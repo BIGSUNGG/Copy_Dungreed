@@ -1,0 +1,3 @@
+C:\Users\BIGSU\Documents\GitHub\Study-Coding\Study-Cpp\Direct X\DX_28_TinyXml\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug\DirectXTex.lib
+C:\Users\BIGSU\Downloads\Copy_Dungreed\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug\DirectXTex.lib
+C:\Users\BIGSU\Documents\GitHub\Copy_Dungreed\Copy_Dungreed\Copy_Dungreed\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug\DirectXTex.lib
