@@ -38,6 +38,8 @@
 
 #define V(hr) assert(SUCCEEDED(hr))
 
+#define TEXTURE_MANAGER TextureManager::GetInstance()
+
 using CallBack = function<void()>;
 using CallBackParam = function<void(int)>;
 

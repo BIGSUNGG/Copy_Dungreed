@@ -9,6 +9,6 @@ public:
 	void Render();
 
 private:
-	shared_ptr<GameMode> _game;
+	shared_ptr<GameMode> _gameMode;
 };
 

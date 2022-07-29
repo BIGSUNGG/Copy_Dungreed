@@ -3,7 +3,7 @@
 
 Program::Program()
 {
-	_game = make_shared<GameMode>();
+	_gameMode = make_shared<MapEditor>();
 }
 
 Program::~Program()
@@ -12,7 +12,7 @@ Program::~Program()
 
 void Program::Update()
 {
-	_game->Update();
+	_gameMode->Update();
 	EffectManager::GetInstance()->Update();
 	Camera::GetInstance()->Update();
 }
@@ -30,14 +30,19 @@ void Program::Render()
 
 	ALPHA_STATE->SetState();
 
-	_game->PreRender();
+	_gameMode->PreRender();
 
-	_game->Render();
+	_gameMode->Render();
 	EffectManager::GetInstance()->Render();
 
+	wstring fps = L"FPS : " + to_wstring((int)Timer::GetInstance()->GetFPS());
+	RECT rect = { 0,0,100,100 };
+
 	DirectWrite::GetInstance()->GetDC()->BeginDraw();
-	_game->PostRender();
-	_game->ImGuiRender();
+	DirectWrite::GetInstance()->RenderText(fps, rect);
+
+	_gameMode->PostRender();
+	_gameMode->ImGuiRender();
 	Camera::GetInstance()->PostRender();
 
 	ImGui::Render();

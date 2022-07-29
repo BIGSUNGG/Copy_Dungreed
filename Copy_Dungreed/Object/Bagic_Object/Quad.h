@@ -9,6 +9,7 @@ public:
 	virtual void Render();
 
 	virtual void CreateVertices();
+	virtual void SetTexture(wstring file);
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	const Vector2& GetSize() { return _size; }
@@ -30,6 +31,9 @@ protected:
 	shared_ptr<Texture> _texture;
 	shared_ptr<VertexShader>	_vertexShader;
 	shared_ptr<PixelShader>		_pixelShader;
+
+	wstring _vs;
+	wstring _ps;
 
 	Vector2 _size;
 };

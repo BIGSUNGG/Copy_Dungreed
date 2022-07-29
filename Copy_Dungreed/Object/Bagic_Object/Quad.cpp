@@ -8,6 +8,9 @@ Quad::Quad()
 Quad::Quad(wstring file, wstring vs, wstring ps)
 {
     // Texture ¼¼ÆÃ
+    _vs = vs;
+    _ps = ps;
+
     _texture = Texture::Add(file);
     _size = _texture->GetSize();
 
@@ -66,4 +69,19 @@ void Quad::CreateVertices()
     _indices.push_back(2);
     _indices.push_back(1);
     _indices.push_back(3);
+}
+
+void Quad::SetTexture(wstring file)
+{
+    _texture = Texture::Add(file);
+    _size = _texture->GetSize();
+
+    CreateVertices();
+    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
+    _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
+
+    _vertexShader = ADD_VS(_vs);
+    _pixelShader = ADD_PS(_ps);
+
+    _transform = make_shared<Transform>();
 }

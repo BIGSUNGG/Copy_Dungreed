@@ -16,6 +16,7 @@
 #include <tchar.h>
 #include <iostream>
 #include <vector>
+#include <queue>>
 #include <map>
 #include <unordered_map>
 #include <algorithm>
@@ -112,7 +113,14 @@ using namespace std;
 #include "Object/UI/Button.h"
 
 // Object
-#include "Dungreed/Object/IObject.h"
+#include "Dungreed/Object/Object.h"
+#include "Dungreed/Object/BackGround/BackGround.h"
+#include "Dungreed/Object/Tile/Tile.h"
+
+#include"Dungreed/Map/Map.h"
+
+// Manager
+#include "Dungreed/Manager/TextureManager.h"
 
 // GameMode
 #include "Dungreed/GameMode/GameMode.h"

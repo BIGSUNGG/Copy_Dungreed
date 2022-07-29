@@ -1,5 +1,5 @@
 #pragma once
-class Creature : public IObject
+class Creature : public Object
 {
 public:
 	Creature();
