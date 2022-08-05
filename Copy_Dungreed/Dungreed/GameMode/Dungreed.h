@@ -9,5 +9,7 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 	virtual void ImGuiRender() override;
+private:
+	shared_ptr<Map> map;
 };
 

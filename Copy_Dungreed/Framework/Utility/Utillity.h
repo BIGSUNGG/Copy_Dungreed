@@ -23,3 +23,11 @@ static wstring StrToWstr(string str)
 
 	return result;
 }
+
+static void SwitchBool(bool& value)
+{
+	if (value == true)
+		value = false;
+	else
+		value = true;
+}

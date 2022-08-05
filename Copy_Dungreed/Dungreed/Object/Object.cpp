@@ -1,13 +1,15 @@
 #include "framework.h"
 #include "Object.h"
 
-Object::Object()
+Object::Object(int level, int num)
+	: _level(level)
+	, _num(num)
 {
 }
 
+
 void Object::Update()
 {
-
 	_texture->Update();
 	_collider->Update();
 }

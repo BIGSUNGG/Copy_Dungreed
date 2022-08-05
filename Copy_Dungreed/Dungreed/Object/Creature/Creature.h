@@ -1,11 +1,5 @@
 #pragma once
-class Creature : public Object
+class Creature
 {
-public:
-	Creature();
-	virtual ~Creature();
-
-	virtual void Update() override;
-	virtual void Render() override;
 };
 

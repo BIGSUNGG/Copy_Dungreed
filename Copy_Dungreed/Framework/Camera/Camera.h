@@ -36,6 +36,8 @@ public:
 
 	Vector2 GetMouseWorldPos();
 
+	bool& GetFreeMode() { return _freeMode; }
+
 private:
 	void Shake();
 	void FreeMode();
@@ -52,6 +54,7 @@ private:
 	
 	shared_ptr<Transform> _target;
 	Vector2 _offset = CENTER;
+	bool _freeMode = false;
 
 	Vector2 _leftBottom = { 0.f,0.f };
 	Vector2 _rightTop = { 0.f,0.f };

@@ -152,9 +152,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
     <ClInclude Include="Dungreed\Object\BackGround\BackGround.h" />
     <ClInclude Include="Dungreed\GameMode\Dungreed.h" />
-    <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
     <ClInclude Include="Dungreed\GameMode\GameMode.h" />
     <ClInclude Include="Framework\Utility\tinyxml2.h" />
     <ClInclude Include="Dungreed\GameMode\MapEditor.h" />
@@ -203,11 +203,12 @@
     <ClInclude Include="TypeDef.h" />
     <ClInclude Include="Framework\Render\VertexShader.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
+    <ClInclude Include="Dungreed\UI\UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
     <ClCompile Include="Dungreed\Object\BackGround\BackGround.cpp" />
     <ClCompile Include="Dungreed\GameMode\Dungreed.cpp" />
-    <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
     <ClCompile Include="Dungreed\GameMode\GameMode.cpp" />
     <ClCompile Include="Framework\Utility\tinyxml2.cpp" />
     <ClCompile Include="Dungreed\GameMode\MapEditor.cpp" />
@@ -259,6 +260,7 @@
     <ClCompile Include="Object\Bagic_Object\Sprite.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\Tile.cpp" />
     <ClCompile Include="Dungreed\Manager\TextureManager.cpp" />
+    <ClCompile Include="Dungreed\UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

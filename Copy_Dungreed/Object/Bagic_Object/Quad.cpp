@@ -6,10 +6,10 @@ Quad::Quad()
 }
 
 Quad::Quad(wstring file, wstring vs, wstring ps)
+    : _vs(vs)
+    , _ps(ps)
 {
     // Texture ¼¼ÆÃ
-    _vs = vs;
-    _ps = ps;
 
     _texture = Texture::Add(file);
     _size = _texture->GetSize();
@@ -84,4 +84,14 @@ void Quad::SetTexture(wstring file)
     _pixelShader = ADD_PS(_ps);
 
     _transform = make_shared<Transform>();
+}
+
+void Quad::SetVS(wstring vs)
+{
+    _vertexShader = ADD_VS(vs);
+}
+
+void Quad::SetPS(wstring ps)
+{
+    _pixelShader = ADD_PS(ps);
 }

@@ -17,8 +17,9 @@ public:
 			return _instance;
 	}
 
-	shared_ptr<Quad> GetTileTexture(int level, int type, int num);
-	shared_ptr<Quad> GetBackGroundTexture(int level,int num = 0);
+	shared_ptr<Quad> GetBackGroundTexture(int level,int num);
+	shared_ptr<Quad> GetWallTexture(int level, int num);
+	shared_ptr<Quad> GetTileTexture(int level, int num);
 
 private:
 	TextureManager();

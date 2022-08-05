@@ -15,29 +15,28 @@ public:
 		PUBLIC,
 	};
 
-	enum Type
-	{
-		BACKGROUND,
-		TILE,
-		BUILDING,
-		CREATURE,
-		EFFECT,
-	};
-
 public:
-	Map();
+	Map(Level level = LEVEL_00, int num = 0, char direction = 0b0000);
 
-	void AddObject(shared_ptr<Object> addObject, Type type);
-	void DeleteObject(shared_ptr<Object> addObject, Type type);
+	void AddObject(shared_ptr<Object> addObject, Object::Object_Type type);
+	void DeleteObject(Vector2 Pos, Object::Object_Type type);
 
 	void Update();
-
 	void PreRender();
 	void Render();
 	void PostRender();
 	void ImguiRender();
 
+	void Save();
+	void Load();
+	void Reset();
+
+	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
+
+	int _objectCount = 0;
 private:
 	vector<vector<shared_ptr<Object>>> _objects;
-	shared_ptr<Object> _object = make_shared<Tile>();
+
+	Level _level;
+	int _num;
 };

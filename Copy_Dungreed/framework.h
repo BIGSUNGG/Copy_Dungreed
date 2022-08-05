@@ -117,7 +117,11 @@ using namespace std;
 #include "Dungreed/Object/BackGround/BackGround.h"
 #include "Dungreed/Object/Tile/Tile.h"
 
-#include"Dungreed/Map/Map.h"
+// UI
+#include "Dungreed/UI/UI.h"
+
+// Map
+#include "Dungreed/Map/Map.h"
 
 // Manager
 #include "Dungreed/Manager/TextureManager.h"

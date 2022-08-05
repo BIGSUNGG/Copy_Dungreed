@@ -10,11 +10,18 @@ public:
 
 	virtual void CreateVertices();
 	virtual void SetTexture(wstring file);
+	virtual void SetVS(wstring vs);
+	virtual void SetPS(wstring ps);
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	const Vector2& GetSize() { return _size; }
 	Vector2 GetHalfSize() { return _size * 0.5f; }
 
+	float Top()		{ return _transform->GetWorldPos().y + (GetHalfSize().y * _transform->GetWorldScale().y); }
+	float Bottom()	{ return _transform->GetWorldPos().y - (GetHalfSize().y * _transform->GetWorldScale().y); }
+	float Right()	{ return _transform->GetWorldPos().x + (GetHalfSize().x * _transform->GetWorldScale().x); }
+	float Left()	{ return _transform->GetWorldPos().x - (GetHalfSize().x * _transform->GetWorldScale().x); }
+	
 protected:
 	Quad();
 

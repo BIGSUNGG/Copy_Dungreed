@@ -5,57 +5,21 @@ MapEditor::MapEditor()
 {
 	_map = make_shared<Map>();
 
-	_curObject = make_shared<Tile>(_level,_type,1);
+	_curObject = make_shared<Tile>(_level,_num);
 }
 
 void MapEditor::Update()
 {
-	if (KEY_DOWN('R'))
-	{
-		if (_isPlaying == true)
-			_isPlaying = false;
-		else
-			_isPlaying = true;
-	}
+	InputEvent();
 
-	if (_isPlaying == false)
-		return;
+	ApplyChange();
 
 	MouseEvenet();
-
-	KeyBoradEvenet();
-
-	if (_level != _beforeLevel || _type != _beforeType || _num != _beforeNum ||
+	
+	if (_level != _beforeLevel || _num != _beforeNum ||
 		_curType != _objectType)
-	{
-		_curObject = make_shared<Tile>(_level, _type, _num);
-		_beforeLevel = _level;
-		_beforeType = _type;
-		_beforeNum = _num;
-		switch (_curType)
-		{
-		case Map::BACKGROUND:
-		{
-			_objectType = Map::BACKGROUND;
-			_curObject = make_shared<BackGround>(_level, _num);
-		}
-			break;
-		case Map::TILE:
-			_objectType = Map::TILE;
-			break;
-		case Map::BUILDING:
-			_objectType = Map::BUILDING;
-			break;
-		case Map::CREATURE:
-			_objectType = Map::CREATURE;
-			break;
-		case Map::EFFECT:
-			_objectType = Map::EFFECT;
-			break;
-		default:
-			break;
-		}
-	}
+		ApplyChange();
+
 	_map->Update();
 
 	_curObject->Update();
@@ -75,34 +39,45 @@ void MapEditor::Render()
 void MapEditor::PostRender()
 {
 	_map->PostRender();
+	
+	_curObject->PostRender();
 }
 
 void MapEditor::ImGuiRender()
 {
-	ImGui::Text("Count : %d", _countObject);
+	ImGui::Text("Object Count : %d", _map->_objectCount);
 	ImGui::SliderInt("Level", &_level, 0, 8);
-	ImGui::SliderInt("Type", &_type, 0, 7);
-	ImGui::SliderInt("Num", &_num, 0, 7);
+	ImGui::SliderInt("Num", &_num, 0, 30);
 	ImGui::SliderInt("CurType", &_curType, 0, 4);
+
 	switch (_objectType)
 	{
-	case Map::BACKGROUND:
+	case Object::Object_Type::BACKGROUND:
 		ImGui::Text("BACKGROUND");
 		break;
-	case Map::TILE:
+	case Object::Object_Type::WALL:
+		ImGui::Text("WALL");
+		break;
+	case Object::Object_Type::TILE:
 		ImGui::Text("TILE");
 		break;
-	case Map::BUILDING:
-		ImGui::Text("BUILDING");
-		break;
-	case Map::CREATURE:
+	case Object::Object_Type::CREATURE:
 		ImGui::Text("CREATURE");
 		break;
-	case Map::EFFECT:
+	case Object::Object_Type::EFFECT:
 		ImGui::Text("EFFECT");
 		break;
 	default:
 		break;
+	}
+
+	if (ImGui::Button("Save"))
+	{
+		_map->Save();
+	}
+	if (ImGui::Button("Load"))
+	{
+		_map->Load();
 	}
 }
 
@@ -122,22 +97,80 @@ void MapEditor::MouseEvenet()
 	_curObject->GetTexture()->GetTransform()->GetPos() = _curMousePos;
 }
 
-void MapEditor::KeyBoradEvenet()
+void MapEditor::InputEvent()
 {	
-	if (KEY_DOWN('W'))
+	if (CAMERA->GetFreeMode() == false)
 	{
-		_map->AddObject(_curObject, _objectType);
-		_curObject = make_shared<Tile>(_level, _type, _num);
+		if (KEY_DOWN('W'))
+		{
+			_map->AddObject(_curObject, _objectType);
+			ApplyChange();
+		}
+		if (KEY_PRESS(VK_SPACE))
+		{
+			_map->AddObject(_curObject, _objectType);
+			ApplyChange();
+		}
+		if (KEY_DOWN('D'))
+		{
+			_map->DeleteObject(_curMousePos, _objectType);
+		}
+		if (KEY_DOWN('F'))
+		{
+			SwitchBool(_freeMode);
+		}
+		if (KEY_DOWN(VK_UP))
+		{
+			++_level;
+		}
+		if (KEY_DOWN(VK_DOWN))
+		{
+			--_level;
+		}
+		if (KEY_DOWN(VK_RIGHT))
+		{
+			++_num;
+		}
+		if (KEY_DOWN(VK_LEFT))
+		{
+			--_num;
+			if (_num < 0)
+				_num = 0;
+		}
 	}
-	if (KEY_PRESS('D'))
+
+		if (KEY_DOWN('G'))
+		{
+			SwitchBool(CAMERA->GetFreeMode());
+		}
+}
+
+void MapEditor::ApplyChange()
+{
+	_curObject = make_shared<Tile>(_level, _num);
+	_beforeLevel = _level;
+	_beforeNum = _num;
+	switch (_curType)
 	{
-		_map->DeleteObject(_curObject, _objectType);
-	}
-	if (KEY_DOWN('F'))
-	{
-		if (_freeMode == true)
-			_freeMode = false;
-		else
-			_freeMode = true;
+	case Object::Object_Type::BACKGROUND:
+		_objectType = Object::Object_Type::BACKGROUND;
+		_curObject = make_shared<BackGround>(_level, _num);
+		break;
+	case Object::Object_Type::WALL:
+		_objectType = Object::Object_Type::WALL;
+		break;
+	case Object::Object_Type::TILE:
+		_objectType = Object::Object_Type::TILE;
+		_curObject = make_shared<Tile>(_level, _num);
+		break;
+	case Object::Object_Type::CREATURE:
+		_objectType = Object::Object_Type::CREATURE;
+		break;
+	case Object::Object_Type::EFFECT:
+		_objectType = Object::Object_Type::EFFECT;
+		break;
+	default:
+		break;
 	}
 }
+

@@ -1,10 +1,15 @@
 #pragma once
 
 // 매크로 정의
-#define WIN_WIDTH 1280
-#define WIN_HEIGHT 720
+#define WIN_WIDTH 1920
+#define WIN_HEIGHT 1080
 
-#define CENTER Vector2(640,360)
+#define	WIN_WIDTH_BASIC 320
+#define	WIN_HEIGHT_BASIC 180
+
+#define WIN_RATIO WIN_WIDTH / WIN_WIDTH_BASIC
+
+#define CENTER Vector2(WIN_WIDTH / 2, WIN_HEIGHT / 2)
 
 #define PI 3.141592
 
@@ -40,15 +45,7 @@
 
 #define TEXTURE_MANAGER TextureManager::GetInstance()
 
+#define CAMERA Camera::GetInstance()
+
 using CallBack = function<void()>;
 using CallBackParam = function<void(int)>;
-
-struct ItemData
-{
-	string name;
-	int price;
-	int value;
-	int type;
-	int attackInfo;
-
-};
