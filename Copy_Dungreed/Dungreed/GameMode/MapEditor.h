@@ -12,14 +12,14 @@ public:
 
 	virtual void MouseEvenet();
 	virtual void InputEvent();
-	virtual void ApplyChange();
+	virtual void RefreshChange();
 private:
 	shared_ptr<Map> _map;
 
 	Vector2 _curMousePos;
 	shared_ptr<Object> _curObject;
 
-	Object::Object_Type _objectType = Object::Object_Type::TILE;
+	Object::Object_Type _type = Object::Object_Type::TILE;
 	int _curType = 2;
 
 	bool _isPlaying = true;

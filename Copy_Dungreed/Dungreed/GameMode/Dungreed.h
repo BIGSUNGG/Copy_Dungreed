@@ -2,6 +2,7 @@
 class Dungreed : public GameMode
 {
 public:
+	Dungreed();
 
 	// GameMode을(를) 통해 상속됨
 	virtual void Update() override;
@@ -10,6 +11,6 @@ public:
 	virtual void PostRender() override;
 	virtual void ImGuiRender() override;
 private:
-	shared_ptr<Map> map;
+	shared_ptr<Map> _map;
 };
 

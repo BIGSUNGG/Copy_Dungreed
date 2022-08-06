@@ -43,7 +43,10 @@
 
 #define V(hr) assert(SUCCEEDED(hr))
 
-#define TEXTURE_MANAGER TextureManager::GetInstance()
+#define OBJ_MANAGER ObjectManager::GetInstance()
+#define GET_OBJECT(type,level,num) ObjectManager::GetInstance()->GetNewObject(type,level,num)
+#define GET_TILE(level,num) ObjectManager::GetInstance()->GetTileObject(level,num)
+#define GET_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGroundObject(level,num)
 
 #define CAMERA Camera::GetInstance()
 

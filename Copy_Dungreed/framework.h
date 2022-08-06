@@ -23,6 +23,7 @@
 #include <string>
 #include <functional>
 #include <time.h>
+#include <thread>
 
 #include <wrl/client.h>
 #include <d3d11.h>
@@ -116,6 +117,7 @@ using namespace std;
 #include "Dungreed/Object/Object.h"
 #include "Dungreed/Object/BackGround/BackGround.h"
 #include "Dungreed/Object/Tile/Tile.h"
+#include "Dungreed/Object/Creature/Creature.h"
 
 // UI
 #include "Dungreed/UI/UI.h"
@@ -124,7 +126,7 @@ using namespace std;
 #include "Dungreed/Map/Map.h"
 
 // Manager
-#include "Dungreed/Manager/TextureManager.h"
+#include "Dungreed/Manager/ObjectManager.h"
 
 // GameMode
 #include "Dungreed/GameMode/GameMode.h"

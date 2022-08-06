@@ -5,20 +5,16 @@ MapEditor::MapEditor()
 {
 	_map = make_shared<Map>();
 
-	_curObject = make_shared<Tile>(_level,_num);
+	_curObject = GET_OBJECT(_curType, _level, _num);
 }
 
 void MapEditor::Update()
 {
+	MouseEvenet();
+
 	InputEvent();
 
-	ApplyChange();
-
-	MouseEvenet();
-	
-	if (_level != _beforeLevel || _num != _beforeNum ||
-		_curType != _objectType)
-		ApplyChange();
+	RefreshChange();
 
 	_map->Update();
 
@@ -50,7 +46,7 @@ void MapEditor::ImGuiRender()
 	ImGui::SliderInt("Num", &_num, 0, 30);
 	ImGui::SliderInt("CurType", &_curType, 0, 4);
 
-	switch (_objectType)
+	switch (_type)
 	{
 	case Object::Object_Type::BACKGROUND:
 		ImGui::Text("BACKGROUND");
@@ -103,17 +99,21 @@ void MapEditor::InputEvent()
 	{
 		if (KEY_DOWN('W'))
 		{
-			_map->AddObject(_curObject, _objectType);
-			ApplyChange();
+			_map->AddObject(_curObject, _type);
+			_curObject = GET_OBJECT(_type, _level, _num);
 		}
-		if (KEY_PRESS(VK_SPACE))
+		if (KEY_PRESS('Q'))
 		{
-			_map->AddObject(_curObject, _objectType);
-			ApplyChange();
+			_map->AddObject(_curObject, _type);
+			_curObject = GET_OBJECT(_type, _level, _num);
 		}
 		if (KEY_DOWN('D'))
 		{
-			_map->DeleteObject(_curMousePos, _objectType);
+			_map->DeleteObject(_curMousePos, _type);
+		}
+		if (KEY_PRESS('E'))
+		{
+			_map->DeleteObject(_curMousePos, _type);
 		}
 		if (KEY_DOWN('F'))
 		{
@@ -134,43 +134,30 @@ void MapEditor::InputEvent()
 		if (KEY_DOWN(VK_LEFT))
 		{
 			--_num;
-			if (_num < 0)
-				_num = 0;
 		}
 	}
 
-		if (KEY_DOWN('G'))
-		{
-			SwitchBool(CAMERA->GetFreeMode());
-		}
+	if (KEY_DOWN('G'))
+	{
+		SwitchBool(CAMERA->GetFreeMode());
+	}
 }
 
-void MapEditor::ApplyChange()
+void MapEditor::RefreshChange()
 {
-	_curObject = make_shared<Tile>(_level, _num);
+	if (_level == _beforeLevel && _num == _beforeNum && _type == _curType)
+		return;
+
+	if (_num < 0)
+		_num = 0;
+
+	if (_level < 0)
+		_level = 0;
+
 	_beforeLevel = _level;
 	_beforeNum = _num;
-	switch (_curType)
-	{
-	case Object::Object_Type::BACKGROUND:
-		_objectType = Object::Object_Type::BACKGROUND;
-		_curObject = make_shared<BackGround>(_level, _num);
-		break;
-	case Object::Object_Type::WALL:
-		_objectType = Object::Object_Type::WALL;
-		break;
-	case Object::Object_Type::TILE:
-		_objectType = Object::Object_Type::TILE;
-		_curObject = make_shared<Tile>(_level, _num);
-		break;
-	case Object::Object_Type::CREATURE:
-		_objectType = Object::Object_Type::CREATURE;
-		break;
-	case Object::Object_Type::EFFECT:
-		_objectType = Object::Object_Type::EFFECT;
-		break;
-	default:
-		break;
-	}
+	_type = (Object::Object_Type)_curType;
+
+	_curObject = GET_OBJECT(_curType, _level, _num);
 }
 

@@ -2,6 +2,13 @@
 class Tile : public Object
 {
 public:
-	Tile(int level = 0, int num = 0);
-};
+	enum Tile_Type
+	{
+		FLOOR,
+		LEFT_STAIR,
+		RIGHT_STAIR,
+		CELLING,
+	};
 
+	Tile(int level, int num);
+};

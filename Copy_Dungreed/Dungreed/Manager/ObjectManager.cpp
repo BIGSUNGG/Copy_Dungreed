@@ -1,22 +1,129 @@
 #include "framework.h"
-#include "TextureManager.h"
+#include "ObjectManager.h"
 
-TextureManager* TextureManager::_instance = nullptr;
+ObjectManager* ObjectManager::_instance = nullptr;
 
-TextureManager::TextureManager()
+ObjectManager::ObjectManager()
 {
 }
 
-TextureManager::~TextureManager()
+ObjectManager::~ObjectManager()
 {
 }
 
-shared_ptr<Quad> TextureManager::GetTileTexture(int level, int num)
+shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 {
-	shared_ptr<Quad> texture;
+	shared_ptr<Object> object = GetTileObject(level, num);
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+	switch (type)
+	{
+	case Object::Object_Type::BACKGROUND:
+		object = GetBackGroundObject(level, num);
+		break;
+	case Object::Object_Type::WALL:
+		break;
+	case Object::Object_Type::TILE:
+		object = GetTileObject(level, num);
+		break;
+	case Object::Object_Type::CREATURE:
+		break;
+	case Object::Object_Type::EFFECT:
+		break;
+	default:
+		break;
+	}
+
+	return object;
+}
+
+shared_ptr<Object> ObjectManager::GetBackGroundObject(int level, int num)
+{
+	shared_ptr<Object> object;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
+
+	switch (level)
+	{
+	case Map::LEVEL_00:
+		switch (num)
+		{
+		case 0:
+			texture = make_shared<Quad>(L"Resource/BackGround/Sky_Day.png");
+			break;
+		case 1:
+			texture = make_shared<Quad>(L"Resource/BackGround/TownBG_Day.png");
+			break; 
+		default:
+			break;
+		}
+		break;
+	case Map::LEVEL_01:
+		break;
+	case Map::LEVEL_02:
+		break;
+	case Map::LEVEL_03:
+		break;
+	case Map::LEVEL_04:
+		break;
+	case Map::LEVEL_05:
+		break;
+	case Map::LEVEL_06:
+		break;
+	case Map::LEVEL_07:
+		break;
+	case Map::PUBLIC:
+		break;
+	default:
+		break;
+	}
+
+	texture->GetTransform()->GetScale() *= WIN_RATIO;
+	object = make_shared<BackGround>(level, num);
+	object->SetTexture(texture);
+	object->SetCollider();
+	return object;
+}
+
+shared_ptr<Object> ObjectManager::GetWallObject(int level, int num)
+{
+	shared_ptr<BackGround> object;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
+	switch (level)
+	{
+	case Map::LEVEL_00:
+		break;
+	case Map::LEVEL_01:
+		break;
+	case Map::LEVEL_02:
+		break;
+	case Map::LEVEL_03:
+		break;
+	case Map::LEVEL_04:
+		break;
+	case Map::LEVEL_05:
+		break;
+	case Map::LEVEL_06:
+		break;
+	case Map::LEVEL_07:
+		break;
+	case Map::PUBLIC:
+		break;
+	default:
+		break;
+	}
+
+	texture->GetTransform()->GetScale() *= WIN_RATIO;
+	object = make_shared<BackGround>(level, num);
+	object->SetTexture(texture);
+	object->SetCollider();
+	return object;
+}
+
+shared_ptr<Object> ObjectManager::GetTileObject(int level, int num)
+{
+	shared_ptr<Tile> object;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
 
 	switch (level)
 	{
@@ -107,83 +214,9 @@ shared_ptr<Quad> TextureManager::GetTileTexture(int level, int num)
 	}
 
 	texture->GetTransform()->GetScale() *= WIN_RATIO;
-	return texture;
+	object = make_shared<Tile>(level,num);
+	object->SetTexture(texture);
+	object->SetCollider();
+
+	return object;
 }
-
-shared_ptr<Quad> TextureManager::GetBackGroundTexture(int level, int num)
-{
-	shared_ptr<Quad> texture;
-
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
-
-	switch (level)
-	{
-	case Map::LEVEL_00:
-		switch (num)
-		{
-		case 0:
-			texture = make_shared<Quad>(L"Resource/BackGround/Sky_Day.png");
-		default:
-			break;
-		}
-		break;
-	case Map::LEVEL_01:
-		break;
-	case Map::LEVEL_02:
-		break;
-	case Map::LEVEL_03:
-		break;
-	case Map::LEVEL_04:
-		break;
-	case Map::LEVEL_05:
-		break;
-	case Map::LEVEL_06:
-		break;
-	case Map::LEVEL_07:
-		break;
-	case Map::PUBLIC:
-		break;
-	default:
-		break;
-	}
-
-	texture->GetTransform()->GetScale() *= WIN_RATIO;
-	return texture;
-}
-
-shared_ptr<Quad> TextureManager::GetWallTexture(int level, int num)
-{
-	shared_ptr<Quad> texture;
-
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
-
-	switch (level)
-	{
-	case Map::LEVEL_00:
-		break;
-	case Map::LEVEL_01:
-		break;
-	case Map::LEVEL_02:
-		break;
-	case Map::LEVEL_03:
-		break;
-	case Map::LEVEL_04:
-		break;
-	case Map::LEVEL_05:
-		break;
-	case Map::LEVEL_06:
-		break;
-	case Map::LEVEL_07:
-		break;
-	case Map::PUBLIC:
-		break;
-	default:
-		break;
-	}
-
-	texture->GetTransform()->GetScale() *= 4;
-	return texture;
-}
-

@@ -7,8 +7,8 @@ Map::Map(Level level,int num,char direction)
 	_num = num;
 
 	_objects.resize(5);
-	
-	Save();
+
+	Load();
 }
 
 void Map::AddObject(shared_ptr<Object> addObject, Object::Object_Type type)
@@ -62,12 +62,10 @@ void Map::PreRender()
 
 void Map::Render()
 {
-	int temp = 0;
 	for (auto& objects : _objects)
 	{
 		for (auto& object : objects)
 		{
-			temp++;
 			object->Render();
 		}
 	}
@@ -91,47 +89,79 @@ void Map::ImguiRender()
 
 void Map::Save()
 {
-	//BinaryWriter writer(L"Save/Map_Info/Level_00_0.txt");
-	//vector<int> Info;
-	//Info.push_back(_objectCount);
-	//for (auto& objects : _objects)
-	//{
-	//	for (auto& object : objects)
-	//	{
-	//		Info.push_back((int)object->GetType());
-	//		Info.push_back((int)object->GetLevel());
-	//		Info.push_back(object->GetNum());
-	//		Info.push_back(object->GetTexture()->GetTransform()->GetPos().x);
-	//		Info.push_back(object->GetTexture()->GetTransform()->GetPos().y);
-	//	}
-	//}
+	{
+		BinaryWriter basicWriter(L"Save/Map_Info/Level_00_0_basic.txt");
 
-	BinaryWriter writer(L"Save/Map_Info/Level_00_0.txt");
+		vector<int> basicInfo;
 
-	vector<int> posDataes;
+		basicInfo.push_back(_objectCount);
 
-	posDataes.push_back(_objectCount);
+		basicWriter.Uint(basicInfo.size());
+		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
+	}
 
-	writer.Uint(posDataes.size());
-	writer.Byte(posDataes.data(), posDataes.size() * sizeof(int));
+	{
+		BinaryWriter mapWriter(L"Save/Map_Info/Level_00_0.txt");
+
+		vector<int> mapInfo;
+
+
+		for (auto& objects : _objects)
+		{
+			for (auto& object : objects)
+			{
+				mapInfo.push_back((int)object->GetType());
+				mapInfo.push_back((int)object->GetLevel());
+				mapInfo.push_back(object->GetNum());
+				mapInfo.push_back(object->GetTexture()->GetTransform()->GetPos().x);
+				mapInfo.push_back(object->GetTexture()->GetTransform()->GetPos().y);
+			}
+		}
+
+		mapWriter.Uint(mapInfo.size());
+		mapWriter.Byte(mapInfo.data(), mapInfo.size() * sizeof(int));
+	}
 }
 
 void Map::Load()
 {
-	BinaryReader reader(L"Save/Map_Info/Level_00_0.txt");
+	{
+		BinaryReader basicReader(L"Save/Map_Info/Level_00_0_basic.txt");
 
-	UINT size = reader.Uint();
+		UINT size = basicReader.Uint();
 
-	vector<int> posDataes;
-	posDataes.resize(1);
-	void* ptr = posDataes.data();
-	reader.Byte(&ptr, size * sizeof(int));
+		vector<int> basicInfo;
+		basicInfo.resize(1);
+		void* ptr = basicInfo.data();
+		basicReader.Byte(&ptr, size * sizeof(int));
 
-	_objectCount = posDataes[0];
+		_objectCount = basicInfo[0];
+	}
 
+	{
+		BinaryReader mapReader(L"Save/Map_Info/Level_00_0.txt");
+
+		UINT size = mapReader.Uint();
+
+		vector<int> mapInfo;
+		int infoCount = _objectCount * 5;
+		mapInfo.resize(infoCount);
+		void* ptr = mapInfo.data();
+		mapReader.Byte(&ptr, size * sizeof(int));
+
+		for (int i = 0; i < _objectCount; i++)
+		{
+			int cur = i * 5;
+
+			shared_ptr<Object> object = GET_OBJECT(mapInfo[cur], mapInfo[cur + 1], mapInfo[cur + 2]);
+
+			object->GetTexture()->GetTransform()->GetPos() = Vector2(mapInfo[cur + 3], mapInfo[cur + 4]);
+			_objects[mapInfo[cur]].emplace_back(object);
+		}
+	}
 }
 
 void Map::Reset()
 {
-	_objects.clear();
+	_objects.clear(); 
 }
