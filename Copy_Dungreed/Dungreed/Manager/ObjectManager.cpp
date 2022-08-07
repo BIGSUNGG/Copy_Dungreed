@@ -37,7 +37,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 	return object;
 }
 
-shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)
+shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)	
 {
 	shared_ptr<BackGround> object = make_shared<BackGround>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
@@ -187,20 +187,33 @@ shared_ptr<Tile> ObjectManager::GetTileObject(int level, int num)
 shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 {
 	shared_ptr<Creature> object;
+	shared_ptr<Quad> texture;
 
 	switch (level)
 	{
 	case -1: // Player
+		object = make_shared<Player>(level, num);
+		object->SetAnimation();
 		switch (num)
 		{
 		case 0:
-			object = make_shared<Player>(level, num);
-			object->GetAnimation() = make_shared<Object::Animation>();
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle0.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle1.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle2.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle3.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle4.png");
+
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun0.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun1.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun2.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun3.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun4.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun5.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun6.png");
+			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun7.png");
+
+			object->GetAnimation()->_animList[Creature::State::JUMP].push_back(L"Resource/Creature/Player/Adventurer/Jump/CharJump0.png");
+			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
 			break;
 		default:
 			break;
@@ -228,9 +241,9 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		break;
 	}
 
-	shared_ptr<Quad>texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
-	object->SetTexture(texture);
 	texture->GetTransform()->GetScale() *= WIN_RATIO;
+	object->SetTexture(texture);
+	object->GetAnimation()->SetTexture(texture);
 	object->SetCollider();
 	object->GetPlayingAnim() = true;
 	return object;

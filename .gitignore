@@ -26,3 +26,4 @@ ImGui/x64/Debug/imgui_impl_dx11.obj
 ImGui/x64/Debug/imgui_draw.obj
 ImGui/x64/Debug/imgui_demo.obj
 ImGui/x64/Debug/imgui.obj
+*.obj

@@ -3,7 +3,7 @@
 
 Program::Program()
 {
-	_gameMode = make_shared<MapEditor>();
+	_gameMode = make_shared<Dungreed>();
 }
 
 Program::~Program()

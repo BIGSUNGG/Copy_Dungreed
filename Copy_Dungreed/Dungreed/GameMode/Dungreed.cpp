@@ -3,13 +3,17 @@
 
 Dungreed::Dungreed()
 {
-	CAMERA->GetFreeMode() = true;
+	CAMERA->GetFreeMode() = false;
 
 	_map = make_shared<Map>();
+	_map->GetObjects()[Object::Object_Type::CREATURE].push_back(GET_OBJECT(3, -1, 0));
+	_map->GetObjects()[Object::Object_Type::CREATURE].back()->GetTexture()->GetTransform()->GetPos() = CENTER;
 }
 
 void Dungreed::Update()
 {
+	CAMERA->GetTransform()->GetPos() = _map->GetObjects()[Object::CREATURE][0]->GetTexture()->GetTransform()->GetPos() * -1 + CENTER;
+
 	_map->Update();
 }
 
@@ -25,6 +29,7 @@ void Dungreed::Render()
 
 void Dungreed::PostRender()
 {
+	_map->PostRender();
 }
 
 void Dungreed::ImGuiRender()

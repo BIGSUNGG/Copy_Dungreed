@@ -10,37 +10,8 @@ Object::Object(int level, int num)
 
 void Object::Update()
 {
-	if (_playingAnim == true)
-	{
-		_anim->_animRunTime += DELTA_TIME;
-		if (_anim->_animRunTime >= _anim->_animSpeed[_anim->_index.first][_anim->_index.second])
-		{
-			_anim->_animRunTime = 0;
-			_anim->_index.second++;
-			if (_anim->_index.second < _anim->_animList.size())
-			{
-				_texture->SetTexture(_anim->_animList[_anim->_index.first][_anim->_index.second]);
-			}
-			else
-			{
-				switch (_anim->_state[_anim->_index.first])
-				{
-				case Animation::State::END:
-					_playingAnim = false;
-					break;
-				case Animation::State::LOOP:
-					_anim->_index.second = 0;
-					_texture->SetTexture(_anim->_animList[_anim->_index.first][_anim->_index.second]);
-					break;
-				case Animation::State::PINGPONG:
-					_anim->_index.second = 1;
-					reverse(_anim->_animList[_anim->_index.first].begin(), _anim->_animList[_anim->_index.first].end());
-					_texture->SetTexture(_anim->_animList[_anim->_index.first][_anim->_index.second]);
-					break;
-				}
-			}
-		}
-	}
+	if (_anim != nullptr)
+		_anim->Update();
 
 	_texture->Update();
 	_collider->Update();
@@ -62,27 +33,55 @@ void Object::SetCollider()
 	_collider->SetParent(_texture->GetTransform());
 }
 
-bool Object::operator<(const Object& value)
+void Object::SetAnimation()
 {
-	return (this->GetTexture()->GetTransform()->GetPos().x <
-		value._texture->GetTransform()->GetPos().x);
+	_anim = make_shared<Animation>();
 }
 
-bool Object::operator>(const Object& value)
+void Object::Animation::Update()
 {
-	return (this->GetTexture()->GetTransform()->GetPos().x >
-		value._texture->GetTransform()->GetPos().x);
+
+	if (_isPlaying == true)
+	{
+		_animRunTime += DELTA_TIME;
+		if (_animRunTime >= _animSpeed[_index.first][_index.second])
+		{
+			_animRunTime = 0;
+			_index.second++;
+			if (_index.second < _animList[_index.first].size())
+			{
+				_texture->SetTexture(_animList[_index.first][_index.second]);
+			}
+			else
+			{
+				switch (_animState[_index.first])
+				{
+				case Animation::Anim_State::END:
+					_isPlaying = false;
+					break;
+				case Animation::Anim_State::LOOP:
+					_index.second = 0;
+					_texture->SetTexture(_animList[_index.first][_index.second]);
+					break;
+				case Animation::Anim_State::PINGPONG:
+					_index.second = 1;
+					reverse(_animList[_index.first].begin(), _animList[_index.first].end());
+					_texture->SetTexture(_animList[_index.first][_index.second]);
+					break;
+				}
+			}
+		}
+	}
 }
 
-bool Object::operator<=(const Object& value)
+void Object::Animation::ChangeAnimation(Object::State state)
 {
-	return (this->GetTexture()->GetTransform()->GetPos().x <=
-		value._texture->GetTransform()->GetPos().x);
-}
+	_isPlaying = true;
 
-bool Object::operator>=(const Object& value)
-{
-	return (this->GetTexture()->GetTransform()->GetPos().x >=
-		value._texture->GetTransform()->GetPos().x);
+	if (_index.first != state)
+	{
+		_index.first = state;
+		_index.second = 0;
+		_texture->SetTexture(_animList[_index.first][_index.second]);
+	}
 }
-

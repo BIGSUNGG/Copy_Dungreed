@@ -24,6 +24,7 @@ void Collider::CreateData()
 
 void Collider::Update()
 {
+	SetColorGreen();
 	_transform->UpdateWorld();
 }
 

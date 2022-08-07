@@ -50,5 +50,7 @@
 
 #define CAMERA Camera::GetInstance()
 
+#define GAME GameManager::GetInstance()
+
 using CallBack = function<void()>;
 using CallBackParam = function<void(int)>;
