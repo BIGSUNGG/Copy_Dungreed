@@ -23,7 +23,7 @@ void Object::Update()
 			}
 			else
 			{
-				switch (_anim->_state)
+				switch (_anim->_state[_anim->_index.first])
 				{
 				case Animation::State::END:
 					_playingAnim = false;

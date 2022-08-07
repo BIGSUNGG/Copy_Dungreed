@@ -19,9 +19,9 @@ public:
 
 	shared_ptr<Object> GetNewObject(int type, int level, int num);
 
-	shared_ptr<Object> GetBackGroundObject(int level,int num);
-	shared_ptr<Object> GetWallObject(int level, int num);
-	shared_ptr<Object> GetTileObject(int level, int num);
+	shared_ptr<BackGround> GetBackGroundObject(int level,int num);
+	shared_ptr<Tile> GetTileObject(int level, int num);
+	shared_ptr<Creature> GetCreature(int level, int num);
 
 private:
 	ObjectManager();

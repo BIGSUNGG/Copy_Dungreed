@@ -74,16 +74,6 @@ void Quad::CreateVertices()
 void Quad::SetTexture(wstring file)
 {
     _texture = Texture::Add(file);
-    _size = _texture->GetSize();
-
-    CreateVertices();
-    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
-    _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
-
-    _vertexShader = ADD_VS(_vs);
-    _pixelShader = ADD_PS(_ps);
-
-    _transform = make_shared<Transform>();
 }
 
 void Quad::SetVS(wstring vs)

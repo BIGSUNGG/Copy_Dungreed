@@ -186,6 +186,7 @@
     <ClInclude Include="Framework\Render\VertexLayOuts.h" />
     <ClInclude Include="Framework\Render\IndexBuffer.h" />
     <ClInclude Include="Framework\Utility\InputManager.h" />
+    <ClInclude Include="Dungreed\Object\Creature\Player\Player.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Framework\State\SamplerState.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="Framework\Render\SRV.cpp" />
     <ClCompile Include="Framework\Render\IndexBuffer.cpp" />
     <ClCompile Include="Framework\Utility\InputManager.cpp" />
+    <ClCompile Include="Dungreed\Object\Creature\Player\Player.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Framework\Utility\Timer.cpp" />
     <ClCompile Include="Framework\State\StateManager.cpp" />

@@ -42,7 +42,7 @@ void MapEditor::PostRender()
 void MapEditor::ImGuiRender()
 {
 	ImGui::Text("Object Count : %d", _map->_objectCount);
-	ImGui::SliderInt("Level", &_level, 0, 8);
+	ImGui::SliderInt("Level", &_level, -1, 8);
 	ImGui::SliderInt("Num", &_num, 0, 30);
 	ImGui::SliderInt("CurType", &_curType, 0, 4);
 

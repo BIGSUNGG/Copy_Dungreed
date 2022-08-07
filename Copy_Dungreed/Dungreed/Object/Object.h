@@ -1,7 +1,7 @@
 #pragma once
 class Object
 {
-protected:
+public:
 	struct Animation
 	{
 		enum State
@@ -11,12 +11,12 @@ protected:
 			PINGPONG,
 		};
 
-		vector<vector<wstring>> _animList;
-		vector<vector<float>>   _animSpeed;
+		vector<vector<wstring>> _animList = vector<vector<wstring>>(5, vector<wstring>());
+		vector<vector<float>>   _animSpeed = vector<vector<float>>(5, vector<float>(5, 0.2f));
 		float _animRunTime = 0.0f;
 		pair<int, int> _index = { 0,0 };
 
-		State _state = LOOP;
+		vector<State> _state = vector<State>(5, LOOP);
 	};
 
 public:
@@ -29,6 +29,7 @@ public:
 		EFFECT,
 	};
 
+public:
 	Object(int level = 0, int num = 0);
 	virtual ~Object() {}
 
@@ -39,11 +40,13 @@ public:
 	virtual void SetCollider();
 	virtual void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
 
-	virtual int GetNum() { return _num; }
-	virtual int GetLevel() { return _level; }
-	virtual Object_Type GetType() { return _objectType; }
-	virtual shared_ptr<Quad> GetTexture() { return _texture; }
-	virtual shared_ptr<Collider> GetCollider() { return _collider; }
+	int GetNum() { return _num; }
+	int GetLevel() { return _level; }
+	bool& GetPlayingAnim() { return _playingAnim; }
+	Object_Type GetType() { return _objectType; }
+	shared_ptr<Quad> GetTexture() { return _texture; }
+	shared_ptr<Collider> GetCollider() { return _collider; }
+	shared_ptr<Animation>& GetAnimation() { return _anim; }
 
 	bool operator< (const Object& value);
 	bool operator> (const Object& value);

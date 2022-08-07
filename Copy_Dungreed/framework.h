@@ -118,6 +118,7 @@ using namespace std;
 #include "Dungreed/Object/BackGround/BackGround.h"
 #include "Dungreed/Object/Tile/Tile.h"
 #include "Dungreed/Object/Creature/Creature.h"
+#include "Dungreed/Object/Creature/Player/Player.h"
 
 // UI
 #include "Dungreed/UI/UI.h"

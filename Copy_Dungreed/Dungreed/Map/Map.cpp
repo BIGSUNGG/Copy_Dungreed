@@ -8,7 +8,10 @@ Map::Map(Level level,int num,char direction)
 
 	_objects.resize(5);
 
-	Load();
+	//Load();
+
+	_objects[Object::Object_Type::CREATURE].push_back(GET_OBJECT(3, -1, 0));
+	_objects[Object::Object_Type::CREATURE].back()->GetTexture()->GetTransform()->GetPos() = CENTER;
 }
 
 void Map::AddObject(shared_ptr<Object> addObject, Object::Object_Type type)
@@ -125,6 +128,7 @@ void Map::Save()
 
 void Map::Load()
 {
+	Reset();
 	{
 		BinaryReader basicReader(L"Save/Map_Info/Level_00_0_basic.txt");
 

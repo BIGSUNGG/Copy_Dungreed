@@ -26,6 +26,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 		object = GetTileObject(level, num);
 		break;
 	case Object::Object_Type::CREATURE:
+		object = GetCreature(level, num);
 		break;
 	case Object::Object_Type::EFFECT:
 		break;
@@ -36,11 +37,10 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 	return object;
 }
 
-shared_ptr<Object> ObjectManager::GetBackGroundObject(int level, int num)
+shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)
 {
-	shared_ptr<Object> object;
+	shared_ptr<BackGround> object = make_shared<BackGround>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
-
 
 	switch (level)
 	{
@@ -49,6 +49,7 @@ shared_ptr<Object> ObjectManager::GetBackGroundObject(int level, int num)
 		{
 		case 0:
 			texture = make_shared<Quad>(L"Resource/BackGround/Sky_Day.png");
+			object->GetBackGroundType() = BackGround::BackGround_Type::FOLLOW_CAMERA;
 			break;
 		case 1:
 			texture = make_shared<Quad>(L"Resource/BackGround/TownBG_Day.png");
@@ -78,51 +79,14 @@ shared_ptr<Object> ObjectManager::GetBackGroundObject(int level, int num)
 	}
 
 	texture->GetTransform()->GetScale() *= WIN_RATIO;
-	object = make_shared<BackGround>(level, num);
 	object->SetTexture(texture);
 	object->SetCollider();
 	return object;
 }
 
-shared_ptr<Object> ObjectManager::GetWallObject(int level, int num)
+shared_ptr<Tile> ObjectManager::GetTileObject(int level, int num)
 {
-	shared_ptr<BackGround> object;
-	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
-
-	switch (level)
-	{
-	case Map::LEVEL_00:
-		break;
-	case Map::LEVEL_01:
-		break;
-	case Map::LEVEL_02:
-		break;
-	case Map::LEVEL_03:
-		break;
-	case Map::LEVEL_04:
-		break;
-	case Map::LEVEL_05:
-		break;
-	case Map::LEVEL_06:
-		break;
-	case Map::LEVEL_07:
-		break;
-	case Map::PUBLIC:
-		break;
-	default:
-		break;
-	}
-
-	texture->GetTransform()->GetScale() *= WIN_RATIO;
-	object = make_shared<BackGround>(level, num);
-	object->SetTexture(texture);
-	object->SetCollider();
-	return object;
-}
-
-shared_ptr<Object> ObjectManager::GetTileObject(int level, int num)
-{
-	shared_ptr<Tile> object;
+	shared_ptr<Tile> object = make_shared<Tile>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
 
 	switch (level)
@@ -214,9 +178,60 @@ shared_ptr<Object> ObjectManager::GetTileObject(int level, int num)
 	}
 
 	texture->GetTransform()->GetScale() *= WIN_RATIO;
-	object = make_shared<Tile>(level,num);
 	object->SetTexture(texture);
 	object->SetCollider();
 
+	return object;
+}
+
+shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
+{
+	shared_ptr<Creature> object;
+
+	switch (level)
+	{
+	case -1: // Player
+		switch (num)
+		{
+		case 0:
+			object = make_shared<Player>(level, num);
+			object->GetAnimation() = make_shared<Object::Animation>();
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle0.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle1.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle2.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle3.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle4.png");
+			break;
+		default:
+			break;
+		}
+		break;
+	case Map::LEVEL_00:
+		break;
+	case Map::LEVEL_01:
+		break;
+	case Map::LEVEL_02:
+		break;
+	case Map::LEVEL_03:
+		break;
+	case Map::LEVEL_04:
+		break;
+	case Map::LEVEL_05:
+		break;
+	case Map::LEVEL_06:
+		break;
+	case Map::LEVEL_07:
+		break;
+	case Map::PUBLIC:
+		break;
+	default:
+		break;
+	}
+
+	shared_ptr<Quad>texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
+	object->SetTexture(texture);
+	texture->GetTransform()->GetScale() *= WIN_RATIO;
+	object->SetCollider();
+	object->GetPlayingAnim() = true;
 	return object;
 }
