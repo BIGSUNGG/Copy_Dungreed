@@ -13,7 +13,7 @@ void BackGround::Update()
 	{
 	case BackGround::STATIC:
 		break;
-	case BackGround::FOLLOW_CAMERA:	
+	case BackGround::FOLLOW_CAMERA:
 		_texture->GetTransform()->GetPos() = CAMERA->GetPos() + CENTER;
 		break;
 	case BackGround::FOLLOW_PLAYER:

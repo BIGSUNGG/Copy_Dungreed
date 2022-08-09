@@ -106,8 +106,6 @@ using namespace std;
 // Bagic Obj
 #include "Object/Bagic_Object/Quad.h"
 #include "Object/Bagic_Object/Sprite.h"
-#include "Object/Bagic_Object/Effect.h"
-#include "Object/Bagic_Object/EffectManager.h"
 #include "Object/Aim.h"
 
 // UI
@@ -116,6 +114,7 @@ using namespace std;
 // Object
 #include "Dungreed/Object/Object.h"
 #include "Dungreed/Object/BackGround/BackGround.h"
+#include "Dungreed/Object/Wall/Wall.h"
 #include "Dungreed/Object/Tile/Tile.h"
 #include "Dungreed/Object/Creature/Creature.h"
 #include "Dungreed/Object/Creature/Player/Player.h"

@@ -8,6 +8,8 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	virtual void ReverseTexture();
+
 	virtual void CreateVertices();
 	virtual void SetTexture(wstring file);
 	virtual void SetVS(wstring vs);

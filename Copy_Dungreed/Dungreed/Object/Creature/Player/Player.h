@@ -14,7 +14,7 @@ protected:
 	float _jumpPowerMax = 800.0f;
 	float _gravity = 1200.0f;
 
-	bool _isPass = false;
+	bool _isReversed = false;
 	bool _doubleJumped = false;
 };
 

@@ -8,12 +8,10 @@ Map::Map(Level level,int num,char direction)
 
 	GAME->SetObjects(&_objects);
 
-	_objects.resize(5);
-
 	Load();
 }
 
-void Map::AddObject(shared_ptr<Object> addObject, Object::Object_Type type)
+void Map::AddObject(shared_ptr<Object> addObject, Object::Object_Type type,bool toFront)
 {
 	addObject->GetTexture()->Update();
 	shared_ptr<Quad> addQuad = addObject->GetTexture();
@@ -28,8 +26,11 @@ void Map::AddObject(shared_ptr<Object> addObject, Object::Object_Type type)
 	}
 
 	_objectCount++;
-	_objects[type].push_back(make_shared<Object>());
-	_objects[type].back() = addObject;
+
+	if (toFront == false)
+		_objects[type].emplace_back(addObject);
+	else
+		_objects[type].insert(_objects[type].begin(), addObject);
 }
 
 void Map::DeleteObject(Vector2 pos, Object::Object_Type type)
@@ -97,6 +98,10 @@ void Map::Save()
 		vector<int> basicInfo;
 
 		basicInfo.push_back(_objectCount);
+		basicInfo.push_back(_leftBottom.x);
+		basicInfo.push_back(_leftBottom.y);
+		basicInfo.push_back(_rightTop.x);
+		basicInfo.push_back(_rightTop.y);
 
 		basicWriter.Uint(basicInfo.size());
 		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
@@ -127,17 +132,20 @@ void Map::Save()
 
 void Map::Load()
 {
+	_objects.resize(4);
 	{
 		BinaryReader basicReader(L"Save/Map_Info/Level_00_0_basic.txt");
 
 		UINT size = basicReader.Uint();
 
 		vector<int> basicInfo;
-		basicInfo.resize(1);
+		basicInfo.resize(5);
 		void* ptr = basicInfo.data();
 		basicReader.Byte(&ptr, size * sizeof(int));
 
 		_objectCount = basicInfo[0];
+		_leftBottom = Vector2(basicInfo[1], basicInfo[2]);
+		_rightTop = Vector2(basicInfo[3], basicInfo[4]);
 	}
 
 	{

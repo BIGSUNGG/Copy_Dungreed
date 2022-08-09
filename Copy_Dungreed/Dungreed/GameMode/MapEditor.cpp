@@ -37,6 +37,20 @@ void MapEditor::PostRender()
 	_map->PostRender();
 	
 	_curObject->PostRender();
+
+	{
+		shared_ptr<Collider> temp = make_shared<RectCollider>(_curObject->GetTexture()->GetHalfSize());
+		temp->GetPos() = _map->GetLeftBottom();
+		temp->Update();
+		temp->SetColorRed();
+		temp->Render();
+
+		temp = make_shared<RectCollider>(_curObject->GetTexture()->GetHalfSize());
+		temp->GetPos() = _map->GetRightTop();
+		temp->Update();
+		temp->SetColorRed();
+		temp->Render();
+	}
 }
 
 void MapEditor::ImGuiRender()
@@ -44,7 +58,7 @@ void MapEditor::ImGuiRender()
 	ImGui::Text("Object Count : %d", _map->_objectCount);
 	ImGui::SliderInt("Level", &_level, -1, 8);
 	ImGui::SliderInt("Num", &_num, 0, 30);
-	ImGui::SliderInt("CurType", &_curType, 0, 4);
+	ImGui::SliderInt("CurType", &_curType, 0, 3);
 
 	switch (_type)
 	{
@@ -97,27 +111,40 @@ void MapEditor::InputEvent()
 {	
 	if (CAMERA->GetFreeMode() == false)
 	{
-		if (KEY_DOWN('W'))
+		if (KEY_DOWN('Q'))
 		{
 			_map->AddObject(_curObject, _type);
 			_curObject = GET_OBJECT(_type, _level, _num);
 		}
-		if (KEY_PRESS('Q'))
+		if (KEY_PRESS('W'))
 		{
 			_map->AddObject(_curObject, _type);
 			_curObject = GET_OBJECT(_type, _level, _num);
 		}
-		if (KEY_DOWN('D'))
+		if (KEY_PRESS('E'))
+		{
+			_map->AddObject(_curObject, _type, true);
+			_curObject = GET_OBJECT(_type, _level, _num);
+		}
+		if (KEY_DOWN('A'))
 		{
 			_map->DeleteObject(_curMousePos, _type);
 		}
-		if (KEY_PRESS('E'))
+		if (KEY_PRESS('S'))
 		{
 			_map->DeleteObject(_curMousePos, _type);
 		}
 		if (KEY_DOWN('F'))
 		{
 			SwitchBool(_freeMode);
+		}
+		if (KEY_DOWN('Z'))
+		{
+			_map->GetLeftBottom() = _curMousePos;
+		}
+		if (KEY_DOWN('X'))
+		{
+			_map->GetRightTop() = _curMousePos;
 		}
 		if (KEY_DOWN(VK_UP))
 		{

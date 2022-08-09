@@ -3,6 +3,14 @@
 class GameMode
 {
 public:
+	enum GameModeType
+	{
+		NONE,
+		DUNGREED,
+		MAP_EDITOR,
+	};
+
+public:
 	GameMode();
 	virtual ~GameMode();
 

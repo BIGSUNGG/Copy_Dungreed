@@ -14,6 +14,22 @@ void Player::Update()
 	if (_movementPos.x != 0)
 	{
 		_anim->ChangeAnimation(State::MOVE);
+		if (_isFalling == false)
+		{
+			if (_movementPos.x > 0)
+			{
+				if (_isReversed == true)
+				{
+					_texture->ReverseTexture();
+					_isReversed = false;
+				}
+			}
+			else if (_isReversed == false)
+			{
+				_texture->ReverseTexture();
+				_isReversed = true;
+			}
+		}
 	}
 	else
 	{
@@ -34,20 +50,16 @@ void Player::Update()
 	InputEvent();
 
 	_jumpPower -= _gravity * DELTA_TIME;
-	_texture->GetTransform()->GetPos().y += _jumpPower * DELTA_TIME;
+
+	MoveCharacter(Vector2(0.0f, _jumpPower));
 
 	_texture->Update();
 	_collider->Update();
 	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_collider, Object::Object_Type::TILE);
-	if (_isPass == false)
+
+	for (auto& object : collisions)
 	{
-		if (collisions.size() > 0)
-		{
-			if (collisions.front()->GetTexture()->Top() <= _movedPos.y - (_texture->Top() - _texture->GetTransform()->GetPos().y) && _movementPos.y <= 0)
-			{
-				_texture->GetTransform()->GetPos().y = collisions.front()->GetTexture()->Top() + (_texture->Top() - _texture->GetTransform()->GetPos().y);
-			}
-		}
+		CollisionEvent(object);
 	}
 
 	Creature::Update();
@@ -62,9 +74,9 @@ void Player::InputEvent()
 	if (KEY_PRESS('S'))
 	{
 		if (KEY_PRESS(VK_SPACE))
-		{
 			_isPass = true;
-		}
+		else
+			_isPass = false;
 	}
 	else if (KEY_UP('S'))
 	{
@@ -72,11 +84,11 @@ void Player::InputEvent()
 	}
 	if (KEY_PRESS('A'))
 	{
-		_texture->GetTransform()->GetPos().x -= _speed * DELTA_TIME;
+		MoveCharacter(Vector2(-_speed, 0.0f));
 	}
 	if (KEY_PRESS('D'))
 	{
-		_texture->GetTransform()->GetPos().x += _speed * DELTA_TIME;
+		MoveCharacter(Vector2(_speed, 0.0f));
 	}
 }
 

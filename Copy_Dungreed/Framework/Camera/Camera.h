@@ -52,7 +52,7 @@ private:
 	shared_ptr<Transform> _moveTransform;
 	shared_ptr<MatrixBuffer> _projectionBuffer;
 
-	float _speed = 200.0f;
+	float _speed = 500.0f;
 	
 	shared_ptr<Transform> _target;
 	Vector2 _offset = CENTER;

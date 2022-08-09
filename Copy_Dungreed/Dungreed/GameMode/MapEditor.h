@@ -26,9 +26,9 @@ private:
 	bool _freeMode = false;
 
 	int _beforeLevel = 0;
-	int _beforeNum = 0;
+	int _beforeNum = 1;
 
 	int _level = 0;
-	int _num = 0;
+	int _num = 1;
 };
 

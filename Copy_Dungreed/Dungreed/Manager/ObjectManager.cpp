@@ -21,6 +21,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 		object = GetBackGroundObject(level, num);
 		break;
 	case Object::Object_Type::WALL:
+		object = GetWallObject(level, num);
 		break;
 	case Object::Object_Type::TILE:
 		object = GetTileObject(level, num);
@@ -53,7 +54,8 @@ shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)
 			break;
 		case 1:
 			texture = make_shared<Quad>(L"Resource/BackGround/TownBG_Day.png");
-			break; 
+			texture->GetTransform()->GetScale() *= 0.75f;
+			break;
 		default:
 			break;
 		}
@@ -81,6 +83,42 @@ shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)
 	texture->GetTransform()->GetScale() *= WIN_RATIO;
 	object->SetTexture(texture);
 	object->SetCollider();
+	return object;
+}
+
+shared_ptr<Wall> ObjectManager::GetWallObject(int level, int num)
+{
+	shared_ptr<Wall> object = make_shared<Wall>(level, num);
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
+	switch (level)
+	{
+	case Map::LEVEL_00:
+		break;
+	case Map::LEVEL_01:
+		break;
+	case Map::LEVEL_02:
+		break;
+	case Map::LEVEL_03:
+		break;
+	case Map::LEVEL_04:
+		break;
+	case Map::LEVEL_05:
+		break;
+	case Map::LEVEL_06:
+		break;
+	case Map::LEVEL_07:
+		break;
+	case Map::PUBLIC:
+		break;
+	default:
+		break;
+	}
+
+	texture->GetTransform()->GetScale() *= WIN_RATIO;
+	object->SetTexture(texture);
+	object->SetCollider();
+
 	return object;
 }
 

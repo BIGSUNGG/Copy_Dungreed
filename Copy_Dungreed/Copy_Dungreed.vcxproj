@@ -167,9 +167,7 @@
     <ClInclude Include="Framework\Utility\BinaryWriter.h" />
     <ClInclude Include="Framework\Utility\MathUtility.h" />
     <ClInclude Include="Framework\Camera\Camera.h" />
-    <ClInclude Include="Object\Bagic_Object\EffectManager.h" />
     <ClInclude Include="Framework\Utility\Utillity.h" />
-    <ClInclude Include="Object\Bagic_Object\Effect.h" />
     <ClInclude Include="Framework\Animation\Action.h" />
     <ClInclude Include="Framework\Collider\Collider.h" />
     <ClInclude Include="Framework\Collider\CircleCollider.h" />
@@ -206,6 +204,8 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Dungreed\UI\UI.h" />
+    <ClInclude Include="Dungreed\Object\Wall\Wall.h" />
+    <ClInclude Include="Dungreed\Object\Weaphon\Weaphon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
@@ -223,8 +223,6 @@
     <ClCompile Include="Framework\Utility\BinaryWriter.cpp" />
     <ClCompile Include="Framework\Utility\MathUtility.cpp" />
     <ClCompile Include="Framework\Camera\Camera.cpp" />
-    <ClCompile Include="Object\Bagic_Object\EffectManager.cpp" />
-    <ClCompile Include="Object\Bagic_Object\Effect.cpp" />
     <ClCompile Include="Framework\Animation\Action.cpp" />
     <ClCompile Include="Framework\Collider\Collider.cpp" />
     <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
@@ -265,6 +263,8 @@
     <ClCompile Include="Dungreed\Object\Tile\Tile.cpp" />
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\UI\UI.cpp" />
+    <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
+    <ClCompile Include="Dungreed\Object\Weaphon\Weaphon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

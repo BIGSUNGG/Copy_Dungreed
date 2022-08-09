@@ -3,7 +3,7 @@
 
 Program::Program()
 {
-	_gameMode = make_shared<Dungreed>();
+	_gameMode = make_shared<MapEditor>();
 }
 
 Program::~Program()
@@ -12,9 +12,8 @@ Program::~Program()
 
 void Program::Update()
 {
-	_gameMode->Update();
-	EffectManager::GetInstance()->Update();
 	Camera::GetInstance()->Update();
+	_gameMode->Update();
 }
 
 void Program::Render()
@@ -33,7 +32,6 @@ void Program::Render()
 	_gameMode->PreRender();
 
 	_gameMode->Render();
-	EffectManager::GetInstance()->Render();
 
 	wstring fps = L"FPS : " + to_wstring((int)Timer::GetInstance()->GetFPS());
 	RECT rect = { 0,0,100,100 };
@@ -43,6 +41,10 @@ void Program::Render()
 
 	_gameMode->PostRender();
 	_gameMode->ImGuiRender();
+	if (ImGui::Button("Play"))
+	{
+		_gameMode = make_shared<Dungreed>();
+	}
 	Camera::GetInstance()->PostRender();
 
 	ImGui::Render();

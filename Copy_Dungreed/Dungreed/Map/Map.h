@@ -18,7 +18,7 @@ public:
 public:
 	Map(Level level = LEVEL_00, int num = 0, char direction = 0b0000);
 
-	void AddObject(shared_ptr<Object> addObject, Object::Object_Type type);
+	void AddObject(shared_ptr<Object> addObject, Object::Object_Type type , bool toFront = false);
 	void DeleteObject(Vector2 Pos, Object::Object_Type type);
 
 	void Update();
@@ -32,10 +32,15 @@ public:
 	void Reset();
 
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
+	Vector2& GetLeftBottom() { return _leftBottom; }
+	Vector2& GetRightTop() { return _rightTop; }
 
 	int _objectCount = 0;
-private:
 	vector<vector<shared_ptr<Object>>> _objects;
+private:
+
+	Vector2 _leftBottom;
+	Vector2 _rightTop;
 
 	Level _level;
 	int _num;
