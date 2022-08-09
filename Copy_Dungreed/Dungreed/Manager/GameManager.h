@@ -21,17 +21,23 @@ public:
 			return _instance;
 	}
 
+	void Update();
+	void PreRender();
+	void Render();
+	void PostRender();
+	void ImguiRender();
+
 	shared_ptr<Player> GetPlayer();
 
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider , Object::Object_Type type);
 
-	void SetObjects(vector<vector<shared_ptr<Object>>>* objects) { _objects = objects; }
+	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
 
 private:
 	GameManager();
 	~GameManager();
 	static GameManager* _instance;	
 	
-	static vector<vector<shared_ptr<Object>>>* _objects;
+	vector<vector<shared_ptr<Object>>> _objects;
 };
 

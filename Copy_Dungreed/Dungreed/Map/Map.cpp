@@ -2,11 +2,10 @@
 #include "Map.h"
 
 Map::Map(Level level,int num,char direction)
+	: _objects(GAME->GetObjects())
 {
 	_level = level;
 	_num = num;
-
-	GAME->SetObjects(&_objects);
 
 	Load();
 }
@@ -46,48 +45,6 @@ void Map::DeleteObject(Vector2 pos, Object::Object_Type type)
 			break;
 		}
 	}
-}
-
-void Map::Update()
-{
-	for (auto& objects : _objects)
-	{
-		for (auto& object : objects)
-		{
-			object->Update();
-		}
-	}
-}
-
-void Map::PreRender()
-{
-}
-
-void Map::Render()
-{
-	for (auto& objects : _objects)
-	{
-		for (auto& object : objects)
-		{
-			object->Render();
-		}
-	}
-
-}
-
-void Map::PostRender()
-{
-	for (auto& objects : _objects)
-	{
-		for (auto& object : objects)
-		{
-			object->PostRender();
-		}
-	}
-}
-
-void Map::ImguiRender()
-{
 }
 
 void Map::Save()

@@ -23,7 +23,7 @@ public:
 		_data._matrix = XMMatrixTranspose(value);
 	}
 
-private:
+public:
 	Data _data;
 };
 

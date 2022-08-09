@@ -16,7 +16,7 @@ void MapEditor::Update()
 
 	RefreshChange();
 
-	_map->Update();
+	GAME->Update();
 
 	_curObject->Update();
 }
@@ -27,15 +27,15 @@ void MapEditor::PreRender()
 
 void MapEditor::Render()
 {
-	_map->Render();
-	
+	GAME->Render();
+
 	_curObject->Render();
 }
 
 void MapEditor::PostRender()
 {
-	_map->PostRender();
-	
+	GAME->PostRender();
+
 	_curObject->PostRender();
 
 	{

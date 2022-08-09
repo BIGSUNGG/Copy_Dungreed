@@ -15,6 +15,7 @@ public:
 	Vector2& GetPos() { return _pos; }
 	Vector2 GetWorldPos();
 	Vector2 GetWorldScale();
+	shared_ptr<MatrixBuffer> GetBuffer() { return _worldBuffer; }
 
 	void SetParent(shared_ptr<Transform> transform) { _parent = transform; }
 

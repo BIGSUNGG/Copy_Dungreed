@@ -8,7 +8,6 @@ public:
 		WALL,
 		TILE,
 		CREATURE,
-		WEAPHON,
 		EFFECT,
 		UI,
 	};
@@ -41,7 +40,7 @@ public:
 		void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
 
 		vector<vector<wstring>> _animList = vector<vector<wstring>>(6, vector<wstring>());
-		vector<vector<float>>   _animSpeed = vector<vector<float>>(6, vector<float>(6, 0.15f));
+		vector<vector<float>>   _animSpeed = vector<vector<float>>(6, vector<float>(10, 0.15f));
 		vector<Anim_State> _animState = vector<Anim_State>(6, LOOP);
 
 	private:

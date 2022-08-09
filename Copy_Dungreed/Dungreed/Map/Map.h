@@ -21,12 +21,6 @@ public:
 	void AddObject(shared_ptr<Object> addObject, Object::Object_Type type , bool toFront = false);
 	void DeleteObject(Vector2 Pos, Object::Object_Type type);
 
-	void Update();
-	void PreRender();
-	void Render();
-	void PostRender();
-	void ImguiRender();
-
 	void Save();
 	void Load();
 	void Reset();
@@ -36,7 +30,7 @@ public:
 	Vector2& GetRightTop() { return _rightTop; }
 
 	int _objectCount = 0;
-	vector<vector<shared_ptr<Object>>> _objects;
+	vector<vector<shared_ptr<Object>>>& _objects;
 private:
 
 	Vector2 _leftBottom;

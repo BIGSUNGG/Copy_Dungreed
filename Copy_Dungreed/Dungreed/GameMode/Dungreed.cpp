@@ -16,8 +16,7 @@ Dungreed::Dungreed()
 
 void Dungreed::Update()
 {
-	//CAMERA->GetTransform()->GetPos() = _map->GetObjects()[Object::CREATURE][0]->GetTexture()->GetTransform()->GetPos() * -1 + CENTER;
-	_map->Update();
+	GAME->Update();
 }
 
 void Dungreed::PreRender()
@@ -27,12 +26,12 @@ void Dungreed::PreRender()
 
 void Dungreed::Render()
 {
-	_map->Render();
+	GAME->Render();
 }
 
 void Dungreed::PostRender()
 {
-	_map->PostRender();
+	GAME->PostRender();
 }
 
 void Dungreed::ImGuiRender()
