@@ -36,6 +36,7 @@ public:
 	public:
 		void Update();
 
+
 		void ChangeAnimation(Object::State state);
 		void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
 
@@ -57,6 +58,8 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void PostRender();
+
+	void MoveObject(Vector2 pos);
 
 	virtual void SetCollider();
 	virtual void SetAnimation();

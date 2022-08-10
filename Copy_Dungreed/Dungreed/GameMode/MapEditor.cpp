@@ -50,6 +50,12 @@ void MapEditor::PostRender()
 		temp->Update();
 		temp->SetColorRed();
 		temp->Render();
+
+		temp = make_shared<RectCollider>(_curObject->GetTexture()->GetHalfSize());
+		temp->GetPos() = _map->GetStartPos();
+		temp->Update();
+		temp->SetColorRed();
+		temp->Render();
 	}
 }
 
@@ -88,6 +94,11 @@ void MapEditor::ImGuiRender()
 	if (ImGui::Button("Load"))
 	{
 		_map->Load();
+		CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER)* -1;
+	}
+	if (ImGui::Button("Reset"))
+	{
+		_map->Reset();
 	}
 }
 
@@ -116,12 +127,7 @@ void MapEditor::InputEvent()
 			_map->AddObject(_curObject, _type);
 			_curObject = GET_OBJECT(_type, _level, _num);
 		}
-		if (KEY_PRESS('W'))
-		{
-			_map->AddObject(_curObject, _type);
-			_curObject = GET_OBJECT(_type, _level, _num);
-		}
-		if (KEY_PRESS('E'))
+		if (KEY_DOWN('W'))
 		{
 			_map->AddObject(_curObject, _type, true);
 			_curObject = GET_OBJECT(_type, _level, _num);
@@ -130,9 +136,9 @@ void MapEditor::InputEvent()
 		{
 			_map->DeleteObject(_curMousePos, _type);
 		}
-		if (KEY_PRESS('S'))
+		if (KEY_DOWN('S'))
 		{
-			_map->DeleteObject(_curMousePos, _type);
+			_map->DeleteObject(_curMousePos, _type, true);
 		}
 		if (KEY_DOWN('F'))
 		{
@@ -145,6 +151,10 @@ void MapEditor::InputEvent()
 		if (KEY_DOWN('X'))
 		{
 			_map->GetRightTop() = _curMousePos;
+		}
+		if (KEY_DOWN('C'))
+		{
+			_map->GetStartPos() = _curMousePos;
 		}
 		if (KEY_DOWN(VK_UP))
 		{

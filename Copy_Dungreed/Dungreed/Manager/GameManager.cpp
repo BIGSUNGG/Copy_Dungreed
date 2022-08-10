@@ -52,11 +52,6 @@ void GameManager::ImguiRender()
 {
 }
 
-shared_ptr<Player> GameManager::GetPlayer()
-{
-	return dynamic_pointer_cast<Player>(_objects[Object::Object_Type::CREATURE].back());
-}
-
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type)
 {
 	vector<shared_ptr<Object>> result;

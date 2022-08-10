@@ -80,7 +80,6 @@ shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)
 		break;
 	}
 
-	texture->GetTransform()->GetScale() *= WIN_RATIO;
 	object->SetTexture(texture);
 	object->SetCollider();
 	return object;
@@ -115,7 +114,6 @@ shared_ptr<Wall> ObjectManager::GetWallObject(int level, int num)
 		break;
 	}
 
-	texture->GetTransform()->GetScale() *= WIN_RATIO;
 	object->SetTexture(texture);
 	object->SetCollider();
 
@@ -215,7 +213,6 @@ shared_ptr<Tile> ObjectManager::GetTileObject(int level, int num)
 		break;
 	}
 
-	texture->GetTransform()->GetScale() *= WIN_RATIO;
 	object->SetTexture(texture);
 	object->SetCollider();
 
@@ -279,7 +276,6 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		break;
 	}
 
-	texture->GetTransform()->GetScale() *= WIN_RATIO;
 	object->SetTexture(texture);
 	object->GetAnimation()->SetTexture(texture);
 	object->SetCollider();

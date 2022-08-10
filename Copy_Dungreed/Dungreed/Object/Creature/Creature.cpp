@@ -17,11 +17,6 @@ void Creature::Update()
 	Object::Update();
 }
 
-void Creature::MoveCharacter(Vector2 pos)
-{
-	_texture->GetTransform()->GetPos() += pos * DELTA_TIME;
-}
-
 void Creature::CollisionEvent(shared_ptr<Object> object)
 {
 	switch (object->GetType())
@@ -41,6 +36,7 @@ void Creature::CollisionEvent(shared_ptr<Object> object)
 				if (object->GetTexture()->Top() <= _movedPos.y - (_texture->Top() - _texture->GetTransform()->GetPos().y) && _movementPos.y <= 0)
 				{
 					_texture->GetTransform()->GetPos().y = object->GetTexture()->Top() + (_texture->Top() - _texture->GetTransform()->GetPos().y);
+					_jumpPower = 0.0f;
 					_onBlock = true;
 				}
 			}

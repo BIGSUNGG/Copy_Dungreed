@@ -27,6 +27,11 @@ void Object::PostRender()
 	_collider->Render();
 }
 
+void Object::MoveObject(Vector2 pos)
+{
+	_texture->GetTransform()->GetPos() += pos * DELTA_TIME;
+}
+
 void Object::SetCollider()
 {
 	_collider = make_shared<RectCollider>(_texture->GetHalfSize());

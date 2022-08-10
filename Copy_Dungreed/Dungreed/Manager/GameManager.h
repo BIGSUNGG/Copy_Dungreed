@@ -27,8 +27,6 @@ public:
 	void PostRender();
 	void ImguiRender();
 
-	shared_ptr<Player> GetPlayer();
-
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider , Object::Object_Type type);
 
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }

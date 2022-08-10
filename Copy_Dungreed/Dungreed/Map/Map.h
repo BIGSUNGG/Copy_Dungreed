@@ -18,14 +18,15 @@ public:
 public:
 	Map(Level level = LEVEL_00, int num = 0, char direction = 0b0000);
 
-	void AddObject(shared_ptr<Object> addObject, Object::Object_Type type , bool toFront = false);
-	void DeleteObject(Vector2 Pos, Object::Object_Type type);
+	void AddObject(shared_ptr<Object> addObject, int type , bool toFront = false);
+	void DeleteObject(Vector2 Pos, Object::Object_Type type, bool toFront = false);
 
 	void Save();
 	void Load();
 	void Reset();
 
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
+	Vector2& GetStartPos() { return _startPos; }
 	Vector2& GetLeftBottom() { return _leftBottom; }
 	Vector2& GetRightTop() { return _rightTop; }
 
@@ -33,6 +34,7 @@ public:
 	vector<vector<shared_ptr<Object>>>& _objects;
 private:
 
+	Vector2 _startPos;
 	Vector2 _leftBottom;
 	Vector2 _rightTop;
 

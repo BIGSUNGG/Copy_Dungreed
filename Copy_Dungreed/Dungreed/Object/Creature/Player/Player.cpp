@@ -9,8 +9,6 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
-
-
 	if (_movementPos.x != 0)
 	{
 		_anim->ChangeAnimation(State::MOVE);
@@ -51,10 +49,11 @@ void Player::Update()
 
 	_jumpPower -= _gravity * DELTA_TIME;
 
-	MoveCharacter(Vector2(0.0f, _jumpPower));
+	MoveObject(Vector2(0.0f, _jumpPower));
 
 	_texture->Update();
 	_collider->Update();
+
 	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_collider, Object::Object_Type::TILE);
 
 	for (auto& object : collisions)
@@ -84,11 +83,11 @@ void Player::InputEvent()
 	}
 	if (KEY_PRESS('A'))
 	{
-		MoveCharacter(Vector2(-_speed, 0.0f));
+		MoveObject(Vector2(-_speed, 0.0f));
 	}
 	if (KEY_PRESS('D'))
 	{
-		MoveCharacter(Vector2(_speed, 0.0f));
+		MoveObject(Vector2(_speed, 0.0f));
 	}
 }
 
