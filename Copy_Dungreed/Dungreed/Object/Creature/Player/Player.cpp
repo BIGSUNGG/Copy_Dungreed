@@ -9,12 +9,12 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
-	if (_movementPos.x != 0)
+	if (_velocity.x != 0)
 	{
 		_anim->ChangeAnimation(State::MOVE);
 		if (_isFalling == false)
 		{
-			if (_movementPos.x > 0)
+			if (_velocity.x > 0)
 			{
 				if (_isReversed == true)
 				{
@@ -33,7 +33,7 @@ void Player::Update()
 	{
 		_anim->ChangeAnimation(State::IDLE);
 	}
-	if (_movementPos.y != 0)
+	if (_velocity.y != 0)
 	{
 		_anim->ChangeAnimation(State::JUMP);
 		_isFalling = true;
@@ -48,20 +48,16 @@ void Player::Update()
 	InputEvent();
 
 	_jumpPower -= _gravity * DELTA_TIME;
-
-	MoveObject(Vector2(0.0f, _jumpPower));
-
-	_texture->Update();
-	_collider->Update();
-
-	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_collider, Object::Object_Type::TILE);
-
-	for (auto& object : collisions)
-	{
-		CollisionEvent(object);
-	}
-
+	_movement.y += _jumpPower;
+	
 	Creature::Update();
+}
+
+void Player::PostRender()
+{
+	ImGui::Text("%f , %f", _velocity.x, _velocity.y);
+
+	Creature::PostRender();
 }
 
 void Player::InputEvent()
@@ -73,21 +69,21 @@ void Player::InputEvent()
 	if (KEY_PRESS('S'))
 	{
 		if (KEY_PRESS(VK_SPACE))
-			_isPass = true;
+			_passFloor = true;
 		else
-			_isPass = false;
+			_passFloor = false;
 	}
 	else if (KEY_UP('S'))
 	{
-		_isPass = false;
+		_passFloor = false;
 	}
 	if (KEY_PRESS('A'))
 	{
-		MoveObject(Vector2(-_speed, 0.0f));
+		_movement.x -= _speed;
 	}
 	if (KEY_PRESS('D'))
 	{
-		MoveObject(Vector2(_speed, 0.0f));
+		_movement.x += _speed;
 	}
 }
 

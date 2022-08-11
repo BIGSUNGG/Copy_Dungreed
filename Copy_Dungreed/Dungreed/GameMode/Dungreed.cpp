@@ -23,7 +23,6 @@ void Dungreed::Update()
 
 void Dungreed::PreRender()
 {
-
 	GAME->PreRender();
 }
 

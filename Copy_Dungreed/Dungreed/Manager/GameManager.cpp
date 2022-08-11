@@ -13,6 +13,11 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
+	if (DELTA_TIME >= _maxDelay)
+		return;
+
+	Optimize();
+	
 	for (auto& objects : _objects)
 	{
 		for (auto& object : objects)
@@ -27,8 +32,8 @@ void GameManager::PreRender()
 }
 
 void GameManager::Render()
-{
-	for (auto& objects : _objects)
+{	
+	for (auto& objects : _optimized)
 	{
 		for (auto& object : objects)
 		{
@@ -39,7 +44,7 @@ void GameManager::Render()
 
 void GameManager::PostRender()
 {
-	for (auto& objects : _objects)
+	for (auto& objects : _optimized)
 	{
 		for (auto& object : objects)
 		{
@@ -52,7 +57,28 @@ void GameManager::ImguiRender()
 {
 }
 
-vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type)
+void GameManager::Optimize()
+{
+	shared_ptr<Collider> temp = make_shared<RectCollider>(CENTER);
+	temp->GetPos() = CAMERA->GetPos() + CENTER;
+	temp->Update();
+
+	_optimized.clear();
+
+	_optimized.emplace_back(GetCollisions(temp, Object::BACKGROUND, false));
+
+	_optimized.emplace_back(GetCollisions(temp, Object::WALL, false));
+
+	_optimized.emplace_back(GetCollisions(temp, Object::TILE, false));
+
+	_optimized.emplace_back(GetCollisions(temp, Object::CREATURE, false));
+
+	_optimized.emplace_back(GetCollisions(temp, Object::EFFECT, false));
+
+	_optimized.emplace_back(GetCollisions(temp, Object::UI, false));
+}
+
+vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool setColor)
 {
 	vector<shared_ptr<Object>> result;
 
@@ -60,7 +86,8 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 	{
 		if (collider->IsCollision(i->GetCollider()))
 		{
-			i->GetCollider()->SetColorRed();
+			if(setColor == true)
+				i->GetCollider()->SetColorRed();
 			result.emplace_back(i);
 		}
 	}

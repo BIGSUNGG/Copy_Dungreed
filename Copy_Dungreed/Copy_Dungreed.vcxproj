@@ -152,10 +152,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Animation\Animation.h" />
     <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
     <ClInclude Include="Dungreed\Object\BackGround\BackGround.h" />
     <ClInclude Include="Dungreed\GameMode\Dungreed.h" />
     <ClInclude Include="Dungreed\GameMode\GameMode.h" />
+    <ClInclude Include="Dungreed\Object\Effect\Effect.h" />
     <ClInclude Include="Framework\Utility\tinyxml2.h" />
     <ClInclude Include="Dungreed\GameMode\MapEditor.h" />
     <ClInclude Include="Dungreed\Object\Object.h" />
@@ -208,10 +210,12 @@
     <ClInclude Include="Dungreed\Object\Weaphon\Weaphon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Animation\Animation.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
     <ClCompile Include="Dungreed\Object\BackGround\BackGround.cpp" />
     <ClCompile Include="Dungreed\GameMode\Dungreed.cpp" />
     <ClCompile Include="Dungreed\GameMode\GameMode.cpp" />
+    <ClCompile Include="Dungreed\Object\Effect\Effect.cpp" />
     <ClCompile Include="Framework\Utility\tinyxml2.cpp" />
     <ClCompile Include="Dungreed\GameMode\MapEditor.cpp" />
     <ClCompile Include="Dungreed\Object\Object.cpp" />

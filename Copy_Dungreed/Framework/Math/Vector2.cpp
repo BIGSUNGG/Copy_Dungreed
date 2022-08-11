@@ -35,6 +35,11 @@ Vector2 Vector2::operator*(const float& value) const
     return Vector2(x * value, y * value);
 }
 
+Vector2 Vector2::operator/(const float& value) const
+{
+    return Vector2(x / value, y / value);
+}
+
 Vector2& Vector2::operator+=(const Vector2& value)
 {
     x += value.x;

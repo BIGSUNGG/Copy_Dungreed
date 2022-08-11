@@ -6,6 +6,8 @@ MapEditor::MapEditor()
 	_map = make_shared<Map>();
 
 	_curObject = GET_OBJECT(_curType, _level, _num);
+
+	CAMERA->SetTarget(nullptr);
 }
 
 void MapEditor::Update()

@@ -41,10 +41,11 @@ void Program::Render()
 
 	_gameMode->PostRender();
 	_gameMode->ImGuiRender();
-	if (ImGui::Button("Play"))
-	{
+	if (ImGui::Button("Dungreed"))
 		_gameMode = make_shared<Dungreed>();
-	}
+	if (ImGui::Button("MapEditor"))
+		_gameMode = make_shared<MapEditor>();
+
 	Camera::GetInstance()->PostRender();
 
 	ImGui::Render();

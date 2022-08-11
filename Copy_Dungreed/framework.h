@@ -101,6 +101,7 @@ using namespace std;
 
 // Animation
 #include "Framework/Animation/Action.h"
+#include "Framework/Animation/Animation.h"
 
 // Object
 // Bagic Obj
@@ -116,6 +117,7 @@ using namespace std;
 #include "Dungreed/Object/BackGround/BackGround.h"
 #include "Dungreed/Object/Wall/Wall.h"
 #include "Dungreed/Object/Tile/Tile.h"
+#include "Dungreed/Object/Effect/Effect.h"
 #include "Dungreed/Object/Creature/Creature.h"
 #include "Dungreed/Object/Creature/Player/Player.h"
 

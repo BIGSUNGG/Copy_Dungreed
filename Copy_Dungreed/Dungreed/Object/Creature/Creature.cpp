@@ -9,11 +9,33 @@ Creature::Creature(int level, int num)
 
 void Creature::Update()
 {
-	_onBlock = false;
+	MoveCharacter(_movement);
 
-	_movementPos = _texture->GetTransform()->GetPos() - _movedPos;
-	_movedPos = _texture->GetTransform()->GetPos();
+	_passFloor = false;
 
+	Object::Update();
+}
+
+void Creature::MoveCharacter(Vector2 pos)
+{
+	_movement = { 0,0 };
+
+
+	_texture->GetTransform()->GetPos() += (pos * DELTA_TIME);
+	
+	_texture->Update();
+	_collider->Update();
+
+	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_collider, Object::Object_Type::TILE);
+
+	for (auto& object : collisions)
+	{
+		CollisionEvent(object);
+	}
+
+	_velocity = (_texture->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
+
+	_beforeMove = _texture->GetTransform()->GetPos();
 	Object::Update();
 }
 
@@ -31,13 +53,13 @@ void Creature::CollisionEvent(shared_ptr<Object> object)
 		switch (temp->GetTileType())
 		{
 		case Tile::BLOCK:
-			if (_onBlock == false && _isPass == false)
+			if (_passFloor == false)
 			{
-				if (object->GetTexture()->Top() <= _movedPos.y - (_texture->Top() - _texture->GetTransform()->GetPos().y) && _movementPos.y <= 0)
+				if (object->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
 				{
-					_texture->GetTransform()->GetPos().y = object->GetTexture()->Top() + (_texture->Top() - _texture->GetTransform()->GetPos().y);
+					_texture->GetTransform()->GetPos().y = object->GetTexture()->Top() + (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y);
 					_jumpPower = 0.0f;
-					_onBlock = true;
+					_passFloor = true;
 				}
 			}
 			break;

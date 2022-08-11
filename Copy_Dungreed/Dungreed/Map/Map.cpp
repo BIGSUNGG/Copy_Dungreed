@@ -138,5 +138,6 @@ void Map::Load()
 void Map::Reset()
 {
 	_objects.clear(); 
-	_objects.resize(4);
+	_objects.resize(7);
+	_objectCount = 0;
 }

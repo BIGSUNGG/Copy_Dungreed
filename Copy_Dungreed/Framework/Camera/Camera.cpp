@@ -100,16 +100,16 @@ void Camera::Shake()
 void Camera::FreeMode()
 {
 	if (KEY_PRESS('W'))
-		_transform->GetPos().y -= _speed * DELTA_TIME;
+		_transform->GetPos().y -= _controlSpeed * DELTA_TIME;
 
 	if (KEY_PRESS('S'))
-		_transform->GetPos().y += _speed * DELTA_TIME;
+		_transform->GetPos().y += _controlSpeed * DELTA_TIME;
 
 	if (KEY_PRESS('A'))
-		_transform->GetPos().x += _speed * DELTA_TIME;
+		_transform->GetPos().x += _controlSpeed * DELTA_TIME;
 
 	if (KEY_PRESS('D'))
-		_transform->GetPos().x -= _speed * DELTA_TIME;
+		_transform->GetPos().x -= _controlSpeed * DELTA_TIME;
 }
 
 void Camera::FollowMode()
@@ -144,5 +144,5 @@ void Camera::FollowMode()
 	//if (targetPos.y > _rightTop.y - WIN_HEIGHT)
 	//	targetPos.y = _rightTop.y - WIN_HEIGHT;
 	//
-	//_transform->GetPos() = LERP(_transform->GetPos(), targetPos * -1, DELTA_TIME * _speed);
+	//_transform->GetPos() = LERP(_transform->GetPos(), targetPos * -1, DELTA_TIME * _followSpeed);
 }
