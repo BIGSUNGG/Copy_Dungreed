@@ -13,18 +13,18 @@ ObjectManager::~ObjectManager()
 
 shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 {
-	shared_ptr<Object> object = GetTileObject(level, num);
+	shared_ptr<Object> object = GetTile(level, num);
 
 	switch (type)
 	{
 	case Object::Object_Type::BACKGROUND:
-		object = GetBackGroundObject(level, num);
+		object = GetBackGround(level, num);
 		break;
 	case Object::Object_Type::WALL:
-		object = GetWallObject(level, num);
+		object = GetWall(level, num);
 		break;
 	case Object::Object_Type::TILE:
-		object = GetTileObject(level, num);
+		object = GetTile(level, num);
 		break;
 	case Object::Object_Type::CREATURE:
 		object = GetCreature(level, num);
@@ -38,7 +38,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 	return object;
 }
 
-shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)	
+shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)	
 {
 	shared_ptr<BackGround> object = make_shared<BackGround>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
@@ -81,11 +81,10 @@ shared_ptr<BackGround> ObjectManager::GetBackGroundObject(int level, int num)
 	}
 
 	object->SetTexture(texture);
-	object->SetCollider();
 	return object;
 }
 
-shared_ptr<Wall> ObjectManager::GetWallObject(int level, int num)
+shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 {
 	shared_ptr<Wall> object = make_shared<Wall>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
@@ -115,12 +114,11 @@ shared_ptr<Wall> ObjectManager::GetWallObject(int level, int num)
 	}
 
 	object->SetTexture(texture);
-	object->SetCollider();
 
 	return object;
 }
 
-shared_ptr<Tile> ObjectManager::GetTileObject(int level, int num)
+shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 {
 	shared_ptr<Tile> object = make_shared<Tile>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
@@ -214,7 +212,6 @@ shared_ptr<Tile> ObjectManager::GetTileObject(int level, int num)
 	}
 
 	object->SetTexture(texture);
-	object->SetCollider();
 
 	return object;
 }
@@ -232,12 +229,16 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		switch (num)
 		{
 		case 0:
+			object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(6, 0.15f);
+			object->GetAnimation()->_animState[Creature::State::IDLE] = Animation::Anim_State::LOOP;
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle0.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle1.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle2.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle3.png");
 			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle4.png");
 
+			object->GetAnimation()->_animSpeed[Creature::State::MOVE] = vector<float>(9, 0.15f);
+			object->GetAnimation()->_animState[Creature::State::MOVE] = Animation::Anim_State::LOOP;
 			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun0.png");
 			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun1.png");
 			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun2.png");
@@ -247,6 +248,8 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun6.png");
 			object->GetAnimation()->_animList[Creature::State::MOVE].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun7.png");
 
+			object->GetAnimation()->_animSpeed[Creature::State::JUMP] = vector<float>(1, 0.15f);
+			object->GetAnimation()->_animState[Creature::State::JUMP] = Animation::Anim_State::END;
 			object->GetAnimation()->_animList[Creature::State::JUMP].push_back(L"Resource/Creature/Player/Adventurer/Jump/CharJump0.png");
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
 			break;
@@ -278,7 +281,72 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 
 	object->SetTexture(texture);
 	object->GetAnimation()->SetTexture(texture);
-	object->SetCollider();
 	object->GetPlayingAnim() = true;
+	return object;
+}
+
+shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
+{
+	shared_ptr<Effect> object = make_shared<Effect>(level, num);
+	object->SetAnimation();
+	shared_ptr<Quad> texture;
+
+	switch (level)
+	{
+	case -1: // Player
+		switch (num)
+		{
+		case 0:
+			object->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.15f);
+			object->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust1.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust2.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust3.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust4.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust5.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust6.png");
+			texture = make_shared<Quad>(object->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		case 1:
+			object->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.15f);
+			object->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX0.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX1.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX2.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX3.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX4.png");
+			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX5.png");
+			texture = make_shared<Quad>(object->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		default:
+			break;
+		}
+		break;
+	case Map::LEVEL_00:
+		break;
+	case Map::LEVEL_01:
+		break;
+	case Map::LEVEL_02:
+		break;
+	case Map::LEVEL_03:
+		break;
+	case Map::LEVEL_04:
+		break;
+	case Map::LEVEL_05:
+		break;
+	case Map::LEVEL_06:
+		break;
+	case Map::LEVEL_07:
+		break;
+	case Map::PUBLIC:
+		break;
+	default:
+		break;
+	}
+
+	object->SetTexture(texture);
+	object->GetAnimation()->SetTexture(texture);
+	object->GetPlayingAnim() = true;
+
 	return object;
 }

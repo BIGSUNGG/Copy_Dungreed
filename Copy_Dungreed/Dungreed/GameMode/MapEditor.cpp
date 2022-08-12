@@ -5,7 +5,7 @@ MapEditor::MapEditor()
 {
 	_map = make_shared<Map>();
 
-	_curObject = GET_OBJECT(_curType, _level, _num);
+	_curObject = MAKE_OBJECT(_curType, _level, _num);
 
 	CAMERA->SetTarget(nullptr);
 }
@@ -127,12 +127,12 @@ void MapEditor::InputEvent()
 		if (KEY_DOWN('Q'))
 		{
 			_map->AddObject(_curObject, _type);
-			_curObject = GET_OBJECT(_type, _level, _num);
+			_curObject = MAKE_OBJECT(_type, _level, _num);
 		}
 		if (KEY_DOWN('W'))
 		{
 			_map->AddObject(_curObject, _type, true);
-			_curObject = GET_OBJECT(_type, _level, _num);
+			_curObject = MAKE_OBJECT(_type, _level, _num);
 		}
 		if (KEY_DOWN('A'))
 		{
@@ -197,6 +197,6 @@ void MapEditor::RefreshChange()
 	_beforeNum = _num;
 	_type = (Object::Object_Type)_curType;
 
-	_curObject = GET_OBJECT(_curType, _level, _num);
+	_curObject = MAKE_OBJECT(_curType, _level, _num);
 }
 

@@ -9,6 +9,7 @@ void Animation::Update()
 		_index.first = _curState;
 		_index.second = 0;
 		_texture->SetTexture(_animList[_index.first][_index.second]);
+		_isPlaying = true;
 	}
 
 	if (_isPlaying == true)
@@ -47,5 +48,4 @@ void Animation::Update()
 void Animation::ChangeAnimation(int state)
 {
 	_curState = state;
-	_isPlaying = true;
 }

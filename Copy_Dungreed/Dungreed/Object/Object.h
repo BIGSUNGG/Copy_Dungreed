@@ -9,7 +9,6 @@ public:
 		TILE,
 		CREATURE,
 		EFFECT,
-		UI,
 	};
 
 	enum State
@@ -29,10 +28,11 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void PostRender();
+	virtual void ImGuiRender() {}
 
 	virtual void SetCollider();
 	virtual void SetAnimation();
-	virtual void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
+	virtual void SetTexture(shared_ptr<Quad> texture);
 
 	int GetNum() { return _num; }
 	int GetLevel() { return _level; }

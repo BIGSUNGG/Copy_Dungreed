@@ -19,10 +19,11 @@ public:
 
 	shared_ptr<Object> GetNewObject(int type, int level, int num);
 
-	shared_ptr<BackGround> GetBackGroundObject(int level,int num);
-	shared_ptr<Wall> GetWallObject(int level, int num);
-	shared_ptr<Tile> GetTileObject(int level, int num);
+	shared_ptr<BackGround> GetBackGround(int level,int num);
+	shared_ptr<Wall> GetWall(int level, int num);
+	shared_ptr<Tile> GetTile(int level, int num);
 	shared_ptr<Creature> GetCreature(int level, int num);
+	shared_ptr<Effect> GetEffect(int level, int num);
 
 private:
 	ObjectManager();

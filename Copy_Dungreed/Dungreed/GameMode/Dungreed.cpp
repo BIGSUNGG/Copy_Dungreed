@@ -8,10 +8,12 @@ Dungreed::Dungreed()
 	_map = make_shared<Map>();
 	_map->Load();
 
-	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(GET_OBJECT(3, -1, 0));
-	GAME->GetObjects()[Object::Object_Type::CREATURE].back()->GetTexture()->GetTransform()->GetPos() = _map->GetStartPos();
+	shared_ptr<Object> player = MAKE_OBJECT(3, -1, 0);
+	player->GetTexture()->GetTransform()->GetPos() = _map->GetStartPos();
 
-	CAMERA->SetTarget(_map->GetObjects()[Object::Object_Type::CREATURE].back()->GetTexture()->GetTransform());
+	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);
+
+	CAMERA->SetTarget(player->GetTexture()-> GetTransform());
 	CAMERA->SetLeftBottom(_map->GetLeftBottom());
 	CAMERA->SetRightTop(_map->GetRightTop());
 }
@@ -38,5 +40,5 @@ void Dungreed::PostRender()
 
 void Dungreed::ImGuiRender()
 {
-
+	GAME->ImguiRender();
 }

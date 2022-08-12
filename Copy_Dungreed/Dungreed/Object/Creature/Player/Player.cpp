@@ -9,11 +9,15 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
+	_dustDelay += DELTA_TIME;
+
 	if (_velocity.x != 0)
 	{
 		_anim->ChangeAnimation(State::MOVE);
 		if (_isFalling == false)
 		{
+			DustEffect();
+
 			if (_velocity.x > 0)
 			{
 				if (_isReversed == true)
@@ -40,6 +44,9 @@ void Player::Update()
 	}
 	else
 	{
+		if (_isFalling == true)
+			DustEffect();
+		
 		_doubleJumped = false;
 		_isFalling = false;
 		_jumpPower = 0.0f;
@@ -58,6 +65,34 @@ void Player::PostRender()
 	ImGui::Text("%f , %f", _velocity.x, _velocity.y);
 
 	Creature::PostRender();
+}
+
+void Player::DustEffect()
+{
+	if (_dustDelay >= 0.5f)
+	{
+		_dustDelay = 0.0f;
+		shared_ptr<Effect> dust = MAKE_EFFECT(-1, 0);
+		dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+		dust->GetTexture()->SetBottom(_texture->Bottom());
+
+		if (_isReversed)
+			dust->GetTexture()->ReverseTexture();
+
+		GAME->AddEffect(dust);
+	}
+}
+
+void Player::DoubleJumpEffect()
+{
+	shared_ptr<Effect> dust = MAKE_EFFECT(-1, 1);
+	dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+	dust->GetTexture()->SetBottom(_texture->Bottom());
+
+	if (_isReversed)
+		dust->GetTexture()->ReverseTexture();
+
+	GAME->AddEffect(dust);
 }
 
 void Player::InputEvent()
@@ -97,5 +132,6 @@ void Player::Jump()
 	{
 		_jumpPower = _jumpPowerMax;
 		_doubleJumped = true;
+		DoubleJumpEffect();
 	}
 }

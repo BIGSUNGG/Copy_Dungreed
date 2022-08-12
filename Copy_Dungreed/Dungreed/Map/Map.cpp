@@ -2,7 +2,6 @@
 #include "Map.h"
 
 Map::Map(Level level,int num,char direction)
-	: _objects(GAME->GetObjects())
 {
 	_level = level;
 	_num = num;
@@ -17,7 +16,7 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 
 	Vector2& pos = addObject->GetTexture()->GetTransform()->GetPos();
 
-	for (auto& objects : _objects[type])
+	for (auto& objects : GET_OBJECTS[type])
 	{
 		if (addObject->GetTexture()->GetTransform()->GetPos() ==
 			objects->GetTexture()->GetTransform()->GetPos())
@@ -28,21 +27,18 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 
 	_objectCount++;
 
-	if (toFront == false)
-		_objects[type].emplace_back(addObject);
-	else
-		_objects[type].insert(_objects[type].begin(), addObject);
+	GAME->AddObject(addObject, type, toFront);
 }
 
 void Map::DeleteObject(Vector2 pos, Object::Object_Type type, bool toFront)
 {
-	for (auto objects = _objects[type].begin(); objects != _objects[type].end(); objects++)
+	for (auto objects = GET_OBJECTS[type].begin(); objects != GET_OBJECTS[type].end(); objects++)
 	{
 		shared_ptr<Quad> object = objects->get()->GetTexture();
 		if (pos.x > object->Left() && pos.x < object->Right() &&
 			pos.y < object->Top() && pos.y > object->Bottom())
 		{
-			_objects[type].erase(objects);
+			GET_OBJECTS[type].erase(objects);
 			_objectCount--;
 			break;
 		}
@@ -74,7 +70,7 @@ void Map::Save()
 		vector<int> mapInfo;
 
 
-		for (auto& objects : _objects)
+		for (auto& objects : GET_OBJECTS)
 		{
 			for (auto& object : objects)
 			{
@@ -127,7 +123,7 @@ void Map::Load()
 		{
 			int cur = i * 5;
 
-			shared_ptr<Object> object = GET_OBJECT(mapInfo[cur], mapInfo[cur + 1], mapInfo[cur + 2]);
+			shared_ptr<Object> object = MAKE_OBJECT(mapInfo[cur], mapInfo[cur + 1], mapInfo[cur + 2]);
 
 			object->GetTexture()->GetTransform()->GetPos() = Vector2(mapInfo[cur + 3], mapInfo[cur + 4]);
 			AddObject(object, mapInfo[cur]);
@@ -137,7 +133,7 @@ void Map::Load()
 
 void Map::Reset()
 {
-	_objects.clear(); 
-	_objects.resize(7);
+	GET_OBJECTS.clear();
+	GET_OBJECTS.resize(5);
 	_objectCount = 0;
 }

@@ -57,7 +57,7 @@ void Creature::CollisionEvent(shared_ptr<Object> object)
 			{
 				if (object->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
 				{
-					_texture->GetTransform()->GetPos().y = object->GetTexture()->Top() + (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y);
+					_texture->SetBottom(object->GetTexture()->Top());
 					_jumpPower = 0.0f;
 					_passFloor = true;
 				}

@@ -37,3 +37,9 @@ void Object::SetAnimation()
 {
 	_anim = make_shared<Animation>();
 }
+
+void Object::SetTexture(shared_ptr<Quad> texture)
+{
+	_texture = texture;
+	SetCollider();
+}

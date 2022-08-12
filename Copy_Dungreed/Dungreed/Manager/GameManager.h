@@ -29,6 +29,9 @@ public:
 
 	void Optimize();
 
+	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
+	void AddEffect(shared_ptr<Effect> effect);
+
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider , Object::Object_Type type,bool setColor = true);
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
 
@@ -40,5 +43,7 @@ private:
 	float _maxDelay = 0.1f;
 	vector<vector<shared_ptr<Object>>> _objects;
 	vector<vector<shared_ptr<Object>>> _optimized;
+
+	int _renderCollider = true;
 };
 

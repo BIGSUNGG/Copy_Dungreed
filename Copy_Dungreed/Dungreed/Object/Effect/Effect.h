@@ -14,6 +14,8 @@ public:
 public:
 	Effect(int level, int num);
 
+	virtual Effect_Type& GetEffectType() { return _effectType; }
+
 protected:
 	Effect_Type _effectType = MOVEMENT;
 

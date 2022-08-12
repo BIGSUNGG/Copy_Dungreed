@@ -44,13 +44,17 @@
 #define V(hr) assert(SUCCEEDED(hr))
 
 #define OBJ_MANAGER ObjectManager::GetInstance()
-#define GET_OBJECT(type,level,num) ObjectManager::GetInstance()->GetNewObject(type,level,num)
-#define GET_TILE(level,num) ObjectManager::GetInstance()->GetTileObject(level,num)
-#define GET_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGroundObject(level,num)
+#define MAKE_OBJECT(type,level,num) ObjectManager::GetInstance()->GetNewObject(type,level,num)
+#define MAKE_TILE(level,num) ObjectManager::GetInstance()->GetTile(level,num)
+#define MAKE_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGround(level,num)
+#define MAKE_EFFECT(level,num) ObjectManager::GetInstance()->GetEffect(level,num)
 
 #define CAMERA Camera::GetInstance()
 
 #define GAME GameManager::GetInstance()
+#define GET_OBJECTS GameManager::GetInstance()->GetObjects()
+
+#define BASIC 0
 
 using CallBack = function<void()>;
 using CallBackParam = function<void(int)>;
