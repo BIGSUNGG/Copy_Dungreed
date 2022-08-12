@@ -130,6 +130,7 @@ using namespace std;
 // Manager
 #include "Dungreed/Manager/ObjectManager.h"
 #include "Dungreed/Manager/GameManager.h"
+#include "Dungreed/Manager/GraphicManager.h"
 
 // GameMode
 #include "Dungreed/GameMode/GameMode.h"

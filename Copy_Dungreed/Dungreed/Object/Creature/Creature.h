@@ -14,11 +14,13 @@ public:
 	Creature(int level, int num);
 
 	virtual void Update() override;
+	virtual void ImGuiRender() override;
 
 	void MoveCharacter(Vector2 pos);
 	virtual void CollisionEvent(shared_ptr<Object> objects);
 
-	virtual Creature_Type& GetCreatureType() { return _creatureType; }
+	const Vector2& GetVelocity() { return _velocity; }
+	Creature_Type& GetCreatureType() { return _creatureType; }
 	
 protected:
 	Creature_Type _creatureType = ENEMY;

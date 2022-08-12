@@ -40,6 +40,7 @@ private:
 	static Device* _instance;
 
 	HWND _hWnd;
+	HWND _hWndTemp;
 
 	Microsoft::WRL::ComPtr<ID3D11Device>			_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext>		_deviceContext;

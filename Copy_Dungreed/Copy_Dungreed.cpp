@@ -22,89 +22,91 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+					 _In_opt_ HINSTANCE hPrevInstance,
+					 _In_ LPWSTR    lpCmdLine,
+					 _In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: 여기에 코드를 입력합니다.
+	// TODO: 여기에 코드를 입력합니다.
 
-    // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_COPYDUNGREED, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+	// 전역 문자열을 초기화합니다.
+	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+	LoadStringW(hInstance, IDC_COPYDUNGREED, szWindowClass, MAX_LOADSTRING);
+	MyRegisterClass(hInstance);
 
-    // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance (hInstance, nCmdShow))
-    {
-        return FALSE;
-    }
+	// 애플리케이션 초기화를 수행합니다:
+	if (!InitInstance (hInstance, nCmdShow))
+	{
+		return FALSE;
+	}
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_COPYDUNGREED));
+	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_COPYDUNGREED));
 
-    MSG msg = {};
+	MSG msg = {};
 
-    // 생성
-    Device::Create(hWnd);
+	// 생성
+	Device::Create(hWnd);
 
-    ImGui::CreateContext();
-    ImGui::StyleColorsDark();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
 
-    ImGui_ImplWin32_Init(hWnd);
-    ImGui_ImplDX11_Init(DEVICE.Get(), DEVICE_CONTEXT.Get());
+	ImGui_ImplWin32_Init(hWnd);
+	ImGui_ImplDX11_Init(DEVICE.Get(), DEVICE_CONTEXT.Get());
 
-    Timer::Create();
-    InputManager::Create();
-    StateManager::Create();
-    ShaderManager::Create();
-    DirectWrite::Create();
-    Camera::Create();
-    ObjectManager::Create();
-    GameManager::Create();
+	Timer::Create();
+	InputManager::Create();
+	StateManager::Create();
+	ShaderManager::Create();
+	DirectWrite::Create();
+	Camera::Create();
+	ObjectManager::Create();
+	GameManager::Create();
+	GraphicManager::Create();
 
-    srand(static_cast<UINT>(time(nullptr)));
+	srand(static_cast<UINT>(time(nullptr)));
 
-    shared_ptr<Program> program = make_shared<Program>();
+	shared_ptr<Program> program = make_shared<Program>();
 
-    while (msg.message != WM_QUIT)
-    {
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-        {
-            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-            {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
-        }
-        // 메인 루프
-        else
-        {
-            Timer::GetInstance()->Update();
-            InputManager::GetInstance()->Update();
-            program->Update();
-            program->Render();
-        }
-    }
+	while (msg.message != WM_QUIT)
+	{
+		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		{
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
+		// 메인 루프
+		else
+		{
+			Timer::GetInstance()->Update();
+			InputManager::GetInstance()->Update();
+			program->Update();
+			program->Render();
+		}
+	}
 
-    // 삭제
-    GameManager::Delete();
-    ObjectManager::Delete();
-    Camera::Delete();
-    DirectWrite::Delete();
-    ShaderManager::Delete();
-    StateManager::Delete();
-    InputManager::Delete();
-    Timer::Delete();
+	// 삭제
+	GraphicManager::Delete();
+	GameManager::Delete();
+	ObjectManager::Delete();
+	Camera::Delete();
+	DirectWrite::Delete();
+	ShaderManager::Delete();
+	StateManager::Delete();
+	InputManager::Delete();
+	Timer::Delete();
 
-    ImGui_ImplDX11_Shutdown();
-    ImGui_ImplWin32_Shutdown();
-    ImGui::DestroyContext();
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 
-    Device::Delete();
+	Device::Delete();
 
-    return (int) msg.wParam;
+	return (int) msg.wParam;
 }
 
 //
@@ -114,23 +116,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-    WNDCLASSEXW wcex;
+	WNDCLASSEXW wcex;
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+	wcex.cbSize = sizeof(WNDCLASSEX);
 
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_COPYDUNGREED));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = 0;
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wcex.style          = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc    = WndProc;
+	wcex.cbClsExtra     = 0;
+	wcex.cbWndExtra     = 0;
+	wcex.hInstance      = hInstance;
+	wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_COPYDUNGREED));
+	wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+	wcex.lpszMenuName   = 0;
+	wcex.lpszClassName  = szWindowClass;
+	wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
-    return RegisterClassExW(&wcex);
+	return RegisterClassExW(&wcex);
 }
 
 //
@@ -151,14 +153,37 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
 
-   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      0, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+   int WinMode;
+   {
+	   BinaryReader Reader(L"Save/Graphic_Setting/Setting.txt");
 
+	   UINT size = Reader.Uint();
+
+	   vector<int> graphicInfo;
+	   graphicInfo.resize(1);
+	   void* ptr = graphicInfo.data();
+	   Reader.Byte(&ptr, size * sizeof(int));
+
+	   WinMode = graphicInfo[0];
+   }
+
+   if (WinMode == 0)
+   {
+	   // 창모드
+	   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+		  0, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+   }
+   else
+   {
+	   // 테두리없는 창 모드
+	   hWnd = CreateWindowExW(WS_EX_APPWINDOW, szWindowClass, szTitle, WS_POPUP,
+		   0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), nullptr, nullptr, hInstance, nullptr);
+   }
    //SetMenu(hWnd, nullptr);
 
    if (!hWnd)
    {
-      return FALSE;
+	  return FALSE;
    }
 
    ShowWindow(hWnd, nCmdShow);
@@ -182,69 +207,69 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT mes
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
-        return true;
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+		return true;
 
-    switch (message)
-    {
-    case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // 메뉴 선택을 구문 분석합니다:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        break;
+	switch (message)
+	{
+	case WM_COMMAND:
+		{
+			int wmId = LOWORD(wParam);
+			// 메뉴 선택을 구문 분석합니다:
+			switch (wmId)
+			{
+			case IDM_ABOUT:
+				DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+				break;
+			case IDM_EXIT:
+				DestroyWindow(hWnd);
+				break;
+			default:
+				return DefWindowProc(hWnd, message, wParam, lParam);
+			}
+		}
+		break;
 
-    case WM_MOUSEMOVE:
-    {
-        MOUSE_POS.x = static_cast<float>(LOWORD(lParam));
-        MOUSE_POS.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
-    }
-    break;
+	case WM_MOUSEMOVE:
+	{
+		MOUSE_POS.x = static_cast<float>(LOWORD(lParam));
+		MOUSE_POS.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
+	}
+	break;
 
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            EndPaint(hWnd, &ps);
-        }
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
+	case WM_PAINT:
+		{
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hWnd, &ps);
+			// TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+			EndPaint(hWnd, &ps);
+		}
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
 }
 
 // 정보 대화 상자의 메시지 처리기입니다.
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    UNREFERENCED_PARAMETER(lParam);
-    switch (message)
-    {
-    case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
+	UNREFERENCED_PARAMETER(lParam);
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		return (INT_PTR)TRUE;
 
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-        {
-            EndDialog(hDlg, LOWORD(wParam));
-            return (INT_PTR)TRUE;
-        }
-        break;
-    }
-    return (INT_PTR)FALSE;
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+		}
+		break;
+	}
+	return (INT_PTR)FALSE;
 }

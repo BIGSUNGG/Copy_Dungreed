@@ -12,5 +12,7 @@ public:
 	virtual void ImGuiRender() override;
 private:
 	shared_ptr<Map> _map;
+	shared_ptr<Creature> _player;
+	float _gameRunTime = 0.0f;
 };
 

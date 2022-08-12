@@ -163,6 +163,7 @@
     <ClInclude Include="Dungreed\Object\Object.h" />
     <ClInclude Include="Dungreed\Map\Map.h" />
     <ClInclude Include="Dungreed\Manager\GameManager.h" />
+    <ClInclude Include="Dungreed\Manager\GraphicManager.h" />
     <ClInclude Include="Object\UI\Button.h" />
     <ClInclude Include="Framework\Utility\DirectWrite.h" />
     <ClInclude Include="Framework\Utility\BinaryReader.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="Dungreed\Object\Object.cpp" />
     <ClCompile Include="Dungreed\Map\Map.cpp" />
     <ClCompile Include="Dungreed\Manager\GameManager.cpp" />
+    <ClCompile Include="Dungreed\Manager\GraphicManager.cpp" />
     <ClCompile Include="Object\UI\Button.cpp" />
     <ClCompile Include="Framework\Utility\DirectWrite.cpp" />
     <ClCompile Include="Framework\Utility\BinaryReader.cpp" />

@@ -28,7 +28,7 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void PostRender();
-	virtual void ImGuiRender() {}
+	virtual void ImGuiRender();
 
 	virtual void SetCollider();
 	virtual void SetAnimation();

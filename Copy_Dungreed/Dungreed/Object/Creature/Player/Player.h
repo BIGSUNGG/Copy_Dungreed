@@ -5,7 +5,7 @@ public:
 	Player(int level, int num);
 
 	virtual void Update() override;
-	virtual void PostRender() override;
+	virtual void ImGuiRender() override;
 
 	virtual void DustEffect();
 	virtual void DoubleJumpEffect();

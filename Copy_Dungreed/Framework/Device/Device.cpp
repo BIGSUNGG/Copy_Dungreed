@@ -4,8 +4,10 @@
 Device* Device::_instance = nullptr;
 
 Device::Device(HWND hWnd)
-: _hWnd(hWnd)
+    : _hWnd(hWnd)
 {
+    _hWnd = _hWnd;
+
     CreateDeviceAndSwapChain();
     CreateBackBuffer();
 }

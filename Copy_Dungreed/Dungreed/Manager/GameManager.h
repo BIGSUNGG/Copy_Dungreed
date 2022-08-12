@@ -44,6 +44,7 @@ private:
 	vector<vector<shared_ptr<Object>>> _objects;
 	vector<vector<shared_ptr<Object>>> _optimized;
 
-	int _renderCollider = true;
+	int _renderCollider = 1;
+	int _pause = 1;
 };
 

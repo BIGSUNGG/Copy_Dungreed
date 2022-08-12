@@ -21,7 +21,7 @@ public:
 	}
 
 	void Update();
-	void PostRender();
+	void ImGuiRender();
 
 	void ShakeStart(float magnitude, float duration, float reduceDamping = 1.0f);
 	

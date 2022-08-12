@@ -20,4 +20,9 @@ public:
 	virtual void Render() abstract;
 	virtual void PostRender() abstract;
 	virtual void ImGuiRender() abstract;
+
+	GameModeType GetGameModeType() { return _modeType; }
+
+protected:
+	GameModeType _modeType = NONE;
 };

@@ -16,6 +16,11 @@ void Creature::Update()
 	Object::Update();
 }
 
+void Creature::ImGuiRender()
+{
+	Object::ImGuiRender();
+}
+
 void Creature::MoveCharacter(Vector2 pos)
 {
 	_movement = { 0,0 };

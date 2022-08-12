@@ -33,10 +33,9 @@ void Camera::Update()
 	_transform->SetBuffer(1);
 }
 
-void Camera::PostRender()
+void Camera::ImGuiRender()
 {
-	ImGui::Text("Camera Info");
-	ImGui::Text("CamX : %0.1f, CamY : %0.1f", _moveTransform->GetPos().x, _moveTransform->GetPos().y);
+	ImGui::Text("CamX : %0.1f, CamY : %0.1f", _moveTransform->GetPos().x + CENTER.x, _moveTransform->GetPos().y + CENTER.y);
 }
 
 void Camera::ShakeStart(float magnitude, float duration, float reduceDamping)

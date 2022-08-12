@@ -60,11 +60,8 @@ void Player::Update()
 	Creature::Update();
 }
 
-void Player::PostRender()
+void Player::ImGuiRender()
 {
-	ImGui::Text("%f , %f", _velocity.x, _velocity.y);
-
-	Creature::PostRender();
 }
 
 void Player::DustEffect()

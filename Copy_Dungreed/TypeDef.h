@@ -4,11 +4,6 @@
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
 
-#define	WIN_WIDTH_BASIC 320
-#define	WIN_HEIGHT_BASIC 180
-
-#define WIN_RATIO WIN_WIDTH / WIN_WIDTH_BASIC
-
 #define CENTER Vector2(WIN_WIDTH / 2, WIN_HEIGHT / 2)
 
 #define PI 3.141592
@@ -45,14 +40,17 @@
 
 #define OBJ_MANAGER ObjectManager::GetInstance()
 #define MAKE_OBJECT(type,level,num) ObjectManager::GetInstance()->GetNewObject(type,level,num)
-#define MAKE_TILE(level,num) ObjectManager::GetInstance()->GetTile(level,num)
 #define MAKE_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGround(level,num)
+#define MAKE_TILE(level,num) ObjectManager::GetInstance()->GetTile(level,num)
+#define MAKE_CREATURE(level,num) ObjectManager::GetInstance()->GetCreature(level,num)
 #define MAKE_EFFECT(level,num) ObjectManager::GetInstance()->GetEffect(level,num)
 
 #define CAMERA Camera::GetInstance()
 
 #define GAME GameManager::GetInstance()
 #define GET_OBJECTS GameManager::GetInstance()->GetObjects()
+
+#define GRAPHIC GraphicManager::GetInstance()
 
 #define BASIC 0
 

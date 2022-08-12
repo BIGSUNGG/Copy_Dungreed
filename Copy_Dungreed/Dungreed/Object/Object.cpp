@@ -7,7 +7,6 @@ Object::Object(int level, int num)
 {
 }
 
-
 void Object::Update()
 {
 	if (_anim != nullptr)
@@ -25,6 +24,10 @@ void Object::Render()
 void Object::PostRender()
 {
 	_collider->Render();
+}
+
+void Object::ImGuiRender()
+{
 }
 
 void Object::SetCollider()

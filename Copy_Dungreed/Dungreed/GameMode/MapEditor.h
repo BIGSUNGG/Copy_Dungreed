@@ -19,11 +19,11 @@ private:
 	Vector2 _curMousePos;
 	shared_ptr<Object> _curObject;
 
-	Object::Object_Type _type = Object::Object_Type::TILE;
-	int _curType = 2;
-
 	bool _isPlaying = true;
 	bool _freeMode = false;
+
+	Object::Object_Type _beforeType = Object::Object_Type::TILE;
+	int _objectType = 2;
 
 	int _beforeLevel = 0;
 	int _beforeNum = 1;

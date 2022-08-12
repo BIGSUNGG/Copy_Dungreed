@@ -30,6 +30,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 		object = GetCreature(level, num);
 		break;
 	case Object::Object_Type::EFFECT:
+		object = GetEffect(level, num);
 		break;
 	default:
 		break;
@@ -80,7 +81,16 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 		break;
 	}
 
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
 	object->SetTexture(texture);
+
+	if (object->GetAnimation() != nullptr)
+	{
+		object->GetAnimation()->SetTexture(texture);
+		object->GetPlayingAnim() = true;
+	}
 	return object;
 }
 
@@ -113,8 +123,16 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 		break;
 	}
 
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
 	object->SetTexture(texture);
 
+	if (object->GetAnimation() != nullptr)
+	{
+		object->GetAnimation()->SetTexture(texture);
+		object->GetPlayingAnim() = true;
+	}
 	return object;
 }
 
@@ -211,14 +229,22 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 		break;
 	}
 
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
 	object->SetTexture(texture);
 
+	if (object->GetAnimation() != nullptr)
+	{
+		object->GetAnimation()->SetTexture(texture);
+		object->GetPlayingAnim() = true;
+	}
 	return object;
 }
 
 shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 {
-	shared_ptr<Creature> object;
+	shared_ptr<Creature> object = make_shared<Creature>(level, num);
 	shared_ptr<Quad> texture;
 
 	switch (level)
@@ -279,9 +305,16 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		break;
 	}
 
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+
 	object->SetTexture(texture);
-	object->GetAnimation()->SetTexture(texture);
-	object->GetPlayingAnim() = true;
+
+	if (object->GetAnimation() != nullptr)
+	{
+		object->GetAnimation()->SetTexture(texture);
+		object->GetPlayingAnim() = true;
+	}
 	return object;
 }
 
@@ -344,9 +377,15 @@ shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 		break;
 	}
 
-	object->SetTexture(texture);
-	object->GetAnimation()->SetTexture(texture);
-	object->GetPlayingAnim() = true;
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
 
+	object->SetTexture(texture);
+
+	if (object->GetAnimation() != nullptr)
+	{
+		object->GetAnimation()->SetTexture(texture);
+		object->GetPlayingAnim() = true;
+	}
 	return object;
 }

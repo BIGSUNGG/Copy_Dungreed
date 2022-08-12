@@ -3,9 +3,11 @@
 
 MapEditor::MapEditor()
 {
+	_modeType = MAP_EDITOR;
+
 	_map = make_shared<Map>();
 
-	_curObject = MAKE_OBJECT(_curType, _level, _num);
+	_curObject = MAKE_OBJECT(_objectType, _level, _num);
 
 	CAMERA->SetTarget(nullptr);
 }
@@ -63,45 +65,47 @@ void MapEditor::PostRender()
 
 void MapEditor::ImGuiRender()
 {
-	ImGui::Text("Object Count : %d", _map->_objectCount);
-	ImGui::SliderInt("Level", &_level, -1, 8);
-	ImGui::SliderInt("Num", &_num, 0, 30);
-	ImGui::SliderInt("CurType", &_curType, 0, 3);
+	if (ImGui::CollapsingHeader("MapEditor"))
+	{
+		ImGui::Text("Object Count : %d", _map->_objectCount);
+		ImGui::SliderInt("Level", &_level, -1, 8);
+		ImGui::SliderInt("Num", &_num, 0, 30);
+		ImGui::SliderInt("Type", &_objectType, 0, 3);
 
-	switch (_type)
-	{
-	case Object::Object_Type::BACKGROUND:
-		ImGui::Text("BACKGROUND");
-		break;
-	case Object::Object_Type::WALL:
-		ImGui::Text("WALL");
-		break;
-	case Object::Object_Type::TILE:
-		ImGui::Text("TILE");
-		break;
-	case Object::Object_Type::CREATURE:
-		ImGui::Text("CREATURE");
-		break;
-	case Object::Object_Type::EFFECT:
-		ImGui::Text("EFFECT");
-		break;
-	default:
-		break;
+		switch (_beforeType)
+		{
+		case Object::Object_Type::BACKGROUND:
+			ImGui::Text("BACKGROUND");
+			break;
+		case Object::Object_Type::WALL:
+			ImGui::Text("WALL");
+			break;
+		case Object::Object_Type::TILE:
+			ImGui::Text("TILE");
+			break;
+		case Object::Object_Type::CREATURE:
+			ImGui::Text("CREATURE");
+			break;
+		default:
+			break;
+		}
+
+		if (ImGui::Button("Save"))
+		{
+			_map->Save();
+		}
+		if (ImGui::Button("Load"))
+		{
+			_map->Load();
+			CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
+		}
+		if (ImGui::Button("Reset"))
+		{
+			_map->Reset();
+		}
 	}
 
-	if (ImGui::Button("Save"))
-	{
-		_map->Save();
-	}
-	if (ImGui::Button("Load"))
-	{
-		_map->Load();
-		CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER)* -1;
-	}
-	if (ImGui::Button("Reset"))
-	{
-		_map->Reset();
-	}
+	GAME->ImguiRender();
 }
 
 void MapEditor::MouseEvenet()
@@ -126,21 +130,21 @@ void MapEditor::InputEvent()
 	{
 		if (KEY_DOWN('Q'))
 		{
-			_map->AddObject(_curObject, _type);
-			_curObject = MAKE_OBJECT(_type, _level, _num);
+			_map->AddObject(_curObject, _beforeType);
+			_curObject = MAKE_OBJECT(_beforeType, _level, _num);
 		}
 		if (KEY_DOWN('W'))
 		{
-			_map->AddObject(_curObject, _type, true);
-			_curObject = MAKE_OBJECT(_type, _level, _num);
+			_map->AddObject(_curObject, _beforeType, true);
+			_curObject = MAKE_OBJECT(_beforeType, _level, _num);
 		}
 		if (KEY_DOWN('A'))
 		{
-			_map->DeleteObject(_curMousePos, _type);
+			_map->DeleteObject(_curMousePos, _beforeType);
 		}
 		if (KEY_DOWN('S'))
 		{
-			_map->DeleteObject(_curMousePos, _type, true);
+			_map->DeleteObject(_curMousePos, _beforeType, true);
 		}
 		if (KEY_DOWN('F'))
 		{
@@ -184,7 +188,7 @@ void MapEditor::InputEvent()
 
 void MapEditor::RefreshChange()
 {
-	if (_level == _beforeLevel && _num == _beforeNum && _type == _curType)
+	if (_level == _beforeLevel && _num == _beforeNum && _beforeType == _objectType)
 		return;
 
 	if (_num < 0)
@@ -195,8 +199,8 @@ void MapEditor::RefreshChange()
 
 	_beforeLevel = _level;
 	_beforeNum = _num;
-	_type = (Object::Object_Type)_curType;
+	_beforeType = (Object::Object_Type)_objectType;
 
-	_curObject = MAKE_OBJECT(_curType, _level, _num);
+	_curObject = MAKE_OBJECT(_objectType, _level, _num);
 }
 
