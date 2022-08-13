@@ -15,8 +15,11 @@ public:
 	virtual void Update() override;
 
 	virtual BackGround_Type& GetBackGroundType() { return _backGroundType; }
+	float& GetRatio() { return _ratio; }
 
 protected:
 	BackGround_Type _backGroundType = STATIC;
+
+	float _ratio = 1.5f;
 };
 

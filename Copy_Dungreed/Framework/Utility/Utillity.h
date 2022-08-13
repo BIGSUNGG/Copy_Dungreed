@@ -31,3 +31,29 @@ static void SwitchBool(bool& value)
 	else
 		value = true;
 }
+
+static void CursurOn()
+{
+	int temp = ShowCursor(true);
+
+	if (temp < 0)
+	{
+		for (int i = 0; i < -temp; i++)
+		{
+			ShowCursor(true);
+		}
+	}
+}
+
+static void CursurOff()
+{
+	int temp = ShowCursor(false);
+
+	if (temp > -1)
+	{
+		for (int i = 0; i < temp + 1; i++)
+		{
+			ShowCursor(false);
+		}
+	}
+}

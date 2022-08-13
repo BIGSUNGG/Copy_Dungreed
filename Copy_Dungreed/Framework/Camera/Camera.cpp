@@ -31,11 +31,15 @@ void Camera::Update()
 	_moveTransform->GetPos().y = -_transform->GetPos().y;
 
 	_transform->SetBuffer(1);
+
+	_velocity = (_transform->GetPos() - _beforeMove) / (float)DELTA_TIME * -1;
+	_beforeMove = _transform->GetPos();
 }
 
 void Camera::ImGuiRender()
 {
 	ImGui::Text("CamX : %0.1f, CamY : %0.1f", _moveTransform->GetPos().x + CENTER.x, _moveTransform->GetPos().y + CENTER.y);
+	ImGui::Text("Velocity : %0.1f , %0.1f", _velocity.x, _velocity.y);
 }
 
 void Camera::ShakeStart(float magnitude, float duration, float reduceDamping)

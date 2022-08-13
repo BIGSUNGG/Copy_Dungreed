@@ -24,6 +24,7 @@ public:
 	shared_ptr<Tile> GetTile(int level, int num);
 	shared_ptr<Creature> GetCreature(int level, int num);
 	shared_ptr<Effect> GetEffect(int level, int num);
+	shared_ptr<Quad> GetCursur(int num);
 
 private:
 	ObjectManager();

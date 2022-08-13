@@ -14,17 +14,27 @@ Dungreed::Dungreed()
 	_player->GetTexture()->GetTransform()->GetPos() = _map->GetStartPos();
 
 	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(dynamic_pointer_cast<Object>(_player));
+	GAME->GetBGUpdate() = true;
 
 	CAMERA->SetTarget(_player->GetTexture()-> GetTransform());
 	CAMERA->SetLeftBottom(_map->GetLeftBottom());
 	CAMERA->SetRightTop(_map->GetRightTop());
+
+	_cursur = OBJ_MANAGER->GetCursur(2);
+	CAMERA->GetVelocity() = { 0,0 };
+
+	CursurOff();
 }
 
 void Dungreed::Update()
 {
 	_gameRunTime += DELTA_TIME;
+	_cursur->GetTransform()->GetPos() = MOUSE_WORLD_POS;
+
+	_cursur->Update();
 
 	GAME->Update();
+
 }
 
 void Dungreed::PreRender()
@@ -39,6 +49,7 @@ void Dungreed::Render()
 
 void Dungreed::PostRender()
 {
+	_cursur->Render();
 	GAME->PostRender();
 }
 

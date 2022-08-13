@@ -17,25 +17,24 @@ void Player::Update()
 		if (_isFalling == false)
 		{
 			DustEffect();
-
-			if (_velocity.x > 0)
-			{
-				if (_isReversed == true)
-				{
-					_texture->ReverseTexture();
-					_isReversed = false;
-				}
-			}
-			else if (_isReversed == false)
-			{
-				_texture->ReverseTexture();
-				_isReversed = true;
-			}
 		}
 	}
 	else
 	{
 		_anim->ChangeAnimation(State::IDLE);
+	}
+	if (_texture->GetTransform()->GetPos().x >= MOUSE_WORLD_POS.x)
+	{
+		if (_isReversed == false)
+		{
+			_texture->ReverseTexture();
+			_isReversed = true;
+		}
+	}
+	else if (_isReversed == true)
+	{
+		_texture->ReverseTexture();
+		_isReversed = false;
 	}
 	if (_velocity.y != 0)
 	{
@@ -66,7 +65,7 @@ void Player::ImGuiRender()
 
 void Player::DustEffect()
 {
-	if (_dustDelay >= 0.5f)
+	if (_dustDelay >= 0.25f)
 	{
 		_dustDelay = 0.0f;
 		shared_ptr<Effect> dust = MAKE_EFFECT(-1, 0);
@@ -100,7 +99,7 @@ void Player::InputEvent()
 	}
 	if (KEY_PRESS('S'))
 	{
-		if (KEY_PRESS(VK_SPACE))
+		if (KEY_DOWN(VK_SPACE))
 			_passFloor = true;
 		else
 			_passFloor = false;
@@ -124,6 +123,7 @@ void Player::Jump()
 	if (_isFalling == false)
 	{
 		_jumpPower = _jumpPowerMax;
+		DustEffect();
 	}
 	else if (_doubleJumped == false)
 	{

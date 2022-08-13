@@ -35,6 +35,7 @@ public:
 	shared_ptr<Transform> GetMoveTransform() { return _moveTransform; }
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	Vector2 GetPos() { return _transform->GetPos() * -1; }
+	Vector2& GetVelocity() { return _velocity; }
 
 	Vector2 GetMouseWorldPos();
 
@@ -67,6 +68,8 @@ private:
 	float _magnitude = 0.0f;
 
 	Vector2 _originPos = { 0.0f,0.0f };
+	Vector2 _beforeMove;
+	Vector2 _velocity;
 
 	static Camera* _instance;
 };

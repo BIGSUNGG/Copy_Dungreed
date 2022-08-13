@@ -10,6 +10,13 @@ MapEditor::MapEditor()
 	_curObject = MAKE_OBJECT(_objectType, _level, _num);
 
 	CAMERA->SetTarget(nullptr);
+
+	GAME->GetBGUpdate() = false;
+
+	_mouseOffset.x = (_curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x);
+	_mouseOffset.y = (_curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y);
+
+	CursurOn();
 }
 
 void MapEditor::Update()
@@ -89,6 +96,10 @@ void MapEditor::ImGuiRender()
 		default:
 			break;
 		}
+		if (ImGui::Button("Apply Offset"))
+		{
+			ApplyOffset();
+		}
 
 		if (ImGui::Button("Save"))
 		{
@@ -112,10 +123,8 @@ void MapEditor::MouseEvenet()
 {
 	if (_freeMode == false)
 	{
-		_curMousePos.x = (int)MOUSE_WORLD_POS.x - ((int)MOUSE_WORLD_POS.x % (int)(_curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x))
-			+ (_curObject->GetTexture()->GetHalfSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x);
-		_curMousePos.y = (int)MOUSE_WORLD_POS.y - ((int)MOUSE_WORLD_POS.y % (int)(_curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y))
-			+ (_curObject->GetTexture()->GetHalfSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y);
+		_curMousePos.x = (int)MOUSE_WORLD_POS.x - ((int)MOUSE_WORLD_POS.x % (int)_mouseOffset.x) + _mouseOffset.x / 2;
+		_curMousePos.y = (int)MOUSE_WORLD_POS.y - ((int)MOUSE_WORLD_POS.y % (int)_mouseOffset.y) + _mouseOffset.y / 2;
 	}
 	else
 	{
@@ -124,18 +133,29 @@ void MapEditor::MouseEvenet()
 	_curObject->GetTexture()->GetTransform()->GetPos() = _curMousePos;
 }
 
+void MapEditor::ApplyOffset()
+{
+	_mouseOffset.x = _curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x;
+	_mouseOffset.y = _curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y;
+}
+
 void MapEditor::InputEvent()
 {	
 	if (CAMERA->GetFreeMode() == false)
 	{
-		if (KEY_DOWN('Q'))
+		if (KEY_DOWN('W'))
 		{
 			_map->AddObject(_curObject, _beforeType);
 			_curObject = MAKE_OBJECT(_beforeType, _level, _num);
 		}
-		if (KEY_DOWN('W'))
+		if (KEY_DOWN('Q'))
 		{
 			_map->AddObject(_curObject, _beforeType, true);
+			_curObject = MAKE_OBJECT(_beforeType, _level, _num);
+		}
+		if (KEY_PRESS('E'))
+		{
+			_map->AddObject(_curObject, _beforeType);
 			_curObject = MAKE_OBJECT(_beforeType, _level, _num);
 		}
 		if (KEY_DOWN('A'))
@@ -152,11 +172,12 @@ void MapEditor::InputEvent()
 		}
 		if (KEY_DOWN('Z'))
 		{
-			_map->GetLeftBottom() = _curMousePos;
+			_map->GetLeftBottom() = _curObject->GetTexture()->GetTransform()->GetPos();
 		}
 		if (KEY_DOWN('X'))
 		{
-			_map->GetRightTop() = _curMousePos;
+			_map->GetRightTop() = _curObject->GetTexture()->GetTransform()->GetPos();
+
 		}
 		if (KEY_DOWN('C'))
 		{

@@ -11,11 +11,13 @@ public:
 	virtual void ImGuiRender() override;
 
 	virtual void MouseEvenet();
+	virtual void ApplyOffset();
 	virtual void InputEvent();
 	virtual void RefreshChange();
 private:
 	shared_ptr<Map> _map;
 
+	Vector2 _mouseOffset;
 	Vector2 _curMousePos;
 	shared_ptr<Object> _curObject;
 
@@ -26,9 +28,9 @@ private:
 	int _objectType = 2;
 
 	int _beforeLevel = 0;
-	int _beforeNum = 1;
+	int _beforeNum = 10;
 
 	int _level = 0;
-	int _num = 1;
+	int _num = 10;
 };
 

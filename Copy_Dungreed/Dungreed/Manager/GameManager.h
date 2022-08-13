@@ -32,6 +32,7 @@ public:
 	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
 	void AddEffect(shared_ptr<Effect> effect);
 
+	bool& GetBGUpdate() { return _bgUdate; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider , Object::Object_Type type,bool setColor = true);
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
 
@@ -44,7 +45,9 @@ private:
 	vector<vector<shared_ptr<Object>>> _objects;
 	vector<vector<shared_ptr<Object>>> _optimized;
 
-	int _renderCollider = 1;
-	int _pause = 1;
+
+	bool _renderCollider = false;
+	bool _pause = false;
+	bool _bgUdate = false;
 };
 

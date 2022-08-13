@@ -63,6 +63,10 @@ void Program::ImGuiRender()
 
 	ImGui::Text("DELTA TIME : %fs", DELTA_TIME);
 
+	GRAPHIC->ImguiRender();
+	ImGui::End();
+
+	ImGui::Begin("Game");
 	switch (_gameMode->GetGameModeType())
 	{
 	case GameMode::NONE:
@@ -78,11 +82,6 @@ void Program::ImGuiRender()
 	default:
 		break;
 	}
-
-	GRAPHIC->ImguiRender();
-	ImGui::End();
-
-	ImGui::Begin("Game");
 	_gameMode->ImGuiRender();
 	ImGui::End();
 }

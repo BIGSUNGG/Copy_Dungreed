@@ -30,12 +30,12 @@ protected:
 	Vector2 _velocity;
 
 	float _jumpPower = 0.0f;
-	float _jumpPowerMax = 1000.0f;
-	float _gravity = 2000.0f;
+	float _jumpPowerMax = 1200.0f;
+	float _gravity = 3000.0f;
 
 	bool _isReversed = false;
 	bool _passFloor = false;
 	bool _isFalling = false;
-	float _speed = 350.0f;
+	float _speed = 450.0f;
 };
 
