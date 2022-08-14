@@ -13,9 +13,6 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
-	if (_pause == true)
-		return;
-
 	if (DELTA_TIME >= _maxDelay)
 		return;
 
@@ -39,6 +36,9 @@ void GameManager::PreRender()
 
 void GameManager::Render()
 {
+	if (_renderTexture == false)
+		return;
+
 	for (auto& objects : _optimized)
 	{
 		for (auto& object : objects)
@@ -83,10 +83,9 @@ void GameManager::ImguiRender()
 
 	if (ImGui::CollapsingHeader("GameManager"))
 	{
-		if (ImGui::Button("Render Collider"))
-			SwitchBool(_renderCollider);
-		if (ImGui::Button("Pause"))
-			SwitchBool(_pause);
+		ImGui::Checkbox("Pause", &_pause);
+		ImGui::Checkbox("Render Texture", &_renderTexture);
+		ImGui::Checkbox("Render Collider", &_renderCollider);
 	}
 }
 

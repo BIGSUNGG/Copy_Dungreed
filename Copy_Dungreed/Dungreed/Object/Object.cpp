@@ -30,6 +30,12 @@ void Object::ImGuiRender()
 {
 }
 
+void Object::ReverseTexture()
+{
+	_texture->ReverseTexture();
+	SwitchBool(_reversed);
+}
+
 void Object::SetCollider()
 {
 	_collider = make_shared<RectCollider>(_texture->GetHalfSize());

@@ -25,6 +25,11 @@ public:
 	float Right() { return GetWorldPos().x + (_halfSize.x * _transform->GetWorldScale().x); }
 	float Left() { return GetWorldPos().x - (_halfSize.x * _transform->GetWorldScale().x); }
 
+	void SetTop(float pos) { _transform->GetPos().y = pos - (GetHalfSize().y * _transform->GetScale().y); }
+	void SetBottom(float pos) { _transform->GetPos().y = pos + (GetHalfSize().y * _transform->GetScale().y); }
+	void SetRight(float pos) { _transform->GetPos().x = pos - (GetHalfSize().x * _transform->GetScale().x); }
+	void SetLeft(float pos) { _transform->GetPos().x = pos + (GetHalfSize().x * _transform->GetScale().x); }
+
 	virtual bool IsCollision(const Vector2& pos) override;
 	virtual bool IsCollision(shared_ptr< RectCollider> rect, bool isObb = false) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other, bool isObb = false) override;

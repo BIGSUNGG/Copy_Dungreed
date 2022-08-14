@@ -24,6 +24,7 @@
 #include <functional>
 #include <time.h>
 #include <thread>
+#include <fstream>
 
 #include <wrl/client.h>
 #include <d3d11.h>

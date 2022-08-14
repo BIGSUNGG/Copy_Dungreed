@@ -25,16 +25,14 @@ void Player::Update()
 	}
 	if (_texture->GetTransform()->GetPos().x >= MOUSE_WORLD_POS.x)
 	{
-		if (_isReversed == false)
+		if (_reversed == false)
 		{
-			_texture->ReverseTexture();
-			_isReversed = true;
+			ReverseTexture();
 		}
 	}
-	else if (_isReversed == true)
+	else if (_reversed == true)
 	{
-		_texture->ReverseTexture();
-		_isReversed = false;
+		ReverseTexture();
 	}
 	if (_velocity.y != 0)
 	{
@@ -52,9 +50,6 @@ void Player::Update()
 	}
 
 	InputEvent();
-
-	_jumpPower -= _gravity * DELTA_TIME;
-	_movement.y += _jumpPower;
 	
 	Creature::Update();
 }
@@ -72,7 +67,7 @@ void Player::DustEffect()
 		dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
 		dust->GetTexture()->SetBottom(_texture->Bottom());
 
-		if (_isReversed)
+		if (_reversed)
 			dust->GetTexture()->ReverseTexture();
 
 		GAME->AddEffect(dust);
@@ -85,7 +80,7 @@ void Player::DoubleJumpEffect()
 	dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
 	dust->GetTexture()->SetBottom(_texture->Bottom());
 
-	if (_isReversed)
+	if (_reversed)
 		dust->GetTexture()->ReverseTexture();
 
 	GAME->AddEffect(dust);

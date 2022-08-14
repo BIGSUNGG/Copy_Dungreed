@@ -11,30 +11,31 @@ Dungreed::Dungreed()
 	_map->Load();
 
 	_player = MAKE_CREATURE(-1, 0);
-	_player->GetTexture()->GetTransform()->GetPos() = _map->GetStartPos();
+	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;
+	_player->GetTexture()->SetBottom(_map->GetStartPos().y);
+	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
 
 	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(dynamic_pointer_cast<Object>(_player));
 	GAME->GetBGUpdate() = true;
 
+	CAMERA->GetTransform()->GetPos() = _player->GetTexture()->GetTransform()->GetPos();
+	CAMERA->GetBeforeMove() = CAMERA->GetTransform()->GetPos();
 	CAMERA->SetTarget(_player->GetTexture()-> GetTransform());
 	CAMERA->SetLeftBottom(_map->GetLeftBottom());
 	CAMERA->SetRightTop(_map->GetRightTop());
 
 	_cursur = OBJ_MANAGER->GetCursur(2);
-	CAMERA->GetVelocity() = { 0,0 };
-
 	CursurOff();
 }
 
 void Dungreed::Update()
 {
 	_gameRunTime += DELTA_TIME;
-	_cursur->GetTransform()->GetPos() = MOUSE_WORLD_POS;
 
+	_cursur->GetTransform()->GetPos() = MOUSE_WORLD_POS;
 	_cursur->Update();
 
 	GAME->Update();
-
 }
 
 void Dungreed::PreRender()
@@ -49,8 +50,9 @@ void Dungreed::Render()
 
 void Dungreed::PostRender()
 {
-	_cursur->Render();
 	GAME->PostRender();
+
+	_cursur->Render();
 }
 
 void Dungreed::ImGuiRender()
@@ -59,6 +61,7 @@ void Dungreed::ImGuiRender()
 	{
 		ImGui::Text("Run Time : %f", _gameRunTime);
 	}
+
 	if (ImGui::CollapsingHeader("Player"))
 	{
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);

@@ -20,6 +20,7 @@ public:
 	virtual void CollisionEvent(shared_ptr<Object> objects);
 
 	const Vector2& GetVelocity() { return _velocity; }
+	Vector2& GetBeforeMove() { return _beforeMove; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 	
 protected:
@@ -33,9 +34,8 @@ protected:
 	float _jumpPowerMax = 1200.0f;
 	float _gravity = 3000.0f;
 
-	bool _isReversed = false;
-	bool _passFloor = false;
 	bool _isFalling = false;
+	bool _passFloor = false;
 	float _speed = 450.0f;
 };
 

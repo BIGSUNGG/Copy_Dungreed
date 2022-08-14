@@ -32,31 +32,60 @@ void GraphicManager::Load()
 
 void GraphicManager::ImguiRender()
 {
-	if (ImGui::CollapsingHeader("Graphic"))
+	if (ImGui::TreeNode("Mouse Cursur"))
 	{
-		ImGui::SliderInt("WinMode", &_winMode, 0, 1);
-		switch (_winMode)
+		if (ImGui::Button("On"))
+			CursurOn();
+
+		ImGui::SameLine();
+		if (ImGui::Button("Off"))
+			CursurOff();
+
+		ImGui::TreePop();
+	}
+
+	if (ImGui::TreeNode("Window Mode"))
+	{
+		ImGui::RadioButton("Border", &_winMode, 0);
+		ImGui::SameLine();
+		ImGui::RadioButton("Borderless", &_winMode, 1);
+
+		ImGui::TreePop();
+	}
+
+	if (ImGui::Button("Apply"))
+	{
+		int temp;
 		{
-		case 0:
-			ImGui::Text("Window");
-			break;
-		case 1:
-			ImGui::Text("Borderless Window");
-			break;
-		default:
-			break;
+			BinaryReader Reader(L"Save/Graphic_Setting/Setting.txt");
+
+			UINT size = Reader.Uint();
+
+			vector<int> graphicInfo;
+			graphicInfo.resize(1);
+			void* ptr = graphicInfo.data();
+			Reader.Byte(&ptr, size * sizeof(int));
+
+			temp = graphicInfo[0];
 		}
 
-		if (ImGui::Button("Apply"))
+		if (_winMode != temp)
 		{
+			_applied = true;
 			BinaryWriter basicWriter(L"Save/Graphic_Setting/Setting.txt");
 
 			vector<int> basicInfo;
 
-			basicInfo.emplace_back(_winMode);
+			basicInfo.push_back(_winMode);
 
 			basicWriter.Uint(basicInfo.size());
 			basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
 		}
+	}
+
+	if (_applied)
+	{
+		ImGui::SameLine();
+		ImGui::Text("Restart Program");
 	}
 }

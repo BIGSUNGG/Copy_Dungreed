@@ -15,6 +15,17 @@ void Program::Update()
 	_runTime += DELTA_TIME;
 
 	Camera::GetInstance()->Update();
+
+	if (KEY_DOWN(VK_F1))
+		SwitchBool(GAME->GetPause());
+	if (KEY_DOWN(VK_F2))
+		SwitchBool(GAME->GetRenderTexture());
+	if (KEY_DOWN(VK_F3))
+		SwitchBool(GAME->GetRenderCollider());
+
+	if (GAME->GetPause())
+		return;
+
 	_gameMode->Update();
 }
 
@@ -56,24 +67,25 @@ void Program::Render()
 void Program::ImGuiRender()
 {
 	ImGui::Begin("Program");
-	ImGui::Text("FPS : %d", Timer::GetInstance()->GetFPS());
-	ImGui::Text("RUN TIME : %0.1f", _runTime);
+	if (ImGui::CollapsingHeader("Info"))
+	{
+		ImGui::Text("FPS : %d", Timer::GetInstance()->GetFPS());
+		ImGui::Text("RUN TIME : %0.1f", _runTime);
+		ImGui::Text("DELTA TIME : %fs", DELTA_TIME);
+	}
 
-	Camera::GetInstance()->ImGuiRender();
+	if (ImGui::CollapsingHeader("Camera"))
+		Camera::GetInstance()->ImGuiRender();
 
-	ImGui::Text("DELTA TIME : %fs", DELTA_TIME);
+	if (ImGui::CollapsingHeader("Graphic Options"))
+		GRAPHIC->ImguiRender();
 
-	GRAPHIC->ImguiRender();
 	ImGui::End();
 
 	ImGui::Begin("Game");
 	switch (_gameMode->GetGameModeType())
 	{
 	case GameMode::NONE:
-		break;
-	case GameMode::DUNGREED:
-		if (ImGui::Button("MapEditor"))
-			_gameMode = make_shared<MapEditor>();
 		break;
 	case GameMode::MAP_EDITOR:
 		if (ImGui::Button("Dungreed"))

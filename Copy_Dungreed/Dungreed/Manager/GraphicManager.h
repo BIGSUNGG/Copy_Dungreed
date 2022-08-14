@@ -28,5 +28,7 @@ private:
 	static GraphicManager* _instance;
 
 	int _winMode = 1;
+
+	bool _applied = false;
 };
 

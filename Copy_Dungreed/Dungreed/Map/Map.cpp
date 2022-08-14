@@ -30,17 +30,35 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 	GAME->AddObject(addObject, type, toFront);
 }
 
-void Map::DeleteObject(Vector2 pos, Object::Object_Type type, bool toFront)
+void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 {
-	for (auto objects = GET_OBJECTS[type].begin(); objects != GET_OBJECTS[type].end(); objects++)
+	if (toFront)
 	{
-		shared_ptr<Quad> object = objects->get()->GetTexture();
-		if (pos.x > object->Left() && pos.x < object->Right() &&
-			pos.y < object->Top() && pos.y > object->Bottom())
+		for (auto objects = GET_OBJECTS[type].begin(); objects != GET_OBJECTS[type].end(); objects++)
 		{
-			GET_OBJECTS[type].erase(objects);
-			_objectCount--;
-			break;
+			shared_ptr<Quad> object = objects->get()->GetTexture();
+			if (pos.x > object->Left() && pos.x < object->Right() &&
+				pos.y < object->Top() && pos.y > object->Bottom())
+			{
+				GET_OBJECTS[type].erase(objects);
+				_objectCount--;
+				break;
+			}
+		}
+	}
+	else
+	{
+		for (int i = GET_OBJECTS[type].size() - 1; i > 0; i--)
+		{
+			shared_ptr<Quad> object = GET_OBJECTS[type][i]->GetTexture();
+			if (pos.x > object->Left() && pos.x < object->Right() &&
+				pos.y < object->Top() && pos.y > object->Bottom())
+			{
+				auto iter = GET_OBJECTS[type].begin() + i;
+				GET_OBJECTS[type].erase(iter);
+				_objectCount--;
+				break;
+			}
 		}
 	}
 }
@@ -75,10 +93,11 @@ void Map::Save()
 			for (auto& object : objects)
 			{
 				mapInfo.push_back((int)object->GetType());
-				mapInfo.push_back((int)object->GetLevel());
+				mapInfo.push_back(object->GetLevel());
 				mapInfo.push_back(object->GetNum());
-				mapInfo.push_back(object->GetTexture()->GetTransform()->GetPos().x);
-				mapInfo.push_back(object->GetTexture()->GetTransform()->GetPos().y);
+				mapInfo.push_back((int)object->GetTexture()->GetTransform()->GetPos().x);
+				mapInfo.push_back((int)object->GetTexture()->GetTransform()->GetPos().y);
+				mapInfo.push_back((int)object->GetReversed());
 			}
 		}
 
@@ -114,18 +133,23 @@ void Map::Load()
 		UINT size = mapReader.Uint();
 
 		vector<int> mapInfo;
-		int infoCount = objectCount * 5;
+		int info = 6;
+		int infoCount = objectCount * info;
 		mapInfo.resize(infoCount);
 		void* ptr = mapInfo.data();
 		mapReader.Byte(&ptr, size * sizeof(int));
 
 		for (int i = 0; i < objectCount; i++)
 		{
-			int cur = i * 5;
+			int cur = i * info;
 
 			shared_ptr<Object> object = MAKE_OBJECT(mapInfo[cur], mapInfo[cur + 1], mapInfo[cur + 2]);
 
 			object->GetTexture()->GetTransform()->GetPos() = Vector2(mapInfo[cur + 3], mapInfo[cur + 4]);
+
+			if (mapInfo[cur + 5] == 1)
+				object->ReverseTexture();
+
 			AddObject(object, mapInfo[cur]);
 		}
 	}

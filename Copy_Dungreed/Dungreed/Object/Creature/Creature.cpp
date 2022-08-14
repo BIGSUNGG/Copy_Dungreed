@@ -9,6 +9,9 @@ Creature::Creature(int level, int num)
 
 void Creature::Update()
 {
+	_jumpPower -= _gravity * DELTA_TIME;
+	_movement.y += _jumpPower;
+
 	MoveCharacter(_movement);
 
 	_passFloor = false;
@@ -24,7 +27,6 @@ void Creature::ImGuiRender()
 void Creature::MoveCharacter(Vector2 pos)
 {
 	_movement = { 0,0 };
-
 
 	_texture->GetTransform()->GetPos() += (pos * DELTA_TIME);
 	

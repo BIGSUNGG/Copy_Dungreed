@@ -38,7 +38,7 @@ void Camera::Update()
 
 void Camera::ImGuiRender()
 {
-	ImGui::Text("CamX : %0.1f, CamY : %0.1f", _moveTransform->GetPos().x + CENTER.x, _moveTransform->GetPos().y + CENTER.y);
+	ImGui::Text("Pos : %0.1f, %0.1f", _moveTransform->GetPos().x + CENTER.x, _moveTransform->GetPos().y + CENTER.y);
 	ImGui::Text("Velocity : %0.1f , %0.1f", _velocity.x, _velocity.y);
 }
 
@@ -132,20 +132,4 @@ void Camera::FollowMode()
 		targetPos.y = _rightTop.y - WIN_HEIGHT;	
 
 	_transform->GetPos() = targetPos * -1;
-
-	//Vector2 targetPos = _target->GetPos() - _offset;
-	//
-	//if (targetPos.x < _leftBottom.x)
-	//	targetPos.x = _leftBottom.x;
-	//
-	//if (targetPos.x > _rightTop.x - WIN_WIDTH)
-	//	targetPos.x = _rightTop.x - WIN_WIDTH;
-	//
-	//if (targetPos.y < _leftBottom.y)
-	//	targetPos.y = _leftBottom.y;
-	//
-	//if (targetPos.y > _rightTop.y - WIN_HEIGHT)
-	//	targetPos.y = _rightTop.y - WIN_HEIGHT;
-	//
-	//_transform->GetPos() = LERP(_transform->GetPos(), targetPos * -1, DELTA_TIME * _followSpeed);
 }

@@ -42,7 +42,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)	
 {
 	shared_ptr<BackGround> object = make_shared<BackGround>(level, num);
-	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (level)
 	{
@@ -87,9 +87,10 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 	}
 
 	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	object->SetTexture(texture);
+	if (object->GetTexture() == nullptr)
+		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
 	{
@@ -102,7 +103,7 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 {
 	shared_ptr<Wall> object = make_shared<Wall>(level, num);
-	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (level)
 	{
@@ -146,9 +147,10 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 	}
 
 	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	object->SetTexture(texture);
+	if (object->GetTexture() == nullptr)
+		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
 	{
@@ -161,7 +163,7 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 {
 	shared_ptr<Tile> object = make_shared<Tile>(level, num);
-	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (level)
 	{
@@ -170,30 +172,54 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 		{
 		case 0:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_1.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 1:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_1_1.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 2:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_1_2.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 3:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_1_3.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 4:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_1_4.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 5:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_1_5.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 6:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_StairL.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 7:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_StairL2.png");
 			break;
 		case 8:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_StairR.png");
+			object->SetTexture(texture);
+			object->GetCollider()->GetTransform()->GetScale().y *= 0.5f;
+			object->GetCollider()->SetBottom(texture->Bottom());
 			break;
 		case 9:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_StairR2.png");
@@ -272,9 +298,10 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 	}
 
 	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	object->SetTexture(texture);
+	if(object->GetTexture() == nullptr)
+		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
 	{
@@ -287,8 +314,8 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 {
 	shared_ptr<Creature> object = make_shared<Creature>(level, num);
-	shared_ptr<Quad> texture;
-		
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");;
+
 	switch (level)
 	{
 	case -1: // Player
@@ -348,9 +375,10 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 	}
 
 	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	object->SetTexture(texture);
+	if (object->GetTexture() == nullptr)
+		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
 	{
@@ -363,8 +391,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 {
 	shared_ptr<Effect> object = make_shared<Effect>(level, num);
-	object->SetAnimation();
-	shared_ptr<Quad> texture;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (level)
 	{
@@ -372,6 +399,7 @@ shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 		switch (num)
 		{
 		case 0:
+			object->SetAnimation();
 			object->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
 			object->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust1.png");
@@ -383,6 +411,7 @@ shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 1:
+			object->SetAnimation();
 			object->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
 			object->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX0.png");
@@ -420,9 +449,10 @@ shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 	}
 
 	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Ui/MainLogo.png");
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	object->SetTexture(texture);
+	if (object->GetTexture() == nullptr)
+		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
 	{
