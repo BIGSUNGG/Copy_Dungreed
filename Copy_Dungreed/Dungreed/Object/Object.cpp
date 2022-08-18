@@ -32,8 +32,13 @@ void Object::ImGuiRender()
 
 void Object::ReverseTexture()
 {
-	_texture->ReverseTexture();
+	_texture->ReverseToX();
 	SwitchBool(_reversed);
+}
+
+void Object::SetOriginalPos(Vector2 pos)
+{
+	_texture->GetTransform()->GetPos() = pos;
 }
 
 void Object::SetCollider()

@@ -9,8 +9,80 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
-	_dustDelay += DELTA_TIME;
+	_dustRunTime += DELTA_TIME;
 
+	MovementEvent();
+	MouseEvent();
+
+	InputEvent();
+
+	if (_weapon != nullptr)
+		_weapon->Update();
+
+	GravityEvent();
+
+	MoveCharacter();
+
+	_passFloor = false;
+
+	Object::Update();
+}
+
+void Player::Render()
+{
+	if (_weapon != nullptr)
+		_weapon->Render();
+
+	Creature::Render();
+}
+
+void Player::DustEffect()
+{
+	if (_dustRunTime >= _dustDelay)
+	{
+		_dustRunTime = 0.0f;
+		shared_ptr<Effect> dust = MAKE_CREATURE_EFFECT(-1, 0);
+		dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+		dust->GetTexture()->SetBottom(_texture->Bottom());
+
+		if (_reversed)
+			dust->GetTexture()->ReverseToX();
+
+		GAME->AddEffect(dust);
+	}
+}
+
+void Player::DoubleJumpEffect()
+{
+	shared_ptr<Effect> dust = MAKE_CREATURE_EFFECT(-1, 1);
+	dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+	dust->GetTexture()->SetBottom(_texture->Bottom());
+
+	if (_reversed)
+		dust->GetTexture()->ReverseToX();
+
+	GAME->AddEffect(dust);
+}
+
+void Player::MouseEvent()
+{
+	if (_texture->GetTransform()->GetPos().x >= MOUSE_WORLD_POS.x)
+	{
+		if (_reversed == false)
+		{
+			ReverseTexture();
+			_handPos.x *= -1;
+		}
+	}
+	else if (_reversed == true)
+	{
+		ReverseTexture();
+		_handPos.x *= -1;
+	}
+}
+
+void Player::MovementEvent()
+{
 	if (_velocity.x != 0)
 	{
 		_anim->ChangeAnimation(State::MOVE);
@@ -23,17 +95,7 @@ void Player::Update()
 	{
 		_anim->ChangeAnimation(State::IDLE);
 	}
-	if (_texture->GetTransform()->GetPos().x >= MOUSE_WORLD_POS.x)
-	{
-		if (_reversed == false)
-		{
-			ReverseTexture();
-		}
-	}
-	else if (_reversed == true)
-	{
-		ReverseTexture();
-	}
+
 	if (_velocity.y != 0)
 	{
 		_anim->ChangeAnimation(State::JUMP);
@@ -43,47 +105,10 @@ void Player::Update()
 	{
 		if (_isFalling == true)
 			DustEffect();
-		
+
 		_doubleJumped = false;
 		_isFalling = false;
-		_jumpPower = 0.0f;
 	}
-
-	InputEvent();
-	
-	Creature::Update();
-}
-
-void Player::ImGuiRender()
-{
-}
-
-void Player::DustEffect()
-{
-	if (_dustDelay >= 0.25f)
-	{
-		_dustDelay = 0.0f;
-		shared_ptr<Effect> dust = MAKE_EFFECT(-1, 0);
-		dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
-		dust->GetTexture()->SetBottom(_texture->Bottom());
-
-		if (_reversed)
-			dust->GetTexture()->ReverseTexture();
-
-		GAME->AddEffect(dust);
-	}
-}
-
-void Player::DoubleJumpEffect()
-{
-	shared_ptr<Effect> dust = MAKE_EFFECT(-1, 1);
-	dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
-	dust->GetTexture()->SetBottom(_texture->Bottom());
-
-	if (_reversed)
-		dust->GetTexture()->ReverseTexture();
-
-	GAME->AddEffect(dust);
 }
 
 void Player::InputEvent()
@@ -111,6 +136,15 @@ void Player::InputEvent()
 	{
 		_movement.x += _speed;
 	}
+	if (KEY_DOWN(VK_LBUTTON))
+	{
+		Attack();
+	}
+}
+
+void Player::Attack()
+{
+	_weapon->Attack();
 }
 
 void Player::Jump()
@@ -126,4 +160,10 @@ void Player::Jump()
 		_doubleJumped = true;
 		DoubleJumpEffect();
 	}
+}
+
+void Player::SetWeapon(shared_ptr<Item> weapon)
+{
+	_weapon = weapon;
+	_weapon->SetOwner(shared_from_this());
 }

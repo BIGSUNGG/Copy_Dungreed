@@ -23,7 +23,9 @@ public:
 	shared_ptr<Wall> GetWall(int level, int num);
 	shared_ptr<Tile> GetTile(int level, int num);
 	shared_ptr<Creature> GetCreature(int level, int num);
-	shared_ptr<Effect> GetEffect(int level, int num);
+	shared_ptr<Effect> GetCreatureEffect(int level, int num);
+	shared_ptr<Effect> GetItemEffect(int level, int num);
+	shared_ptr<Item> GetItem(int type, int num);
 	shared_ptr<Quad> GetCursur(int num);
 
 private:

@@ -32,11 +32,13 @@ public:
 	void SetLockFPS(double value) { _lockFPS = value; }
 
 	int GetFPS() { return _frameRate; }
-	double GetDeltaTime() { return _deltaTime; }
+	float& GetGameSpeed() { return _gameSpeed; }
+	double GetDeltaTime() { return _deltaTime * _gameSpeed; }
 	double GetRunTime() { return _runTime; }
 
 private:
 	static Timer* _instance;
+	float _gameSpeed = 1.0f;
 
 	double _timeScale = 0.0;
 	double _deltaTime = 0.0;

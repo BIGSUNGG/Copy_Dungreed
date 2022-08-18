@@ -10,13 +10,14 @@ Dungreed::Dungreed()
 	_map = make_shared<Map>();
 	_map->Load();
 
-	_player = MAKE_CREATURE(-1, 0);
+	_player = dynamic_pointer_cast<Player>(MAKE_CREATURE(-1, 0));
 	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;
 	_player->GetTexture()->SetBottom(_map->GetStartPos().y);
 	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
+	_player->SetWeapon(OBJ_MANAGER->GetItem(1, 0));
 
 	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(dynamic_pointer_cast<Object>(_player));
-	GAME->GetBGUpdate() = true;
+	GAME->GetObjectUpdate() = true;
 
 	CAMERA->GetTransform()->GetPos() = _player->GetTexture()->GetTransform()->GetPos();
 	CAMERA->GetBeforeMove() = CAMERA->GetTransform()->GetPos();
@@ -65,6 +66,7 @@ void Dungreed::ImGuiRender()
 	if (ImGui::CollapsingHeader("Player"))
 	{
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);
+		ImGui::Text("Hand Pos : %f , %f", _player->GetHandPos().x, _player->GetHandPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
 	}
 

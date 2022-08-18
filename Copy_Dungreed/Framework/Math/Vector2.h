@@ -22,7 +22,7 @@ public:
 
 	Vector2& operator=(const Vector2& value);
 
-	void Normalize();
+	Vector2 Normalize();
 
 	float Distance(const Vector2& value) const;
 	float Length() const;

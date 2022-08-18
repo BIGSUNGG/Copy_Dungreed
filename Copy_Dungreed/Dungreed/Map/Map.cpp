@@ -145,7 +145,7 @@ void Map::Load()
 
 			shared_ptr<Object> object = MAKE_OBJECT(mapInfo[cur], mapInfo[cur + 1], mapInfo[cur + 2]);
 
-			object->GetTexture()->GetTransform()->GetPos() = Vector2(mapInfo[cur + 3], mapInfo[cur + 4]);
+			object->SetOriginalPos(Vector2(mapInfo[cur + 3], mapInfo[cur + 4]));
 
 			if (mapInfo[cur + 5] == 1)
 				object->ReverseTexture();

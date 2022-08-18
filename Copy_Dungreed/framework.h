@@ -113,6 +113,13 @@ using namespace std;
 // UI
 #include "Object/UI/Button.h"
 
+// Status
+#include "Dungreed/Status/Status.h"
+
+// Item
+#include "Dungreed/Item/Item.h"
+#include "Dungreed/Item/Weapon/Weapon.h"
+
 // Object
 #include "Dungreed/Object/Object.h"
 #include "Dungreed/Object/BackGround/BackGround.h"
@@ -121,6 +128,7 @@ using namespace std;
 #include "Dungreed/Object/Effect/Effect.h"
 #include "Dungreed/Object/Creature/Creature.h"
 #include "Dungreed/Object/Creature/Player/Player.h"
+#include "Dungreed/Object/Creature/Monster/Monster.h"
 
 // UI
 #include "Dungreed/UI/UI.h"

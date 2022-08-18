@@ -11,7 +11,7 @@ MapEditor::MapEditor()
 
 	CAMERA->SetTarget(nullptr);
 
-	GAME->GetBGUpdate() = false;
+	GAME->GetObjectUpdate() = false;
 
 	_mouseOffset.x = (_curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x);
 	_mouseOffset.y = (_curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y);
@@ -92,7 +92,7 @@ void MapEditor::ImGuiRender()
 			ImGui::Text("Object Count : %d", _map->GetObjectCount());
 			ImGui::SliderInt("Level", &_objectLevel, 0, 8);
 			ImGui::SliderInt("Num", &_objectNum, 0, 30);
-			ImGui::SliderInt("Type", &_objectType, 0, 4);
+			ImGui::SliderInt("Type", &_objectType, 0, 3);
 
 			if (ImGui::Button("Reverse"))
 				_curObject->ReverseTexture();
@@ -113,9 +113,6 @@ void MapEditor::ImGuiRender()
 				break;
 			case Object::Object_Type::CREATURE:
 				ImGui::Text("CREATURE");
-				break;
-			case Object::Object_Type::EFFECT:
-				ImGui::Text("EFFECT");
 				break;
 			default:
 				break;

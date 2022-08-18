@@ -18,6 +18,7 @@
 #define DEVICE_CONTEXT Device::GetInstance()->GetDeviceContext()
 
 #define DELTA_TIME Timer::GetInstance()->GetDeltaTime()
+#define GAME_SPEED Timer::GetInstance()->GetGameSpeed()
 #define RUN_TIME Timer::GetInstance()->GetRunTime()
 
 #define KEY_DOWN(k) InputManager::GetInstance()->Down(k)
@@ -43,7 +44,9 @@
 #define MAKE_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGround(level,num)
 #define MAKE_TILE(level,num) ObjectManager::GetInstance()->GetTile(level,num)
 #define MAKE_CREATURE(level,num) ObjectManager::GetInstance()->GetCreature(level,num)
-#define MAKE_EFFECT(level,num) ObjectManager::GetInstance()->GetEffect(level,num)
+#define MAKE_CREATURE_EFFECT(level,num) ObjectManager::GetInstance()->GetCreatureEffect(level,num)
+#define MAKE_ITEM_EFFECT(level,num) ObjectManager::GetInstance()->GetItemEffect(level,num)
+#define MAKE_ITEM(type,num) ObjectManager::GetInstance()->GetItem(type,num);
 
 #define CAMERA Camera::GetInstance()
 

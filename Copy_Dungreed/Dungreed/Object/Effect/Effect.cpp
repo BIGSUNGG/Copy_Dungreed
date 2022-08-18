@@ -6,3 +6,11 @@ Effect::Effect(int level, int num)
 {
 	_objectType = Object::EFFECT;
 }
+
+void Effect::Update()
+{
+	Object::Update();
+
+	if (_anim->GetIsPlaying() == false)
+		_isActive = false;
+}

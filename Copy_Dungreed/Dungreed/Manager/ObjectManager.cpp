@@ -30,7 +30,7 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 		object = GetCreature(level, num);
 		break;
 	case Object::Object_Type::EFFECT:
-		object = GetEffect(level, num);
+		object = GetCreatureEffect(level, num);
 		break;
 	default:
 		break;
@@ -353,6 +353,25 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		}
 		break;
 	case Map::LEVEL_00:
+		switch (num)
+		{
+		case 0:
+			object = make_shared<Monster>(level, num);
+			object->SetAnimation();
+			object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(7, 0.3f);
+			object->GetAnimation()->_animState[Creature::State::IDLE] = Animation::Anim_State::LOOP;
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle0.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle1.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle2.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle3.png");
+			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle4.png");
+
+			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
+			break;
+		default:
+			break;
+		}
 		break;
 	case Map::LEVEL_01:
 		break;
@@ -388,9 +407,9 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 	return object;
 }
 
-shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
+shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 {
-	shared_ptr<Effect> object = make_shared<Effect>(level, num);
+	shared_ptr<Effect> effect = make_shared<Effect>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (level)
@@ -399,28 +418,28 @@ shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 		switch (num)
 		{
 		case 0:
-			object->SetAnimation();
-			object->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
-			object->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust1.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust2.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust3.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust4.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust5.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust6.png");
-			texture = make_shared<Quad>(object->GetAnimation()->_animList[BASIC][BASIC]);
+			effect->SetAnimation();
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust1.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust2.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust3.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust4.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust5.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust6.png");
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 1:
-			object->SetAnimation();
-			object->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
-			object->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX0.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX1.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX2.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX3.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX4.png");
-			object->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX5.png");
-			texture = make_shared<Quad>(object->GetAnimation()->_animList[BASIC][BASIC]);
+			effect->SetAnimation();
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX0.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX1.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX2.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX3.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX4.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX5.png");
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		default:
 			break;
@@ -451,15 +470,100 @@ shared_ptr<Effect> ObjectManager::GetEffect(int level, int num)
 	if (texture == nullptr)
 		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	if (object->GetTexture() == nullptr)
-		object->SetTexture(texture);
+	if (effect->GetTexture() == nullptr)
+		effect->SetTexture(texture);
 
-	if (object->GetAnimation() != nullptr)
+	if (effect->GetAnimation() != nullptr)
 	{
-		object->GetAnimation()->SetTexture(texture);
-		object->GetPlayingAnim() = true;
+		effect->GetAnimation()->SetTexture(texture);
+		effect->GetPlayingAnim() = true;
 	}
-	return object;
+	return effect;
+}
+
+shared_ptr<Effect> ObjectManager::GetItemEffect(int type, int num)
+{
+	shared_ptr<Effect> effect = make_shared<Effect>(type, num);
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	switch (type)
+	{
+	case Item::FOOD:
+		break;
+	case Item::WEAPON:
+		switch (num)
+		{
+		case 0:
+			effect->SetAnimation();
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(4, 0.1f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/SwingFX00.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/SwingFX01.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/SwingFX02.png");
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		default:
+			break;
+		}
+		break;
+	case Item::ACCESSORY:
+		break;
+	default:
+		break;
+	}
+
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	if (effect->GetTexture() == nullptr)
+		effect->SetTexture(texture);
+
+	if (effect->GetAnimation() != nullptr)
+	{
+		effect->GetAnimation()->SetTexture(texture);
+		effect->GetPlayingAnim() = true;
+	}
+	return effect;
+}
+
+shared_ptr<Item> ObjectManager::GetItem(int type, int num)
+{
+	shared_ptr<Item> item;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	switch (type)
+	{
+	case Item::FOOD:
+		break;
+	case Item::WEAPON:
+		switch (num)
+		{
+		case 0:
+			item = make_shared<Weapon>(type, num);
+			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
+			break;
+		default:
+			break;
+		}
+		break;
+	case Item::ACCESSORY:
+		break;
+	default:
+		break;
+	}
+
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	if (item->GetTexture() == nullptr)
+		item->SetTexture(texture);
+
+	if (item->GetAnimation() != nullptr)
+	{
+		item->GetAnimation()->SetTexture(texture);
+		item->GetPlayingAnim() = true;
+	}
+	return item;
 }
 
 shared_ptr<Quad> ObjectManager::GetCursur(int num)

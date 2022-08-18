@@ -9,7 +9,7 @@ BackGround::BackGround(int level, int num)
 
 void BackGround::Update()
 {
-	if (GAME->GetBGUpdate() == true)
+	if (GAME->GetObjectUpdate() == true)
 	{
 		switch (_backGroundType)
 		{

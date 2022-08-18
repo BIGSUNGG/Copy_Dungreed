@@ -93,11 +93,13 @@ Vector2& Vector2::operator=(const Vector2& value)
     return *this;
 }
 
-void Vector2::Normalize()
+Vector2 Vector2::Normalize()
 {
     float length = Length();
     x = x / length;
     y = y / length;
+
+    return *this;
 }
 
 float Vector2::Distance(const Vector2& value) const

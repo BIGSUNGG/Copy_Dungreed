@@ -34,13 +34,14 @@ public:
 
 	virtual void SetCollider();
 	virtual void SetAnimation();
+	virtual void SetOriginalPos(Vector2 pos);
 	virtual void SetTexture(shared_ptr<Quad> texture);
 
 	int GetNum() { return _num; }
 	int GetLevel() { return _level; }
 	bool& GetPlayingAnim() { return _playingAnim; }
-	bool& GetIsActive() { return _isActive; }
 	bool& GetReversed() { return _reversed; }
+	const bool& GetIsActive() { return _isActive; }
 	Object_Type GetType() { return _objectType; }
 	shared_ptr<Quad> GetTexture() { return _texture; }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }

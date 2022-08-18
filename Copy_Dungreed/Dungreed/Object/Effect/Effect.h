@@ -4,20 +4,22 @@ class Effect : public Object
 public:
 	enum Effect_Type
 	{
-		WEATHER,
-		MOVEMENT,
-		MONSTER_ATTACK,
-		PLAYER_ATTACK,
-		ATTACKED,
+		NONE,
+		MAP,
+		ITEM,
+		PLAYER,
+		MONSTER,
 	};
 
 public:
 	Effect(int level, int num);
+	
+	virtual void Update()override;
 
 	virtual Effect_Type& GetEffectType() { return _effectType; }
 
 protected:
-	Effect_Type _effectType = MOVEMENT;
+	Effect_Type _effectType = NONE;
 
 };
 

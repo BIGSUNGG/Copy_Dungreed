@@ -72,6 +72,7 @@ void Program::ImGuiRender()
 		ImGui::Text("FPS : %d", Timer::GetInstance()->GetFPS());
 		ImGui::Text("RUN TIME : %0.1f", _runTime);
 		ImGui::Text("DELTA TIME : %fs", DELTA_TIME);
+		ImGui::SliderFloat("GAME SPEED", &GAME_SPEED, 0.1f, 5.0f, "%0.1f");
 	}
 
 	if (ImGui::CollapsingHeader("Camera"))
