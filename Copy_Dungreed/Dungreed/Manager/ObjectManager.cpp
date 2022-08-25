@@ -95,7 +95,6 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 	if (object->GetAnimation() != nullptr)
 	{
 		object->GetAnimation()->SetTexture(texture);
-		object->GetPlayingAnim() = true;
 	}
 	return object;
 }
@@ -155,7 +154,6 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 	if (object->GetAnimation() != nullptr)
 	{
 		object->GetAnimation()->SetTexture(texture);
-		object->GetPlayingAnim() = true;
 	}
 	return object;
 }
@@ -306,7 +304,6 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 	if (object->GetAnimation() != nullptr)
 	{
 		object->GetAnimation()->SetTexture(texture);
-		object->GetPlayingAnim() = true;
 	}
 	return object;
 }
@@ -402,7 +399,6 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 	if (object->GetAnimation() != nullptr)
 	{
 		object->GetAnimation()->SetTexture(texture);
-		object->GetPlayingAnim() = true;
 	}
 	return object;
 }
@@ -476,21 +472,18 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 	if (effect->GetAnimation() != nullptr)
 	{
 		effect->GetAnimation()->SetTexture(texture);
-		effect->GetPlayingAnim() = true;
 	}
 	return effect;
 }
 
-shared_ptr<Effect> ObjectManager::GetItemEffect(int type, int num)
+shared_ptr<Effect> ObjectManager::GetWeaponEffect(int type, int num)
 {
 	shared_ptr<Effect> effect = make_shared<Effect>(type, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (type)
 	{
-	case Item::FOOD:
-		break;
-	case Item::WEAPON:
+	case Weapon::MELEE:
 		switch (num)
 		{
 		case 0:
@@ -506,7 +499,9 @@ shared_ptr<Effect> ObjectManager::GetItemEffect(int type, int num)
 			break;
 		}
 		break;
-	case Item::ACCESSORY:
+	case Weapon::GUN:
+		break;
+	case Weapon::SUB:
 		break;
 	default:
 		break;
@@ -521,32 +516,32 @@ shared_ptr<Effect> ObjectManager::GetItemEffect(int type, int num)
 	if (effect->GetAnimation() != nullptr)
 	{
 		effect->GetAnimation()->SetTexture(texture);
-		effect->GetPlayingAnim() = true;
 	}
+
 	return effect;
 }
 
-shared_ptr<Item> ObjectManager::GetItem(int type, int num)
+shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
 {
-	shared_ptr<Item> item;
+	shared_ptr<Bullet> bullet;
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (type)
 	{
-	case Item::FOOD:
+	case Weapon::MELEE:
 		break;
-	case Item::WEAPON:
+	case Weapon::GUN:
 		switch (num)
 		{
 		case 0:
-			item = make_shared<Weapon>(type, num);
-			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
+			bullet = make_shared<Bullet>();
+			texture = make_shared<Quad>(L"Resource/Effect/Weapon/Gun/CrossbowArrow.png");
 			break;
 		default:
 			break;
 		}
 		break;
-	case Item::ACCESSORY:
+	case Weapon::SUB:
 		break;
 	default:
 		break;
@@ -555,15 +550,59 @@ shared_ptr<Item> ObjectManager::GetItem(int type, int num)
 	if (texture == nullptr)
 		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
-	if (item->GetTexture() == nullptr)
-		item->SetTexture(texture);
+	if (bullet->GetTexture() == nullptr)
+		bullet->SetTexture(texture);
 
-	if (item->GetAnimation() != nullptr)
+	if (bullet->GetAnimation() != nullptr)
 	{
-		item->GetAnimation()->SetTexture(texture);
-		item->GetPlayingAnim() = true;
+		bullet->GetAnimation()->SetTexture(texture);
 	}
-	return item;
+
+	return bullet;
+}
+
+shared_ptr<Weapon> ObjectManager::GetWeapon(int type, int num)
+{
+	shared_ptr<Weapon> weapon;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	switch (type)
+	{
+	case Weapon::MELEE:
+		switch (num)
+		{
+		case 0:
+			weapon = make_shared<Melee>(type, num);
+			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
+			break;
+		default:
+			break;
+		}
+		break;
+	case Weapon::GUN:
+		switch (num)
+		{
+		case 0:
+			weapon = make_shared<Gun>(type, num);
+			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
+			break;
+		default:
+			break;
+		}
+		break;
+	case Weapon::SUB:
+		break;
+	default:
+		break;
+	}
+
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	if (weapon->GetTexture() == nullptr)
+		weapon->SetTexture(texture);
+
+	return weapon;
 }
 
 shared_ptr<Quad> ObjectManager::GetCursur(int num)

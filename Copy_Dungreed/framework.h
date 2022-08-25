@@ -119,6 +119,9 @@ using namespace std;
 // Item
 #include "Dungreed/Item/Item.h"
 #include "Dungreed/Item/Weapon/Weapon.h"
+#include "Dungreed/Item/Weapon/Melee/Melee.h"
+#include "Dungreed/Bullet/Bullet.h"
+#include "Dungreed/Item/Weapon/Gun/Gun.h"
 
 // Object
 #include "Dungreed/Object/Object.h"

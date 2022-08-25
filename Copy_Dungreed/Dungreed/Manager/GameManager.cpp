@@ -16,8 +16,6 @@ void GameManager::Update()
 	if (DELTA_TIME >= _maxDelay)
 		return;
 
-	_deleteTempTime += DELTA_TIME;
-
 	Optimize();
 	
 	for (auto& objects : _objects)
@@ -68,9 +66,6 @@ void GameManager::PostRender()
 			object->PostRender();
 		}
 	}
-
-	for (auto& temp : _tempCollider)
-		temp->Render();
 }
 
 void GameManager::ImguiRender()
@@ -96,23 +91,17 @@ void GameManager::ImguiRender()
 
 void GameManager::Optimize()
 {
-	if (_deleteTempTime >= _deleteTempDelay)
+	for (auto& objects : _objects)
 	{
-		_deleteTempTime = 0.0f;
-		_tempCollider.clear();
-	}
-
-	for(auto& objects : _objects)
 		for (auto& object : objects)
 		{
 			if (object == nullptr)
 				continue;
 
 			if (object->GetIsActive() == false)
-			{
 				object = nullptr;
-			}
 		}
+	}
 
 	shared_ptr<Collider> temp = make_shared<RectCollider>(CENTER);
 	temp->GetPos() = CAMERA->GetPos() + CENTER;
@@ -141,17 +130,26 @@ void GameManager::AddObject(shared_ptr<Object> object, int type, bool toFront)
 
 void GameManager::AddEffect(shared_ptr<Effect> effect)
 {
-	_objects[Object::Object_Type::EFFECT].emplace_back(effect);
-}
-
-void GameManager::AddTempCollider(shared_ptr<Collider> collider)
-{
-	_tempCollider.push_back(collider);
+	bool addEffect = false;
+	
+	for (auto object = _objects[Object::Object_Type::EFFECT].begin(); object != _objects[Object::Object_Type::EFFECT].end(); object++)
+	{
+		if (object->get() == nullptr)
+		{
+			_objects[Object::Object_Type::EFFECT].emplace(object, effect);
+			addEffect = true;
+			break;
+		}
+	}
+	
+	if(addEffect == false)
+		_objects[Object::Object_Type::EFFECT].emplace_back(effect);
 }
 
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor)
 {
 	vector<shared_ptr<Object>> result;
+	collider->Update();
 
 	for (auto& object : _objects[type])
 	{
@@ -161,6 +159,27 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 		if (collider->IsCollision(object->GetCollider(), Obb))
 		{
 			if(setColor == true)
+				object->GetCollider()->SetColorRed();
+
+			result.emplace_back(object);
+		}
+	}
+
+	return result;
+}
+
+vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor)
+{
+	vector<shared_ptr<Object>> result;
+
+	for (auto& object : _objects[type])
+	{
+		if (object == nullptr)
+			continue;
+
+		if (object->GetCollider()->IsCollision(object->GetCollider()))
+		{
+			if (setColor == true)
 				object->GetCollider()->SetColorRed();
 
 			result.emplace_back(object);

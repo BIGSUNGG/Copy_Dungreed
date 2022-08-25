@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Status\Status.h" />
     <ClInclude Include="Framework\Animation\Animation.h" />
     <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
@@ -167,6 +168,8 @@
     <ClInclude Include="Dungreed\Manager\GraphicManager.h" />
     <ClInclude Include="Dungreed\Item\Item.h" />
     <ClInclude Include="Dungreed\Object\Creature\Monster\Monster.h" />
+    <ClInclude Include="Dungreed\Item\Weapon\Melee\Melee.h" />
+    <ClInclude Include="Dungreed\Item\Weapon\Gun\Gun.h" />
     <ClInclude Include="Object\UI\Button.h" />
     <ClInclude Include="Framework\Utility\DirectWrite.h" />
     <ClInclude Include="Framework\Utility\BinaryReader.h" />
@@ -211,10 +214,10 @@
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Dungreed\UI\UI.h" />
     <ClInclude Include="Dungreed\Object\Wall\Wall.h" />
-    <ClInclude Include="Dungreed\Object\Weaphon\Weaphon.h" />
     <ClInclude Include="Dungreed\Item\Weapon\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\Bullet\Bullet.cpp" />
     <ClCompile Include="Framework\Animation\Animation.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
     <ClCompile Include="Dungreed\Object\BackGround\BackGround.cpp" />
@@ -229,6 +232,8 @@
     <ClCompile Include="Dungreed\Manager\GraphicManager.cpp" />
     <ClCompile Include="Dungreed\Item\Item.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\Monster.cpp" />
+    <ClCompile Include="Dungreed\Item\Weapon\Melee\Melee.cpp" />
+    <ClCompile Include="Dungreed\Item\Weapon\Gun\Gun.cpp" />
     <ClCompile Include="Object\UI\Button.cpp" />
     <ClCompile Include="Framework\Utility\DirectWrite.cpp" />
     <ClCompile Include="Framework\Utility\BinaryReader.cpp" />
@@ -276,7 +281,6 @@
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\UI\UI.cpp" />
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
-    <ClCompile Include="Dungreed\Object\Weaphon\Weaphon.cpp" />
     <ClCompile Include="Dungreed\Item\Weapon\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ Object::Object(int level, int num)
 
 void Object::Update()
 {
-	if (_anim != nullptr)
+	if (_anim != nullptr && _playingAnim)
 		_anim->Update();
 
 	_texture->Update();
@@ -50,6 +50,7 @@ void Object::SetCollider()
 void Object::SetAnimation()
 {
 	_anim = make_shared<Animation>();
+	_playingAnim = true;
 }
 
 void Object::SetTexture(shared_ptr<Quad> texture)

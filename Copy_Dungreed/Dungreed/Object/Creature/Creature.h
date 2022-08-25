@@ -18,12 +18,12 @@ public:
 	virtual void Damaged(Status status);
 
 	virtual void MoveCharacter();
-	virtual void GravityEvent();
 	virtual void CollisionEvent(shared_ptr<Object> objects);
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void CreatureCollision(shared_ptr<Creature> creature);
 
 	const Vector2& GetVelocity() { return _velocity; }
+	const Status& GetStatus() { return _status; }
 	Vector2& GetBeforeMove() { return _beforeMove; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 
@@ -45,6 +45,7 @@ protected:
 
 	bool _isFalling = false;
 	bool _passFloor = false;
+	bool _gravity = true;
 	float _speed = 450.0f;
 };
 

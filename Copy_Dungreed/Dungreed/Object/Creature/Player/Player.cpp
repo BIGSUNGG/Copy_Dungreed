@@ -19,13 +19,7 @@ void Player::Update()
 	if (_weapon != nullptr)
 		_weapon->Update();
 
-	GravityEvent();
-
-	MoveCharacter();
-
-	_passFloor = false;
-
-	Object::Update();
+	Creature::Update();
 }
 
 void Player::Render()
@@ -71,13 +65,11 @@ void Player::MouseEvent()
 		if (_reversed == false)
 		{
 			ReverseTexture();
-			_handPos.x *= -1;
 		}
 	}
 	else if (_reversed == true)
 	{
 		ReverseTexture();
-		_handPos.x *= -1;
 	}
 }
 

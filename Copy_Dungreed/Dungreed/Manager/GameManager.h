@@ -31,7 +31,6 @@ public:
 
 	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
 	void AddEffect(shared_ptr<Effect> effect);
-	void AddTempCollider(shared_ptr<Collider> collider);
 
 	bool& GetPause() { return _pause; }
 	bool& GetRenderTexture() { return _renderTexture; }
@@ -39,6 +38,7 @@ public:
 
 	bool& GetObjectUpdate() { return _objectUpdate; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true);
+	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
 
 private:
@@ -47,10 +47,7 @@ private:
 	static GameManager* _instance;	
 	
 	float _maxDelay = 0.1f;
-	float _deleteTempTime = 1.0f;
-	float _deleteTempDelay = 1.0f;
 
-	vector<shared_ptr<Collider>> _tempCollider;
 	vector<vector<shared_ptr<Object>>> _objects;
 	vector<vector<shared_ptr<Object>>> _optimized;
 

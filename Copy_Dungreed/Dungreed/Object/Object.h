@@ -37,12 +37,12 @@ public:
 	virtual void SetOriginalPos(Vector2 pos);
 	virtual void SetTexture(shared_ptr<Quad> texture);
 
-	int GetNum() { return _num; }
-	int GetLevel() { return _level; }
-	bool& GetPlayingAnim() { return _playingAnim; }
-	bool& GetReversed() { return _reversed; }
+	const int& GetNum() { return _num; }
+	const int& GetLevel() { return _level; }
+	const bool& GetPlayingAnim() { return _playingAnim; }
+	const bool& GetReversed() { return _reversed; }
 	const bool& GetIsActive() { return _isActive; }
-	Object_Type GetType() { return _objectType; }
+	const Object_Type& GetType() { return _objectType; }
 	shared_ptr<Quad> GetTexture() { return _texture; }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }

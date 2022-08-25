@@ -32,6 +32,22 @@ void GraphicManager::Load()
 
 void GraphicManager::ImguiRender()
 {
+
+	if (ImGui::TreeNode("Window Mode"))
+	{
+		ImGui::RadioButton("Border", &_winMode, 0);
+		ImGui::SameLine();
+		ImGui::RadioButton("Borderless", &_winMode, 1);
+
+		ImGui::TreePop();
+	}
+
+	if (ImGui::TreeNode("FPS Limit"))
+	{
+		ImGui::SliderInt("FRAME Limit", &_fpsLimit, 0, 1000);
+		ImGui::TreePop();
+	}
+
 	if (ImGui::TreeNode("Mouse Cursur"))
 	{
 		if (ImGui::Button("On"))
@@ -44,17 +60,10 @@ void GraphicManager::ImguiRender()
 		ImGui::TreePop();
 	}
 
-	if (ImGui::TreeNode("Window Mode"))
+	if (ImGui::Button("Apply Settings"))
 	{
-		ImGui::RadioButton("Border", &_winMode, 0);
-		ImGui::SameLine();
-		ImGui::RadioButton("Borderless", &_winMode, 1);
+		Timer::GetInstance()->SetLockFPS(_fpsLimit);
 
-		ImGui::TreePop();
-	}
-
-	if (ImGui::Button("Apply"))
-	{
 		int temp;
 		{
 			BinaryReader Reader(L"Save/Graphic_Setting/Setting.txt");

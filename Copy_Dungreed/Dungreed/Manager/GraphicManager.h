@@ -28,6 +28,7 @@ private:
 	static GraphicManager* _instance;
 
 	int _winMode = 1;
+	int _fpsLimit = 0;
 
 	bool _applied = false;
 };

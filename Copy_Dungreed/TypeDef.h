@@ -44,8 +44,11 @@
 #define MAKE_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGround(level,num)
 #define MAKE_TILE(level,num) ObjectManager::GetInstance()->GetTile(level,num)
 #define MAKE_CREATURE(level,num) ObjectManager::GetInstance()->GetCreature(level,num)
+
+#define MAKE_PLAYER_BULLET(type,num) ObjectManager::GetInstance()->GetPlayerBullet(type,num)
+
 #define MAKE_CREATURE_EFFECT(level,num) ObjectManager::GetInstance()->GetCreatureEffect(level,num)
-#define MAKE_ITEM_EFFECT(level,num) ObjectManager::GetInstance()->GetItemEffect(level,num)
+#define MAKE_WEAPON_EFFECT(level,num) ObjectManager::GetInstance()->GetWeaponEffect(level,num)
 #define MAKE_ITEM(type,num) ObjectManager::GetInstance()->GetItem(type,num);
 
 #define CAMERA Camera::GetInstance()

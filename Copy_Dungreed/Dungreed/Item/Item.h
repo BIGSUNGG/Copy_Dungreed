@@ -7,6 +7,7 @@ class Item
 public:
 	enum Item_Type
 	{
+		NONE,
 		FOOD,
 		WEAPON,
 		ACCESSORY,
@@ -37,17 +38,17 @@ public:
 	virtual void SetAnimation();
 	virtual void SetTexture(shared_ptr<Quad> texture);
 
-	int GetNum() { return _num; }
-	int GetType() { return _type; }
-	bool& GetPlayingAnim() { return _playingAnim; }
-	bool& GetIsActive() { return _isActive; }
-	bool& GetReversed() { return _reversed; }
-	virtual Item_Type GetItemType() { return _itemType; }
+	const int& GetNum() { return _num; }
+	const int& GetType() { return _type; }
+	const bool& GetPlayingAnim() { return _playingAnim; }
+	const bool& GetIsActive() { return _isActive; }
+	const bool& GetReversed() { return _reversed; }
+	const Item_Type& GetItemType() { return _itemType; }
 	virtual shared_ptr<Quad> GetTexture() { return _texture; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 
 protected:
-	shared_ptr<Player> _owner;
+	weak_ptr<Player> _owner;
 	shared_ptr<Quad> _texture;
 	shared_ptr<Animation> _anim;
 

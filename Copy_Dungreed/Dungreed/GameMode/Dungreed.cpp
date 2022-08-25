@@ -14,7 +14,7 @@ Dungreed::Dungreed()
 	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;
 	_player->GetTexture()->SetBottom(_map->GetStartPos().y);
 	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
-	_player->SetWeapon(OBJ_MANAGER->GetItem(1, 0));
+	_player->SetWeapon(OBJ_MANAGER->GetWeapon(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(dynamic_pointer_cast<Object>(_player));
 	GAME->GetObjectUpdate() = true;
@@ -66,7 +66,6 @@ void Dungreed::ImGuiRender()
 	if (ImGui::CollapsingHeader("Player"))
 	{
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);
-		ImGui::Text("Hand Pos : %f , %f", _player->GetHandPos().x, _player->GetHandPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
 	}
 

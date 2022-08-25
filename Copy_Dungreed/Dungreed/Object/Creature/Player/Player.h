@@ -17,8 +17,6 @@ public:
 	virtual void Attack();
 	virtual void Jump();
 
-	virtual const Vector2& GetHandPos() { return _handPos; }
-
 	virtual void SetWeapon(shared_ptr<Item> weapon);
 
 protected:
@@ -28,8 +26,5 @@ protected:
 
 	float _dustRunTime = 0.25f;
 	float _dustDelay = 0.25f;
-
-	Vector2 _handPos = { 45,-25 };
-
 };
 

@@ -9,6 +9,16 @@ Creature::Creature(int level, int num)
 
 void Creature::Update()
 {
+	if(_gravity)
+		_jumpPower -= _gravityPower * DELTA_TIME;
+
+	_movement.y += _jumpPower;
+
+	if(GAME->GetObjectUpdate())
+		MoveCharacter();
+
+	_passFloor = false;
+
 	Object::Update();
 }
 
@@ -38,12 +48,6 @@ void Creature::MoveCharacter()
 	_beforeMove = _texture->GetTransform()->GetPos();
 	_movement = { 0,0 };
 	Object::Update();
-}
-
-void Creature::GravityEvent()
-{
-	_jumpPower -= _gravityPower * DELTA_TIME;
-	_movement.y += _jumpPower;
 }
 
 void Creature::CollisionEvent(shared_ptr<Object> object)
