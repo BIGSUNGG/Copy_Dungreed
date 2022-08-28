@@ -68,6 +68,8 @@ void Dungreed::ImGuiRender()
 		if(ImGui::Button("MELEE"))
 			_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 
+		ImGui::SameLine();
+
 		if(ImGui::Button("GUN"))
 			_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 

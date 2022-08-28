@@ -86,7 +86,9 @@ void Program::ImGuiRender()
 	ImGui::Begin("Game");
 	switch (_gameMode->GetGameModeType())
 	{
-	case GameMode::PLAYER:
+	case GameMode::DUNGREED:
+		if (ImGui::Button("MapEditor"))
+			_gameMode = make_shared<MapEditor>();
 		break;
 	case GameMode::MAP_EDITOR:
 		if (ImGui::Button("Dungreed"))

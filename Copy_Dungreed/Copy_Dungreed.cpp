@@ -1,15 +1,8 @@
-﻿// DX_0530_6_HANIL.cpp : 애플리케이션에 대한 진입점을 정의합니다.
-//
-
-#include "framework.h"
+﻿#include "framework.h"
 #include "Copy_Dungreed.h"
 
 #define MAX_LOADSTRING 100
 
-// Hello Git
-// Hello Branch
-
-// 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 HWND hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
@@ -19,7 +12,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);	
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 					 _In_opt_ HINSTANCE hPrevInstance,
@@ -55,6 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	ImGui_ImplWin32_Init(hWnd);
 	ImGui_ImplDX11_Init(DEVICE.Get(), DEVICE_CONTEXT.Get());
 
+	// 싱글톤 클래스 생성
 	Timer::Create();
 	InputManager::Create();
 	StateManager::Create();
@@ -89,7 +83,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 
-	// 삭제
+	// 싱글톤 클래스 삭제
 	GraphicManager::Delete();
 	GameManager::Delete();
 	ObjectManager::Delete();
@@ -167,6 +161,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	   WinMode = graphicInfo[0];
    }
 
+   // 윈도우 화면 모드 설정
    if (WinMode == 0)
    {
 	   // 창모드

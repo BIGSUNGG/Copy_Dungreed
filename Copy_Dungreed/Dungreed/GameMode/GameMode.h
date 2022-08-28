@@ -5,7 +5,7 @@ class GameMode
 public:
 	enum GameModeType
 	{
-		PLAYER,
+		NONE,
 		DUNGREED,
 		MAP_EDITOR,
 	};
@@ -24,5 +24,5 @@ public:
 	GameModeType GetGameModeType() { return _modeType; }
 
 protected:
-	GameModeType _modeType = PLAYER;
+	GameModeType _modeType = NONE;
 };

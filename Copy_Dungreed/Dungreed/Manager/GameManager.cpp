@@ -148,9 +148,6 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
-	if (_player != nullptr)
-		return;
-
 	_player = player;
 	_objects[Object::Object_Type::CREATURE].emplace_back(player);
 }

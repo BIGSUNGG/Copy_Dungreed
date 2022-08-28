@@ -5,6 +5,7 @@ Monster::Monster(int level, int num)
 	:Creature(level, num)
 {
 	_creatureType = Creature_Type::ENEMY;
+	_targetDistance = (MathUtility::RandomFloat(_targetDistanceMin, _targetDistanceMax)) * _targetDistanceRatio;
 	_speed = 300.0f;
 }
 
@@ -45,10 +46,31 @@ void Monster::AI()
 		else
 			_movement.x -= _speed;
 	}
+	else if (_texture->Top() < _target.lock()->GetTexture()->GetTransform()->GetPos().y)
+	{
+		Jump();
+	}
+	else if (_texture->Bottom() > _target.lock()->GetTexture()->Top())
+	{
+		_passFloor = true;
+	}
 	else
 	{
-		_anim->ChangeAnimation(State::ATTACK);
+		Attack();
 	}
+}
+
+void Monster::Jump()
+{
+	if (_isFalling == false)
+	{
+		_jumpPower = _jumpPowerMax;
+	}
+}
+
+void Monster::Attack()
+{
+	_anim->ChangeAnimation(State::ATTACK);
 }
 
 void Monster::MovementEvent()
