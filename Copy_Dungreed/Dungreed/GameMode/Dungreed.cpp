@@ -10,20 +10,20 @@ Dungreed::Dungreed()
 	_map = make_shared<Map>();
 	_map->Load();
 
-	_player = dynamic_pointer_cast<Player>(MAKE_CREATURE(-1, 0));
+	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));
 	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;
 	_player->GetTexture()->SetBottom(_map->GetStartPos().y);
 	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
-	_player->SetWeapon(OBJ_MANAGER->GetWeapon(Weapon::Weapon_Type::GUN, 0));
+	_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 
-	GAME->GetObjects()[Object::Object_Type::CREATURE].emplace_back(dynamic_pointer_cast<Object>(_player));
+	GAME->AddPlayer(_player);
+	GAME->Update();
 	GAME->GetObjectUpdate() = true;
 
-	CAMERA->GetTransform()->GetPos() = _player->GetTexture()->GetTransform()->GetPos();
-	CAMERA->GetBeforeMove() = CAMERA->GetTransform()->GetPos();
 	CAMERA->SetTarget(_player->GetTexture()-> GetTransform());
 	CAMERA->SetLeftBottom(_map->GetLeftBottom());
 	CAMERA->SetRightTop(_map->GetRightTop());
+	CAMERA->Update();
 
 	_cursur = OBJ_MANAGER->GetCursur(2);
 	CursurOff();
@@ -65,6 +65,12 @@ void Dungreed::ImGuiRender()
 
 	if (ImGui::CollapsingHeader("Player"))
 	{
+		if(ImGui::Button("MELEE"))
+			_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
+
+		if(ImGui::Button("GUN"))
+			_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
 	}

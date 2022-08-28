@@ -18,6 +18,7 @@ public:
 	void ChangeAnimation(int state);
 	void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
 
+	bool& GetRefreshSize() { return _refreshSize; }
 	const bool& GetIsPlaying() { return _isPlaying; }
 
 	unordered_map<int, vector<wstring>> _animList;
@@ -29,5 +30,6 @@ private:
 	float _animRunTime = 0.0f;
 	int _curState = _index.second;
 	bool _isPlaying = true;
+	bool _refreshSize = false;
 	pair<int, int> _index = { 0,0 };
 };

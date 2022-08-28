@@ -42,6 +42,6 @@ void InputManager::Update()
 			_stateMap[i] = PRESS;
 		}
 		else
-			_stateMap[i] = NONE;
+			_stateMap[i] = PLAYER;
 	}
 }

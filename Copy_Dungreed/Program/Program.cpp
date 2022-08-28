@@ -86,7 +86,7 @@ void Program::ImGuiRender()
 	ImGui::Begin("Game");
 	switch (_gameMode->GetGameModeType())
 	{
-	case GameMode::NONE:
+	case GameMode::PLAYER:
 		break;
 	case GameMode::MAP_EDITOR:
 		if (ImGui::Button("Dungreed"))

@@ -43,13 +43,18 @@
 #define MAKE_OBJECT(type,level,num) ObjectManager::GetInstance()->GetNewObject(type,level,num)
 #define MAKE_BACKGROUND(level,num) ObjectManager::GetInstance()->GetBackGround(level,num)
 #define MAKE_TILE(level,num) ObjectManager::GetInstance()->GetTile(level,num)
+
+#define MAKE_PLAYER(num) ObjectManager::GetInstance()->GetPlayer(num)
 #define MAKE_CREATURE(level,num) ObjectManager::GetInstance()->GetCreature(level,num)
 
 #define MAKE_PLAYER_BULLET(type,num) ObjectManager::GetInstance()->GetPlayerBullet(type,num)
 
-#define MAKE_CREATURE_EFFECT(level,num) ObjectManager::GetInstance()->GetCreatureEffect(level,num)
+#define MAKE_PLAYER_EFFECT(num) ObjectManager::GetInstance()->GetPlayerEffect(num)
+#define MAKE_CREATURE_EFFECT(type,num) ObjectManager::GetInstance()->GetCreatureEffect(type,num)
 #define MAKE_WEAPON_EFFECT(level,num) ObjectManager::GetInstance()->GetWeaponEffect(level,num)
-#define MAKE_ITEM(type,num) ObjectManager::GetInstance()->GetItem(type,num);
+
+#define MAKE_ITEM(type,num) ObjectManager::GetInstance()->GetItem(type,num)
+#define MAKE_PLAYER_WEAPON(type,num) ObjectManager::GetInstance()->GetPlayerWeapon(type,num)
 
 #define CAMERA Camera::GetInstance()
 
@@ -58,6 +63,7 @@
 
 #define GRAPHIC GraphicManager::GetInstance()
 
+#define EXCEPT -1
 #define BASIC 0
 
 using CallBack = function<void()>;

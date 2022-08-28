@@ -71,17 +71,27 @@ void Quad::ReverseToY()
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
 }
 
+void Quad::Refresh()
+{
+    _size = _texture->GetSize();
+
+    CreateVertices();
+    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
+    _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
+}
+
 void Quad::CreateVertices()
 {
     Vector2 halfSize = _size * 0.5f;
 
-    _vertices.reserve(4);
+    _vertices.clear();
 
     _vertices.emplace_back(-halfSize.x, halfSize.y,0,0); // ¿Þ À§
     _vertices.emplace_back(halfSize.x, halfSize.y, 1, 0); // ¿À À§
     _vertices.emplace_back(-halfSize.x, -halfSize.y, 0, 1); // ¿Þ ¾Æ·¡
     _vertices.emplace_back(halfSize.x, -halfSize.y, 1, 1); // ¿À ¾Æ·¡
 
+    _indices.clear();
     _indices.push_back(0);
     _indices.push_back(1);
     _indices.push_back(2);

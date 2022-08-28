@@ -2,7 +2,7 @@
 class Gun : public Weapon
 {
 public:
-	Gun(int type, int num);
+	Gun();
 	virtual ~Gun();
 
 	virtual void Update() override;

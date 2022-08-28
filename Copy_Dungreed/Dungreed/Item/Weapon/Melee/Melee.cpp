@@ -1,11 +1,10 @@
 #include "framework.h"
 #include "Melee.h"
 
-Melee::Melee(int level, int num)
-	: Weapon(level,num)
+Melee::Melee()
 {
 	_weaponType = MELEE;
-	_appendAngle = { -0.1f,0.7f };
+	_appendAngle = { -0.1f,1.2f };
 	_offset = { 45,-25 };
 }
 
@@ -20,15 +19,15 @@ void Melee::Attack()
 
 	_attackedTime = 0.0f;
 
-	++_angleIndex;
+	++_index;
 
-	if (_angleIndex >= _appendAngle.size())
-		_angleIndex = 0;
+	if (_index >= _appendAngle.size())
+		_index = 0;
 
 	AttackEffect();
 
 	shared_ptr<Collider> _attack = make_shared<RectCollider>(_attackRange);
-	_attack->GetTransform()->GetPos() = _attackArm->GetWorldPos();
+	_attack->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
 	_attack->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (0.5f * PI);
 	_attack->Update();
 
@@ -45,8 +44,8 @@ void Melee::Attack()
 
 void Melee::AttackEffect()
 {
-	shared_ptr<Effect> swing = MAKE_WEAPON_EFFECT(_weaponType, _num);
-	swing->GetTexture()->GetTransform()->GetPos() = _attackArm->GetWorldPos();
+	shared_ptr<Effect> swing = MAKE_WEAPON_EFFECT(_weaponType, 0);
+	swing->GetTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
 	swing->GetTexture()->GetTransform()->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (0.5f * PI);
 
 	_attackRange = swing->GetTexture()->GetHalfSize();
@@ -63,7 +62,7 @@ void Melee::SetWeapon()
 	{
 		_springArm->GetPos() = _offset + _owner.lock()->GetTexture()->GetTransform()->GetPos();
 		_ownerFollower->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle();
-		_attackArm->GetPos().x = _weaponLength;
+		_attackOfsset->GetPos().x = _weaponLength;
 
 		float angle;
 
@@ -76,7 +75,7 @@ void Melee::SetWeapon()
 				_reversed = true;
 			}
 			_texture->GetTransform()->GetPos().y = -_weaponLength;
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() + (_appendAngle[_angleIndex] * PI);
+			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() + (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
@@ -88,12 +87,12 @@ void Melee::SetWeapon()
 				_reversed = false;
 			}
 			_texture->GetTransform()->GetPos().y = _weaponLength;
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (_appendAngle[_angleIndex] * PI);
+			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 
 		_springArm->UpdateWorld();
 		_ownerFollower->UpdateWorld();
-		_attackArm->UpdateWorld();
+		_attackOfsset->UpdateWorld();
 	}
 }

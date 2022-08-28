@@ -6,7 +6,7 @@ class InputManager
 private:
 	enum
 	{
-		NONE,
+		PLAYER,
 		DOWN,
 		UP,
 		PRESS

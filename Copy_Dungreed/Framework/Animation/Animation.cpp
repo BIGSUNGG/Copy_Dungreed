@@ -22,6 +22,8 @@ void Animation::Update()
 			if (_index.second < _animList[_index.first].size())
 			{
 				_texture->SetTexture(_animList[_index.first][_index.second]);
+				if(_refreshSize)
+					_texture->Refresh();
 			}
 			else
 			{
@@ -47,5 +49,6 @@ void Animation::Update()
 
 void Animation::ChangeAnimation(int state)
 {
-	_curState = state;
+	if(_animList[state].size() > 0)
+		_curState = state;
 }

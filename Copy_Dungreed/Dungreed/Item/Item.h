@@ -1,13 +1,13 @@
 #pragma once
 
-class Player;
+class Creature;
 
 class Item
 {
 public:
 	enum Item_Type
 	{
-		NONE,
+		PLAYER,
 		FOOD,
 		WEAPON,
 		ACCESSORY,
@@ -22,7 +22,7 @@ public:
 	};
 
 public:
-	Item(int type, int num);
+	Item();
 	virtual ~Item();
 
 	virtual void Update();
@@ -34,12 +34,10 @@ public:
 	virtual void Skill() abstract;
 	virtual void Damaged(const Status& status) abstract;
 
-	virtual void SetOwner(shared_ptr<Player> owner);
+	virtual void SetOwner(shared_ptr<Creature> owner);
 	virtual void SetAnimation();
 	virtual void SetTexture(shared_ptr<Quad> texture);
 
-	const int& GetNum() { return _num; }
-	const int& GetType() { return _type; }
 	const bool& GetPlayingAnim() { return _playingAnim; }
 	const bool& GetIsActive() { return _isActive; }
 	const bool& GetReversed() { return _reversed; }
@@ -48,16 +46,13 @@ public:
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 
 protected:
-	weak_ptr<Player> _owner;
+	weak_ptr<Creature> _owner;
 	shared_ptr<Quad> _texture;
 	shared_ptr<Animation> _anim;
 
 	Status _status;
 
 	Item_Type _itemType = ACCESSORY;
-
-	int _type;
-	int _num;
 
 	Item_State _state = IDLE;
 	bool _isActive = true;

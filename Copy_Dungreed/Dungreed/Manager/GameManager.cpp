@@ -146,6 +146,15 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 		_objects[Object::Object_Type::EFFECT].emplace_back(effect);
 }
 
+void GameManager::AddPlayer(shared_ptr<Player> player)
+{
+	if (_player != nullptr)
+		return;
+
+	_player = player;
+	_objects[Object::Object_Type::CREATURE].emplace_back(player);
+}
+
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor)
 {
 	vector<shared_ptr<Object>> result;
@@ -153,7 +162,7 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 
 	for (auto& object : _objects[type])
 	{
-		if (object == nullptr)
+		if (object == nullptr || collider == object->GetCollider())
 			continue;
 
 		if (collider->IsCollision(object->GetCollider(), Obb))

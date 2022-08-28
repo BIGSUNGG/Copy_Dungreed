@@ -22,11 +22,14 @@ public:
 	shared_ptr<BackGround> GetBackGround(int level,int num);
 	shared_ptr<Wall> GetWall(int level, int num);
 	shared_ptr<Tile> GetTile(int level, int num);
+
+	shared_ptr<Player> GetPlayer(int num);
 	shared_ptr<Creature> GetCreature(int level, int num);
 
 	shared_ptr<Bullet> GetPlayerBullet(int type, int num);
-	shared_ptr<Weapon> GetWeapon(int type, int num);
+	shared_ptr<Weapon> GetPlayerWeapon(int type, int num);
 
+	shared_ptr<Effect> GetPlayerEffect(int num);
 	shared_ptr<Effect> GetCreatureEffect(int level, int num);
 	shared_ptr<Effect> GetWeaponEffect(int level, int num);
 

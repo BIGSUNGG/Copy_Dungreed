@@ -10,7 +10,7 @@ public:
 	};
 
 public:
-	Weapon(int type, int num);
+	Weapon();
 
 	virtual void Update();
 
@@ -21,7 +21,9 @@ public:
 	virtual void AttackEffect();
 
 	virtual void SetWeapon();
-	virtual void SetOwner(shared_ptr<Player> owner) override;
+	virtual void SetOwner(shared_ptr<Creature> owner) override;
+
+	virtual const bool& GetFastRender() { return _fastRender[_index]; }
 
 protected:
 	Weapon_Type _weaponType = MELEE;
@@ -30,10 +32,12 @@ protected:
 	bool _reversed = false;
 
 	shared_ptr<Transform> _springArm;
-	shared_ptr<Transform> _attackArm;
+	shared_ptr<Transform> _attackOfsset;
 	shared_ptr<Transform> _ownerFollower;
 
-	int _angleIndex = 0;
+	int _index = 0;
+	vector<bool> _fastRender = { false,true };
+
 	float _attackDelay = 0.3f;
 	float _attackedTime = 0.1f;
 

@@ -12,30 +12,23 @@ void Player::Update()
 	_dustRunTime += DELTA_TIME;
 
 	MovementEvent();
+
 	MouseEvent();
 
 	InputEvent();
 
-	if (_weapon != nullptr)
-		_weapon->Update();
-
 	Creature::Update();
-}
-
-void Player::Render()
-{
-	if (_weapon != nullptr)
-		_weapon->Render();
-
-	Creature::Render();
 }
 
 void Player::DustEffect()
 {
+	if (_dashCurSpeed > 0)
+		return;
+
 	if (_dustRunTime >= _dustDelay)
 	{
 		_dustRunTime = 0.0f;
-		shared_ptr<Effect> dust = MAKE_CREATURE_EFFECT(-1, 0);
+		shared_ptr<Effect> dust = MAKE_PLAYER_EFFECT(0);
 		dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
 		dust->GetTexture()->SetBottom(_texture->Bottom());
 
@@ -48,7 +41,7 @@ void Player::DustEffect()
 
 void Player::DoubleJumpEffect()
 {
-	shared_ptr<Effect> dust = MAKE_CREATURE_EFFECT(-1, 1);
+	shared_ptr<Effect> dust = MAKE_PLAYER_EFFECT(1);
 	dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
 	dust->GetTexture()->SetBottom(_texture->Bottom());
 
@@ -77,7 +70,7 @@ void Player::MovementEvent()
 {
 	if (_velocity.x != 0)
 	{
-		_anim->ChangeAnimation(State::MOVE);
+		_anim->ChangeAnimation(State::RUN);
 		if (_isFalling == false)
 		{
 			DustEffect();
@@ -101,42 +94,78 @@ void Player::MovementEvent()
 		_doubleJumped = false;
 		_isFalling = false;
 	}
+
+	if (_dashCurSpeed > 0.0f)
+	{
+		_movement += (_dashDirection * _dashCurSpeed);
+
+		if (_dashSlow)
+		{
+			_dashCurSpeed -= _dashSlowSpeed * DELTA_TIME;
+		}
+		else
+		{
+			_dashRunTime += DELTA_TIME;
+
+			if (_dashRunTime >= _dashMaxTime)
+				_dashSlow = true;
+		}
+	}
+	else
+		_gravity = true;
 }
 
 void Player::InputEvent()
 {
-	if (KEY_DOWN('W'))
+	if (_dashCurSpeed <= 0)
 	{
-		Jump();
-	}
-	if (KEY_PRESS('S'))
-	{
-		if (KEY_DOWN(VK_SPACE))
-			_passFloor = true;
-		else
+		if (KEY_DOWN('W'))
+		{
+			Jump();
+		}
+		if (KEY_PRESS('S'))
+		{
+			if (KEY_DOWN(VK_SPACE))
+				_passFloor = true;
+			else
+				_passFloor = false;
+		}
+		else if (KEY_UP('S'))
+		{
 			_passFloor = false;
-	}
-	else if (KEY_UP('S'))
-	{
-		_passFloor = false;
-	}
-	if (KEY_PRESS('A'))
-	{
-		_movement.x -= _speed;
-	}
-	if (KEY_PRESS('D'))
-	{
-		_movement.x += _speed;
+		}
+		if (KEY_PRESS('A'))
+		{
+			_movement.x -= _speed;
+		}
+		if (KEY_PRESS('D'))
+		{
+			_movement.x += _speed;
+		}
 	}
 	if (KEY_DOWN(VK_LBUTTON))
 	{
 		Attack();
 	}
+	if (KEY_DOWN(VK_RBUTTON))
+		Dash();
 }
 
 void Player::Attack()
 {
-	_weapon->Attack();
+	if(_weapon != nullptr)
+		_weapon->Attack();
+}
+
+void Player::Dash()
+{
+	_dashSlow = false;
+	_gravity = false;
+	_dashRunTime = 0.0f;
+	_jumpPower = 0.0f;
+	_dashCurSpeed = _dashSpeedMax;
+	_dashDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
+	_dashDirection.Normalize();
 }
 
 void Player::Jump()
@@ -154,8 +183,15 @@ void Player::Jump()
 	}
 }
 
-void Player::SetWeapon(shared_ptr<Item> weapon)
+void Player::TileBlockCollision(shared_ptr<Tile> tile)
 {
-	_weapon = weapon;
-	_weapon->SetOwner(shared_from_this());
+	if (_passFloor == false)
+	{
+		if (tile->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
+		{
+			_texture->SetBottom(tile->GetTexture()->Top());
+			_jumpPower = 0.0f;
+			_passFloor = true;
+		}
+	}
 }

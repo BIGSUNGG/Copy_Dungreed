@@ -1,8 +1,7 @@
 #include "framework.h"
 #include "Item.h"
 
-Item::Item(int type, int num)
-	: _type(type), _num(num)
+Item::Item()
 {
 }
 
@@ -26,7 +25,7 @@ void Item::ReverseTexture()
 	SwitchBool(_reversed);
 }
 
-void Item::SetOwner(shared_ptr<Player> owner)
+void Item::SetOwner(shared_ptr<Creature> owner)
 {
 	_owner = owner;
 }

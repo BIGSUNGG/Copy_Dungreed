@@ -1,8 +1,7 @@
 #include "framework.h"
 #include "Gun.h"
 
-Gun::Gun(int level, int num)
-	: Weapon(level,num)
+Gun::Gun()
 {
 	_weaponType = GUN;
 	_offset = { 40,-10 };
@@ -48,7 +47,7 @@ void Gun::Render()
 
 void Gun::Attack()
 {
-	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, _num);
+	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, 0);
 	_bullet->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
 	_bullet->GetTexture()->GetTransform()->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (0.5f * PI);
 
@@ -85,7 +84,7 @@ void Gun::SetWeapon()
 	{
 		_springArm->GetPos() = _offset + _owner.lock()->GetTexture()->GetTransform()->GetPos();
 		_ownerFollower->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle();
-		_attackArm->GetPos().x = _weaponLength;
+		_attackOfsset->GetPos().x = _weaponLength;
 		_texture->GetTransform()->GetPos().x = _weaponLength;
 
 		float angle;
@@ -98,7 +97,7 @@ void Gun::SetWeapon()
 				_offset.x *= -1;
 				_reversed = true;
 			}
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() + (_appendAngle[_angleIndex] * PI);
+			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() + (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
@@ -109,12 +108,12 @@ void Gun::SetWeapon()
 				_offset.x *= -1;
 				_reversed = false;
 			}
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (_appendAngle[_angleIndex] * PI);
+			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 
 		_springArm->UpdateWorld();
 		_ownerFollower->UpdateWorld();
-		_attackArm->UpdateWorld();
+		_attackOfsset->UpdateWorld();
 	}
 }

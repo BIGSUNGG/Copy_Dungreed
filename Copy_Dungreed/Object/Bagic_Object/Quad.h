@@ -10,6 +10,7 @@ public:
 
 	virtual void ReverseToX();
 	virtual void ReverseToY();
+	virtual void Refresh();
 
 	virtual void CreateVertices();
 	virtual void SetTexture(wstring file);

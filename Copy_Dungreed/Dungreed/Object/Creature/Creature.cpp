@@ -9,17 +9,40 @@ Creature::Creature(int level, int num)
 
 void Creature::Update()
 {
-	if(_gravity)
-		_jumpPower -= _gravityPower * DELTA_TIME;
+	if (GAME->GetObjectUpdate())
+	{
+		if (_gravity)
+			_jumpPower -= _gravityPower * DELTA_TIME;
 
-	_movement.y += _jumpPower;
+		_movement.y += _jumpPower;
 
-	if(GAME->GetObjectUpdate())
-		MoveCharacter();
+		if (GAME->GetObjectUpdate())
+			MoveCharacter();
 
-	_passFloor = false;
+		_passFloor = false;
+	}
 
 	Object::Update();
+
+	if (_weapon != nullptr)
+		_weapon->Update();
+}
+
+void Creature::Render()
+{
+	if (_weapon != nullptr)
+	{
+		bool weaponRender = _weapon->GetFastRender();
+		if (!weaponRender)
+			_weapon->Render();
+
+		Object::Render();
+
+		if (weaponRender)
+			_weapon->Render();
+	}
+	else
+		Object::Render();
 }
 
 void Creature::Damaged(Status status)
@@ -27,7 +50,7 @@ void Creature::Damaged(Status status)
 	_status._hp -= _status._atk;
 
 	if (_status._hp <= 0)
-		_isActive = false;
+		Death();
 }
 
 void Creature::MoveCharacter()
@@ -48,6 +71,16 @@ void Creature::MoveCharacter()
 	_beforeMove = _texture->GetTransform()->GetPos();
 	_movement = { 0,0 };
 	Object::Update();
+}
+
+void Creature::Death()
+{
+	_isActive = false;
+
+	shared_ptr<Effect> dieEffect = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 0);
+	dieEffect->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
+
+	GAME->AddEffect(dieEffect);
 }
 
 void Creature::CollisionEvent(shared_ptr<Object> object)
@@ -82,15 +115,7 @@ void Creature::TileCollison(shared_ptr<Tile> tile)
 	switch (tile->GetTileType())
 	{
 	case Tile::BLOCK:
-		if (_passFloor == false)
-		{
-			if (tile->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
-			{
-				_texture->SetBottom(tile->GetTexture()->Top());
-				_jumpPower = 0.0f;
-				_passFloor = true;
-			}
-		}
+		TileBlockCollision(tile);
 		break;
 	case Tile::FLOOR:
 		break;
@@ -105,6 +130,19 @@ void Creature::TileCollison(shared_ptr<Tile> tile)
 	}
 }
 
+void Creature::TileBlockCollision(shared_ptr<Tile> tile)
+{
+	if (_passFloor == false)
+	{
+		if (tile->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
+		{
+			_texture->SetBottom(tile->GetTexture()->Top());
+			_jumpPower = 0.0f;
+			_passFloor = true;
+		}
+	}
+}
+
 void Creature::CreatureCollision(shared_ptr<Creature> creature)
 {
 }
@@ -114,4 +152,11 @@ void Creature::SetOriginalPos(Vector2 pos)
 	Object::SetOriginalPos(pos);
 	_beforeMove = pos;
 	_velocity = { 0,0 };
+}
+
+
+void Creature::SetWeapon(shared_ptr<Weapon> weapon)
+{
+	_weapon = weapon;
+	_weapon->SetOwner(shared_from_this());
 }

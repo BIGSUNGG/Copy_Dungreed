@@ -19,7 +19,7 @@ public:
 	virtual Effect_Type& GetEffectType() { return _effectType; }
 
 protected:
-	Effect_Type _effectType = NONE;
+	Effect_Type _effectType = PLAYER;
 
 };
 

@@ -15,7 +15,7 @@ public:
 	{
 		IDLE,
 		ATTACK,
-		MOVE,
+		RUN,
 		JUMP,
 		DIE,
 		CHARGE

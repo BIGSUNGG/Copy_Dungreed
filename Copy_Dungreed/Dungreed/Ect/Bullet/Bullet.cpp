@@ -30,7 +30,6 @@ void Bullet::Update()
 void Bullet::Render()
 {
 	_texture->Render();
-	_collider->Render();
 }
 
 void Bullet::PostRender()

@@ -2,7 +2,7 @@
 class Melee : public Weapon
 {
 public:
-	Melee(int type , int num);
+	Melee();
 	virtual ~Melee();
 
 	virtual void Attack() override;

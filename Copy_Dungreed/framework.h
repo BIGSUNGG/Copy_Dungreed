@@ -108,19 +108,15 @@ using namespace std;
 // Bagic Obj
 #include "Object/Bagic_Object/Quad.h"
 #include "Object/Bagic_Object/Sprite.h"
-#include "Object/Aim.h"
-
-// UI
-#include "Object/UI/Button.h"
 
 // Status
-#include "Dungreed/Status/Status.h"
+#include "Dungreed/Ect/Status/Status.h"
 
 // Item
 #include "Dungreed/Item/Item.h"
 #include "Dungreed/Item/Weapon/Weapon.h"
 #include "Dungreed/Item/Weapon/Melee/Melee.h"
-#include "Dungreed/Bullet/Bullet.h"
+#include "Dungreed/Ect/Bullet/Bullet.h"
 #include "Dungreed/Item/Weapon/Gun/Gun.h"
 
 // Object
