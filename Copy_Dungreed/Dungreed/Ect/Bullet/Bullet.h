@@ -1,4 +1,7 @@
 #pragma once
+
+class Item;
+
 class Bullet
 {
 public:
@@ -18,7 +21,7 @@ public:
 	virtual void SetTexture(shared_ptr<Quad> texture);
 	virtual void SetSpeed(float speed) { _speed = speed; }
 	virtual void SetDirection(const Vector2& direction) { _direction = direction; }
-	virtual void SetOwner(shared_ptr<Creature> owner) { _owner = owner; }
+	virtual void SetOwner(shared_ptr<Item> weapon) { _weapon = weapon; }
 
 	const bool& GetPlayingAnim() { return _playingAnim; }
 	const bool& GetIsActive() { return _isActive; }
@@ -30,7 +33,7 @@ protected:
 	shared_ptr<Quad> _texture;
 	shared_ptr<RectCollider> _collider;
 	shared_ptr<Animation> _anim;
-	weak_ptr<Creature> _owner;
+	weak_ptr<Item> _weapon;
 
 	bool _isActive = true;
 	bool _playingAnim = false;

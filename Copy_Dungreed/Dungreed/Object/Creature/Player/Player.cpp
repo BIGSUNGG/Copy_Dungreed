@@ -17,7 +17,7 @@ void Player::Update()
 
 	InputEvent();
 	
-	_weapon->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle() * PI);
+	_weapon->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle());
 
 	Creature::Update();
 }

@@ -48,15 +48,18 @@ void Gun::Render()
 void Gun::Attack()
 {
 	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, 0);
-	_bullet->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
+	_bullet->GetTexture()->GetTransform()->GetPos() = _springArm->GetWorldPos();
 	_bullet->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
-	Vector2 direction;// = _showDirection - _owner.lock()->GetTexture()->GetTransform()->GetPos();
+	Vector2 direction = { 1.0f,tan(_showDirection) };
+
 	direction.Normalize();
+	if (_reversed)
+		direction *= -1;
 
 	_bullet->SetDirection(direction);
 	_bullet->SetSpeed(_bulletSpeed);
-	_bullet->SetOwner(_owner.lock());
+	_bullet->SetOwner(shared_from_this());
 
 	bool addBullet = false;
 
