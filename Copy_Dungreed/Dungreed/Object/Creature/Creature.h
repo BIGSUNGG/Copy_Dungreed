@@ -20,11 +20,13 @@ public:
 
 	virtual void MoveCharacter();
 	virtual void Death();
+	virtual void Attack();
 	virtual void CollisionEvent(shared_ptr<Object> objects);
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);
 	virtual void CreatureCollision(shared_ptr<Creature> creature);
 
+	const bool& GetIsFalling() { return _isFalling; }
 	const Vector2& GetVelocity() { return _velocity; }
 	const Status& GetStatus() { return _status; }
 	Vector2& GetBeforeMove() { return _beforeMove; }

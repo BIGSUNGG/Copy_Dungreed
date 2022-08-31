@@ -20,6 +20,7 @@ public:
 
 	bool& GetRefreshSize() { return _refreshSize; }
 	const bool& GetIsPlaying() { return _isPlaying; }
+	const int& GetCurAnim() { return _index.first; }
 
 	unordered_map<int, vector<wstring>> _animList;
 	unordered_map<int, vector<float>>   _animSpeed;

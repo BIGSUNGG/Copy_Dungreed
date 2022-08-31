@@ -8,19 +8,45 @@ Weapon::Weapon()
 
 void Weapon::Update()
 {
-	_attackedTime += DELTA_TIME;
+	_attackDelayTime += DELTA_TIME;
+	if (_attacked)
+	{
+		_giveDamageDelayTime += DELTA_TIME;
+		if (_giveDamageDelayTime >= _giveDamageDelay)
+		{
+			CheckAttack();
+			_attacked = false;
+		}
+	}
 
 	SetWeapon();
 
 	Item::Update();
+
+	if(_anim != nullptr && _anim->GetIsPlaying() == false)
+		_anim->ChangeAnimation(Creature::State::IDLE);
 }
 
 void Weapon::Attack()
+{
+	_attacked = true;
+	_giveDamageDelayTime = 0.0f;
+
+	if (_anim != nullptr)
+		_anim->ChangeAnimation(Creature::State::ATTACK);
+}
+
+void Weapon::CheckAttack()
 {
 }
 
 void Weapon::Skill()
 {
+}
+
+void Weapon::GiveDamage(shared_ptr<Creature> enemy)
+{
+	enemy->Damaged(_status);
 }
 
 void Weapon::Damaged(const Status& status)

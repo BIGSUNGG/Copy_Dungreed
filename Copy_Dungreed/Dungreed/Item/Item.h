@@ -41,6 +41,7 @@ public:
 	const bool& GetPlayingAnim() { return _playingAnim; }
 	const bool& GetIsActive() { return _isActive; }
 	const bool& GetReversed() { return _reversed; }
+	const 
 	const Item_Type& GetItemType() { return _itemType; }
 	virtual shared_ptr<Quad> GetTexture() { return _texture; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }

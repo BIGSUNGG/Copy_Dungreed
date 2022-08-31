@@ -32,6 +32,7 @@ public:
 	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
 	void AddEffect(shared_ptr<Effect> effect);
 	void AddPlayer(shared_ptr<Player> player);
+	void AddDebugCollider(shared_ptr<Collider> collider) { _debugCollider.push_back(collider); }
 
 	bool& GetPause() { return _pause; }
 	bool& GetRenderTexture() { return _renderTexture; }
@@ -52,6 +53,7 @@ private:
 
 	vector<vector<shared_ptr<Object>>> _objects;
 	vector<vector<shared_ptr<Object>>> _optimized;
+	vector<shared_ptr<Collider>> _debugCollider;
 	shared_ptr<Player> _player;
 
 	bool _renderTexture = true;

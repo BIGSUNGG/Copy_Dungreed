@@ -83,6 +83,14 @@ void Creature::Death()
 	GAME->AddEffect(dieEffect);
 }
 
+void Creature::Attack()
+{
+	if (_weapon != nullptr)
+		_weapon->Attack();
+
+	_anim->ChangeAnimation(State::ATTACK);
+}
+
 void Creature::CollisionEvent(shared_ptr<Object> object)
 {
 	switch (object->GetType())

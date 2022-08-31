@@ -75,7 +75,15 @@ void Quad::Refresh()
 {
     _size = _texture->GetSize();
 
+    auto temp = _vertices;
     CreateVertices();
+
+    for (int i = 0; i < _vertices.size(); i++)
+    {
+        _vertices[i].uv.x = temp[i].uv.x;
+        _vertices[i].uv.y = temp[i].uv.y;
+    }
+
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
     _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
 }

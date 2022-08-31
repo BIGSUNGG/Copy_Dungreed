@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="Dungreed\Ect\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Ect\Status\Status.h" />
+    <ClInclude Include="Dungreed\Item\Weapon\Melee\Effect_In_Melee\Effect_In_Melee.h" />
     <ClInclude Include="Framework\Animation\Animation.h" />
     <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
     <ClInclude Include="Dungreed\Object\BackGround\BackGround.h" />
@@ -180,7 +181,7 @@
     <ClInclude Include="Framework\Collider\Collider.h" />
     <ClInclude Include="Framework\Collider\CircleCollider.h" />
     <ClInclude Include="Framework\Collider\RectCollider.h" />
-    <ClInclude Include="Object\Bagic_Object\Quad.h" />
+    <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
     <ClInclude Include="Framework\Render\ConstantBuffer.h" />
@@ -200,7 +201,7 @@
     <ClInclude Include="Framework\State\StateManager.h" />
     <ClInclude Include="Framework\Render\Shader.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
-    <ClInclude Include="Object\Bagic_Object\Sprite.h" />
+    <ClInclude Include="Object\Sprite.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
@@ -216,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\Ect\Bullet\Bullet.cpp" />
+    <ClCompile Include="Dungreed\Item\Weapon\Melee\Effect_In_Melee\Effect_In_Melee.cpp" />
     <ClCompile Include="Framework\Animation\Animation.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
     <ClCompile Include="Dungreed\Object\BackGround\BackGround.cpp" />
@@ -241,7 +243,7 @@
     <ClCompile Include="Framework\Collider\Collider.cpp" />
     <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
-    <ClCompile Include="Object\Bagic_Object\Quad.cpp" />
+    <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
     <ClCompile Include="Framework\Math\Vector2.cpp" />
     <ClCompile Include="Framework\Render\ConstantBuffer.cpp" />
@@ -272,7 +274,7 @@
     <ClCompile Include="Framework\Render\Shader.cpp" />
     <ClCompile Include="Framework\Render\ShaderManager.cpp" />
     <ClCompile Include="Framework\Render\Texture.cpp" />
-    <ClCompile Include="Object\Bagic_Object\Sprite.cpp" />
+    <ClCompile Include="Object\Sprite.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\Tile.cpp" />
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\UI\UI.cpp" />

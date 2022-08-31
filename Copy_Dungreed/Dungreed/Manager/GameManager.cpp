@@ -49,6 +49,11 @@ void GameManager::Render()
 			object->Render();
 		}
 	}
+
+	for (auto& collider : _debugCollider)
+	{
+		collider->Render();
+	}
 }
 
 void GameManager::PostRender()

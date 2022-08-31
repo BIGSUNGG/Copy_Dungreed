@@ -370,6 +370,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		{
 		case 0:
 			object = make_shared<Monster>(level, num);
+
 			object->SetAnimation();
 			object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(1, 0.3f);
 			object->GetAnimation()->_animState[Creature::State::IDLE] = Animation::Anim_State::LOOP;
@@ -385,6 +386,8 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk5.png");
 
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
+			object->SetTexture(texture);
+			object->SetWeapon(GetEnemyWeapon(0, 0));
 			break;
 		case 1:
 			object = make_shared<Monster>(level, num);
@@ -555,6 +558,30 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 
 			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
+		case 1:
+			effect->SetAnimation();
+			effect->GetAnimation()->GetRefreshSize() = true;
+
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(15, 0.05f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx00.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx01.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx02.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx03.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx04.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx05.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx06.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx07.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx08.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx09.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx10.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx11.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx12.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx13.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Creature/Spawn/MagicCircleFx14.png");
+
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
 		default:
 			break;
 		}
@@ -701,6 +728,85 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 
 	if (weapon->GetTexture() == nullptr)
 		weapon->SetTexture(texture);
+
+	if (weapon->GetAnimation() != nullptr)
+	{
+		weapon->GetAnimation()->SetTexture(texture);
+	}
+	return weapon;
+}
+
+shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
+{
+	shared_ptr<Weapon> weapon;
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	switch (type)
+	{
+	case Map::LEVEL_00:
+		switch (num)
+		{
+		case 0:
+			weapon = make_shared<Effect_In_Melee>();
+			weapon->SetAnimation();
+			weapon->GetAnimation()->GetRefreshSize() = true;
+			weapon->SetAttackDelay(1.0f);
+
+			weapon->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(1, 0.1f);
+			weapon->GetAnimation()->_animState[Creature::State::IDLE] = Animation::Anim_State::END;
+			weapon->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword00.png");
+
+			weapon->GetAnimation()->_animSpeed[Creature::State::ATTACK] = vector<float>(12, 0.1f);
+			weapon->GetAnimation()->_animState[Creature::State::ATTACK] = Animation::Anim_State::END;
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword00.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword01.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword02.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword03.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword04.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword05.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword06.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword07.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword08.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword09.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword10.png");
+			weapon->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword11.png");
+
+			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		default:
+			break;
+		}
+		break;
+	case Map::LEVEL_01:
+		break;
+	case Map::LEVEL_02:
+		break;
+	case Map::LEVEL_03:
+		break;
+	case Map::LEVEL_04:
+		break;
+	case Map::LEVEL_05:
+		break;
+	case Map::LEVEL_06:
+		break;
+	case Map::LEVEL_07:
+		break;
+	case Map::PUBLIC:
+		break;
+	default:
+		break;
+	}
+
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	if (weapon->GetTexture() == nullptr)
+		weapon->SetTexture(texture);
+
+	if (weapon->GetAnimation() != nullptr)
+	{
+		weapon->GetAnimation()->SetTexture(texture);
+	}
 
 	return weapon;
 }

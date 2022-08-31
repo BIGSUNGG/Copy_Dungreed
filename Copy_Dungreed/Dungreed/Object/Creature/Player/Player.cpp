@@ -16,6 +16,8 @@ void Player::Update()
 	MouseEvent();
 
 	InputEvent();
+	
+	_weapon->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle() * PI);
 
 	Creature::Update();
 }
@@ -41,14 +43,14 @@ void Player::DustEffect()
 
 void Player::DoubleJumpEffect()
 {
-	shared_ptr<Effect> dust = MAKE_PLAYER_EFFECT(1);
-	dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
-	dust->GetTexture()->SetBottom(_texture->Bottom());
+	shared_ptr<Effect> doubleJump = MAKE_PLAYER_EFFECT(1);
+	doubleJump->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+	doubleJump->GetTexture()->SetBottom(_texture->Bottom());
 
 	if (_reversed)
-		dust->GetTexture()->ReverseToX();
+		doubleJump->GetTexture()->ReverseToX();
 
-	GAME->AddEffect(dust);
+	GAME->AddEffect(doubleJump);
 }
 
 void Player::MouseEvent()
@@ -81,7 +83,7 @@ void Player::MovementEvent()
 		_anim->ChangeAnimation(State::IDLE);
 	}
 
-	if (_velocity.y != 0)
+	if (_velocity.y != 0 || _dashCurSpeed > 0.0f)
 	{
 		_anim->ChangeAnimation(State::JUMP);
 		_isFalling = true;
@@ -98,6 +100,7 @@ void Player::MovementEvent()
 	if (_dashCurSpeed > 0.0f)
 	{
 		_movement += (_dashDirection * _dashCurSpeed);
+		_isFalling = true;
 
 		if (_dashSlow)
 		{
@@ -149,12 +152,6 @@ void Player::InputEvent()
 	}
 	if (KEY_DOWN(VK_RBUTTON))
 		Dash();
-}
-
-void Player::Attack()
-{
-	if(_weapon != nullptr)
-		_weapon->Attack();
 }
 
 void Player::Dash()

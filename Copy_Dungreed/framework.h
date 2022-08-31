@@ -105,9 +105,8 @@ using namespace std;
 #include "Framework/Animation/Animation.h"
 
 // Object
-// Bagic Obj
-#include "Object/Bagic_Object/Quad.h"
-#include "Object/Bagic_Object/Sprite.h"
+#include "Object/Quad.h"
+#include "Object/Sprite.h"
 
 // Status
 #include "Dungreed/Ect/Status/Status.h"
@@ -116,6 +115,7 @@ using namespace std;
 #include "Dungreed/Item/Item.h"
 #include "Dungreed/Item/Weapon/Weapon.h"
 #include "Dungreed/Item/Weapon/Melee/Melee.h"
+#include "Dungreed/Item/Weapon/Melee/Effect_In_Melee/Effect_In_Melee.h"
 #include "Dungreed/Ect/Bullet/Bullet.h"
 #include "Dungreed/Item/Weapon/Gun/Gun.h"
 

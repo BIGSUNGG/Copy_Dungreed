@@ -11,6 +11,9 @@ Item::~Item()
 
 void Item::Update()
 {
+	if(_anim != nullptr)
+		_anim->Update();
+
 	_texture->Update();
 }
 

@@ -49,9 +49,9 @@ void Gun::Attack()
 {
 	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, 0);
 	_bullet->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
-	_bullet->GetTexture()->GetTransform()->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (0.5f * PI);
+	_bullet->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
-	Vector2 direction = MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos();
+	Vector2 direction;// = _showDirection - _owner.lock()->GetTexture()->GetTransform()->GetPos();
 	direction.Normalize();
 
 	_bullet->SetDirection(direction);
@@ -72,6 +72,8 @@ void Gun::Attack()
 
 	if (addBullet == false)
 		_bullets.emplace_back(_bullet);
+
+	Weapon::Attack();
 }
 
 void Gun::AttackEffect()
@@ -83,7 +85,7 @@ void Gun::SetWeapon()
 	if (_owner.lock() != nullptr)
 	{
 		_springArm->GetPos() = _offset + _owner.lock()->GetTexture()->GetTransform()->GetPos();
-		_ownerFollower->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle();
+		_ownerFollower->GetAngle() = _showDirection;
 		_attackOfsset->GetPos().x = _weaponLength;
 		_texture->GetTransform()->GetPos().x = _weaponLength;
 
@@ -97,7 +99,7 @@ void Gun::SetWeapon()
 				_offset.x *= -1;
 				_reversed = true;
 			}
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() + (_appendAngle[_index] * PI);
+			angle = _showDirection + (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
@@ -108,7 +110,7 @@ void Gun::SetWeapon()
 				_offset.x *= -1;
 				_reversed = false;
 			}
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (_appendAngle[_index] * PI);
+			angle = _showDirection - (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 

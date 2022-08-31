@@ -14,10 +14,10 @@ Melee::~Melee()
 
 void Melee::Attack()
 {
-	if (_attackedTime < _attackDelay)
+	if (_attackDelayTime < _attackDelay)
 		return;
 
-	_attackedTime = 0.0f;
+	_attackDelayTime = 0.0f;
 
 	++_index;
 
@@ -26,9 +26,14 @@ void Melee::Attack()
 
 	AttackEffect();
 
+	Weapon::Attack();
+}
+
+void Melee::CheckAttack()
+{
 	shared_ptr<Collider> _attack = make_shared<RectCollider>(_attackRange);
-	_attack->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
-	_attack->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (0.5f * PI);
+	_attack->GetTransform()->GetPos() = _springArm->GetWorldPos();
+	_attack->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 	_attack->Update();
 
 	vector<shared_ptr<Object>> _collisions = GAME->GetCollisions(_attack, Object::Object_Type::CREATURE);
@@ -37,7 +42,8 @@ void Melee::Attack()
 		if (enemy != _owner.lock())
 		{
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
-			creature->Damaged(_status);
+			if (creature->GetCreatureType() != _owner.lock()->GetCreatureType())
+				GiveDamage(creature);
 		}
 	}
 }
@@ -46,7 +52,7 @@ void Melee::AttackEffect()
 {
 	shared_ptr<Effect> swing = MAKE_WEAPON_EFFECT(_weaponType, 0);
 	swing->GetTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
-	swing->GetTexture()->GetTransform()->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (0.5f * PI);
+	swing->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
 	_attackRange = swing->GetTexture()->GetHalfSize();
 
@@ -61,7 +67,7 @@ void Melee::SetWeapon()
 	if (_owner.lock() != nullptr)
 	{
 		_springArm->GetPos() = _offset + _owner.lock()->GetTexture()->GetTransform()->GetPos();
-		_ownerFollower->GetAngle() = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle();
+		_ownerFollower->GetAngle() = _showDirection;
 		_attackOfsset->GetPos().x = _weaponLength;
 
 		float angle;
@@ -75,7 +81,7 @@ void Melee::SetWeapon()
 				_reversed = true;
 			}
 			_texture->GetTransform()->GetPos().y = -_weaponLength;
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() + (_appendAngle[_index] * PI);
+			angle = _showDirection + (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
@@ -87,7 +93,7 @@ void Melee::SetWeapon()
 				_reversed = false;
 			}
 			_texture->GetTransform()->GetPos().y = _weaponLength;
-			angle = (MOUSE_WORLD_POS - _owner.lock()->GetTexture()->GetTransform()->GetPos()).Angle() - (_appendAngle[_index] * PI);
+			angle = _showDirection - (_appendAngle[_index] * PI);
 			_springArm->GetAngle() = angle;
 		}
 

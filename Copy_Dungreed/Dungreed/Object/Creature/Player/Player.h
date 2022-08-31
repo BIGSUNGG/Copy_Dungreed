@@ -13,7 +13,6 @@ public:
 	virtual void MovementEvent();
 	virtual void InputEvent();
 
-	virtual void Attack();
 	virtual void Dash();
 	virtual void Jump();
 
