@@ -10,6 +10,7 @@ public:
 	virtual void SearchTarget();
 	virtual void AI();
 	virtual void Jump();
+	virtual bool Damaged(Status status) override;
 
 	virtual void SpawnEffect();
 

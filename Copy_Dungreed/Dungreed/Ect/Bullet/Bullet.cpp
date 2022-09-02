@@ -47,13 +47,15 @@ void Bullet::Attack()
 	vector<shared_ptr<Object>> _collisions = GAME->GetCollisions(_collider, Object::Object_Type::CREATURE);
 	for (auto& enemy : _collisions)
 	{
-		if(enemy != _weapon.lock()->GetOwner())
+		if (enemy != _weapon.lock()->GetOwner())
 		{
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
 			// TODO : 매개변수 제대로 된 값 넣어주기
-			creature->Damaged(Status());
-			DestroyEvent();
-			return;
+			if (creature->Damaged(Status()))
+			{
+				DestroyEvent();
+				return;
+			}
 		}
 	}
 }

@@ -108,9 +108,15 @@ void Monster::AI()
 void Monster::Jump()
 {
 	if (_isFalling == false)
-	{
 		_jumpPower = _jumpPowerMax;
-	}
+}
+
+bool Monster::Damaged(Status status)
+{
+	if(_spawn == false)
+		return false;
+
+	Creature::Damaged(status);
 }
 
 void Monster::SpawnEffect()

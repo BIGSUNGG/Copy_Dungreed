@@ -16,11 +16,12 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	virtual void Damaged(Status status);
+	virtual bool Damaged(Status status);
 
 	virtual void MoveCharacter();
 	virtual void Death();
 	virtual void Attack();
+
 	virtual void CollisionEvent(shared_ptr<Object> objects);
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);

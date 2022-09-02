@@ -45,12 +45,13 @@ void Creature::Render()
 		Object::Render();
 }
 
-void Creature::Damaged(Status status)
+bool Creature::Damaged(Status status)
 {
 	_status._hp -= _status._atk;
-
 	if (_status._hp <= 0)
 		Death();
+
+	return true;
 }
 
 void Creature::MoveCharacter()
