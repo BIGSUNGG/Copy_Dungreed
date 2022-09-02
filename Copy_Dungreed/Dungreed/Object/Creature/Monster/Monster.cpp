@@ -45,7 +45,7 @@ void Monster::Update()
 
 void Monster::Render()
 {
-	if (_spawn)
+	if (_spawn || GAME->GetObjectUpdate() == false)
 		Creature::Render();
 }
 
