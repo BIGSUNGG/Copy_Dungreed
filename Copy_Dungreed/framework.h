@@ -114,19 +114,21 @@ using namespace std;
 // ECT
 #include "Dungreed/Ect/Bullet/Bullet.h"
 
-// Item
-#include "Dungreed/Item/Item.h"
-#include "Dungreed/Item/Weapon/Weapon.h"
-#include "Dungreed/Item/Weapon/Melee/Melee.h"
-#include "Dungreed/Item/Weapon/Melee/Effect_In_Melee/Effect_In_Melee.h"
-#include "Dungreed/Item/Weapon/Gun/Gun.h"
-
 // Object
 #include "Dungreed/Object/Object.h"
 #include "Dungreed/Object/BackGround/BackGround.h"
 #include "Dungreed/Object/Wall/Wall.h"
 #include "Dungreed/Object/Tile/Tile.h"
 #include "Dungreed/Object/Effect/Effect.h"
+
+// Item
+#include "Dungreed/Object/Item/Item.h"
+#include "Dungreed/Object/Item/Weapon/Weapon.h"
+#include "Dungreed/Object/Item/Weapon/Melee/Melee.h"
+#include "Dungreed/Object/Item/Weapon/Melee/Effect_In_Melee/Effect_In_Melee.h"
+#include "Dungreed/Object/Item/Weapon/Gun/Gun.h"
+
+// Creature
 #include "Dungreed/Object/Creature/Creature.h"
 #include "Dungreed/Object/Creature/Player/Player.h"
 #include "Dungreed/Object/Creature/Monster/Monster.h"

@@ -387,7 +387,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
 			object->SetTexture(texture);
-			object->SetWeapon(GetEnemyWeapon(0, 0));
+			object->AddWeapon(GetEnemyWeapon(0, 0));
 			break;
 		case 1:
 			object = make_shared<Monster>(level, num);

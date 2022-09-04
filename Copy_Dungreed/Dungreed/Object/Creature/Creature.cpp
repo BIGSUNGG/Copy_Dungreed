@@ -5,6 +5,7 @@ Creature::Creature(int level, int num)
 	: Object(level, num)
 {
 	_objectType = Object::Object_Type::CREATURE;
+	_weaponSlot.resize(1);
 }
 
 void Creature::Update()
@@ -24,25 +25,33 @@ void Creature::Update()
 
 	Object::Update();
 
-	if (_weapon != nullptr)
-		_weapon->Update();
+	for (auto& weapon : _weaponSlot)
+	{
+		if (weapon != nullptr)
+			weapon->Update();
+	}
 }
 
 void Creature::Render()
 {
-	if (_weapon != nullptr)
+	if (_weaponSlot[_curWeaponSlot] != nullptr)
 	{
-		bool weaponRender = _weapon->GetFastRender();
+		bool weaponRender = _weaponSlot[_curWeaponSlot]->GetFastRender();
 		if (!weaponRender)
-			_weapon->Render();
+			_weaponSlot[_curWeaponSlot]->Render();
 
 		Object::Render();
 
 		if (weaponRender)
-			_weapon->Render();
+			_weaponSlot[_curWeaponSlot]->Render();
 	}
 	else
 		Object::Render();
+}
+
+void Creature::PostRender()
+{
+	Object::PostRender();
 }
 
 bool Creature::Damaged(Status status)
@@ -86,8 +95,8 @@ void Creature::Death()
 
 void Creature::Attack()
 {
-	if (_weapon != nullptr)
-		_weapon->Attack();
+	if (_weaponSlot[_curWeaponSlot] != nullptr)
+		_weaponSlot[_curWeaponSlot]->Attack();
 
 	_anim->ChangeAnimation(State::ATTACK);
 }
@@ -164,8 +173,15 @@ void Creature::SetOriginalPos(Vector2 pos)
 }
 
 
-void Creature::SetWeapon(shared_ptr<Weapon> weapon)
+void Creature::AddWeapon(shared_ptr<Weapon> weapon)
 {
-	_weapon = weapon;
-	_weapon->SetOwner(shared_from_this());
+	for (auto& slot : _weaponSlot)
+	{
+		if (slot == nullptr)
+		{
+			weapon->SetOwner(shared_from_this());
+			slot = weapon;
+			break;
+		}
+	}
 }

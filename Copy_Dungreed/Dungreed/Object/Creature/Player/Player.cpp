@@ -5,6 +5,7 @@ Player::Player(int level, int num)
 	: Creature(level, num)
 {
 	_creatureType = PLAYER;
+	_weaponSlot.resize(2);
 }
 
 void Player::Update()
@@ -17,7 +18,7 @@ void Player::Update()
 
 	InputEvent();
 	
-	_weapon->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle());
+	_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle());
 
 	Creature::Update();
 }
@@ -123,9 +124,8 @@ void Player::InputEvent()
 	if (_dashCurSpeed <= 0)
 	{
 		if (KEY_DOWN('W'))
-		{
 			Jump();
-		}
+
 		if (KEY_PRESS('S'))
 		{
 			if (KEY_DOWN(VK_SPACE))
@@ -134,24 +134,21 @@ void Player::InputEvent()
 				_passFloor = false;
 		}
 		else if (KEY_UP('S'))
-		{
 			_passFloor = false;
-		}
+
 		if (KEY_PRESS('A'))
-		{
 			_movement.x -= _speed;
-		}
 		if (KEY_PRESS('D'))
-		{
 			_movement.x += _speed;
-		}
 	}
 	if (KEY_DOWN(VK_LBUTTON))
-	{
 		Attack();
-	}
 	if (KEY_DOWN(VK_RBUTTON))
 		Dash();
+	if (KEY_DOWN('1'))
+		_curWeaponSlot = 0;
+	if (KEY_DOWN('2'))
+		_curWeaponSlot = 1;
 }
 
 void Player::Dash()

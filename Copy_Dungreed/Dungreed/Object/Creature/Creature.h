@@ -15,6 +15,7 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
+	virtual void PostRender() override;
 
 	virtual bool Damaged(Status status);
 
@@ -33,12 +34,13 @@ public:
 	Vector2& GetBeforeMove() { return _beforeMove; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 
-	virtual void SetWeapon(shared_ptr<Weapon> weapon);
+	virtual void AddWeapon(shared_ptr<Weapon> weapon);
 	virtual void SetOriginalPos(Vector2 pos) override;
 	
 protected:
 	Creature_Type _creatureType = ENEMY;
-	shared_ptr<Weapon> _weapon;
+	vector<shared_ptr<Weapon>> _weaponSlot;
+	int _curWeaponSlot = 0;
 
 	Vector2 _movement;
 	Vector2 _beforeMove;

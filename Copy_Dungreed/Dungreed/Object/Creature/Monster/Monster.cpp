@@ -20,7 +20,7 @@ void Monster::Update()
 		if (_spawn == true)
 			AI();
 
-		if (_weapon != nullptr)
+		if (_weaponSlot[_curWeaponSlot] != nullptr)
 		{
 			float angle;
 
@@ -29,7 +29,7 @@ void Monster::Update()
 			else
 				angle =  1 * PI;
 
-			_weapon->SetShowTo(angle);
+			_weaponSlot[_curWeaponSlot]->SetShowTo(angle);
 		}
 
 		if (_spawn == false && _target.lock() != nullptr)
@@ -67,7 +67,7 @@ void Monster::SearchTarget()
 
 void Monster::AI()
 {
-	if (_target.lock() == nullptr || _weapon->GetAnimation()->GetCurAnim() == Creature::State::ATTACK)
+	if (_target.lock() == nullptr || _weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::State::ATTACK)
 		return;
 
 	float length = abs(_target.lock()->GetTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);

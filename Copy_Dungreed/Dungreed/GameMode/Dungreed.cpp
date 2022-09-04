@@ -14,7 +14,8 @@ Dungreed::Dungreed()
 	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;
 	_player->GetTexture()->SetBottom(_map->GetStartPos().y);
 	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
-	_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
+	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
+	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->AddPlayer(_player);
 	GAME->Update();
@@ -66,12 +67,12 @@ void Dungreed::ImGuiRender()
 	if (ImGui::CollapsingHeader("Player"))
 	{
 		if(ImGui::Button("MELEE"))
-			_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
+			_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 
 		ImGui::SameLine();
 
 		if(ImGui::Button("GUN"))
-			_player->SetWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+			_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
