@@ -25,6 +25,8 @@ public:
 	void Load();
 	void Reset();
 
+	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
+
 	Vector2& GetStartPos() { return _startPos; }
 	Vector2& GetLeftBottom() { return _leftBottom; }
 	Vector2& GetRightTop() { return _rightTop; }
@@ -32,6 +34,7 @@ public:
 	const int& GetObjectCount() { return _objectCount; }
 
 private:
+	vector<vector<shared_ptr<Object>>> _objects;
 	int _objectCount = 0;
 
 	Vector2 _startPos;

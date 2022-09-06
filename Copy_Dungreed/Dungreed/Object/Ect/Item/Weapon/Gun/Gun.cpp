@@ -5,42 +5,14 @@ Gun::Gun()
 {
 	_weaponType = GUN;
 	_offset = { 40,-10 };
-
-	_bullets.reserve(10);
 }
 
 Gun::~Gun()
 {
 }
 
-void Gun::Update()
-{
-	Weapon::Update();
-
-	for (auto& bullet : _bullets)
-	{
-		if (bullet == nullptr)
-			continue;
-
-		if (bullet->GetIsActive() == false)
-		{
-			bullet = nullptr;
-			continue;
-		}
-
-		bullet->Update();
-	}
-}
-
 void Gun::Render()
 {
-	for (auto& bullet : _bullets)
-	{
-		if (bullet == nullptr)
-			continue;
-
-		bullet->Render();
-	}
 
 	Weapon::Render();
 }
@@ -63,18 +35,7 @@ void Gun::Attack()
 
 	bool addBullet = false;
 
-	for (auto& bullet : _bullets)
-	{
-		if (bullet != nullptr)
-			continue;
-
-		bullet = _bullet;
-		addBullet = true;
-		break;
-	}
-
-	if (addBullet == false)
-		_bullets.emplace_back(_bullet);
+	GAME->AddEctObject(_bullet);
 
 	Weapon::Attack();
 }

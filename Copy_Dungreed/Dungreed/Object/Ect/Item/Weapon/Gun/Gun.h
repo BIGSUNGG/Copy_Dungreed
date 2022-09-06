@@ -5,17 +5,14 @@ public:
 	Gun();
 	virtual ~Gun();
 
-	virtual void Update() override;
 	virtual void Render() override;
 
 	virtual void Attack() override;
 
 	virtual void AttackEffect();
 
-	virtual void SetWeapon() override; 
+	virtual void SetWeapon() override;
 
 protected:
-	vector<shared_ptr<Bullet>> _bullets;
 	float _bulletSpeed = 1000.0f;
 };
-

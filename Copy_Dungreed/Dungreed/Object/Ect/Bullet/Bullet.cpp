@@ -11,6 +11,12 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
+	if (_weapon.lock() == nullptr)
+	{
+		DestroyEvent();
+		return;
+	}
+
 	_runTime += DELTA_TIME;
 
 	if (_runTime >= _runTimeMax)
@@ -21,20 +27,9 @@ void Bullet::Update()
 
 	_texture->GetTransform()->GetPos() += (_direction * (_speed * DELTA_TIME));
 
-	_texture->Update();
-	_collider->Update();
+	Object::Update();
 
 	Attack();
-}
-
-void Bullet::Render()
-{
-	_texture->Render();
-}
-
-void Bullet::PostRender()
-{
-	_collider->Render();
 }
 
 void Bullet::ReverseTexture()
@@ -63,22 +58,4 @@ void Bullet::Attack()
 void Bullet::DestroyEvent()
 {
 	_isActive = false;
-}
-
-void Bullet::SetCollider()
-{
-	_collider = make_shared<RectCollider>(_texture->GetHalfSize());
-	_collider->SetParent(_texture->GetTransform());
-}
-
-void Bullet::SetAnimation()
-{
-	_anim = make_shared<Animation>();
-	_playingAnim = true;
-}
-
-void Bullet::SetTexture(shared_ptr<Quad> texture)
-{
-	_texture = texture;
-	SetCollider();
 }

@@ -16,7 +16,7 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 
 	Vector2& pos = addObject->GetTexture()->GetTransform()->GetPos();
 
-	for (auto& objects : GET_OBJECTS[type])
+	for (auto& objects : _objects[type])
 	{
 		if (addObject->GetTexture()->GetTransform()->GetPos() ==
 			objects->GetTexture()->GetTransform()->GetPos())
@@ -26,21 +26,24 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 	}
 
 	_objectCount++;
-
-	GAME->AddObject(addObject, type, toFront);
+	
+	if (toFront)
+		_objects[type].emplace(_objects[type].begin(), addObject);
+	else
+		_objects[type].emplace_back(addObject);
 }
 
 void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 {
 	if (toFront)
 	{
-		for (auto objects = GET_OBJECTS[type].begin(); objects != GET_OBJECTS[type].end(); objects++)
+		for (auto objects = _objects[type].begin(); objects != _objects[type].end(); objects++)
 		{
 			shared_ptr<Quad> object = objects->get()->GetTexture();
 			if (pos.x > object->Left() && pos.x < object->Right() &&
 				pos.y < object->Top() && pos.y > object->Bottom())
 			{
-				GET_OBJECTS[type].erase(objects);
+				_objects[type].erase(objects);
 				_objectCount--;
 				break;
 			}
@@ -48,14 +51,14 @@ void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 	}
 	else
 	{
-		for (int i = GET_OBJECTS[type].size() - 1; i > 0; i--)
+		for (int i = _objects[type].size() - 1; i > 0; i--)
 		{
-			shared_ptr<Quad> object = GET_OBJECTS[type][i]->GetTexture();
+			shared_ptr<Quad> object = _objects[type][i]->GetTexture();
 			if (pos.x > object->Left() && pos.x < object->Right() &&
 				pos.y < object->Top() && pos.y > object->Bottom())
 			{
-				auto iter = GET_OBJECTS[type].begin() + i;
-				GET_OBJECTS[type].erase(iter);
+				auto iter = _objects[type].begin() + i;
+				_objects[type].erase(iter);
 				_objectCount--;
 				break;
 			}
@@ -88,7 +91,7 @@ void Map::Save()
 		vector<int> mapInfo;
 
 
-		for (auto& objects : GET_OBJECTS)
+		for (auto& objects : _objects)
 		{
 			for (auto& object : objects)
 			{
@@ -157,7 +160,9 @@ void Map::Load()
 
 void Map::Reset()
 {
-	GET_OBJECTS.clear();
-	GET_OBJECTS.resize(5);
+	_objects.clear();
+	_objects.resize(6);
+	for (auto& object : _objects)
+		object.reserve(100);
 	_objectCount = 0;
 }

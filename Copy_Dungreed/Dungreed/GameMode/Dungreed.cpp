@@ -9,6 +9,7 @@ Dungreed::Dungreed()
 
 	_map = make_shared<Map>();
 	_map->Load();
+	GAME->SetMap(_map);
 
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));
 	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;

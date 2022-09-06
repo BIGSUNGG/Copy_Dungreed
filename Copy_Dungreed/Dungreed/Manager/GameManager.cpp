@@ -18,12 +18,14 @@ void GameManager::Update()
 
 	Optimize();
 	
-	for (auto& objects : _objects)
+	for (auto& objects : _curMap->GetObjects())
 	{
 		for (auto& object : objects)
 		{
 			if (object == nullptr)
 				continue;
+
+			auto temp = objects;
 
 			object->Update();
 		}
@@ -96,7 +98,7 @@ void GameManager::ImguiRender()
 
 void GameManager::Optimize()
 {
-	for (auto& objects : _objects)
+	for (auto& objects : _curMap->GetObjects())
 	{
 		for (auto& object : objects)
 		{
@@ -122,39 +124,48 @@ void GameManager::Optimize()
 	
 	_optimized.emplace_back(GetCollisions(temp, Object::CREATURE, false, false));
 	
+	_optimized.emplace_back(GetCollisions(temp, Object::ECT, false, false));
+
 	_optimized.emplace_back(GetCollisions(temp, Object::EFFECT, false, false));
 }
 
 void GameManager::AddObject(shared_ptr<Object> object, int type, bool toFront)
 {
 	if (toFront == false)
-		_objects[type].emplace_back(object);
+	{
+		bool addEffect = false;
+
+		for (auto iter = _curMap->GetObjects()[type].begin(); iter != _curMap->GetObjects()[type].end(); iter++)
+		{
+			if (iter->get() == nullptr)
+			{
+				_curMap->GetObjects()[type].emplace(iter, object);
+				addEffect = true;
+				break;
+			}
+		}
+
+		if (addEffect == false)
+			_curMap->GetObjects()[type].emplace_back(object);
+	}
 	else
-		_objects[type].emplace(_objects[type].begin(), object);
+		_curMap->GetObjects()[type].emplace(_curMap->GetObjects()[type].begin(), object);
 }
 
 void GameManager::AddEffect(shared_ptr<Effect> effect)
 {
-	bool addEffect = false;
-	
-	for (auto object = _objects[Object::Object_Type::EFFECT].begin(); object != _objects[Object::Object_Type::EFFECT].end(); object++)
-	{
-		if (object->get() == nullptr)
-		{
-			_objects[Object::Object_Type::EFFECT].emplace(object, effect);
-			addEffect = true;
-			break;
-		}
-	}
-	
-	if(addEffect == false)
-		_objects[Object::Object_Type::EFFECT].emplace_back(effect);
+	AddObject(effect, Object::Object_Type::EFFECT, false);
 }
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
 	_player = player;
-	_objects[Object::Object_Type::CREATURE].emplace_back(player);
+	_curMap->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);
+}
+
+void GameManager::AddEctObject(shared_ptr<Object> object)
+{
+	AddObject(object, Object::Object_Type::ECT, false);
 }
 
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor)
@@ -162,7 +173,7 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 	vector<shared_ptr<Object>> result;
 	collider->Update();
 
-	for (auto& object : _objects[type])
+	for (auto& object : _curMap->GetObjects()[type])
 	{
 		if (object == nullptr || collider == object->GetCollider())
 			continue;
@@ -183,7 +194,7 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 {
 	vector<shared_ptr<Object>> result;
 
-	for (auto& object : _objects[type])
+	for (auto& object : _curMap->GetObjects()[type])
 	{
 		if (object == nullptr)
 			continue;

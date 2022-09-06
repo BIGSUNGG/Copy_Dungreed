@@ -6,6 +6,7 @@ MapEditor::MapEditor()
 	_modeType = MAP_EDITOR;
 
 	_map = make_shared<Map>();
+	GAME->SetMap(_map);
 
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 

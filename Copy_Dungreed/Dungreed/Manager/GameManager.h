@@ -32,6 +32,7 @@ public:
 	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
 	void AddEffect(shared_ptr<Effect> effect);
 	void AddPlayer(shared_ptr<Player> player);
+	void AddEctObject(shared_ptr<Object> object);
 	void AddDebugCollider(shared_ptr<Collider> collider) { _debugCollider.push_back(collider); }
 
 	bool& GetPause() { return _pause; }
@@ -41,8 +42,9 @@ public:
 	bool& GetObjectUpdate() { return _objectUpdate; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
-	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
 	shared_ptr<Creature> GetPlayer() { return _player; }
+
+	void SetMap(shared_ptr<Map> addedMap) { _curMap = addedMap; }
 
 private:
 	GameManager();
@@ -51,7 +53,7 @@ private:
 	
 	float _maxDelay = 0.1f;
 
-	vector<vector<shared_ptr<Object>>> _objects;
+	shared_ptr<Map> _curMap;
 	vector<vector<shared_ptr<Object>>> _optimized;
 	vector<shared_ptr<Collider>> _debugCollider;
 	shared_ptr<Player> _player;

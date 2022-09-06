@@ -103,6 +103,16 @@ void Monster::AI()
 
 		Attack();
 	}
+	else
+	{
+		if (length >= _targetDistanceJumping)
+		{
+			if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
+				_movement.x += _speed;
+			else
+				_movement.x -= _speed;
+		}
+	}
 }
 
 void Monster::Jump()

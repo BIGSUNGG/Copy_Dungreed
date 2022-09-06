@@ -111,9 +111,6 @@ using namespace std;
 // Status
 #include "Dungreed/Ect/Status/Status.h"
 
-// ECT
-#include "Dungreed/Ect/Bullet/Bullet.h"
-
 // Object
 #include "Dungreed/Object/Object.h"
 #include "Dungreed/Object/BackGround/BackGround.h"
@@ -121,12 +118,16 @@ using namespace std;
 #include "Dungreed/Object/Tile/Tile.h"
 #include "Dungreed/Object/Effect/Effect.h"
 
+// ECT
+#include "Dungreed/Object/Ect/Ect.h"
+#include "Dungreed/Object/Ect/Bullet/Bullet.h"
+
 // Item
-#include "Dungreed/Object/Item/Item.h"
-#include "Dungreed/Object/Item/Weapon/Weapon.h"
-#include "Dungreed/Object/Item/Weapon/Melee/Melee.h"
-#include "Dungreed/Object/Item/Weapon/Melee/Effect_In_Melee/Effect_In_Melee.h"
-#include "Dungreed/Object/Item/Weapon/Gun/Gun.h"
+#include "Dungreed/Object/Ect/Item/Item.h"
+#include "Dungreed/Object/Ect/Item/Weapon/Weapon.h"
+#include "Dungreed/Object/Ect/Item/Weapon/Melee/Melee.h"
+#include "Dungreed/Object/Ect/Item/Weapon/Melee/Effect_In_Melee/Effect_In_Melee.h"
+#include "Dungreed/Object/Ect/Item/Weapon/Gun/Gun.h"
 
 // Creature
 #include "Dungreed/Object/Creature/Creature.h"

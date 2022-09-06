@@ -8,6 +8,7 @@ public:
 		WALL,
 		TILE,
 		CREATURE,
+		ECT,
 		EFFECT,
 	};
 

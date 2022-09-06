@@ -3,6 +3,7 @@
 
 Item::Item()
 {
+	_objectType = Object_Type::ECT;
 }
 
 Item::~Item()
