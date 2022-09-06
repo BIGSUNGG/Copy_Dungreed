@@ -18,8 +18,6 @@ void Player::Update()
 
 	InputEvent();
 	
-	_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle());
-
 	Creature::Update();
 }
 
@@ -67,6 +65,8 @@ void Player::MouseEvent()
 	{
 		ReverseTexture();
 	}
+
+	_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle());
 }
 
 void Player::MovementEvent()
@@ -177,15 +177,3 @@ void Player::Jump()
 	}
 }
 
-void Player::TileBlockCollision(shared_ptr<Tile> tile)
-{
-	if (_passFloor == false)
-	{
-		if (tile->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
-		{
-			_texture->SetBottom(tile->GetTexture()->Top());
-			_jumpPower = 0.0f;
-			_passFloor = true;
-		}
-	}
-}

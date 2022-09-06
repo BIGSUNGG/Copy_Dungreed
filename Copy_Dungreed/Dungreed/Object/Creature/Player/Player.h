@@ -16,8 +16,6 @@ public:
 	virtual void Dash();
 	virtual void Jump();
 
-	virtual void TileBlockCollision(shared_ptr<Tile> tile) override;
-
 protected:
 	bool _doubleJumped = false;
 

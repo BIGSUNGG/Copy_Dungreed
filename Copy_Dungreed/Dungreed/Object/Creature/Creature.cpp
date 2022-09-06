@@ -52,6 +52,8 @@ void Creature::Render()
 void Creature::PostRender()
 {
 	Object::PostRender();
+
+	_weaponSlot[_curWeaponSlot]->PostRender();
 }
 
 bool Creature::Damaged(Status status)
@@ -136,6 +138,7 @@ void Creature::TileCollison(shared_ptr<Tile> tile)
 		TileBlockCollision(tile);
 		break;
 	case Tile::FLOOR:
+		TileFloorCollision(tile);
 		break;
 	case Tile::LEFT_STAIR:
 		break;
@@ -150,15 +153,41 @@ void Creature::TileCollison(shared_ptr<Tile> tile)
 
 void Creature::TileBlockCollision(shared_ptr<Tile> tile)
 {
+	if (_beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) >= tile->GetCollider()->Top() && _velocity.y <= 0)
+	{
+		_texture->SetBottom(tile->GetCollider()->Top());
+		_jumpPower = 0.0f;
+	}
+	else if (_beforeMove.y + (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) <= tile->GetCollider()->Bottom() && _velocity.y >= 0)
+	{
+		_texture->SetTop(tile->GetCollider()->Bottom());
+		_jumpPower = 0.0f;
+	}
+	else if (_beforeMove.x + (_texture->GetHalfSize().x * _texture->GetTransform()->GetScale().x) <= tile->GetCollider()->Left() && _velocity.x >= 0)
+	{
+		_texture->SetRight(tile->GetCollider()->Left());
+	}
+	else if (_beforeMove.x + (_texture->GetHalfSize().x * _texture->GetTransform()->GetScale().x) >= tile->GetCollider()->Right() && _velocity.x <= 0)
+	{
+		_texture->SetLeft(tile->GetCollider()->Right());
+	}
+}
+
+void Creature::TileFloorCollision(shared_ptr<Tile> tile)
+{
 	if (_passFloor == false)
 	{
-		if (tile->GetTexture()->Top() <= _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) && _velocity.y <= 0)
+		if (_beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) >= tile->GetCollider()->Top() && _velocity.y <= 0)
 		{
-			_texture->SetBottom(tile->GetTexture()->Top());
+			_texture->SetBottom(tile->GetCollider()->Top());
 			_jumpPower = 0.0f;
 			_passFloor = true;
 		}
 	}
+}
+
+void Creature::TileLeftStairCollision(shared_ptr<Tile> tile)
+{
 }
 
 void Creature::CreatureCollision(shared_ptr<Creature> creature)

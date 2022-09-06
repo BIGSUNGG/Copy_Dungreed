@@ -26,6 +26,8 @@ public:
 	virtual void CollisionEvent(shared_ptr<Object> objects);
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);
+	virtual void TileFloorCollision(shared_ptr<Tile> tile);
+	virtual void TileLeftStairCollision(shared_ptr<Tile> tile);
 	virtual void CreatureCollision(shared_ptr<Creature> creature);
 
 	const bool& GetIsFalling() { return _isFalling; }
