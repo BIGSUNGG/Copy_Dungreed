@@ -94,7 +94,7 @@ void Monster::AI()
 	{
 		_passFloor = true;
 	}
-	else if(_texture->Top() >= _target.lock()->GetTexture()->Bottom() && _texture->Bottom() <= _target.lock()->GetTexture()->Bottom())
+	else
 	{
 		if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x && _reversed == true)
 			ReverseTexture();
@@ -102,16 +102,6 @@ void Monster::AI()
 			ReverseTexture();
 
 		Attack();
-	}
-	else
-	{
-		if (length >= _targetDistanceJumping)
-		{
-			if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
-				_movement.x += _speed;
-			else
-				_movement.x -= _speed;
-		}
 	}
 }
 

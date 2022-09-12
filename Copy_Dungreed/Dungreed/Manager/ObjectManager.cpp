@@ -268,12 +268,14 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		case 23:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/TownBasic_StairL.png");
+			object->GetTileType() = Tile::Tile_Type::RIGHT_STAIR;
 			break;
 		case 24:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/TownBasic_StairL2.png");
 			break;
 		case 25:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/TownBasic_StairR.png");
+			object->GetTileType() = Tile::Tile_Type::LEFT_STAIR;
 			break;
 		case 26:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/TownBasic_StairR2.png");

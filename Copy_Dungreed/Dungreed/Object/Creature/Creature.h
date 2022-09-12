@@ -28,6 +28,7 @@ public:
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);
 	virtual void TileFloorCollision(shared_ptr<Tile> tile);
 	virtual void TileLeftStairCollision(shared_ptr<Tile> tile);
+	virtual void TileRightStairCollision(shared_ptr<Tile> tile);
 	virtual void CreatureCollision(shared_ptr<Creature> creature);
 
 	const bool& GetIsFalling() { return _isFalling; }
@@ -37,7 +38,7 @@ public:
 	Creature_Type& GetCreatureType() { return _creatureType; }
 
 	virtual void AddWeapon(shared_ptr<Weapon> weapon);
-	virtual void SetOriginalPos(Vector2 pos) override;
+	virtual void SetSpawnPos(Vector2 pos) override;
 	
 protected:
 	Creature_Type _creatureType = ENEMY;
@@ -57,6 +58,7 @@ protected:
 
 	bool _isFalling = false;
 	bool _passFloor = false;
+	bool _passTile = false;
 	bool _gravity = true;
 	float _speed = 450.0f;
 };

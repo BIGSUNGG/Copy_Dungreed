@@ -36,7 +36,7 @@ void Object::ReverseTexture()
 	SwitchBool(_reversed);
 }
 
-void Object::SetOriginalPos(Vector2 pos)
+void Object::SetSpawnPos(Vector2 pos)
 {
 	_texture->GetTransform()->GetPos() = pos;
 }

@@ -22,6 +22,10 @@ void Program::Update()
 		SwitchBool(GAME->GetRenderTexture());
 	if (KEY_DOWN(VK_F3))
 		SwitchBool(GAME->GetRenderCollider());
+	if (KEY_DOWN(VK_F4))
+		_gameMode = make_shared<MapEditor>();
+	if (KEY_DOWN(VK_F5))
+		_gameMode = make_shared<Dungreed>();
 
 	if (GAME->GetPause())
 		return;
