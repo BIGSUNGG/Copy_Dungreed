@@ -23,7 +23,7 @@ public:
 	virtual void Death();
 	virtual void Attack();
 
-	virtual void CollisionEvent(shared_ptr<Object> objects);
+	virtual void TileCollisionEvent(shared_ptr<Object> objects);
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);
 	virtual void TileFloorCollision(shared_ptr<Tile> tile);
@@ -59,6 +59,7 @@ protected:
 	bool _isFalling = false;
 	bool _passFloor = false;
 	bool _passTile = false;
+	bool _onStair = false;
 	bool _gravity = true;
 	float _speed = 450.0f;
 };

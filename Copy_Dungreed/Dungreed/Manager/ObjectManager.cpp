@@ -369,6 +369,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 {
 	shared_ptr<Creature> object = make_shared<Creature>(level, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");;
+	shared_ptr<Weapon> weapon;
 
 	switch (level)
 	{
@@ -394,7 +395,9 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
 			object->SetTexture(texture);
-			object->AddWeapon(GetEnemyWeapon(0, 0));
+			weapon = GetEnemyWeapon(0, 0);
+			object->AddWeapon(weapon);
+			
 			break;
 		case 1:
 			object = make_shared<Monster>(level, num);
@@ -610,7 +613,7 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 	return effect;
 }
 
-shared_ptr<Effect> ObjectManager::GetWeaponEffect(int type, int num)
+shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 {
 	shared_ptr<Effect> effect = make_shared<Effect>(type, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
@@ -632,6 +635,37 @@ shared_ptr<Effect> ObjectManager::GetWeaponEffect(int type, int num)
 		default:
 			break;
 		}
+		break;
+	case Weapon::GUN:
+		break;
+	case Weapon::SUB:
+		break;
+	default:
+		break;
+	}
+
+	if (texture == nullptr)
+		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	if (effect->GetTexture() == nullptr)
+		effect->SetTexture(texture);
+
+	if (effect->GetAnimation() != nullptr)
+	{
+		effect->GetAnimation()->SetTexture(texture);
+	}
+
+	return effect;
+}
+
+shared_ptr<Effect> ObjectManager::GetEnemyWeaponEffect(int type, int num)
+{
+	shared_ptr<Effect> effect = make_shared<Effect>(type, num);
+	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+
+	switch (type)
+	{
+	case Weapon::MELEE:
 		break;
 	case Weapon::GUN:
 		break;
@@ -699,6 +733,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 {
 	shared_ptr<Weapon> weapon;
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	function<shared_ptr<Effect>()> func;
 
 	switch (type)
 	{
@@ -707,6 +742,9 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		{
 		case 0:
 			weapon = make_shared<Melee>();
+			func = bind(&ObjectManager::GetPlayerWeaponEffect, this, 0, 0);
+			weapon->SetAttackRange({ 120,84 });
+			weapon->SetAttackEffect(func);
 			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
 			break;
 		default:
@@ -754,7 +792,13 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 		switch (num)
 		{
 		case 0:
-			weapon = make_shared<Effect_In_Melee>();
+			weapon = make_shared<Melee>();
+
+			weapon->SetOffset({ 70,-25 });
+			weapon->SetAppendAngle({ 0.7f });
+			weapon->SetGiveDamageDelay(0.8f);
+			weapon->SetAttackRange({ 100,100 });
+
 			weapon->SetAnimation();
 			weapon->GetAnimation()->GetRefreshSize() = true;
 			weapon->SetAttackDelay(1.0f);

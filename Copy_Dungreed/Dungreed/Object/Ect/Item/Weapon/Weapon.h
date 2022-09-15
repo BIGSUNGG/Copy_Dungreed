@@ -1,4 +1,7 @@
 #pragma once
+
+class ObjectManager;
+
 class Weapon : public Item
 {
 public:
@@ -21,9 +24,14 @@ public:
 	virtual void Damaged(const Status& status) override;
 
 	virtual void AttackEffect();
+	virtual void SetAttackEffect(function<shared_ptr<Effect>()> effect) { _attackEffect = effect; }
 
 	virtual void SetWeapon();
+	virtual void SetOffset(Vector2 offset) { _offset = offset; }
+	virtual void SetAppendAngle(vector<float> angle) { _appendAngle = angle; }
 	virtual void SetAttackDelay(float delay) { _attackDelay = delay; }
+	virtual void SetAttackRange(Vector2 range) { _attackRange = range; }
+	virtual void SetGiveDamageDelay(float delay) { _giveDamageDelay = delay; }
 	virtual void SetOwner(shared_ptr<Creature> owner) override;
 	virtual void SetShowTo(const float& showDirection) { _showDirection = showDirection; }
 
@@ -34,7 +42,6 @@ protected:
 
 	float _weaponLength = 0.0f;
 	bool _reversed = false;
-
 	shared_ptr<Transform> _springArm;
 	shared_ptr<Transform> _attackOfsset;
 	shared_ptr<Transform> _ownerFollower;
@@ -52,6 +59,8 @@ protected:
 
 	bool _attacked = false;
 	float _giveDamageDelay = 0.0f;
-	float _giveDamageDelayTime = 0.0f;
+	float _giveDamageDelayRunTime = 0.0f;
+
+	function<shared_ptr<Effect>()> _attackEffect;
 };
 

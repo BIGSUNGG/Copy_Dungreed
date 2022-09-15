@@ -154,7 +154,6 @@
   <ItemGroup>
     <ClInclude Include="Dungreed\Object\Ect\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Ect\Status\Status.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Melee\Effect_In_Melee\Effect_In_Melee.h" />
     <ClInclude Include="Dungreed\Object\Ect\Ect.h" />
     <ClInclude Include="Framework\Animation\Animation.h" />
     <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
@@ -218,7 +217,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\Object\Ect\Bullet\Bullet.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Melee\Effect_In_Melee\Effect_In_Melee.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Ect.cpp" />
     <ClCompile Include="Framework\Animation\Animation.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />

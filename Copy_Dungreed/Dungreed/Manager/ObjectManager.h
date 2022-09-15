@@ -32,7 +32,8 @@ public:
 
 	shared_ptr<Effect> GetPlayerEffect(int num);
 	shared_ptr<Effect> GetCreatureEffect(int level, int num);
-	shared_ptr<Effect> GetWeaponEffect(int level, int num);
+	shared_ptr<Effect> GetPlayerWeaponEffect(int level, int num);
+	shared_ptr<Effect> GetEnemyWeaponEffect(int level, int num);
 
 	shared_ptr<Quad> GetCursur(int num);
 

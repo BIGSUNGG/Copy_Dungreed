@@ -24,13 +24,13 @@ void Melee::Attack()
 	if (_index >= _appendAngle.size())
 		_index = 0;
 
-	AttackEffect();
-
 	Weapon::Attack();
 }
 
 void Melee::CheckAttack()
 {
+	AttackEffect();
+
 	shared_ptr<Collider> _attack = make_shared<RectCollider>(_attackRange);
 	_attack->GetTransform()->GetPos() = _springArm->GetWorldPos();
 	_attack->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
@@ -43,23 +43,24 @@ void Melee::CheckAttack()
 		{
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
 			if (creature->GetCreatureType() != _owner.lock()->GetCreatureType())
-				GiveDamage(creature);
+				GiveDamage(creature); 
 		}
 	}
 }
 
 void Melee::AttackEffect()
 {
-	shared_ptr<Effect> swing = MAKE_WEAPON_EFFECT(_weaponType, 0);
-	swing->GetTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
-	swing->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
+	if (_attackEffect == nullptr)
+		return;
 
-	_attackRange = swing->GetTexture()->GetHalfSize();
+	shared_ptr<Effect> effect = _attackEffect();
+	effect->GetTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
+	effect->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
 	if (_reversed)
-		swing->GetTexture()->ReverseToX();
+		effect->GetTexture()->ReverseToX();
 
-	GAME->AddEffect(swing);
+	GAME->AddEffect(effect);
 }
 
 void Melee::SetWeapon()

@@ -11,8 +11,8 @@ void Weapon::Update()
 	_attackDelayTime += DELTA_TIME;
 	if (_attacked)
 	{
-		_giveDamageDelayTime += DELTA_TIME;
-		if (_giveDamageDelayTime >= _giveDamageDelay)
+		_giveDamageDelayRunTime += DELTA_TIME;
+		if (_giveDamageDelayRunTime >= _giveDamageDelay)
 		{
 			CheckAttack();
 			_attacked = false;
@@ -30,7 +30,7 @@ void Weapon::Update()
 void Weapon::Attack()
 {
 	_attacked = true;
-	_giveDamageDelayTime = 0.0f;
+	_giveDamageDelayRunTime = 0.0f;
 
 	if (_anim != nullptr)
 		_anim->ChangeAnimation(Creature::State::ATTACK);

@@ -40,7 +40,8 @@ void Monster::Update()
 		}
 	}
 
-	Creature::Update();
+	if (_spawn == true)
+		Creature::Update();
 }
 
 void Monster::Render()

@@ -84,8 +84,9 @@ void Player::MovementEvent()
 		_anim->ChangeAnimation(State::IDLE);
 	}
 
-	if (_velocity.y != 0 || _dashCurSpeed > 0.0f)
+	if ((_velocity.y != 0 || _dashCurSpeed > 0.0f) && _onStair == false)
 	{
+
 		_anim->ChangeAnimation(State::JUMP);
 		_isFalling = true;
 	}

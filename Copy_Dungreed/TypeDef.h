@@ -51,7 +51,7 @@
 
 #define MAKE_PLAYER_EFFECT(num) ObjectManager::GetInstance()->GetPlayerEffect(num)
 #define MAKE_CREATURE_EFFECT(type,num) ObjectManager::GetInstance()->GetCreatureEffect(type,num)
-#define MAKE_WEAPON_EFFECT(level,num) ObjectManager::GetInstance()->GetWeaponEffect(level,num)
+#define MAKE_WEAPON_EFFECT(level,num) ObjectManager::GetInstance()->GetPlayerWeaponEffect(level,num)
 
 #define MAKE_ITEM(type,num) ObjectManager::GetInstance()->GetItem(type,num)
 #define MAKE_PLAYER_WEAPON(type,num) ObjectManager::GetInstance()->GetPlayerWeapon(type,num)
@@ -67,4 +67,4 @@
 #define BASIC 0
 
 using CallBack = function<void()>;
-using CallBackParam = function<void(int)>;
+using CallBackParam = function<void(int,int)>;

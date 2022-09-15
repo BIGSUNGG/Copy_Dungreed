@@ -126,7 +126,6 @@ using namespace std;
 #include "Dungreed/Object/Ect/Item/Item.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Weapon.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Melee/Melee.h"
-#include "Dungreed/Object/Ect/Item/Weapon/Melee/Effect_In_Melee/Effect_In_Melee.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Gun/Gun.h"
 
 // Creature

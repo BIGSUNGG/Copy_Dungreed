@@ -16,6 +16,11 @@ void Program::Update()
 
 	Camera::GetInstance()->Update();
 
+	if (GAME->GetPause())
+		return;
+
+	_gameMode->Update();
+
 	if (KEY_DOWN(VK_F1))
 		SwitchBool(GAME->GetPause());
 	if (KEY_DOWN(VK_F2))
@@ -24,13 +29,8 @@ void Program::Update()
 		SwitchBool(GAME->GetRenderCollider());
 	if (KEY_DOWN(VK_F4))
 		_gameMode = make_shared<MapEditor>();
-	if (KEY_DOWN(VK_F5))
+	if (KEY_DOWN(VK_F6))
 		_gameMode = make_shared<Dungreed>();
-
-	if (GAME->GetPause())
-		return;
-
-	_gameMode->Update();
 }
 
 void Program::Render()

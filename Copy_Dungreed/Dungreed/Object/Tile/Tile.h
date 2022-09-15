@@ -8,7 +8,6 @@ public:
 		FLOOR,
 		LEFT_STAIR,
 		RIGHT_STAIR,
-		CELLING,
 	};
 	
 public:
