@@ -1,7 +1,8 @@
 #include "framework.h"
 #include "Weapon.h"
 
-Weapon::Weapon()
+Weapon::Weapon(int level, int num)
+	: Item(level, num)
 {
 	_itemType = WEAPON;
 }
@@ -42,11 +43,6 @@ void Weapon::CheckAttack()
 
 void Weapon::Skill()
 {
-}
-
-void Weapon::GiveDamage(shared_ptr<Creature> enemy)
-{
-	enemy->Damaged(_status);
 }
 
 void Weapon::Damaged(const Status& status)

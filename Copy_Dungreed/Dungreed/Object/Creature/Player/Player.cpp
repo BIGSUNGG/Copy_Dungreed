@@ -6,6 +6,9 @@ Player::Player(int level, int num)
 {
 	_creatureType = PLAYER;
 	_weaponSlot.resize(2);
+
+	_status.SetMaxHp(80);
+	_status._atk = 40;
 }
 
 void Player::Update()

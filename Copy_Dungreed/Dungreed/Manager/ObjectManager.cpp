@@ -324,7 +324,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 	{
 	case 0:
 		object->SetAnimation();
-		object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(5, 0.3f);
+		object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(5, 0.15f);
 		object->GetAnimation()->_animState[Creature::State::IDLE] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle0.png");
 		object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle1.png");
@@ -377,7 +377,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		switch (num)
 		{
 		case 0:
-			object = make_shared<Monster>(level, num);
+			object = make_shared<GraySkel>(level, num);
 
 			object->SetAnimation();
 			object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(1, 0.3f);
@@ -398,44 +398,6 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			weapon = GetEnemyWeapon(0, 0);
 			object->AddWeapon(weapon);
 			
-			break;
-		case 1:
-			object = make_shared<Monster>(level, num);
-			object->SetAnimation();
-			object->GetAnimation()->_animSpeed[Creature::State::IDLE] = vector<float>(7, 0.3f);
-			object->GetAnimation()->_animState[Creature::State::IDLE] = Animation::Anim_State::LOOP;
-			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle.png");
-			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle0.png");
-			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle1.png");
-			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle2.png");
-			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle3.png");
-			object->GetAnimation()->_animList[Creature::State::IDLE].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Idle/BigWhiteSkelIdle4.png");
-
-			object->GetAnimation()->_animSpeed[Creature::State::ATTACK] = vector<float>(12, 0.15f);
-			object->GetAnimation()->_animState[Creature::State::ATTACK] = Animation::Anim_State::LOOP;
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack00.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack01.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack02.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack03.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack04.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack05.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack06.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack07.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack08.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack09.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack10.png");
-			object->GetAnimation()->_animList[Creature::State::ATTACK].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/ATTACK/BigWhiteSkelAttack11.png");
-
-			object->GetAnimation()->_animSpeed[Creature::State::RUN] = vector<float>(7, 0.15f);
-			object->GetAnimation()->_animState[Creature::State::RUN] = Animation::Anim_State::LOOP;
-			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Run/BigWhiteSkelMove0.png");
-			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Run/BigWhiteSkelMove1.png");
-			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Run/BigWhiteSkelMove2.png");
-			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Run/BigWhiteSkelMove3.png");
-			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Run/BigWhiteSkelMove4.png");
-			object->GetAnimation()->_animList[Creature::State::RUN].push_back(L"Resource/Creature/Enemy/BigWhiteSkel/Run/BigWhiteSkelMove5.png");
-
-			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::State::IDLE][0]);
 			break;
 		default:
 			break;
@@ -637,6 +599,24 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 		}
 		break;
 	case Weapon::GUN:
+		switch (num)
+		{
+		case 0:
+			effect->SetAnimation();
+			effect->GetAnimation()->GetRefreshSize() = true;
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.1f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX0.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX1.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX2.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX3.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX4.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX5.png");
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		default:
+			break;
+		}
 		break;
 	case Weapon::SUB:
 		break;
@@ -693,6 +673,7 @@ shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
 {
 	shared_ptr<Bullet> bullet;
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	function<shared_ptr<Effect>()> func;
 
 	switch (type)
 	{
@@ -702,8 +683,10 @@ shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
 		switch (num)
 		{
 		case 0:
-			bullet = make_shared<Bullet>();
-			texture = make_shared<Quad>(L"Resource/Effect/Weapon/Gun/CrossbowArrow.png");
+			bullet = make_shared<Bullet>(type ,num);
+			func = bind(&ObjectManager::GetPlayerWeaponEffect,this, Weapon::GUN, 0);
+			bullet->SetDestroyEffect(func);
+			texture = make_shared<Quad>(L"Resource/Effect/Weapon/Gun/Bullet/CrossbowArrow.png");
 			break;
 		default:
 			break;
@@ -741,7 +724,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		switch (num)
 		{
 		case 0:
-			weapon = make_shared<Melee>();
+			weapon = make_shared<Melee>(type,num);
 			func = bind(&ObjectManager::GetPlayerWeaponEffect, this, 0, 0);
 			weapon->SetAttackRange({ 120,84 });
 			weapon->SetAttackEffect(func);
@@ -755,7 +738,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		switch (num)
 		{
 		case 0:
-			weapon = make_shared<Gun>();
+			weapon = make_shared<Gun>(type,num);
 			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
 			break;
 		default:
@@ -792,7 +775,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 		switch (num)
 		{
 		case 0:
-			weapon = make_shared<Melee>();
+			weapon = make_shared<Melee>(type,num);
 
 			weapon->SetOffset({ 70,-25 });
 			weapon->SetAppendAngle({ 0.7f });

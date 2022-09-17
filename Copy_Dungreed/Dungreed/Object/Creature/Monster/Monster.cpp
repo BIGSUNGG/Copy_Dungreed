@@ -5,7 +5,6 @@ Monster::Monster(int level, int num)
 	:Creature(level, num)
 {
 	_creatureType = Creature_Type::ENEMY;
-	_targetDistanceGround = (MathUtility::RandomFloat(_targetDistanceMin, _targetDistanceMax)) * _targetDistanceRatio;
 	_speed = 300.0f;
 }
 
@@ -68,42 +67,6 @@ void Monster::SearchTarget()
 
 void Monster::AI()
 {
-	if (_target.lock() == nullptr || _weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::State::ATTACK)
-		return;
-
-	float length = abs(_target.lock()->GetTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);
-	if (length >= _targetDistanceGround)
-	{
-		if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
-			_movement.x += _speed;
-		else
-			_movement.x -= _speed;
-	}
-	else if (_texture->Top() < _target.lock()->GetTexture()->GetTransform()->GetPos().y && _target.lock()->GetIsFalling() == false)
-	{
-		if (length >= _targetDistanceJumping)
-		{
-			if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
-				_movement.x += _speed;
-			else
-				_movement.x -= _speed;
-		}
-
-		Jump();
-	}
-	else if (_texture->Bottom() > _target.lock()->GetTexture()->Top())
-	{
-		_passFloor = true;
-	}
-	else
-	{
-		if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x && _reversed == true)
-			ReverseTexture();
-		else if (_target.lock()->GetTexture()->GetTransform()->GetPos().x < _texture->GetTransform()->GetPos().x && _reversed == false)
-			ReverseTexture();
-
-		Attack();
-	}
 }
 
 void Monster::Jump()
@@ -112,12 +75,12 @@ void Monster::Jump()
 		_jumpPower = _jumpPowerMax;
 }
 
-bool Monster::Damaged(Status status)
+bool Monster::GetDamage(Status status)
 {
 	if(_spawn == false)
 		return false;
 
-	Creature::Damaged(status);
+	return Creature::GetDamage(status);
 }
 
 void Monster::SpawnEffect()

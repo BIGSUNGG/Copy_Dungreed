@@ -1,8 +1,10 @@
 #include "framework.h"
 #include "Bullet.h"
 
-Bullet::Bullet()
+Bullet::Bullet(int level, int num)
+	: Ect(level,num)
 {
+	_ectType = Ect::BULLET;
 }
 
 Bullet::~Bullet()
@@ -46,7 +48,8 @@ void Bullet::Attack()
 		{
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
 			// TODO : 매개변수 제대로 된 값 넣어주기
-			if (creature->Damaged(Status()))
+			bool attackSuccess = _weapon.lock()->GiveDamage(creature);
+			if(attackSuccess)
 			{
 				DestroyEvent();
 				return;
@@ -58,4 +61,13 @@ void Bullet::Attack()
 void Bullet::DestroyEvent()
 {
 	_isActive = false;
+
+	if (_destroyEffect)
+	{
+		shared_ptr<Effect> effect = _destroyEffect();
+		effect->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
+		effect->GetTexture()->GetTransform()->GetAngle() = _texture->GetTransform()->GetAngle();
+
+		GAME->AddEffect(effect);
+	}
 }

@@ -1,7 +1,8 @@
 #include "framework.h"
 #include "Gun.h"
 
-Gun::Gun()
+Gun::Gun(int level, int num)
+	:Weapon(level,num)
 {
 	_weaponType = GUN;
 	_offset = { 40,-10 };

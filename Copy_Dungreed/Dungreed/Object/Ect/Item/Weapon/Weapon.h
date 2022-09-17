@@ -13,13 +13,12 @@ public:
 	};
 
 public:
-	Weapon();
+	Weapon(int level, int num);
 
 	virtual void Update();
 
 	virtual void Attack() override;
 	virtual void CheckAttack();
-	virtual void GiveDamage(shared_ptr<Creature> enemy);
 	virtual void Skill() override;
 	virtual void Damaged(const Status& status) override;
 

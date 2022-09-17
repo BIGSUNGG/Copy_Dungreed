@@ -1,9 +1,10 @@
 #include "framework.h"
 #include "Item.h"
 
-Item::Item()
+Item::Item(int level, int num)
+	: Ect(level,num)
 {
-	_objectType = Object_Type::ECT;
+	_ectType = Ect::ITEM;
 }
 
 Item::~Item()
@@ -13,6 +14,12 @@ Item::~Item()
 void Item::Render()
 {
 	_texture->Render();
+}
+
+bool Item::GiveDamage(shared_ptr<Creature> target)
+{
+	bool attackSuccess = _owner.lock()->GiveDamage(target);
+	return attackSuccess;
 }
 
 void Item::ReverseTexture()

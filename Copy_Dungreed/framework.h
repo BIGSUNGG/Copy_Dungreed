@@ -101,12 +101,10 @@ using namespace std;
 #include "Framework/Collider/RectCollider.h"
 
 // Animation
-#include "Framework/Animation/Action.h"
 #include "Framework/Animation/Animation.h"
 
 // Object
 #include "Object/Quad.h"
-#include "Object/Sprite.h"
 
 // Status
 #include "Dungreed/Ect/Status/Status.h"
@@ -132,6 +130,7 @@ using namespace std;
 #include "Dungreed/Object/Creature/Creature.h"
 #include "Dungreed/Object/Creature/Player/Player.h"
 #include "Dungreed/Object/Creature/Monster/Monster.h"
+#include "Dungreed/Object/Creature/Monster/GraySkel/GraySkel.h"
 
 // UI
 #include "Dungreed/UI/UI.h"

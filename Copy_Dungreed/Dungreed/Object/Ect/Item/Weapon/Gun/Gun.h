@@ -2,7 +2,7 @@
 class Gun : public Weapon
 {
 public:
-	Gun();
+	Gun(int level, int num);
 	virtual ~Gun();
 
 	virtual void Render() override;
@@ -14,5 +14,5 @@ public:
 	virtual void SetWeapon() override;
 
 protected:
-	float _bulletSpeed = 1000.0f;
+	float _bulletSpeed = 2000.0f;
 };

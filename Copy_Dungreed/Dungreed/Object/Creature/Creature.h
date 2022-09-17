@@ -17,7 +17,8 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-	virtual bool Damaged(Status status);
+	virtual bool GetDamage(Status status);
+	virtual bool GiveDamage(shared_ptr<Creature> target);
 
 	virtual void MoveCharacter();
 	virtual void Death();

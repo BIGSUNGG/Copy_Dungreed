@@ -1,11 +1,15 @@
 #pragma once
-
-struct Status
+class Status
 {
-	int _hp		= 0;
-	int _hpMax	= 0;
-	int _def	= 0;
-	int _defMax = 0;
-	int _atk	= 0;
-	int _atkMax = 0;
+public:
+	Status();
+	~Status();
+
+	void SetMaxHp(int maxHp);
+
+public:
+	int _hp = 0;
+	int _hpMax = 0;
+	int _def = 0;
+	int _atk = 0;
 };

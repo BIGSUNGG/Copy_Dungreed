@@ -2,7 +2,7 @@
 
 class Creature;
 
-class Item : public Object , public enable_shared_from_this<Item>
+class Item : public Ect , public enable_shared_from_this<Item>
 {
 public:
 	enum Item_Type
@@ -22,10 +22,12 @@ public:
 	};
 
 public:
-	Item();
+	Item(int level, int num);
 	virtual ~Item();
 
 	virtual void Render();
+
+	virtual bool GiveDamage(shared_ptr<Creature> target);
 
 	virtual void ReverseTexture();
 

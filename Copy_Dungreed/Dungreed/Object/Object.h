@@ -23,7 +23,7 @@ public:
 	};
 
 public:
-	Object(int level = 0, int num = 0);
+	Object(int level, int num);
 	virtual ~Object() {}
 
 	virtual void Update();

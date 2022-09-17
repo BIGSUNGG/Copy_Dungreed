@@ -60,13 +60,19 @@ void Creature::PostRender()
 		_weaponSlot[_curWeaponSlot]->PostRender();
 }
 
-bool Creature::Damaged(Status status)
+bool Creature::GetDamage(Status enemyStatus)
 {
-	_status._hp -= _status._atk;
+	_status._hp -= enemyStatus._atk;
 	if (_status._hp <= 0)
 		Death();
 
 	return true;
+}
+
+bool Creature::GiveDamage(shared_ptr<Creature> target)
+{
+	bool attackSuccess = target->GetDamage(_status);
+	return attackSuccess;
 }
 
 void Creature::MoveCharacter()
