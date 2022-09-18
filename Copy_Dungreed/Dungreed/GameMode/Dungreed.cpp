@@ -7,8 +7,7 @@ Dungreed::Dungreed()
 
 	CAMERA->GetFreeMode() = false;
 
-	_map = make_shared<Map>();
-	_map->Load();
+	_map = MAP_MANAGER->Load(0, 0);
 	GAME->SetMap(_map);
 
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));

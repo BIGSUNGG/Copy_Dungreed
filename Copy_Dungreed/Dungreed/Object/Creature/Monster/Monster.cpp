@@ -41,11 +41,13 @@ void Monster::Update()
 
 	if (_spawn == true)
 		Creature::Update();
+	else
+		Object::Update();
 }
 
 void Monster::Render()
 {
-	if (_spawn || GAME->GetObjectUpdate() == false)
+	if (_spawn || GAME->GetObjectUpdate() == false || GAME->GetPlayer() == nullptr)
 		Creature::Render();
 }
 
@@ -54,8 +56,8 @@ void Monster::SearchTarget()
 	if (_target.lock() != nullptr)
 		return;
 
-	auto collisions =GAME->GetCollisions(_collider, Object::Object_Type::CREATURE);
-	
+	auto collisions = GAME->GetCollisions(_collider, Object::Object_Type::CREATURE);
+
 	float length = (_texture->GetTransform()->GetPos() - GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos()).Length();
 
 	if (length <= _searchLength)
@@ -67,12 +69,6 @@ void Monster::SearchTarget()
 
 void Monster::AI()
 {
-}
-
-void Monster::Jump()
-{
-	if (_isFalling == false)
-		_jumpPower = _jumpPowerMax;
 }
 
 bool Monster::GetDamage(Status status)

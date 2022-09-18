@@ -57,6 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Camera::Create();
 	ObjectManager::Create();
 	GameManager::Create();
+	MapManager::Create();
 	GraphicManager::Create();
 
 	srand(static_cast<UINT>(time(nullptr)));
@@ -85,6 +86,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// 싱글톤 클래스 삭제
 	GraphicManager::Delete();
+	MapManager::Delete();
 	GameManager::Delete();
 	ObjectManager::Delete();
 	Camera::Delete();

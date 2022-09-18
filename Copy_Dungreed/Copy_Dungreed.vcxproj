@@ -180,6 +180,7 @@
     <ClInclude Include="Framework\Collider\CircleCollider.h" />
     <ClInclude Include="Framework\Collider\RectCollider.h" />
     <ClInclude Include="Dungreed\Object\Creature\Monster\GraySkel\GraySkel.h" />
+    <ClInclude Include="Dungreed\Manager\MapManager.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="Framework\Collider\CircleCollider.cpp" />
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\GraySkel\GraySkel.cpp" />
+    <ClCompile Include="Dungreed\Manager\MapManager.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
     <ClCompile Include="Framework\Math\Vector2.cpp" />

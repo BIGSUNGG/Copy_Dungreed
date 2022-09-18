@@ -122,6 +122,22 @@ void Creature::Attack()
 	_anim->ChangeAnimation(State::ATTACK);
 }
 
+void Creature::MoveLeft()
+{
+	_movement.x -= _speed;
+}
+
+void Creature::MoveRight()
+{
+	_movement.x += _speed;
+}
+
+void Creature::Jump()
+{
+	if (_isFalling == false)
+		_jumpPower = _jumpPowerMax;
+}
+
 void Creature::TileCollisionEvent(shared_ptr<Object> object)
 {
 	switch (object->GetType())

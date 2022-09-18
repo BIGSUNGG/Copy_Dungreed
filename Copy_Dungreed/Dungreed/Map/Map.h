@@ -16,13 +16,10 @@ public:
 	};
 
 public:
-	Map(Level level = LEVEL_00, int num = 0, char direction = 0b0000);
+	Map(int level, int num, char direction = 0b0000);
 
 	void AddObject(shared_ptr<Object> addObject, int type , bool toFront = false);
 	void DeleteObject(Vector2 Pos, int type, bool toFront = false);
-
-	void Save();
-	void Load();
 	void Reset();
 
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
@@ -31,6 +28,8 @@ public:
 	Vector2& GetLeftBottom() { return _leftBottom; }
 	Vector2& GetRightTop() { return _rightTop; }
 
+	const int& GetLevel() { return _level; }
+	const int& GetNum() { return _num; }
 	const int& GetObjectCount() { return _objectCount; }
 
 private:
@@ -41,6 +40,6 @@ private:
 	Vector2 _leftBottom;
 	Vector2 _rightTop;
 
-	Level _level;
+	int _level;
 	int _num;
 };

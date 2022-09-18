@@ -14,7 +14,7 @@ public:
 	virtual void InputEvent();
 
 	virtual void Dash();
-	virtual void Jump();
+	virtual void Jump() override;
 
 protected:
 	bool _doubleJumped = false;

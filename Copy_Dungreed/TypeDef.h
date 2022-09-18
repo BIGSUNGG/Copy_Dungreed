@@ -63,6 +63,8 @@
 
 #define GRAPHIC GraphicManager::GetInstance()
 
+#define MAP_MANAGER MapManager::GetInstance()
+
 #define EXCEPT -1
 #define BASIC 0
 

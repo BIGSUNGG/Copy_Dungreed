@@ -33,5 +33,8 @@ private:
 	int _objectType		= 2;
 	int _objectLevel	= 0;
 	int _objectNum		= 10;
+
+	int _mapLevel	= 0;
+	int _mapNum		= 0;
 };
 

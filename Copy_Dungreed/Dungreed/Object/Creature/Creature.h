@@ -24,6 +24,10 @@ public:
 	virtual void Death();
 	virtual void Attack();
 
+	virtual void MoveLeft();
+	virtual void MoveRight();
+	virtual void Jump();
+
 	virtual void TileCollisionEvent(shared_ptr<Object> objects);
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);

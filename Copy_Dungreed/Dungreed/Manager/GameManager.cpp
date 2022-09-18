@@ -159,6 +159,9 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
+	if (_player != nullptr)
+		_player->Death();
+
 	_player = player;
 	_curMap->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);
 }

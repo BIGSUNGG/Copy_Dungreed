@@ -5,14 +5,12 @@ MapEditor::MapEditor()
 {
 	_modeType = MAP_EDITOR;
 
-	_map = make_shared<Map>();
+	_map = MAP_MANAGER->Load(_mapLevel,_mapNum);
 	GAME->SetMap(_map);
+	GAME->GetObjectUpdate() = false;
 
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
-
 	CAMERA->SetTarget(nullptr);
-
-	GAME->GetObjectUpdate() = false;
 
 	_mouseOffset.x = (_curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x);
 	_mouseOffset.y = (_curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y);
@@ -155,13 +153,17 @@ void MapEditor::ImGuiRender()
 
 		if (ImGui::TreeNode("Map"))
 		{
+			ImGui::SliderInt("Level", &_mapLevel, 0, 8);
+			ImGui::SliderInt("Num", &_mapNum, 0, 30);
+
 			if (ImGui::Button("Save"))
-				_map->Save();
+				MAP_MANAGER->Save(_map);
 
 			ImGui::SameLine();
 			if (ImGui::Button("Load"))
 			{
-				_map->Load();
+				_map = MAP_MANAGER->Load(_mapLevel, _mapNum);
+				GAME->SetMap(_map);
 				CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
 			}
 
@@ -183,7 +185,7 @@ void MapEditor::AddObject(const bool& toFront)
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 
 	if(_autoSave)
-		_map->Save();
+		MAP_MANAGER->Save(_map);
 }
 
 void MapEditor::DeleteObject(const bool& toFront)
@@ -191,7 +193,7 @@ void MapEditor::DeleteObject(const bool& toFront)
 	_map->DeleteObject(_curMousePos, _objectType, toFront);
 
 	if (_autoSave)
-		_map->Save();
+		MAP_MANAGER->Save(_map);
 }
 
 void MapEditor::MouseEvenet()
