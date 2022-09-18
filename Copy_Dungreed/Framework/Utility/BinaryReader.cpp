@@ -25,6 +25,7 @@ int BinaryReader::Int()
 UINT BinaryReader::Uint()
 {
     UINT temp;
+    // 파일을 찾기 못함
     assert(ReadFile(_file, OUT & temp, sizeof(UINT), OUT & _size, nullptr));
 
     return temp;

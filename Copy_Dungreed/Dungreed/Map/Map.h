@@ -36,9 +36,9 @@ private:
 	vector<vector<shared_ptr<Object>>> _objects;
 	int _objectCount = 0;
 
-	Vector2 _startPos;
-	Vector2 _leftBottom;
-	Vector2 _rightTop;
+	Vector2 _startPos = { 0,0 };
+	Vector2 _leftBottom = { 0,0 };
+	Vector2 _rightTop = { 0,0 };
 
 	int _level;
 	int _num;

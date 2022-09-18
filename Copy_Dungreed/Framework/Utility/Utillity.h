@@ -24,6 +24,21 @@ static wstring StrToWstr(string str)
 	return result;
 }
 
+static string CharToStr(char* value, int size)
+{
+	string result;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (value[i] == '\0')
+			break;
+
+		result.push_back(value[i]);
+	}
+
+	return result;
+}
+
 static void SwitchBool(bool& value)
 {
 	if (value == true)

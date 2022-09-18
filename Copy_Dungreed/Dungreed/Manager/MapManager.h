@@ -27,5 +27,6 @@ private:
 
 	unordered_map<int, unordered_map<int, shared_ptr<Map>>> _maps;
 	vector<int> _mapSize;
+	string _path;
 };
 
