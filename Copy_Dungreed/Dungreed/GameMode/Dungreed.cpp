@@ -7,12 +7,11 @@ Dungreed::Dungreed()
 
 	CAMERA->GetFreeMode() = false;
 
-	_map = MAP_MANAGER->Load(0, 0);
-	GAME->SetMap(_map);
+	MAP_MANAGER->MakeRandomMap(0, 0);
 
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));
-	_player->GetTexture()->GetTransform()->GetPos().x = _map->GetStartPos().x;
-	_player->GetTexture()->SetBottom(_map->GetStartPos().y);
+	_player->GetTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
+	_player->GetTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
 	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
@@ -22,8 +21,8 @@ Dungreed::Dungreed()
 	GAME->GetObjectUpdate() = true;
 
 	CAMERA->SetTarget(_player->GetTexture()-> GetTransform());
-	CAMERA->SetLeftBottom(_map->GetLeftBottom());
-	CAMERA->SetRightTop(_map->GetRightTop());
+	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());
+	CAMERA->SetRightTop(MAP_MANAGER->GetCurMap()->GetRightTop());
 	CAMERA->Update();
 
 	_cursur = OBJ_MANAGER->GetCursur(2);
@@ -38,6 +37,7 @@ void Dungreed::Update()
 	_cursur->Update();
 
 	GAME->Update();
+	MAP_MANAGER->Update();
 }
 
 void Dungreed::PreRender()

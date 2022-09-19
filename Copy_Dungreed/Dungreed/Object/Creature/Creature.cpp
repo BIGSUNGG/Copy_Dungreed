@@ -235,11 +235,11 @@ void Creature::TileLeftStairCollision(shared_ptr<Tile> tile)
 {	
 	_onStair = true;
 
-	if (_texture->GetTransform()->GetPos().x > tile->GetTexture()->Left() &&
-		_texture->GetTransform()->GetPos().x < tile->GetTexture()->Right())
+	if (_texture->GetTransform()->GetPos().x >= tile->GetTexture()->Left() &&
+		_texture->GetTransform()->GetPos().x <= tile->GetTexture()->Right())
 	{
-		float x =  this->GetPos().x - tile->GetTexture()->Right();
-		float y = -x + tile->GetTexture()->Bottom();
+		float x =  this->GetPos().x - tile->GetCollider()->Right();
+		float y = -x + tile->GetCollider()->Bottom();
 		if (_texture->Bottom() <= y)
 		{
 			_texture->SetBottom(y);
@@ -253,11 +253,11 @@ void Creature::TileRightStairCollision(shared_ptr<Tile> tile)
 {
 	_onStair = true;
 
-	if (_texture->GetTransform()->GetPos().x > tile->GetTexture()->Left() &&
-		_texture->GetTransform()->GetPos().x < tile->GetTexture()->Right())
+	if (_texture->GetTransform()->GetPos().x >= tile->GetTexture()->Left() &&
+		_texture->GetTransform()->GetPos().x <= tile->GetTexture()->Right())
 	{
-		float x = this->GetPos().x - tile->GetTexture()->Left();
-		float y = x + tile->GetTexture()->Bottom();
+		float x = this->GetPos().x - tile->GetCollider()->Left();
+		float y = x + tile->GetCollider()->Bottom();
 		if (_texture->Bottom() <= y)
 		{
 			_texture->SetBottom(y);

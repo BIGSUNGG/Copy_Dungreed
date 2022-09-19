@@ -62,13 +62,19 @@ void Monster::SearchTarget()
 
 	if (length <= _searchLength)
 	{
-		_target = GAME->GetPlayer();
-		SpawnEffect();
+		SetTarget(GAME->GetPlayer());
+		MAP_MANAGER->SetTarget(GAME->GetPlayer());
 	}
 }
 
 void Monster::AI()
 {
+}
+
+void Monster::SetTarget(shared_ptr<Creature> target)
+{
+	_target = target;
+	SpawnEffect();
 }
 
 bool Monster::GetDamage(Status status)

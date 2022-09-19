@@ -115,17 +115,11 @@ void GameManager::Optimize()
 	temp->Update();
 
 	_optimized.clear();
-
-	_optimized.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false));
-	
-	_optimized.emplace_back(GetCollisions(temp, Object::WALL, false, false));
-	
+	_optimized.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false));	
+	_optimized.emplace_back(GetCollisions(temp, Object::WALL, false, false));	
 	_optimized.emplace_back(GetCollisions(temp, Object::TILE, false, false));
-	
-	_optimized.emplace_back(GetCollisions(temp, Object::CREATURE, false, false));
-	
+	_optimized.emplace_back(GetCollisions(temp, Object::CREATURE, false, false));	
 	_optimized.emplace_back(GetCollisions(temp, Object::ECT, false, false));
-
 	_optimized.emplace_back(GetCollisions(temp, Object::EFFECT, false, false));
 }
 
@@ -160,7 +154,10 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
 	if (_player != nullptr)
+	{
+		_player->GetTexture()->GetTransform()->GetPos() = { INT_MAX,INT_MAX };
 		_player->Death();
+	}
 
 	_player = player;
 	_curMap->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);

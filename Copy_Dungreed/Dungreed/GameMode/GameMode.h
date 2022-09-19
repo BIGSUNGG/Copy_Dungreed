@@ -8,6 +8,7 @@ public:
 		NONE,
 		DUNGREED,
 		MAP_EDITOR,
+		DEBUG,
 	};
 
 public:

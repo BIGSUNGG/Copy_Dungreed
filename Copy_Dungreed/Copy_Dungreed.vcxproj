@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
     <ClInclude Include="Dungreed\Object\Ect\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Object\Ect\Ect.h" />
     <ClInclude Include="Framework\Animation\Animation.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Bullet\Bullet.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Ect.cpp" />
     <ClCompile Include="Framework\Animation\Animation.cpp" />

@@ -49,13 +49,13 @@ void MapEditor::PostRender()
 	_curObject->PostRender();
 
 	{
-		shared_ptr<Collider> temp = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
+		shared_ptr<Collider> temp = make_shared<RectCollider>(Vector2(40.0f, 40.0f));
 		temp->GetPos() = _map->GetLeftBottom();
 		temp->Update();
 		temp->SetColorRed();
 		temp->Render();
 
-		temp = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
+		temp = make_shared<RectCollider>(Vector2(40.0f, 40.0f));
 		temp->GetPos() = _map->GetRightTop();
 		temp->Update();
 		temp->SetColorRed();
@@ -64,7 +64,31 @@ void MapEditor::PostRender()
 		temp = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
 		temp->GetPos() = _map->GetStartPos();
 		temp->Update();
-		temp->SetColorRed();
+		temp->SetColorGreen();
+		temp->Render();
+
+		temp = make_shared<RectCollider>(Vector2(48.0f, 192.0f));
+		temp->GetPos() = _map->GetLeftDoor();
+		temp->Update();
+		temp->SetColorGreen();
+		temp->Render();
+
+		temp = make_shared<RectCollider>(Vector2(48.0f, 192.0f));
+		temp->GetPos() = _map->GetRightDoor();
+		temp->Update();
+		temp->SetColorGreen();
+		temp->Render();
+
+		temp = make_shared<RectCollider>(Vector2(192.0f, 48.0f));
+		temp->GetPos() = _map->GetTopDoor();
+		temp->Update();
+		temp->SetColorGreen();
+		temp->Render();
+
+		temp = make_shared<RectCollider>(Vector2(192.0f, 48.0f));
+		temp->GetPos() = _map->GetBottomDoor();
+		temp->Update();
+		temp->SetColorGreen();
 		temp->Render();
 	}
 }
@@ -90,7 +114,7 @@ void MapEditor::ImGuiRender()
 		{
 			ImGui::Text("Object Count : %d", _map->GetObjectCount());
 			ImGui::SliderInt("Level", &_objectLevel, 0, 8);
-			ImGui::SliderInt("Num", &_objectNum, 0, 30);
+			ImGui::SliderInt("Num", &_objectNum, 0, 99);
 			ImGui::SliderInt("Type", &_objectType, 0, 3);
 
 			if (ImGui::Button("Reverse"))
@@ -172,6 +196,10 @@ void MapEditor::ImGuiRender()
 				_map->Reset();
 
 			ImGui::Checkbox("AutoSave", &_autoSave);
+			ImGui::SameLine();
+			
+			if (ImGui::Button("Save All"))
+				MAP_MANAGER->SaveAll();
 
 			ImGui::TreePop();
 		}
@@ -256,7 +284,19 @@ void MapEditor::InputEvent()
 		
 		if (KEY_DOWN(VK_LEFT))
 			--_objectNum;
-		
+
+		if (KEY_DOWN('J'))
+			_map->GetLeftDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+
+		if (KEY_DOWN('K'))
+			_map->GetBottomDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+
+		if (KEY_DOWN('L'))
+			_map->GetRightDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+
+		if (KEY_DOWN('I'))
+			_map->GetTopDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+
 	}
 
 	if (KEY_DOWN('G'))

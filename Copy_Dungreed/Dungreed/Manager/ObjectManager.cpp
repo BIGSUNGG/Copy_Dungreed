@@ -283,6 +283,236 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 		}
 		break;
 	case Map::LEVEL_01:
+		switch (num)
+		{
+		case 0:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_0.png");
+			break;
+		case 1:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_1.png");
+			break;
+		case 2:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_2.png");
+			break;
+		case 3:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_3.png");
+			break;
+		case 4:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_4.png");
+			break;
+		case 5:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_5.png");
+			break;
+		case 6:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_6.png");
+			break;
+		case 7:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_7.png");
+			break;
+		case 8:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Basic_H_Type2_8.png");
+			break;
+		case 9:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicDirt_Bottom.png");
+			break;
+		case 10:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicDirt_Middle.png");
+			break;
+		case 11:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicDirt_Top.png");
+			break;
+		case 12:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_BottomCenter.png");
+			break;
+		case 13:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_BottomLeft.png");
+			break;
+		case 14:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_BottomRight.png");
+			break;
+		case 15:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_0.png");
+			break;
+		case 16:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_1.png");
+			break;
+		case 17:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_2.png");
+			break;
+		case 18:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_3.png");
+			break;
+		case 19:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_4.png");
+			break;
+		case 20:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_5.png");
+			break;
+		case 21:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_6.png");
+			break;
+		case 22:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleCenter_7.png");
+			break;
+		case 23:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleLeft.png");
+			break;
+		case 24:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_MiddleRight.png");
+			break;
+		case 25:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_0.png");
+			break;
+		case 26:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_1.png");
+			break;
+		case 27:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_2.png");
+			break;
+		case 28:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_3.png");
+			break;
+		case 29:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_4.png");
+			break;
+		case 30:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_5.png");
+			break;
+		case 31:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_6.png");
+			break;
+		case 32:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_7.png");
+			break;
+		case 33:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopCenter_8.png");
+			break;
+		case 34:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopLeft.png");
+			break;
+		case 35:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/BasicStone_TopRight.png");
+			break;
+		case 36:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H0.png");
+			break;
+		case 37:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H1.png");
+			break;
+		case 38:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H2.png");
+			break;
+		case 39:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H3.png");
+			break;
+		case 40:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H4.png");
+			break;
+		case 41:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H5.png");
+			break;
+		case 42:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H6.png");
+			break;
+		case 43:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H7.png");
+			break;
+		case 44:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H8.png");
+			break;
+		case 45:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H9.png");
+			break;
+		case 46:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H10.png");
+			break;
+		case 47:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H11.png");
+			break;
+		case 48:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H12.png");
+			break;
+		case 49:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H13.png");
+			break;
+		case 50:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H14.png");
+			break;
+		case 51:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_H15.png");
+			break;
+		case 52:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Marble_Stair_BottomLeft.png");
+			break;
+		case 53:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Marble_Stair_BottomRight.png");
+			break;
+		case 54:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Marble_Stair_TopLeft.png");
+			break;
+		case 55:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Marble_Stair_TopRight.png");
+			break;
+		case 56:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Marble_Top.png");
+			break;
+		case 57:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_BottomCenter.png");
+			break;
+		case 58:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_BottomLeft.png");
+			break;
+		case 59:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_BottomRight.png");
+			break;
+		case 60:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_Left.png");
+			break;
+		case 61:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_MiddleLeft.png");
+			break;
+		case 62:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_MiddleRight.png");
+			break;
+		case 63:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_Right.png");
+			break;
+		case 64:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_Top.png");
+			break;
+		case 65:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_TopCenter.png");
+			break;
+		case 66:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_TopLeft.png");
+			break;
+		case 67:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Slim_TopRight.png");
+			break;
+		case 68:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Stair_BottomLeft.png");
+			break;
+		case 69:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Stair_BottomRight.png");
+			break;
+		case 70:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Stair_TopLeft.png");
+			break;
+		case 71:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Stair_TopRight.png");
+			break;
+		case 72:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Vertical1TileBottom.png");
+			break;
+		case 73:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Vertical1TileMiddle.png");
+			break;
+		case 74:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Vertical1TileTop.png");
+			break;
+		default:
+			break;
+		}
 		break;
 	case Map::LEVEL_02:
 		break;

@@ -141,9 +141,9 @@ void Player::InputEvent()
 			_passFloor = false;
 
 		if (KEY_PRESS('A'))
-			_movement.x -= _speed;
+			MoveLeft();
 		if (KEY_PRESS('D'))
-			_movement.x += _speed;
+			MoveRight();
 	}
 	if (KEY_DOWN(VK_LBUTTON))
 		Attack();

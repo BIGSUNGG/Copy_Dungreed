@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "Map.h"
 
-Map::Map(int level, int num, char direction)
+Map::Map(int level, int num)
 {
 	_level = level;
 	_num = num;

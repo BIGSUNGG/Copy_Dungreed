@@ -9,6 +9,7 @@ public:
 
 	virtual void SearchTarget();
 	virtual void AI();
+	virtual void SetTarget(shared_ptr<Creature> target);
 	virtual bool GetDamage(Status status) override;
 
 	virtual void SpawnEffect();

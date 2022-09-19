@@ -1,8 +1,8 @@
 #pragma once
-class Dungreed : public GameMode
+class DebugMode : public GameMode
 {
 public:
-	Dungreed();
+	DebugMode();
 
 	void Update() override;
 	void PreRender() override;
@@ -10,9 +10,13 @@ public:
 	void PostRender() override;
 	void ImGuiRender() override;
 
+	void PlayerInit();
+
 private:
 	shared_ptr<Player> _player;
 	shared_ptr<Quad> _cursur;
-	float _gameRunTime = 0.0f;
+
+	int _mapLevel = 0;
+	int _mapNum = 0;
 };
 

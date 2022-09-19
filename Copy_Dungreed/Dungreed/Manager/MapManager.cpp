@@ -3,6 +3,21 @@
 
 MapManager* MapManager::_instance = nullptr;
 
+void MapManager::Update()
+{
+}
+
+void MapManager::MakeRandomMap(int level, int num)
+{	
+	_maps[0][0] = Load(level, level);
+	bool leftDoor = (_maps[0][0]->GetLeftDoor() != Vector2(INT_MAX, INT_MAX));
+	bool rightDoor = (_maps[0][0]->GetRightDoor() != Vector2(INT_MAX, INT_MAX));
+	bool topDoor = (_maps[0][0]->GetTopDoor() != Vector2(INT_MAX, INT_MAX));
+	bool bottomDoor = (_maps[0][0]->GetBottomDoor() != Vector2(INT_MAX, INT_MAX));
+
+	SetCurMap({ 0,0 });
+}
+
 shared_ptr<Map> MapManager::Load(int level, int num)
 {
 	shared_ptr<Map> newMap = make_shared<Map>(level,num);
@@ -38,7 +53,7 @@ shared_ptr<Map> MapManager::Load(int level, int num)
 			UINT size = basicReader.Uint();
 
 			vector<int> basicInfo;
-			basicInfo.resize(7);
+			basicInfo.resize(15);
 			void* ptr = basicInfo.data();
 			basicReader.Byte(&ptr, size * sizeof(int));
 
@@ -114,6 +129,7 @@ void MapManager::Save(shared_ptr<Map> map)
 		{
 			ofstream makeFile1(sLoadPath + ".bin");
 			ofstream makeFile2(sLoadPath + "_Basic" + ".bin");
+			_mapSize[level].emplace_back(num);
 		}
 	}
 
@@ -129,6 +145,15 @@ void MapManager::Save(shared_ptr<Map> map)
 		basicInfo.push_back(map->GetRightTop().y);
 		basicInfo.push_back(map->GetStartPos().x);
 		basicInfo.push_back(map->GetStartPos().y);
+
+		basicInfo.push_back(map->GetTopDoor().x);
+		basicInfo.push_back(map->GetTopDoor().y);
+		basicInfo.push_back(map->GetBottomDoor().x);
+		basicInfo.push_back(map->GetBottomDoor().y);
+		basicInfo.push_back(map->GetLeftDoor().x);
+		basicInfo.push_back(map->GetLeftDoor().y);
+		basicInfo.push_back(map->GetRightDoor().x);
+		basicInfo.push_back(map->GetRightDoor().y);
 
 		basicWriter.Uint(basicInfo.size());
 		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
@@ -157,13 +182,97 @@ void MapManager::Save(shared_ptr<Map> map)
 	}
 }
 
+void MapManager::SaveAll()
+{
+	// Save Load방식의 변경점이 있을때 편하게 쓰기 위해
+	for (int level = 0; level < _mapSize.size(); level++)
+	{
+		for (int num = 0; num < _mapSize[level].size(); num++)
+		{
+			shared_ptr<Map> temp = Load(level, _mapSize[level][num]);
+			Save(temp);
+		}
+	}
+}
+
+void MapManager::SetTarget(shared_ptr<Creature> target)
+{
+	for (auto& monster : _maps[_curMapIndex.first][_curMapIndex.second]->GetObjects()[Object::CREATURE])
+	{
+		auto creature = dynamic_pointer_cast<Creature>(monster);
+		if (creature->GetCreatureType() == Creature::ENEMY)
+		{
+			auto enemy = dynamic_pointer_cast<Monster>(creature);
+			enemy->SetTarget(target);
+		}
+	}
+}
+
+void MapManager::SetCurMap(shared_ptr<Map> map)
+{
+	_maps[_curMapIndex.first][_curMapIndex.second] = map;
+	GAME->SetMap(_maps[_curMapIndex.first][_curMapIndex.second]);
+	GAME->GetObjectUpdate() = false;
+	GAME->Update();
+	GAME->GetObjectUpdate() = true;
+
+	return;
+}
+
+void MapManager::SetCurMap(const pair<int,int>& index)
+{
+	_curMapIndex = index;
+	GAME->SetMap(_maps[_curMapIndex.first][_curMapIndex.second]);
+	GAME->GetObjectUpdate() = false;
+	GAME->Update();
+	GAME->GetObjectUpdate() = true;
+
+	return;
+}
+
 MapManager::MapManager()
 {
+	_mapSize.resize(9);
+
+	// 현재 프로젝트 경로 구하기
 	char path[1000];
 	_getcwd(path, 1000);
 	
 	_path = CharToStr(path, 1000);
 	_path += "\\";
+
+	// 맵 갯수 구하기
+	for (int level = 0; level < 9; level++)
+	{
+		for (int num = 0; num < 30; num++)
+		{
+			string sLoadPath = _path + "Save\\Maps\\Level_";
+
+			wstring levelPath;
+			{
+				if (level < 10)
+					levelPath += L"0";
+
+				levelPath += to_wstring(level);
+			}
+			wstring numPath;
+			{
+				if (num < 10)
+					numPath += L"0";
+
+				numPath += to_wstring(num);
+			}
+			sLoadPath += WstrToStr(levelPath) + "_" + WstrToStr(numPath);
+
+			ifstream checkPath1(sLoadPath + ".bin");
+			ifstream checkPath2(sLoadPath + "_Basic" + ".bin");
+
+			if (checkPath1 && checkPath2)
+			{
+				_mapSize[level].push_back(num);
+			}
+		}
+	}
 }
 
 MapManager::~MapManager()

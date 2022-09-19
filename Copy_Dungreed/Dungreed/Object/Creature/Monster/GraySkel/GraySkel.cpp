@@ -17,18 +17,18 @@ void GraySkel::AI()
 	if (length >= _targetDistanceGround)
 	{
 		if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
-			_movement.x += _speed;
+			MoveRight();
 		else
-			_movement.x -= _speed;
+			MoveLeft();
 	}
 	else if (_texture->Top() < _target.lock()->GetTexture()->GetTransform()->GetPos().y && _target.lock()->GetIsFalling() == false)
 	{
 		if (length >= _targetDistanceJumping)
 		{
 			if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
-				_movement.x += _speed;
+				MoveRight();
 			else
-				_movement.x -= _speed;
+				MoveLeft();
 		}
 
 		Jump();
@@ -46,4 +46,12 @@ void GraySkel::AI()
 
 		Attack();
 	}
+}
+
+void GraySkel::TileBlockCollision(shared_ptr<Tile> tile)
+{
+	Monster::TileBlockCollision(tile);
+	
+	//if (_beforeMove.x - (_texture->GetHalfSize().x * _texture->GetTransform()->GetScale().x) <= tile->GetPos().y)
+	Jump();
 }
