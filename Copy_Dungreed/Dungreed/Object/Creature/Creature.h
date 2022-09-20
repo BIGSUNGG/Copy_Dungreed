@@ -39,7 +39,7 @@ public:
 	const bool& GetIsFalling() { return _isFalling; }
 	const Vector2& GetVelocity() { return _velocity; }
 	const Status& GetStatus() { return _status; }
-	Vector2& GetBeforeMove() { return _beforeMove; }
+	const Vector2& GetBeforeMovePos() { return _beforeMove; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 
 	virtual void AddWeapon(shared_ptr<Weapon> weapon);

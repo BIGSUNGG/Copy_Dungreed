@@ -73,4 +73,13 @@ void Map::Reset()
 	for (auto& object : _objects)
 		object.reserve(100);
 	_objectCount = 0;
+
+	_startPos = { 5000,5000 };
+	_leftBottom = { 0,0 };
+	_rightTop = { 10000,10000 };
+
+	_topDoor = { 0,0 };
+	_bottomDoor = { 0,0 };
+	_leftDoor = { 0,0 };
+	_rightDoor = { 0,0 };
 }

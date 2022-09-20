@@ -42,9 +42,9 @@ public:
 	bool& GetObjectUpdate() { return _objectUpdate; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
-	shared_ptr<Creature> GetPlayer() { return _player; }
+	shared_ptr<Player> GetPlayer() { return _player; }
 
-	void SetMap(shared_ptr<Map> addedMap) { _curMap = addedMap; }
+	void SetMap(shared_ptr<Map> addedMap);
 
 private:
 	GameManager();

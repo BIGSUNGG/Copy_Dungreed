@@ -28,6 +28,11 @@ public:
 	Vector2& GetLeftBottom() { return _leftBottom; }
 	Vector2& GetRightTop() { return _rightTop; }
 
+	bool CanGoTop() { return (_topDoor != Vector2(0, 0)); }
+	bool CanGoBottom() { return (_bottomDoor != Vector2(0, 0)); }
+	bool CanGoLeft() { return (_leftDoor != Vector2(0, 0)); }
+	bool CanGoRight() { return (_rightDoor != Vector2(0, 0)); }
+
 	Vector2& GetTopDoor() { return _topDoor; }
 	Vector2& GetBottomDoor() { return _bottomDoor; }
 	Vector2& GetLeftDoor() { return _leftDoor; }
@@ -41,14 +46,14 @@ private:
 	vector<vector<shared_ptr<Object>>> _objects;
 	int _objectCount = 0;
 
-	Vector2 _startPos = { 1000,1000 };
+	Vector2 _startPos = { 5000,5000 };
 	Vector2 _leftBottom = { 0,0 };
 	Vector2 _rightTop = { 0,0 };
 
-	Vector2 _topDoor = { INT_MAX,INT_MAX };
-	Vector2 _bottomDoor = { INT_MAX,INT_MAX };
-	Vector2 _leftDoor = { INT_MAX,INT_MAX };
-	Vector2 _rightDoor = { INT_MAX,INT_MAX };
+	Vector2 _topDoor = { 0,0 };
+	Vector2 _bottomDoor = { 0,0 };
+	Vector2 _leftDoor = { 0,0 };
+	Vector2 _rightDoor = { 0,0 };
 
 	int _level;
 	int _num;

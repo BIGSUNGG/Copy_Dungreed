@@ -10,7 +10,7 @@ public:
 	void PostRender() override;
 	void ImGuiRender() override;
 
-	void PlayerInit();
+	void Init();
 
 private:
 	shared_ptr<Player> _player;

@@ -20,6 +20,10 @@ public:
 	void Update();
 
 	void MakeRandomMap(int level,int num);
+	void FindTopMap(int level, int x, int y);
+	void FindBottomMap(int level, int x, int y);
+	void FindLeftMap(int level, int x, int y);
+	void FindRightMap(int level, int x, int y);
 
 	shared_ptr<Map> Load(int level, int num);
 	void Save(shared_ptr<Map> map);

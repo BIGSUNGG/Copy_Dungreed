@@ -201,6 +201,26 @@ void MapEditor::ImGuiRender()
 			if (ImGui::Button("Save All"))
 				MAP_MANAGER->SaveAll();
 
+			if (ImGui::TreeNode("Reset Door"))
+			{
+				if (ImGui::Button("Left"))
+					_map->GetLeftDoor() = Vector2(0, 0);
+				ImGui::SameLine();
+
+				if (ImGui::Button("Right"))
+					_map->GetRightDoor() = Vector2(0, 0);
+				ImGui::SameLine();
+
+				if (ImGui::Button("Top"))
+					_map->GetTopDoor() = Vector2(0, 0);
+				ImGui::SameLine();
+
+				if (ImGui::Button("Bottom"))
+					_map->GetBottomDoor() = Vector2(0, 0);
+
+				ImGui::TreePop();
+			}
+
 			ImGui::TreePop();
 		}
 	}
@@ -248,25 +268,25 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('W'))
 			AddObject(false);
-		
+
 		if (KEY_PRESS('E'))
 			AddObject(false);
-		
+
 		if (KEY_DOWN('A'))
 			DeleteObject(true);
-		
+
 		if (KEY_DOWN('S'))
 			DeleteObject(false);
 
 		if (KEY_PRESS('D'))
 			DeleteObject(false);
-		
+
 		if (KEY_DOWN('F'))
 			SwitchBool(_freeMode);
-		
+
 		if (KEY_DOWN('Z'))
 			_map->GetLeftBottom() = _curObject->GetTexture()->GetTransform()->GetPos();
-		
+
 		if (KEY_DOWN('X'))
 			_map->GetRightTop() = _curObject->GetTexture()->GetTransform()->GetPos();
 
@@ -275,27 +295,44 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN(VK_UP))
 			++_objectLevel;
-		
+
 		if (KEY_DOWN(VK_DOWN))
 			--_objectLevel;
-		
+
 		if (KEY_DOWN(VK_RIGHT))
 			++_objectNum;
-		
+
 		if (KEY_DOWN(VK_LEFT))
 			--_objectNum;
 
 		if (KEY_DOWN('J'))
+		{
 			_map->GetLeftDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			if (_autoSave)
+				MAP_MANAGER->Save(_map);
+		}
 
 		if (KEY_DOWN('K'))
+		{
 			_map->GetBottomDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			if (_autoSave)
+				MAP_MANAGER->Save(_map);
+		}
+
 
 		if (KEY_DOWN('L'))
+		{
 			_map->GetRightDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			if (_autoSave)
+				MAP_MANAGER->Save(_map);
+		}
 
 		if (KEY_DOWN('I'))
+		{
 			_map->GetTopDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			if (_autoSave)
+				MAP_MANAGER->Save(_map);
+		}
 
 	}
 

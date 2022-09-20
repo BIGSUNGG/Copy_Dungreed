@@ -153,7 +153,17 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
-	if (_player != nullptr)
+	if (_player = player)
+	{
+		for (auto& creature : _curMap->GetObjects()[Object::CREATURE])
+		{
+			if (creature == _player)
+			{
+				creature = nullptr;
+			}
+		}
+	}
+	else if (_player != nullptr)
 	{
 		_player->GetTexture()->GetTransform()->GetPos() = { INT_MAX,INT_MAX };
 		_player->Death();
@@ -209,4 +219,9 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 	}
 
 	return result;
+}
+
+void GameManager::SetMap(shared_ptr<Map> addedMap)
+{
+	_curMap = addedMap;
 }

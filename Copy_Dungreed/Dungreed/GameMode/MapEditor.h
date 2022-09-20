@@ -28,7 +28,7 @@ private:
 	shared_ptr<Object>	_curObject;
 
 	bool _freeMode	= false;
-	bool _autoSave	= false;
+	bool _autoSave	= true;
 
 	int _objectType		= 2;
 	int _objectLevel	= 0;

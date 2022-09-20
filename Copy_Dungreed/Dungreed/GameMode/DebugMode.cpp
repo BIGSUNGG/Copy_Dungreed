@@ -5,11 +5,10 @@ DebugMode::DebugMode()
 {
 	_modeType = DEBUG;
 
-	CAMERA->GetFreeMode() = false;
+	auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
+	MAP_MANAGER->SetCurMap(_map);
 
-	MAP_MANAGER->MakeRandomMap(0, 0);
-
-	PlayerInit();
+	Init();
 
 	_cursur = OBJ_MANAGER->GetCursur(2);
 	CursurOn();
@@ -57,25 +56,23 @@ void DebugMode::ImGuiRender()
 		{
 			auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
 			MAP_MANAGER->SetCurMap(_map);
-			PlayerInit();
+			Init();
 		}
 	}
 
 	GAME->ImguiRender();
 }
 
-void DebugMode::PlayerInit()
+void DebugMode::Init()
 {
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));
 	_player->GetTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
 	_player->GetTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
-	_player->GetBeforeMove() = _player->GetTexture()->GetTransform()->GetPos();
+	_player->SetSpawnPos(_player->GetTexture()->GetTransform()->GetPos());
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->AddPlayer(_player);
-	
-	GAME->Update();
 	GAME->GetObjectUpdate() = true;
 
 	CAMERA->SetTarget(_player->GetTexture()->GetTransform());
