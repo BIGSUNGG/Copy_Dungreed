@@ -53,6 +53,7 @@ private:
 	
 	float _maxDelay = 0.1f;
 
+	shared_ptr<UI> _ui;
 	shared_ptr<Map> _curMap;
 	vector<vector<shared_ptr<Object>>> _optimized;
 	vector<shared_ptr<Collider>> _debugCollider;

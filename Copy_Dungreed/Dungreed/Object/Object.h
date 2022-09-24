@@ -23,7 +23,7 @@ public:
 	};
 
 public:
-	Object(int level, int num);
+	Object(int level = 0, int num = 0);
 	virtual ~Object() {}
 
 	virtual void Update();
@@ -47,11 +47,13 @@ public:
 	const bool& GetIsActive() { return _isActive; }
 	const Object_Type& GetType() { return _objectType; }
 	const Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
+	const Vector2& GetSpawnPos() { return _spawnPos; }
 	shared_ptr<Quad> GetTexture() { return _texture; }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 
 protected:
+	Vector2 _spawnPos = { 0,0 };
 	shared_ptr<Quad> _texture;
 	shared_ptr<RectCollider> _collider;
 	shared_ptr<Animation> _anim;

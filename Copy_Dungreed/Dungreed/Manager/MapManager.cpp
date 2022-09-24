@@ -10,45 +10,45 @@ void MapManager::Update()
 	{
 		if (GetCurMap()->CanGoLeft())
 		{
-			temp = make_shared<RectCollider>(Vector2(48.0f, 192.0f));
+			temp = make_shared<RectCollider>(_doorHalfSize);
 			temp->GetPos() = GetCurMap()->GetLeftDoor();
 			temp->Update();
 			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
-				SetCurMap({ _curMapIndex.first - 1, _curMapIndex.second });
+				SetCurMap({ _curMapIndex.x - 1, _curMapIndex.y });
 			}
 		}
 
 		if (GetCurMap()->CanGoRight())
 		{
-			temp = make_shared<RectCollider>(Vector2(48.0f, 192.0f));
+			temp = make_shared<RectCollider>(_doorHalfSize);
 			temp->GetPos() = GetCurMap()->GetRightDoor();
 			temp->Update();
 			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
-				SetCurMap({ _curMapIndex.first + 1, _curMapIndex.second });
+				SetCurMap({ _curMapIndex.x + 1, _curMapIndex.y });
 			}
 		}
 
 		if (GetCurMap()->CanGoTop())
 		{
-			temp = make_shared<RectCollider>(Vector2(192.0f, 48.0f));
+			temp = make_shared<RectCollider>(_doorHalfSize);
 			temp->GetPos() = GetCurMap()->GetTopDoor();
 			temp->Update();
 			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
-				SetCurMap({ _curMapIndex.first, _curMapIndex.second + 1 });
+				SetCurMap({ _curMapIndex.x, _curMapIndex.y + 1 });
 			}
 		}
 
 		if (GetCurMap()->CanGoBottom())
 		{
-			temp = make_shared<RectCollider>(Vector2(192.0f, 48.0f));
+			temp = make_shared<RectCollider>(_doorHalfSize);
 			temp->GetPos() = GetCurMap()->GetBottomDoor();
 			temp->Update();
 			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
-				SetCurMap({ _curMapIndex.first, _curMapIndex.second - 1 });
+				SetCurMap({ _curMapIndex.x, _curMapIndex.y - 1 });
 			}
 		}
 	}
@@ -81,11 +81,18 @@ void MapManager::FindTopMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = rand() % _mapSize[level].size() + 1;
+		int num = (rand() % _mapSize[level].size() + 1) - 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoBottom())
 		{
+			if(map->CanGoTop() && _maps[x][y+1] != nullptr)
+				continue;
+			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
+				continue;
+			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
+				continue;
+
 			_maps[x][y] = map;
 
 			if (_maps[x][y]->CanGoTop())
@@ -109,11 +116,18 @@ void MapManager::FindBottomMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = rand() % _mapSize[level].size() + 1;
+		int num = (rand() % _mapSize[level].size() + 1) - 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoTop())
 		{
+			if (map->CanGoBottom() && _maps[x][y - 1] != nullptr)
+				continue;
+			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
+				continue;
+			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
+				continue;
+
 			_maps[x][y] = map;
 
 			if (_maps[x][y]->CanGoBottom())
@@ -137,11 +151,18 @@ void MapManager::FindLeftMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = rand() % _mapSize[level].size() + 1;
+		int num = (rand() % _mapSize[level].size() + 1) - 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoRight())
 		{
+			if (map->CanGoTop() && _maps[x][y + 1] != nullptr)
+				continue;
+			if (map->CanGoBottom() && _maps[x][y - 1] != nullptr)
+				continue;
+			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
+				continue;
+
 			_maps[x][y] = map;
 
 			if (_maps[x][y]->CanGoTop())
@@ -165,11 +186,18 @@ void MapManager::FindRightMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = rand() % _mapSize[level].size() + 1;
+		int num = (rand() % _mapSize[level].size() + 1) - 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoLeft())
 		{
+			if (map->CanGoTop() && _maps[x][y + 1] != nullptr)
+				continue;
+			if (map->CanGoBottom() && _maps[x][y - 1] != nullptr)
+				continue;
+			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
+				continue;
+
 			_maps[x][y] = map;
 
 			if (_maps[x][y]->CanGoTop())
@@ -370,7 +398,7 @@ void MapManager::SaveAll()
 
 void MapManager::SetTarget(shared_ptr<Creature> target)
 {
-	for (auto& monster : _maps[_curMapIndex.first][_curMapIndex.second]->GetObjects()[Object::CREATURE])
+	for (auto& monster : _maps[_curMapIndex.x][_curMapIndex.y]->GetObjects()[Object::CREATURE])
 	{
 		auto creature = dynamic_pointer_cast<Creature>(monster);
 		if (creature != nullptr && creature->GetCreatureType() == Creature::ENEMY)
@@ -383,21 +411,46 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 
 void MapManager::SetCurMap(shared_ptr<Map> map)
 {
-	_maps[_curMapIndex.first][_curMapIndex.second] = map;
+	_maps[_curMapIndex.x][_curMapIndex.y] = map;
 	SetCurMap(_curMapIndex);
 
 	return;
 }
 
-void MapManager::SetCurMap(const pair<int,int>& index)
+void MapManager::SetCurMap(const Vector2& index)
 {
+	int moveX = index.x - _curMapIndex.x;
+	int moveY = index.y - _curMapIndex.y;
 	_curMapIndex = index;
-	GAME->SetMap(_maps[_curMapIndex.first][_curMapIndex.second]);
+	GAME->SetMap(_maps[_curMapIndex.x][_curMapIndex.y]);
 	if (GAME->GetPlayer() != nullptr)
 	{
 		GAME->AddPlayer(GAME->GetPlayer());
-		GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
-		GAME->GetPlayer()->GetTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
+		if (moveX > 0)
+		{
+			GAME->GetPlayer()->GetTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorHalfSize.x + 48);
+			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetLeftDoor().y - _doorHalfSize.y);
+		}
+		else if (moveX < 0)
+		{
+			GAME->GetPlayer()->GetTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorHalfSize.x - 48);
+			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetRightDoor().y - _doorHalfSize.y);
+		}
+		else if (moveY > 0)
+		{
+			GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
+			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorHalfSize.y + 48);
+		}
+		else if (moveY < 0)
+		{
+			GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
+			GAME->GetPlayer()->GetTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorHalfSize.y + 48);
+		}
+		else
+		{
+			GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = GetCurMap()->GetStartPos().x;
+			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetStartPos().y);
+		}
 		GAME->GetPlayer()->SetSpawnPos(GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos());
 	}
 	return;

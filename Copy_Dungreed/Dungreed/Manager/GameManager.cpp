@@ -5,6 +5,7 @@ GameManager* GameManager::_instance = nullptr;
 
 GameManager::GameManager()
 {
+	_ui = make_shared<NomalUI>();
 }
 
 GameManager::~GameManager()
@@ -30,6 +31,9 @@ void GameManager::Update()
 			object->Update();
 		}
 	}
+
+	if (_ui != nullptr)
+		_ui->Update();
 }
 
 void GameManager::PreRender()
@@ -60,19 +64,22 @@ void GameManager::Render()
 
 void GameManager::PostRender()
 {
-	if (_renderCollider == false)
-		return;
-
-	for (auto& objects : _optimized)
+	if (_renderCollider)
 	{
-		for (auto& object : objects)
+		for (auto& objects : _optimized)
 		{
-			if (object == nullptr)
-				continue;
+			for (auto& object : objects)
+			{
+				if (object == nullptr)
+					continue;
 
-			object->PostRender();
+				object->PostRender();
+			}
 		}
 	}
+
+	if (_ui != nullptr)
+		_ui->PostRender();
 }
 
 void GameManager::ImguiRender()
@@ -155,11 +162,12 @@ void GameManager::AddPlayer(shared_ptr<Player> player)
 {
 	if (_player = player)
 	{
-		for (auto& creature : _curMap->GetObjects()[Object::CREATURE])
+		for (auto& object : _curMap->GetObjects()[Object::CREATURE])
 		{
-			if (creature == _player)
+			auto creature = dynamic_pointer_cast<Creature>(object);
+			if (creature != nullptr && creature->GetCreatureType() == Creature::PLAYER)
 			{
-				creature = nullptr;
+				object = nullptr;
 			}
 		}
 	}

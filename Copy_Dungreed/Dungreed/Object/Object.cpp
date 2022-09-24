@@ -38,6 +38,7 @@ void Object::ReverseTexture()
 
 void Object::SetSpawnPos(Vector2 pos)
 {
+	_spawnPos = pos;
 	_texture->GetTransform()->GetPos() = pos;
 }
 

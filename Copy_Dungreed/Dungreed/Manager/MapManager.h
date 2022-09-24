@@ -31,9 +31,9 @@ public:
 
 	void SetTarget(shared_ptr<Creature> target);
 	void SetCurMap(shared_ptr<Map> map);
-	void SetCurMap(const pair<int,int>& index);
+	void SetCurMap(const Vector2& index);
 
-	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.first][_curMapIndex.second]; }
+	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.x][_curMapIndex.y]; }
 	const vector<vector<int>>& GetCurMapSize() { return _mapSize; }
 
 private:
@@ -42,8 +42,10 @@ private:
 	static MapManager* _instance;
 
 	unordered_map<int, unordered_map<int, shared_ptr<Map>>> _maps;
-	pair<int, int> _curMapIndex = {0,0};
+	Vector2 _curMapIndex = {0,0};
 	vector<vector<int>> _mapSize;
 	string _path;
+
+	const Vector2 _doorHalfSize = { 48.0f, 192.0f };
 };
 

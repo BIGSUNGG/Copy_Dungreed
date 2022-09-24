@@ -136,6 +136,7 @@ using namespace std;
 
 // UI
 #include "Dungreed/UI/UI.h"
+#include "Dungreed/UI/Nomal/NomalUI.h"
 
 // Map
 #include "Dungreed/Map/Map.h"

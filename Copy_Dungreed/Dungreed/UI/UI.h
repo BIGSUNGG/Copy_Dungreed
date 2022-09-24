@@ -1,13 +1,10 @@
 #pragma once
 class UI
 {
+public:
 	enum UI_Type
 	{
-		HP_BAR,
-		DASH_GAUGE,
-		MINI_MAP,
-		FOOD,
-		GOLD,
+		NOMAL,
 	};
 
 	UI();
@@ -21,7 +18,7 @@ class UI
 
 protected:
 	vector<shared_ptr<Object>> _objects;
-	UI_Type _uiType = UI_Type::HP_BAR;
+	UI_Type _uiType = UI_Type::NOMAL;
 
 };
 
