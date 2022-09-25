@@ -18,7 +18,8 @@ void Object::Update()
 
 void Object::Render()
 {
-	_texture->Render();
+	if(_render)
+		_texture->Render();
 }
 
 void Object::PostRender()

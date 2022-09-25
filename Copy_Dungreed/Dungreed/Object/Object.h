@@ -40,6 +40,7 @@ public:
 	virtual void SetTexture(shared_ptr<Quad> texture);
 
 
+	bool& GetRender() { return _render; }
 	const int& GetNum() { return _num; }
 	const int& GetLevel() { return _level; }
 	const bool& GetPlayingAnim() { return _playingAnim; }
@@ -58,6 +59,7 @@ protected:
 	shared_ptr<RectCollider> _collider;
 	shared_ptr<Animation> _anim;
 	Object_Type _objectType = Object_Type::TILE;
+	bool _render = true;
 
 	int _level;
 	int _num;

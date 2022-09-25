@@ -26,7 +26,7 @@ float4 SetColor(float2 uv)
 
 float4 PS(PixelInput input) : SV_TARGET
 {
-	if (selected > 0)
+	if (selected == 1)
 		return SetColor(input.uv);
 	
 	return map.Sample(samp, input.uv);

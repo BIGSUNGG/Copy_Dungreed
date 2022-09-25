@@ -10,14 +10,12 @@ public:
 	UI();
 	virtual ~UI() {}
 
-	virtual void Update();
-	virtual void PostRender();
+	virtual void Update() abstract;
+	virtual void PostRender() abstract;
 
 	virtual UI_Type GetType() { return _uiType; }
-	virtual vector<shared_ptr<Object>>& GetObjects() { return _objects; }
 
 protected:
-	vector<shared_ptr<Object>> _objects;
 	UI_Type _uiType = UI_Type::NOMAL;
 
 };
