@@ -17,16 +17,13 @@ NomalUI::NomalUI()
 	_hpBarBase->GetTexture()->SetTop(WIN_HEIGHT - 25);
 	_hpBarBase->SetSpawnPos(_hpBarBase->GetPos());
 
-	_hpBarGauge.reserve(_hpBarGaugeSize);
+	_hpBarGauge = make_shared<InstanceQuads>(L"Resource/Ui/Nomal/HpBar_Gauge.png", _hpBarGaugeSize);
 	for (int i = 0; i < _hpBarGaugeSize; i++)
 	{
-		auto bar = make_shared<Object>();
-		bar->SetTexture(make_shared<Quad>(L"Resource/Ui/Nomal/HpBar_Gauge.png"));
-		bar->GetTexture()->GetTransform()->GetPos().x = _hpBarEmpty->GetTexture()->Left() + 133 + i;
-		bar->GetTexture()->GetTransform()->GetPos().y = _hpBarBase->GetPos().y;
-		bar->SetSpawnPos(bar->GetPos());
-		_hpBarGauge.emplace_back(bar);
+		_hpBarGauge->GetTransforms()[i]->GetPos().x = _hpBarEmpty->GetTexture()->Left() + 133 + i;
+		_hpBarGauge->GetTransforms()[i]->GetPos().y = _hpBarBase->GetPos().y;
 	}
+	_hpBarGauge->ApplyChanges();
 }
 
 NomalUI::~NomalUI()
@@ -42,18 +39,13 @@ void NomalUI::Update()
 	if (GAME->GetPlayer() != nullptr)
 		hpRatio = GAME->GetPlayer()->GetStatus().GetHpRatio();
 
+	_hpBarGauge->SetRenderPercent(hpRatio);
 	for (int i = 0; i < _hpBarGaugeSize; i++)
 	{
-		
-		if ((float)i / (float)_hpBarGaugeSize < hpRatio)
-		{
-			_hpBarGauge[i]->SetPos(CAMERA->GetPos() + _hpBarGauge[i]->GetSpawnPos());
-			_hpBarGauge[i]->GetRender() = true;
-			_hpBarGauge[i]->Update();
-		}
-		else
-			_hpBarGauge[i]->GetRender() = false;
+		_hpBarGauge->GetTransforms()[i]->GetPos().x = _hpBarEmpty->GetTexture()->Left() + 133 + i;
+		_hpBarGauge->GetTransforms()[i]->GetPos().y = _hpBarBase->GetPos().y;
 	}
+	_hpBarGauge->ApplyChanges();
 
 	_hpBarBase->SetPos(CAMERA->GetPos() + _hpBarBase->GetSpawnPos());
 	_hpBarBase->Update();
@@ -62,7 +54,6 @@ void NomalUI::Update()
 void NomalUI::PostRender()
 {
 	_hpBarBase->Render();
-	for (auto& bar : _hpBarGauge)
-		bar->Render();
+	_hpBarGauge->Render();
 	_hpBarEmpty->Render();
 }

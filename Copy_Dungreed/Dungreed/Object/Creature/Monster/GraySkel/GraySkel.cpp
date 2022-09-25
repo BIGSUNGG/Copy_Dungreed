@@ -5,7 +5,7 @@ GraySkel::GraySkel(int level, int num)
 	: Monster(level, num)
 {
 	_status.SetMaxHp(80);
-	_status._atk = 40;
+	_status._atk = 25;
 }
 
 void GraySkel::AI()

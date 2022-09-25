@@ -183,6 +183,7 @@
     <ClInclude Include="Dungreed\Object\Creature\Monster\GraySkel\GraySkel.h" />
     <ClInclude Include="Dungreed\Manager\MapManager.h" />
     <ClInclude Include="Dungreed\UI\Nomal\NomalUI.h" />
+    <ClInclude Include="Object\InstanceQuads.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Dungreed\Object\Creature\Monster\GraySkel\GraySkel.cpp" />
     <ClCompile Include="Dungreed\Manager\MapManager.cpp" />
     <ClCompile Include="Dungreed\UI\Nomal\NomalUI.cpp" />
+    <ClCompile Include="Object\InstanceQuads.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
     <ClCompile Include="Framework\Math\Vector2.cpp" />
@@ -332,6 +334,22 @@
     <FxCompile Include="Shader\ColliderShader\ColliderVertexShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shader\InstancingShader\InstancingPixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shader\InstancingShader\InstancingVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shader\ObjectPixelShader.hlsl">

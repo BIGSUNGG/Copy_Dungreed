@@ -7,6 +7,7 @@ public:
 
 	virtual void Update();
 	virtual void Render();
+	void SetRender();
 
 	virtual void ReverseToX();
 	virtual void ReverseToY();

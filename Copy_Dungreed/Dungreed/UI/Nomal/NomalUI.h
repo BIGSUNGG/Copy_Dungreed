@@ -11,6 +11,6 @@ protected:
 	shared_ptr<Object> _hpBarBase;
 	shared_ptr<Object> _hpBarEmpty;
 	const int _hpBarGaugeSize = 294;
-	vector<shared_ptr<Object>> _hpBarGauge;
+	shared_ptr<InstanceQuads> _hpBarGauge;
 };
 

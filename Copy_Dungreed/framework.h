@@ -107,6 +107,7 @@ using namespace std;
 
 // Object
 #include "Object/Quad.h"
+#include "Object/InstanceQuads.h"
 
 // Status
 #include "Dungreed/Ect/Status/Status.h"

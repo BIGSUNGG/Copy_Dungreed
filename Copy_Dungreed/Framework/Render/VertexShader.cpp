@@ -91,7 +91,7 @@ void VertexShader::CreateInputLayout()
 
         temp = temp.substr(0, n);
 
-        if (temp == "Instance")
+        if (temp == "INSTANCE")
         {
             elementDesc.InputSlot = 1;
             elementDesc.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;

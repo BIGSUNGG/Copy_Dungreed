@@ -51,6 +51,21 @@ void Quad::Render()
 
 }
 
+void Quad::SetRender()
+{
+	_transform->SetBuffer(0);
+
+	IASetPT();
+
+	_texture->Set(0);
+
+	_vertexBuffer->IASetVertexBuffer(0);
+	_indexBuffer->IASetIndexBuffer();
+
+	_vertexShader->Set();
+	_pixelShader->Set();
+}
+
 void Quad::ReverseToX()
 {
     _vertices[0].uv.x = abs(_vertices[0].uv.x - 1);
