@@ -17,6 +17,9 @@ public:
 			return _instance;
 	}
 
+	const int& GetGold() { return _gold; }
+	const int& GetCurHungry() { return _hungry; }
+	const int& GetHungryMax() { return _hungryMax; }
 	const int& GetPlayerLevel() { return _playerLevel; }
 	const int& GetCurWeaponSlot() { return *_curWeaponSlot; }
 	shared_ptr<Weapon> GetCurWeapon() { return _weaponSlot->operator[](*_curWeaponSlot); }
@@ -33,6 +36,7 @@ private:
 
 	int _gold = 0;
 	int _hungry = 0;
+	int _hungryMax = 100;
 	int _playerLevel = 1;
 
 	int* _curWeaponSlot;

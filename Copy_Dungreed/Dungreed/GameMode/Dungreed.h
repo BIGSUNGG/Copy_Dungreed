@@ -14,7 +14,6 @@ public:
 
 private:
 	shared_ptr<Player> _player;
-	shared_ptr<Quad> _cursur;
 	float _gameRunTime = 0.0f;
 };
 

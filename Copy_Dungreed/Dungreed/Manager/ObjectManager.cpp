@@ -86,16 +86,15 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (object->GetTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
-	{
 		object->GetAnimation()->SetTexture(texture);
-	}
+
 	return object;
 }
 
@@ -145,16 +144,15 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (object->GetTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
-	{
 		object->GetAnimation()->SetTexture(texture);
-	}
+
 	return object;
 }
 
@@ -532,16 +530,15 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
-	if(object->GetTexture() == nullptr)
+	if (object->GetTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
-	{
 		object->GetAnimation()->SetTexture(texture);
-	}
+
 	return object;
 }
 
@@ -582,16 +579,15 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (object->GetTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
-	{
 		object->GetAnimation()->SetTexture(texture);
-	}
+
 	return object;
 }
 
@@ -653,16 +649,15 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (object->GetTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
-	{
 		object->GetAnimation()->SetTexture(texture);
-	}
+
 	return object;
 }
 
@@ -701,16 +696,15 @@ shared_ptr<Effect> ObjectManager::GetPlayerEffect(int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (effect->GetTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
-	{
 		effect->GetAnimation()->SetTexture(texture);
-	}
+
 	return effect;
 }
 
@@ -792,16 +786,15 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (effect->GetTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
-	{
 		effect->GetAnimation()->SetTexture(texture);
-	}
+
 	return effect;
 }
 
@@ -854,16 +847,14 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (effect->GetTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
-	{
 		effect->GetAnimation()->SetTexture(texture);
-	}
 
 	return effect;
 }
@@ -885,16 +876,14 @@ shared_ptr<Effect> ObjectManager::GetEnemyWeaponEffect(int type, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (effect->GetTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
-	{
 		effect->GetAnimation()->SetTexture(texture);
-	}
 
 	return effect;
 }
@@ -928,16 +917,14 @@ shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (bullet->GetTexture() == nullptr)
 		bullet->SetTexture(texture);
 
 	if (bullet->GetAnimation() != nullptr)
-	{
 		bullet->GetAnimation()->SetTexture(texture);
-	}
 
 	return bullet;
 }
@@ -981,16 +968,15 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (weapon->GetTexture() == nullptr)
 		weapon->SetTexture(texture);
 
 	if (weapon->GetAnimation() != nullptr)
-	{
 		weapon->GetAnimation()->SetTexture(texture);
-	}
+
 	return weapon;
 }
 
@@ -1061,16 +1047,14 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 		break;
 	}
 
-	if (texture == nullptr)
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	if (weapon->GetTexture() == nullptr)
 		weapon->SetTexture(texture);
 
 	if (weapon->GetAnimation() != nullptr)
-	{
 		weapon->GetAnimation()->SetTexture(texture);
-	}
 
 	return weapon;
 }
@@ -1093,6 +1077,9 @@ shared_ptr<Quad> ObjectManager::GetCursur(int num)
 	default:
 		break;
 	}
+
+	assert(texture != nullptr);
+	assert(texture->GetSize() != Vector2(0, 0));
 
 	return texture;
 }

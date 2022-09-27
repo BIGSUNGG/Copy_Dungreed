@@ -2,19 +2,22 @@
 #include "NomalUI.h"
 
 NomalUI::NomalUI()
+	: UI()
 {
 	_uiType = UI::GROUND;
 
+	_cursur = OBJ_MANAGER->GetCursur(2);
+
 	_hpBarEmpty = make_shared<Object>();
 	_hpBarEmpty->SetTexture(make_shared<Quad>(L"Resource/Ui/Nomal/HpBar_Empty.png"));
-	_hpBarEmpty->GetTexture()->SetLeft(25);
-	_hpBarEmpty->GetTexture()->SetTop(WIN_HEIGHT - 25);
+	_hpBarEmpty->GetTexture()->SetLeft(18);
+	_hpBarEmpty->GetTexture()->SetTop(WIN_HEIGHT - 18);
 	_hpBarEmpty->SetSpawnPos(_hpBarEmpty->GetPos());
 
 	_hpBarBase = make_shared<Object>();
 	_hpBarBase->SetTexture(make_shared<Quad>(L"Resource/Ui/Nomal/HpBar_Base.png"));
-	_hpBarBase->GetTexture()->SetLeft(25);
-	_hpBarBase->GetTexture()->SetTop(WIN_HEIGHT - 25);
+	_hpBarBase->GetTexture()->SetLeft(18);
+	_hpBarBase->GetTexture()->SetTop(WIN_HEIGHT - 18);
 	_hpBarBase->SetSpawnPos(_hpBarBase->GetPos());
 	
 	_hpBarGauge = make_shared<Object>(); 
@@ -35,11 +38,17 @@ NomalUI::NomalUI()
 	_weaponSlot2->GetTexture()->SetBottom(40);
 	_weaponSlot2->SetSpawnPos(_weaponSlot2->GetPos());
 
-	_goldIcon = make_shared<Object>();
-	_goldIcon->SetTexture(make_shared<Quad>(L"Resource/Ui/Nomal/WeaponSlot_2.png"));
-	_goldIcon->GetTexture()->SetRight(25);
-	_goldIcon->GetTexture()->SetBottom(80);
-	_goldIcon->SetSpawnPos(_goldIcon->GetPos());
+	_coinIcon = make_shared<Object>();
+	_coinIcon->SetTexture(make_shared<Quad>(L"Resource/Icon/CoinIcon.png"));
+	_coinIcon->GetTexture()->SetLeft(37);
+	_coinIcon->GetTexture()->SetBottom(77);
+	_coinIcon->SetSpawnPos(_coinIcon->GetPos());
+
+	_hungryIcon = make_shared<Object>();
+	_hungryIcon->SetTexture(make_shared<Quad>(L"Resource/Icon/HungryIcon.png"));
+	_hungryIcon->GetTexture()->SetLeft(26);
+	_hungryIcon->GetTexture()->SetBottom(33);
+	_hungryIcon->SetSpawnPos(_hungryIcon->GetPos());
 }
 
 NomalUI::~NomalUI()
@@ -48,34 +57,43 @@ NomalUI::~NomalUI()
 
 void NomalUI::Update()
 {
-	_hpBarEmpty->SetPos(CAMERA->GetPos() + _hpBarEmpty->GetSpawnPos());
+	_cursur->GetTransform()->GetPos() = MOUSE_POS;
+	_cursur->Update();
+
 	_hpBarEmpty->Update();
 
 	float hpRatio = 0.0f;
 	if (GAME->GetPlayer() != nullptr)
 		hpRatio = GAME->GetPlayer()->GetStatus().GetHpRatio();
 
-	_hpBarGauge->SetPos(CAMERA->GetPos() + _hpBarGauge->GetSpawnPos());
+	_hpBarGauge->SetPos(_hpBarGauge->GetSpawnPos());
 	_hpBarGauge->GetTexture()->GetTransform()->GetScale().x = hpRatio;
 	_hpBarGauge->GetTexture()->SetLeft(_hpBarGauge->GetPos().x - _hpBarGauge->GetTexture()->GetHalfSize().x);
 	_hpBarGauge->Update();
 
-	_hpBarBase->SetPos(CAMERA->GetPos() + _hpBarBase->GetSpawnPos());
 	_hpBarBase->Update();
 
 	if (INVENTORY->GetCurWeaponSlot() == 0)
 	{
-		_weaponSlot1->SetPos(CAMERA->GetPos() + _weaponSlot1->GetSpawnPos());
-		_weaponSlot2->SetPos(CAMERA->GetPos() + _weaponSlot2->GetSpawnPos());
+		_weaponSlot1->SetPos(_weaponSlot1->GetSpawnPos());
+		_weaponSlot2->SetPos(_weaponSlot2->GetSpawnPos());
 	}
 	else
 	{
-		_weaponSlot1->SetPos(CAMERA->GetPos() + _weaponSlot2->GetSpawnPos());
-		_weaponSlot2->SetPos(CAMERA->GetPos() + _weaponSlot1->GetSpawnPos());
+		_weaponSlot1->SetPos(_weaponSlot2->GetSpawnPos());
+		_weaponSlot2->SetPos(_weaponSlot1->GetSpawnPos());
 	}
 	_weaponSlot1->Update();
 
 	_weaponSlot2->Update();
+
+	_coinIcon->Update();
+
+	_hungryIcon->Update();
+}
+
+void NomalUI::SetRTV()
+{
 }
 
 void NomalUI::PostRender()
@@ -95,7 +113,7 @@ void NomalUI::PostRender()
 		_weaponSlot2->Render();
 	}
 	shared_ptr<Quad> weaponImage = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetTexture()->GetTextureFile());
-	weaponImage->GetTransform()->GetPos() = CAMERA->GetPos() + _weaponSlot1->GetSpawnPos();
+	weaponImage->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
 	switch (INVENTORY->GetCurWeapon()->GetWeaponType())
 	{
 	case Weapon::MELEE:
@@ -111,6 +129,10 @@ void NomalUI::PostRender()
 
 	weaponImage->Update();
 	weaponImage->Render();
+
+	_coinIcon->Render();
+	_hungryIcon->Render();
+
 	int maxHp = GAME->GetPlayer()->GetStatus()._hpMax;
 	int hp = GAME->GetPlayer()->GetStatus()._hp;
 	if (hp < 0)
@@ -122,19 +144,43 @@ void NomalUI::PostRender()
 	hpText += to_wstring(maxHp);
 	RECT hpTextRect =
 	{
-		_hpBarGauge->GetSpawnPos().x - (_textSize * hpText.size() / 4.5),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) + _textSize / 1.4,
-		_hpBarGauge->GetSpawnPos().x + (_textSize * hpText.size() / 4.5),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) - _textSize / 1.4
+		_hpBarGauge->GetSpawnPos().x - (_hpBarTextSize * hpText.size() / 5),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) + _hpBarTextSize / 1.4,
+		_hpBarGauge->GetSpawnPos().x + (_hpBarTextSize * hpText.size()),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) - _hpBarTextSize / 1.4
 	};
 
-	DirectWrite::GetInstance()->RenderText(hpText, hpTextRect, _textSize);
+	DirectWrite::GetInstance()->RenderText(hpText, hpTextRect, _hpBarTextSize);
 
 	std::wstring levelText;
 	levelText += to_wstring(INVENTORY->GetPlayerLevel());
 	RECT levelTextRect =
 	{
-		(_hpBarGauge->GetSpawnPos().x - 210) - (_textSize * levelText.size() / 4.5),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) + _textSize / 1.4,
-		(_hpBarGauge->GetSpawnPos().x - 210) + (_textSize * levelText.size() / 4.5),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) - _textSize / 1.4
+		(_hpBarGauge->GetSpawnPos().x - 215) - (_hpBarTextSize * levelText.size() / 5),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) + _hpBarTextSize / 1.4,
+		(_hpBarGauge->GetSpawnPos().x - 215) + (_hpBarTextSize * levelText.size()),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) - _hpBarTextSize / 1.4
 	};
 
-	DirectWrite::GetInstance()->RenderText(levelText, levelTextRect, _textSize);
+	DirectWrite::GetInstance()->RenderText(levelText, levelTextRect, _hpBarTextSize);
+
+	std::wstring goldText;
+	goldText += to_wstring(INVENTORY->GetGold());
+	RECT goldTextRect =
+	{
+		((_coinIcon->GetSpawnPos().x + _coinIcon->GetTexture()->GetHalfSize().x) + 26),										(WIN_HEIGHT - _coinIcon->GetSpawnPos().y) + _infoTextSize / 1.4,
+		((_coinIcon->GetSpawnPos().x + _coinIcon->GetTexture()->GetHalfSize().x) + 26) + (_infoTextSize * goldText.size()),	(WIN_HEIGHT - _coinIcon->GetSpawnPos().y) - _infoTextSize / 1.4
+	};
+
+	DirectWrite::GetInstance()->RenderText(goldText, goldTextRect, _infoTextSize);
+
+	std::wstring hungryText;
+	hungryText += to_wstring(INVENTORY->GetCurHungry());
+	hungryText += L" / ";
+	hungryText += to_wstring(INVENTORY->GetHungryMax());
+	RECT hungryTextRect =
+	{
+		((_hungryIcon->GetSpawnPos().x + _hungryIcon->GetTexture()->GetHalfSize().x) + 15),											(WIN_HEIGHT - _hungryIcon->GetSpawnPos().y) + _infoTextSize / 1.4,
+		((_hungryIcon->GetSpawnPos().x + _hungryIcon->GetTexture()->GetHalfSize().x) + 15) + (_infoTextSize * hungryText.size()),	(WIN_HEIGHT - _hungryIcon->GetSpawnPos().y) - _infoTextSize / 1.4
+	};
+
+	DirectWrite::GetInstance()->RenderText(hungryText, hungryTextRect, _infoTextSize);
+
+	_cursur->Render();
 }

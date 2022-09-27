@@ -81,7 +81,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			Timer::GetInstance()->Update();
 			InputManager::GetInstance()->Update();
 			program->Update();
+
+			program->PreRender();
 			program->Render();
+			program->PostRender();
+			program->ImGuiRender();
+			program->RenderEnd();
 		}
 	}
 

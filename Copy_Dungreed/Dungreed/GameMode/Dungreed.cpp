@@ -13,7 +13,6 @@ Dungreed::Dungreed()
 
 	Init();
 
-	_cursur = OBJ_MANAGER->GetCursur(2);
 	CursurOff();
 }
 
@@ -23,9 +22,6 @@ void Dungreed::Update()
 
 	GAME->Update();
 	MAP_MANAGER->Update();
-
-	_cursur->GetTransform()->GetPos() = MOUSE_WORLD_POS;
-	_cursur->Update();
 }
 
 void Dungreed::PreRender()
@@ -63,8 +59,6 @@ void Dungreed::ImGuiRender()
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
 	}
-
-	_cursur->Render();
 
 	GAME->ImguiRender();
 }

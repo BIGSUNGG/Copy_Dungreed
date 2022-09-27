@@ -28,9 +28,19 @@ shared_ptr<Texture>& Texture::Add(wstring file)
     shared_ptr<Texture> texture = make_shared<Texture>(srv, image);
     texture->_file = file;
 
-    _texturesMap[file] = texture;
+	return _texturesMap[file] = texture;
+}
 
-    return _texturesMap[file];
+shared_ptr<Texture>& Texture::Add(wstring file, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv)
+{
+	if (_texturesMap.count(file) > 0)
+		return _texturesMap[file];
+
+	ScratchImage image;
+
+	shared_ptr<Texture> texture = make_shared<Texture>(srv, image);
+
+	return _texturesMap[file] = texture;
 }
 
 void Texture::Set(UINT slot)

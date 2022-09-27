@@ -8,6 +8,7 @@ Camera::Camera()
 	_transform = make_shared<Transform>();
 	_moveTransform = make_shared<Transform>();
 	_projectionBuffer = make_shared<MatrixBuffer>();
+	_uiCameraBuffer = make_shared<MatrixBuffer>();
 
 	SetProjectionBuffer(2);
 }
@@ -29,8 +30,6 @@ void Camera::Update()
 	_moveTransform->UpdateWorld();
 	_moveTransform->GetPos().x = -_transform->GetPos().x;
 	_moveTransform->GetPos().y = -_transform->GetPos().y;
-
-	_transform->SetBuffer(1);
 
 	_velocity = (_transform->GetPos() - _beforeMove) / (float)DELTA_TIME * -1;
 	_beforeMove = _transform->GetPos();

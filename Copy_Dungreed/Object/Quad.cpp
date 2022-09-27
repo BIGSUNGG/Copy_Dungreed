@@ -1,4 +1,4 @@
-#include "framework.h"
+ï»¿#include "framework.h"
 #include "Quad.h"
 
 Quad::Quad()
@@ -9,7 +9,7 @@ Quad::Quad(wstring file, wstring vs, wstring ps)
     : _vs(vs)
     , _ps(ps)
 {
-    // Texture ¼¼ÆÃ
+    // Texture ì„¸íŒ…
 
     _texture = Texture::Add(file);
     _size = _texture->GetSize();
@@ -22,6 +22,21 @@ Quad::Quad(wstring file, wstring vs, wstring ps)
     _pixelShader = ADD_PS(ps);
 
     _transform = make_shared<Transform>();
+}
+
+Quad::Quad(wstring file, Vector2 size, wstring vs, wstring ps)
+{
+	_texture = Texture::Add(file);
+	_size = size;
+
+	CreateVertices();
+	_vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
+	_indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
+
+	_vertexShader = ADD_VS(vs);
+	_pixelShader = ADD_PS(ps);
+
+	_transform = make_shared<Transform>();
 }
 
 Quad::~Quad()
@@ -107,12 +122,16 @@ void Quad::CreateVertices()
 {
     Vector2 halfSize = _size * 0.5f;
 
-    _vertices.clear();
+	if (halfSize.Length() == 0)
+	{
+		halfSize = { 0.5f , 0.5f };
+	}
 
-    _vertices.emplace_back(-halfSize.x, halfSize.y,0,0); // ¿Þ À§
-    _vertices.emplace_back(halfSize.x, halfSize.y, 1, 0); // ¿À À§
-    _vertices.emplace_back(-halfSize.x, -halfSize.y, 0, 1); // ¿Þ ¾Æ·¡
-    _vertices.emplace_back(halfSize.x, -halfSize.y, 1, 1); // ¿À ¾Æ·¡
+	_vertices.clear();
+    _vertices.emplace_back(-halfSize.x, halfSize.y,0,0); // ì™¼ ìœ„
+    _vertices.emplace_back(halfSize.x, halfSize.y, 1, 0); // ì˜¤ ìœ„
+    _vertices.emplace_back(-halfSize.x, -halfSize.y, 0, 1); // ì™¼ ì•„ëž˜
+    _vertices.emplace_back(halfSize.x, -halfSize.y, 1, 1); // ì˜¤ ì•„ëž˜
 
     _indices.clear();
     _indices.push_back(0);

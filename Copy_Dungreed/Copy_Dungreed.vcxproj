@@ -199,6 +199,7 @@
     <ClInclude Include="Framework\Utility\InputManager.h" />
     <ClInclude Include="Dungreed\Object\Creature\Player\Player.h" />
     <ClInclude Include="Program\Program.h" />
+    <ClInclude Include="Framework\Render\RenderTarget.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Framework\State\SamplerState.h" />
     <ClInclude Include="Framework\Render\SRV.h" />
@@ -289,6 +290,7 @@
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Weapon.cpp" />
     <ClCompile Include="Dungreed\Ect\Status\Status.cpp" />
+    <ClCompile Include="Framework\Render\RenderTarget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

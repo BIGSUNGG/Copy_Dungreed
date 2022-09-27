@@ -66,6 +66,11 @@ void Device::CreateBackBuffer()
     _deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
 }
 
+void Device::SetRTV()
+{
+	_deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
+}
+
 void Device::Clear()
 {
     FLOAT myColorR = 0.0f / 255.0f;

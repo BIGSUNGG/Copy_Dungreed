@@ -6,8 +6,11 @@ public:
 	~Program();
 
 	void Update();
+	void PreRender();
 	void Render();
+	void PostRender();
 	void ImGuiRender();
+	void RenderEnd();
 
 private:
 	shared_ptr<GameMode> _gameMode;

@@ -34,38 +34,40 @@ void Program::Update()
 		_gameMode = make_shared<Dungreed>();
 }
 
-void Program::Render()
+void Program::PreRender()
 {
+	Camera::GetInstance()->SetProjectionBuffer(WIN_WIDTH, WIN_HEIGHT);
+	Camera::GetInstance()->SetCameraWorldBuffer();
+
+	_gameMode->PreRender();
+
+	Device::GetInstance()->SetRTV();
 	Device::GetInstance()->Clear();
 
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	Camera::GetInstance()->SetProjectionBuffer(WIN_WIDTH, WIN_HEIGHT);
 	Camera::GetInstance()->SetViewPort(WIN_WIDTH, WIN_HEIGHT);
 
 	ALPHA_STATE->SetState();
+}
 
-	_gameMode->PreRender();
-
+void Program::Render()
+{
 	_gameMode->Render();
+}
 
+void Program::PostRender()
+{
 	wstring fps = L"FPS : " + to_wstring((int)Timer::GetInstance()->GetFPS());
 	RECT rect = { 0,0,100,100 };
 
 	DirectWrite::GetInstance()->GetDC()->BeginDraw();
 	DirectWrite::GetInstance()->RenderText(fps, rect);
 
+	Camera::GetInstance()->SetUiCameraBuffer();
 	_gameMode->PostRender();
-
-	ImGuiRender();
-
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
-	DirectWrite::GetInstance()->GetDC()->EndDraw();
-	Device::GetInstance()->Present();
 }
 
 void Program::ImGuiRender()
@@ -110,5 +112,14 @@ void Program::ImGuiRender()
 		break;
 	}
 	_gameMode->ImGuiRender();
+}
+
+void Program::RenderEnd()
+{
 	ImGui::End();
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+	DirectWrite::GetInstance()->GetDC()->EndDraw();
+	Device::GetInstance()->Present();
 }

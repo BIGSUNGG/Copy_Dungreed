@@ -38,6 +38,8 @@ void GameManager::Update()
 
 void GameManager::PreRender()
 {
+	if (_ui != nullptr)
+		_ui->SetRTV();
 }
 
 void GameManager::Render()
