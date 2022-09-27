@@ -69,7 +69,7 @@ void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 void Map::Reset()
 {
 	_objects.clear();
-	_objects.resize(6);
+	_objects.resize(Object::_objectTypeCount);
 	for (auto& object : _objects)
 		object.reserve(100);
 	_objectCount = 0;

@@ -58,7 +58,7 @@ private:
 	float _followSpeed = 200.0f;
 	
 	shared_ptr<Transform> _target;
-	Vector2 _offset = CENTER;
+	Vector2 _offset = Vector2(CENTER.x,CENTER.y - 40);
 	bool _freeMode = false;
 
 	Vector2 _leftBottom = { 0.f,0.f };

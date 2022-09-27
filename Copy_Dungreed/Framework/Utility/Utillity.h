@@ -39,6 +39,21 @@ static string CharToStr(char* value, int size)
 	return result;
 }
 
+static wstring CharToWstr(char* value, int size = 1000)
+{
+	wstring result;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (value[i] == '\0')
+			break;
+
+		result.push_back(value[i]);
+	}
+
+	return result;
+}
+
 static void SwitchBool(bool& value)
 {
 	if (value == true)

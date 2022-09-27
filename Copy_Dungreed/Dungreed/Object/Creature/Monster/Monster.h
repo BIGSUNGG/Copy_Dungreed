@@ -7,10 +7,11 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
+	virtual void SetTarget(shared_ptr<Creature> target);
+protected:
 	virtual void SearchTarget();
 	virtual void AI();
-	virtual void SetTarget(shared_ptr<Creature> target);
-	virtual bool GetDamage(Status status) override;
+	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
 
 	virtual void SpawnEffect();
 

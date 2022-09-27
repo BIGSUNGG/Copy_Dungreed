@@ -17,24 +17,8 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-	virtual bool GetDamage(Status status);
-	virtual bool GiveDamage(shared_ptr<Creature> target);
-
-	virtual void MoveCharacter();
-	virtual void Death();
-	virtual void Attack();
-
-	virtual void MoveLeft();
-	virtual void MoveRight();
-	virtual void Jump();
-
-	virtual void TileCollisionEvent(shared_ptr<Object> objects);
-	virtual void TileCollison(shared_ptr<Tile> tile);
-	virtual void TileBlockCollision(shared_ptr<Tile> tile);
-	virtual void TileFloorCollision(shared_ptr<Tile> tile);
-	virtual void TileLeftStairCollision(shared_ptr<Tile> tile);
-	virtual void TileRightStairCollision(shared_ptr<Tile> tile);
-	virtual void CreatureCollision(shared_ptr<Creature> creature);
+	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon);
+	virtual bool GiveDamage(shared_ptr<Creature> target , shared_ptr<Item> weapon = nullptr);
 
 	const bool& GetIsFalling() { return _isFalling; }
 	const Vector2& GetVelocity() { return _velocity; }
@@ -45,6 +29,23 @@ public:
 	virtual void AddWeapon(shared_ptr<Weapon> weapon);
 	virtual void SetSpawnPos(Vector2 pos) override;
 	
+protected:
+	virtual void CollisionEvent(shared_ptr<Object> objects);
+	virtual void TileCollison(shared_ptr<Tile> tile);
+	virtual void TileBlockCollision(shared_ptr<Tile> tile);
+	virtual void TileFloorCollision(shared_ptr<Tile> tile);
+	virtual void TileLeftStairCollision(shared_ptr<Tile> tile);
+	virtual void TileRightStairCollision(shared_ptr<Tile> tile);
+	virtual void CreatureCollision(shared_ptr<Creature> creature);
+
+	virtual void MoveCharacter();
+	virtual void Death();
+	virtual void Attack();
+
+	virtual void MoveLeft();
+	virtual void MoveRight();
+	virtual void Jump();
+
 protected:
 	Creature_Type _creatureType = ENEMY;
 	vector<shared_ptr<Weapon>> _weaponSlot;

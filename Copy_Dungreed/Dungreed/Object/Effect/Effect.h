@@ -4,11 +4,8 @@ class Effect : public Object
 public:
 	enum Effect_Type
 	{
-		NONE,
-		MAP,
-		ITEM,
-		PLAYER,
-		MONSTER,
+		DESTROY,
+		LOOP,
 	};
 
 public:
@@ -19,7 +16,7 @@ public:
 	virtual Effect_Type& GetEffectType() { return _effectType; }
 
 protected:
-	Effect_Type _effectType = PLAYER;
+	Effect_Type _effectType = DESTROY;
 
 };
 

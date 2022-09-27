@@ -18,7 +18,7 @@ void Item::Render()
 
 bool Item::GiveDamage(shared_ptr<Creature> target)
 {
-	bool attackSuccess = _owner.lock()->GiveDamage(target);
+	bool attackSuccess = _owner.lock()->GiveDamage(target,shared_from_this());
 	return attackSuccess;
 }
 

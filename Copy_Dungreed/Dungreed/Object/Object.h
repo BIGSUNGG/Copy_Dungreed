@@ -47,13 +47,15 @@ public:
 	const bool& GetReversed() { return _reversed; }
 	const bool& GetIsActive() { return _isActive; }
 	const Object_Type& GetType() { return _objectType; }
-	const Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
+	Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
 	const Vector2& GetSpawnPos() { return _spawnPos; }
 	shared_ptr<Quad> GetTexture() { return _texture; }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 
+	static const int _objectTypeCount = 6;
 protected:
+
 	Vector2 _spawnPos = { 0,0 };
 	shared_ptr<Quad> _texture;
 	shared_ptr<RectCollider> _collider;

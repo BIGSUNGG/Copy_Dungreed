@@ -3,6 +3,7 @@
 
 MapEditor::MapEditor()
 {
+	GAME->Reset();
 	_modeType = MAP_EDITOR;
 
 	_map = MAP_MANAGER->Load(_mapLevel,_mapNum);

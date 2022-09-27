@@ -20,6 +20,7 @@ public:
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 	const Vector2& GetSize() { return _size; }
+	const wstring& GetTextureFile() { return _texture->GetFile(); }
 	Vector2 GetHalfSize() { return _size * 0.5f; }
 
 	float Top()		{ return _transform->GetPos().y + (GetHalfSize().y * _transform->GetScale().y); }

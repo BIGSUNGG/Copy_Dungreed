@@ -65,6 +65,8 @@
 
 #define MAP_MANAGER MapManager::GetInstance()
 
+#define INVENTORY InventoryManager::GetInstance()
+
 #define EXCEPT -1
 #define BASIC 0
 

@@ -6,15 +6,16 @@ public:
 
 	virtual void Update() override;
 
-	virtual void DustEffect();
-	virtual void DoubleJumpEffect();
+protected:
+	virtual void Dash();
+	virtual void Jump() override;
 
 	virtual void MouseEvent();
 	virtual void MovementEvent();
 	virtual void InputEvent();
 
-	virtual void Dash();
-	virtual void Jump() override;
+	virtual void DustEffect();
+	virtual void DoubleJumpEffect();
 
 protected:
 	bool _doubleJumped = false;

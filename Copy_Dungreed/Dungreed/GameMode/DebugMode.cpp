@@ -3,6 +3,7 @@
 
 DebugMode::DebugMode()
 {
+	GAME->Reset();
 	_modeType = DEBUG;
 
 	auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);

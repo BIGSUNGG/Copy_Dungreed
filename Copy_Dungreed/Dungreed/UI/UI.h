@@ -4,7 +4,8 @@ class UI
 public:
 	enum UI_Type
 	{
-		NOMAL,
+		NONE,
+		GROUND,
 	};
 
 	UI();
@@ -16,7 +17,7 @@ public:
 	virtual UI_Type GetType() { return _uiType; }
 
 protected:
-	UI_Type _uiType = UI_Type::NOMAL;
+	UI_Type _uiType = UI_Type::NONE;
 
 };
 

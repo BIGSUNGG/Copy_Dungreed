@@ -12,17 +12,18 @@ Program::~Program()
 
 void Program::Update()
 {
-	_runTime += DELTA_TIME;
+	if (KEY_DOWN(VK_F1))
+		SwitchBool(GAME->GetPause());
 
-	Camera::GetInstance()->Update();
+	_runTime += DELTA_TIME;
 
 	if (GAME->GetPause())
 		return;
 
+	Camera::GetInstance()->Update();
+
 	_gameMode->Update();
 
-	if (KEY_DOWN(VK_F1))
-		SwitchBool(GAME->GetPause());
 	if (KEY_DOWN(VK_F2))
 		SwitchBool(GAME->GetRenderTexture());
 	if (KEY_DOWN(VK_F3))
@@ -59,7 +60,6 @@ void Program::Render()
 	_gameMode->PostRender();
 
 	ImGuiRender();
-
 
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

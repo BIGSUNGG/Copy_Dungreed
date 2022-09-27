@@ -45,7 +45,7 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
-	for (auto& objects : _optimized)
+	for (auto& objects : _objectInScreen)
 	{
 		for (auto& object : objects)
 		{
@@ -66,7 +66,7 @@ void GameManager::PostRender()
 {
 	if (_renderCollider)
 	{
-		for (auto& objects : _optimized)
+		for (auto& objects : _objectInScreen)
 		{
 			for (auto& object : objects)
 			{
@@ -84,7 +84,7 @@ void GameManager::PostRender()
 
 void GameManager::ImguiRender()
 {
-	for (auto& objects : _optimized)
+	for (auto& objects : _objectInScreen)
 	{
 		for (auto& object : objects)
 		{
@@ -121,13 +121,13 @@ void GameManager::Optimize()
 	temp->GetPos() = CAMERA->GetPos() + CENTER;
 	temp->Update();
 
-	_optimized.clear();
-	_optimized.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false));	
-	_optimized.emplace_back(GetCollisions(temp, Object::WALL, false, false));	
-	_optimized.emplace_back(GetCollisions(temp, Object::TILE, false, false));
-	_optimized.emplace_back(GetCollisions(temp, Object::CREATURE, false, false));	
-	_optimized.emplace_back(GetCollisions(temp, Object::ECT, false, false));
-	_optimized.emplace_back(GetCollisions(temp, Object::EFFECT, false, false));
+	_objectInScreen.clear();
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false));	
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::WALL, false, false));	
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::TILE, false, false));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false));	
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false));
 }
 
 void GameManager::AddObject(shared_ptr<Object> object, int type, bool toFront)
@@ -160,7 +160,7 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
-	if (_player = player)
+	if (_player != nullptr)
 	{
 		for (auto& object : _curMap->GetObjects()[Object::CREATURE])
 		{
@@ -170,11 +170,6 @@ void GameManager::AddPlayer(shared_ptr<Player> player)
 				object = nullptr;
 			}
 		}
-	}
-	else if (_player != nullptr)
-	{
-		_player->GetTexture()->GetTransform()->GetPos() = { INT_MAX,INT_MAX };
-		_player->Death();
 	}
 
 	_player = player;
@@ -229,7 +224,57 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 	return result;
 }
 
+void GameManager::SetUI(UI::UI_Type type)
+{
+	switch (type)
+	{
+	case UI::NONE:
+		_ui = nullptr;
+		break;
+	case UI::GROUND:
+		_ui = make_shared<NomalUI>();
+		break;
+	default:
+		break;
+	}
+}
+
 void GameManager::SetMap(shared_ptr<Map> addedMap)
 {
 	_curMap = addedMap;
+	_objectInScreen.clear();
+	for (auto& object : _curMap->GetObjects()[Object::ECT])
+	{
+		if(object == nullptr)
+			continue;
+
+		if (object->GetType() == Object::ECT)
+		{
+			auto temp = dynamic_pointer_cast<Ect>(object);
+			if (temp->GetEctType() == Ect::BULLET)
+				object = nullptr;
+		}
+	}
+
+	for (auto& object : _curMap->GetObjects()[Object::EFFECT])
+	{
+		if (object == nullptr)
+			continue;
+
+		if (object->GetType() == Object::EFFECT)
+		{
+			auto temp = dynamic_pointer_cast<Effect>(object);
+			if (temp->GetEffectType() == Effect::DESTROY)
+				object = nullptr;
+		}
+	}
+}
+
+void GameManager::Reset()
+{
+	_ui = nullptr;
+	_curMap = nullptr;
+	_objectInScreen.clear();
+	_debugCollider.clear();
+	_player = nullptr;
 }

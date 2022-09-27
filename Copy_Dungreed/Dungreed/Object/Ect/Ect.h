@@ -12,6 +12,8 @@ public:
 public:
 	Ect(int level,int num);
 
+	const Ect_Type& GetEctType() { return _ectType; }
+
 protected:
 	Ect_Type _ectType = UNKNOWN;
 };

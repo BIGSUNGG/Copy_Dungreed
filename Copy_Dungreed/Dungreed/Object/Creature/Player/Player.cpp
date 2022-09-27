@@ -9,6 +9,9 @@ Player::Player(int level, int num)
 
 	_status.SetMaxHp(80);
 	_status._atk = 40;
+
+	INVENTORY->SetWeaponSlot(&_weaponSlot);
+	INVENTORY->SetCurWeaponSlot(&_curWeaponSlot);
 }
 
 void Player::Update()

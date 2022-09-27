@@ -4,8 +4,8 @@ class GraySkel : public Monster
 public:
 	GraySkel(int level, int num);
 
+protected:
 	void AI() override;
-	virtual void TileBlockCollision(shared_ptr<Tile> tile) override;
 
 protected:
 	float _targetDistanceGround = 100.0f;

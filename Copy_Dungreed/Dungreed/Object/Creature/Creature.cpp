@@ -60,18 +60,18 @@ void Creature::PostRender()
 		_weaponSlot[_curWeaponSlot]->PostRender();
 }
 
-bool Creature::GetDamage(Status enemyStatus)
+bool Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
-	_status._hp -= enemyStatus._atk;
+	_status._hp -= enemy->GetStatus()._atk;
 	if (_status._hp <= 0)
 		Death();
 
 	return true;
 }
 
-bool Creature::GiveDamage(shared_ptr<Creature> target)
+bool Creature::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
 {
-	bool attackSuccess = target->GetDamage(_status);
+	bool attackSuccess = target->GetDamage(shared_from_this(),weapon);
 	return attackSuccess;
 }
 
@@ -96,7 +96,8 @@ void Creature::MoveCharacter()
 
 	for (auto& object : collisions)
 	{
-		TileCollisionEvent(object);
+		auto tile = dynamic_pointer_cast<Tile>(object);
+		TileCollison(tile);
 	}
 	_velocity = (_texture->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
 
@@ -138,7 +139,7 @@ void Creature::Jump()
 		_jumpPower = _jumpPowerMax;
 }
 
-void Creature::TileCollisionEvent(shared_ptr<Object> object)
+void Creature::CollisionEvent(shared_ptr<Object> object)
 {
 	switch (object->GetType())
 	{

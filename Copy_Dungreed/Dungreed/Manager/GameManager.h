@@ -44,7 +44,10 @@ public:
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	shared_ptr<Player> GetPlayer() { return _player; }
 
+	void SetUI(UI::UI_Type type);
 	void SetMap(shared_ptr<Map> addedMap);
+
+	void Reset();
 
 private:
 	GameManager();
@@ -55,7 +58,7 @@ private:
 
 	shared_ptr<UI> _ui;
 	shared_ptr<Map> _curMap;
-	vector<vector<shared_ptr<Object>>> _optimized;
+	vector<vector<shared_ptr<Object>>> _objectInScreen;
 	vector<shared_ptr<Collider>> _debugCollider;
 	shared_ptr<Player> _player;
 

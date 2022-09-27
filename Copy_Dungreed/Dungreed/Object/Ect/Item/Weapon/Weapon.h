@@ -18,23 +18,25 @@ public:
 	virtual void Update();
 
 	virtual void Attack() override;
-	virtual void CheckAttack();
 	virtual void Skill() override;
 	virtual void Damaged(const Status& status) override;
 
-	virtual void AttackEffect();
 	virtual void SetAttackEffect(function<shared_ptr<Effect>()> effect) { _attackEffect = effect; }
 
 	virtual void SetWeapon();
-	virtual void SetOffset(Vector2 offset) { _offset = offset; }
-	virtual void SetAppendAngle(vector<float> angle) { _appendAngle = angle; }
-	virtual void SetAttackDelay(float delay) { _attackDelay = delay; }
-	virtual void SetAttackRange(Vector2 range) { _attackRange = range; }
-	virtual void SetGiveDamageDelay(float delay) { _giveDamageDelay = delay; }
+	void SetOffset(Vector2 offset) { _offset = offset; }
+	void SetAppendAngle(vector<float> angle) { _appendAngle = angle; }
+	void SetAttackDelay(float delay) { _attackDelay = delay; }
+	void SetAttackRange(Vector2 range) { _attackRange = range; }
+	void SetGiveDamageDelay(float delay) { _giveDamageDelay = delay; }
 	virtual void SetOwner(shared_ptr<Creature> owner) override;
-	virtual void SetShowTo(const float& showDirection) { _showDirection = showDirection; }
+	void SetShowTo(const float& showDirection) { _showDirection = showDirection; }
 
+	const Weapon_Type& GetWeaponType() { return _weaponType; }
 	virtual const bool& GetFastRender() { return _fastRender[_index]; }
+protected:
+	virtual void AttackEffect();
+	virtual void CheckAttack();
 
 protected:
 	Weapon_Type _weaponType = MELEE;

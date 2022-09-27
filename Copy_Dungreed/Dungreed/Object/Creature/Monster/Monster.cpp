@@ -77,12 +77,12 @@ void Monster::SetTarget(shared_ptr<Creature> target)
 	SpawnEffect();
 }
 
-bool Monster::GetDamage(Status status)
+bool Monster::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
 	if(_spawn == false)
 		return false;
 
-	return Creature::GetDamage(status);
+	return Creature::GetDamage(enemy,weapon);
 }
 
 void Monster::SpawnEffect()

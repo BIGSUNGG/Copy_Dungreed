@@ -47,11 +47,3 @@ void GraySkel::AI()
 		Attack();
 	}
 }
-
-void GraySkel::TileBlockCollision(shared_ptr<Tile> tile)
-{
-	Monster::TileBlockCollision(tile);
-	
-	//if (_beforeMove.x - (_texture->GetHalfSize().x * _texture->GetTransform()->GetScale().x) <= tile->GetPos().y)
-	Jump();
-}
