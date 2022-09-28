@@ -4,7 +4,6 @@
 Dungreed::Dungreed()
 {
 	GAME->Reset();
-	GAME->SetUI(UI::GROUND);
 	_modeType = DUNGREED;
 
 	CAMERA->GetFreeMode() = false;
@@ -22,11 +21,13 @@ void Dungreed::Update()
 
 	GAME->Update();
 	MAP_MANAGER->Update();
+	UI_MANAGER->Update();
 }
 
 void Dungreed::PreRender()
 {
 	GAME->PreRender();
+	UI_MANAGER->PreRender();
 }
 
 void Dungreed::Render()
@@ -37,6 +38,7 @@ void Dungreed::Render()
 void Dungreed::PostRender()
 {
 	GAME->PostRender();
+	UI_MANAGER->PostRender();
 }
 
 void Dungreed::ImGuiRender()

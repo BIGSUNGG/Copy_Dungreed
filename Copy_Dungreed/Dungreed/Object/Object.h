@@ -10,6 +10,7 @@ public:
 		CREATURE,
 		ECT,
 		EFFECT,
+		UI,
 	};
 
 	enum State
@@ -27,6 +28,7 @@ public:
 	virtual ~Object() {}
 
 	virtual void Update();
+	virtual void PreRender();
 	virtual void Render();
 	virtual void PostRender();
 	virtual void ImGuiRender();
@@ -53,7 +55,7 @@ public:
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 
-	static const int _objectTypeCount = 6;
+	static const int _objectTypeCount = 7;
 protected:
 
 	Vector2 _spawnPos = { 0,0 };
@@ -63,8 +65,8 @@ protected:
 	Object_Type _objectType = Object_Type::TILE;
 	bool _render = true;
 
-	int _level;
-	int _num;
+	int _level = 0;
+	int _num = 0;
 
 	State _state = IDLE;
 	bool _isActive = true;

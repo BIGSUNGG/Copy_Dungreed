@@ -67,6 +67,8 @@
 
 #define INVENTORY InventoryManager::GetInstance()
 
+#define UI_MANAGER UIManager::GetInstance()
+
 #define EXCEPT -1
 #define BASIC 0
 

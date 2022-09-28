@@ -278,6 +278,9 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 		case 26:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/TownBasic_StairR2.png");
 			break;
+		case 27:
+			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_4.png");
+			break;
 		}
 		break;
 	case Map::LEVEL_01:

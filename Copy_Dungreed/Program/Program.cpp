@@ -66,7 +66,6 @@ void Program::PostRender()
 	DirectWrite::GetInstance()->GetDC()->BeginDraw();
 	DirectWrite::GetInstance()->RenderText(fps, rect);
 
-	Camera::GetInstance()->SetUiCameraBuffer();
 	_gameMode->PostRender();
 }
 

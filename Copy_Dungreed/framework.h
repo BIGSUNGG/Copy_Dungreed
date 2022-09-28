@@ -137,8 +137,11 @@ using namespace std;
 #include "Dungreed/Object/Creature/Monster/GraySkel/GraySkel.h"
 
 // UI
-#include "Dungreed/UI/UI.h"
-#include "Dungreed/UI/Nomal/NomalUI.h"
+#include "Dungreed/Object/UI/UI.h"
+#include "Dungreed/Object/UI/HpBar/UI_HpBar.h"
+#include "Dungreed/Object/UI/WeaponSlot/UI_WeaponSlot.h"
+#include "Dungreed/Object/UI/Info/UI_Info.h"
+#include "Dungreed/Object/UI/MiniMap/UI_MiniMap.h"
 
 // Map
 #include "Dungreed/Map/Map.h"
@@ -149,6 +152,7 @@ using namespace std;
 #include "Dungreed/Manager/MapManager.h"
 #include "Dungreed/Manager/GraphicManager.h"
 #include "Dungreed/Manager/InventoryManager.h"
+#include "Dungreed/Manager/UIManager.h"
 
 // GameMode
 #include "Dungreed/GameMode/GameMode.h"

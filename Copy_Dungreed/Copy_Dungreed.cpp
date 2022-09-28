@@ -60,6 +60,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	MapManager::Create();
 	GraphicManager::Create();
 	InventoryManager::Create();
+	UIManager::Create();
 
 	srand(static_cast<UINT>(time(nullptr)));
 
@@ -91,6 +92,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	// 싱글톤 클래스 삭제
+	UIManager::Delete();
 	InventoryManager::Delete();
 	GraphicManager::Delete();
 	MapManager::Delete();

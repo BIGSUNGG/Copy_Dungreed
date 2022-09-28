@@ -182,8 +182,8 @@
     <ClInclude Include="Framework\Collider\RectCollider.h" />
     <ClInclude Include="Dungreed\Object\Creature\Monster\GraySkel\GraySkel.h" />
     <ClInclude Include="Dungreed\Manager\MapManager.h" />
-    <ClInclude Include="Dungreed\UI\Nomal\NomalUI.h" />
     <ClInclude Include="Dungreed\Manager\InventoryManager.h" />
+    <ClInclude Include="Dungreed\Object\UI\HpBar\UI_HpBar.h" />
     <ClInclude Include="Object\InstanceQuads.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
@@ -216,9 +216,13 @@
     <ClInclude Include="TypeDef.h" />
     <ClInclude Include="Framework\Render\VertexShader.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
-    <ClInclude Include="Dungreed\UI\UI.h" />
     <ClInclude Include="Dungreed\Object\Wall\Wall.h" />
     <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Weapon.h" />
+    <ClInclude Include="Dungreed\Manager\UIManager.h" />
+    <ClInclude Include="Dungreed\Object\UI\UI.h" />
+    <ClInclude Include="Dungreed\Object\UI\WeaponSlot\UI_WeaponSlot.h" />
+    <ClInclude Include="Dungreed\Object\UI\Info\UI_Info.h" />
+    <ClInclude Include="Dungreed\Object\UI\MiniMap\UI_MiniMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
@@ -250,8 +254,8 @@
     <ClCompile Include="Framework\Collider\RectCollider.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\GraySkel\GraySkel.cpp" />
     <ClCompile Include="Dungreed\Manager\MapManager.cpp" />
-    <ClCompile Include="Dungreed\UI\Nomal\NomalUI.cpp" />
     <ClCompile Include="Dungreed\Manager\InventoryManager.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\HpBar\UI_HpBar.cpp" />
     <ClCompile Include="Object\InstanceQuads.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
@@ -286,11 +290,15 @@
     <ClCompile Include="Framework\Render\Texture.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\Tile.cpp" />
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
-    <ClCompile Include="Dungreed\UI\UI.cpp" />
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Weapon.cpp" />
     <ClCompile Include="Dungreed\Ect\Status\Status.cpp" />
     <ClCompile Include="Framework\Render\RenderTarget.cpp" />
+    <ClCompile Include="Dungreed\Manager\UIManager.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\UI.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\WeaponSlot\UI_WeaponSlot.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\Info\UI_Info.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\MiniMap\UI_MiniMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

@@ -4,7 +4,7 @@ using namespace Microsoft::WRL;
 class RenderTarget
 {
 public:
-	RenderTarget(float width, float height);
+	RenderTarget(float width = WIN_WIDTH, float height = WIN_HEIGHT);
 	~RenderTarget();
 
 	void Set();

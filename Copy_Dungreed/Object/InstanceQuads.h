@@ -2,7 +2,8 @@
 class InstanceQuads
 {
 public:
-	InstanceQuads(wstring file, int size);
+	InstanceQuads(wstring file, int count);
+	InstanceQuads(shared_ptr<Quad> quad, int count);
 
 	virtual void Update();
 	virtual void Render();

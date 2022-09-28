@@ -16,6 +16,10 @@ void Object::Update()
 	_collider->Update();
 }
 
+void Object::PreRender()
+{
+}
+
 void Object::Render()
 {
 	if(_render)

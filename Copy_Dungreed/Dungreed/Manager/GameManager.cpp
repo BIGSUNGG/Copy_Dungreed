@@ -5,7 +5,6 @@ GameManager* GameManager::_instance = nullptr;
 
 GameManager::GameManager()
 {
-	_ui = make_shared<NomalUI>();
 }
 
 GameManager::~GameManager()
@@ -31,15 +30,10 @@ void GameManager::Update()
 			object->Update();
 		}
 	}
-
-	if (_ui != nullptr)
-		_ui->Update();
 }
 
 void GameManager::PreRender()
 {
-	if (_ui != nullptr)
-		_ui->SetRTV();
 }
 
 void GameManager::Render()
@@ -79,9 +73,6 @@ void GameManager::PostRender()
 			}
 		}
 	}
-
-	if (_ui != nullptr)
-		_ui->PostRender();
 }
 
 void GameManager::ImguiRender()
@@ -226,21 +217,6 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 	return result;
 }
 
-void GameManager::SetUI(UI::UI_Type type)
-{
-	switch (type)
-	{
-	case UI::NONE:
-		_ui = nullptr;
-		break;
-	case UI::GROUND:
-		_ui = make_shared<NomalUI>();
-		break;
-	default:
-		break;
-	}
-}
-
 void GameManager::SetMap(shared_ptr<Map> addedMap)
 {
 	_curMap = addedMap;
@@ -274,7 +250,6 @@ void GameManager::SetMap(shared_ptr<Map> addedMap)
 
 void GameManager::Reset()
 {
-	_ui = nullptr;
 	_curMap = nullptr;
 	_objectInScreen.clear();
 	_debugCollider.clear();
