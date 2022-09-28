@@ -101,6 +101,15 @@ void Creature::MoveCharacter()
 	}
 	_velocity = (_texture->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
 
+	if (_texture->Left() < MAP_MANAGER->GetCurMap()->GetLeftBottom().x)
+		_texture->SetLeft(MAP_MANAGER->GetCurMap()->GetLeftBottom().x);
+	else if (_texture->Right() > MAP_MANAGER->GetCurMap()->GetRightTop().x)
+		_texture->SetRight(MAP_MANAGER->GetCurMap()->GetRightTop().x);
+	else if (_texture->Top() > MAP_MANAGER->GetCurMap()->GetRightTop().y)
+		_texture->SetTop(MAP_MANAGER->GetCurMap()->GetRightTop().y);
+	else if (_texture->Bottom() < MAP_MANAGER->GetCurMap()->GetLeftBottom().y)
+		Death();
+
 	_beforeMove = _texture->GetTransform()->GetPos();
 	_movement = { 0,0 };
 }

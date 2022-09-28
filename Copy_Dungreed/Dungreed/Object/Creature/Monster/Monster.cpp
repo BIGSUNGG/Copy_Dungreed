@@ -6,6 +6,7 @@ Monster::Monster(int level, int num)
 {
 	_creatureType = Creature_Type::ENEMY;
 	_speed = 300.0f;
+	_render = false;
 }
 
 void Monster::Update()
@@ -74,6 +75,7 @@ void Monster::AI()
 void Monster::SetTarget(shared_ptr<Creature> target)
 {
 	_target = target;
+	_render = true;
 	SpawnEffect();
 }
 

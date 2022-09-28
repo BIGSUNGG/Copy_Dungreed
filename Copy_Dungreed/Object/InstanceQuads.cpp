@@ -22,6 +22,9 @@ InstanceQuads::InstanceQuads(wstring file, int count)
 InstanceQuads::InstanceQuads(shared_ptr<Quad> quad, int count)
 	: _quad(quad)
 {
+	_quad->SetVS(L"Shader/InstancingShader/InstancingVertexShader.hlsl");
+	_quad->SetPS(L"Shader/InstancingShader/InstancingPixelShader.hlsl");
+
 	_instanceDataes.resize(count);
 
 	for (auto& instanceData : _instanceDataes)
@@ -38,6 +41,7 @@ InstanceQuads::InstanceQuads(shared_ptr<Quad> quad, int count)
 
 void InstanceQuads::Update()
 {
+	_quad->Update();
 }
 
 void InstanceQuads::Render()

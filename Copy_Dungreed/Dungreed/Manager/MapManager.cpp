@@ -455,6 +455,7 @@ void MapManager::SetCurMap(const Vector2& index)
 	}
 
 	UI_MANAGER->ChangedMap();
+	CAMERA->Update();
 	return;
 }
 

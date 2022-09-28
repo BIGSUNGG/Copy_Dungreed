@@ -11,12 +11,15 @@ public:
 	virtual void Refresh();
 
 protected:
-	shared_ptr<RenderTarget> _rtv;
-	shared_ptr<Quad> _rtvQuad;
+	const Vector2 _miniTileSize = Vector2(5, 5);
+	const float _miniMapSizeRatio = 0.05f;
 
-	const Vector2 _miniTileSize = Vector2(500, 500);
+	shared_ptr<RenderTarget> _miniMapRtv;
+	shared_ptr<RenderTarget> _miniTileRtv;
+	shared_ptr<Quad> _miniMapBase;
+
 	shared_ptr<InstanceQuads> _miniTile;
-	shared_ptr<InstanceQuads> _miniPlayer;
-	shared_ptr<InstanceQuads> _miniEnemy;
+	vector<shared_ptr<Object>> _miniEnemy;
+	shared_ptr<Object> _miniPlayer;
 };
 
