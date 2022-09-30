@@ -7,7 +7,7 @@ UI_MiniMap::UI_MiniMap()
 
 
 	_miniMapRtv = make_shared<RenderTarget>(WIN_WIDTH,WIN_HEIGHT);
-	float color[4] = { 1,1,1,0.1 };
+	float color[4] = { 1,1,1,0 };
 	_miniMapRtv->SetColor(color);
 
 	_miniTileRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
@@ -20,8 +20,7 @@ UI_MiniMap::UI_MiniMap()
 
 void UI_MiniMap::Update()
 {
-	if (_miniMapBase != nullptr)
-		_miniMapBase->Update();
+	_miniMapBase->Update();
 
 	{
 		Vector2 pos = (GAME->GetPlayer()->GetPos() - MAP_MANAGER->GetCurMap()->GetLeftBottom()) * _miniMapSizeRatio;
@@ -31,6 +30,8 @@ void UI_MiniMap::Update()
 	}
 	_miniPlayer->Update();
 
+	_miniTile->Update();
+	
 	{
 		auto creature = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
 		for (int i = 0; i < _miniEnemy.size(); i++)

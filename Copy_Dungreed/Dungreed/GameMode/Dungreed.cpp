@@ -8,7 +8,7 @@ Dungreed::Dungreed()
 
 	CAMERA->GetFreeMode() = false;
 
-	MAP_MANAGER->MakeRandomMap(1, 0);
+	MAP_MANAGER->MakeRandomMap(0, 0);
 
 	Init();
 

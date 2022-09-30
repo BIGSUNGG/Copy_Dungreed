@@ -15,15 +15,19 @@ void Animation::Update()
 	if (_isPlaying == true)
 	{
 		_animRunTime += DELTA_TIME;
-		if (_animRunTime >= _animSpeed[_index.first][_index.second])
+		if (_animRunTime >= _animSpeed[_index.first][_index.second] && _isPlaying == true)
 		{
 			_animRunTime = 0;
 			_index.second++;
 			if (_index.second < _animList[_index.first].size())
 			{
+				if (_beforeChange != nullptr)
+					_beforeChange(_texture);
 				_texture->SetTexture(_animList[_index.first][_index.second]);
-				if(_refreshSize)
+				if (_refreshSize)
 					_texture->Refresh();
+				if (_afterChange != nullptr)
+					_afterChange(_texture);
 			}
 			else
 			{
@@ -34,12 +38,20 @@ void Animation::Update()
 					break;
 				case Animation::Anim_State::LOOP:
 					_index.second = 0;
+					if(_beforeChange != nullptr)
+						_beforeChange(_texture);
 					_texture->SetTexture(_animList[_index.first][_index.second]);
+					if (_afterChange != nullptr)
+						_afterChange(_texture);
 					break;
 				case Animation::Anim_State::PINGPONG:
 					_index.second = 1;
 					reverse(_animList[_index.first].begin(), _animList[_index.first].end());
+					if (_beforeChange != nullptr)
+						_beforeChange(_texture);
 					_texture->SetTexture(_animList[_index.first][_index.second]);
+					if (_afterChange != nullptr)
+						_afterChange(_texture);
 					break;
 				}
 			}

@@ -68,6 +68,10 @@ void Bullet::DestroyEvent()
 		effect->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
 		effect->GetTexture()->GetTransform()->GetAngle() = _texture->GetTransform()->GetAngle();
 
+		Vector2 direction = _direction;
+		effect->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {quad->GetTransform()->GetPos() -= (direction * quad->GetHalfSize().y); });
+		effect->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {quad->GetTransform()->GetPos() += (direction * quad->GetHalfSize().y); });
+
 		GAME->AddEffect(effect);
 	}
 }

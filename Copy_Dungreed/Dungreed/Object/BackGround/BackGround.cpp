@@ -19,7 +19,7 @@ void BackGround::Update()
 			_texture->GetTransform()->GetPos() = CAMERA->GetPos() + CENTER;
 			break;
 		case BackGround::FOLLOW_PLAYER:
-			_texture->GetTransform()->GetPos() += (CAMERA->GetVelocity() * DELTA_TIME) / _ratio;
+			_texture->GetTransform()->GetPos() += (CAMERA->GetVelocity() * DELTA_TIME) / _perspectiveRatio;
 			break;
 		default:
 			break;
