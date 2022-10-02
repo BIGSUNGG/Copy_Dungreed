@@ -14,6 +14,7 @@ public:
 public:
 	UI();
 
+	virtual void Refresh();
 	UI_Type GetUIType() { return _uiType; }
 
 protected:

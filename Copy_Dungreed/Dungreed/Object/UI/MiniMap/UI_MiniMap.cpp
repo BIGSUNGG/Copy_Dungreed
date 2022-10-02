@@ -33,7 +33,7 @@ void UI_MiniMap::Update()
 	_miniTile->Update();
 	
 	{
-		auto creature = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
+		auto& creature = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
 		for (int i = 0; i < _miniEnemy.size(); i++)
 		{
 			if (creature[i] == GAME->GetPlayer() || creature[i] == nullptr || creature[i]->GetRender() == false)

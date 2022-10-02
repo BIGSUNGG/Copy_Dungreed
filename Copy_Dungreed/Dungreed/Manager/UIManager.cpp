@@ -11,7 +11,8 @@ void UIManager::Update()
 	switch (_state)
 	{
 	case UIManager::UI_State::NOMAL:
-		_hpBar->Update();
+		_enemyHpBar->Update();
+		_playerHpBar->Update();
 		_weaponSlot->Update();
 		_info->Update();
 		_miniMap->Update();
@@ -37,7 +38,8 @@ void UIManager::PostRender()
 	switch (_state)
 	{
 	case UIManager::UI_State::NOMAL:
-		_hpBar->Render();
+		_enemyHpBar->Render();
+		_playerHpBar->Render();
 		_weaponSlot->Render();
 		_info->Render();
 		_miniMap->Render();
@@ -55,13 +57,15 @@ void UIManager::PostRender()
 void UIManager::ChangedMap()
 {
 	_miniMap->Refresh();
+	_enemyHpBar->Refresh();
 }
 
 UIManager::UIManager()
 {
 	_cursur = OBJ_MANAGER->GetCursur(2);
 
-	_hpBar = make_shared<UI_HpBar>();
+	_playerHpBar = make_shared<UI_PlayerHpBar>();
+	_enemyHpBar = make_shared<UI_EnemyHpBar>();
 	_weaponSlot = make_shared<UI_WeaponSlot>();
 	_info = make_shared<UI_Info>();
 	_miniMap = make_shared<UI_MiniMap>();

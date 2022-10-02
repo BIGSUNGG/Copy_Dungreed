@@ -138,7 +138,8 @@ using namespace std;
 
 // UI
 #include "Dungreed/Object/UI/UI.h"
-#include "Dungreed/Object/UI/HpBar/UI_HpBar.h"
+#include "Dungreed/Object/UI/HpBar/UI_PlayerHpBar.h"
+#include "Dungreed/Object/UI/HpBar/UI_EnemyHpBar.h"
 #include "Dungreed/Object/UI/WeaponSlot/UI_WeaponSlot.h"
 #include "Dungreed/Object/UI/Info/UI_Info.h"
 #include "Dungreed/Object/UI/MiniMap/UI_MiniMap.h"

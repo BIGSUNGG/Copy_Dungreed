@@ -4,3 +4,7 @@
 UI::UI()
 {
 }
+
+void UI::Refresh()
+{
+}

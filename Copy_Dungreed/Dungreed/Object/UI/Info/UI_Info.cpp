@@ -5,17 +5,13 @@ UI_Info::UI_Info()
 {
 	_uiType = UI::INFO;
 
-	_coinIcon = make_shared<Object>();
-	_coinIcon->SetTexture(make_shared<Quad>(L"Resource/Icon/CoinIcon.png"));
-	_coinIcon->GetTexture()->SetLeft(37);
-	_coinIcon->GetTexture()->SetBottom(77);
-	_coinIcon->SetSpawnPos(_coinIcon->GetPos());
+	_coinIcon = make_shared<Quad>(L"Resource/Icon/CoinIcon.png");
+	_coinIcon->SetLeft(37);
+	_coinIcon->SetBottom(77);
 
-	_hungryIcon = make_shared<Object>();
-	_hungryIcon->SetTexture(make_shared<Quad>(L"Resource/Icon/HungryIcon.png"));
-	_hungryIcon->GetTexture()->SetLeft(26);
-	_hungryIcon->GetTexture()->SetBottom(33);
-	_hungryIcon->SetSpawnPos(_hungryIcon->GetPos());
+	_hungryIcon = make_shared<Quad>(L"Resource/Icon/HungryIcon.png");
+	_hungryIcon->SetLeft(26);
+	_hungryIcon->SetBottom(33);
 
 }
 
@@ -35,8 +31,8 @@ void UI_Info::Render()
 	goldText += to_wstring(INVENTORY->GetGold());
 	RECT goldTextRect =
 	{
-		((_coinIcon->GetSpawnPos().x + _coinIcon->GetTexture()->GetHalfSize().x) + 26),										(WIN_HEIGHT - _coinIcon->GetSpawnPos().y) + _infoTextSize / 1.4,
-		((_coinIcon->GetSpawnPos().x + _coinIcon->GetTexture()->GetHalfSize().x) + 26) + (_infoTextSize * goldText.size()),	(WIN_HEIGHT - _coinIcon->GetSpawnPos().y) - _infoTextSize / 1.4
+		((_coinIcon->GetTransform()->GetPos().x + _coinIcon->GetHalfSize().x) + 26),										(WIN_HEIGHT - _coinIcon->GetTransform()->GetPos().y) + _infoTextSize / 1.9,
+		((_coinIcon->GetTransform()->GetPos().x + _coinIcon->GetHalfSize().x) + 26) + (_infoTextSize * goldText.size()),	(WIN_HEIGHT - _coinIcon->GetTransform()->GetPos().y) - _infoTextSize / 1.9
 	};
 
 	DirectWrite::GetInstance()->RenderText(goldText, goldTextRect, _infoTextSize);
@@ -47,8 +43,8 @@ void UI_Info::Render()
 	hungryText += to_wstring(INVENTORY->GetHungryMax());
 	RECT hungryTextRect =
 	{
-		((_hungryIcon->GetSpawnPos().x + _hungryIcon->GetTexture()->GetHalfSize().x) + 15),											(WIN_HEIGHT - _hungryIcon->GetSpawnPos().y) + _infoTextSize / 1.4,
-		((_hungryIcon->GetSpawnPos().x + _hungryIcon->GetTexture()->GetHalfSize().x) + 15) + (_infoTextSize * hungryText.size()),	(WIN_HEIGHT - _hungryIcon->GetSpawnPos().y) - _infoTextSize / 1.4
+		((_hungryIcon->GetTransform()->GetPos().x + _hungryIcon->GetHalfSize().x) + 15),											(WIN_HEIGHT - _hungryIcon->GetTransform()->GetPos().y) + _infoTextSize / 1.9,
+		((_hungryIcon->GetTransform()->GetPos().x + _hungryIcon->GetHalfSize().x) + 15) + (_infoTextSize * hungryText.size()),	(WIN_HEIGHT - _hungryIcon->GetTransform()->GetPos().y) - _infoTextSize / 1.9
 	};
 
 	DirectWrite::GetInstance()->RenderText(hungryText, hungryTextRect, _infoTextSize);

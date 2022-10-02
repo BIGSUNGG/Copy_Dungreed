@@ -8,8 +8,8 @@ public:
 	virtual void Render() override;
 
 protected:
-	shared_ptr<Object> _coinIcon;
-	shared_ptr<Object> _hungryIcon;
+	shared_ptr<Quad> _coinIcon;
+	shared_ptr<Quad> _hungryIcon;
 
 	const float _infoTextSize = 30.0f;
 

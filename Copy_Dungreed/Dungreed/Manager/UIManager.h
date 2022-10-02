@@ -42,7 +42,8 @@ private:
 	shared_ptr<Quad> _cursur;
 
 	shared_ptr<UI_MiniMap> _miniMap;
-	shared_ptr<UI_HpBar> _hpBar;
+	shared_ptr<UI_PlayerHpBar> _playerHpBar;
+	shared_ptr<UI_EnemyHpBar> _enemyHpBar;
 	shared_ptr<UI_WeaponSlot> _weaponSlot;
 	shared_ptr<UI_Info> _info;
 
