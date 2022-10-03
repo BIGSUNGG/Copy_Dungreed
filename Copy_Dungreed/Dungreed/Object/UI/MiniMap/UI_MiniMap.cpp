@@ -2,13 +2,14 @@
 #include "UI_MiniMap.h"
 
 UI_MiniMap::UI_MiniMap()
+	: UI()
 {
 	_uiType = UI::MINIMAP;
 
 
 	_miniMapRtv = make_shared<RenderTarget>(WIN_WIDTH,WIN_HEIGHT);
 	float color[4] = { 1,1,1,0 };
-	_miniMapRtv->SetColor(color);
+	_miniMapRtv->Color(color);
 
 	_miniTileRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 

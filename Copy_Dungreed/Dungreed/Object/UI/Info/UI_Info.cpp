@@ -2,6 +2,7 @@
 #include "UI_Info.h"
 
 UI_Info::UI_Info()
+	: UI()
 {
 	_uiType = UI::INFO;
 

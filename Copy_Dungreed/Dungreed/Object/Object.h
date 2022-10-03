@@ -57,20 +57,20 @@ public:
 
 	static const int _objectTypeCount = 7;
 protected:
-
+	Object_Type _objectType = Object_Type::TILE;
 	Vector2 _spawnPos = { 0,0 };
+	bool _isActive = true;
+
 	shared_ptr<Quad> _texture;
 	shared_ptr<RectCollider> _collider;
 	shared_ptr<Animation> _anim;
-	Object_Type _objectType = Object_Type::TILE;
-	bool _render = true;
+	bool _playingAnim = false;
+	shared_ptr<ObjectBuffer> _buffer;
 
 	int _level = 0;
 	int _num = 0;
-
-	State _state = IDLE;
-	bool _isActive = true;
-	bool _playingAnim = false;
+	bool _render = true;
 	bool _reversed = false;
+
 };
 

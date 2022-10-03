@@ -2,6 +2,7 @@
 #include "UI_WeaponSlot.h"
 
 UI_WeaponSlot::UI_WeaponSlot()
+	: UI()
 {
 	_uiType = UI::WEAPON_SLOT;
 

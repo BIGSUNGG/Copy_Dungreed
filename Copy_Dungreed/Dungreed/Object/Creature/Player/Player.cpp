@@ -118,7 +118,7 @@ void Player::MovementEvent()
 		{
 			_dashRunTime += DELTA_TIME;
 
-			if (_dashRunTime >= _dashMaxTime)
+			if (_dashRunTime >= _dashRunTimeMax)
 				_dashSlow = true;
 		}
 	}

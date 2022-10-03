@@ -57,16 +57,20 @@ protected:
 
 	Status _status;
 
+	float _speed = 450.0f;
+
 	float _jumpPower = 0.0f;
 	float _jumpPowerMax = 1800.0f;
 
 	float _gravityPower = 5000.0f;
+
+	float _damagedRunTime = 0.1f;
+	const float _damagedRunTimeMax = 0.05f;
 
 	bool _isFalling = false;
 	bool _passFloor = false;
 	bool _passTile = false;
 	bool _onStair = false;
 	bool _gravity = true;
-	float _speed = 450.0f;
 };
 

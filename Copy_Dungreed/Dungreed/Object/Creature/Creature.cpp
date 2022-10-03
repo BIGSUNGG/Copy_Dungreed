@@ -10,6 +10,12 @@ Creature::Creature(int level, int num)
 
 void Creature::Update()
 {
+	_damagedRunTime += DELTA_TIME;
+	if (_damagedRunTime <= _damagedRunTimeMax)
+		_buffer->_data.selected = 1;
+	else
+		_buffer->_data.selected = 0;
+
 	_onStair = false;
 
 	if (GAME->GetObjectUpdate())
@@ -63,8 +69,13 @@ void Creature::PostRender()
 bool Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
 	_status._hp -= enemy->GetStatus()._atk;
+
 	if (_status._hp <= 0)
 		Death();
+
+	_damagedRunTime = 0.0f;
+	_buffer->_data.selected = 1;
+	_buffer->_data.value1 = 1;
 
 	return true;
 }
@@ -118,10 +129,10 @@ void Creature::Death()
 {
 	_isActive = false;
 
-	shared_ptr<Effect> dieEffect = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 0);
-	dieEffect->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
+	shared_ptr<Effect> deathEffect = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 0);
+	deathEffect->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
-	GAME->AddEffect(dieEffect);
+	GAME->AddEffect(deathEffect);
 }
 
 void Creature::Attack()

@@ -49,90 +49,18 @@ private:
 	Data _data;
 };
 
-class FrameBuffer : public ConstantBuffer
-{
-public:
-	struct Data
-	{
-		XMFLOAT2 _maxFrame;
-		XMFLOAT2 _curFrame;
-	}_data;
-
-	FrameBuffer()
-	: ConstantBuffer(&_data, sizeof(Data))
-	{
-		_data._maxFrame = { 1,1 };
-		_data._curFrame = { 1,1 };
-	}
-};
-
-class ActionBuffer : public ConstantBuffer
-{
-public:
-	struct Data
-	{
-		// 16바이트씩 끊어서 읽는다.. => 16바이트의 정수배로 정보를 줘야함.
-		Vector2 _startPos;
-		Vector2 _maxSize;
-		Vector2 _size;
-		Vector2 padding;
-	}_data;
-	
-	ActionBuffer()
-	: ConstantBuffer(&_data, sizeof(Data))
-	{
-		_data._startPos = { 0,0 };
-		_data._maxSize = { 0,0 };
-		_data._size = { 0,0 };
-		_data.padding = { 0,0 };
-	}
-};
-
-class FilterBuffer : public ConstantBuffer
+class ObjectBuffer : public ConstantBuffer
 {
 public:
 	struct Data
 	{
 		int selected = 0;
-		int value1 = 0;
-		int value2 = 0;
-		int value3 = 0;
+		float value1 = 0;
+		float value2 = 0;
+		float value3 = 0;
 	}_data;
 
-	FilterBuffer()
-		: ConstantBuffer(&_data, sizeof(Data))
-	{
-	}
-};
-
-class ImageSizeBuffer : public ConstantBuffer
-{
-public:
-	struct Data
-	{
-		XMFLOAT2 size = { 0.0f,0.0f };
-		XMFLOAT2 padding = { 0.0f,0.0f };
-	}_data;
-
-	ImageSizeBuffer()
-		: ConstantBuffer(&_data, sizeof(Data))
-	{
-	}
-};
-
-class ButtonBuffer : public ConstantBuffer
-{
-public:
-	struct Data
-	{
-		int _state = 0;
-		float _hover = 0.0f;
-		float _click = 0.0f;
-		int padding;
-
-	}_data;
-
-	ButtonBuffer()
+	ObjectBuffer()
 		: ConstantBuffer(&_data, sizeof(Data))
 	{
 	}

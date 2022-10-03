@@ -2,6 +2,7 @@
 #include "UI_EnemyHpBar.h"
 
 UI_EnemyHpBar::UI_EnemyHpBar()
+	: UI()
 {
 }
 

@@ -5,6 +5,7 @@ Object::Object(int level, int num)
 	: _level(level)
 	, _num(num)
 {
+	_buffer = make_shared<ObjectBuffer>();
 }
 
 void Object::Update()
@@ -22,8 +23,11 @@ void Object::PreRender()
 
 void Object::Render()
 {
-	if(_render)
+	if (_render)
+	{
+		_buffer->SetPSBuffer(0);
 		_texture->Render();
+	}
 }
 
 void Object::PostRender()
@@ -62,5 +66,6 @@ void Object::SetAnimation()
 void Object::SetTexture(shared_ptr<Quad> texture)
 {
 	_texture = texture;
+	_texture->SetPS(L"Shader/ObjectShader/ObjectPixelShader.hlsl");
 	SetCollider();
 }

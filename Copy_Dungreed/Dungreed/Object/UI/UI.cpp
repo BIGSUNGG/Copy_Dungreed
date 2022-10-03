@@ -2,6 +2,7 @@
 #include "UI.h"
 
 UI::UI()
+	: Object()
 {
 }
 

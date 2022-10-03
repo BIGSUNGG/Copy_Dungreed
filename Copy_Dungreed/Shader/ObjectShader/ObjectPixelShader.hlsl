@@ -1,7 +1,9 @@
 cbuffer Color : register(b0)
 {
-	int selected;
-	float3 rgb;
+	int selected = 0;
+	float value1 = 0;
+	float value2 = 0;
+	float value3 = 0;
 }
 
 Texture2D map : register(t0);
@@ -16,12 +18,16 @@ struct PixelInput
 
 float4 SetColor(float2 uv)
 {
-	float4 color = map.Sample(samp, uv);
-	color.x = rgb.x;
-	color.y = rgb.y;
-	color.z = rgb.z;
+	float4 result = map.Sample(samp, uv);
 
-	return color;
+	result.x = value1;
+	result.y = value2;
+	result.z = value3;
+
+	if (result.w < 1)
+		result.w = 0;
+
+	return result;
 }
 
 float4 PS(PixelInput input) : SV_TARGET

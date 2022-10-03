@@ -8,9 +8,9 @@ public:
 	virtual void Render() override;
 
 protected:
-	shared_ptr<Quad> _hpBarBase;
-	shared_ptr<Quad> _hpBarEmpty;
-	shared_ptr<Quad> _hpBarGauge;
+	shared_ptr<Object> _hpBarBase;
+	shared_ptr<Object> _hpBarEmpty;
+	shared_ptr<Object> _hpBarGauge;
 
 	const float _hpBarTextSize = 65.0f;
 	const int _hpBarGaugeSize = 294;
