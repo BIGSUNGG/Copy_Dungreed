@@ -28,7 +28,7 @@ private:
 	shared_ptr<Object>	_curObject;
 
 	bool _freeMode	= false;
-	bool _autoSave	= true;
+	bool _autoSave	= false;
 
 	int _objectType		= 2;
 	int _objectLevel	= 0;
@@ -36,5 +36,8 @@ private:
 
 	int _mapLevel	= 0;
 	int _mapNum		= 0;
+
+	const Vector2 _verticalDoorHalfSize = { 60.0f, 198.0f };
+	const Vector2 _horizonialDoorHalfSize = { 198.0f, 60.0f };
 };
 

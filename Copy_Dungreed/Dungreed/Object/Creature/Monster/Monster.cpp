@@ -59,7 +59,7 @@ void Monster::SearchTarget()
 
 	auto collisions = GAME->GetCollisions(_collider, Object::Object_Type::CREATURE);
 
-	float length = (_texture->GetTransform()->GetPos() - GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos()).Length();
+	float length = (_texture->GetTransform()->GetPos() - GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos()).Length();
 
 	if (length <= _searchLength)
 	{
@@ -90,10 +90,10 @@ bool Monster::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 void Monster::SpawnEffect()
 {
 	shared_ptr<Effect> spawn = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 1);
-	spawn->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
+	spawn->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
 	if (_reversed)
-		spawn->GetTexture()->ReverseToX();
+		spawn->GetObjectTexture()->ReverseToX();
 
 	GAME->AddEffect(spawn);
 }

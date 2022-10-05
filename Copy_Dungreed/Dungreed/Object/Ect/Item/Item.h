@@ -25,8 +25,6 @@ public:
 	Item(int level, int num);
 	virtual ~Item();
 
-	virtual void Render();
-
 	virtual bool GiveDamage(shared_ptr<Creature> target);
 
 	virtual void ReverseTexture();

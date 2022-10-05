@@ -88,7 +88,7 @@ void UI_MiniMap::Refresh()
 		shared_ptr<Texture> texture = Texture::Add(L"MiniMap_Base_Texture", _miniMapRtv->GetSRV());
 		_miniMapBase->SetTexture(texture);
 		_miniMapBase->SetTop(WIN_HEIGHT - 40);
-		_miniMapBase->SetRight(WIN_WIDTH - 40);
+		_miniMapBase->SetRight(WIN_WIDTH - 180);
 	}
 
 	{

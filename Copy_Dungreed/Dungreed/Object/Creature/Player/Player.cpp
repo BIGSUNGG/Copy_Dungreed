@@ -36,11 +36,11 @@ void Player::DustEffect()
 	{
 		_dustRunTime = 0.0f;
 		shared_ptr<Effect> dust = MAKE_PLAYER_EFFECT(0);
-		dust->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
-		dust->GetTexture()->SetBottom(_texture->Bottom());
+		dust->GetObjectTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+		dust->GetObjectTexture()->SetBottom(_texture->Bottom());
 
 		if (_reversed)
-			dust->GetTexture()->ReverseToX();
+			dust->GetObjectTexture()->ReverseToX();
 
 		GAME->AddEffect(dust);
 	}
@@ -49,11 +49,11 @@ void Player::DustEffect()
 void Player::DoubleJumpEffect()
 {
 	shared_ptr<Effect> doubleJump = MAKE_PLAYER_EFFECT(1);
-	doubleJump->GetTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
-	doubleJump->GetTexture()->SetBottom(_texture->Bottom());
+	doubleJump->GetObjectTexture()->GetTransform()->GetPos().x = _texture->GetTransform()->GetPos().x;
+	doubleJump->GetObjectTexture()->SetBottom(_texture->Bottom());
 
 	if (_reversed)
-		doubleJump->GetTexture()->ReverseToX();
+		doubleJump->GetObjectTexture()->ReverseToX();
 
 	GAME->AddEffect(doubleJump);
 }

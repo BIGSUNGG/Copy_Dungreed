@@ -40,7 +40,7 @@ public:
 	bool& GetRenderCollider() { return _renderCollider; }
 
 	bool& GetObjectUpdate() { return _objectUpdate; }
-	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true);
+	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true , bool forceCollision = false);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	shared_ptr<Player> GetPlayer() { return _player; }
 
@@ -56,6 +56,7 @@ private:
 	float _maxDelay = 0.1f;
 
 	shared_ptr<Map> _curMap;
+	vector<vector<shared_ptr<InstanceQuads>>> _instanceQuad;
 	vector<vector<shared_ptr<Object>>> _objectInScreen;
 	vector<shared_ptr<Collider>> _debugCollider;
 	shared_ptr<Player> _player;

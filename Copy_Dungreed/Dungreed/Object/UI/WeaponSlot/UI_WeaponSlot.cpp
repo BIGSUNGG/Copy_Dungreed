@@ -8,14 +8,14 @@ UI_WeaponSlot::UI_WeaponSlot()
 
 	_weaponSlot1 = make_shared<Object>();
 	_weaponSlot1->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_1.png"));
-	_weaponSlot1->GetTexture()->SetRight(WIN_WIDTH - 25);
-	_weaponSlot1->GetTexture()->SetBottom(25);
+	_weaponSlot1->GetObjectTexture()->SetRight(WIN_WIDTH - 25);
+	_weaponSlot1->GetObjectTexture()->SetBottom(25);
 	_weaponSlot1->SetSpawnPos(_weaponSlot1->GetPos());
 
 	_weaponSlot2 = make_shared<Object>();
 	_weaponSlot2->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_2.png"));
-	_weaponSlot2->GetTexture()->SetRight(WIN_WIDTH - 10);
-	_weaponSlot2->GetTexture()->SetBottom(40);
+	_weaponSlot2->GetObjectTexture()->SetRight(WIN_WIDTH - 10);
+	_weaponSlot2->GetObjectTexture()->SetBottom(40);
 	_weaponSlot2->SetSpawnPos(_weaponSlot2->GetPos());
 
 }
@@ -51,7 +51,7 @@ void UI_WeaponSlot::Render()
 		_weaponSlot2->Render();
 	}
 
-	shared_ptr<Quad> weaponImage = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetTexture()->GetTextureFile());
+	shared_ptr<Quad> weaponImage = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile());
 	weaponImage->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
 	switch (INVENTORY->GetCurWeapon()->GetWeaponType())
 	{

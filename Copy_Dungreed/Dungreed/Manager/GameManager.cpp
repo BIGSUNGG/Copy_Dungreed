@@ -115,12 +115,12 @@ void GameManager::Optimize()
 	temp->Update();
 
 	_objectInScreen.clear();
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false));	
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::WALL, false, false));	
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::TILE, false, false));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false));	
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false, true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::WALL, false, false, true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::TILE, false, false, true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false,true));	
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false,true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false,true));
 }
 
 void GameManager::AddObject(shared_ptr<Object> object, int type, bool toFront)
@@ -174,7 +174,7 @@ void GameManager::AddEctObject(shared_ptr<Object> object)
 	AddObject(object, Object::Object_Type::ECT, false);
 }
 
-vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor)
+vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor,bool forceCollison)
 {
 	vector<shared_ptr<Object>> result;
 	collider->Update();
@@ -182,6 +182,9 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 	for (auto& object : _curMap->GetObjects()[type])
 	{
 		if (object == nullptr || collider == object->GetCollider())
+			continue;
+
+		if (object->GetCollision() == false && forceCollison == false)
 			continue;
 
 		if (collider->IsCollision(object->GetCollider(), Obb))
@@ -246,6 +249,34 @@ void GameManager::SetMap(shared_ptr<Map> addedMap)
 				object = nullptr;
 		}
 	}
+	
+	_instanceQuad.clear();
+	_instanceQuad.resize(Object::CREATURE);
+
+	for (int i = 0; i < Object::Object_Type::CREATURE; i++)
+	{
+		// 같은 이미지의 오브젝트 트렌스폼 map에 저장
+		unordered_map<wstring, vector<shared_ptr<Transform>>> _objects;
+		for (auto& object : _curMap->GetObjects()[i])
+		{
+			if(object == nullptr)
+				continue;
+
+			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object->GetObjectTexture()->GetTransform());
+		}
+
+		// 같은 이미지의 트렌스폼들을 하나의 InstanceQuads에 추가
+		for (auto& iter : _objects)
+		{
+			auto instanceQuad = make_shared<InstanceQuads>(iter.first, iter.second.size());
+			for (int j = 0; j < iter.second.size(); j++)
+			{
+				instanceQuad->GetTransforms()[j] = iter.second[j];
+			}
+			_instanceQuad[i].emplace_back(instanceQuad);
+		}
+	}
+
 }
 
 void GameManager::Reset()

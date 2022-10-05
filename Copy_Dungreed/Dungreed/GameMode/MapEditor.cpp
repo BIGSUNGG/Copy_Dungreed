@@ -13,8 +13,8 @@ MapEditor::MapEditor()
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 	CAMERA->SetTarget(nullptr);
 
-	_mouseOffset.x = (_curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x);
-	_mouseOffset.y = (_curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y);
+	_mouseOffset.x = (_curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x);
+	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
 
 	CursurOn();
 }
@@ -68,25 +68,25 @@ void MapEditor::PostRender()
 		temp->SetColorGreen();
 		temp->Render();
 
-		temp = make_shared<RectCollider>(Vector2(48.0f, 192.0f));
+		temp = make_shared<RectCollider>(_verticalDoorHalfSize);
 		temp->GetPos() = _map->GetLeftDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
-		temp = make_shared<RectCollider>(Vector2(48.0f, 192.0f));
+		temp = make_shared<RectCollider>(_verticalDoorHalfSize);
 		temp->GetPos() = _map->GetRightDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
-		temp = make_shared<RectCollider>(Vector2(192.0f, 48.0f));
+		temp = make_shared<RectCollider>(_horizonialDoorHalfSize);
 		temp->GetPos() = _map->GetTopDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
-		temp = make_shared<RectCollider>(Vector2(192.0f, 48.0f));
+		temp = make_shared<RectCollider>(_horizonialDoorHalfSize);
 		temp->GetPos() = _map->GetBottomDoor();
 		temp->Update();
 		temp->SetColorGreen();
@@ -157,19 +157,19 @@ void MapEditor::ImGuiRender()
 			if (ImGui::TreeNode("Append Offset As"))
 			{
 				if (ImGui::Button("Top"))
-					_mouseAppend.y += _curObject->GetTexture()->Top() - _curObject->GetTexture()->GetTransform()->GetPos().y;
+					_mouseAppend.y += _curObject->GetObjectTexture()->Top() - _curObject->GetObjectTexture()->GetTransform()->GetPos().y;
 
 				ImGui::SameLine();
 				if (ImGui::Button("Bottom"))
-					_mouseAppend.y += _curObject->GetTexture()->Bottom() - _curObject->GetTexture()->GetTransform()->GetPos().y;
+					_mouseAppend.y += _curObject->GetObjectTexture()->Bottom() - _curObject->GetObjectTexture()->GetTransform()->GetPos().y;
 
 				ImGui::SameLine();
 				if (ImGui::Button("Left"))
-					_mouseAppend.x += _curObject->GetTexture()->Left() - _curObject->GetTexture()->GetTransform()->GetPos().x;
+					_mouseAppend.x += _curObject->GetObjectTexture()->Left() - _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
 
 				ImGui::SameLine();
 				if (ImGui::Button("Right"))
-					_mouseAppend.x += _curObject->GetTexture()->Right() - _curObject->GetTexture()->GetTransform()->GetPos().x;
+					_mouseAppend.x += _curObject->GetObjectTexture()->Right() - _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
 
 				ImGui::TreePop();
 			}
@@ -257,7 +257,7 @@ void MapEditor::MouseEvenet()
 	else
 		_curMousePos = MOUSE_WORLD_POS;
 
-	_curObject->GetTexture()->GetTransform()->GetPos() = _curMousePos;
+	_curObject->GetObjectTexture()->GetTransform()->GetPos() = _curMousePos;
 }
 
 void MapEditor::InputEvent()
@@ -286,10 +286,10 @@ void MapEditor::InputEvent()
 			SwitchBool(_freeMode);
 
 		if (KEY_DOWN('Z'))
-			_map->GetLeftBottom() = _curObject->GetTexture()->GetTransform()->GetPos();
+			_map->GetLeftBottom() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
 
 		if (KEY_DOWN('X'))
-			_map->GetRightTop() = _curObject->GetTexture()->GetTransform()->GetPos();
+			_map->GetRightTop() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
 
 		if (KEY_DOWN('C'))
 			_map->GetStartPos() = _curMousePos;
@@ -308,14 +308,17 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('J'))
 		{
-			_map->GetLeftDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			_map->GetLeftDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_map->GetLeftDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y + _verticalDoorHalfSize.y;
 			if (_autoSave)
 				MAP_MANAGER->Save(_map);
 		}
 
 		if (KEY_DOWN('K'))
 		{
-			_map->GetBottomDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			_map->GetBottomDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_map->GetBottomDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y;
+
 			if (_autoSave)
 				MAP_MANAGER->Save(_map);
 		}
@@ -323,14 +326,16 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('L'))
 		{
-			_map->GetRightDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			_map->GetRightDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_map->GetRightDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y + _verticalDoorHalfSize.y;
 			if (_autoSave)
 				MAP_MANAGER->Save(_map);
 		}
 
 		if (KEY_DOWN('I'))
 		{
-			_map->GetTopDoor() = _curObject->GetTexture()->GetTransform()->GetPos();
+			_map->GetTopDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_map->GetTopDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y;			
 			if (_autoSave)
 				MAP_MANAGER->Save(_map);
 		}
@@ -345,8 +350,8 @@ void MapEditor::InputEvent()
 void MapEditor::ApplyOffset()
 {
 
-	_mouseOffset.x = _curObject->GetTexture()->GetSize().x * _curObject->GetTexture()->GetTransform()->GetScale().x;
-	_mouseOffset.y = _curObject->GetTexture()->GetSize().y * _curObject->GetTexture()->GetTransform()->GetScale().y;
+	_mouseOffset.x = _curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x;
+	_mouseOffset.y = _curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y;
 }
 
 void MapEditor::ApplyChange()

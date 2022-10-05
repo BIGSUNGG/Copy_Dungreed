@@ -22,13 +22,13 @@ void UI_EnemyHpBar::Update()
 				_hpBarBase[i]->GetRender() = true;
 				_hpBarGauge[i]->GetRender() = true;
 
-				_hpBarBase[i]->GetTexture()->SetTop(creature->GetTexture()->Bottom() - CAMERA->GetPos().y - 10.0f);
+				_hpBarBase[i]->GetObjectTexture()->SetTop(creature->GetObjectTexture()->Bottom() - CAMERA->GetPos().y - 10.0f);
 				_hpBarBase[i]->GetPos().x = creature->GetPos().x - CAMERA->GetPos().x;
 
 				_hpBarGauge[i]->GetPos() = _hpBarBase[i]->GetPos();
 
-				_hpBarGauge[i]->GetTexture()->GetTransform()->GetScale().x = hpRatio;
-				_hpBarGauge[i]->GetTexture()->SetLeft(_hpBarGauge[i]->GetPos().x - _hpBarGauge[i]->GetTexture()->GetHalfSize().x);
+				_hpBarGauge[i]->GetObjectTexture()->GetTransform()->GetScale().x = hpRatio;
+				_hpBarGauge[i]->GetObjectTexture()->SetLeft(_hpBarGauge[i]->GetPos().x - _hpBarGauge[i]->GetObjectTexture()->GetHalfSize().x);
 				
 			}
 			else

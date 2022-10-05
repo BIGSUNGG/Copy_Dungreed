@@ -2,7 +2,7 @@
 #include "Item.h"
 
 Item::Item(int level, int num)
-	: Ect(level,num)
+	: Ect(level, num)
 {
 	_ectType = Ect::ITEM;
 }
@@ -11,14 +11,9 @@ Item::~Item()
 {
 }
 
-void Item::Render()
-{
-	_texture->Render();
-}
-
 bool Item::GiveDamage(shared_ptr<Creature> target)
 {
-	bool attackSuccess = _owner.lock()->GiveDamage(target,shared_from_this());
+	bool attackSuccess = _owner.lock()->GiveDamage(target, shared_from_this());
 	return attackSuccess;
 }
 

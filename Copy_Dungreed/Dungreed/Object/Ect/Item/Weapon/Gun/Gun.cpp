@@ -12,17 +12,21 @@ Gun::~Gun()
 {
 }
 
-void Gun::Render()
-{
-
-	Weapon::Render();
-}
-
 void Gun::Attack()
 {
+	if (_attackDelayTime < _attackDelay)
+		return;
+
+	_attackDelayTime = 0.0f;
+
+	++_index;
+
+	if (_index >= _appendAngle.size())
+		_index = 0;
+
 	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, 0);
-	_bullet->GetTexture()->GetTransform()->GetPos() = _springArm->GetWorldPos();
-	_bullet->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
+	_bullet->GetObjectTexture()->GetTransform()->GetPos() = _springArm->GetWorldPos();
+	_bullet->GetObjectTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
 	Vector2 direction = { 1.0f,tan(_showDirection) };
 
@@ -49,7 +53,7 @@ void Gun::SetWeapon()
 {
 	if (_owner.lock() != nullptr)
 	{
-		_springArm->GetPos() = _offset + _owner.lock()->GetTexture()->GetTransform()->GetPos();
+		_springArm->GetPos() = _offset + _owner.lock()->GetObjectTexture()->GetTransform()->GetPos();
 		_ownerFollower->GetAngle() = _showDirection;
 		_attackOfsset->GetPos().x = _weaponLength;
 		_texture->GetTransform()->GetPos().x = _weaponLength;

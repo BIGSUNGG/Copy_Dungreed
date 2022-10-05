@@ -43,6 +43,7 @@ public:
 
 
 	bool& GetRender() { return _render; }
+	bool& GetCollision() { return _collison; }
 	const int& GetNum() { return _num; }
 	const int& GetLevel() { return _level; }
 	const bool& GetPlayingAnim() { return _playingAnim; }
@@ -51,7 +52,7 @@ public:
 	const Object_Type& GetType() { return _objectType; }
 	Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
 	const Vector2& GetSpawnPos() { return _spawnPos; }
-	shared_ptr<Quad> GetTexture() { return _texture; }
+	shared_ptr<Quad> GetObjectTexture() { return _texture; }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 
@@ -60,6 +61,7 @@ protected:
 	Object_Type _objectType = Object_Type::TILE;
 	Vector2 _spawnPos = { 0,0 };
 	bool _isActive = true;
+	bool _collison = true;
 
 	shared_ptr<Quad> _texture;
 	shared_ptr<RectCollider> _collider;

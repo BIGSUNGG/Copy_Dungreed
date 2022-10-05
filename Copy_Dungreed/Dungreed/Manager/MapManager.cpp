@@ -81,7 +81,7 @@ void MapManager::FindTopMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = (rand() % _mapSize[level].size() + 1) - 1;
+		int num = (rand() % (_mapSize[level].size() - 1)) + 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoBottom())
@@ -116,7 +116,7 @@ void MapManager::FindBottomMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = (rand() % _mapSize[level].size() + 1) - 1;
+		int num = (rand() % (_mapSize[level].size() - 1)) + 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoTop())
@@ -151,7 +151,7 @@ void MapManager::FindLeftMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = (rand() % _mapSize[level].size() + 1) - 1;
+		int num = (rand() % (_mapSize[level].size() - 1)) + 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoRight())
@@ -186,7 +186,7 @@ void MapManager::FindRightMap(int level, int x, int y)
 
 	while (true)
 	{
-		int num = (rand() % _mapSize[level].size() + 1) - 1;
+		int num = (rand() % (_mapSize[level].size() - 1)) + 1;
 		auto map = Load(level, num);
 
 		if (map->CanGoLeft())
@@ -372,8 +372,8 @@ void MapManager::Save(shared_ptr<Map> map)
 				mapInfo.push_back((int)object->GetType());
 				mapInfo.push_back(object->GetLevel());
 				mapInfo.push_back(object->GetNum());
-				mapInfo.push_back((int)object->GetTexture()->GetTransform()->GetPos().x);
-				mapInfo.push_back((int)object->GetTexture()->GetTransform()->GetPos().y);
+				mapInfo.push_back((int)object->GetObjectTexture()->GetTransform()->GetPos().x);
+				mapInfo.push_back((int)object->GetObjectTexture()->GetTransform()->GetPos().y);
 				mapInfo.push_back((int)object->GetReversed());
 			}
 		}
@@ -428,30 +428,30 @@ void MapManager::SetCurMap(const Vector2& index)
 		GAME->AddPlayer(GAME->GetPlayer());
 		if (moveX > 0)
 		{
-			GAME->GetPlayer()->GetTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorHalfSize.x + 48);
-			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetLeftDoor().y - _doorHalfSize.y);
+			GAME->GetPlayer()->GetObjectTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorHalfSize.x + 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetLeftDoor().y - _doorHalfSize.y);
 		}
 		else if (moveX < 0)
 		{
-			GAME->GetPlayer()->GetTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorHalfSize.x - 48);
-			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetRightDoor().y - _doorHalfSize.y);
+			GAME->GetPlayer()->GetObjectTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorHalfSize.x - 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetRightDoor().y - _doorHalfSize.y);
 		}
 		else if (moveY > 0)
 		{
-			GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
-			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorHalfSize.y + 48);
+			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorHalfSize.y + 48);
 		}
 		else if (moveY < 0)
 		{
-			GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
-			GAME->GetPlayer()->GetTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorHalfSize.y + 48);
+			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
+			GAME->GetPlayer()->GetObjectTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorHalfSize.y + 48);
 		}
 		else
 		{
-			GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos().x = GetCurMap()->GetStartPos().x;
-			GAME->GetPlayer()->GetTexture()->SetBottom(GetCurMap()->GetStartPos().y);
+			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetStartPos().x;
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetStartPos().y);
 		}
-		GAME->GetPlayer()->SetSpawnPos(GAME->GetPlayer()->GetTexture()->GetTransform()->GetPos());
+		GAME->GetPlayer()->SetSpawnPos(GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos());
 	}
 
 	UI_MANAGER->ChangedMap();

@@ -45,7 +45,7 @@ void DebugMode::ImGuiRender()
 {
 	if (ImGui::CollapsingHeader("Player"))
 	{
-		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetTexture()->GetTransform()->GetPos().x, _player->GetTexture()->GetTransform()->GetPos().y);
+		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetObjectTexture()->GetTransform()->GetPos().x, _player->GetObjectTexture()->GetTransform()->GetPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
 	}
 	if (ImGui::CollapsingHeader("Map"))
@@ -67,16 +67,16 @@ void DebugMode::ImGuiRender()
 void DebugMode::Init()
 {
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));
-	_player->GetTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
-	_player->GetTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
-	_player->SetSpawnPos(_player->GetTexture()->GetTransform()->GetPos());
+	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
+	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
+	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->AddPlayer(_player);
 	GAME->GetObjectUpdate() = true;
 
-	CAMERA->SetTarget(_player->GetTexture()->GetTransform());
+	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());
 	CAMERA->SetRightTop(MAP_MANAGER->GetCurMap()->GetRightTop());
 	CAMERA->Update();

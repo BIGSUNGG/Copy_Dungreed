@@ -57,6 +57,12 @@ void Weapon::SetWeapon()
 {
 }
 
+void Weapon::SetAttackDelay(float delay)
+{
+	_attackDelay = delay;
+	_attackDelayTime = delay;
+}
+
 void Weapon::SetOwner(shared_ptr<Creature> owner)
 {
 	Item::SetOwner(owner);
@@ -65,7 +71,7 @@ void Weapon::SetOwner(shared_ptr<Creature> owner)
 	_attackOfsset = make_shared<Transform>();
 	_ownerFollower = make_shared<Transform>();
 
-	_ownerFollower->SetParent(_owner.lock()->GetTexture()->GetTransform());
+	_ownerFollower->SetParent(_owner.lock()->GetObjectTexture()->GetTransform());
 	_attackOfsset->SetParent(_ownerFollower);
 	_texture->GetTransform()->SetParent(_springArm);
 

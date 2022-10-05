@@ -65,7 +65,7 @@ protected:
 	float _gravityPower = 5000.0f;
 
 	float _damagedRunTime = 0.1f;
-	const float _damagedRunTimeMax = 0.05f;
+	const float _damagedRunTimeMax = 0.1f;
 
 	bool _isFalling = false;
 	bool _passFloor = false;

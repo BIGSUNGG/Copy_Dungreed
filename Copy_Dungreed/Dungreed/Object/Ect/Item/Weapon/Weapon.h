@@ -26,7 +26,7 @@ public:
 	virtual void SetWeapon();
 	void SetOffset(Vector2 offset) { _offset = offset; }
 	void SetAppendAngle(vector<float> angle) { _appendAngle = angle; }
-	void SetAttackDelay(float delay) { _attackDelay = delay; }
+	void SetAttackDelay(float delay);
 	void SetAttackRange(Vector2 range) { _attackRange = range; }
 	void SetGiveDamageDelay(float delay) { _giveDamageDelay = delay; }
 	virtual void SetOwner(shared_ptr<Creature> owner) override;

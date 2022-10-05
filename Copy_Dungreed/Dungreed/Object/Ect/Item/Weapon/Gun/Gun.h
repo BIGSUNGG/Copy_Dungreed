@@ -5,8 +5,6 @@ public:
 	Gun(int level, int num);
 	virtual ~Gun();
 
-	virtual void Render() override;
-
 	virtual void Attack() override;
 
 	virtual void SetWeapon() override;

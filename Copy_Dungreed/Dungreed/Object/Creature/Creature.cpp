@@ -76,6 +76,8 @@ bool Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 	_damagedRunTime = 0.0f;
 	_buffer->_data.selected = 1;
 	_buffer->_data.value1 = 1;
+	_buffer->_data.value2 = 0;
+	_buffer->_data.value3 = 0;
 
 	return true;
 }
@@ -130,7 +132,7 @@ void Creature::Death()
 	_isActive = false;
 
 	shared_ptr<Effect> deathEffect = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 0);
-	deathEffect->GetTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
+	deathEffect->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
 	GAME->AddEffect(deathEffect);
 }
@@ -261,8 +263,8 @@ void Creature::TileLeftStairCollision(shared_ptr<Tile> tile)
 {	
 	_onStair = true;
 
-	if (_texture->GetTransform()->GetPos().x >= tile->GetTexture()->Left() &&
-		_texture->GetTransform()->GetPos().x <= tile->GetTexture()->Right())
+	if (_texture->GetTransform()->GetPos().x >= tile->GetObjectTexture()->Left() &&
+		_texture->GetTransform()->GetPos().x <= tile->GetObjectTexture()->Right())
 	{
 		float x =  this->GetPos().x - tile->GetCollider()->Right();
 		float y = -x + tile->GetCollider()->Bottom();
@@ -279,8 +281,8 @@ void Creature::TileRightStairCollision(shared_ptr<Tile> tile)
 {
 	_onStair = true;
 
-	if (_texture->GetTransform()->GetPos().x >= tile->GetTexture()->Left() &&
-		_texture->GetTransform()->GetPos().x <= tile->GetTexture()->Right())
+	if (_texture->GetTransform()->GetPos().x >= tile->GetObjectTexture()->Left() &&
+		_texture->GetTransform()->GetPos().x <= tile->GetObjectTexture()->Right())
 	{
 		float x = this->GetPos().x - tile->GetCollider()->Left();
 		float y = x + tile->GetCollider()->Bottom();

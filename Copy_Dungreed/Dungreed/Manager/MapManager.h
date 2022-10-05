@@ -46,6 +46,6 @@ private:
 	vector<vector<int>> _mapSize;
 	string _path;
 
-	const Vector2 _doorHalfSize = { 48.0f, 192.0f };
+	const Vector2 _doorHalfSize = { 60.0f, 198.0f };
 };
 

@@ -11,15 +11,15 @@ Map::Map(int level, int num)
 
 void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 {
-	addObject->GetTexture()->Update();
-	shared_ptr<Quad> addQuad = addObject->GetTexture();
+	addObject->GetObjectTexture()->Update();
+	shared_ptr<Quad> addQuad = addObject->GetObjectTexture();
 
-	Vector2& pos = addObject->GetTexture()->GetTransform()->GetPos();
+	Vector2& pos = addObject->GetObjectTexture()->GetTransform()->GetPos();
 
 	for (auto& objects : _objects[type])
 	{
-		if (addObject->GetTexture()->GetTransform()->GetPos() ==
-			objects->GetTexture()->GetTransform()->GetPos())
+		if (addObject->GetObjectTexture()->GetTransform()->GetPos() ==
+			objects->GetObjectTexture()->GetTransform()->GetPos())
 		{
 			return;
 		}
@@ -39,7 +39,7 @@ void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 	{
 		for (auto objects = _objects[type].begin(); objects != _objects[type].end(); objects++)
 		{
-			shared_ptr<Quad> object = objects->get()->GetTexture();
+			shared_ptr<Quad> object = objects->get()->GetObjectTexture();
 			if (pos.x > object->Left() && pos.x < object->Right() &&
 				pos.y < object->Top() && pos.y > object->Bottom())
 			{
@@ -53,7 +53,7 @@ void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 	{
 		for (int i = _objects[type].size() - 1; i > 0; i--)
 		{
-			shared_ptr<Quad> object = _objects[type][i]->GetTexture();
+			shared_ptr<Quad> object = _objects[type][i]->GetObjectTexture();
 			if (pos.x > object->Left() && pos.x < object->Right() &&
 				pos.y < object->Top() && pos.y > object->Bottom())
 			{

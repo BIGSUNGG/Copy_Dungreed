@@ -8,19 +8,19 @@ UI_PlayerHpBar::UI_PlayerHpBar()
 
 	_hpBarEmpty = make_shared<Object>();
 	_hpBarEmpty->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Empty.png"));
-	_hpBarEmpty->GetTexture()->SetLeft(18);
-	_hpBarEmpty->GetTexture()->SetTop(WIN_HEIGHT - 18);
+	_hpBarEmpty->GetObjectTexture()->SetLeft(18);
+	_hpBarEmpty->GetObjectTexture()->SetTop(WIN_HEIGHT - 18);
 	_hpBarEmpty->SetSpawnPos(_hpBarEmpty->GetPos());
 
 	_hpBarBase = make_shared<Object>();
 	_hpBarBase->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Base.png"));
-	_hpBarBase->GetTexture()->SetLeft(18);
-	_hpBarBase->GetTexture()->SetTop(WIN_HEIGHT - 18);
+	_hpBarBase->GetObjectTexture()->SetLeft(18);
+	_hpBarBase->GetObjectTexture()->SetTop(WIN_HEIGHT - 18);
 	_hpBarBase->SetSpawnPos(_hpBarBase->GetPos());
 
 	_hpBarGauge = make_shared<Object>();
 	_hpBarGauge->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Gauge.png"));
-	_hpBarGauge->GetTexture()->SetLeft(_hpBarEmpty->GetTexture()->Left() + 132);
+	_hpBarGauge->GetObjectTexture()->SetLeft(_hpBarEmpty->GetObjectTexture()->Left() + 132);
 	_hpBarGauge->GetPos().y = _hpBarEmpty->GetPos().y;
 	_hpBarGauge->SetSpawnPos(_hpBarGauge->GetPos());
 }
@@ -34,8 +34,8 @@ void UI_PlayerHpBar::Update()
 		hpRatio = GAME->GetPlayer()->GetStatus().GetHpRatio();
 
 	_hpBarGauge->SetPos(_hpBarGauge->GetSpawnPos());
-	_hpBarGauge->GetTexture()->GetTransform()->GetScale().x = hpRatio;
-	_hpBarGauge->GetTexture()->SetLeft(_hpBarGauge->GetPos().x - _hpBarGauge->GetTexture()->GetHalfSize().x);
+	_hpBarGauge->GetObjectTexture()->GetTransform()->GetScale().x = hpRatio;
+	_hpBarGauge->GetObjectTexture()->SetLeft(_hpBarGauge->GetPos().x - _hpBarGauge->GetObjectTexture()->GetHalfSize().x);
 	_hpBarGauge->Update();
 
 	_hpBarBase->Update();

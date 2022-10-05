@@ -89,7 +89,7 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (object->GetTexture() == nullptr)
+	if (object->GetObjectTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
@@ -125,6 +125,59 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 		}
 		break;
 	case Map::LEVEL_01:
+		switch (num)
+		{
+		case 0:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_0.png");
+			break;
+		case 1:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_1.png");
+			break;
+		case 2:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_2.png");
+			break;
+		case 3:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_3.png");
+			break;
+		case 4:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_4.png");
+			break;
+		case 5:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_5.png");
+			break;
+		case 6:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_6.png");
+			break;
+		case 7:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_8.png");
+			break;
+		case 8:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_9.png");
+			break;
+		case 9:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_10.png");
+			break;
+		case 10:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_11.png");
+			break;
+		case 11:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_12.png");
+			break;
+		case 12:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_13.png");
+			break;
+		case 13:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_14.png");
+			break;
+		case 14:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_15.png");
+			break;
+		case 15:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_16.png");
+			break;
+		default:
+			break;
+		}
 		break;
 	case Map::LEVEL_02:
 		break;
@@ -147,7 +200,7 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (object->GetTexture() == nullptr)
+	if (object->GetObjectTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
@@ -280,6 +333,7 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		case 27:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_4.png");
+			object->GetCollision() = false;
 			break;
 		}
 		break;
@@ -536,7 +590,7 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (object->GetTexture() == nullptr)
+	if (object->GetObjectTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
@@ -585,7 +639,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (object->GetTexture() == nullptr)
+	if (object->GetObjectTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
@@ -655,7 +709,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (object->GetTexture() == nullptr)
+	if (object->GetObjectTexture() == nullptr)
 		object->SetTexture(texture);
 
 	if (object->GetAnimation() != nullptr)
@@ -702,7 +756,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerEffect(int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (effect->GetTexture() == nullptr)
+	if (effect->GetObjectTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
@@ -792,7 +846,7 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (effect->GetTexture() == nullptr)
+	if (effect->GetObjectTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
@@ -830,7 +884,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 		case 0:
 			effect->SetAnimation();
 			effect->GetAnimation()->GetRefreshSize() = true;
-			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.1f);
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.05f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX0.png");
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX1.png");
@@ -853,7 +907,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (effect->GetTexture() == nullptr)
+	if (effect->GetObjectTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
@@ -882,7 +936,7 @@ shared_ptr<Effect> ObjectManager::GetEnemyWeaponEffect(int type, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (effect->GetTexture() == nullptr)
+	if (effect->GetObjectTexture() == nullptr)
 		effect->SetTexture(texture);
 
 	if (effect->GetAnimation() != nullptr)
@@ -923,7 +977,7 @@ shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (bullet->GetTexture() == nullptr)
+	if (bullet->GetObjectTexture() == nullptr)
 		bullet->SetTexture(texture);
 
 	if (bullet->GetAnimation() != nullptr)
@@ -960,6 +1014,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		case 0:
 			weapon = make_shared<Gun>(type,num);
 			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
+			weapon->SetAttackDelay(0.5f);
 			break;
 		default:
 			break;
@@ -974,7 +1029,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (weapon->GetTexture() == nullptr)
+	if (weapon->GetObjectTexture() == nullptr)
 		weapon->SetTexture(texture);
 
 	if (weapon->GetAnimation() != nullptr)
@@ -1053,7 +1108,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 	assert(texture != nullptr);
 	assert(texture->GetSize() != Vector2(0, 0));
 
-	if (weapon->GetTexture() == nullptr)
+	if (weapon->GetObjectTexture() == nullptr)
 		weapon->SetTexture(texture);
 
 	if (weapon->GetAnimation() != nullptr)

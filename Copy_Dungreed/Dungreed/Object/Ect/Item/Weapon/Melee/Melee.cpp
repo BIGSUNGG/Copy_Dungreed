@@ -55,11 +55,11 @@ void Melee::AttackEffect()
 		return;
 
 	shared_ptr<Effect> effect = _attackEffect();
-	effect->GetTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
-	effect->GetTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
+	effect->GetObjectTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
+	effect->GetObjectTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
 	if (_reversed)
-		effect->GetTexture()->ReverseToX();
+		effect->GetObjectTexture()->ReverseToX();
 
 	GAME->AddEffect(effect);
 }
@@ -68,7 +68,7 @@ void Melee::SetWeapon()
 {
 	if (_owner.lock() != nullptr)
 	{
-		_springArm->GetPos() = _offset + _owner.lock()->GetTexture()->GetTransform()->GetPos();
+		_springArm->GetPos() = _offset + _owner.lock()->GetObjectTexture()->GetTransform()->GetPos();
 		_ownerFollower->GetAngle() = _showDirection;
 		_attackOfsset->GetPos().x = _weaponLength;
 

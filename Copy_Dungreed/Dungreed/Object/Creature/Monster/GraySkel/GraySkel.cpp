@@ -13,19 +13,19 @@ void GraySkel::AI()
 	if (_target.lock() == nullptr || _weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::State::ATTACK)
 		return;
 
-	float length = abs(_target.lock()->GetTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);
+	float length = abs(_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);
 	if (length >= _targetDistanceGround)
 	{
-		if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
+		if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
 			MoveRight();
 		else
 			MoveLeft();
 	}
-	else if (_texture->Top() < _target.lock()->GetTexture()->GetTransform()->GetPos().y && _target.lock()->GetIsFalling() == false)
+	else if (_texture->Top() < _target.lock()->GetObjectTexture()->GetTransform()->GetPos().y && _target.lock()->GetIsFalling() == false)
 	{
 		if (length >= _targetDistanceJumping)
 		{
-			if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
+			if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x)
 				MoveRight();
 			else
 				MoveLeft();
@@ -33,15 +33,15 @@ void GraySkel::AI()
 
 		Jump();
 	}
-	else if (_texture->Bottom() > _target.lock()->GetTexture()->Top())
+	else if (_texture->Bottom() > _target.lock()->GetObjectTexture()->Top())
 	{
 		_passFloor = true;
 	}
 	else
 	{
-		if (_target.lock()->GetTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x && _reversed == true)
+		if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x && _reversed == true)
 			ReverseTexture();
-		else if (_target.lock()->GetTexture()->GetTransform()->GetPos().x < _texture->GetTransform()->GetPos().x && _reversed == false)
+		else if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x < _texture->GetTransform()->GetPos().x && _reversed == false)
 			ReverseTexture();
 
 		Attack();
