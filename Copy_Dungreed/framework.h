@@ -97,6 +97,7 @@ using namespace std;
 #include "Framework/Utility/BinaryReader.h"
 #include "Framework/Utility/DirectWrite.h"
 #include "Framework/Utility/tinyxml2.h"
+#include "Framework/Utility/MouseCursur.h"
 
 //Collider
 #include "Framework/Collider/Collider.h"

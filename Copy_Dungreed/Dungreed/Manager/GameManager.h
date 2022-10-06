@@ -56,7 +56,6 @@ private:
 	float _maxDelay = 0.1f;
 
 	shared_ptr<Map> _curMap;
-	vector<vector<shared_ptr<InstanceQuads>>> _instanceQuad;
 	vector<vector<shared_ptr<Object>>> _objectInScreen;
 	vector<shared_ptr<Collider>> _debugCollider;
 	shared_ptr<Player> _player;

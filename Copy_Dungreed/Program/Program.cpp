@@ -24,6 +24,8 @@ void Program::Update()
 
 	_gameMode->Update();
 
+	MOUSE_CURSUR->Update();
+
 	if (KEY_DOWN(VK_F2))
 		SwitchBool(GAME->GetRenderTexture());
 	if (KEY_DOWN(VK_F3))
@@ -115,10 +117,13 @@ void Program::ImGuiRender()
 
 void Program::RenderEnd()
 {
+	DirectWrite::GetInstance()->GetDC()->EndDraw();
+
 	ImGui::End();
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-	DirectWrite::GetInstance()->GetDC()->EndDraw();
+	MOUSE_CURSUR->Render();
+
 	Device::GetInstance()->Present();
 }

@@ -4,8 +4,12 @@ class GraySkel : public Monster
 public:
 	GraySkel(int level, int num);
 
+	virtual void Update() override;
+
 protected:
-	void AI() override;
+	virtual void AI() override;
+
+	virtual void Attack() override;
 
 protected:
 	float _targetDistanceGround = 100.0f;

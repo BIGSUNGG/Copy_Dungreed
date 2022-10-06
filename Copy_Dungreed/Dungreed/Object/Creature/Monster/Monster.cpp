@@ -20,18 +20,6 @@ void Monster::Update()
 		if (_spawn == true)
 			AI();
 
-		if (_weaponSlot[_curWeaponSlot] != nullptr)
-		{
-			float angle;
-
-			if (_reversed)
-				angle = 0;
-			else
-				angle =  1 * PI;
-
-			_weaponSlot[_curWeaponSlot]->SetShowTo(angle);
-		}
-
 		if (_spawn == false && _target.lock() != nullptr)
 		{
 			_spawnDelay -= DELTA_TIME;

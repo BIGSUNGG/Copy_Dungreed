@@ -21,6 +21,7 @@ public:
 
 private:
 	shared_ptr<Map> _map;
+	shared_ptr<Map> _copyMap;
 
 	Vector2				_mouseOffset;
 	Vector2				_mouseAppend;

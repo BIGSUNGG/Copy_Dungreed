@@ -5,9 +5,6 @@ UIManager* UIManager::_instance = nullptr;
 
 void UIManager::Update()
 {
-	_cursur->GetTransform()->GetPos() = MOUSE_POS;
-	_cursur->Update();
-
 	switch (_state)
 	{
 	case UIManager::UI_State::NOMAL:
@@ -51,7 +48,6 @@ void UIManager::PostRender()
 	default:
 		break;
 	}
-	_cursur->Render();
 }
 
 void UIManager::ChangedMap()
@@ -62,8 +58,6 @@ void UIManager::ChangedMap()
 
 UIManager::UIManager()
 {
-	_cursur = OBJ_MANAGER->GetCursur(2);
-
 	_playerHpBar = make_shared<UI_PlayerHpBar>();
 	_enemyHpBar = make_shared<UI_EnemyHpBar>();
 	_weaponSlot = make_shared<UI_WeaponSlot>();

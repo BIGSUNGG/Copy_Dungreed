@@ -39,8 +39,6 @@ private:
 	static UIManager* _instance;
 	UI_State _state = UI_State::NOMAL;
 
-	shared_ptr<Quad> _cursur;
-
 	shared_ptr<UI_MiniMap> _miniMap;
 	shared_ptr<UI_PlayerHpBar> _playerHpBar;
 	shared_ptr<UI_EnemyHpBar> _enemyHpBar;

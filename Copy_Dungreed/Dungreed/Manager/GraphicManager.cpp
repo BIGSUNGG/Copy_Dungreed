@@ -51,11 +51,11 @@ void GraphicManager::ImguiRender()
 	if (ImGui::TreeNode("Mouse Cursur"))
 	{
 		if (ImGui::Button("On"))
-			CursurOn();
+			MOUSE_CURSUR->CursurOn();
 
 		ImGui::SameLine();
 		if (ImGui::Button("Off"))
-			CursurOff();
+			MOUSE_CURSUR->CursurOff();
 
 		ImGui::TreePop();
 	}

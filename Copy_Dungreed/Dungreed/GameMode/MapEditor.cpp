@@ -16,7 +16,7 @@ MapEditor::MapEditor()
 	_mouseOffset.x = (_curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x);
 	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
 
-	CursurOn();
+	MOUSE_CURSUR->CursurOn();
 }
 
 void MapEditor::Update()
@@ -195,6 +195,19 @@ void MapEditor::ImGuiRender()
 			ImGui::SameLine();
 			if (ImGui::Button("Reset"))
 				_map->Reset();
+
+			if (ImGui::Button("Copy"))
+				_copyMap = _map;
+
+			ImGui::SameLine();
+			if (ImGui::Button("Paste"))
+			{
+				if (_copyMap != nullptr)
+				{
+					_map->Paste(_copyMap);
+					CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
+				}
+			}
 
 			ImGui::Checkbox("AutoSave", &_autoSave);
 			ImGui::SameLine();

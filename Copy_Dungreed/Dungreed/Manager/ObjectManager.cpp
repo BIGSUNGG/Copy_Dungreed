@@ -192,6 +192,14 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 	case Map::LEVEL_07:
 		break;
 	case Map::PUBLIC:
+		switch (num)
+		{
+		case 0:
+			texture = make_shared<Quad>(L"Resource/Map/Public/Door/Door9 #214938.png");
+			break;
+		default:
+			break;
+		}
 		break;
 	default:
 		break;
@@ -1002,6 +1010,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			func = bind(&ObjectManager::GetPlayerWeaponEffect, this, 0, 0);
 			weapon->SetAttackRange({ 120,84 });
 			weapon->SetAttackEffect(func);
+			weapon->SetAppendAngle({ -0.1f,1.2f });
 			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
 			break;
 		default:
@@ -1051,8 +1060,8 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 		case 0:
 			weapon = make_shared<Melee>(type,num);
 
-			weapon->SetOffset({ 70,-25 });
-			weapon->SetAppendAngle({ 0.7f });
+			weapon->SetOffset({ 70,-55 });
+			weapon->SetAppendAngle({ 0.f });
 			weapon->SetGiveDamageDelay(0.8f);
 			weapon->SetAttackRange({ 100,100 });
 

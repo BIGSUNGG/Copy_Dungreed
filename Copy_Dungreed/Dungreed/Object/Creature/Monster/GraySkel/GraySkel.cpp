@@ -8,6 +8,22 @@ GraySkel::GraySkel(int level, int num)
 	_status._atk = 25;
 }
 
+void GraySkel::Update()
+{
+	if (_weaponSlot[_curWeaponSlot] != nullptr)
+	{
+		float angle;
+
+		if (_reversed)
+			angle = 1 * PI;
+		else
+			angle = 0;
+
+		_weaponSlot[_curWeaponSlot]->SetShowTo(angle);
+	}
+	Monster::Update();
+}
+
 void GraySkel::AI()
 {
 	if (_target.lock() == nullptr || _weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::State::ATTACK)
@@ -46,4 +62,31 @@ void GraySkel::AI()
 
 		Attack();
 	}
+}
+
+void GraySkel::Attack()
+{
+	if (_reversed)
+	{
+		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {
+			quad->GetTransform()->GetPos() = Vector2(quad->Right(),quad->Bottom()); 
+			});
+
+		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {
+			quad->SetRight(quad->GetTransform()->GetPos().x);
+			quad->SetBottom(quad->GetTransform()->GetPos().y); 
+			});
+	}
+	else
+	{
+		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {
+			quad->GetTransform()->GetPos() = Vector2(quad->Left(), quad->Bottom());
+			});
+
+		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {
+			quad->SetLeft(quad->GetTransform()->GetPos().x);
+			quad->SetBottom(quad->GetTransform()->GetPos().y);
+			});
+	}
+	Monster::Attack();
 }

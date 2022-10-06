@@ -20,6 +20,7 @@ public:
 
 	void AddObject(shared_ptr<Object> addObject, int type , bool toFront = false);
 	void DeleteObject(Vector2 Pos, int type, bool toFront = false);
+	void Paste(shared_ptr<Map> copyMap);
 	void Reset();
 
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }

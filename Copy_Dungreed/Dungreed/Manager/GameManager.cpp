@@ -41,7 +41,7 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
-	for (auto& objects : _objectInScreen)
+	for (auto& objects : _curMap->GetObjects())
 	{
 		for (auto& object : objects)
 		{
@@ -62,7 +62,7 @@ void GameManager::PostRender()
 {
 	if (_renderCollider)
 	{
-		for (auto& objects : _objectInScreen)
+		for (auto& objects : _curMap->GetObjects())
 		{
 			for (auto& object : objects)
 			{
@@ -249,34 +249,6 @@ void GameManager::SetMap(shared_ptr<Map> addedMap)
 				object = nullptr;
 		}
 	}
-	
-	_instanceQuad.clear();
-	_instanceQuad.resize(Object::CREATURE);
-
-	for (int i = 0; i < Object::Object_Type::CREATURE; i++)
-	{
-		// 같은 이미지의 오브젝트 트렌스폼 map에 저장
-		unordered_map<wstring, vector<shared_ptr<Transform>>> _objects;
-		for (auto& object : _curMap->GetObjects()[i])
-		{
-			if(object == nullptr)
-				continue;
-
-			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object->GetObjectTexture()->GetTransform());
-		}
-
-		// 같은 이미지의 트렌스폼들을 하나의 InstanceQuads에 추가
-		for (auto& iter : _objects)
-		{
-			auto instanceQuad = make_shared<InstanceQuads>(iter.first, iter.second.size());
-			for (int j = 0; j < iter.second.size(); j++)
-			{
-				instanceQuad->GetTransforms()[j] = iter.second[j];
-			}
-			_instanceQuad[i].emplace_back(instanceQuad);
-		}
-	}
-
 }
 
 void GameManager::Reset()

@@ -14,7 +14,6 @@ public:
 
 private:
 	shared_ptr<Player> _player;
-	shared_ptr<Quad> _cursur;
 
 	int _mapLevel = 0;
 	int _mapNum = 0;

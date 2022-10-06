@@ -9,7 +9,7 @@ public:
 	virtual void Render();
 
 	shared_ptr<Quad> GetTexture() { return _quad; }
-	vector<shared_ptr<Transform>> GetTransforms() { return _transforms; }
+	vector<shared_ptr<Transform>>& GetTransforms() { return _transforms; }
 
 	void SetRenderPercent(float percent) { _renderPercent = percent; }
 

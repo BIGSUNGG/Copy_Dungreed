@@ -69,6 +69,8 @@
 
 #define UI_MANAGER UIManager::GetInstance()
 
+#define MOUSE_CURSUR MouseCursur::GetInstance()
+
 #define EXCEPT -1
 #define BASIC 0
 

@@ -5,7 +5,6 @@ Melee::Melee(int level, int num)
 	: Weapon(level,num)
 {
 	_weaponType = MELEE;
-	_appendAngle = { -0.1f,1.2f };
 	_offset = { 45,-25 };
 }
 

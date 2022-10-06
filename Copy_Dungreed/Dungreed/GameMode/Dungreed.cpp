@@ -12,7 +12,7 @@ Dungreed::Dungreed()
 
 	Init();
 
-	CursurOff();
+	MOUSE_CURSUR->CursurOff();
 }
 
 void Dungreed::Update()

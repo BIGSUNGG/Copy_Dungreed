@@ -23,7 +23,7 @@ void Object::PreRender()
 
 void Object::Render()
 {
-	if (_render)
+	if (_render || GAME->GetObjectUpdate() == false)
 	{
 		_buffer->SetPSBuffer(0);
 		_texture->Render();

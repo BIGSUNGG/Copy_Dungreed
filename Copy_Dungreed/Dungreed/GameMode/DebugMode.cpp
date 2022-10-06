@@ -6,20 +6,18 @@ DebugMode::DebugMode()
 	GAME->Reset();
 	_modeType = DEBUG;
 
+	CAMERA->GetFreeMode() = false;
 	auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
+
 	MAP_MANAGER->SetCurMap(_map);
 
 	Init();
 
-	_cursur = OBJ_MANAGER->GetCursur(2);
-	CursurOn();
+	MOUSE_CURSUR->CursurOff();
 }
 
 void DebugMode::Update()
 {
-	_cursur->GetTransform()->GetPos() = MOUSE_WORLD_POS;
-	_cursur->Update();
-
 	GAME->Update();
 	MAP_MANAGER->Update();
 }
@@ -37,8 +35,6 @@ void DebugMode::Render()
 void DebugMode::PostRender()
 {
 	GAME->PostRender();
-
-	_cursur->Render();
 }
 
 void DebugMode::ImGuiRender()

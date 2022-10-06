@@ -66,20 +66,41 @@ void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 	}
 }
 
+void Map::Paste(shared_ptr<Map> copyMap)
+{
+	_objects.clear();
+	_objects.resize(Object::_objectTypeCount);
+	for (auto& object : _objects)
+		object.reserve(100);
+
+	_objects		= copyMap->GetObjects();
+	_objectCount	= copyMap->GetObjectCount();
+
+	_startPos	= copyMap->GetStartPos();
+	_leftBottom = copyMap->GetLeftBottom();
+	_rightTop	= copyMap->GetRightTop();
+
+	_topDoor	= copyMap->GetTopDoor();
+	_bottomDoor = copyMap->GetBottomDoor();
+	_leftDoor	= copyMap->GetLeftDoor();
+	_rightDoor	= copyMap->GetRightDoor();
+}
+
 void Map::Reset()
 {
 	_objects.clear();
 	_objects.resize(Object::_objectTypeCount);
 	for (auto& object : _objects)
 		object.reserve(100);
+
 	_objectCount = 0;
 
-	_startPos = { 5000,5000 };
+	_startPos	= { 5000,5000 };
 	_leftBottom = { 0,0 };
-	_rightTop = { 10000,10000 };
+	_rightTop	= { 10000,10000 };
 
-	_topDoor = { 0,0 };
+	_topDoor	= { 0,0 };
 	_bottomDoor = { 0,0 };
-	_leftDoor = { 0,0 };
-	_rightDoor = { 0,0 };
+	_leftDoor	= { 0,0 };
+	_rightDoor	= { 0,0 };
 }
