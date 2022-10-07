@@ -41,9 +41,20 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
-	for (auto& objects : _curMap->GetObjects())
+	for (int i = Object::BACKGROUND; i < Object::CREATURE; i++)
 	{
-		for (auto& object : objects)
+		for (auto& object : _instanceQuad[i])
+		{
+			if (object == nullptr)
+				continue;
+
+			object->Render();
+		}
+	}
+
+	for (int i = Object::CREATURE; i < Object::UI; i++)
+	{
+		for (auto& object : _curMap->GetObjects()[i])
 		{
 			if (object == nullptr)
 				continue;
@@ -62,9 +73,9 @@ void GameManager::PostRender()
 {
 	if (_renderCollider)
 	{
-		for (auto& objects : _curMap->GetObjects())
+		for (int i = Object::TILE; i < Object::UI; i++)
 		{
-			for (auto& object : objects)
+			for (auto& object : _curMap->GetObjects()[i])
 			{
 				if (object == nullptr)
 					continue;
@@ -77,7 +88,7 @@ void GameManager::PostRender()
 
 void GameManager::ImguiRender()
 {
-	for (auto& objects : _objectInScreen)
+	for (auto& objects : _curMap->GetObjects())
 	{
 		for (auto& object : objects)
 		{
@@ -121,6 +132,38 @@ void GameManager::Optimize()
 	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false,true));	
 	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false,true));
 	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false,true));
+}
+
+void GameManager::Instancing()
+{
+	if (_curMap == nullptr)
+		return;
+
+	_instanceQuad.clear();
+	_instanceQuad.resize(Object::CREATURE);
+
+	for (int i = 0; i < Object::Object_Type::CREATURE; i++)
+	{
+		unordered_map<wstring, vector<shared_ptr<Transform>>> _objects;
+		for (auto& object : _curMap->GetObjects()[i])
+		{
+			if (object == nullptr)
+				continue;
+
+			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object->GetObjectTexture()->GetTransform());
+		}
+
+		for (auto& iter : _objects)
+		{
+			auto instanceQuad = make_shared<InstanceQuad>(iter.first, iter.second.size());
+			for (int j = 0; j < iter.second.size(); j++)
+			{
+				instanceQuad->GetTransforms()[j] = iter.second[j];
+			}
+			instanceQuad->ApplyChanges();
+			_instanceQuad[i].emplace_back(instanceQuad);
+		}
+	}
 }
 
 void GameManager::AddObject(shared_ptr<Object> object, int type, bool toFront)
@@ -249,6 +292,8 @@ void GameManager::SetMap(shared_ptr<Map> addedMap)
 				object = nullptr;
 		}
 	}
+
+	Instancing();
 }
 
 void GameManager::Reset()

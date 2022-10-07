@@ -185,7 +185,7 @@
     <ClInclude Include="Dungreed\Manager\InventoryManager.h" />
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_PlayerHpBar.h" />
     <ClInclude Include="Framework\Utility\MouseCursur.h" />
-    <ClInclude Include="Object\InstanceQuads.h" />
+    <ClInclude Include="Object\InstanceQuad.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
@@ -259,7 +259,7 @@
     <ClCompile Include="Dungreed\Manager\InventoryManager.cpp" />
     <ClCompile Include="Dungreed\Object\UI\HpBar\UI_PlayerHpBar.cpp" />
     <ClCompile Include="Framework\Utility\MouseCursur.cpp" />
-    <ClCompile Include="Object\InstanceQuads.cpp" />
+    <ClCompile Include="Object\InstanceQuad.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
     <ClCompile Include="Framework\Math\Vector2.cpp" />

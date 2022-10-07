@@ -31,6 +31,8 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 		_objects[type].emplace(_objects[type].begin(), addObject);
 	else
 		_objects[type].emplace_back(addObject);
+
+	GAME->Instancing();
 }
 
 void Map::DeleteObject(Vector2 pos, int type, bool toFront)
@@ -64,6 +66,8 @@ void Map::DeleteObject(Vector2 pos, int type, bool toFront)
 			}
 		}
 	}
+
+	GAME->Instancing();
 }
 
 void Map::Paste(shared_ptr<Map> copyMap)

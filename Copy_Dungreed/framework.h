@@ -109,7 +109,7 @@ using namespace std;
 
 // Object
 #include "Object/Quad.h"
-#include "Object/InstanceQuads.h"
+#include "Object/InstanceQuad.h"
 
 // Status
 #include "Dungreed/Ect/Status/Status.h"

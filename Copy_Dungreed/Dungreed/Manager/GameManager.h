@@ -28,6 +28,7 @@ public:
 	void ImguiRender();
 
 	void Optimize();
+	void Instancing();
 
 	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
 	void AddEffect(shared_ptr<Effect> effect);
@@ -53,9 +54,10 @@ private:
 	~GameManager();
 	static GameManager* _instance;	
 	
-	float _maxDelay = 0.1f;
+	const float _maxDelay = 0.05f;
 
 	shared_ptr<Map> _curMap;
+	vector<vector<shared_ptr<InstanceQuad>>> _instanceQuad;
 	vector<vector<shared_ptr<Object>>> _objectInScreen;
 	vector<shared_ptr<Collider>> _debugCollider;
 	shared_ptr<Player> _player;

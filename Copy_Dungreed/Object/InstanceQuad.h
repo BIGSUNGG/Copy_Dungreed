@@ -1,9 +1,9 @@
 #pragma once
-class InstanceQuads
+class InstanceQuad
 {
 public:
-	InstanceQuads(wstring file, int count);
-	InstanceQuads(shared_ptr<Quad> quad, int count);
+	InstanceQuad(wstring file, int count);
+	InstanceQuad(shared_ptr<Quad> quad, int count);
 
 	virtual void Update();
 	virtual void Render();

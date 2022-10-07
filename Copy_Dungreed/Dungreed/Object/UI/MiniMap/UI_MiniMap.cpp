@@ -97,7 +97,7 @@ void UI_MiniMap::Refresh()
 
 		shared_ptr<Texture> texture = Texture::Add(L"MiniMap_Tile_Texture", _miniTileRtv->GetSRV());
 		quad->SetTexture(texture);
-		_miniTile = make_shared<InstanceQuads>(quad, tiles.size());
+		_miniTile = make_shared<InstanceQuad>(quad, tiles.size());
 		for (int i = 0; i < tiles.size(); i++)
 		{
 			Vector2 pos = (tiles[i]->GetPos() - leftBottom) * _miniMapSizeRatio;

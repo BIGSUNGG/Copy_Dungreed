@@ -1,7 +1,7 @@
 #include "framework.h"
-#include "InstanceQuads.h"
+#include "InstanceQuad.h"
 
-InstanceQuads::InstanceQuads(wstring file, int count)
+InstanceQuad::InstanceQuad(wstring file, int count)
 {
 	_quad = make_shared<Quad>(file, L"Shader/InstancingShader/InstancingVertexShader.hlsl", L"Shader/InstancingShader/InstancingPixelShader.hlsl");
 
@@ -19,7 +19,7 @@ InstanceQuads::InstanceQuads(wstring file, int count)
 	_instancingBuffer = make_shared<VertexBuffer>(_instanceDataes.data(), sizeof(XMMATRIX), _instanceDataes.size());
 }
 
-InstanceQuads::InstanceQuads(shared_ptr<Quad> quad, int count)
+InstanceQuad::InstanceQuad(shared_ptr<Quad> quad, int count)
 	: _quad(quad)
 {
 	_quad->SetVS(L"Shader/InstancingShader/InstancingVertexShader.hlsl");
@@ -39,12 +39,12 @@ InstanceQuads::InstanceQuads(shared_ptr<Quad> quad, int count)
 	_instancingBuffer = make_shared<VertexBuffer>(_instanceDataes.data(), sizeof(XMMATRIX), _instanceDataes.size());
 }
 
-void InstanceQuads::Update()
+void InstanceQuad::Update()
 {
 	_quad->Update();
 }
 
-void InstanceQuads::Render()
+void InstanceQuad::Render()
 {
 	_instancingBuffer->IASetVertexBuffer(1);
 
@@ -53,7 +53,7 @@ void InstanceQuads::Render()
 	DEVICE_CONTEXT->DrawIndexedInstanced(6, _instanceDataes.size() * _renderPercent, 0, 0, 0);
 }
 
-void InstanceQuads::ApplyChanges()
+void InstanceQuad::ApplyChanges()
 {
 	_instanceDataes.clear();
 

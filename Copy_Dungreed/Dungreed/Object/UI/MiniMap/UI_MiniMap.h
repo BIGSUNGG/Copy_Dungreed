@@ -18,7 +18,7 @@ protected:
 	shared_ptr<RenderTarget> _miniTileRtv;
 	shared_ptr<Quad> _miniMapBase;
 
-	shared_ptr<InstanceQuads> _miniTile;
+	shared_ptr<InstanceQuad> _miniTile;
 	vector<shared_ptr<Object>> _miniEnemy;
 	shared_ptr<Object> _miniPlayer;
 };
