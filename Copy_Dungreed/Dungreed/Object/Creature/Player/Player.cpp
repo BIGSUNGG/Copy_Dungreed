@@ -8,7 +8,7 @@ Player::Player(int level, int num)
 	_weaponSlot.resize(2);
 
 	_status.SetMaxHp(80);
-	_status._atk = 40;
+	_status._atk = 25;
 
 	INVENTORY->SetWeaponSlot(&_weaponSlot);
 	INVENTORY->SetCurWeaponSlot(&_curWeaponSlot);
@@ -16,6 +16,7 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
+	_dash.Update();
 	_dustRunTime += DELTA_TIME;
 
 	MovementEvent();
@@ -29,7 +30,7 @@ void Player::Update()
 
 void Player::DustEffect()
 {
-	if (_dashCurSpeed > 0)
+	if (_dash._dashCurSpeed > 0)
 		return;
 
 	if (_dustRunTime >= _dustDelay)
@@ -90,7 +91,7 @@ void Player::MovementEvent()
 		_anim->ChangeAnimation(State::IDLE);
 	}
 
-	if ((_velocity.y != 0 || _dashCurSpeed > 0.0f) && _onStair == false)
+	if ((_velocity.y != 0 || _dash._dashCurSpeed > 0.0f) && _onStair == false)
 	{
 
 		_anim->ChangeAnimation(State::JUMP);
@@ -105,30 +106,30 @@ void Player::MovementEvent()
 		_isFalling = false;
 	}
 
-	if (_dashCurSpeed > 0.0f)
+	if (_dash._dashCurSpeed > 0.0f)
 	{
-		_movement += (_dashDirection * _dashCurSpeed);
+		_movement += (_dash._dashDirection * _dash._dashCurSpeed);
 		_isFalling = true;
 
-		if (_dashSlow)
+		if (_dash._dashSlow)
 		{
-			_dashCurSpeed -= _dashSlowSpeed * DELTA_TIME;
+			_dash._dashCurSpeed -= _dash._dashSlowSpeed * DELTA_TIME;
 		}
 		else
 		{
-			_dashRunTime += DELTA_TIME;
+			_dash._dashRunTime += DELTA_TIME;
 
-			if (_dashRunTime >= _dashRunTimeMax)
-				_dashSlow = true;
+			if (_dash._dashRunTime >= _dash._dashRunTimeMax)
+				_dash._dashSlow = true;
 		}
 	}
 	else
-		_gravity = true;
+		_gravityRatio = 1.0f;
 }
 
 void Player::InputEvent()
 {
-	if (_dashCurSpeed <= 0)
+	if (_dash._dashCurSpeed <= 0)
 	{
 		if (KEY_DOWN('W'))
 			Jump();
@@ -160,13 +161,19 @@ void Player::InputEvent()
 
 void Player::Dash()
 {
-	_dashSlow = false;
-	_gravity = false;
-	_dashRunTime = 0.0f;
-	_jumpPower = 0.0f;
-	_dashCurSpeed = _dashSpeedMax;
-	_dashDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
-	_dashDirection.Normalize();
+	if (_dash._dashCount > 0)
+	{
+		_gravityRatio = 0.3f;
+		_jumpPower = 0.0f;
+
+		--_dash._dashCount;
+		_dash._dashChargeTime = 0.0f;
+		_dash._dashSlow = false;
+		_dash._dashRunTime = 0.0f;
+		_dash._dashCurSpeed = _dash._dashSpeedMax;
+		_dash._dashDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
+		_dash._dashDirection.Normalize();
+	}
 }
 
 void Player::Jump()

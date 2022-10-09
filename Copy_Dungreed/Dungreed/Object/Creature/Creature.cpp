@@ -20,8 +20,7 @@ void Creature::Update()
 
 	if (GAME->GetObjectUpdate())
 	{
-		if (_gravity)
-			_jumpPower -= _gravityPower * DELTA_TIME;
+		_jumpPower -= (_gravityPower * _gravityRatio) * DELTA_TIME;
 
 		_movement.y += _jumpPower;
 

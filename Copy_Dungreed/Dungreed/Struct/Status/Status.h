@@ -1,5 +1,5 @@
 #pragma once
-class Status
+struct Status
 {
 public:
 	Status();

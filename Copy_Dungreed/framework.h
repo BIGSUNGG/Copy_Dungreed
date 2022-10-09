@@ -112,7 +112,8 @@ using namespace std;
 #include "Object/InstanceQuad.h"
 
 // Status
-#include "Dungreed/Ect/Status/Status.h"
+#include "Dungreed/Struct/Status/Status.h"
+#include "Dungreed/Struct/Dash/Dash_Info.h"
 
 // Object
 #include "Dungreed/Object/Object.h"

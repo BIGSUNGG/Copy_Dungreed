@@ -1,0 +1,21 @@
+#include "framework.h"
+#include "Dash_Info.h"
+
+Dash_Info::Dash_Info()
+{
+}
+
+Dash_Info::~Dash_Info()
+{
+}
+
+void Dash_Info::Update()
+{
+	_dashChargeTime += DELTA_TIME;
+
+	if (_dashChargeTime >= _dashChargeDelay && _dashCount < _dashCountMax)
+	{
+		_dashChargeTime = 0.0f;
+		++_dashCount;
+	}
+}

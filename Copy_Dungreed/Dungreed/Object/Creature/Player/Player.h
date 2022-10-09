@@ -2,9 +2,14 @@
 class Player : public Creature
 {
 public:
+
+
+public:
 	Player(int level, int num);
 
 	virtual void Update() override;
+
+	const Dash_Info& GetDashInfo() { return _dash; }
 
 protected:
 	virtual void Dash();
@@ -20,13 +25,7 @@ protected:
 protected:
 	bool _doubleJumped = false;
 
-	bool _dashSlow = false;
-	float _dashCurSpeed = 0.0f;
-	const float _dashSlowSpeed = 10000.0f;
-	const float _dashSpeedMax = 2500.0f;
-	float _dashRunTime = 0.0f;
-	const float _dashRunTimeMax = 0.025f;
-	Vector2 _dashDirection = { 0,0 };
+	Dash_Info _dash;
 
 	float _dustRunTime = 0.25f;
 	const float _dustDelay = 0.25f;

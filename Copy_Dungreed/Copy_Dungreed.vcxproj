@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
     <ClInclude Include="Dungreed\Object\Ect\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Object\Ect\Ect.h" />
@@ -207,7 +208,7 @@
     <ClInclude Include="Framework\State\StateManager.h" />
     <ClInclude Include="Framework\Render\Shader.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
-    <ClInclude Include="Dungreed\Ect\Status\Status.h" />
+    <ClInclude Include="Dungreed\Struct\Status\Status.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Bullet\Bullet.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Ect.cpp" />
@@ -295,7 +297,7 @@
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Weapon.cpp" />
-    <ClCompile Include="Dungreed\Ect\Status\Status.cpp" />
+    <ClCompile Include="Dungreed\Struct\Status\Status.cpp" />
     <ClCompile Include="Framework\Render\RenderTarget.cpp" />
     <ClCompile Include="Dungreed\Manager\UIManager.cpp" />
     <ClCompile Include="Dungreed\Object\UI\UI.cpp" />

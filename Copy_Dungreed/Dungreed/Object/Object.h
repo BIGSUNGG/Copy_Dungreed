@@ -46,6 +46,7 @@ public:
 	bool& GetCollision() { return _collison; }
 	const int& GetNum() { return _num; }
 	const int& GetLevel() { return _level; }
+	const bool& GetInstance() { return _instance; }
 	const bool& GetPlayingAnim() { return _playingAnim; }
 	const bool& GetReversed() { return _reversed; }
 	const bool& GetIsActive() { return _isActive; }
@@ -60,6 +61,7 @@ public:
 protected:
 	Object_Type _objectType = Object_Type::TILE;
 	Vector2 _spawnPos = { 0,0 };
+	bool _instance = false;
 	bool _isActive = true;
 	bool _collison = true;
 

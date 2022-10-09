@@ -41,27 +41,22 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
-	for (int i = Object::BACKGROUND; i < Object::CREATURE; i++)
+	for (int i = Object::BACKGROUND; i < Object::UI; i++)
 	{
-		for (auto& object : _instanceQuad[i])
+		for (auto& instanceQuad : _instanceQuad[i])
 		{
-			if (object == nullptr)
-				continue;
-
-			object->Render();
+			instanceQuad->Render();
 		}
-	}
 
-	for (int i = Object::CREATURE; i < Object::UI; i++)
-	{
 		for (auto& object : _curMap->GetObjects()[i])
 		{
-			if (object == nullptr)
+			if (object == nullptr || object->GetInstance() == true)
 				continue;
 
 			object->Render();
 		}
 	}
+
 
 	for (auto& collider : _debugCollider)
 	{
@@ -140,14 +135,14 @@ void GameManager::Instancing()
 		return;
 
 	_instanceQuad.clear();
-	_instanceQuad.resize(Object::CREATURE);
+	_instanceQuad.resize(Object::_objectTypeCount);
 
 	for (int i = 0; i < Object::Object_Type::CREATURE; i++)
 	{
 		unordered_map<wstring, vector<shared_ptr<Transform>>> _objects;
 		for (auto& object : _curMap->GetObjects()[i])
 		{
-			if (object == nullptr)
+			if (object == nullptr || object->GetInstance() == false)
 				continue;
 
 			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object->GetObjectTexture()->GetTransform());

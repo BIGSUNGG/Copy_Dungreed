@@ -71,6 +71,6 @@ protected:
 	bool _passFloor = false;
 	bool _passTile = false;
 	bool _onStair = false;
-	bool _gravity = true;
+	float _gravityRatio = 1.0f;
 };
 

@@ -53,7 +53,7 @@ void UIManager::PostRender()
 void UIManager::ChangedMap()
 {
 	_miniMap->Refresh();
-	_enemyHpBar->Refresh();
+	_enemyHpBar->Refresh(); 
 }
 
 UIManager::UIManager()
