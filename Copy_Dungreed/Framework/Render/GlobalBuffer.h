@@ -58,7 +58,7 @@ public:
 		float value1 = 0;
 		float value2 = 0;
 		float value3 = 0;
-		float value4 = 0;
+		float value4 = 1;
 		XMFLOAT3 padding;
 	}_data;
 
