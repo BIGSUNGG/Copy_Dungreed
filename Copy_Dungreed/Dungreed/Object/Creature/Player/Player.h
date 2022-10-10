@@ -13,6 +13,7 @@ public:
 
 protected:
 	virtual void Dash();
+	virtual void DashMovement();
 	virtual void Jump() override;
 
 	virtual void MouseEvent();

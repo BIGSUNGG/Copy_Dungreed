@@ -156,6 +156,7 @@
     <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
     <ClInclude Include="Dungreed\Object\Ect\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Object\Ect\Ect.h" />
+    <ClInclude Include="Dungreed\Object\Effect\Trail\Effect_Trail.h" />
     <ClInclude Include="Framework\Animation\Animation.h" />
     <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
     <ClInclude Include="Dungreed\Object\BackGround\BackGround.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Bullet\Bullet.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Ect.cpp" />
+    <ClCompile Include="Dungreed\Object\Effect\Trail\Effect_Trail.cpp" />
     <ClCompile Include="Framework\Animation\Animation.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
     <ClCompile Include="Dungreed\Object\BackGround\BackGround.cpp" />

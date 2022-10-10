@@ -106,25 +106,7 @@ void Player::MovementEvent()
 		_isFalling = false;
 	}
 
-	if (_dash._dashCurSpeed > 0.0f)
-	{
-		_movement += (_dash._dashDirection * _dash._dashCurSpeed);
-		_isFalling = true;
-
-		if (_dash._dashSlow)
-		{
-			_dash._dashCurSpeed -= _dash._dashSlowSpeed * DELTA_TIME;
-		}
-		else
-		{
-			_dash._dashRunTime += DELTA_TIME;
-
-			if (_dash._dashRunTime >= _dash._dashRunTimeMax)
-				_dash._dashSlow = true;
-		}
-	}
-	else
-		_gravityRatio = 1.0f;
+	DashMovement();
 }
 
 void Player::InputEvent()
@@ -165,15 +147,50 @@ void Player::Dash()
 	{
 		_gravityRatio = 0.3f;
 		_jumpPower = 0.0f;
-
-		--_dash._dashCount;
-		_dash._dashChargeTime = 0.0f;
-		_dash._dashSlow = false;
-		_dash._dashRunTime = 0.0f;
-		_dash._dashCurSpeed = _dash._dashSpeedMax;
+		_dash.Reset();
 		_dash._dashDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
 		_dash._dashDirection.Normalize();
 	}
+}
+
+void Player::DashMovement()
+{
+	if (_dash._dashCurSpeed > 0.0f)
+	{
+		_movement += (_dash._dashDirection * _dash._dashCurSpeed);
+		if (_dash._trailCount < _dash._trailCountMax)
+		{
+			_dash._trailTime += DELTA_TIME;
+			if (_dash._trailTime > _dash._trailDelay)
+			{
+				++_dash._trailCount;
+				_dash._trailTime = 0.0f;
+				auto trail = make_shared<Effect_Trail>();
+				auto quad = make_shared<Quad>(_texture->GetImageFile());
+				trail->SetTexture(quad);
+				trail->GetPos() = this->GetPos();
+				if (_reversed)
+					trail->ReverseTexture();
+				GAME->AddEffect(trail);
+			}
+		}
+
+		_isFalling = true;
+
+		if (_dash._dashSlow)
+		{
+			_dash._dashCurSpeed -= _dash._dashSlowSpeed * DELTA_TIME;
+		}
+		else
+		{
+			_dash._dashRunTime += DELTA_TIME;
+
+			if (_dash._dashRunTime >= _dash._dashRunTimeMax)
+				_dash._dashSlow = true;
+		}
+	}
+	else
+		_gravityRatio = 1.0f;
 }
 
 void Player::Jump()

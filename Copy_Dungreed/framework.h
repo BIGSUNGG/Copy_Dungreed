@@ -121,6 +121,7 @@ using namespace std;
 #include "Dungreed/Object/Wall/Wall.h"
 #include "Dungreed/Object/Tile/Tile.h"
 #include "Dungreed/Object/Effect/Effect.h"
+#include "Dungreed/Object/Effect/Trail/Effect_Trail.h"
 
 // ECT
 #include "Dungreed/Object/Ect/Ect.h"

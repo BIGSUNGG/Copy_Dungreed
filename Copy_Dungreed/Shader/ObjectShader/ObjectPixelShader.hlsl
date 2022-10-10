@@ -1,9 +1,11 @@
 cbuffer Color : register(b0)
 {
-	int selected = 0;
-	float value1 = 0;
-	float value2 = 0;
-	float value3 = 0;
+	int selected;
+	float value1;
+	float value2;
+	float value3;
+	float value4;
+	float3 padding;
 }
 
 Texture2D map : register(t0);
@@ -26,6 +28,8 @@ float4 SetColor(float2 uv)
 
 	if (result.w < 1)
 		result.w = 0;
+	else
+		result.w = value4;
 
 	return result;
 }
