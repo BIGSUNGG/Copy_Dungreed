@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Utility\Audio.h" />
     <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
     <ClInclude Include="Dungreed\Object\Ect\Bullet\Bullet.h" />
@@ -187,6 +188,14 @@
     <ClInclude Include="Dungreed\Manager\InventoryManager.h" />
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_PlayerHpBar.h" />
     <ClInclude Include="Framework\Utility\MouseCursur.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod.hpp" />
+    <ClInclude Include="Library\FMOD\inc\fmod_codec.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_common.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_dsp.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_dsp_effects.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_errors.h" />
+    <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
     <ClInclude Include="Object\InstanceQuad.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
@@ -229,6 +238,7 @@
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Utility\Audio.cpp" />
     <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Bullet\Bullet.cpp" />
@@ -411,6 +421,14 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Save\Map_Info\Level_00_0.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Library\FMOD\inc\fmod.cs" />
+    <None Include="Library\FMOD\inc\fmod_dsp.cs" />
+    <None Include="Library\FMOD\inc\fmod_errors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Library\FMOD\fmod_vc.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

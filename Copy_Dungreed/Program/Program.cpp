@@ -20,7 +20,8 @@ void Program::Update()
 	if (GAME->GetPause())
 		return;
 
-	Camera::GetInstance()->Update();
+	CAMERA->Update();
+	SOUND->Update();
 
 	_gameMode->Update();
 

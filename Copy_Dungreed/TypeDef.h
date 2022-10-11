@@ -71,6 +71,8 @@
 
 #define MOUSE_CURSUR MouseCursur::GetInstance()
 
+#define SOUND Audio::GetInstance()
+
 #define EXCEPT -1
 #define BASIC 0
 

@@ -5,6 +5,8 @@ GameManager* GameManager::_instance = nullptr;
 
 GameManager::GameManager()
 {
+	SOUND->Add("bgm", "Resource/Sound/Bgm/0.Town.wav");
+	SOUND->Play("bgm");
 }
 
 GameManager::~GameManager()

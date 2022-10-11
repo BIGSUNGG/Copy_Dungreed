@@ -50,6 +50,10 @@
 #include <d2d1_2.h>
 #include <dwrite.h>
 
+//FMOD
+#include "Library/FMOD/inc/fmod.hpp"
+#pragma comment(lib,"Library/FMOD/fmod_vc.lib")
+
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
@@ -97,6 +101,7 @@ using namespace std;
 #include "Framework/Utility/BinaryReader.h"
 #include "Framework/Utility/DirectWrite.h"
 #include "Framework/Utility/tinyxml2.h"
+#include "Framework/Utility/Audio.h"
 #include "Framework/Utility/MouseCursur.h"
 
 //Collider

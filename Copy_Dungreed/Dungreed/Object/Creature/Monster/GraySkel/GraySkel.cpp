@@ -66,27 +66,13 @@ void GraySkel::AI()
 
 void GraySkel::Attack()
 {
-	if (_reversed)
-	{
-		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {
-			quad->GetTransform()->GetPos() = Vector2(quad->Right(),quad->Bottom()); 
-			});
+	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {
+		quad->GetTransform()->GetPos() = Vector2(quad->Left(), quad->Bottom());
+		});
 
-		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {
-			quad->SetRight(quad->GetTransform()->GetPos().x);
-			quad->SetBottom(quad->GetTransform()->GetPos().y); 
-			});
-	}
-	else
-	{
-		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {
-			quad->GetTransform()->GetPos() = Vector2(quad->Left(), quad->Bottom());
-			});
-
-		_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {
-			quad->SetLeft(quad->GetTransform()->GetPos().x);
-			quad->SetBottom(quad->GetTransform()->GetPos().y);
-			});
-	}
+	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {
+		quad->SetLeft(quad->GetTransform()->GetPos().x);
+		quad->SetBottom(quad->GetTransform()->GetPos().y);
+		});
 	Monster::Attack();
 }
