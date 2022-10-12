@@ -20,7 +20,7 @@ public:
 	void Save();
 	void Load();
 
-	void ImguiRender();
+	void ImGuiRender();
 
 private:
 	GraphicManager();

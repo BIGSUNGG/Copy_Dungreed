@@ -30,7 +30,7 @@ void GraphicManager::Load()
 {
 }
 
-void GraphicManager::ImguiRender()
+void GraphicManager::ImGuiRender()
 {
 
 	if (ImGui::TreeNode("Window Mode"))

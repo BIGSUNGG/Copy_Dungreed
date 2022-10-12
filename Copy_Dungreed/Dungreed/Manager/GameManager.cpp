@@ -5,8 +5,6 @@ GameManager* GameManager::_instance = nullptr;
 
 GameManager::GameManager()
 {
-	SOUND->Add("bgm", "Resource/Sound/Bgm/1.JailField.wav", true);
-	SOUND->Play("bgm");
 }
 
 GameManager::~GameManager()

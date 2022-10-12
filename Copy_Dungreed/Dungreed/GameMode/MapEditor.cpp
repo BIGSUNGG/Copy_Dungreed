@@ -17,6 +17,8 @@ MapEditor::MapEditor()
 	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
 
 	MOUSE_CURSUR->CursurOn();
+
+	SOUND->StopAll();
 }
 
 void MapEditor::Update()

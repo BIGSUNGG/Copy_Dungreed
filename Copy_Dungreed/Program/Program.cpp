@@ -31,11 +31,11 @@ void Program::Update()
 		SwitchBool(GAME->GetRenderTexture());
 	if (KEY_DOWN(VK_F3))
 		SwitchBool(GAME->GetRenderCollider());
-	if (KEY_DOWN(VK_F4))
-		_gameMode = make_shared<MapEditor>();
-	if (KEY_DOWN(VK_F5))
-		_gameMode = make_shared<DebugMode>();
 	if (KEY_DOWN(VK_F6))
+		_gameMode = make_shared<MapEditor>();
+	if (KEY_DOWN(VK_F7))
+		_gameMode = make_shared<DebugMode>();
+	if (KEY_DOWN(VK_F8))
 		_gameMode = make_shared<Dungreed>();
 }
 
@@ -84,12 +84,14 @@ void Program::ImGuiRender()
 		ImGui::Text("DELTA TIME : %fs", DELTA_TIME);
 		ImGui::SliderFloat("GAME SPEED", &GAME_SPEED, 0.1f, 5.0f, "%0.1f");
 	}
+	if (ImGui::CollapsingHeader("Audio"))
+		SOUND->ImGuiRender();
 
 	if (ImGui::CollapsingHeader("Camera"))
 		Camera::GetInstance()->ImGuiRender();
 
 	if (ImGui::CollapsingHeader("Graphic Options"))
-		GRAPHIC->ImguiRender();
+		GRAPHIC->ImGuiRender();
 
 	ImGui::End();
 

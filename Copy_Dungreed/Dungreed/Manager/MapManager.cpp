@@ -456,11 +456,34 @@ void MapManager::SetCurMap(const Vector2& index)
 
 	UI_MANAGER->Refresh();
 	CAMERA->Update();
+
+	string bgm;
+
+	switch (_maps[_curMapIndex.x][_curMapIndex.y]->GetLevel())
+	{
+	case 0:
+		bgm = "0.Town";
+		break;
+	case 1:
+		bgm = "1.JailField";
+		break;
+	default:
+		break;
+	}
+
+	if (SOUND->IsPlaySound(bgm) == false)
+	{
+		SOUND->StopAll();
+		SOUND->Play(bgm);
+	}
+
 	return;
 }
 
 MapManager::MapManager()
 {
+	SOUND->Add("0.Town", "Resource/Sound/Bgm/0.Town.wav", true);
+	SOUND->Add("1.JailField", "Resource/Sound/Bgm/1.JailField.wav", true);
 	_mapSize.resize(9);
 
 	// 현재 프로젝트 경로 구하기
