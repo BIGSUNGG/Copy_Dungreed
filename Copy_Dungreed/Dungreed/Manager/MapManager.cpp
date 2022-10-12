@@ -454,7 +454,7 @@ void MapManager::SetCurMap(const Vector2& index)
 		GAME->GetPlayer()->SetSpawnPos(GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos());
 	}
 
-	UI_MANAGER->ChangedMap();
+	UI_MANAGER->Refresh();
 	CAMERA->Update();
 	return;
 }

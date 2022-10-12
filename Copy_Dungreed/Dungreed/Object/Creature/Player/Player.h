@@ -9,6 +9,8 @@ public:
 
 	virtual void Update() override;
 
+	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
+
 	const Dash_Info& GetDashInfo() { return _dash; }
 
 protected:

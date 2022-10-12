@@ -11,20 +11,19 @@ Creature::Creature(int level, int num)
 void Creature::Update()
 {
 	_damagedRunTime += DELTA_TIME;
-	if (_damagedRunTime <= _damagedRunTimeMax)
-		_buffer->_data.selected = 1;
-	else
+
+	if (_damagedRunTime >= _damagedRunTimeMax)
 		_buffer->_data.selected = 0;
 
 	_onStair = false;
 
-	if (GAME->GetObjectUpdate())
+	if (GAME->GetPlaying())
 	{
 		_jumpPower -= (_gravityPower * _gravityRatio) * DELTA_TIME;
 
 		_movement.y += _jumpPower;
 
-		if (GAME->GetObjectUpdate())
+		if (GAME->GetPlaying())
 			MoveCharacter();
 
 		_passFloor = false;
@@ -73,10 +72,6 @@ bool Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 		Death();
 
 	_damagedRunTime = 0.0f;
-	_buffer->_data.selected = 1;
-	_buffer->_data.value1 = 1;
-	_buffer->_data.value2 = 0;
-	_buffer->_data.value3 = 0;
 
 	return true;
 }

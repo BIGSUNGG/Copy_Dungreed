@@ -4,6 +4,8 @@
 Player::Player(int level, int num)
 	: Creature(level, num)
 {
+	_damagedRunTimeMax = 0.2f;
+
 	_creatureType = PLAYER;
 	_weaponSlot.resize(2);
 
@@ -12,6 +14,9 @@ Player::Player(int level, int num)
 
 	INVENTORY->SetWeaponSlot(&_weaponSlot);
 	INVENTORY->SetCurWeaponSlot(&_curWeaponSlot);
+
+	SOUND->Add("ui-sound-13-dash", "Resource/Sound/Creature/Player/Dash/ui-sound-13-dash.wav");
+	SOUND->Add("Jumping", "Resource/Sound/Creature/Player/Jump/Jumping.wav");
 }
 
 void Player::Update()
@@ -26,6 +31,19 @@ void Player::Update()
 	InputEvent();
 	
 	Creature::Update();
+}
+
+bool Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+{
+	const bool& damaged = Creature::GetDamage(enemy, weapon);
+
+	if (_status._hp > 0)
+	{
+		_buffer->_data.selected = 2;
+		_buffer->_data.value4 = 0.5f;
+	}
+
+	return damaged;
 }
 
 void Player::DustEffect()
@@ -131,7 +149,7 @@ void Player::InputEvent()
 		if (KEY_PRESS('D'))
 			MoveRight();
 	}
-	if (KEY_DOWN(VK_LBUTTON))
+	if (KEY_PRESS(VK_LBUTTON))
 		Attack();
 	if (KEY_DOWN(VK_RBUTTON))
 		Dash();
@@ -145,6 +163,7 @@ void Player::Dash()
 {
 	if (_dash._dashCount > 0)
 	{
+		SOUND->Play("ui-sound-13-dash");
 		_gravityRatio = 0.3f;
 		_jumpPower = 0.0f;
 		_dash.Reset();
@@ -197,11 +216,13 @@ void Player::Jump()
 {
 	if (_isFalling == false)
 	{
+		SOUND->Play("Jumping");
 		_jumpPower = _jumpPowerMax;
 		DustEffect();
 	}
 	else if (_doubleJumped == false)
 	{
+		SOUND->Play("Jumping");
 		_jumpPower = _jumpPowerMax;
 		_doubleJumped = true;
 		DoubleJumpEffect();

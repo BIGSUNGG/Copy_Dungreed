@@ -29,7 +29,7 @@ public:
 	void PreRender();
 	void PostRender();
 
-	void ChangedMap();
+	void Refresh();
 	void SetState(UI_State& state) { _state = state; }
 
 private:
@@ -38,6 +38,8 @@ private:
 
 	static UIManager* _instance;
 	UI_State _state = UI_State::NOMAL;
+	shared_ptr<RenderTarget> _filter;
+	shared_ptr<Quad> _filterQuad;
 
 	shared_ptr<UI_MiniMap> _miniMap;
 	shared_ptr<UI_PlayerHpBar> _playerHpBar;

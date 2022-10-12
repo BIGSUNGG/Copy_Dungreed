@@ -35,6 +35,8 @@ void Weapon::Attack()
 
 	if (_anim != nullptr)
 		_anim->ChangeAnimation(Creature::State::ATTACK);
+
+	SOUND->Play(_attackSound);
 }
 
 void Weapon::CheckAttack()

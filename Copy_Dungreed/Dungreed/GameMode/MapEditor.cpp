@@ -8,7 +8,7 @@ MapEditor::MapEditor()
 
 	_map = MAP_MANAGER->Load(_mapLevel,_mapNum);
 	GAME->SetMap(_map);
-	GAME->GetObjectUpdate() = false;
+	GAME->GetPlaying() = false;
 
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 	CAMERA->SetTarget(nullptr);

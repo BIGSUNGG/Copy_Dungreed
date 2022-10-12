@@ -1012,6 +1012,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			weapon->SetAttackEffect(func);
 			weapon->SetAppendAngle({ -0.1f,1.2f });
 			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
+			SOUND->Add("swing2", "Resource/Sound/Weapon/Swing/swing2.wav");
+			weapon->SetAttackSound("swing2");
 			break;
 		default:
 			break;
@@ -1024,6 +1026,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			weapon = make_shared<Gun>(type,num);
 			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
 			weapon->SetAttackDelay(0.5f);
+			SOUND->Add("crossbow", "Resource/Sound/Weapon/Fire/crossbow.wav");
+			weapon->SetAttackSound("crossbow");
 			break;
 		default:
 			break;

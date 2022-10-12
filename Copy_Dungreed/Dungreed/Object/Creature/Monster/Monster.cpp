@@ -7,11 +7,14 @@ Monster::Monster(int level, int num)
 	_creatureType = Creature_Type::ENEMY;
 	_speed = 300.0f;
 	_render = false;
+	
+	SOUND->Add("Hit_Monster", "Resource/Sound/Creature/Monster/Hit/Hit_Monster.wav");
+	SOUND->Add("MonsterDie", "Resource/Sound/Creature/Monster/Die/MonsterDie.wav");
 }
 
 void Monster::Update()
 {
-	if (GAME->GetObjectUpdate())
+	if (GAME->GetPlaying())
 	{
 		MovementEvent();
 
@@ -36,7 +39,7 @@ void Monster::Update()
 
 void Monster::Render()
 {
-	if (_spawn || GAME->GetObjectUpdate() == false || GAME->GetPlayer() == nullptr)
+	if (_spawn || GAME->GetPlaying() == false || GAME->GetPlayer() == nullptr)
 		Creature::Render();
 }
 
@@ -72,7 +75,20 @@ bool Monster::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 	if(_spawn == false)
 		return false;
 
-	return Creature::GetDamage(enemy,weapon);
+	const bool& damaged = Creature::GetDamage(enemy, weapon);
+
+	if (_status._hp > 0)
+	{
+		SOUND->Play("Hit_Monster");
+		_buffer->_data.selected = 1;
+		_buffer->_data.value1 = 1;
+		_buffer->_data.value2 = 0;
+		_buffer->_data.value3 = 0;
+	}
+	else
+		SOUND->Play("MonsterDie");
+
+	return damaged;
 }
 
 void Monster::SpawnEffect()

@@ -33,6 +33,8 @@ void Program::Update()
 		SwitchBool(GAME->GetRenderCollider());
 	if (KEY_DOWN(VK_F4))
 		_gameMode = make_shared<MapEditor>();
+	if (KEY_DOWN(VK_F5))
+		_gameMode = make_shared<DebugMode>();
 	if (KEY_DOWN(VK_F6))
 		_gameMode = make_shared<Dungreed>();
 }

@@ -21,16 +21,21 @@ void UIManager::Update()
 	default:
 		break;
 	}
+
+	_filterQuad->Update();
 }
 
 void UIManager::PreRender()
 {
+	_filter->Set();
 	_miniMap->PreRender();
 }
 
 void UIManager::PostRender()
 {
 	Camera::GetInstance()->SetUiCameraBuffer();
+
+	_filterQuad->Render();
 
 	switch (_state)
 	{
@@ -50,7 +55,7 @@ void UIManager::PostRender()
 	}
 }
 
-void UIManager::ChangedMap()
+void UIManager::Refresh()
 {
 	_miniMap->Refresh();
 	_enemyHpBar->Refresh(); 
@@ -58,6 +63,15 @@ void UIManager::ChangedMap()
 
 UIManager::UIManager()
 {
+	_filter = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
+	float color[4] = { 0,0,0,0.15f };
+	_filter->Color(color);
+
+	_filterQuad = make_shared<Quad>(L"UI_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
+	shared_ptr<Texture> texture = Texture::Add(L"UI_Filter_Texture", _filter->GetSRV());
+	_filterQuad->SetTexture(texture);
+	_filterQuad->GetTransform()->GetPos() = CENTER;
+
 	_playerHpBar = make_shared<UI_PlayerHpBar>();
 	_enemyHpBar = make_shared<UI_EnemyHpBar>();
 	_weaponSlot = make_shared<UI_WeaponSlot>();

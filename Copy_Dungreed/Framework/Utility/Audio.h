@@ -38,7 +38,7 @@ public:
 
 	void Update();
 	void Add(string key, string file, bool bgm = false);
-	void Play(string key, float volume = 1.0f);
+	void Play(string key, float volume = 0.5f);
 	void Stop(string key);
 	void Pause(string key);
 	void Resume(string key);

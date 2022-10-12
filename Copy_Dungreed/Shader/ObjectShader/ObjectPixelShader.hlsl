@@ -34,10 +34,24 @@ float4 SetColor(float2 uv)
 	return result;
 }
 
+float4 SetAlpha(float2 uv)
+{
+	float4 result = map.Sample(samp, uv);
+
+	if (result.w < 1)
+		result.w = 0;
+	else
+		result.w = value4;
+
+	return result;
+}
+
 float4 PS(PixelInput input) : SV_TARGET
 {
 	if (selected == 1)
 		return SetColor(input.uv);
+	if (selected == 2)
+		return SetAlpha(input.uv);
 	
 	return map.Sample(samp, input.uv);
 }

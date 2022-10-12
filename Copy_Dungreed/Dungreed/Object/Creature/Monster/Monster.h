@@ -8,10 +8,10 @@ public:
 	virtual void Render() override;
 
 	virtual void SetTarget(shared_ptr<Creature> target);
+	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
 protected:
 	virtual void SearchTarget();
 	virtual void AI();
-	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
 
 	virtual void SpawnEffect();
 

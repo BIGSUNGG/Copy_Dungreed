@@ -44,7 +44,12 @@ void Audio::Add(string key, string file, bool bgm)
 void Audio::Play(string key, float volume)
 {
 	if (_soundMap.count(key) == 0)
-		return;
+	{
+		if (key == "")
+			return;
+
+		assert(false);
+	}
 
 	_soundSystem->playSound(_soundMap[key]->_sound, nullptr, false, &_soundMap[key]->_channel);
 	_soundMap[key]->_channel->setVolume(volume);

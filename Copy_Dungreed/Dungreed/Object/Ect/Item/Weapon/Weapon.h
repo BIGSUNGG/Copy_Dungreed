@@ -24,6 +24,7 @@ public:
 	virtual void SetAttackEffect(function<shared_ptr<Effect>()> effect) { _attackEffect = effect; }
 
 	virtual void SetWeapon();
+	virtual void SetAttackSound(const string& sound) { _attackSound = sound; }
 	void SetOffset(Vector2 offset) { _offset = offset; }
 	void SetAppendAngle(vector<float> angle) { _appendAngle = angle; }
 	void SetAttackDelay(float delay);
@@ -52,6 +53,7 @@ protected:
 
 	float _attackDelay = 0.3f;
 	float _attackDelayTime = 0.3f;
+	string _attackSound;
 
 	vector<float> _appendAngle = { 0.0f };
 	Vector2 _attackRange = { 0,0 };

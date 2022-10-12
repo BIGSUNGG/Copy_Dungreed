@@ -70,7 +70,7 @@ void DebugMode::Init()
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->AddPlayer(_player);
-	GAME->GetObjectUpdate() = true;
+	GAME->GetPlaying() = true;
 
 	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());

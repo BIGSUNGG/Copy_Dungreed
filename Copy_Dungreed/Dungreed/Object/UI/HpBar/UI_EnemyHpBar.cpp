@@ -51,10 +51,10 @@ void UI_EnemyHpBar::Update()
 void UI_EnemyHpBar::Render()
 {
 	for (int i = 0; i < _hpBarBase.size(); i++)
-	{
 		_hpBarBase[i]->Render();
+
+	for (int i = 0; i < _hpBarGauge.size(); i++)
 		_hpBarGauge[i]->Render();
-	}
 }
 
 void UI_EnemyHpBar::Refresh()

@@ -40,7 +40,7 @@ public:
 	bool& GetRenderTexture() { return _renderTexture; }
 	bool& GetRenderCollider() { return _renderCollider; }
 
-	bool& GetObjectUpdate() { return _objectUpdate; }
+	bool& GetPlaying() { return _playing; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true , bool forceCollision = false);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	shared_ptr<Player> GetPlayer() { return _player; }
@@ -65,6 +65,6 @@ private:
 	bool _renderTexture = true;
 	bool _renderCollider = false;
 	bool _pause = false;
-	bool _objectUpdate = false;
+	bool _playing = false;
 };
 
