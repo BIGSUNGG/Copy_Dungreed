@@ -68,7 +68,7 @@ private:
 	map<string, bool> _type;
 	const int MAX_CHANNEL = 15;
 
-	float _audioVolume = 1.0f;
+	float _audioVolume = 0.5f;
 	float _bgmVolume = 1.0f;
 	float _sfxVolume = 1.0f;
 };

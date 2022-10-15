@@ -152,6 +152,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.h" />
+    <ClInclude Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.h" />
+    <ClInclude Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.h" />
     <ClInclude Include="Framework\Utility\Audio.h" />
     <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
@@ -196,6 +199,8 @@
     <ClInclude Include="Library\FMOD\inc\fmod_dsp_effects.h" />
     <ClInclude Include="Library\FMOD\inc\fmod_errors.h" />
     <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
+    <ClInclude Include="Dungreed\Object\Tile\LockDoor\LockDoor.h" />
+    <ClInclude Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.h" />
     <ClInclude Include="Object\InstanceQuad.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
@@ -238,6 +243,9 @@
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.cpp" />
+    <ClCompile Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.cpp" />
+    <ClCompile Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.cpp" />
     <ClCompile Include="Framework\Utility\Audio.cpp" />
     <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
@@ -273,6 +281,8 @@
     <ClCompile Include="Dungreed\Manager\InventoryManager.cpp" />
     <ClCompile Include="Dungreed\Object\UI\HpBar\UI_PlayerHpBar.cpp" />
     <ClCompile Include="Framework\Utility\MouseCursur.cpp" />
+    <ClCompile Include="Dungreed\Object\Tile\LockDoor\LockDoor.cpp" />
+    <ClCompile Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.cpp" />
     <ClCompile Include="Object\InstanceQuad.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />

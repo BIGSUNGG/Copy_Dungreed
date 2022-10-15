@@ -2,9 +2,6 @@
 class Player : public Creature
 {
 public:
-
-
-public:
 	Player(int level, int num);
 
 	virtual void Update() override;
@@ -29,6 +26,7 @@ protected:
 	bool _doubleJumped = false;
 
 	Dash_Info _dash;
+	string _curStepSound;
 
 	float _dustRunTime = 0.25f;
 	const float _dustDelay = 0.25f;

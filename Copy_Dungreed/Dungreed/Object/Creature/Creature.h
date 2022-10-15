@@ -10,6 +10,16 @@ public:
 		NPC,
 	};
 
+	enum Creature_State
+	{
+		IDLE,
+		ATTACK,
+		RUN,
+		JUMP,
+		DIE,
+		CHARGE
+	};
+
 public:
 	Creature(int level, int num);
 

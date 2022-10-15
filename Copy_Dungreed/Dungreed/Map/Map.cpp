@@ -9,6 +9,27 @@ Map::Map(int level, int num)
 	Reset();
 }
 
+void Map::CheckCleared()
+{
+	if (_cleared == true)
+		return;
+
+	_cleared = true;
+	for (auto& object : _objects[Object::CREATURE])
+	{
+		if (object == nullptr)
+			continue;
+
+		auto creature = dynamic_pointer_cast<Creature>(object);
+
+		if (creature->GetCreatureType() == Creature::ENEMY)
+		{
+			_cleared = false;
+			return;
+		}
+	}
+}
+
 void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 {
 	addObject->GetObjectTexture()->Update();

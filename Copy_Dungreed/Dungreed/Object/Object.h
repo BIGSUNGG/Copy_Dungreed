@@ -13,16 +13,6 @@ public:
 		UI,
 	};
 
-	enum State
-	{
-		IDLE,
-		ATTACK,
-		RUN,
-		JUMP,
-		DIE,
-		CHARGE
-	};
-
 public:
 	Object(int level = 0, int num = 0);
 	virtual ~Object() {}

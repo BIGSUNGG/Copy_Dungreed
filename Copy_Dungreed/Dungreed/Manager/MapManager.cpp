@@ -5,8 +5,10 @@ MapManager* MapManager::_instance = nullptr;
 
 void MapManager::Update()
 {
+	GetCurMap()->CheckCleared();
+
 	shared_ptr<Collider> temp;
-	if (GAME->GetPlayer() != nullptr)
+	if (GAME->GetPlayer() != nullptr && GetCurMap()->GetCleared())
 	{
 		if (GetCurMap()->CanGoLeft())
 		{
@@ -405,6 +407,35 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 		{
 			auto enemy = dynamic_pointer_cast<Monster>(creature);
 			enemy->SetTarget(target);
+		}
+	}
+
+	GetCurMap()->CheckCleared();
+	if (GetCurMap()->GetCleared() == false)
+	{
+		if (GetCurMap()->CanGoLeft())
+		{
+			auto door = make_shared<LockDoorLeft>();
+			door->SetSpawnPos(GetCurMap()->GetLeftDoor());
+			GAME->AddObject(door, Object::TILE);
+		}
+		if (GetCurMap()->CanGoRight())
+		{
+			auto door = make_shared<LockDoorRight>();
+			door->SetSpawnPos(GetCurMap()->GetRightDoor());
+			GAME->AddObject(door, Object::TILE);
+		}
+		if (GetCurMap()->CanGoTop())
+		{
+			auto door = make_shared<LockDoorTop>();
+			door->SetSpawnPos(GetCurMap()->GetRightDoor());
+			GAME->AddObject(door, Object::TILE);
+		}
+		if (GetCurMap()->CanGoBottom())
+		{
+			auto door = make_shared<LockDoorBottom>();
+			door->SetSpawnPos(GetCurMap()->GetRightDoor());
+			GAME->AddObject(door, Object::TILE);
 		}
 	}
 }

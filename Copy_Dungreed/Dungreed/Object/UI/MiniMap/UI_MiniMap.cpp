@@ -100,6 +100,9 @@ void UI_MiniMap::Refresh()
 		_miniTile = make_shared<InstanceQuad>(quad, tiles.size());
 		for (int i = 0; i < tiles.size(); i++)
 		{
+			if (tiles[i] == nullptr)
+				continue;
+
 			Vector2 pos = (tiles[i]->GetPos() - leftBottom) * _miniMapSizeRatio;
 			pos.x += _miniMapBase->Left();
 			pos.y += _miniMapBase->Bottom();

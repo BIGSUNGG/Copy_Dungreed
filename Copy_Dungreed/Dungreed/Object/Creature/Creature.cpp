@@ -136,7 +136,7 @@ void Creature::Attack()
 	if (_weaponSlot[_curWeaponSlot] != nullptr)
 		_weaponSlot[_curWeaponSlot]->Attack();
 
-	_anim->ChangeAnimation(State::ATTACK);
+	_anim->ChangeAnimation(Creature_State::ATTACK);
 }
 
 void Creature::MoveLeft()

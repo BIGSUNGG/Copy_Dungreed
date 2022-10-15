@@ -25,7 +25,7 @@ void Weapon::Update()
 	Item::Update();
 
 	if(_anim != nullptr && _anim->GetIsPlaying() == false)
-		_anim->ChangeAnimation(Creature::State::IDLE);
+		_anim->ChangeAnimation(Creature::Creature_State::IDLE);
 }
 
 void Weapon::Attack()
@@ -34,7 +34,7 @@ void Weapon::Attack()
 	_giveDamageDelayRunTime = 0.0f;
 
 	if (_anim != nullptr)
-		_anim->ChangeAnimation(Creature::State::ATTACK);
+		_anim->ChangeAnimation(Creature::Creature_State::ATTACK);
 
 	SOUND->Play(_attackSound);
 }

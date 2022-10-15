@@ -19,6 +19,7 @@ DebugMode::DebugMode()
 void DebugMode::Update()
 {
 	GAME->Update();
+	MAP_MANAGER->Update();
 }
 
 void DebugMode::PreRender()

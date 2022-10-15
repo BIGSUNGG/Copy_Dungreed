@@ -106,7 +106,7 @@ void Monster::MovementEvent()
 {
 	if (_velocity.x != 0)
 	{
-		_anim->ChangeAnimation(State::RUN);
+		_anim->ChangeAnimation(Creature_State::RUN);
 
 		if (_velocity.x > 0 && _reversed == true && _isFalling == false)
 			ReverseTexture();
@@ -115,12 +115,12 @@ void Monster::MovementEvent()
 	}
 	else
 	{
-		_anim->ChangeAnimation(State::IDLE);
+		_anim->ChangeAnimation(Creature_State::IDLE);
 	}
 
 	if (_velocity.y != 0)
 	{
-		_anim->ChangeAnimation(State::JUMP);
+		_anim->ChangeAnimation(Creature_State::JUMP);
 
 		_isFalling = true;
 	}

@@ -18,6 +18,8 @@ public:
 public:
 	Map(int level, int num);
 
+	void CheckCleared();
+
 	void AddObject(shared_ptr<Object> addObject, int type , bool toFront = false);
 	void DeleteObject(Vector2 Pos, int type, bool toFront = false);
 	void Paste(shared_ptr<Map> copyMap);
@@ -39,6 +41,7 @@ public:
 	Vector2& GetLeftDoor() { return _leftDoor; }
 	Vector2& GetRightDoor() { return _rightDoor; }
 
+	const bool& GetCleared() { return _cleared; }
 	const int& GetLevel() { return _level; }
 	const int& GetNum() { return _num; }
 	const int& GetObjectCount() { return _objectCount; }
@@ -58,4 +61,6 @@ private:
 
 	int _level;
 	int _num;
+
+	bool _cleared = false;
 };

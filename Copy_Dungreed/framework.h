@@ -125,6 +125,11 @@ using namespace std;
 #include "Dungreed/Object/BackGround/BackGround.h"
 #include "Dungreed/Object/Wall/Wall.h"
 #include "Dungreed/Object/Tile/Tile.h"
+#include "Dungreed/Object/Tile/LockDoor/LockDoor.h"
+#include "Dungreed/Object/Tile/LockDoor/Left/LockDoorLeft.h"
+#include "Dungreed/Object/Tile/LockDoor/Right/LockDoorRight.h"
+#include "Dungreed/Object/Tile/LockDoor/Top/LockDoorTop.h"
+#include "Dungreed/Object/Tile/LockDoor/Bottom/LockDoorBottom.h"
 #include "Dungreed/Object/Effect/Effect.h"
 #include "Dungreed/Object/Effect/Trail/Effect_Trail.h"
 

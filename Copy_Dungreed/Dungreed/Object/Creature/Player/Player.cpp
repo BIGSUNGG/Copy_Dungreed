@@ -17,6 +17,11 @@ Player::Player(int level, int num)
 
 	SOUND->Add("ui-sound-13-dash", "Resource/Sound/Creature/Player/Dash/ui-sound-13-dash.wav");
 	SOUND->Add("Jumping", "Resource/Sound/Creature/Player/Jump/Jumping.wav");
+
+	SOUND->Add("step_lth1", "Resource/Sound/Creature/Player/Move/step_lth1.wav");
+	SOUND->Add("step_lth2", "Resource/Sound/Creature/Player/Move/step_lth2.wav");
+	SOUND->Add("step_lth33", "Resource/Sound/Creature/Player/Move/step_lth33.wav");
+	SOUND->Add("step_lth4", "Resource/Sound/Creature/Player/Move/step_lth4.wav");
 }
 
 void Player::Update()
@@ -98,21 +103,45 @@ void Player::MovementEvent()
 {
 	if (_velocity.x != 0)
 	{
-		_anim->ChangeAnimation(State::RUN);
+		_anim->ChangeAnimation(Creature_State::RUN);
 		if (_isFalling == false)
 		{
+			if (SOUND->IsPlaySound(_curStepSound) == false)
+			{
+				int stepSound = rand() % 4;
+				switch (stepSound)
+				{
+				case 0:
+					_curStepSound = "step_lth1";
+					break;
+				case 1:
+					_curStepSound = "step_lth2";
+					break;
+				case 2:
+					_curStepSound = "step_lth33";
+					break;
+				case 3:
+					_curStepSound = "step_lth4";
+					break;
+				default:
+					break;
+				}
+
+				SOUND->Play(_curStepSound);
+			}
+
 			DustEffect();
 		}
 	}
 	else
 	{
-		_anim->ChangeAnimation(State::IDLE);
+		_anim->ChangeAnimation(Creature_State::IDLE);
 	}
 
 	if ((_velocity.y != 0 || _dash._dashCurSpeed > 0.0f) && _onStair == false)
 	{
 
-		_anim->ChangeAnimation(State::JUMP);
+		_anim->ChangeAnimation(Creature_State::JUMP);
 		_isFalling = true;
 	}
 	else
