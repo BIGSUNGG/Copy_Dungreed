@@ -616,7 +616,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 	{
 	case 0:
 		object->SetAnimation();
-		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.15f);
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle0.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle1.png");
@@ -624,7 +624,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle3.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle4.png");
 
-		object->GetAnimation()->_animSpeed[Creature::Creature_State::RUN] = vector<float>(8, 0.15f);
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::RUN] = vector<float>(8, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::RUN] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun0.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun1.png");
@@ -635,14 +635,14 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun6.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Adventurer/Run/CharRun7.png");
 
-		object->GetAnimation()->_animSpeed[Creature::Creature_State::JUMP] = vector<float>(1, 0.15f);
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::JUMP] = vector<float>(1, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::JUMP] = Animation::Anim_State::END;
 		object->GetAnimation()->_animList[Creature::Creature_State::JUMP].push_back(L"Resource/Creature/Player/Adventurer/Jump/CharJump0.png");
 		texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
 		break;
 	case 1:
 		object->SetAnimation();
-		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.15f);
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Alice/Idle/CharIdle0.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Alice/Idle/CharIdle1.png");
@@ -650,7 +650,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Alice/Idle/CharIdle3.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Alice/Idle/CharIdle4.png");
 
-		object->GetAnimation()->_animSpeed[Creature::Creature_State::RUN] = vector<float>(6, 0.15f);
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::RUN] = vector<float>(6, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::RUN] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Alice/Run/CharRun0.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Alice/Run/CharRun1.png");
@@ -659,9 +659,35 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Alice/Run/CharRun4.png");
 		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Alice/Run/CharRun5.png");
 
-		object->GetAnimation()->_animSpeed[Creature::Creature_State::JUMP] = vector<float>(1, 0.15f);
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::JUMP] = vector<float>(1, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::JUMP] = Animation::Anim_State::END;
 		object->GetAnimation()->_animList[Creature::Creature_State::JUMP].push_back(L"Resource/Creature/Player/Alice/Jump/CharJump0.png");
+		texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
+		break;
+	case 2:
+		object->SetAnimation();
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.1f);
+		object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
+		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Sesilia/Idle/Sesilia_Idle00.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Sesilia/Idle/Sesilia_Idle01.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Sesilia/Idle/Sesilia_Idle02.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Sesilia/Idle/Sesilia_Idle03.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Sesilia/Idle/Sesilia_Idle04.png");
+
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::RUN] = vector<float>(8, 0.1f);
+		object->GetAnimation()->_animState[Creature::Creature_State::RUN] = Animation::Anim_State::LOOP;
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move00.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move01.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move02.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move03.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move04.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move05.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move06.png");
+		object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Player/Sesilia/Run/Sesilia_Move07.png");
+
+		object->GetAnimation()->_animSpeed[Creature::Creature_State::JUMP] = vector<float>(1, 0.1f);
+		object->GetAnimation()->_animState[Creature::Creature_State::JUMP] = Animation::Anim_State::END;
+		object->GetAnimation()->_animList[Creature::Creature_State::JUMP].push_back(L"Resource/Creature/Player/Sesilia/Jump/Sesilia_Jump00.png");
 		texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
 		break;
 	default:

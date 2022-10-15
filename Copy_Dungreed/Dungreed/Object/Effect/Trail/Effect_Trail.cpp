@@ -8,7 +8,7 @@ Effect_Trail::Effect_Trail(int level, int num)
 	_buffer->_data.value1 = 1;
 	_buffer->_data.value2 = 1;
 	_buffer->_data.value3 = 1;
-	_buffer->_data.value4 = 0.5f;
+	_buffer->_data.value4 = 1;
 }
 
 void Effect_Trail::Update()
@@ -16,7 +16,12 @@ void Effect_Trail::Update()
 	_buffer->_data.value4 -= _fadeRatio * DELTA_TIME;
 
 	if (_buffer->_data.value4 <= 0)
+	{
 		_isActive = false;
+		return;
+	}
+	else
+		GetPos() += (_direction * _speed) * DELTA_TIME;
 
 	Object::Update();
 }

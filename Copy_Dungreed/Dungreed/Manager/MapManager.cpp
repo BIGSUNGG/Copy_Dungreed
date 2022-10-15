@@ -7,52 +7,16 @@ void MapManager::Update()
 {
 	GetCurMap()->CheckCleared();
 
-	shared_ptr<Collider> temp;
-	if (GAME->GetPlayer() != nullptr && GetCurMap()->GetCleared())
+	if (GetCurMap()->GetCleared())
 	{
-		if (GetCurMap()->CanGoLeft())
+		_mapDoorDelayTime[_curMapIndex.x][_curMapIndex.y] += DELTA_TIME;
+		if (_mapDoorDelayTime[_curMapIndex.x][_curMapIndex.y] >= _doorEffectDelay)
 		{
-			temp = make_shared<RectCollider>(_doorHalfSize);
-			temp->GetPos() = GetCurMap()->GetLeftDoor();
-			temp->Update();
-			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
-			{
-				SetCurMap({ _curMapIndex.x - 1, _curMapIndex.y });
-			}
+			_mapDoorDelayTime[_curMapIndex.x][_curMapIndex.y] -= _doorEffectDelay;
+			MakeDoorEffect();
 		}
-
-		if (GetCurMap()->CanGoRight())
-		{
-			temp = make_shared<RectCollider>(_doorHalfSize);
-			temp->GetPos() = GetCurMap()->GetRightDoor();
-			temp->Update();
-			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
-			{
-				SetCurMap({ _curMapIndex.x + 1, _curMapIndex.y });
-			}
-		}
-
-		if (GetCurMap()->CanGoTop())
-		{
-			temp = make_shared<RectCollider>(_doorHalfSize);
-			temp->GetPos() = GetCurMap()->GetTopDoor();
-			temp->Update();
-			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
-			{
-				SetCurMap({ _curMapIndex.x, _curMapIndex.y + 1 });
-			}
-		}
-
-		if (GetCurMap()->CanGoBottom())
-		{
-			temp = make_shared<RectCollider>(_doorHalfSize);
-			temp->GetPos() = GetCurMap()->GetBottomDoor();
-			temp->Update();
-			if (temp->IsCollision(GAME->GetPlayer()->GetCollider()))
-			{
-				SetCurMap({ _curMapIndex.x, _curMapIndex.y - 1 });
-			}
-		}
+		if(GAME->GetPlayer() != nullptr)
+			CheckMapMove();
 	}
 }
 
@@ -459,23 +423,23 @@ void MapManager::SetCurMap(const Vector2& index)
 		GAME->AddPlayer(GAME->GetPlayer());
 		if (moveX > 0)
 		{
-			GAME->GetPlayer()->GetObjectTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorHalfSize.x + 48);
-			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetLeftDoor().y - _doorHalfSize.y);
+			GAME->GetPlayer()->GetObjectTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorVerticalHalfSize.x + 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetLeftDoor().y - _doorVerticalHalfSize.y);
 		}
 		else if (moveX < 0)
 		{
-			GAME->GetPlayer()->GetObjectTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorHalfSize.x - 48);
-			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetRightDoor().y - _doorHalfSize.y);
+			GAME->GetPlayer()->GetObjectTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorVerticalHalfSize.x - 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetRightDoor().y - _doorVerticalHalfSize.y);
 		}
 		else if (moveY > 0)
 		{
 			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
-			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorHalfSize.y + 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorVerticalHalfSize.y + 48);
 		}
 		else if (moveY < 0)
 		{
 			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
-			GAME->GetPlayer()->GetObjectTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorHalfSize.y + 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorVerticalHalfSize.y + 48);
 		}
 		else
 		{
@@ -508,7 +472,120 @@ void MapManager::SetCurMap(const Vector2& index)
 		SOUND->Play(bgm);
 	}
 
+	_mapDoorDelayTime[index.x][index.y] = 0.0f;
+
 	return;
+}
+
+void MapManager::CheckMapMove()
+{
+	shared_ptr<Collider> doorCollider;
+	if (GetCurMap()->CanGoLeft())
+	{
+		doorCollider = make_shared<RectCollider>(_doorVerticalHalfSize);
+		doorCollider->GetPos() = GetCurMap()->GetLeftDoor();
+		doorCollider->Update();
+		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
+		{
+			SetCurMap({ _curMapIndex.x - 1, _curMapIndex.y });
+		}
+	}
+
+	if (GetCurMap()->CanGoRight())
+	{
+		doorCollider = make_shared<RectCollider>(_doorVerticalHalfSize);
+		doorCollider->GetPos() = GetCurMap()->GetRightDoor();
+		doorCollider->Update();
+		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
+		{
+			SetCurMap({ _curMapIndex.x + 1, _curMapIndex.y });
+		}
+	}
+
+	if (GetCurMap()->CanGoTop())
+	{
+		doorCollider = make_shared<RectCollider>(_doorHorizonlHalfSize);
+		doorCollider->GetPos() = GetCurMap()->GetTopDoor();
+		doorCollider->Update();
+		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
+		{
+			SetCurMap({ _curMapIndex.x, _curMapIndex.y + 1 });
+		}
+	}
+
+	if (GetCurMap()->CanGoBottom())
+	{
+		doorCollider = make_shared<RectCollider>(_doorHorizonlHalfSize);
+		doorCollider->GetPos() = GetCurMap()->GetBottomDoor();
+		doorCollider->Update();
+		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
+		{
+			SetCurMap({ _curMapIndex.x, _curMapIndex.y - 1 });
+		}
+	}
+}
+
+void MapManager::MakeDoorEffect()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		if (GetCurMap()->CanGoLeft())
+		{
+			auto trail = make_shared<Effect_Trail>();
+			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
+			trail->SetTexture(quad);
+			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetLeftDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetLeftDoor().x + _doorVerticalHalfSize.x);
+			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetLeftDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetLeftDoor().y + (_doorVerticalHalfSize.y * 0.7));
+			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
+			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
+			trail->SetFadeRatio(0.7f);
+			trail->SetDirection({ 1,0 });
+			trail->SetSpeed(100.0f);
+			GAME->AddEffect(trail);
+		}
+		if (GetCurMap()->CanGoRight())
+		{
+			auto trail = make_shared<Effect_Trail>();
+			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
+			trail->SetTexture(quad);
+			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetRightDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetRightDoor().x + _doorVerticalHalfSize.x);
+			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetRightDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetRightDoor().y + (_doorVerticalHalfSize.y * 0.7));
+			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
+			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
+			trail->SetFadeRatio(0.7f);
+			trail->SetDirection({ -1,0 });
+			trail->SetSpeed(100.0f);
+			GAME->AddEffect(trail);
+		}
+		if (GetCurMap()->CanGoTop())
+		{
+			auto trail = make_shared<Effect_Trail>();
+			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
+			trail->SetTexture(quad);
+			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetTopDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetTopDoor().x + _doorVerticalHalfSize.x);
+			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetTopDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetTopDoor().y + (_doorVerticalHalfSize.y * 0.7));
+			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
+			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
+			trail->SetFadeRatio(0.7f);
+			trail->SetDirection({ 0,-1 });
+			trail->SetSpeed(100.0f);
+			GAME->AddEffect(trail);
+		}
+		if (GetCurMap()->CanGoBottom())
+		{
+			auto trail = make_shared<Effect_Trail>();
+			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
+			trail->SetTexture(quad);
+			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetBottomDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetBottomDoor().x + _doorVerticalHalfSize.x);
+			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetBottomDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetBottomDoor().y + (_doorVerticalHalfSize.y * 0.7));
+			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
+			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
+			trail->SetFadeRatio(0.7f);
+			trail->SetDirection({ 0,1 });
+			trail->SetSpeed(100.0f);
+			GAME->AddEffect(trail);
+		}
+	}
 }
 
 MapManager::MapManager()

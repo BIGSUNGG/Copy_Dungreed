@@ -217,6 +217,8 @@ void Player::DashMovement()
 				auto quad = make_shared<Quad>(_texture->GetImageFile());
 				trail->SetTexture(quad);
 				trail->GetPos() = this->GetPos();
+				trail->SetAlpha(0.5f);
+				trail->SetFadeRatio(1.5f);
 				if (_reversed)
 					trail->ReverseTexture();
 				GAME->AddEffect(trail);

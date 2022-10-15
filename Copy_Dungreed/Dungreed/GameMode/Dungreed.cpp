@@ -67,7 +67,7 @@ void Dungreed::ImGuiRender()
 
 void Dungreed::Init()
 {
-	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(1));
+	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
 	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
 	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());

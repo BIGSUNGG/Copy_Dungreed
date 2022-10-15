@@ -37,15 +37,24 @@ public:
 	const vector<vector<int>>& GetCurMapSize() { return _mapSize; }
 
 private:
+	void CheckMapMove();
+	void MakeDoorEffect();
+
+private:
 	MapManager();
 	~MapManager();
 	static MapManager* _instance;
 
-	unordered_map<int, unordered_map<int, shared_ptr<Map>>> _maps;
+	map<int, map<int, shared_ptr<Map>>> _maps;
 	Vector2 _curMapIndex = {0,0};
 	vector<vector<int>> _mapSize;
 	string _path;
 
-	const Vector2 _doorHalfSize = { 60.0f, 198.0f };
+	const Vector2 _doorVerticalHalfSize = { 60.0f, 198.0f };
+	const Vector2 _doorHorizonlHalfSize = { 198.0f, 60.0f };
+
+	map<int, map<int, float>> _mapDoorDelayTime;
+	float _doorEffectDelay = 0.15f;
+
 };
 
