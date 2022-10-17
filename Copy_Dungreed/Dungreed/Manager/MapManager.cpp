@@ -6,24 +6,14 @@ MapManager* MapManager::_instance = nullptr;
 void MapManager::Update()
 {
 	GetCurMap()->CheckCleared();
-
-	if (GetCurMap()->GetCleared())
-	{
-		_mapDoorDelayTime[_curMapIndex.x][_curMapIndex.y] += DELTA_TIME;
-		if (_mapDoorDelayTime[_curMapIndex.x][_curMapIndex.y] >= _doorEffectDelay)
-		{
-			_mapDoorDelayTime[_curMapIndex.x][_curMapIndex.y] -= _doorEffectDelay;
-			MakeDoorEffect();
-		}
-		if(GAME->GetPlayer() != nullptr)
-			CheckMapMove();
-	}
 }
 
 void MapManager::MakeRandomMap(int level, int num)
 {	
 	_maps.clear();
-	_maps[0][0] = Load(level, num);
+
+	shared_ptr<Map> map = Load(level, num);
+	AddMap(map, Vector2(0, 0));
 	
 	if (_maps[0][0]->CanGoTop())
 		FindTopMap(level, 0, 0 + 1);
@@ -59,7 +49,7 @@ void MapManager::FindTopMap(int level, int x, int y)
 			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
 				continue;
 
-			_maps[x][y] = map;
+			AddMap(map, Vector2(x, y));
 
 			if (_maps[x][y]->CanGoTop())
 				FindTopMap(level, x, y + 1);
@@ -94,7 +84,7 @@ void MapManager::FindBottomMap(int level, int x, int y)
 			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
 				continue;
 
-			_maps[x][y] = map;
+			AddMap(map, Vector2(x, y));
 
 			if (_maps[x][y]->CanGoBottom())
 				FindBottomMap(level, x, y - 1);
@@ -129,7 +119,7 @@ void MapManager::FindLeftMap(int level, int x, int y)
 			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
 				continue;
 
-			_maps[x][y] = map;
+			AddMap(map, Vector2(x, y));
 
 			if (_maps[x][y]->CanGoTop())
 				FindTopMap(level, x, y + 1);
@@ -164,7 +154,7 @@ void MapManager::FindRightMap(int level, int x, int y)
 			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
 				continue;
 
-			_maps[x][y] = map;
+			AddMap(map, Vector2(x, y));
 
 			if (_maps[x][y]->CanGoTop())
 				FindTopMap(level, x, y + 1);
@@ -375,33 +365,6 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 	}
 
 	GetCurMap()->CheckCleared();
-	if (GetCurMap()->GetCleared() == false)
-	{
-		if (GetCurMap()->CanGoLeft())
-		{
-			auto door = make_shared<LockDoorLeft>();
-			door->SetSpawnPos(GetCurMap()->GetLeftDoor());
-			GAME->AddObject(door, Object::TILE);
-		}
-		if (GetCurMap()->CanGoRight())
-		{
-			auto door = make_shared<LockDoorRight>();
-			door->SetSpawnPos(GetCurMap()->GetRightDoor());
-			GAME->AddObject(door, Object::TILE);
-		}
-		if (GetCurMap()->CanGoTop())
-		{
-			auto door = make_shared<LockDoorTop>();
-			door->SetSpawnPos(GetCurMap()->GetRightDoor());
-			GAME->AddObject(door, Object::TILE);
-		}
-		if (GetCurMap()->CanGoBottom())
-		{
-			auto door = make_shared<LockDoorBottom>();
-			door->SetSpawnPos(GetCurMap()->GetRightDoor());
-			GAME->AddObject(door, Object::TILE);
-		}
-	}
 }
 
 void MapManager::SetCurMap(shared_ptr<Map> map)
@@ -472,119 +435,49 @@ void MapManager::SetCurMap(const Vector2& index)
 		SOUND->Play(bgm);
 	}
 
-	_mapDoorDelayTime[index.x][index.y] = 0.0f;
-
 	return;
 }
 
-void MapManager::CheckMapMove()
+void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 {
-	shared_ptr<Collider> doorCollider;
-	if (GetCurMap()->CanGoLeft())
-	{
-		doorCollider = make_shared<RectCollider>(_doorVerticalHalfSize);
-		doorCollider->GetPos() = GetCurMap()->GetLeftDoor();
-		doorCollider->Update();
-		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
-		{
-			SetCurMap({ _curMapIndex.x - 1, _curMapIndex.y });
-		}
-	}
+	if (_maps[where.x][where.y] != nullptr)
+		return;
 
-	if (GetCurMap()->CanGoRight())
-	{
-		doorCollider = make_shared<RectCollider>(_doorVerticalHalfSize);
-		doorCollider->GetPos() = GetCurMap()->GetRightDoor();
-		doorCollider->Update();
-		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
-		{
-			SetCurMap({ _curMapIndex.x + 1, _curMapIndex.y });
-		}
-	}
+	_maps[where.x][where.y] = map;
 
-	if (GetCurMap()->CanGoTop())
-	{
-		doorCollider = make_shared<RectCollider>(_doorHorizonlHalfSize);
-		doorCollider->GetPos() = GetCurMap()->GetTopDoor();
-		doorCollider->Update();
-		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
-		{
-			SetCurMap({ _curMapIndex.x, _curMapIndex.y + 1 });
-		}
-	}
+	map->CheckCleared();
 
-	if (GetCurMap()->CanGoBottom())
+	if (map->CanGoLeft())
 	{
-		doorCollider = make_shared<RectCollider>(_doorHorizonlHalfSize);
-		doorCollider->GetPos() = GetCurMap()->GetBottomDoor();
-		doorCollider->Update();
-		if (doorCollider->IsCollision(GAME->GetPlayer()->GetCollider()))
-		{
-			SetCurMap({ _curMapIndex.x, _curMapIndex.y - 1 });
-		}
+		auto door = make_shared<LockDoorLeft>();
+		door->SetSpawnPos(map->GetLeftDoor());
+		if (map->GetCleared() == true)
+			door->Open();
+		map->AddObject(door, Object::TILE);
 	}
-}
-
-void MapManager::MakeDoorEffect()
-{
-	for (int i = 0; i < 3; i++)
+	if (map->CanGoRight())
 	{
-		if (GetCurMap()->CanGoLeft())
-		{
-			auto trail = make_shared<Effect_Trail>();
-			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
-			trail->SetTexture(quad);
-			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetLeftDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetLeftDoor().x + _doorVerticalHalfSize.x);
-			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetLeftDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetLeftDoor().y + (_doorVerticalHalfSize.y * 0.7));
-			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
-			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
-			trail->SetFadeRatio(0.7f);
-			trail->SetDirection({ 1,0 });
-			trail->SetSpeed(100.0f);
-			GAME->AddEffect(trail);
-		}
-		if (GetCurMap()->CanGoRight())
-		{
-			auto trail = make_shared<Effect_Trail>();
-			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
-			trail->SetTexture(quad);
-			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetRightDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetRightDoor().x + _doorVerticalHalfSize.x);
-			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetRightDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetRightDoor().y + (_doorVerticalHalfSize.y * 0.7));
-			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
-			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
-			trail->SetFadeRatio(0.7f);
-			trail->SetDirection({ -1,0 });
-			trail->SetSpeed(100.0f);
-			GAME->AddEffect(trail);
-		}
-		if (GetCurMap()->CanGoTop())
-		{
-			auto trail = make_shared<Effect_Trail>();
-			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
-			trail->SetTexture(quad);
-			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetTopDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetTopDoor().x + _doorVerticalHalfSize.x);
-			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetTopDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetTopDoor().y + (_doorVerticalHalfSize.y * 0.7));
-			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
-			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
-			trail->SetFadeRatio(0.7f);
-			trail->SetDirection({ 0,-1 });
-			trail->SetSpeed(100.0f);
-			GAME->AddEffect(trail);
-		}
-		if (GetCurMap()->CanGoBottom())
-		{
-			auto trail = make_shared<Effect_Trail>();
-			auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
-			trail->SetTexture(quad);
-			trail->GetPos().x = MathUtility::RandomFloat(GetCurMap()->GetBottomDoor().x - _doorVerticalHalfSize.x, GetCurMap()->GetBottomDoor().x + _doorVerticalHalfSize.x);
-			trail->GetPos().y = MathUtility::RandomFloat(GetCurMap()->GetBottomDoor().y - (_doorVerticalHalfSize.y * 0.7), GetCurMap()->GetBottomDoor().y + (_doorVerticalHalfSize.y * 0.7));
-			trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
-			trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
-			trail->SetFadeRatio(0.7f);
-			trail->SetDirection({ 0,1 });
-			trail->SetSpeed(100.0f);
-			GAME->AddEffect(trail);
-		}
+		auto door = make_shared<LockDoorRight>();
+		door->SetSpawnPos(map->GetRightDoor());
+		if (map->GetCleared() == true)
+			door->Open();
+		map->AddObject(door, Object::TILE);
+	}
+	if (map->CanGoTop())
+	{
+		auto door = make_shared<LockDoorTop>();
+		door->SetSpawnPos(map->GetRightDoor());
+		if (map->GetCleared() == true)
+			door->Open();
+		map->AddObject(door, Object::TILE);
+	}
+	if (map->CanGoBottom())
+	{
+		auto door = make_shared<LockDoorBottom>();
+		door->SetSpawnPos(map->GetRightDoor());
+		if (map->GetCleared() == true)
+			door->Open();
+		map->AddObject(door, Object::TILE);
 	}
 }
 

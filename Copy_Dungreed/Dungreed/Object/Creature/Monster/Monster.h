@@ -9,6 +9,7 @@ public:
 
 	virtual void SetTarget(shared_ptr<Creature> target);
 	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
+
 protected:
 	virtual void SearchTarget();
 	virtual void AI();
@@ -24,5 +25,6 @@ protected:
 
 	bool _spawn = false;
 	float _spawnDelay = 0.8f;
+
 };
 

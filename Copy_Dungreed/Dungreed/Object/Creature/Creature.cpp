@@ -238,6 +238,11 @@ void Creature::TileBlockCollision(shared_ptr<Tile> tile)
 		_texture->SetTop(tile->GetCollider()->Bottom());
 		_jumpPower = 0.0f;
 	}
+	else
+	{
+		_texture->SetBottom(tile->GetCollider()->Top());
+		_jumpPower = 0.0f;
+	}
 }
 
 void Creature::TileFloorCollision(shared_ptr<Tile> tile)

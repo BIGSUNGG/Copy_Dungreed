@@ -6,6 +6,7 @@ Monster::Monster(int level, int num)
 {
 	_creatureType = Creature_Type::ENEMY;
 	_speed = 300.0f;
+	_damagedRunTimeMax = 0.05f;
 	_render = false;
 	
 	SOUND->Add("Hit_Monster", "Resource/Sound/Creature/Monster/Hit/Hit_Monster.wav");

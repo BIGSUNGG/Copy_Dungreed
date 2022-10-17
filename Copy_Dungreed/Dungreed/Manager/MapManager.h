@@ -33,28 +33,25 @@ public:
 	void SetCurMap(shared_ptr<Map> map);
 	void SetCurMap(const Vector2& index);
 
+	const Vector2& GetMapIndex() { return _curMapIndex; }
 	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.x][_curMapIndex.y]; }
 	const vector<vector<int>>& GetCurMapSize() { return _mapSize; }
 
 private:
-	void CheckMapMove();
-	void MakeDoorEffect();
+	void AddMap(shared_ptr<Map> map, Vector2 where);
 
 private:
 	MapManager();
 	~MapManager();
 	static MapManager* _instance;
 
-	map<int, map<int, shared_ptr<Map>>> _maps;
+	unordered_map<int, unordered_map<int, shared_ptr<Map>>> _maps;
 	Vector2 _curMapIndex = {0,0};
 	vector<vector<int>> _mapSize;
 	string _path;
 
 	const Vector2 _doorVerticalHalfSize = { 60.0f, 198.0f };
 	const Vector2 _doorHorizonlHalfSize = { 198.0f, 60.0f };
-
-	map<int, map<int, float>> _mapDoorDelayTime;
-	float _doorEffectDelay = 0.15f;
 
 };
 

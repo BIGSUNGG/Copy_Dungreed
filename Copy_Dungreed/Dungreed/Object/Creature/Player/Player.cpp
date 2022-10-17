@@ -259,4 +259,3 @@ void Player::Jump()
 		DoubleJumpEffect();
 	}
 }
-

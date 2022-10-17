@@ -15,13 +15,13 @@ public:
 public:
 	void Update();
 
-	void ChangeAnimation(int state);
+	void ChangeAnimation(int state, bool force = false);
 	void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
 	void SetBeforeChangeFunc(function<void(shared_ptr<Quad>)> func) { _beforeChange = func; }
 	void SetAfterChangeFunc(function<void(shared_ptr<Quad>)> func) { _afterChange = func; }
 
 	bool& GetRefreshSize() { return _refreshSize; }
-	const bool& GetIsPlaying() { return _isPlaying; }
+	bool& GetIsPlaying() { return _isPlaying; }
 	const int& GetCurAnim() { return _index.first; }
 
 	unordered_map<int, vector<wstring>> _animList;
