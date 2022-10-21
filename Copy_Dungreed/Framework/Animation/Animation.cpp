@@ -63,7 +63,8 @@ void Animation::ChangeAnimation(int state , bool force)
 {
 	if (force)
 		_index.first = state;
-	else if(_animList[state].size() > 0)
+
+	if(_animList[state].size() > 0)
 		_curState = state;
 
 }

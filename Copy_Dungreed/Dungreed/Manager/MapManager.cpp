@@ -11,6 +11,7 @@ void MapManager::Update()
 void MapManager::MakeRandomMap(int level, int num)
 {	
 	_maps.clear();
+	_curMapIndex = { 0,0 };
 
 	shared_ptr<Map> map = Load(level, num);
 	AddMap(map, Vector2(0, 0));
@@ -380,7 +381,7 @@ void MapManager::SetCurMap(const Vector2& index)
 	int moveX = index.x - _curMapIndex.x;
 	int moveY = index.y - _curMapIndex.y;
 	_curMapIndex = index;
-	GAME->SetMap(_maps[_curMapIndex.x][_curMapIndex.y]);
+	GAME->SetCurMap(_maps[_curMapIndex.x][_curMapIndex.y]);
 	if (GAME->GetPlayer() != nullptr)
 	{
 		GAME->AddPlayer(GAME->GetPlayer());

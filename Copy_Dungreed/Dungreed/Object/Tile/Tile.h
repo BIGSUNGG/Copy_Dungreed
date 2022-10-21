@@ -4,8 +4,8 @@ class Tile : public Object
 public:
 	enum Tile_Type
 	{
-		BLOCK,
 		FLOOR,
+		BLOCK,
 		LEFT_STAIR,
 		RIGHT_STAIR,
 	};

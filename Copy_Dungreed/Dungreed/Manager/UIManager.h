@@ -31,6 +31,7 @@ public:
 
 	void Refresh();
 	void SetState(UI_State& state) { _state = state; }
+	const UI_State& GetCurState() { return _state; }
 
 private:
 	UIManager();

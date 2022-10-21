@@ -20,6 +20,7 @@ public:
 	virtual void Render() override;
 
 	Vector2& GetHalfSize() { return _halfSize; }
+
 	float Top() { return GetWorldPos().y + (_halfSize.y * _transform->GetWorldScale().y); }
 	float Bottom() { return GetWorldPos().y - (_halfSize.y * _transform->GetWorldScale().y); }
 	float Right() { return GetWorldPos().x + (_halfSize.x * _transform->GetWorldScale().x); }

@@ -21,7 +21,7 @@ protected:
 
 protected:
 	bool _open = false;
-	float _doorEffectDelayTime = 0.0f;
+	float _doorEffectDelayTime = 0.15f;
 	const float _doorEffectDelay = 0.15f;
 
 	Vector2 _moveDirection = { 0,0 };

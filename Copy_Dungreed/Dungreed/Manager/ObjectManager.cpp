@@ -560,9 +560,11 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		case 70:
 			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Stair_TopLeft.png");
+			object->GetTileType() = Tile::LEFT_STAIR;
 			break;
 		case 71:
 			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Tile_Stair_TopRight.png");
+			object->GetTileType() = Tile::RIGHT_STAIR;
 			break;
 		case 72:
 			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Vertical1TileBottom.png");
@@ -572,6 +574,10 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		case 74:
 			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/Vertical1TileTop.png");
+			break;
+		case 75:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Tile/OneWayPlatform.png");
+			object->GetTileType() = Tile::FLOOR;
 			break;
 		default:
 			break;
@@ -702,6 +708,8 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 
 	if (object->GetAnimation() != nullptr)
 		object->GetAnimation()->SetTexture(texture);
+
+	object->SetCollider();
 
 	return object;
 }

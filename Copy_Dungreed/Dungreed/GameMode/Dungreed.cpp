@@ -68,8 +68,6 @@ void Dungreed::ImGuiRender()
 void Dungreed::Init()
 {
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
-	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
-	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 	_player->AddWeapon(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
@@ -77,8 +75,5 @@ void Dungreed::Init()
 	GAME->AddPlayer(_player);
 	GAME->GetPlaying() = true;
 
-	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
-	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());
-	CAMERA->SetRightTop(MAP_MANAGER->GetCurMap()->GetRightTop());
 	CAMERA->Update();
 }

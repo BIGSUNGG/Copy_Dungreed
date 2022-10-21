@@ -106,30 +106,7 @@ void Player::MovementEvent()
 		_anim->ChangeAnimation(Creature_State::RUN);
 		if (_isFalling == false)
 		{
-			if (SOUND->IsPlaySound(_curStepSound) == false)
-			{
-				int stepSound = rand() % 4;
-				switch (stepSound)
-				{
-				case 0:
-					_curStepSound = "step_lth1";
-					break;
-				case 1:
-					_curStepSound = "step_lth2";
-					break;
-				case 2:
-					_curStepSound = "step_lth33";
-					break;
-				case 3:
-					_curStepSound = "step_lth4";
-					break;
-				default:
-					break;
-				}
-
-				SOUND->Play(_curStepSound);
-			}
-
+			StepSound();
 			DustEffect();
 		}
 	}
@@ -186,6 +163,37 @@ void Player::InputEvent()
 		_curWeaponSlot = 0;
 	if (KEY_DOWN('2'))
 		_curWeaponSlot = 1;
+}
+
+void Player::StepSound()
+{
+	if (SOUND->IsPlaySound(_curStepSound) == false)
+	{
+		++_stepSound;
+
+		if (_stepSound > 3)
+			_stepSound = 0;
+
+		switch (_stepSound)
+		{
+		case 0:
+			_curStepSound = "step_lth1";
+			break;
+		case 1:
+			_curStepSound = "step_lth2";
+			break;
+		case 2:
+			_curStepSound = "step_lth33";
+			break;
+		case 3:
+			_curStepSound = "step_lth4";
+			break;
+		default:
+			break;
+		}
+
+		SOUND->Play(_curStepSound);
+	}
 }
 
 void Player::Dash()

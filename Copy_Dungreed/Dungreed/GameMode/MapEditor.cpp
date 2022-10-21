@@ -7,7 +7,7 @@ MapEditor::MapEditor()
 	_modeType = MAP_EDITOR;
 
 	_map = MAP_MANAGER->Load(_mapLevel,_mapNum);
-	GAME->SetMap(_map);
+	GAME->SetCurMap(_map);
 	GAME->GetPlaying() = false;
 
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
@@ -190,13 +190,16 @@ void MapEditor::ImGuiRender()
 			if (ImGui::Button("Load"))
 			{
 				_map = MAP_MANAGER->Load(_mapLevel, _mapNum);
-				GAME->SetMap(_map);
+				GAME->SetCurMap(_map);
 				CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
 			}
 
 			ImGui::SameLine();
 			if (ImGui::Button("Reset"))
+			{
 				_map->Reset();
+				GAME->Instancing();
+			}
 
 			if (ImGui::Button("Copy"))
 				_copyMap = _map;
@@ -296,6 +299,22 @@ void MapEditor::InputEvent()
 
 		if (KEY_PRESS('D'))
 			DeleteObject(false);
+
+		if (KEY_DOWN('R'))
+		{
+			for (auto& objects : _map->GetObjects())
+			{
+				for (auto& object : objects)
+				{
+					if (object->GetPos() == _curObject->GetPos())
+					{
+						_objectType = object->GetType();
+						_objectLevel = object->GetLevel();
+						_objectNum = object->GetNum();
+					}
+				}
+			}
+		}
 
 		if (KEY_DOWN('F'))
 			SwitchBool(_freeMode);

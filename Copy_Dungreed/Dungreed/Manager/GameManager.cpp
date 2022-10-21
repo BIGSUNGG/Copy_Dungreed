@@ -204,6 +204,7 @@ void GameManager::AddPlayer(shared_ptr<Player> player)
 	}
 
 	_player = player;
+	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 	_curMap->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);
 }
 
@@ -258,9 +259,9 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 	return result;
 }
 
-void GameManager::SetMap(shared_ptr<Map> addedMap)
+void GameManager::SetCurMap(shared_ptr<Map> map)
 {
-	_curMap = addedMap;
+	_curMap = map;
 	_objectInScreen.clear();
 	for (auto& object : _curMap->GetObjects()[Object::ECT])
 	{
@@ -289,6 +290,9 @@ void GameManager::SetMap(shared_ptr<Map> addedMap)
 	}
 
 	Instancing();
+
+	CAMERA->SetLeftBottom(map->GetLeftBottom());
+	CAMERA->SetRightTop(map->GetRightTop());
 }
 
 void GameManager::Reset()

@@ -19,10 +19,13 @@ protected:
 	virtual void MovementEvent();
 	virtual void InputEvent();
 
+	virtual void StepSound();
+
 	virtual void DustEffect();
 	virtual void DoubleJumpEffect();
 
 protected:
+	int _stepSound = 0;
 	bool _doubleJumped = false;
 
 	Dash_Info _dash;

@@ -40,7 +40,10 @@ void LockDoor::Open()
 {
 	_render = false;
 	_open = true;
+	_anim->ChangeAnimation(OPEN, true);
+	_anim->GetIsPlaying() = false;
 }
+
 
 void LockDoor::DoorOpenEffect()
 {

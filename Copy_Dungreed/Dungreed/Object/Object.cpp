@@ -51,9 +51,13 @@ void Object::SetSpawnPos(Vector2 pos)
 	_texture->GetTransform()->GetPos() = pos;
 }
 
-void Object::SetCollider()
+void Object::SetCollider(shared_ptr<RectCollider> collider)
 {
-	_collider = make_shared<RectCollider>(_texture->GetHalfSize());
+	if (collider == nullptr)
+		_collider = make_shared<RectCollider>(_texture->GetHalfSize());
+	else
+		_collider = collider;
+
 	_collider->SetParent(_texture->GetTransform());
 }
 

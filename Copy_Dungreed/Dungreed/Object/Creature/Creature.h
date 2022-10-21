@@ -40,7 +40,7 @@ public:
 	virtual void SetSpawnPos(Vector2 pos) override;
 	
 protected:
-	virtual void CollisionEvent(shared_ptr<Object> objects);
+	virtual void CollisionEvent();
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);
 	virtual void TileFloorCollision(shared_ptr<Tile> tile);

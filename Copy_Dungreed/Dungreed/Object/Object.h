@@ -25,7 +25,7 @@ public:
 
 	virtual void ReverseTexture();
 
-	virtual void SetCollider();
+	virtual void SetCollider(shared_ptr<RectCollider> collider = nullptr);
 	virtual void SetAnimation();
 	virtual void SetSpawnPos(Vector2 pos);
 	virtual void SetPos(const Vector2& pos) { _texture->GetTransform()->GetPos() = pos; }
