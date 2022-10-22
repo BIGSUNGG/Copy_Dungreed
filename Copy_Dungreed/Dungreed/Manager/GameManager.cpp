@@ -204,12 +204,18 @@ void GameManager::Input()
 	_player->MouseEvent();
 
 
-	if (KEY_DOWN('V'))
+	if (KEY_DOWN('V') && _curMap->GetCleared())
 	{
 		if (UI_MANAGER->GetCurState() == UIManager::UI_State::IVEN)
+		{
+			MOUSE_CURSUR->SetCursurImage(2);
 			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+		}
 		else
+		{
+			MOUSE_CURSUR->SetCursurImage(0);
 			UI_MANAGER->SetState(UIManager::UI_State::IVEN);
+		}
 	}
 }
 
@@ -348,6 +354,8 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 
 	CAMERA->SetLeftBottom(map->GetLeftBottom());
 	CAMERA->SetRightTop(map->GetRightTop());
+
+	UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
 }
 
 void GameManager::Reset()

@@ -17,6 +17,11 @@ void MouseCursur::Render()
 		_mouseCursur->Render();
 }
 
+void MouseCursur::SetCursurImage(int num)
+{
+	_mouseCursur = OBJ_MANAGER->GetCursur(num);
+}
+
 void MouseCursur::CursurOn()
 {
 	int temp = ShowCursor(true);
@@ -49,7 +54,7 @@ void MouseCursur::CursurOff()
 
 MouseCursur::MouseCursur()
 {
-	_mouseCursur = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+	SetCursurImage(2);
 }
 
 MouseCursur::~MouseCursur()

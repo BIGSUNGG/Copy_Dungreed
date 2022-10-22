@@ -71,6 +71,16 @@ UI_Inventory::UI_Inventory()
 			}
 		}
 
+	{
+		_exitButton = make_shared<UI_Button>();
+		auto quad = make_shared<Quad>(L"Resource/Ui/Inventory/Exit.png");
+		auto hoverQuad = make_shared<Quad>(L"Resource/Ui/Inventory/Exit_Hover.png");
+		quad->SetRight(_invenBase->Left());
+		quad->SetTop(WIN_HEIGHT - 9);
+		_exitButton->SetTexture(quad);
+		_exitButton->SetHoverTexture(hoverQuad);
+	}
+
 	_weapons.resize(2, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 	_accessories.resize(15, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 	_items.resize(15, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
@@ -81,6 +91,7 @@ void UI_Inventory::Update()
 	FindTexture();
 
 	_invenBase->Update();
+	_exitButton->Update();
 
 	for (auto& slot : _curSlot)
 		slot->Update();
@@ -109,6 +120,7 @@ void UI_Inventory::Update()
 void UI_Inventory::Render()
 {
 	_invenBase->Render();
+	_exitButton->Render();
 	_curSlot[INVENTORY->GetCurWeaponSlot()]->Render();
 
 	for (auto& slot : _weaponSlot)
@@ -212,6 +224,12 @@ void UI_Inventory::MouseEvenet()
 {
 	if (KEY_DOWN(VK_LBUTTON))
 	{
+		if (_exitButton->GetHover())
+		{
+			MOUSE_CURSUR->SetCursurImage(2);
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+		}
+
 		for (int i = 0; i < _weaponSlot.size(); i++)
 		{
 			if (_weaponSlot[i]->GetHover())
@@ -280,7 +298,7 @@ void UI_Inventory::MouseEvenet()
 		{
 			if (_weaponSlot[i]->GetHover())
 			{
-				if (selected->GetItemType() == INVENTORY->GetWeaponSlot()[i]->GetItemType())
+				if (selected->GetItemType() == Item::WEAPON)
 				{
 					swapItem = INVENTORY->GetWeaponSlot()[i];
 					INVENTORY->GetWeaponSlot()[i] = dynamic_pointer_cast<Weapon>(selected);
@@ -293,7 +311,7 @@ void UI_Inventory::MouseEvenet()
 		{
 			if (_accessorySlot[i]->GetHover())
 			{
-				if (selected->GetItemType() == INVENTORY->GetWeaponSlot()[i]->GetItemType())
+				if (selected->GetItemType() == Item::ACCESSORY)
 				{
 					swapItem = INVENTORY->GetAccessorySlot()[i];
 					INVENTORY->GetAccessorySlot()[i] = dynamic_pointer_cast<Accessory>(selected);

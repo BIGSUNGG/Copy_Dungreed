@@ -30,6 +30,8 @@ public:
 	void Update();
 	void Render();
 
+	void SetCursurImage(int num);
+
 	void CursurOn();
 	void CursurOff();
 

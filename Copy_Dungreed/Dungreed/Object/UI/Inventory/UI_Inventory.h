@@ -18,6 +18,7 @@ protected:
 	vector<shared_ptr<UI_Button>> _weaponSlot;
 	vector<shared_ptr<UI_Button>> _accessorySlot;
 	vector<shared_ptr<UI_Button>> _itemSlot;
+	shared_ptr<UI_Button> _exitButton;
 
 	vector<shared_ptr<Quad>> _weapons;
 	vector<shared_ptr<Quad>> _accessories;
