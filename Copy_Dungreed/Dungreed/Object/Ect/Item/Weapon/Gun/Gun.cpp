@@ -5,7 +5,7 @@ Gun::Gun(int level, int num)
 	:Weapon(level,num)
 {
 	_weaponType = GUN;
-	_offset = { 40,-10 };
+	_offset = { 40,-20 };
 }
 
 Gun::~Gun()

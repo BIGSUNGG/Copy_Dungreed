@@ -156,6 +156,8 @@ using namespace std;
 #include "Dungreed/Object/UI/WeaponSlot/UI_WeaponSlot.h"
 #include "Dungreed/Object/UI/Info/UI_Info.h"
 #include "Dungreed/Object/UI/MiniMap/UI_MiniMap.h"
+#include "Dungreed/Object/UI/Button/UI_Button.h"
+#include "Dungreed/Object/UI/Inventory/UI_Inventory.h"
 
 // Map
 #include "Dungreed/Map/Map.h"

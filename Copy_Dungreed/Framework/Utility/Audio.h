@@ -37,6 +37,10 @@ public:
 	}
 
 	void Update();
+
+	void Save();
+	void Load();
+
 	void Add(string key, string file, bool bgm = false);
 	void Play(string key);
 
@@ -71,4 +75,8 @@ private:
 	float _audioVolume = 0.5f;
 	float _bgmVolume = 1.0f;
 	float _sfxVolume = 1.0f;
+
+	float _tempAudioVolume = 0.5f;
+	float _tempBgmVolume = 1.0f;
+	float _tempSfxVolume = 1.0f;
 };

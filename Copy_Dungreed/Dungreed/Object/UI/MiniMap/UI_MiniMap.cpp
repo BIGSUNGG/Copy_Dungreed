@@ -101,7 +101,10 @@ void UI_MiniMap::Refresh()
 		for (int i = 0; i < tiles.size(); i++)
 		{
 			if (tiles[i] == nullptr || tiles[i]->GetInstance() == false)
+			{
+				_miniTile->GetTransforms()[i] = nullptr;
 				continue;
+			}
 
 			Vector2 pos = (tiles[i]->GetPos() - leftBottom) * _miniMapSizeRatio;
 			pos.x += _miniMapBase->Left();

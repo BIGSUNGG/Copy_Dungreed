@@ -15,9 +15,9 @@ protected:
 	virtual void DashMovement();
 	virtual void Jump() override;
 
-	virtual void MouseEvent();
 	virtual void MovementEvent();
 	virtual void InputEvent();
+	virtual void MouseEvent();
 
 	virtual void StepSound();
 

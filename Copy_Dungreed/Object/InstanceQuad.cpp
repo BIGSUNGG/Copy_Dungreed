@@ -59,6 +59,9 @@ void InstanceQuad::ApplyChanges()
 
 	for (int i = 0; i < _transforms.size(); i++)
 	{
+		if (_transforms[i] == nullptr)
+			continue;
+
 		_transforms[i]->UpdateWorld();
 		_instanceDataes.emplace_back(XMMatrixTranspose(_transforms[i]->GetMatrix()));
 	}

@@ -24,6 +24,11 @@ void GameManager::Update()
 		{
 			if (object == nullptr)
 				continue;
+			else if (object->GetInstance() == true)
+			{
+				object->GetCollider()->SetColorGreen();
+				continue;
+			}
 
 			auto temp = objects;
 
@@ -145,6 +150,7 @@ void GameManager::Instancing()
 			if (object == nullptr || object->GetInstance() == false)
 				continue;
 
+			object->Update();
 			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object->GetObjectTexture()->GetTransform());
 		}
 
@@ -206,6 +212,9 @@ void GameManager::AddPlayer(shared_ptr<Player> player)
 	_player = player;
 	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 	_curMap->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);
+
+	_player->GetObjectTexture()->Update();
+	_player->GetCollider()->Update();
 }
 
 void GameManager::AddEctObject(shared_ptr<Object> object)

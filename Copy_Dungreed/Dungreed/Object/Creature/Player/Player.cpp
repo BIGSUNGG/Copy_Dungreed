@@ -31,8 +31,6 @@ void Player::Update()
 
 	MovementEvent();
 
-	MouseEvent();
-
 	InputEvent();
 	
 	Creature::Update();
@@ -96,7 +94,7 @@ void Player::MouseEvent()
 		ReverseTexture();
 	}
 
-	_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle());
+	_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle());
 }
 
 void Player::MovementEvent()
@@ -135,34 +133,47 @@ void Player::MovementEvent()
 
 void Player::InputEvent()
 {
-	if (_dash._dashCurSpeed <= 0)
+	if (UI_MANAGER->GetCurState() == UIManager::UI_State::NOMAL)
 	{
-		if (KEY_DOWN('W'))
-			Jump();
-
-		if (KEY_PRESS('S'))
+		if (_dash._dashCurSpeed <= 0)
 		{
-			if (KEY_DOWN(VK_SPACE))
-				_passFloor = true;
-			else
-				_passFloor = false;
-		}
-		else if (KEY_UP('S'))
-			_passFloor = false;
+			if (KEY_DOWN('W'))
+				Jump();
 
-		if (KEY_PRESS('A'))
-			MoveLeft();
-		if (KEY_PRESS('D'))
-			MoveRight();
+			if (KEY_PRESS('S'))
+			{
+				if (KEY_DOWN(VK_SPACE))
+					_passFloor = true;
+				else
+					_passFloor = false;
+			}
+			else if (KEY_UP('S'))
+				_passFloor = false;
+
+			if (KEY_PRESS('A'))
+				MoveLeft();
+			if (KEY_PRESS('D'))
+				MoveRight();
+		}
+		if (KEY_PRESS(VK_LBUTTON))
+			Attack();
+		if (KEY_DOWN(VK_RBUTTON))
+			Dash();
+		if (KEY_DOWN('1'))
+			_curWeaponSlot = 0;
+		if (KEY_DOWN('2'))
+			_curWeaponSlot = 1;
+
+		MouseEvent();
 	}
-	if (KEY_PRESS(VK_LBUTTON))
-		Attack();
-	if (KEY_DOWN(VK_RBUTTON))
-		Dash();
-	if (KEY_DOWN('1'))
-		_curWeaponSlot = 0;
-	if (KEY_DOWN('2'))
-		_curWeaponSlot = 1;
+
+	if (KEY_DOWN('V'))
+	{
+		if (UI_MANAGER->GetCurState() == UIManager::UI_State::IVEN)
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+		else
+			UI_MANAGER->SetState(UIManager::UI_State::IVEN);
+	}
 }
 
 void Player::StepSound()

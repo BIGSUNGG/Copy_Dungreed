@@ -241,6 +241,8 @@
     <ClInclude Include="Dungreed\Object\UI\Info\UI_Info.h" />
     <ClInclude Include="Dungreed\Object\UI\MiniMap\UI_MiniMap.h" />
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.h" />
+    <ClInclude Include="Dungreed\Object\UI\Button\UI_Button.h" />
+    <ClInclude Include="Dungreed\Object\UI\Inventory\UI_Inventory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.cpp" />
@@ -327,6 +329,8 @@
     <ClCompile Include="Dungreed\Object\UI\Info\UI_Info.cpp" />
     <ClCompile Include="Dungreed\Object\UI\MiniMap\UI_MiniMap.cpp" />
     <ClCompile Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\Button\UI_Button.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\Inventory\UI_Inventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

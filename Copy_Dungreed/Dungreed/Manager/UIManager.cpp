@@ -14,9 +14,10 @@ void UIManager::Update()
 		_info->Update();
 		_miniMap->Update();
 		break;
-	case UIManager::UI_State::SHOP:
-		break;
-	case UIManager::UI_State::RESTAURANT:
+	case UIManager::UI_State::IVEN:
+		_playerHpBar->Update();
+		_info->Update();
+		_inventory->Update();
 		break;
 	default:
 		break;
@@ -46,9 +47,10 @@ void UIManager::PostRender()
 		_info->Render();
 		_miniMap->Render();
 		break;
-	case UIManager::UI_State::SHOP:
-		break;
-	case UIManager::UI_State::RESTAURANT:
+	case UIManager::UI_State::IVEN:
+		_playerHpBar->Render();
+		_info->Render();
+		_inventory->Render();
 		break;
 	default:
 		break;
@@ -77,6 +79,7 @@ UIManager::UIManager()
 	_weaponSlot = make_shared<UI_WeaponSlot>();
 	_info = make_shared<UI_Info>();
 	_miniMap = make_shared<UI_MiniMap>();
+	_inventory = make_shared<UI_Inventory>();
 }
 
 UIManager::~UIManager()

@@ -9,7 +9,7 @@ public:
 	{
 		MELEE,
 		GUN,
-		SUB
+		SUB,
 	};
 
 public:
@@ -35,6 +35,7 @@ public:
 
 	const Weapon_Type& GetWeaponType() { return _weaponType; }
 	virtual const bool& GetFastRender() { return _fastRender[_index]; }
+	virtual const Vector2& GetOffset() { return _offset; }
 protected:
 	virtual void AttackEffect();
 	virtual void CheckAttack();

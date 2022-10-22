@@ -10,6 +10,7 @@ public:
 protected:
 	shared_ptr<Object> _weaponSlot1;
 	shared_ptr<Object> _weaponSlot2;
+	shared_ptr<Quad> _curWeapon;
 
 };
 

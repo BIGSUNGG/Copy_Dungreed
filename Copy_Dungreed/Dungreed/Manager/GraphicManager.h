@@ -30,6 +30,6 @@ private:
 	int _winMode = 1;
 	int _fpsLimit = 0;
 
-	bool _applied = false;
+	bool _restart = false;
 };
 

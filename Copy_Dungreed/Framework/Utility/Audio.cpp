@@ -9,6 +9,8 @@ Audio::Audio()
 {
 	System_Create(&_soundSystem);
 	_soundSystem->init(MAX_CHANNEL, FMOD_INIT_NORMAL, nullptr);
+
+	Load();
 }
 
 Audio::~Audio()
@@ -22,6 +24,42 @@ Audio::~Audio()
 void Audio::Update()
 {
 	_soundSystem->update();
+}
+
+void Audio::Save()
+{
+	{
+		BinaryWriter basicWriter(L"Save/Audio_Setting/AudioVolum.bin");
+
+		vector<int> basicInfo;
+
+		basicInfo.push_back(_audioVolume);
+		basicInfo.push_back(_bgmVolume);
+		basicInfo.push_back(_sfxVolume);
+
+		basicWriter.Uint(basicInfo.size());
+		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
+	}
+}
+
+void Audio::Load()
+{
+	{
+		BinaryReader Reader(L"Save/Audio_Setting/AudioVolum.bin");
+
+		UINT size = Reader.Uint();
+
+		vector<int> graphicInfo;
+		graphicInfo.resize(3);
+		void* ptr = graphicInfo.data();
+		Reader.Byte(&ptr, size * sizeof(int));
+
+		_audioVolume = graphicInfo[0];
+		_bgmVolume = graphicInfo[1];
+		_sfxVolume = graphicInfo[2];
+
+		SetVolumeAll();
+	}
 }
 
 void Audio::Add(string key, string file, bool bgm)
@@ -159,10 +197,18 @@ bool Audio::IsPlaySound(string key)
 
 void Audio::ImGuiRender()
 {
-	ImGui::SliderFloat("Audio Volume", &_audioVolume, 0.0f, 2.0f, "%0.1f");
-	ImGui::SliderFloat("BGM Volume", &_bgmVolume, 0.0f, 1.0f, "%0.1f");
-	ImGui::SliderFloat("SFX Volume", &_sfxVolume, 0.0f, 1.0f, "%0.1f");
+	ImGui::SliderFloat("Audio Volume", &_tempAudioVolume, 0.0f, 2.0f, "%0.1f");
+	ImGui::SliderFloat("BGM Volume", &_tempBgmVolume, 0.0f, 1.0f, "%0.1f");
+	ImGui::SliderFloat("SFX Volume", &_tempSfxVolume, 0.0f, 1.0f, "%0.1f");
 
 	if (ImGui::Button("Apply"))
+	{
+		_audioVolume = _tempAudioVolume;
+		_bgmVolume = _bgmVolume;
+		_sfxVolume = _tempSfxVolume;
 		SOUND->SetVolumeAll();
+	}
+
+	if (ImGui::Button("Save"))
+		SOUND->Save(); 
 }

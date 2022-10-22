@@ -22,6 +22,7 @@ public:
 	const int& GetHungryMax() { return _hungryMax; }
 	const int& GetPlayerLevel() { return _playerLevel; }
 	const int& GetCurWeaponSlot() { return *_curWeaponSlot; }
+	const vector<shared_ptr<Weapon>>& GetWeaponSlot() { return *_weaponSlot; }
 	shared_ptr<Weapon> GetCurWeapon() { return _weaponSlot->operator[](*_curWeaponSlot); }
 
 	void SetCurWeaponSlot(int* slot) { _curWeaponSlot = slot; }

@@ -7,10 +7,9 @@ class Item : public Ect , public enable_shared_from_this<Item>
 public:
 	enum Item_Type
 	{
-		PLAYER,
-		FOOD,
 		WEAPON,
 		ACCESSORY,
+		NONE
 	};
 
 	enum Item_State

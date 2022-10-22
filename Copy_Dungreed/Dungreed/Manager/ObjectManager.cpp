@@ -120,8 +120,6 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 		case 3:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Wall/SecondFloor3.png");
 			break;
-		default:
-			break;
 		}
 		break;
 	case Map::LEVEL_01:

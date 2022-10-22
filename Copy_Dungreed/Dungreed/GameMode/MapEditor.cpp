@@ -302,16 +302,13 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('R'))
 		{
-			for (auto& objects : _map->GetObjects())
+			for (auto& object : _map->GetObjects()[_objectType])
 			{
-				for (auto& object : objects)
+				if (object->GetPos() == _curObject->GetPos())
 				{
-					if (object->GetPos() == _curObject->GetPos())
-					{
-						_objectType = object->GetType();
-						_objectLevel = object->GetLevel();
-						_objectNum = object->GetNum();
-					}
+					_objectType = object->GetType();
+					_objectLevel = object->GetLevel();
+					_objectNum = object->GetNum();
 				}
 			}
 		}
