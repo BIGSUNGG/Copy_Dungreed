@@ -36,7 +36,7 @@ public:
 	const Vector2& GetBeforeMovePos() { return _beforeMove; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 
-	virtual void AddWeapon(shared_ptr<Weapon> weapon);
+	virtual void AddItem(shared_ptr<Item> weapon);
 	virtual void SetSpawnPos(Vector2 pos) override;
 	
 protected:
@@ -59,6 +59,8 @@ protected:
 protected:
 	Creature_Type _creatureType = ENEMY;
 	vector<shared_ptr<Weapon>> _weaponSlot;
+	vector<shared_ptr<Accessory>> _accessorySlot;
+	vector<shared_ptr<Item>> _itemSlot;
 	int _curWeaponSlot = 0;
 
 	Vector2 _movement;

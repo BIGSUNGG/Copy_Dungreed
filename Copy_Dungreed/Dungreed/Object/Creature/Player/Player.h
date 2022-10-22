@@ -10,14 +10,22 @@ public:
 
 	const Dash_Info& GetDashInfo() { return _dash; }
 
-protected:
 	virtual void Dash();
-	virtual void DashMovement();
 	virtual void Jump() override;
 
-	virtual void MovementEvent();
-	virtual void InputEvent();
+	virtual void Attack();
+
+	virtual void MoveLeft();
+	virtual void MoveRight();
+
+	virtual void SetPassFloor(const bool& pass) { _passFloor = pass; }
+	virtual void SetCurWeaponSlot(const int& slot) { _curWeaponSlot = slot; }
+
 	virtual void MouseEvent();
+
+protected:
+	virtual void DashMovement();
+	virtual void MovementEvent();
 
 	virtual void StepSound();
 
@@ -25,11 +33,12 @@ protected:
 	virtual void DoubleJumpEffect();
 
 protected:
-	int _stepSound = 0;
-	bool _doubleJumped = false;
-
 	Dash_Info _dash;
+
 	string _curStepSound;
+	int _stepSound = 0;
+
+	bool _doubleJumped = false;
 
 	float _dustRunTime = 0.25f;
 	const float _dustDelay = 0.25f;

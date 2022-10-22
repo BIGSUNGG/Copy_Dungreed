@@ -8,12 +8,16 @@ Player::Player(int level, int num)
 
 	_creatureType = PLAYER;
 	_weaponSlot.resize(2);
+	_accessorySlot.resize(4);
+	_itemSlot.resize(15);
 
 	_status.SetMaxHp(80);
 	_status._atk = 25;
 
 	INVENTORY->SetWeaponSlot(&_weaponSlot);
 	INVENTORY->SetCurWeaponSlot(&_curWeaponSlot);
+	INVENTORY->SetAccessorySlot(&_accessorySlot);
+	INVENTORY->SetItemSlot(&_itemSlot);
 
 	SOUND->Add("ui-sound-13-dash", "Resource/Sound/Creature/Player/Dash/ui-sound-13-dash.wav");
 	SOUND->Add("Jumping", "Resource/Sound/Creature/Player/Jump/Jumping.wav");
@@ -30,8 +34,6 @@ void Player::Update()
 	_dustRunTime += DELTA_TIME;
 
 	MovementEvent();
-
-	InputEvent();
 	
 	Creature::Update();
 }
@@ -94,7 +96,8 @@ void Player::MouseEvent()
 		ReverseTexture();
 	}
 
-	_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle());
+	if(_weaponSlot[_curWeaponSlot] != nullptr)
+		_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle());
 }
 
 void Player::MovementEvent()
@@ -129,51 +132,6 @@ void Player::MovementEvent()
 	}
 
 	DashMovement();
-}
-
-void Player::InputEvent()
-{
-	if (UI_MANAGER->GetCurState() == UIManager::UI_State::NOMAL)
-	{
-		if (_dash._dashCurSpeed <= 0)
-		{
-			if (KEY_DOWN('W'))
-				Jump();
-
-			if (KEY_PRESS('S'))
-			{
-				if (KEY_DOWN(VK_SPACE))
-					_passFloor = true;
-				else
-					_passFloor = false;
-			}
-			else if (KEY_UP('S'))
-				_passFloor = false;
-
-			if (KEY_PRESS('A'))
-				MoveLeft();
-			if (KEY_PRESS('D'))
-				MoveRight();
-		}
-		if (KEY_PRESS(VK_LBUTTON))
-			Attack();
-		if (KEY_DOWN(VK_RBUTTON))
-			Dash();
-		if (KEY_DOWN('1'))
-			_curWeaponSlot = 0;
-		if (KEY_DOWN('2'))
-			_curWeaponSlot = 1;
-
-		MouseEvent();
-	}
-
-	if (KEY_DOWN('V'))
-	{
-		if (UI_MANAGER->GetCurState() == UIManager::UI_State::IVEN)
-			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
-		else
-			UI_MANAGER->SetState(UIManager::UI_State::IVEN);
-	}
 }
 
 void Player::StepSound()
@@ -224,6 +182,7 @@ void Player::DashMovement()
 {
 	if (_dash._dashCurSpeed > 0.0f)
 	{
+		_passFloor = true;
 		_movement += (_dash._dashDirection * _dash._dashCurSpeed);
 		if (_dash._trailCount < _dash._trailCountMax)
 		{
@@ -259,11 +218,16 @@ void Player::DashMovement()
 		}
 	}
 	else
+	{
 		_gravityRatio = 1.0f;
+	}
 }
 
 void Player::Jump()
 {
+	if (_dash._dashCurSpeed > 0)
+		return;
+
 	if (_isFalling == false)
 	{
 		SOUND->Play("Jumping");
@@ -277,4 +241,28 @@ void Player::Jump()
 		_doubleJumped = true;
 		DoubleJumpEffect();
 	}
+}
+
+void Player::Attack()
+{
+	if (_dash._dashCurSpeed > 0)
+		return;
+	
+	Creature::Attack();
+}
+
+void Player::MoveLeft()
+{
+	if (_dash._dashCurSpeed > 0)
+		return;
+
+	Creature::MoveLeft();
+}
+
+void Player::MoveRight()
+{
+	if (_dash._dashCurSpeed > 0)
+		return;
+
+	Creature::MoveRight();
 }

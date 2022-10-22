@@ -17,6 +17,7 @@ void GameManager::Update()
 		return;
 
 	Optimize();
+	Input();
 	
 	for (auto& objects : _curMap->GetObjects())
 	{
@@ -164,6 +165,51 @@ void GameManager::Instancing()
 			instanceQuad->ApplyChanges();
 			_instanceQuad[i].emplace_back(instanceQuad);
 		}
+	}
+}
+
+void GameManager::Input()
+{
+	if (_player == nullptr)
+		return;
+
+	if (UI_MANAGER->GetCurState() == UIManager::UI_State::NOMAL)
+	{
+		if (KEY_DOWN('W'))
+			_player->Jump();
+
+		if (KEY_PRESS('S'))
+		{
+			if (KEY_DOWN(VK_SPACE))
+				_player->SetPassFloor(true);
+			else
+				_player->SetPassFloor(false);
+		}
+		else if (KEY_UP('S'))
+			_player->SetPassFloor(false);
+
+		if (KEY_PRESS('A'))
+			_player->MoveLeft();
+		if (KEY_PRESS('D'))
+			_player->MoveRight();
+		if (KEY_PRESS(VK_LBUTTON))
+			_player->Attack();
+		if (KEY_DOWN(VK_RBUTTON))
+			_player->Dash();
+		if (KEY_DOWN('1'))
+			_player->SetCurWeaponSlot(0);
+		if (KEY_DOWN('2'))
+			_player->SetCurWeaponSlot(1);
+	}
+	_player->MouseEvent();
+
+
+	if (KEY_DOWN('V'))
+	{
+		if (UI_MANAGER->GetCurState() == UIManager::UI_State::IVEN)
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+		else
+			UI_MANAGER->SetState(UIManager::UI_State::IVEN);
 	}
 }
 

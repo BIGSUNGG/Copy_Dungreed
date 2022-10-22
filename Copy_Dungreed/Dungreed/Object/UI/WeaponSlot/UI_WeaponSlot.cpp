@@ -37,22 +37,31 @@ void UI_WeaponSlot::Update()
 
 	_weaponSlot2->Update();
 
-	if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile())
+	if (INVENTORY->GetCurWeapon() != nullptr)
 	{
-		_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile());
-		_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
-		switch (INVENTORY->GetCurWeapon()->GetWeaponType())
+		if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile())
 		{
-		case Weapon::MELEE:
-			_curWeapon->GetTransform()->GetAngle() = (1.5f * PI);
-			break;
-		case Weapon::GUN:
-			break;
-		case Weapon::SUB:
-			break;
-		default:
-			break;
+			_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile());
+			_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
+			switch (INVENTORY->GetCurWeapon()->GetWeaponType())
+			{
+			case Weapon::MELEE:
+				_curWeapon->GetTransform()->GetAngle() = (1.5f * PI);
+				break;
+			case Weapon::GUN:
+				break;
+			case Weapon::SUB:
+				break;
+			default:
+				break;
+			}
+			_curWeapon->Update();
 		}
+	}
+	else
+	{
+		_curWeapon = make_shared<Quad>(L"EMPTY", (Vector2(0, 0)));
+		_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
 		_curWeapon->Update();
 	}
 }

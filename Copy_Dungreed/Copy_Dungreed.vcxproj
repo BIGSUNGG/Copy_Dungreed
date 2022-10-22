@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\Object\Ect\Item\Accessory\Accessory.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.h" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Dungreed\Object\UI\Inventory\UI_Inventory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\Object\Ect\Item\Accessory\Accessory.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.cpp" />

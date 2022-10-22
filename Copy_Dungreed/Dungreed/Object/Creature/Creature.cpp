@@ -285,15 +285,60 @@ void Creature::SetSpawnPos(Vector2 pos)
 }
 
 
-void Creature::AddWeapon(shared_ptr<Weapon> weapon)
+void Creature::AddItem(shared_ptr<Item> item)
 {
-	for (auto& slot : _weaponSlot)
+	bool add = false;
+
+	switch (item->GetItemType())
 	{
-		if (slot == nullptr)
+	case Item::WEAPON:
+	{
+		auto weapon = dynamic_pointer_cast<Weapon>(item);
+
+		for (auto& slot : _weaponSlot)
 		{
-			weapon->SetOwner(shared_from_this());
-			slot = weapon;
-			break;
+			if (slot == nullptr)
+			{
+				item->SetOwner(shared_from_this());
+				slot = weapon;
+				add = true;
+				break;
+			}
+		}
+	}
+		break;
+	case Item::ACCESSORY:
+	{
+		auto accessory = dynamic_pointer_cast<Accessory>(item);
+
+		for (auto& slot : _accessorySlot)
+		{
+			if (slot == nullptr)
+			{
+				item->SetOwner(shared_from_this());
+				slot = accessory;
+				add = true;
+				break;
+			}
+		}
+	}
+		break;
+	case Item::NONE:
+		break;
+	default:
+		break;
+	}
+
+	if (add == false)
+	{
+		for (auto& slot : _itemSlot)
+		{
+			if (slot == nullptr)
+			{
+				item->SetOwner(shared_from_this());
+				slot = item;
+				break;
+			}
 		}
 	}
 }

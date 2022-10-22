@@ -30,6 +30,8 @@ public:
 	void Optimize();
 	void Instancing();
 
+	void Input();
+
 	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
 	void AddEffect(shared_ptr<Effect> effect);
 	void AddPlayer(shared_ptr<Player> player);

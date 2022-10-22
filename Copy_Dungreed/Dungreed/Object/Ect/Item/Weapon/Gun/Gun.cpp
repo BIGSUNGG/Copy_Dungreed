@@ -27,12 +27,14 @@ void Gun::Attack()
 	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, 0);
 	_bullet->GetObjectTexture()->GetTransform()->GetPos() = _springArm->GetWorldPos();
 	_bullet->GetObjectTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
-
+	
+	float angle = _showDirection / PI;
 	Vector2 direction = { 1.0f,tan(_showDirection) };
 
-	direction.Normalize();
-	if (_reversed)
+	if (angle > 0.5f || angle < -0.5f)
 		direction *= -1;
+
+	direction.Normalize();
 
 	_bullet->SetDirection(direction);
 	_bullet->SetSpeed(_bulletSpeed);

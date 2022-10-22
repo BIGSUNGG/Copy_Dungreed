@@ -22,10 +22,14 @@ public:
 	const int& GetHungryMax() { return _hungryMax; }
 	const int& GetPlayerLevel() { return _playerLevel; }
 	const int& GetCurWeaponSlot() { return *_curWeaponSlot; }
-	const vector<shared_ptr<Weapon>>& GetWeaponSlot() { return *_weaponSlot; }
 	shared_ptr<Weapon> GetCurWeapon() { return _weaponSlot->operator[](*_curWeaponSlot); }
 
+	vector<shared_ptr<Weapon>>& GetWeaponSlot() { return *_weaponSlot; }
+	vector<shared_ptr<Accessory>>& GetAccessorySlot() { return *_accessory; }
+	vector<shared_ptr<Item>>& GetItemSlot() { return *_itemSlot; }
+
 	void SetCurWeaponSlot(int* slot) { _curWeaponSlot = slot; }
+	void SetAccessorySlot(vector<shared_ptr<Accessory>>* slot) { _accessory = slot; }
 	void SetWeaponSlot(vector<shared_ptr<Weapon>>* slot) { _weaponSlot = slot; }
 	void SetItemSlot(vector<shared_ptr<Item>>* slot) { _itemSlot = slot; }
 
@@ -42,6 +46,7 @@ private:
 
 	int* _curWeaponSlot;
 	vector<shared_ptr<Weapon>>* _weaponSlot;
+	vector<shared_ptr<Accessory>>* _accessory;
 	vector<shared_ptr<Item>>* _itemSlot;
 };
 

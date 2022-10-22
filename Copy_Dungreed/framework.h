@@ -142,6 +142,7 @@ using namespace std;
 #include "Dungreed/Object/Ect/Item/Weapon/Weapon.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Melee/Melee.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Gun/Gun.h"
+#include "Dungreed/Object/Ect/Item/Accessory/Accessory.h"
 
 // Creature
 #include "Dungreed/Object/Creature/Creature.h"
