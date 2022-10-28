@@ -132,7 +132,7 @@ void Player::MovementEvent()
 			DustEffect();
 
 		_doubleJumped = false;
-		_isFalling = false;
+		FallingEnd();
 	}
 
 	DashMovement();

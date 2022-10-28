@@ -196,10 +196,6 @@ void GameManager::Input()
 			_player->Attack();
 		if (KEY_DOWN(VK_RBUTTON))
 			_player->Dash();
-		if (KEY_DOWN('1'))
-			_player->SetCurWeaponSlot(0);
-		if (KEY_DOWN('2'))
-			_player->SetCurWeaponSlot(1);
 
 		_player->MouseEvent();
 	}
@@ -207,6 +203,10 @@ void GameManager::Input()
 	{
 		_player->MouseEvent();
 	}
+	if (KEY_DOWN('1'))
+		_player->SetCurWeaponSlot(0);
+	if (KEY_DOWN('2'))
+		_player->SetCurWeaponSlot(1);
 
 	if (KEY_DOWN(VK_ESCAPE))
 	{

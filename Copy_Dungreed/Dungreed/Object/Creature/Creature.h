@@ -57,6 +57,8 @@ protected:
 	virtual void MoveRight();
 	virtual void Jump();
 
+	virtual void FallingEnd();
+
 protected:
 	Creature_Type _creatureType = ENEMY;
 	vector<shared_ptr<Weapon>> _weaponSlot;
@@ -85,5 +87,8 @@ protected:
 	bool _passFloor = false;
 	bool _passTile = false;
 	bool _onStair = false;
+
+	bool _canMoveLeft = true;
+	bool _canMoveRight = true;
 };
 

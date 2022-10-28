@@ -104,7 +104,7 @@ void GraySkel::MovementEvent()
 	}
 	else
 	{
-		_isFalling = false;
+		FallingEnd();
 		_jumpPower = 0.0f;
 	}
 }
