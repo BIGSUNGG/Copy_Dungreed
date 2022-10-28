@@ -95,9 +95,6 @@ void Creature::MoveCharacter()
 
 	_velocity = (_texture->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
 
-	if (_texture->Bottom() < 0)
-		Death();
-
 	_beforeMove = _texture->GetTransform()->GetPos();
 	_movement = { 0,0 };
 }

@@ -19,6 +19,10 @@ UI_Map::UI_Map()
 	_mapBlock = make_shared<InstanceQuad>(L"Resource/Ui/Map/Map_Block.png", 0);
 	_verticalLine = make_shared<InstanceQuad>(L"Resource/Ui/Map/Map_Bar_Vertical.png", 0);
 	_horizonLine = make_shared<InstanceQuad>(L"Resource/Ui/Map/Map_Bar_Horizon.png", 0);
+
+	_blinkBlock = make_shared<Quad>(L"Resource/Ui/Map/Blink_Block.png");
+	_blinkBlock->GetTransform()->GetPos() = Vector2(960.f, 457.f);
+	_blinkBlock->Update();
 }
 
 void UI_Map::PreRender()
@@ -28,6 +32,13 @@ void UI_Map::PreRender()
 
 void UI_Map::Update()
 {
+	_blinkRunTime += DELTA_TIME;
+	if (_blinkRunTime >= _blinkDelay)
+	{
+		_blinkRunTime = 0.0f;
+		SwitchBool(_blink);
+	}
+
 	_filterQuad->Update();
 	_mapBase->Update();
 
@@ -38,12 +49,12 @@ void UI_Map::Update()
 
 void UI_Map::Render()
 {
-	DirectWrite::GetInstance()->GetDC()->EndDraw();
-	DirectWrite::GetInstance()->GetDC()->BeginDraw();
-
 	_filterQuad->Render();
-	_mapBlock->Render();
 
+	if(_blink)
+		_blinkBlock->Render();
+
+	_mapBlock->Render();
 	_mapBase->Render();
 	_verticalLine->Render();
 	_horizonLine->Render();

@@ -18,5 +18,10 @@ protected:
 	shared_ptr<InstanceQuad> _verticalLine;
 	shared_ptr<InstanceQuad> _horizonLine;
 
+	shared_ptr<Quad> _blinkBlock;
+	bool _blink = true;
+	const float _blinkDelay = 0.5f;
+	float _blinkRunTime = 0.0f;
+
 };
 

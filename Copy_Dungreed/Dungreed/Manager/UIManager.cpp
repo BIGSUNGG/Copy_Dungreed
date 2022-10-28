@@ -62,11 +62,8 @@ void UIManager::PostRender()
 		_inventory->Render();
 		break;
 	case UI_State::MAP:
-		_enemyHpBar->Render();
-		_playerHpBar->Render();
 		_weaponSlot->Render();
 		_info->Render();
-		_miniMap->Render();
 		_map->Render();
 		break;
 	default:

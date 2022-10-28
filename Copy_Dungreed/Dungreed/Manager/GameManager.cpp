@@ -232,6 +232,13 @@ void GameManager::Input()
 			UI_MANAGER->SetState(UIManager::UI_State::MAP);
 		}
 	}
+	else if (KEY_UP(VK_TAB))
+	{
+		if (UI_MANAGER->GetCurState() == UIManager::UI_State::MAP)
+		{
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+		}
+	}
 
 	if (KEY_DOWN('V') && _curMap->GetCleared())
 	{
@@ -248,6 +255,9 @@ void GameManager::Input()
 
 void GameManager::AddObject(shared_ptr<Object> object, int type)
 {
+	if (_curMap == nullptr)
+		return;
+
 	object->GetObjectTexture()->Update();
 	object->GetCollider()->Update();
 	_curMap->GetObjects()[type].emplace_back(object);
@@ -260,7 +270,7 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
 {
-	if (_player != nullptr)
+	if (_player != nullptr && _curMap != nullptr)
 	{
 		for (auto& object : _curMap->GetObjects()[Object::CREATURE])
 		{
@@ -356,6 +366,21 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 			auto temp = dynamic_pointer_cast<Effect>(object);
 			if (temp->GetEffectType() == Effect::DESTROY)
 				object = nullptr;
+		}
+	}
+
+	for (auto& objects : map->GetObjects())
+	{
+		for (auto& object : objects)
+		{
+			if (object == nullptr)
+				continue;
+
+			if (object->GetObjectTexture() != nullptr)
+				object->GetObjectTexture()->Update();
+
+			if (object->GetCollider() != nullptr)
+				object->GetCollider()->Update();
 		}
 	}
 

@@ -8,8 +8,6 @@ Dungreed::Dungreed()
 
 	CAMERA->GetFreeMode() = false;
 
-	MAP_MANAGER->MakeRandomMap(1, 0);
-
 	Init();
 
 	MOUSE_CURSUR->CursurOff();
@@ -77,5 +75,6 @@ void Dungreed::Init()
 	GAME->AddPlayer(_player);
 	GAME->GetPlaying() = true;
 
+	MAP_MANAGER->MakeRandomMap(1, 0);
 	CAMERA->Update();
 }
