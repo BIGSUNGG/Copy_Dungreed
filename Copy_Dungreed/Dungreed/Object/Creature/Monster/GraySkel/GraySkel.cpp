@@ -6,6 +6,7 @@ GraySkel::GraySkel(int level, int num)
 {
 	_status.SetMaxHp(80);
 	_status._atk = 25;
+	_status._speed = 300.0f;
 }
 
 void GraySkel::Update()
@@ -26,7 +27,8 @@ void GraySkel::Update()
 
 void GraySkel::AI()
 {
-	if (_target.lock() == nullptr || _weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::Creature_State::ATTACK)
+	if (_weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::Creature_State::ATTACK && 
+		_weaponSlot[_curWeaponSlot]->GetAnimation()->GetIsPlaying() == true)
 		return;
 
 	float length = abs(_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);
@@ -60,19 +62,49 @@ void GraySkel::AI()
 		else if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x < _texture->GetTransform()->GetPos().x && _reversed == false)
 			ReverseTexture();
 
-		Attack();
+		if(_target.lock()->GetIsFalling() == false)
+			Attack();
 	}
 }
 
 void GraySkel::Attack()
 {
 	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {
-		quad->GetTransform()->GetPos() = Vector2(quad->Left(), quad->Bottom());
+		quad->GetTransform()->GetPos() = Vector2(quad->Left(), quad->Top());
 		});
 
 	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {
 		quad->SetLeft(quad->GetTransform()->GetPos().x);
-		quad->SetBottom(quad->GetTransform()->GetPos().y);
+		quad->SetTop(quad->GetTransform()->GetPos().y);
 		});
 	Monster::Attack();
+}
+
+void GraySkel::MovementEvent()
+{
+	if (_velocity.x != 0)
+	{
+		_anim->ChangeAnimation(Creature_State::RUN);
+
+		if (_velocity.x > 0 && _reversed == true && _isFalling == false)
+			ReverseTexture();
+		else if (_velocity.x < 0 && _reversed == false && _isFalling == false)
+			ReverseTexture();
+	}
+	else
+	{
+		_anim->ChangeAnimation(Creature_State::IDLE);
+	}
+
+	if (_velocity.y != 0)
+	{
+		_anim->ChangeAnimation(Creature_State::JUMP);
+
+		_isFalling = true;
+	}
+	else
+	{
+		_isFalling = false;
+		_jumpPower = 0.0f;
+	}
 }

@@ -192,6 +192,7 @@
     <ClInclude Include="Dungreed\Manager\InventoryManager.h" />
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_PlayerHpBar.h" />
     <ClInclude Include="Framework\Utility\MouseCursur.h" />
+    <ClInclude Include="Dungreed\Object\Creature\Monster\Ghost\Ghost.h" />
     <ClInclude Include="Library\FMOD\inc\fmod.h" />
     <ClInclude Include="Library\FMOD\inc\fmod.hpp" />
     <ClInclude Include="Library\FMOD\inc\fmod_codec.h" />
@@ -244,6 +245,7 @@
     <ClInclude Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.h" />
     <ClInclude Include="Dungreed\Object\UI\Button\UI_Button.h" />
     <ClInclude Include="Dungreed\Object\UI\Inventory\UI_Inventory.h" />
+    <ClInclude Include="Dungreed\Object\UI\Map\UI_Map.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\Object\Ect\Item\Accessory\Accessory.cpp" />
@@ -287,6 +289,7 @@
     <ClCompile Include="Framework\Utility\MouseCursur.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\LockDoor.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.cpp" />
+    <ClCompile Include="Dungreed\Object\Creature\Monster\Ghost\Ghost.cpp" />
     <ClCompile Include="Object\InstanceQuad.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
@@ -333,6 +336,7 @@
     <ClCompile Include="Dungreed\Object\UI\HpBar\UI_EnemyHpBar.cpp" />
     <ClCompile Include="Dungreed\Object\UI\Button\UI_Button.cpp" />
     <ClCompile Include="Dungreed\Object\UI\Inventory\UI_Inventory.cpp" />
+    <ClCompile Include="Dungreed\Object\UI\Map\UI_Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

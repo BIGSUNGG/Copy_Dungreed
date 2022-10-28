@@ -23,6 +23,8 @@ void Creature::Update()
 
 		_movement.y += _jumpPower;
 
+		MovementEvent();
+
 		if (GAME->GetPlaying())
 			MoveCharacter();
 
@@ -93,13 +95,7 @@ void Creature::MoveCharacter()
 
 	_velocity = (_texture->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
 
-	if (_texture->Left() < MAP_MANAGER->GetCurMap()->GetLeftBottom().x)
-		_texture->SetLeft(MAP_MANAGER->GetCurMap()->GetLeftBottom().x);
-	else if (_texture->Right() > MAP_MANAGER->GetCurMap()->GetRightTop().x)
-		_texture->SetRight(MAP_MANAGER->GetCurMap()->GetRightTop().x);
-	else if (_texture->Top() > MAP_MANAGER->GetCurMap()->GetRightTop().y)
-		_texture->SetTop(MAP_MANAGER->GetCurMap()->GetRightTop().y);
-	else if (_texture->Bottom() < MAP_MANAGER->GetCurMap()->GetLeftBottom().y)
+	if (_texture->Bottom() < 0)
 		Death();
 
 	_beforeMove = _texture->GetTransform()->GetPos();
@@ -126,12 +122,12 @@ void Creature::Attack()
 
 void Creature::MoveLeft()
 {
-	_movement.x -= _speed;
+	_movement.x -= _status._speed;
 }
 
 void Creature::MoveRight()
 {
-	_movement.x += _speed;
+	_movement.x += _status._speed;
 }
 
 void Creature::Jump()
@@ -187,7 +183,7 @@ void Creature::TileCollison(shared_ptr<Tile> tile)
 
 void Creature::TileBlockCollision(shared_ptr<Tile> tile)
 {
-	float allowHeight = _speed * DELTA_TIME * 2;
+	float allowHeight = _status._speed * DELTA_TIME * 2;
 
 	if (_onStair && _beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) + allowHeight && _jumpPower <= 0)
 	{
@@ -271,10 +267,6 @@ void Creature::TileRightStairCollision(shared_ptr<Tile> tile)
 			_jumpPower = 0.0f;
 		}
 	}
-}
-
-void Creature::CreatureCollision(shared_ptr<Creature> creature)
-{
 }
 
 void Creature::SetSpawnPos(Vector2 pos)

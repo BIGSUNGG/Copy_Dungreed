@@ -65,11 +65,7 @@ void Program::Render()
 
 void Program::PostRender()
 {
-	wstring fps = L"FPS : " + to_wstring((int)Timer::GetInstance()->GetFPS());
-	RECT rect = { 0,0,100,100 };
-
 	DirectWrite::GetInstance()->GetDC()->BeginDraw();
-	DirectWrite::GetInstance()->RenderText(fps, rect);
 
 	_gameMode->PostRender();
 }
@@ -124,6 +120,9 @@ void Program::ImGuiRender()
 
 void Program::RenderEnd()
 {
+	wstring fps = L"FPS : " + to_wstring((int)Timer::GetInstance()->GetFPS());
+	RECT rect = { 0,0,100,100 };
+	DirectWrite::GetInstance()->RenderText(fps, rect);
 	DirectWrite::GetInstance()->GetDC()->EndDraw();
 
 	ImGui::End();

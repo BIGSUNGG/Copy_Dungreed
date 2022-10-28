@@ -5,7 +5,7 @@ MouseCursur* MouseCursur::_instance = nullptr;
 
 void MouseCursur::Update()
 {
-	_mouseCursur->GetTransform()->GetPos() = MOUSE_POS;	
+	_mouseCursur->GetTransform()->GetPos() = MOUSE_POS;
 	_mouseCursur->Update();
 }
 
@@ -17,9 +17,10 @@ void MouseCursur::Render()
 		_mouseCursur->Render();
 }
 
-void MouseCursur::SetCursurImage(int num)
+void MouseCursur::SetCursurImage(wstring image)
 {
-	_mouseCursur = OBJ_MANAGER->GetCursur(num);
+	_mouseCursur->SetTexture(image);
+	_mouseCursur->Refresh();
 }
 
 void MouseCursur::CursurOn()
@@ -54,7 +55,7 @@ void MouseCursur::CursurOff()
 
 MouseCursur::MouseCursur()
 {
-	SetCursurImage(2);
+	_mouseCursur = make_shared<Quad>(L"MOUSE_CURSUR", Vector2(0, 0));
 }
 
 MouseCursur::~MouseCursur()

@@ -16,16 +16,16 @@ void MapManager::MakeRandomMap(int level, int num)
 	shared_ptr<Map> map = Load(level, num);
 	AddMap(map, Vector2(0, 0));
 	
-	if (_maps[0][0]->CanGoTop())
+	if (_maps[0][0].first->CanGoTop())
 		FindTopMap(level, 0, 0 + 1);
 
-	if (_maps[0][0]->CanGoBottom())
+	if (_maps[0][0].first->CanGoBottom())
 		FindBottomMap(level, 0, 0 - 1);
 
-	if (_maps[0][0]->CanGoLeft())
+	if (_maps[0][0].first->CanGoLeft())
 		FindLeftMap(level, 0 - 1, 0);
 
-	if (_maps[0][0]->CanGoRight())
+	if (_maps[0][0].first->CanGoRight())
 		FindRightMap(level, 0 + 1, 0);
 
 	SetCurMap({ 0,0 });
@@ -33,7 +33,7 @@ void MapManager::MakeRandomMap(int level, int num)
 
 void MapManager::FindTopMap(int level, int x, int y)
 {
-	if (_maps[x][y] != nullptr)
+	if (_maps[x][y].first != nullptr)
 		return;
 
 	while (true)
@@ -43,22 +43,22 @@ void MapManager::FindTopMap(int level, int x, int y)
 
 		if (map->CanGoBottom())
 		{
-			if(map->CanGoTop() && _maps[x][y+1] != nullptr)
+			if(map->CanGoTop() && _maps[x][y+1].first != nullptr)
 				continue;
-			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
+			if (map->CanGoLeft() && _maps[x - 1][y].first != nullptr)
 				continue;
-			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
+			if (map->CanGoRight() && _maps[x + 1][y].first != nullptr)
 				continue;
 
 			AddMap(map, Vector2(x, y));
 
-			if (_maps[x][y]->CanGoTop())
+			if (_maps[x][y].first->CanGoTop())
 				FindTopMap(level, x, y + 1);
 
-			if (_maps[x][y]->CanGoLeft())
+			if (_maps[x][y].first->CanGoLeft())
 				FindLeftMap(level, x - 1, y);
 
-			if (_maps[x][y]->CanGoRight())
+			if (_maps[x][y].first->CanGoRight())
 				FindRightMap(level, x + 1, y);
 
 			return;
@@ -68,7 +68,7 @@ void MapManager::FindTopMap(int level, int x, int y)
 
 void MapManager::FindBottomMap(int level, int x, int y)
 {
-	if (_maps[x][y] != nullptr)
+	if (_maps[x][y].first != nullptr)
 		return;
 
 	while (true)
@@ -78,22 +78,22 @@ void MapManager::FindBottomMap(int level, int x, int y)
 
 		if (map->CanGoTop())
 		{
-			if (map->CanGoBottom() && _maps[x][y - 1] != nullptr)
+			if (map->CanGoBottom() && _maps[x][y - 1].first != nullptr)
 				continue;
-			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
+			if (map->CanGoLeft() && _maps[x - 1][y].first != nullptr)
 				continue;
-			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
+			if (map->CanGoRight() && _maps[x + 1][y].first != nullptr)
 				continue;
 
 			AddMap(map, Vector2(x, y));
 
-			if (_maps[x][y]->CanGoBottom())
+			if (_maps[x][y].first->CanGoBottom())
 				FindBottomMap(level, x, y - 1);
 
-			if (_maps[x][y]->CanGoLeft())
+			if (_maps[x][y].first->CanGoLeft())
 				FindLeftMap(level, x - 1, y);
 
-			if (_maps[x][y]->CanGoRight())
+			if (_maps[x][y].first->CanGoRight())
 				FindRightMap(level, x + 1, y);
 
 			return;
@@ -103,7 +103,7 @@ void MapManager::FindBottomMap(int level, int x, int y)
 
 void MapManager::FindLeftMap(int level, int x, int y)
 {
-	if (_maps[x][y] != nullptr)
+	if (_maps[x][y].first != nullptr)
 		return;
 
 	while (true)
@@ -113,22 +113,22 @@ void MapManager::FindLeftMap(int level, int x, int y)
 
 		if (map->CanGoRight())
 		{
-			if (map->CanGoTop() && _maps[x][y + 1] != nullptr)
+			if (map->CanGoTop() && _maps[x][y + 1].first != nullptr)
 				continue;
-			if (map->CanGoBottom() && _maps[x][y - 1] != nullptr)
+			if (map->CanGoBottom() && _maps[x][y - 1].first != nullptr)
 				continue;
-			if (map->CanGoLeft() && _maps[x - 1][y] != nullptr)
+			if (map->CanGoLeft() && _maps[x - 1][y].first != nullptr)
 				continue;
 
 			AddMap(map, Vector2(x, y));
 
-			if (_maps[x][y]->CanGoTop())
+			if (_maps[x][y].first->CanGoTop())
 				FindTopMap(level, x, y + 1);
 
-			if (_maps[x][y]->CanGoBottom())
+			if (_maps[x][y].first->CanGoBottom())
 				FindBottomMap(level, x, y - 1);
 
-			if (_maps[x][y]->CanGoLeft())
+			if (_maps[x][y].first->CanGoLeft())
 				FindLeftMap(level, x - 1, y);
 
 			return;
@@ -138,7 +138,7 @@ void MapManager::FindLeftMap(int level, int x, int y)
 
 void MapManager::FindRightMap(int level, int x, int y)
 {
-	if (_maps[x][y] != nullptr)
+	if (_maps[x][y].first != nullptr)
 		return;
 
 	while (true)
@@ -148,22 +148,22 @@ void MapManager::FindRightMap(int level, int x, int y)
 
 		if (map->CanGoLeft())
 		{
-			if (map->CanGoTop() && _maps[x][y + 1] != nullptr)
+			if (map->CanGoTop() && _maps[x][y + 1].first != nullptr)
 				continue;
-			if (map->CanGoBottom() && _maps[x][y - 1] != nullptr)
+			if (map->CanGoBottom() && _maps[x][y - 1].first != nullptr)
 				continue;
-			if (map->CanGoRight() && _maps[x + 1][y] != nullptr)
+			if (map->CanGoRight() && _maps[x + 1][y].first != nullptr)
 				continue;
 
 			AddMap(map, Vector2(x, y));
 
-			if (_maps[x][y]->CanGoTop())
+			if (_maps[x][y].first->CanGoTop())
 				FindTopMap(level, x, y + 1);
 
-			if (_maps[x][y]->CanGoBottom())
+			if (_maps[x][y].first->CanGoBottom())
 				FindBottomMap(level, x, y - 1);
 
-			if (_maps[x][y]->CanGoRight())
+			if (_maps[x][y].first->CanGoRight())
 				FindRightMap(level, x + 1, y);
 
 			return;
@@ -244,6 +244,8 @@ shared_ptr<Map> MapManager::Load(int level, int num)
 				if (mapInfo[cur + 5] == 1)
 					object->ReverseTexture();
 
+				object->GetObjectTexture()->Update();
+				object->GetCollider()->Update();
 				newMap->AddObject(object, mapInfo[cur]);
 			}
 		}
@@ -355,7 +357,7 @@ void MapManager::SaveAll()
 
 void MapManager::SetTarget(shared_ptr<Creature> target)
 {
-	for (auto& monster : _maps[_curMapIndex.x][_curMapIndex.y]->GetObjects()[Object::CREATURE])
+	for (auto& monster : _maps[_curMapIndex.x][_curMapIndex.y].first->GetObjects()[Object::CREATURE])
 	{
 		auto creature = dynamic_pointer_cast<Creature>(monster);
 		if (creature != nullptr && creature->GetCreatureType() == Creature::ENEMY)
@@ -370,7 +372,7 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 
 void MapManager::SetCurMap(shared_ptr<Map> map)
 {
-	_maps[_curMapIndex.x][_curMapIndex.y] = map;
+	_maps[_curMapIndex.x][_curMapIndex.y].first = map;
 	SetCurMap(_curMapIndex);
 
 	return;
@@ -378,10 +380,12 @@ void MapManager::SetCurMap(shared_ptr<Map> map)
 
 void MapManager::SetCurMap(const Vector2& index)
 {
+	_maps[index.x][index.y].second = true;
+
 	int moveX = index.x - _curMapIndex.x;
 	int moveY = index.y - _curMapIndex.y;
 	_curMapIndex = index;
-	GAME->SetCurMap(_maps[_curMapIndex.x][_curMapIndex.y]);
+	GAME->SetCurMap(_maps[_curMapIndex.x][_curMapIndex.y].first);
 	if (GAME->GetPlayer() != nullptr)
 	{
 		GAME->AddPlayer(GAME->GetPlayer());
@@ -418,7 +422,7 @@ void MapManager::SetCurMap(const Vector2& index)
 
 	string bgm;
 
-	switch (_maps[_curMapIndex.x][_curMapIndex.y]->GetLevel())
+	switch (_maps[_curMapIndex.x][_curMapIndex.y].first->GetLevel())
 	{
 	case 0:
 		bgm = "0.Town";
@@ -441,10 +445,11 @@ void MapManager::SetCurMap(const Vector2& index)
 
 void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 {
-	if (_maps[where.x][where.y] != nullptr)
+	if (_maps[where.x][where.y].first != nullptr)
 		return;
 
-	_maps[where.x][where.y] = map;
+	_maps[where.x][where.y].first = map;
+	_maps[where.x][where.y].second = false;
 
 	map->CheckCleared();
 
@@ -454,6 +459,7 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 		door->SetSpawnPos(map->GetLeftDoor());
 		if (map->GetCleared() == true)
 			door->Open();
+
 		map->AddObject(door, Object::TILE);
 	}
 	if (map->CanGoRight())
@@ -462,6 +468,7 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 		door->SetSpawnPos(map->GetRightDoor());
 		if (map->GetCleared() == true)
 			door->Open();
+
 		map->AddObject(door, Object::TILE);
 	}
 	if (map->CanGoTop())
@@ -470,6 +477,7 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 		door->SetSpawnPos(map->GetRightDoor());
 		if (map->GetCleared() == true)
 			door->Open();
+
 		map->AddObject(door, Object::TILE);
 	}
 	if (map->CanGoBottom())
@@ -478,6 +486,7 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 		door->SetSpawnPos(map->GetRightDoor());
 		if (map->GetCleared() == true)
 			door->Open();
+
 		map->AddObject(door, Object::TILE);
 	}
 }

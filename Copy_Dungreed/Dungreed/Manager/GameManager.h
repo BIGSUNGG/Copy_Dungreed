@@ -32,7 +32,7 @@ public:
 
 	void Input();
 
-	void AddObject(shared_ptr<Object> object, int type,bool toFront = false);
+	void AddObject(shared_ptr<Object> object, int type);
 	void AddEffect(shared_ptr<Effect> effect);
 	void AddPlayer(shared_ptr<Player> player);
 	void AddEctObject(shared_ptr<Object> object);

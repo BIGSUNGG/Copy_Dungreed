@@ -5,7 +5,6 @@ Monster::Monster(int level, int num)
 	:Creature(level, num)
 {
 	_creatureType = Creature_Type::ENEMY;
-	_speed = 300.0f;
 	_damagedRunTimeMax = 0.05f;
 	_render = false;
 	
@@ -17,11 +16,10 @@ void Monster::Update()
 {
 	if (GAME->GetPlaying())
 	{
-		MovementEvent();
+		if (_spawn == false)
+			SearchTarget();
 
-		SearchTarget();
-
-		if (_spawn == true)
+		if (_spawn == true && _target.lock() != nullptr)
 			AI();
 
 		if (_spawn == false && _target.lock() != nullptr)
@@ -101,33 +99,4 @@ void Monster::SpawnEffect()
 		spawn->GetObjectTexture()->ReverseToX();
 
 	GAME->AddEffect(spawn);
-}
-
-void Monster::MovementEvent()
-{
-	if (_velocity.x != 0)
-	{
-		_anim->ChangeAnimation(Creature_State::RUN);
-
-		if (_velocity.x > 0 && _reversed == true && _isFalling == false)
-			ReverseTexture();
-		else if (_velocity.x < 0 && _reversed == false && _isFalling == false)
-			ReverseTexture();
-	}
-	else
-	{
-		_anim->ChangeAnimation(Creature_State::IDLE);
-	}
-
-	if (_velocity.y != 0)
-	{
-		_anim->ChangeAnimation(Creature_State::JUMP);
-
-		_isFalling = true;
-	}
-	else
-	{
-		_isFalling = false;
-		_jumpPower = 0.0f;
-	}
 }

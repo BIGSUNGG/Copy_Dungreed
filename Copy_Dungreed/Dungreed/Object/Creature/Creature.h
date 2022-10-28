@@ -41,13 +41,14 @@ public:
 	
 protected:
 	virtual void CollisionEvent();
+
 	virtual void TileCollison(shared_ptr<Tile> tile);
 	virtual void TileBlockCollision(shared_ptr<Tile> tile);
 	virtual void TileFloorCollision(shared_ptr<Tile> tile);
 	virtual void TileLeftStairCollision(shared_ptr<Tile> tile);
 	virtual void TileRightStairCollision(shared_ptr<Tile> tile);
-	virtual void CreatureCollision(shared_ptr<Creature> creature);
 
+	virtual void MovementEvent() {}
 	virtual void MoveCharacter();
 	virtual void Death();
 	virtual void Attack();
@@ -61,6 +62,7 @@ protected:
 	vector<shared_ptr<Weapon>> _weaponSlot;
 	vector<shared_ptr<Accessory>> _accessorySlot;
 	vector<shared_ptr<Item>> _itemSlot;
+
 	int _curWeaponSlot = 0;
 
 	Vector2 _movement;
@@ -69,20 +71,19 @@ protected:
 
 	Status _status;
 
-	float _speed = 450.0f;
-
 	float _jumpPower = 0.0f;
 	float _jumpPowerMax = 1800.0f;
 
 	float _gravityPower = 5000.0f;
 
+	bool _isFalling = false;
+	float _gravityRatio = 1.0f;
+
 	float _damagedRunTime = 0.1f;
 	float _damagedRunTimeMax = 0.1f;
 
-	bool _isFalling = false;
 	bool _passFloor = false;
 	bool _passTile = false;
 	bool _onStair = false;
-	float _gravityRatio = 1.0f;
 };
 

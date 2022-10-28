@@ -200,51 +200,62 @@ void GameManager::Input()
 			_player->SetCurWeaponSlot(0);
 		if (KEY_DOWN('2'))
 			_player->SetCurWeaponSlot(1);
+
+		_player->MouseEvent();
 	}
-	_player->MouseEvent();
-
-
-	if (KEY_DOWN('V') && _curMap->GetCleared())
+	else if (UI_MANAGER->GetCurState() == UIManager::UI_State::MAP)
 	{
-		if (UI_MANAGER->GetCurState() == UIManager::UI_State::IVEN)
+		_player->MouseEvent();
+	}
+
+	if (KEY_DOWN(VK_ESCAPE))
+	{
+		switch (UI_MANAGER->GetCurState())
 		{
-			MOUSE_CURSUR->SetCursurImage(2);
+		case UIManager::UI_State::INVEN:
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+			break;
+		default:
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+			break;
+		}
+	}
+
+	if (KEY_DOWN(VK_TAB) && _curMap->GetCleared())
+	{
+		if (UI_MANAGER->GetCurState() == UIManager::UI_State::MAP)
+		{
 			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
 		}
 		else
 		{
-			MOUSE_CURSUR->SetCursurImage(0);
-			UI_MANAGER->SetState(UIManager::UI_State::IVEN);
+			UI_MANAGER->SetState(UIManager::UI_State::MAP);
+		}
+	}
+
+	if (KEY_DOWN('V') && _curMap->GetCleared())
+	{
+		if (UI_MANAGER->GetCurState() == UIManager::UI_State::INVEN)
+		{
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+		}
+		else
+		{
+			UI_MANAGER->SetState(UIManager::UI_State::INVEN);
 		}
 	}
 }
 
-void GameManager::AddObject(shared_ptr<Object> object, int type, bool toFront)
+void GameManager::AddObject(shared_ptr<Object> object, int type)
 {
-	if (toFront == false)
-	{
-		bool addEffect = false;
-
-		for (auto iter = _curMap->GetObjects()[type].begin(); iter != _curMap->GetObjects()[type].end(); iter++)
-		{
-			if (iter->get() == nullptr)
-			{
-				_curMap->GetObjects()[type].emplace(iter, object);
-				addEffect = true;
-				break;
-			}
-		}
-
-		if (addEffect == false)
-			_curMap->GetObjects()[type].emplace_back(object);
-	}
-	else
-		_curMap->GetObjects()[type].emplace(_curMap->GetObjects()[type].begin(), object);
+	object->GetObjectTexture()->Update();
+	object->GetCollider()->Update();
+	_curMap->GetObjects()[type].emplace_back(object);
 }
 
 void GameManager::AddEffect(shared_ptr<Effect> effect)
 {
-	AddObject(effect, Object::Object_Type::EFFECT, false);
+	AddObject(effect, Object::Object_Type::EFFECT);
 }
 
 void GameManager::AddPlayer(shared_ptr<Player> player)
@@ -263,15 +274,13 @@ void GameManager::AddPlayer(shared_ptr<Player> player)
 
 	_player = player;
 	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
-	_curMap->GetObjects()[Object::Object_Type::CREATURE].emplace_back(player);
 
-	_player->GetObjectTexture()->Update();
-	_player->GetCollider()->Update();
+	AddObject(_player, Object::Object_Type::CREATURE);
 }
 
 void GameManager::AddEctObject(shared_ptr<Object> object)
 {
-	AddObject(object, Object::Object_Type::ECT, false);
+	AddObject(object, Object::Object_Type::ECT);
 }
 
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor,bool forceCollison)

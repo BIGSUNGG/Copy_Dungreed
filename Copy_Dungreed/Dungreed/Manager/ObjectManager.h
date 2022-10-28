@@ -35,7 +35,7 @@ public:
 	shared_ptr<Effect> GetPlayerWeaponEffect(int level, int num);
 	shared_ptr<Effect> GetEnemyWeaponEffect(int level, int num);
 
-	shared_ptr<Quad> GetCursur(int num);
+	wstring GetCursurImage(int num);
 
 private:
 	ObjectManager();

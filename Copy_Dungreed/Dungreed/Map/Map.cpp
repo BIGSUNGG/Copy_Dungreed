@@ -47,7 +47,7 @@ void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
 	}
 
 	_objectCount++;
-	
+
 	if (toFront)
 		_objects[type].emplace(_objects[type].begin(), addObject);
 	else

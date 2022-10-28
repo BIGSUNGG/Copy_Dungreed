@@ -5,7 +5,8 @@ public:
 	enum class UI_State
 	{
 		NOMAL,
-		IVEN,
+		INVEN,
+		MAP,
 	};
 
 public:
@@ -29,7 +30,7 @@ public:
 	void PostRender();
 
 	void Refresh();
-	void SetState(const UI_State& state) { _state = state; }
+	void SetState(const UI_State& state);
 	const UI_State& GetCurState() { return _state; }
 
 private:
@@ -47,6 +48,7 @@ private:
 	shared_ptr<UI_WeaponSlot> _weaponSlot;
 	shared_ptr<UI_Info> _info;
 	shared_ptr<UI_Inventory> _inventory;
+	shared_ptr<UI_Map> _map;
 
 };
 

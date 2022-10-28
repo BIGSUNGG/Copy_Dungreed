@@ -15,7 +15,7 @@ public:
 
 	void SetDestroyEffect(function<shared_ptr<Effect>()> effect) { _destroyEffect = effect; }
 	virtual void SetSpeed(float speed) { _speed = speed; }
-	virtual void SetDirection(const Vector2& direction) { _direction = direction; }
+	virtual void SetDirection(const Vector2& direction);
 	virtual void SetOwner(shared_ptr<Item> weapon) { _weapon = weapon; }
 protected:
 	virtual void DestroyEvent();

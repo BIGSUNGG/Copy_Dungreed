@@ -58,6 +58,12 @@ void Bullet::Attack()
 	}
 }
 
+void Bullet::SetDirection(const Vector2& direction)
+{
+	_direction = direction;
+	_direction.Normalize();
+}
+
 void Bullet::DestroyEvent()
 {
 	_isActive = false;

@@ -82,7 +82,7 @@ UI_Inventory::UI_Inventory()
 	}
 
 	_weapons.resize(2, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
-	_accessories.resize(15, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
+	_accessories.resize(4, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 	_items.resize(15, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 }
 
@@ -114,6 +114,9 @@ void UI_Inventory::Update()
 	for (auto& item : _items)
 		item->Update();
 
+	if (_selectedItem != nullptr)
+		_selectedItem->Update();
+
 	MouseEvenet();
 }
 
@@ -140,6 +143,9 @@ void UI_Inventory::Render()
 
 	for (auto& item : _items)
 		item->Render();
+
+	if (_selectedItem != nullptr)
+		_selectedItem->Render();
 
 	std::wstring coinText;
 	coinText += to_wstring(INVENTORY->GetGold());
@@ -210,6 +216,29 @@ void UI_Inventory::FindTexture()
 			{
 				_items[i] = make_shared<Quad>(INVENTORY->GetItemSlot()[i]->GetObjectTexture()->GetImageFile());
 				_items[i]->GetTransform()->GetPos() = _itemSlot[i]->GetPos();
+
+				switch (INVENTORY->GetItemSlot()[i]->GetItemType())
+				{
+				case Item::WEAPON:
+				{
+					shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[i]);
+					switch (weapon->GetWeaponType())
+					{
+					case Weapon::MELEE:
+						_items[i]->GetTransform()->GetAngle() = (1.5f * PI);
+						break;
+					case Weapon::GUN:
+						break;
+					case Weapon::SUB:
+						break;
+					default:
+						break;
+					}
+				}
+					break;
+				default:
+					break;
+				}
 			}
 		}
 		else
@@ -226,15 +255,29 @@ void UI_Inventory::MouseEvenet()
 	{
 		if (_exitButton->GetHover())
 		{
-			MOUSE_CURSUR->SetCursurImage(2);
 			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
 		}
 
-		for (int i = 0; i < _weaponSlot.size(); i++)
+		for (int i = 0; i < 2; i++)
 		{
 			if (_weaponSlot[i]->GetHover())
 			{
-				_selectedItem = _weapons[i];
+				_selectedItem = make_shared<Quad>(_weapons[i]->GetImageFile());
+
+				shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetWeaponSlot()[i]);
+				switch (weapon->GetWeaponType())
+				{
+				case Weapon::MELEE:
+					_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
+					break;
+				case Weapon::GUN:
+					break;
+				case Weapon::SUB:
+					break;
+				default:
+					break;
+				}
+
 				_type = 0;
 				_num = i;
 				return;
@@ -245,7 +288,7 @@ void UI_Inventory::MouseEvenet()
 		{
 			if (_accessorySlot[i]->GetHover())
 			{
-				_selectedItem = _accessories[i];
+				_selectedItem = make_shared<Quad>(_accessories[i]->GetImageFile());
 				_type = 1;
 				_num = i;
 				return;
@@ -256,7 +299,31 @@ void UI_Inventory::MouseEvenet()
 		{
 			if (_itemSlot[i]->GetHover())
 			{
-				_selectedItem = _items[i];
+				_selectedItem = make_shared<Quad>(_items[i]->GetImageFile());
+
+				switch (INVENTORY->GetItemSlot()[i]->GetItemType())
+				{
+				case Item::WEAPON:
+				{
+					shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[i]);
+					switch (weapon->GetWeaponType())
+					{
+					case Weapon::MELEE:
+						_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
+						break;
+					case Weapon::GUN:
+						break;
+					case Weapon::SUB:
+						break;
+					default:
+						break;
+					}
+				}
+				break;
+				default:
+					break;
+				}
+
 				_type = 2;
 				_num = i;
 				return;
@@ -293,6 +360,9 @@ void UI_Inventory::MouseEvenet()
 			_selectedItem->GetTransform()->GetPos() = _itemSlot[_num]->GetPos();
 			selected = INVENTORY->GetItemSlot()[_num];
 		}
+
+		if (selected == nullptr)
+			return;
 
 		for (int i = 0; i < 2; i++)
 		{

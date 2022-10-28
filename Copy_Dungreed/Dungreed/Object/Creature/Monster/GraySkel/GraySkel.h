@@ -11,8 +11,11 @@ protected:
 
 	virtual void Attack() override;
 
+	virtual void MovementEvent() override;
+
 protected:
 	float _targetDistanceGround = 100.0f;
 	float _targetDistanceJumping = 20.0f;
+
 };
 

@@ -14,10 +14,18 @@ void UIManager::Update()
 		_info->Update();
 		_miniMap->Update();
 		break;
-	case UIManager::UI_State::IVEN:
+	case UIManager::UI_State::INVEN:
 		_playerHpBar->Update();
 		_info->Update();
 		_inventory->Update();
+		break;
+	case UI_State::MAP:
+		_enemyHpBar->Update();
+		_playerHpBar->Update();
+		_weaponSlot->Update();
+		_info->Update();
+		_miniMap->Update();
+		_map->Update();
 		break;
 	default:
 		break;
@@ -30,6 +38,7 @@ void UIManager::PreRender()
 {
 	_filter->Set();
 	_miniMap->PreRender();
+	_map->PreRender();
 }
 
 void UIManager::PostRender()
@@ -47,10 +56,18 @@ void UIManager::PostRender()
 		_info->Render();
 		_miniMap->Render();
 		break;
-	case UIManager::UI_State::IVEN:
+	case UIManager::UI_State::INVEN:
 		_playerHpBar->Render();
 		_info->Render();
 		_inventory->Render();
+		break;
+	case UI_State::MAP:
+		_enemyHpBar->Render();
+		_playerHpBar->Render();
+		_weaponSlot->Render();
+		_info->Render();
+		_miniMap->Render();
+		_map->Render();
 		break;
 	default:
 		break;
@@ -60,7 +77,28 @@ void UIManager::PostRender()
 void UIManager::Refresh()
 {
 	_miniMap->Refresh();
-	_enemyHpBar->Refresh(); 
+	_enemyHpBar->Refresh();
+	_map->Refresh();
+}
+
+void UIManager::SetState(const UI_State& state)
+{
+	_state = state;
+
+	switch (_state)
+	{
+	case UIManager::UI_State::NOMAL:
+		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(2));
+		break;
+	case UIManager::UI_State::INVEN:
+		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		break;
+	case UI_State::MAP:
+		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		break;
+	default:
+		break;
+	}
 }
 
 UIManager::UIManager()
@@ -80,6 +118,7 @@ UIManager::UIManager()
 	_info = make_shared<UI_Info>();
 	_miniMap = make_shared<UI_MiniMap>();
 	_inventory = make_shared<UI_Inventory>();
+	_map = make_shared<UI_Map>();
 }
 
 UIManager::~UIManager()

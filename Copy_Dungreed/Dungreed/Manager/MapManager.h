@@ -34,8 +34,9 @@ public:
 	void SetCurMap(const Vector2& index);
 
 	const Vector2& GetMapIndex() { return _curMapIndex; }
-	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.x][_curMapIndex.y]; }
+	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.x][_curMapIndex.y].first; }
 	const vector<vector<int>>& GetCurMapSize() { return _mapSize; }
+	const map<int, map<int, pair<shared_ptr<Map>, bool>>>& GetMaps() { return _maps; }
 
 private:
 	void AddMap(shared_ptr<Map> map, Vector2 where);
@@ -45,7 +46,8 @@ private:
 	~MapManager();
 	static MapManager* _instance;
 
-	unordered_map<int, unordered_map<int, shared_ptr<Map>>> _maps;
+	map<int, map<int, pair<shared_ptr<Map>,bool>>> _maps;
+
 	Vector2 _curMapIndex = {0,0};
 	vector<vector<int>> _mapSize;
 	string _path;

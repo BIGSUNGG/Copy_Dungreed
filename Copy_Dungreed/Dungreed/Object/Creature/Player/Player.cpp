@@ -13,6 +13,7 @@ Player::Player(int level, int num)
 
 	_status.SetMaxHp(80);
 	_status._atk = 25;
+	_status._speed = 450.0f;
 
 	INVENTORY->SetWeaponSlot(&_weaponSlot);
 	INVENTORY->SetCurWeaponSlot(&_curWeaponSlot);
@@ -33,13 +34,17 @@ void Player::Update()
 	_dash.Update();
 	_dustRunTime += DELTA_TIME;
 
-	MovementEvent();
-	
+	if (_weaponSlot[_curWeaponSlot] != nullptr)
+		_weaponSlot[_curWeaponSlot]->SetShowTo(_weaponDirection);
+
 	Creature::Update();
 }
 
 bool Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
+	if (_buffer->_data.selected == 2)
+		return false;
+
 	const bool& damaged = Creature::GetDamage(enemy, weapon);
 
 	if (_status._hp > 0)
@@ -96,8 +101,7 @@ void Player::MouseEvent()
 		ReverseTexture();
 	}
 
-	if(_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponSlot[_curWeaponSlot]->SetShowTo((MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle());
+	_weaponDirection = (MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle();
 }
 
 void Player::MovementEvent()

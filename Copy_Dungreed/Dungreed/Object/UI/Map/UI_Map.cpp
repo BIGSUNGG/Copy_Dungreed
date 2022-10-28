@@ -1,0 +1,104 @@
+#include "framework.h"
+#include "UI_Map.h"
+
+UI_Map::UI_Map()
+{
+	_filter = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
+	float color[4] = { 0,0,0,0.5f };
+	_filter->Color(color);
+
+	_filterQuad = make_shared<Quad>(L"UI_Map_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
+	shared_ptr<Texture> texture = Texture::Add(L"UI_Map_Texture", _filter->GetSRV());
+	_filterQuad->SetTexture(texture);
+	_filterQuad->GetTransform()->GetPos() = CENTER;
+
+	_mapBase = make_shared<Quad>(L"Resource/Ui/Map/Map_Base.png");
+	_mapBase->SetBottom(0);
+	_mapBase->GetTransform()->GetPos().x = CENTER.x;
+
+	_mapBlock = make_shared<InstanceQuad>(L"Resource/Ui/Map/Map_Block.png", 0);
+	_verticalLine = make_shared<InstanceQuad>(L"Resource/Ui/Map/Map_Bar_Vertical.png", 0);
+	_horizonLine = make_shared<InstanceQuad>(L"Resource/Ui/Map/Map_Bar_Horizon.png", 0);
+}
+
+void UI_Map::PreRender()
+{
+	_filter->Set();
+}
+
+void UI_Map::Update()
+{
+	_filterQuad->Update();
+	_mapBase->Update();
+
+	_mapBlock->Update();
+	_verticalLine->Update();
+	_horizonLine->Update();
+}
+
+void UI_Map::Render()
+{
+	DirectWrite::GetInstance()->GetDC()->EndDraw();
+	DirectWrite::GetInstance()->GetDC()->BeginDraw();
+
+	_filterQuad->Render();
+	_mapBlock->Render();
+
+	_mapBase->Render();
+	_verticalLine->Render();
+	_horizonLine->Render();
+}
+
+void UI_Map::Refresh()
+{
+	_mapBlock->GetTransforms().clear();
+	_verticalLine->GetTransforms().clear();
+	_horizonLine->GetTransforms().clear();
+
+	for (auto& maps : MAP_MANAGER->GetMaps())
+	{
+		for (auto& map : maps.second)
+		{
+			if (map.second.second)
+			{
+				Vector2 distance = MAP_MANAGER->GetMapIndex() - Vector2(maps.first, map.first);
+				Vector2 blockPos = Vector2(960.f - (distance.x * 156.f), 457.f - (distance.y * 156.f));
+
+				{
+					shared_ptr<Transform> transform = make_shared<Transform>();
+					transform->GetPos() = blockPos;
+					_mapBlock->GetTransforms().emplace_back(transform);
+				}
+
+				if (map.second.first->CanGoRight())
+				{
+					shared_ptr<Transform> transform = make_shared<Transform>();
+					transform->GetPos() = blockPos + Vector2(72, 0);
+					_horizonLine->GetTransforms().emplace_back(transform);
+				}
+				if (map.second.first->CanGoLeft())
+				{
+					shared_ptr<Transform> transform = make_shared<Transform>();
+					transform->GetPos() = blockPos - Vector2(72, 0);
+					_horizonLine->GetTransforms().emplace_back(transform);
+				}
+				if (map.second.first->CanGoTop())
+				{
+					shared_ptr<Transform> transform = make_shared<Transform>();
+					transform->GetPos() = blockPos + Vector2(0, 72);
+					_verticalLine->GetTransforms().emplace_back(transform);
+				}
+				if (map.second.first->CanGoBottom())
+				{
+					shared_ptr<Transform> transform = make_shared<Transform>();
+					transform->GetPos() = blockPos - Vector2(0, 72);
+					_verticalLine->GetTransforms().emplace_back(transform);
+				}
+			}
+		}
+	}
+
+	_mapBlock->ApplyChanges();
+	_verticalLine->ApplyChanges();
+	_horizonLine->ApplyChanges();
+}

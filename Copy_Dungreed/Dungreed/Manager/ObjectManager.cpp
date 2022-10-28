@@ -744,7 +744,50 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			object->SetTexture(texture);
 			weapon = GetEnemyWeapon(0, 0);
 			object->AddItem(weapon);
-			
+			break;
+		case 1:		
+			object = make_shared<GraySkel>(level, num);
+
+			object->SetAnimation();
+			object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(1, 0.3f);
+			object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/GraySkel/Idle/GraySkelIdle.png");
+
+			object->GetAnimation()->_animSpeed[Creature::Creature_State::RUN] = vector<float>(6, 0.3f);
+			object->GetAnimation()->_animState[Creature::Creature_State::RUN] = Animation::Anim_State::LOOP;
+			object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk0.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk1.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk2.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk3.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk4.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::RUN].push_back(L"Resource/Creature/Enemy/GraySkel/Run/GraySkelWalk5.png");
+
+			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
+			object->SetTexture(texture);
+			weapon = GetEnemyWeapon(0, 1);
+			object->AddItem(weapon);
+			break;
+		case 2:
+			object = make_shared<Ghost>(level, num);
+
+			object->SetAnimation();
+			object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(6, 0.3f);
+			object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost0.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost1.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost2.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost3.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost4.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost5.png");
+
+			object->GetAnimation()->_animSpeed[Creature::Creature_State::ATTACK] = vector<float>(3, 0.3f);
+			object->GetAnimation()->_animState[Creature::Creature_State::ATTACK] = Animation::Anim_State::LOOP;
+			object->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Creature/Enemy/Ghost/Attack/LittleGhostAttack0.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Creature/Enemy/Ghost/Attack/LittleGhostAttack1.png");
+			object->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Creature/Enemy/Ghost/Attack/LittleGhostAttack2.png");
+
+			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
+
 			break;
 		default:
 			break;
@@ -1150,6 +1193,42 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 
 			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
+		case 1:
+			weapon = make_shared<Melee>(type, num);
+
+			weapon->SetOffset({ 45,-55 });
+			weapon->SetAppendAngle({ 0.f });
+			weapon->SetGiveDamageDelay(0.7f);
+			weapon->SetAttackRange({ 150,150 });
+
+			weapon->SetAnimation();
+			weapon->GetAnimation()->GetRefreshSize() = true;
+			weapon->SetAttackDelay(1.0f);
+
+			weapon->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(1, 0.1f);
+			weapon->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::END;
+			weapon->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword00.png");
+
+			weapon->GetAnimation()->_animSpeed[Creature::Creature_State::ATTACK] = vector<float>(15, 0.1f);
+			weapon->GetAnimation()->_animState[Creature::Creature_State::ATTACK] = Animation::Anim_State::END;
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword00.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword01.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword02.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword03.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword04.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword05.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword06.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword07.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword08.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword09.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword10.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword11.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword12.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword13.png");
+			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword14.png");
+
+			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
 		default:
 			break;
 		}
@@ -1186,27 +1265,24 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 	return weapon;
 }
 
-shared_ptr<Quad> ObjectManager::GetCursur(int num)
+wstring ObjectManager::GetCursurImage(int num)
 {
-	shared_ptr<Quad> texture;
+	wstring string;
 
 	switch (num)
 	{
 	case 0:
-		texture = make_shared<Quad>(L"Resource/Cursur/BasicCursor.png");
+		string = L"Resource/Cursur/BasicCursor.png";
 		break;
 	case 1:
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor1.png");
+		string = L"Resource/Cursur/ShootingCursor1.png";
 		break;
 	case 2:
-		texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
+		string = L"Resource/Cursur/ShootingCursor2.png";
 		break;
 	default:
 		break;
 	}
 
-	assert(texture != nullptr);
-	assert(texture->GetSize() != Vector2(0, 0));
-
-	return texture;
+	return string;
 }

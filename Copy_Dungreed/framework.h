@@ -149,6 +149,7 @@ using namespace std;
 #include "Dungreed/Object/Creature/Player/Player.h"
 #include "Dungreed/Object/Creature/Monster/Monster.h"
 #include "Dungreed/Object/Creature/Monster/GraySkel/GraySkel.h"
+#include "Dungreed/Object/Creature/Monster/Ghost/Ghost.h"
 
 // UI
 #include "Dungreed/Object/UI/UI.h"
@@ -159,6 +160,7 @@ using namespace std;
 #include "Dungreed/Object/UI/MiniMap/UI_MiniMap.h"
 #include "Dungreed/Object/UI/Button/UI_Button.h"
 #include "Dungreed/Object/UI/Inventory/UI_Inventory.h"
+#include "Dungreed/Object/UI/Map/UI_Map.h"
 
 // Map
 #include "Dungreed/Map/Map.h"

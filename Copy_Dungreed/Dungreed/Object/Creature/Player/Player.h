@@ -34,6 +34,7 @@ protected:
 
 protected:
 	Dash_Info _dash;
+	float _weaponDirection = 0.0f;
 
 	string _curStepSound;
 	int _stepSound = 0;

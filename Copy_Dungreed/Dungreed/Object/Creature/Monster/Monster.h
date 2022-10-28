@@ -16,7 +16,7 @@ protected:
 
 	virtual void SpawnEffect();
 
-	virtual void MovementEvent();
+	virtual void MovementEvent() override {}
 
 protected:
 	weak_ptr<Creature> _target;
