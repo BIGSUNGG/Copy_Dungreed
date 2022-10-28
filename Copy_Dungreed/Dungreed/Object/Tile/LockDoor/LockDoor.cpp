@@ -31,8 +31,7 @@ void LockDoor::Update()
 			_anim->ChangeAnimation(OPEN);
 		else if (_anim->GetCurAnim() == OPEN && _anim->GetIsPlaying() == false)
 		{
-			_render = false;
-			_open = true;
+			Open();
 		}
 	}
 
@@ -45,6 +44,7 @@ void LockDoor::Open()
 	_open = true;
 	_anim->ChangeAnimation(OPEN, true);
 	_anim->GetIsPlaying() = false;
+	_collison = false;
 }
 
 
