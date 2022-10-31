@@ -1,5 +1,5 @@
 #pragma once
-class UI : public Object
+class UI
 {
 public:
 	enum UI_Type
@@ -13,6 +13,10 @@ public:
 
 public:
 	UI();
+
+	virtual void Update();
+	virtual void PreRender();
+	virtual void Render();
 
 	virtual void Refresh();
 	UI_Type GetUIType() { return _uiType; }

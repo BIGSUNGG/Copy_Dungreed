@@ -2,7 +2,18 @@
 #include "UI.h"
 
 UI::UI()
-	: Object()
+{
+}
+
+void UI::Update()
+{
+}
+
+void UI::PreRender()
+{
+}
+
+void UI::Render()
 {
 }
 

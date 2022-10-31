@@ -192,7 +192,7 @@ void GameManager::Input()
 			_player->MoveLeft();
 		if (KEY_PRESS('D'))
 			_player->MoveRight();
-		if (KEY_PRESS(VK_LBUTTON))
+		if (KEY_DOWN(VK_LBUTTON))
 			_player->Attack();
 		if (KEY_DOWN(VK_RBUTTON))
 			_player->Dash();
@@ -212,24 +212,24 @@ void GameManager::Input()
 	{
 		switch (UI_MANAGER->GetCurState())
 		{
-		case UIManager::UI_State::INVEN:
+		case UIManager::UI_State::OPTION:
 			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
 			break;
 		default:
-			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+			UI_MANAGER->SetState(UIManager::UI_State::OPTION);
 			break;
 		}
 	}
 
 	if (KEY_DOWN(VK_TAB) && _curMap->GetCleared())
 	{
-		if (UI_MANAGER->GetCurState() == UIManager::UI_State::MAP)
+		switch (UI_MANAGER->GetCurState())
 		{
-			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
-		}
-		else
-		{
+		case UIManager::UI_State::NOMAL:
 			UI_MANAGER->SetState(UIManager::UI_State::MAP);
+			break;
+		default:
+			break;
 		}
 	}
 	else if (KEY_UP(VK_TAB))

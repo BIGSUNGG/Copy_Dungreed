@@ -152,15 +152,21 @@ using namespace std;
 #include "Dungreed/Object/Creature/Monster/Ghost/Ghost.h"
 
 // UI
-#include "Dungreed/Object/UI/UI.h"
-#include "Dungreed/Object/UI/HpBar/UI_PlayerHpBar.h"
-#include "Dungreed/Object/UI/HpBar/UI_EnemyHpBar.h"
-#include "Dungreed/Object/UI/WeaponSlot/UI_WeaponSlot.h"
-#include "Dungreed/Object/UI/Info/UI_Info.h"
-#include "Dungreed/Object/UI/MiniMap/UI_MiniMap.h"
-#include "Dungreed/Object/UI/Button/UI_Button.h"
-#include "Dungreed/Object/UI/Inventory/UI_Inventory.h"
-#include "Dungreed/Object/UI/Map/UI_Map.h"
+#include "Dungreed/UI/UI.h"
+
+#include "Dungreed/UI/Component/UI_Component.h"
+#include "Dungreed/UI/Component/Button/UI_Button.h"
+#include "Dungreed/UI/Component/Slider/UI_Slider.h"
+
+#include "Dungreed/UI/HpBar/UI_PlayerHpBar.h"
+#include "Dungreed/UI/HpBar/UI_EnemyHpBar.h"
+#include "Dungreed/UI/WeaponSlot/UI_WeaponSlot.h"
+#include "Dungreed/UI/Info/UI_Info.h"
+#include "Dungreed/UI/MiniMap/UI_MiniMap.h"
+#include "Dungreed/UI/Inventory/UI_Inventory.h"
+#include "Dungreed/UI/Map/UI_Map.h"
+#include "Dungreed/UI/Select/UI_Option.h"
+#include "Dungreed/UI/Setting/UI_Setting.h"
 
 // Map
 #include "Dungreed/Map/Map.h"

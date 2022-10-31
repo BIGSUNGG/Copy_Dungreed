@@ -88,7 +88,5 @@ protected:
 	bool _passTile = false;
 	bool _onStair = false;
 
-	bool _canMoveLeft = true;
-	bool _canMoveRight = true;
 };
 

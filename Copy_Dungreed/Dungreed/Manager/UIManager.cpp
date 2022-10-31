@@ -27,6 +27,12 @@ void UIManager::Update()
 		_miniMap->Update();
 		_map->Update();
 		break;
+	case UI_State::OPTION:
+		_select->Update();
+		break;
+	case UI_State::SETTING:
+		_setting->Update();
+		break;
 	default:
 		break;
 	}
@@ -66,6 +72,12 @@ void UIManager::PostRender()
 		_info->Render();
 		_map->Render();
 		break;
+	case UI_State::OPTION:
+		_select->Render();
+		break;
+	case UI_State::SETTING:
+		_setting->Render();
+		break;
 	default:
 		break;
 	}
@@ -93,6 +105,12 @@ void UIManager::SetState(const UI_State& state)
 	case UI_State::MAP:
 		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
 		break;
+	case UI_State::OPTION:
+		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		break;
+	case UI_State::SETTING:
+		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		break;
 	default:
 		break;
 	}
@@ -116,6 +134,8 @@ UIManager::UIManager()
 	_miniMap = make_shared<UI_MiniMap>();
 	_inventory = make_shared<UI_Inventory>();
 	_map = make_shared<UI_Map>();
+	_select = make_shared<UI_Option>();
+	_setting = make_shared<UI_Setting>();
 }
 
 UIManager::~UIManager()

@@ -61,3 +61,8 @@ static void SwitchBool(bool& value)
 	else
 		value = true;
 }
+
+static void EndProgram()
+{
+	DestroyWindow(Device::GetInstance()->GetHWND());
+}

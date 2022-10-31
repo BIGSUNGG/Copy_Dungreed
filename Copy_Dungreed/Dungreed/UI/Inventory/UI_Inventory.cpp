@@ -18,6 +18,7 @@ UI_Inventory::UI_Inventory()
 		secondSlot->SetBottom(762);
 		secondSlot->SetLeft(_invenBase->Left() + 402);
 		_curSlot.emplace_back(secondSlot);
+
 	}
 
 	for (int i = 0; i < 2; i++)
@@ -29,6 +30,28 @@ UI_Inventory::UI_Inventory()
 		quad->SetBottom(_curSlot[i]->Bottom() + 18);
 		slot->SetTexture(quad);
 		slot->SetHoverTexture(hoverQuad);
+		function<void()> func = [&, i]() {
+			_selectedItem = make_shared<Quad>(_weapons[i]->GetImageFile());
+
+			shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetWeaponSlot()[i]);
+			switch (weapon->GetWeaponType())
+			{
+			case Weapon::MELEE:
+				_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
+				break;
+			case Weapon::GUN:
+				break;
+			case Weapon::SUB:
+				break;
+			default:
+				break;
+			}
+
+			_type = 0;
+			_num = i;
+			return;
+		};
+		slot->SetKeyDownEvent(func);
 		_weaponSlot.emplace_back(slot);
 	}
 
@@ -41,7 +64,10 @@ UI_Inventory::UI_Inventory()
 		quad->SetBottom(_curSlot[i]->Bottom() + 18);
 		slot->SetTexture(quad);
 		slot->SetHoverTexture(hoverQuad);
-		_weaponSlot.emplace_back(slot);
+		function<void()> func = [&, i]() {
+		};
+		slot->SetKeyDownEvent(func);
+		_subWeaponSlot.emplace_back(slot);
 	}
 
 	for (int i = 0; i < 4; i++)
@@ -53,6 +79,13 @@ UI_Inventory::UI_Inventory()
 		quad->SetBottom(609);
 		slot->SetTexture(quad);
 		slot->SetHoverTexture(hoverQuad);
+		function<void()> func = [&, i]() {
+			_selectedItem = make_shared<Quad>(_accessories[i]->GetImageFile());
+			_type = 1;
+			_num = i;
+			return;
+		};
+		slot->SetKeyDownEvent(func);
 		_accessorySlot.emplace_back(slot);
 	}
 
@@ -67,6 +100,42 @@ UI_Inventory::UI_Inventory()
 				quad->SetBottom(432 - (132 * j));
 				slot->SetTexture(quad);
 				slot->SetHoverTexture(hoverQuad);
+				
+				int index = (j * 5) + i;
+				function<void()> func = [&, index]() {
+					_selectedItem = make_shared<Quad>(_items[index]->GetImageFile());
+
+					if (INVENTORY->GetItemSlot()[index] != nullptr)
+					{
+						switch (INVENTORY->GetItemSlot()[index]->GetItemType())
+						{
+						case Item::WEAPON:
+						{
+							shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[index]);
+							switch (weapon->GetWeaponType())
+							{
+							case Weapon::MELEE:
+								_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
+								break;
+							case Weapon::GUN:
+								break;
+							case Weapon::SUB:
+								break;
+							default:
+								break;
+							}
+						}
+						break;
+						default:
+							break;
+						}
+					}
+
+					_type = 2;
+					_num = index;
+					return;
+				};
+				slot->SetKeyDownEvent(func);
 				_itemSlot.emplace_back(slot);
 			}
 		}
@@ -79,6 +148,8 @@ UI_Inventory::UI_Inventory()
 		quad->SetTop(WIN_HEIGHT - 9);
 		_exitButton->SetTexture(quad);
 		_exitButton->SetHoverTexture(hoverQuad);
+		function<void()> func = []() { UI_MANAGER->SetState(UIManager::UI_State::NOMAL); };
+		_exitButton->SetKeyDownEvent(func);
 	}
 
 	_weapons.resize(2, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
@@ -97,6 +168,9 @@ void UI_Inventory::Update()
 		slot->Update();
 
 	for (auto& slot : _weaponSlot)
+		slot->Update();
+
+	for (auto& slot : _subWeaponSlot)
 		slot->Update();
 
 	for (auto& slot : _accessorySlot)
@@ -127,6 +201,9 @@ void UI_Inventory::Render()
 	_curSlot[INVENTORY->GetCurWeaponSlot()]->Render();
 
 	for (auto& slot : _weaponSlot)
+		slot->Render();
+
+	for (auto& slot : _subWeaponSlot)
 		slot->Render();
 
 	for (auto& slot : _accessorySlot)
@@ -251,86 +328,7 @@ void UI_Inventory::FindTexture()
 
 void UI_Inventory::MouseEvenet()
 {
-	if (KEY_DOWN(VK_LBUTTON))
-	{
-		if (_exitButton->GetHover())
-		{
-			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
-		}
-
-		for (int i = 0; i < 2; i++)
-		{
-			if (_weaponSlot[i]->GetHover())
-			{
-				_selectedItem = make_shared<Quad>(_weapons[i]->GetImageFile());
-
-				shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetWeaponSlot()[i]);
-				switch (weapon->GetWeaponType())
-				{
-				case Weapon::MELEE:
-					_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
-					break;
-				case Weapon::GUN:
-					break;
-				case Weapon::SUB:
-					break;
-				default:
-					break;
-				}
-
-				_type = 0;
-				_num = i;
-				return;
-			}
-		}
-
-		for (int i = 0; i < _accessorySlot.size(); i++)
-		{
-			if (_accessorySlot[i]->GetHover())
-			{
-				_selectedItem = make_shared<Quad>(_accessories[i]->GetImageFile());
-				_type = 1;
-				_num = i;
-				return;
-			}
-		}
-
-		for (int i = 0; i < _itemSlot.size(); i++)
-		{
-			if (_itemSlot[i]->GetHover())
-			{
-				_selectedItem = make_shared<Quad>(_items[i]->GetImageFile());
-
-				switch (INVENTORY->GetItemSlot()[i]->GetItemType())
-				{
-				case Item::WEAPON:
-				{
-					shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[i]);
-					switch (weapon->GetWeaponType())
-					{
-					case Weapon::MELEE:
-						_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
-						break;
-					case Weapon::GUN:
-						break;
-					case Weapon::SUB:
-						break;
-					default:
-						break;
-					}
-				}
-				break;
-				default:
-					break;
-				}
-
-				_type = 2;
-				_num = i;
-				return;
-			}
-		}
-	}
-	else if (KEY_PRESS(VK_LBUTTON))
+	if (KEY_PRESS(VK_LBUTTON))
 	{
 		if (_selectedItem == nullptr)
 			return;

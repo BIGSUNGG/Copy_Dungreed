@@ -14,6 +14,7 @@ protected:
 	shared_ptr<RenderTarget> _filter;
 	shared_ptr<Quad> _filterQuad;
 	shared_ptr<Quad> _mapBase;
+	shared_ptr<UI_Button> _exitButton;
 	shared_ptr<InstanceQuad> _mapBlock;
 	shared_ptr<InstanceQuad> _verticalLine;
 	shared_ptr<InstanceQuad> _horizonLine;
@@ -24,4 +25,3 @@ protected:
 	float _blinkRunTime = 0.0f;
 
 };
-

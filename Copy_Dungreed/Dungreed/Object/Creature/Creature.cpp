@@ -25,11 +25,11 @@ void Creature::Update()
 
 		MovementEvent();
 
-		_passFloor = false;
-		_passTile = false;
-
 		if (GAME->GetPlaying())
 			MoveCharacter();
+
+		_passFloor = false;
+		_passTile = false;
 	}
 
 	Object::Update();
@@ -119,17 +119,11 @@ void Creature::Attack()
 
 void Creature::MoveLeft()
 {
-	if (_canMoveLeft == false)
-		return;
-
 	_movement.x -= _status._speed;
 }
 
 void Creature::MoveRight()
 {
-	if (_canMoveRight == false)
-		return;
-
 	_movement.x += _status._speed;
 }
 
@@ -142,8 +136,6 @@ void Creature::Jump()
 void Creature::FallingEnd()
 {
 	_isFalling = false;
-	_canMoveLeft = true;
-	_canMoveRight = true;
 }
 
 void Creature::CollisionEvent()
@@ -211,12 +203,10 @@ void Creature::TileBlockCollision(shared_ptr<Tile> tile)
 	else if (_velocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
 	{
 		_texture->SetRight(tile->GetCollider()->Left() - 0.001f);
-		_canMoveRight = false;
 	}
 	else if (_velocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
 	{
 		_texture->SetLeft(tile->GetCollider()->Right() + 0.001f);
-		_canMoveLeft = false;
 	}
 	else if (_onStair)
 	{

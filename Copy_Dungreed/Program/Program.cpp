@@ -3,7 +3,7 @@
 
 Program::Program()
 {
-	_gameMode = make_shared<MapEditor>();
+	_gameMode = make_shared<Dungreed>();
 }
 
 Program::~Program()
@@ -37,6 +37,8 @@ void Program::Update()
 		_gameMode = make_shared<DebugMode>();
 	if (KEY_DOWN(VK_F8))
 		_gameMode = make_shared<Dungreed>();
+
+	//DestroyWindow(*_hwnd);
 }
 
 void Program::PreRender()
@@ -65,8 +67,6 @@ void Program::Render()
 
 void Program::PostRender()
 {
-	DirectWrite::GetInstance()->GetDC()->BeginDraw();
-
 	_gameMode->PostRender();
 }
 
@@ -123,7 +123,6 @@ void Program::RenderEnd()
 	wstring fps = L"FPS : " + to_wstring((int)Timer::GetInstance()->GetFPS());
 	RECT rect = { 0,0,100,100 };
 	DirectWrite::GetInstance()->RenderText(fps, rect);
-	DirectWrite::GetInstance()->GetDC()->EndDraw();
 
 	ImGui::End();
 	ImGui::Render();

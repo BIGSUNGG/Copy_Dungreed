@@ -101,7 +101,8 @@ void Player::MouseEvent()
 		ReverseTexture();
 	}
 
-	_weaponDirection = (MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle();
+	if(_weaponSlot[_curWeaponSlot] != nullptr)
+		_weaponDirection = (MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle();
 }
 
 void Player::MovementEvent()

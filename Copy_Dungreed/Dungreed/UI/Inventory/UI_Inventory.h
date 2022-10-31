@@ -16,6 +16,7 @@ protected:
 	shared_ptr<Quad> _invenBase;
 	vector<shared_ptr<Quad>> _curSlot;
 	vector<shared_ptr<UI_Button>> _weaponSlot;
+	vector<shared_ptr<UI_Button>> _subWeaponSlot;
 	vector<shared_ptr<UI_Button>> _accessorySlot;
 	vector<shared_ptr<UI_Button>> _itemSlot;
 	shared_ptr<UI_Button> _exitButton;

@@ -22,8 +22,6 @@ Quad::Quad(wstring file, wstring vs, wstring ps)
     _pixelShader = ADD_PS(ps);
 
     _transform = make_shared<Transform>();
-
-    assert(_size != Vector2(0, 0));
 }
 
 Quad::Quad(wstring file, Vector2 size, wstring vs, wstring ps)

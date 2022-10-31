@@ -23,6 +23,19 @@ UI_Map::UI_Map()
 	_blinkBlock = make_shared<Quad>(L"Resource/Ui/Map/Blink_Block.png");
 	_blinkBlock->GetTransform()->GetPos() = Vector2(960.f, 457.f);
 	_blinkBlock->Update();
+
+	{
+		_exitButton = make_shared<UI_Button>();
+		auto quad = make_shared<Quad>(L"Resource/Ui/Button/Exit.png");
+		auto hoverQuad = make_shared<Quad>(L"Resource/Ui/Button/Exit_Hover.png");
+		quad->SetRight(WIN_WIDTH - 36);
+		quad->SetTop(WIN_HEIGHT - 45);
+		_exitButton->SetTexture(quad);
+		_exitButton->SetHoverTexture(hoverQuad);
+		function<void()> func = []() { UI_MANAGER->SetState(UIManager::UI_State::NOMAL); };
+		_exitButton->SetKeyDownEvent(func);
+	}
+
 }
 
 void UI_Map::PreRender()
@@ -45,6 +58,7 @@ void UI_Map::Update()
 	_mapBlock->Update();
 	_verticalLine->Update();
 	_horizonLine->Update();
+	_exitButton->Update();
 }
 
 void UI_Map::Render()
@@ -58,6 +72,7 @@ void UI_Map::Render()
 	_mapBase->Render();
 	_verticalLine->Render();
 	_horizonLine->Render();
+	_exitButton->Render();
 }
 
 void UI_Map::Refresh()

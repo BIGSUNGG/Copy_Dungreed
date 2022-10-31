@@ -7,6 +7,8 @@ public:
 		NOMAL,
 		INVEN,
 		MAP,
+		OPTION,
+		SETTING,
 	};
 
 public:
@@ -49,6 +51,8 @@ private:
 	shared_ptr<UI_Info> _info;
 	shared_ptr<UI_Inventory> _inventory;
 	shared_ptr<UI_Map> _map;
+	shared_ptr<UI_Option> _select;
+	shared_ptr<UI_Setting> _setting;
 
 };
 

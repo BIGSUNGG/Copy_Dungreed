@@ -41,6 +41,8 @@ DirectWrite::~DirectWrite()
 
 void DirectWrite::RenderText(wstring text, RECT rect, float size, wstring fontPath, XMFLOAT4 color, DWRITE_FONT_WEIGHT weight, DWRITE_FONT_STYLE style, DWRITE_FONT_STRETCH stretch)
 {
+	GetDC()->BeginDraw();
+
 	FontBrushDesc brushDesc;
 	brushDesc._color = color;
 
@@ -97,5 +99,7 @@ void DirectWrite::RenderText(wstring text, RECT rect, float size, wstring fontPa
 	rectF.bottom = (float)rect.bottom;
 
 	_deviceContext->DrawTextW(text.c_str(), text.size(), findText->_format.Get(), &rectF, findBrush->_brush.Get());
+
+	GetDC()->EndDraw();
 }
 
