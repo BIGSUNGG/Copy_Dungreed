@@ -38,7 +38,6 @@ void Program::Update()
 	if (KEY_DOWN(VK_F8))
 		_gameMode = make_shared<Dungreed>();
 
-	//DestroyWindow(*_hwnd);
 }
 
 void Program::PreRender()

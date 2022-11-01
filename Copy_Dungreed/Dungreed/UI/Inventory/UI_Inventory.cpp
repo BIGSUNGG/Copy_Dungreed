@@ -155,6 +155,11 @@ UI_Inventory::UI_Inventory()
 	_weapons.resize(2, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 	_accessories.resize(4, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 	_items.resize(15, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
+
+	_coinText = make_shared<UI_Text>();
+	_coinText->SetTextSize(65.0f);
+	_coinText->SetTextStatus(UI_Text::Text_Status::RIGHT);
+	_coinText->SetPos(Vector2(WIN_WIDTH - 110, 70));
 }
 
 void UI_Inventory::Update()
@@ -226,13 +231,8 @@ void UI_Inventory::Render()
 
 	std::wstring coinText;
 	coinText += to_wstring(INVENTORY->GetGold());
-	RECT coinTextRect =
-	{
-		WIN_WIDTH - 150 - (_coinTextSize * (coinText.size() - 1) / 2)	,WIN_HEIGHT - 104,
-		WIN_WIDTH, WIN_HEIGHT
-	};
-
-	DirectWrite::GetInstance()->RenderText(coinText, coinTextRect, _coinTextSize);
+	_coinText->SetText(coinText);
+	_coinText->Render();
 }
 
 void UI_Inventory::FindTexture()

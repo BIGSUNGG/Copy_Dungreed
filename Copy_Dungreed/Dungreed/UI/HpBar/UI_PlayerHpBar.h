@@ -20,7 +20,9 @@ protected:
 	shared_ptr<Object> _dashBarGaugeMid;
 	shared_ptr<Object> _dashBarGaugeRight;
 
-	const float _hpBarTextSize = 65.0f;
+	shared_ptr<UI_Text> _hpText;
+	shared_ptr<UI_Text> _levelText;
+
 	const int _hpBarGaugeSize = 294;
 
 };

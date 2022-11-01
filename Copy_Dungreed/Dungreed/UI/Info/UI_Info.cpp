@@ -14,6 +14,13 @@ UI_Info::UI_Info()
 	_hungryIcon->SetLeft(26);
 	_hungryIcon->SetBottom(33);
 
+	_coinText = make_shared<UI_Text>();
+	_coinText->SetPos(Vector2(_coinIcon->GetTransform()->GetPos().x + 35, _coinIcon->GetTransform()->GetPos().y));
+	_coinText->SetTextSize(35);
+
+	_hungryText = make_shared<UI_Text>();
+	_hungryText->SetPos(Vector2(_hungryIcon->GetTransform()->GetPos().x + 35, _hungryIcon->GetTransform()->GetPos().y));
+	_hungryText->SetTextSize(35);
 }
 
 void UI_Info::Update()
@@ -30,23 +37,15 @@ void UI_Info::Render()
 
 	std::wstring goldText;
 	goldText += to_wstring(INVENTORY->GetGold());
-	RECT goldTextRect =
-	{
-		((_coinIcon->GetTransform()->GetPos().x + _coinIcon->GetHalfSize().x) + 26),										(WIN_HEIGHT - _coinIcon->GetTransform()->GetPos().y) + _infoTextSize / 1.9,
-		((_coinIcon->GetTransform()->GetPos().x + _coinIcon->GetHalfSize().x) + 26) + (_infoTextSize * goldText.size()),	(WIN_HEIGHT - _coinIcon->GetTransform()->GetPos().y) - _infoTextSize / 1.9
-	};
 
-	DirectWrite::GetInstance()->RenderText(goldText, goldTextRect, _infoTextSize);
+	_coinText->SetText(goldText);
+	_coinText->Render();
 
 	std::wstring hungryText;
 	hungryText += to_wstring(INVENTORY->GetCurHungry());
 	hungryText += L" / ";
 	hungryText += to_wstring(INVENTORY->GetHungryMax());
-	RECT hungryTextRect =
-	{
-		((_hungryIcon->GetTransform()->GetPos().x + _hungryIcon->GetHalfSize().x) + 15),											(WIN_HEIGHT - _hungryIcon->GetTransform()->GetPos().y) + _infoTextSize / 1.9,
-		((_hungryIcon->GetTransform()->GetPos().x + _hungryIcon->GetHalfSize().x) + 15) + (_infoTextSize * hungryText.size()),	(WIN_HEIGHT - _hungryIcon->GetTransform()->GetPos().y) - _infoTextSize / 1.9
-	};
 
-	DirectWrite::GetInstance()->RenderText(hungryText, hungryTextRect, _infoTextSize);
+	_hungryText->SetText(hungryText);
+	_hungryText->Render();
 }

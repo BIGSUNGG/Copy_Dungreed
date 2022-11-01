@@ -157,6 +157,7 @@ using namespace std;
 #include "Dungreed/UI/Component/UI_Component.h"
 #include "Dungreed/UI/Component/Button/UI_Button.h"
 #include "Dungreed/UI/Component/Slider/UI_Slider.h"
+#include "Dungreed/UI/Component/Text/UI_Text.h"
 
 #include "Dungreed/UI/HpBar/UI_PlayerHpBar.h"
 #include "Dungreed/UI/HpBar/UI_EnemyHpBar.h"

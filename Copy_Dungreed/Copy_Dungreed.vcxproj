@@ -250,6 +250,7 @@
     <ClInclude Include="Dungreed\UI\Setting\UI_Setting.h" />
     <ClInclude Include="Dungreed\UI\Component\UI_Component.h" />
     <ClInclude Include="Dungreed\UI\Component\Slider\UI_Slider.h" />
+    <ClInclude Include="Dungreed\UI\Component\Text\UI_Text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\Object\Ect\Item\Accessory\Accessory.cpp" />
@@ -345,6 +346,7 @@
     <ClCompile Include="Dungreed\UI\Setting\UI_Setting.cpp" />
     <ClCompile Include="Dungreed\UI\Component\UI_Component.cpp" />
     <ClCompile Include="Dungreed\UI\Component\Slider\UI_Slider.cpp" />
+    <ClCompile Include="Dungreed\UI\Component\Text\UI_Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

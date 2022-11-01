@@ -14,7 +14,8 @@ protected:
 	shared_ptr<Quad> _hungryGauge;
 	shared_ptr<Quad> _hungryGaugeBase;
 
-	const float _infoTextSize = 30.0f;
+	shared_ptr<UI_Text> _coinText;
+	shared_ptr<UI_Text> _hungryText;
 
 };
 

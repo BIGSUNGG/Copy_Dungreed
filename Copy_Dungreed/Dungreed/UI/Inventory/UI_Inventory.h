@@ -11,8 +11,6 @@ public:
 	virtual void MouseEvenet();
 
 protected:
-	const float _coinTextSize = 65.0f;
-
 	shared_ptr<Quad> _invenBase;
 	vector<shared_ptr<Quad>> _curSlot;
 	vector<shared_ptr<UI_Button>> _weaponSlot;
@@ -26,6 +24,8 @@ protected:
 	vector<shared_ptr<Quad>> _items;
 
 	shared_ptr<Quad> _selectedItem;
+	shared_ptr<UI_Text> _coinText;
+
 	int _type = 0;
 	int _num = 0;
 };

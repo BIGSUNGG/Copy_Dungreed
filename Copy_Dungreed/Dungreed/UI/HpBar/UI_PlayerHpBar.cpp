@@ -59,6 +59,16 @@ UI_PlayerHpBar::UI_PlayerHpBar()
 	_dashBarGaugeRight->GetObjectTexture()->SetLeft(_dashBarGaugeBaseMid->GetObjectTexture()->Right());
 	_dashBarGaugeRight->GetPos().y = WIN_HEIGHT - 150;
 	_dashBarGaugeRight->SetSpawnPos(_dashBarGaugeRight->GetPos());
+	
+	_hpText = make_shared<UI_Text>();
+	_hpText->SetPos(_hpBarGauge->GetSpawnPos());
+	_hpText->SetTextStatus(UI_Text::Text_Status::MID);
+	_hpText->SetTextSize(65);
+
+	_levelText = make_shared<UI_Text>();
+	_levelText->SetPos(Vector2(_hpBarGauge->GetSpawnPos().x - 215 , _hpBarGauge->GetSpawnPos().y));
+	_levelText->SetTextStatus(UI_Text::Text_Status::MID);
+	_levelText->SetTextSize(65);
 }
 
 void UI_PlayerHpBar::Update()
@@ -124,26 +134,24 @@ void UI_PlayerHpBar::Render()
 		hp = 0;
 
 	std::wstring hpText;
-	hpText += to_wstring(hp);
-	hpText += L" / ";
-	hpText += to_wstring(maxHp);
-	RECT hpTextRect =
-	{
-		_hpBarGauge->GetSpawnPos().x - (_hpBarTextSize * hpText.size() / 4),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) + _hpBarTextSize / 1.9,
-		_hpBarGauge->GetSpawnPos().x + (_hpBarTextSize * hpText.size()),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) - _hpBarTextSize / 1.9
-	};
+	wstring curHpText = to_wstring(hp);
+	wstring maxHpText = to_wstring(maxHp);
 
-	DirectWrite::GetInstance()->RenderText(hpText, hpTextRect, _hpBarTextSize);
+	for (int i = 0; i <maxHpText.length() - curHpText.length(); i++)
+	{
+		hpText += L" ";
+	}
+
+	hpText += curHpText;
+	hpText += L" / ";
+	hpText += maxHpText;
+	_hpText->SetText(hpText);
+	_hpText->Render();
 
 	std::wstring levelText;
 	levelText += to_wstring(INVENTORY->GetPlayerLevel());
-	RECT levelTextRect =
-	{
-		(_hpBarGauge->GetSpawnPos().x - 215) - (_hpBarTextSize * levelText.size() / 4),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) + _hpBarTextSize / 1.9,
-		(_hpBarGauge->GetSpawnPos().x - 215) + (_hpBarTextSize * levelText.size()),(WIN_HEIGHT - _hpBarGauge->GetSpawnPos().y) - _hpBarTextSize / 1.9
-	};
-
-	DirectWrite::GetInstance()->RenderText(levelText, levelTextRect, _hpBarTextSize);
+	_levelText->SetText(levelText);
+	_levelText->Render();
 
 	_dashBarGaugeBaseLeft->Render();
 	_dashBarGaugeBaseMid->Render();
