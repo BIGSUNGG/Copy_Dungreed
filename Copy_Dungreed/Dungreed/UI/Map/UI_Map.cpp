@@ -33,7 +33,7 @@ UI_Map::UI_Map()
 		_exitButton->SetTexture(quad);
 		_exitButton->SetHoverTexture(hoverQuad);
 		function<void()> func = []() { UI_MANAGER->SetState(UIManager::UI_State::NOMAL); };
-		_exitButton->SetKeyDownEvent(func);
+		_exitButton->SetKeyUpEvent(func);
 	}
 
 }

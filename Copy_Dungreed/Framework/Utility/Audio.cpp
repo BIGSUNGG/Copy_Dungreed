@@ -31,14 +31,14 @@ void Audio::Save()
 	{
 		BinaryWriter basicWriter(L"Save/Audio_Setting/AudioVolum.bin");
 
-		vector<int> basicInfo;
+		vector<float> basicInfo;
 
 		basicInfo.push_back(_audioVolume);
 		basicInfo.push_back(_bgmVolume);
 		basicInfo.push_back(_sfxVolume);
 
 		basicWriter.Uint(basicInfo.size());
-		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
+		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(float));
 	}
 }
 
@@ -49,10 +49,10 @@ void Audio::Load()
 
 		UINT size = Reader.Uint();
 
-		vector<int> graphicInfo;
+		vector<float> graphicInfo;
 		graphicInfo.resize(3);
 		void* ptr = graphicInfo.data();
-		Reader.Byte(&ptr, size * sizeof(int));
+		Reader.Byte(&ptr, size * sizeof(float));
 
 		_audioVolume = graphicInfo[0];
 		_bgmVolume = graphicInfo[1];

@@ -166,12 +166,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    int WinMode;
    {
-	   BinaryReader Reader(L"Save/Graphic_Setting/Setting.txt");
+	   BinaryReader Reader(L"Save/Graphic_Setting/Setting.bin");
 
 	   UINT size = Reader.Uint();
 
 	   vector<int> graphicInfo;
-	   graphicInfo.resize(1);
+	   graphicInfo.resize(2);
 	   void* ptr = graphicInfo.data();
 	   Reader.Byte(&ptr, size * sizeof(int));
 

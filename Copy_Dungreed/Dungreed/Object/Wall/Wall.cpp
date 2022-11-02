@@ -5,5 +5,5 @@ Wall::Wall(int level, int num)
 	: Object(level,num)
 {
 	_objectType = Object::Object_Type::WALL;
-	_instance = true;
+	_static = true;
 }

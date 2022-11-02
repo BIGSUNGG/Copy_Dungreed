@@ -13,6 +13,7 @@ public:
 	virtual void SetPos(const Vector2& pos) override;
 	virtual void SetButton(shared_ptr<UI_Button> button);
 	virtual void SetThumb(shared_ptr<Quad> texture) { _thumb = texture; }
+	virtual void SetRatio(const float& ratio);
 
 protected:
 	shared_ptr<UI_Button> _base;

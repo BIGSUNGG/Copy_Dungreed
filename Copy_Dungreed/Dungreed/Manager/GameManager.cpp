@@ -5,6 +5,7 @@ GameManager* GameManager::_instance = nullptr;
 
 GameManager::GameManager()
 {
+	_objectInScreen.resize(Object::_objectTypeCount);
 }
 
 GameManager::~GameManager()
@@ -25,13 +26,12 @@ void GameManager::Update()
 		{
 			if (object == nullptr)
 				continue;
-			else if (object->GetInstance() == true)
+
+			if (object->GetStatic() == true)
 			{
 				object->GetCollider()->SetColorGreen();
 				continue;
 			}
-
-			auto temp = objects;
 
 			object->Update();
 		}
@@ -54,9 +54,9 @@ void GameManager::Render()
 			instanceQuad->Render();
 		}
 
-		for (auto& object : _curMap->GetObjects()[i])
+		for (auto& object : _objectInScreen[i])
 		{
-			if (object == nullptr || object->GetInstance() == true)
+			if (object == nullptr || object->GetStatic() == true)
 				continue;
 
 			object->Render();
@@ -76,7 +76,7 @@ void GameManager::PostRender()
 	{
 		for (int i = Object::TILE; i < Object::UI; i++)
 		{
-			for (auto& object : _curMap->GetObjects()[i])
+			for (auto& object : _objectInScreen[i])
 			{
 				if (object == nullptr)
 					continue;
@@ -148,7 +148,7 @@ void GameManager::Instancing()
 		unordered_map<wstring, vector<shared_ptr<Transform>>> _objects;
 		for (auto& object : _curMap->GetObjects()[i])
 		{
-			if (object == nullptr || object->GetInstance() == false)
+			if (object == nullptr || object->GetStatic() == false)
 				continue;
 
 			object->Update();
@@ -342,7 +342,6 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 void GameManager::SetCurMap(shared_ptr<Map> map)
 {
 	_curMap = map;
-	_objectInScreen.clear();
 	for (auto& object : _curMap->GetObjects()[Object::ECT])
 	{
 		if(object == nullptr)
@@ -395,7 +394,6 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 void GameManager::Reset()
 {
 	_curMap = nullptr;
-	_objectInScreen.clear();
 	_debugCollider.clear();
 	_player = nullptr;
 }

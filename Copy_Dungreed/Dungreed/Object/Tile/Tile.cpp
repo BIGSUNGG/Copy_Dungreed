@@ -5,5 +5,5 @@ Tile::Tile(int level, int num)
 	: Object(level,num)
 {
 	_objectType = Object::Object_Type::TILE;
-	_instance = true;
+	_static = true;
 }

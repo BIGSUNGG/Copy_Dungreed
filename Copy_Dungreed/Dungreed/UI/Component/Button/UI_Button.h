@@ -25,6 +25,7 @@ protected:
 	shared_ptr<Collider> _collider;
 
 	bool _hover = false;
+	bool _click = false;
 	function<void()> _keyDownFunc;
 	function<void()> _keyPressFunc;
 	function<void()> _keyUpFunc;

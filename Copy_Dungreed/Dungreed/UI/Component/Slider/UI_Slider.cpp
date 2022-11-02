@@ -47,3 +47,9 @@ void UI_Slider::SetButton(shared_ptr<UI_Button> button)
 	};
 	_base->SetKeyDownEvent(keyDownfunc);
 }
+
+void UI_Slider::SetRatio(const float& ratio)
+{
+	_ratio = ratio;
+	_thumb->GetTransform()->GetPos().x = _base->GetTexture()->Left() + ((_base->GetTexture()->Right() - _base->GetTexture()->Left()) * _ratio);
+}

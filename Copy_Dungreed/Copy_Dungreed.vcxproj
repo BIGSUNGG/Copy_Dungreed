@@ -246,7 +246,7 @@
     <ClInclude Include="Dungreed\UI\Component\Button\UI_Button.h" />
     <ClInclude Include="Dungreed\UI\Inventory\UI_Inventory.h" />
     <ClInclude Include="Dungreed\UI\Map\UI_Map.h" />
-    <ClInclude Include="Dungreed\UI\Select\UI_Option.h" />
+    <ClInclude Include="Dungreed\UI\Option\UI_Option.h" />
     <ClInclude Include="Dungreed\UI\Setting\UI_Setting.h" />
     <ClInclude Include="Dungreed\UI\Component\UI_Component.h" />
     <ClInclude Include="Dungreed\UI\Component\Slider\UI_Slider.h" />
@@ -342,7 +342,7 @@
     <ClCompile Include="Dungreed\UI\Component\Button\UI_Button.cpp" />
     <ClCompile Include="Dungreed\UI\Inventory\UI_Inventory.cpp" />
     <ClCompile Include="Dungreed\UI\Map\UI_Map.cpp" />
-    <ClCompile Include="Dungreed\UI\Select\UI_Option.cpp" />
+    <ClCompile Include="Dungreed\UI\Option\UI_Option.cpp" />
     <ClCompile Include="Dungreed\UI\Setting\UI_Setting.cpp" />
     <ClCompile Include="Dungreed\UI\Component\UI_Component.cpp" />
     <ClCompile Include="Dungreed\UI\Component\Slider\UI_Slider.cpp" />

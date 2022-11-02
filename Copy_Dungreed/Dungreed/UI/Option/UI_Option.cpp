@@ -17,7 +17,7 @@ UI_Option::UI_Option()
 		_exitButton->SetTexture(quad);
 		_exitButton->SetHoverTexture(hoverQuad);
 		function<void()> func = []() { UI_MANAGER->SetState(UIManager::UI_State::NOMAL); };
-		_exitButton->SetKeyDownEvent(func);
+		_exitButton->SetKeyUpEvent(func);
 	}
 
 	{
@@ -39,7 +39,7 @@ UI_Option::UI_Option()
 		_optionButton->SetTexture(quad);
 		_optionButton->SetHoverTexture(hoverQuad);
 		function<void()> func = []() { UI_MANAGER->SetState(UIManager::UI_State::SETTING); };
-		_optionButton->SetKeyDownEvent(func);
+		_optionButton->SetKeyUpEvent(func);
 	}
 
 	{
@@ -51,7 +51,7 @@ UI_Option::UI_Option()
 		_gameExitButton->SetTexture(quad);
 		_gameExitButton->SetHoverTexture(hoverQuad);
 		function<void()> func = []() { EndProgram(); };
-		_gameExitButton->SetKeyDownEvent(func);
+		_gameExitButton->SetKeyUpEvent(func);
 	}
 }
 

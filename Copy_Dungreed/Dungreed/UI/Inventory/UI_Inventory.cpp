@@ -149,7 +149,7 @@ UI_Inventory::UI_Inventory()
 		_exitButton->SetTexture(quad);
 		_exitButton->SetHoverTexture(hoverQuad);
 		function<void()> func = []() { UI_MANAGER->SetState(UIManager::UI_State::NOMAL); };
-		_exitButton->SetKeyDownEvent(func);
+		_exitButton->SetKeyUpEvent(func);
 	}
 
 	_weapons.resize(2, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));

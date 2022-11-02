@@ -166,7 +166,7 @@ using namespace std;
 #include "Dungreed/UI/MiniMap/UI_MiniMap.h"
 #include "Dungreed/UI/Inventory/UI_Inventory.h"
 #include "Dungreed/UI/Map/UI_Map.h"
-#include "Dungreed/UI/Select/UI_Option.h"
+#include "Dungreed/UI/Option/UI_Option.h"
 #include "Dungreed/UI/Setting/UI_Setting.h"
 
 // Map

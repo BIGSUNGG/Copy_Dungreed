@@ -15,48 +15,35 @@ void GraphicManager::Save()
 {
 	Timer::GetInstance()->SetLockFPS(_fpsLimit);
 
-	int temp;
-	{
-		BinaryReader Reader(L"Save/Graphic_Setting/Setting.txt");
+	_restart = true;
+	BinaryWriter basicWriter(L"Save/Graphic_Setting/Setting.bin");
 
-		UINT size = Reader.Uint();
+	vector<int> basicInfo;
 
-		vector<int> graphicInfo;
-		graphicInfo.resize(1);
-		void* ptr = graphicInfo.data();
-		Reader.Byte(&ptr, size * sizeof(int));
+	basicInfo.push_back(_winMode);
+	basicInfo.push_back(_fpsLimit);
 
-		temp = graphicInfo[0];
-	}
-
-	if (_winMode != temp)
-	{
-		_restart = true;
-		BinaryWriter basicWriter(L"Save/Graphic_Setting/Setting.txt");
-
-		vector<int> basicInfo;
-
-		basicInfo.push_back(_winMode);
-
-		basicWriter.Uint(basicInfo.size());
-		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
-	}
+	basicWriter.Uint(basicInfo.size());
+	basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
 }
 
 void GraphicManager::Load()
 {
 	{
-		BinaryReader Reader(L"Save/Graphic_Setting/Setting.txt");
+		BinaryReader Reader(L"Save/Graphic_Setting/Setting.bin");
 
 		UINT size = Reader.Uint();
 
 		vector<int> graphicInfo;
-		graphicInfo.resize(1);
+		graphicInfo.resize(2);
 		void* ptr = graphicInfo.data();
 		Reader.Byte(&ptr, size * sizeof(int));
 
 		_winMode = graphicInfo[0];
+		_fpsLimit = graphicInfo[1];
 	}
+
+	Timer::GetInstance()->SetLockFPS(_fpsLimit);
 }
 
 void GraphicManager::ImGuiRender()
@@ -97,4 +84,18 @@ void GraphicManager::ImGuiRender()
 		ImGui::SameLine();
 		ImGui::Text("Restart Program");
 	}
+}
+
+void GraphicManager::SetWinMode(const int& mode)
+{
+	if (mode > 1 || mode < 0)
+		return;
+
+	_winMode = mode;
+}
+
+void GraphicManager::SetFpsLimit(const int& mode)
+{
+	_fpsLimit = mode;
+	Timer::GetInstance()->SetLockFPS(_fpsLimit);
 }

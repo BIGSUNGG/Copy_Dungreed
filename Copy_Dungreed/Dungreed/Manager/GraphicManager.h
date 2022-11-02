@@ -22,6 +22,12 @@ public:
 
 	void ImGuiRender();
 
+	const int& GetWinMode() { return _winMode; }
+	const int& GetFpsLimit() { return _fpsLimit; }
+
+	void SetWinMode(const int& mode);
+	void SetFpsLimit(const int& mode);
+
 private:
 	GraphicManager();
 	~GraphicManager();

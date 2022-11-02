@@ -202,13 +202,18 @@ void Creature::TileBlockCollision(shared_ptr<Tile> tile)
 	}
 	else if (_velocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
 	{
-		_texture->SetRight(tile->GetCollider()->Left() - 0.001f);
+		_texture->SetRight(tile->GetCollider()->Left());
 	}
 	else if (_velocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
 	{
-		_texture->SetLeft(tile->GetCollider()->Right() + 0.001f);
+		_texture->SetLeft(tile->GetCollider()->Right());
 	}
 	else if (_onStair)
+	{
+		_texture->SetBottom(tile->GetCollider()->Top());
+		_jumpPower = 0.0f;
+	}
+	else
 	{
 		_texture->SetBottom(tile->GetCollider()->Top());
 		_jumpPower = 0.0f;

@@ -5,7 +5,7 @@ BackGround::BackGround(int level, int num)
 	: Object(level, num)
 {
 	_objectType = Object::Object_Type::BACKGROUND;
-	_instance = false;
+	_static = false;
 }
 
 void BackGround::Update()

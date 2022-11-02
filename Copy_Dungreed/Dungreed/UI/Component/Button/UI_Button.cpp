@@ -13,18 +13,29 @@ void UI_Button::Update()
 		_hoverTexture->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 		_hoverTexture->Update();
 		_hover = true;
-		if (KEY_DOWN(VK_LBUTTON) && _keyDownFunc != nullptr)
-			_keyDownFunc();
+		if (KEY_DOWN(VK_LBUTTON))
+		{
+			_click = true;
+
+			if(_keyDownFunc != nullptr)
+				_keyDownFunc();
+		}
 		else if (KEY_PRESS(VK_LBUTTON) && _keyPressFunc != nullptr)
 			_keyPressFunc();
-		else if (KEY_UP(VK_LBUTTON) && _keyUpFunc != nullptr)
-			_keyUpFunc();
+		else if (KEY_UP(VK_LBUTTON))
+		{
+			if(_click==true && _keyUpFunc != nullptr)
+				_keyUpFunc();
+
+			_click = false;
+		}
 	}
 	else
 	{
 		_texture->Update();
 		_collider->Update();
 		_hover = false;
+		_click = false;
 	}
 }
 

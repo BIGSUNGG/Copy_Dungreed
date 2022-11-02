@@ -60,6 +60,14 @@ public:
 
 	void ImGuiRender();
 
+	const float& GetAudioVolume() { return _audioVolume; }
+	const float& GetBGMVolume() { return _bgmVolume; }
+	const float& GetSFXVolume() { return _sfxVolume; }
+
+	void SetAudioVolume(const float& volume) { _audioVolume = volume; }
+	void SetBGMVolume(const float& volume) { _bgmVolume = volume; }
+	void SetSFXVolume(const float& volume) { _sfxVolume = volume; }
+
 private:
 	Audio();
 	~Audio();
