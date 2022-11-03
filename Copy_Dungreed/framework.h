@@ -117,7 +117,7 @@ using namespace std;
 #include "Object/InstanceQuad.h"
 
 // Status
-#include "Dungreed/Struct/Status/Status.h"
+#include "Dungreed/Struct/Status/Creature_Status.h"
 #include "Dungreed/Struct/Dash/Dash_Info.h"
 
 // Object
@@ -141,6 +141,7 @@ using namespace std;
 #include "Dungreed/Object/Ect/Item/Item.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Weapon.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Melee/Melee.h"
+#include "Dungreed/Object/Ect/Item/Weapon/Melee/FireDragonKiller/Melee_FireDragonKiller.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Gun/Gun.h"
 #include "Dungreed/Object/Ect/Item/Accessory/Accessory.h"
 

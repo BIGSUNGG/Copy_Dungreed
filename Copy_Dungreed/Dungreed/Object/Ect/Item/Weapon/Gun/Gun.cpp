@@ -19,12 +19,12 @@ void Gun::Attack()
 
 	_attackDelayTime = 0.0f;
 
-	++_index;
+	++_offsetIndex;
 
-	if (_index >= _appendAngle.size())
-		_index = 0;
+	if (_offsetIndex >= _appendAngle.size())
+		_offsetIndex = 0;
 
-	shared_ptr<Bullet> _bullet = MAKE_PLAYER_BULLET(_weaponType, 0);
+	shared_ptr<Bullet> _bullet = MAKE_BULLET(_weaponType, 0);
 	_bullet->GetObjectTexture()->GetTransform()->GetPos() = _springArm->GetWorldPos();
 	_bullet->GetObjectTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 	
@@ -70,7 +70,7 @@ void Gun::SetWeapon()
 				_offset.x *= -1;
 				_reversed = true;
 			}
-			angle = _showDirection + (_appendAngle[_index] * PI);
+			angle = _showDirection + (_appendAngle[_offsetIndex] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
@@ -81,7 +81,7 @@ void Gun::SetWeapon()
 				_offset.x *= -1;
 				_reversed = false;
 			}
-			angle = _showDirection - (_appendAngle[_index] * PI);
+			angle = _showDirection - (_appendAngle[_offsetIndex] * PI);
 			_springArm->GetAngle() = angle;
 		}
 

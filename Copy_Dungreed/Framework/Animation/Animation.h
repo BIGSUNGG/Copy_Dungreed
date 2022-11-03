@@ -17,8 +17,8 @@ public:
 
 	void ChangeAnimation(int state, bool force = false);
 	void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
-	void SetBeforeChangeFunc(function<void(shared_ptr<Quad>)> func) { _beforeChange = func; }
-	void SetAfterChangeFunc(function<void(shared_ptr<Quad>)> func) { _afterChange = func; }
+	void SetBeforeChangeFunc(function<void()> func) { _beforeChange = func; }
+	void SetAfterChangeFunc(function<void()> func) { _afterChange = func; }
 
 	bool& GetRefreshSize() { return _refreshSize; }
 	bool& GetIsPlaying() { return _isPlaying; }
@@ -28,9 +28,12 @@ public:
 	unordered_map<int, vector<float>>   _animSpeed;
 	unordered_map<int, Anim_State>		_animState;
 
+protected:
+	void ChangeImage();
+
 private:
-	function<void(shared_ptr<Quad>)> _beforeChange;
-	function<void(shared_ptr<Quad>)> _afterChange;
+	function<void()> _beforeChange;
+	function<void()> _afterChange;
 
 	shared_ptr<Quad> _texture;
 	pair<int, int> _index = { 0,0 };

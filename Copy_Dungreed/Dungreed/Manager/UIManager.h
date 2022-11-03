@@ -44,6 +44,8 @@ private:
 	shared_ptr<RenderTarget> _filter;
 	shared_ptr<Quad> _filterQuad;
 
+	vector<shared_ptr<UI>> _ui;
+
 	shared_ptr<UI_MiniMap> _miniMap;
 	shared_ptr<UI_PlayerHpBar> _playerHpBar;
 	shared_ptr<UI_EnemyHpBar> _enemyHpBar;

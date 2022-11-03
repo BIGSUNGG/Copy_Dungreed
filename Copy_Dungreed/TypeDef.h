@@ -47,7 +47,7 @@
 #define MAKE_PLAYER(num) ObjectManager::GetInstance()->GetPlayer(num)
 #define MAKE_CREATURE(level,num) ObjectManager::GetInstance()->GetCreature(level,num)
 
-#define MAKE_PLAYER_BULLET(type,num) ObjectManager::GetInstance()->GetPlayerBullet(type,num)
+#define MAKE_BULLET(type,num) ObjectManager::GetInstance()->GetBullet(type,num)
 
 #define MAKE_PLAYER_EFFECT(num) ObjectManager::GetInstance()->GetPlayerEffect(num)
 #define MAKE_CREATURE_EFFECT(type,num) ObjectManager::GetInstance()->GetCreatureEffect(type,num)
@@ -55,6 +55,7 @@
 
 #define MAKE_ITEM(type,num) ObjectManager::GetInstance()->GetItem(type,num)
 #define MAKE_PLAYER_WEAPON(type,num) ObjectManager::GetInstance()->GetPlayerWeapon(type,num)
+#define MAKE_MONSTER_WEAPON(type,num) ObjectManager::GetInstance()->GetEnemyWeapon(type,num)
 
 #define CAMERA Camera::GetInstance()
 

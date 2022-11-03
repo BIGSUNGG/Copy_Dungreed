@@ -26,7 +26,7 @@ public:
 	shared_ptr<Player> GetPlayer(int num);
 	shared_ptr<Creature> GetCreature(int level, int num);
 
-	shared_ptr<Bullet> GetPlayerBullet(int type, int num);
+	shared_ptr<Bullet> GetBullet(int type, int num);
 	shared_ptr<Weapon> GetPlayerWeapon(int type, int num);
 	shared_ptr<Weapon> GetEnemyWeapon(int type, int num);
 

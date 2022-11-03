@@ -37,7 +37,6 @@ public:
 	const int& GetNum() { return _num; }
 	const int& GetLevel() { return _level; }
 	const bool& GetStatic() { return _static; }
-	const bool& GetPlayingAnim() { return _playingAnim; }
 	const bool& GetReversed() { return _reversed; }
 	const bool& GetIsActive() { return _isActive; }
 	const Object_Type& GetType() { return _objectType; }
@@ -58,7 +57,6 @@ protected:
 	shared_ptr<Quad> _texture;
 	shared_ptr<RectCollider> _collider;
 	shared_ptr<Animation> _anim;
-	bool _playingAnim = false;
 	shared_ptr<ObjectBuffer> _buffer;
 
 	int _level = 0;

@@ -27,3 +27,9 @@ void Item::SetOwner(shared_ptr<Creature> owner)
 {
 	_owner = owner;
 }
+
+void Item::SetHudTexture(const wstring& image)
+{
+	_hudTexture = make_shared<Quad>(image);
+	_hudTexture->Update();
+}

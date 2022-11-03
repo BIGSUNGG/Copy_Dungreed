@@ -1,9 +1,9 @@
 #pragma once
-struct Status
+struct Creature_Status
 {
 public:
-	Status();
-	~Status();
+	Creature_Status();
+	~Creature_Status();
 
 	void SetMaxHp(int maxHp);
 	float GetHpRatio() const { return (float)_hp / (float)_hpMax; }

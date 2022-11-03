@@ -43,8 +43,8 @@ void UIManager::Update()
 void UIManager::PreRender()
 {
 	_filter->Set();
-	_miniMap->PreRender();
-	_map->PreRender();
+	for (auto& ui : _ui)
+		ui->PreRender();
 }
 
 void UIManager::PostRender()
@@ -85,9 +85,8 @@ void UIManager::PostRender()
 
 void UIManager::Refresh()
 {
-	_miniMap->Refresh();
-	_enemyHpBar->Refresh();
-	_map->Refresh();
+	for (auto& ui : _ui)
+		ui->Refresh();
 }
 
 void UIManager::SetState(const UI_State& state)
@@ -136,6 +135,17 @@ UIManager::UIManager()
 	_map = make_shared<UI_Map>();
 	_select = make_shared<UI_Option>();
 	_setting = make_shared<UI_Setting>();
+
+	_ui.emplace_back(_playerHpBar);
+	_ui.emplace_back(_enemyHpBar);
+	_ui.emplace_back(_weaponSlot);
+	_ui.emplace_back(_info);
+	_ui.emplace_back(_miniMap);
+	_ui.emplace_back(_inventory);
+	_ui.emplace_back(_map);
+	_ui.emplace_back(_select);
+	_ui.emplace_back(_setting);
+
 }
 
 UIManager::~UIManager()

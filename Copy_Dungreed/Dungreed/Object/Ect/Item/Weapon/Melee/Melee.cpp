@@ -19,10 +19,10 @@ void Melee::Attack()
 
 	_attackDelayTime = 0.0f;
 
-	++_index;
+	++_offsetIndex;
 
-	if (_index >= _appendAngle.size())
-		_index = 0;
+	if (_offsetIndex >= _appendAngle.size())
+		_offsetIndex = 0;
 
 	Weapon::Attack();
 }
@@ -32,9 +32,18 @@ void Melee::CheckAttack()
 	AttackEffect();
 
 	shared_ptr<Collider> _attack = make_shared<RectCollider>(_attackRange);
-	_attack->GetTransform()->GetPos() = _springArm->GetWorldPos();
-	_attack->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
+
+	float angle = _showDirection / PI;
+	Vector2 direction = { 1.0f,tan(_showDirection) };
+
+	if (angle > 0.5f || angle < -0.5f)
+		direction *= -1;
+
+	direction.Normalize();	
+	_attack->GetTransform()->GetPos() = _owner.lock()->GetPos() + (direction * _attackRange.x);
+	_attack->GetTransform()->GetAngle() = _showDirection;
 	_attack->Update();
+	GAME->AddDebugCollider(_attack);
 
 	vector<shared_ptr<Object>> _collisions = GAME->GetCollisions(_attack, Object::Object_Type::CREATURE);
 	for (auto& enemy : _collisions)
@@ -82,7 +91,7 @@ void Melee::SetWeapon()
 				_reversed = true;
 			}
 			_texture->GetTransform()->GetPos().y = -_weaponLength;
-			angle = _showDirection + (_appendAngle[_index] * PI);
+			angle = _showDirection + (_appendAngle[_offsetIndex] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
@@ -94,7 +103,7 @@ void Melee::SetWeapon()
 				_reversed = false;
 			}
 			_texture->GetTransform()->GetPos().y = _weaponLength;
-			angle = _showDirection - (_appendAngle[_index] * PI);
+			angle = _showDirection - (_appendAngle[_offsetIndex] * PI);
 			_springArm->GetAngle() = angle;
 		}
 

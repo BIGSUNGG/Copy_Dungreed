@@ -19,6 +19,26 @@ UI_WeaponSlot::UI_WeaponSlot()
 	_weaponSlot2->SetSpawnPos(_weaponSlot2->GetPos());
 
 	_curWeapon = make_shared<Quad>(L"EMPTY",Vector2(0,0));
+
+	_weaponSkillRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
+	float color[4] = { 0,0,0,0.3f };
+	_weaponSkillRtv->Color(color);
+
+
+	_weaponSkillBase = make_shared<Quad>(L"Resource/Ui/WeaponSlot/Weapon_Skill.png");
+	_weaponSkillBase->GetTransform()->GetPos().y = _weaponSlot1->GetSpawnPos().y;
+	_weaponSkillBase->GetTransform()->GetPos().x = _weaponSlot1->GetSpawnPos().x - 325.f;
+	_weaponSkillBase->Update();
+
+	_weaponSkillIcon = make_shared<Quad>(L"EMPTY", Vector2(0, 0));
+	_weaponSkillIcon->GetTransform()->GetPos() = _weaponSkillBase->GetTransform()->GetPos();
+	_weaponSkillIcon->Update();
+
+	_weaponSkillCoolTime = make_shared<Quad>(L"Skill_Cool_Time", Vector2(_weaponSkillBase->GetSize()));
+	shared_ptr<Texture> texture = Texture::Add(L"MiniMap_Base_Texture", _weaponSkillRtv->GetSRV());
+	_weaponSkillCoolTime->SetTexture(texture);
+	_weaponSkillCoolTime->GetTransform()->GetPos() = _weaponSkillBase->GetTransform()->GetPos();
+	_weaponSkillCoolTime->Update();
 }
 
 void UI_WeaponSlot::Update()
@@ -39,9 +59,9 @@ void UI_WeaponSlot::Update()
 
 	if (INVENTORY->GetCurWeapon() != nullptr)
 	{
-		if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile())
+		if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetHudTexture()->GetImageFile())
 		{
-			_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetObjectTexture()->GetImageFile());
+			_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetHudTexture()->GetImageFile());
 			_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
 			switch (INVENTORY->GetCurWeapon()->GetWeaponType())
 			{
@@ -64,6 +84,25 @@ void UI_WeaponSlot::Update()
 		_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
 		_curWeapon->Update();
 	}
+
+	if (INVENTORY->GetCurWeapon() != nullptr && INVENTORY->GetCurWeapon()->GetSkillHuiTexture() != nullptr)
+	{
+		if (_weaponSkillIcon->GetImageFile() != INVENTORY->GetCurWeapon()->GetSkillHuiTexture()->GetImageFile())
+		{
+			_weaponSkillIcon->SetTexture(INVENTORY->GetCurWeapon()->GetSkillHuiTexture()->GetImageFile());
+			_weaponSkillIcon->Refresh();
+			_weaponSkillIcon->Update();
+		}
+		_weaponSkillCoolTime->GetTransform()->GetScale().x = abs(INVENTORY->GetCurWeapon()->GetSkillCoolTimeRatio() - 1.f);
+		_weaponSkillCoolTime->SetLeft(_weaponSkillBase->Left());
+		_weaponSkillCoolTime->Update();
+	}
+
+}
+
+void UI_WeaponSlot::PreRender()
+{
+	_weaponSkillRtv->Set();
 }
 
 void UI_WeaponSlot::Render()
@@ -80,4 +119,12 @@ void UI_WeaponSlot::Render()
 	}
 
 	_curWeapon->Render();
+
+	if (INVENTORY->GetCurWeapon() != nullptr && INVENTORY->GetCurWeapon()->GetSkillHuiTexture() != nullptr)
+	{
+		_weaponSkillBase->Render();
+		_weaponSkillIcon->Render();
+		_weaponSkillCoolTime->Render();
+	}
+
 }

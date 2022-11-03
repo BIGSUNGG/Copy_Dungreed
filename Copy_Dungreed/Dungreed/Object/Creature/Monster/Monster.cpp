@@ -69,12 +69,12 @@ void Monster::SetTarget(shared_ptr<Creature> target)
 	SpawnEffect();
 }
 
-bool Monster::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+float Monster::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
 	if(_spawn == false)
 		return false;
 
-	const bool& damaged = Creature::GetDamage(enemy, weapon);
+	const float& damaged = Creature::GetDamage(enemy, weapon);
 
 	if (_status._hp > 0)
 	{

@@ -34,11 +34,8 @@ void Creature::Update()
 
 	Object::Update();
 
-	for (auto& weapon : _weaponSlot)
-	{
-		if (weapon != nullptr)
-			weapon->Update();
-	}
+	if (_weaponSlot[_curWeaponSlot] != nullptr)
+		_weaponSlot[_curWeaponSlot]->Update();
 }
 
 void Creature::Render()
@@ -66,22 +63,23 @@ void Creature::PostRender()
 		_weaponSlot[_curWeaponSlot]->PostRender();
 }
 
-bool Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+float Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
-	_status._hp -= enemy->GetStatus()._atk;
+	float damage = enemy->GetStatus()._atk;
+	_status._hp -= damage;
 
 	if (_status._hp <= 0)
 		Death();
 
 	_damagedRunTime = 0.0f;
 
-	return true;
+	return damage;
 }
 
-bool Creature::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
+float Creature::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
 {
-	bool attackSuccess = target->GetDamage(shared_from_this(),weapon);
-	return attackSuccess;
+	float attackDamage = target->GetDamage(shared_from_this(),weapon);
+	return attackDamage;
 }
 
 void Creature::MoveCharacter()
@@ -114,7 +112,15 @@ void Creature::Attack()
 	if (_weaponSlot[_curWeaponSlot] != nullptr)
 		_weaponSlot[_curWeaponSlot]->Attack();
 
-	_anim->ChangeAnimation(Creature_State::ATTACK);
+	_anim->ChangeAnimation(Creature::Creature_State::ATTACK);
+}
+
+void Creature::Skill()
+{
+	if (_weaponSlot[_curWeaponSlot] != nullptr)
+		_weaponSlot[_curWeaponSlot]->Skill();
+
+	_anim->ChangeAnimation(Creature::Creature_State::SKILL);
 }
 
 void Creature::MoveLeft()

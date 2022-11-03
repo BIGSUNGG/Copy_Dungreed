@@ -24,7 +24,7 @@ void Bullet::Update()
 	if (_runTime >= _runTimeMax)
 		DestroyEvent();
 
-	if (_anim != nullptr && _playingAnim)
+	if (_anim != nullptr)
 		_anim->Update();
 
 	_texture->GetTransform()->GetPos() += (_direction * (_speed * DELTA_TIME));
@@ -44,15 +44,22 @@ void Bullet::Attack()
 	vector<shared_ptr<Object>> _collisions = GAME->GetCollisions(_collider, Object::Object_Type::CREATURE);
 	for (auto& enemy : _collisions)
 	{
+		if (_attacked[enemy] == true)
+			continue;
+
 		if (enemy != _weapon.lock()->GetOwner())
 		{
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
-			// TODO : 매개변수 제대로 된 값 넣어주기
 			bool attackSuccess = _weapon.lock()->GiveDamage(creature);
 			if(attackSuccess)
 			{
-				DestroyEvent();
-				return;
+				--_hitCount;
+				_attacked[enemy] = true;
+				if (_hitCount <= 0)
+				{
+					DestroyEvent();
+					return;
+				}
 			}
 		}
 	}
@@ -75,9 +82,9 @@ void Bullet::DestroyEvent()
 		effect->GetObjectTexture()->GetTransform()->GetAngle() = _texture->GetTransform()->GetAngle();
 
 		Vector2 direction = _direction;
-		effect->GetAnimation()->SetBeforeChangeFunc([=](shared_ptr<Quad> quad) {quad->GetTransform()->GetPos() -= (direction * quad->GetHalfSize().y); });
-		effect->GetAnimation()->SetAfterChangeFunc([=](shared_ptr<Quad> quad) {quad->GetTransform()->GetPos() += (direction * quad->GetHalfSize().y); });
+		effect->GetAnimation()->SetBeforeChangeFunc([=]() {effect->GetObjectTexture()->GetTransform()->GetPos() -= (direction * effect->GetObjectTexture()->GetHalfSize().y); });
+		effect->GetAnimation()->SetAfterChangeFunc([=]() {effect->GetObjectTexture()->GetTransform()->GetPos() += (direction * effect->GetObjectTexture()->GetHalfSize().y); });
 
-		GAME->AddEffect(effect);
+		GAME->AddEffect(effect); 
 	}
 }

@@ -40,12 +40,12 @@ void Player::Update()
 	Creature::Update();
 }
 
-bool Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+float Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
 	if (_buffer->_data.selected == 2)
 		return false;
 
-	const bool& damaged = Creature::GetDamage(enemy, weapon);
+	const bool& damage = Creature::GetDamage(enemy, weapon);
 
 	if (_status._hp > 0)
 	{
@@ -53,7 +53,7 @@ bool Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 		_buffer->_data.value4 = 0.5f;
 	}
 
-	return damaged;
+	return damage;
 }
 
 void Player::DustEffect()

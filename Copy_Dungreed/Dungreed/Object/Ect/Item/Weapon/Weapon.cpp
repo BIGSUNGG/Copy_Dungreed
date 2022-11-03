@@ -9,6 +9,7 @@ Weapon::Weapon(int level, int num)
 
 void Weapon::Update()
 {
+	_skillRuntime += DELTA_TIME;
 	_attackDelayTime += DELTA_TIME;
 	if (_attacked)
 	{
@@ -45,14 +46,39 @@ void Weapon::CheckAttack()
 
 void Weapon::Skill()
 {
+	if (_skillRuntime < _skillDelay)
+		return;
+	_skillRuntime = 0.f;
+
+	_skill();
+
+	if (_anim != nullptr)
+		_anim->ChangeAnimation(Item::Item_State::SKILL);
 }
 
-void Weapon::Damaged(const Status& status)
+void Weapon::Damaged(const Creature_Status& status)
 {
+}
+
+float Weapon::GetSkillCoolTimeRatio()
+{
+	float ratio = _skillRuntime / _skillDelay;
+	if (ratio > 1)
+		ratio = 1;
+
+	return ratio;
 }
 
 void Weapon::AttackEffect()
 {
+}
+
+void Weapon::AddOffsetIndex(const int& num)
+{
+	_offsetIndex += num;
+
+	if (_offsetIndex >= _appendAngle.size())
+		_offsetIndex -= _appendAngle.size();
 }
 
 void Weapon::SetWeapon()
@@ -78,4 +104,16 @@ void Weapon::SetOwner(shared_ptr<Creature> owner)
 	_texture->GetTransform()->SetParent(_springArm);
 
 	_weaponLength = _texture->GetHalfSize().y;
+}
+
+void Weapon::SetSkill(function<void()> skill, const wstring& image)
+{
+	_skill = skill;
+	_skillHudTexture = make_shared<Quad>(image);
+}
+
+void Weapon::SetSkillDelay(const float& delay)
+{
+	_skillDelay = delay;
+	_skillRuntime = delay;
 }

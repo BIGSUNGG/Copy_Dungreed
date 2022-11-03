@@ -30,17 +30,20 @@ public:
 
 	virtual void Attack() abstract;
 	virtual void Skill() abstract;
-	virtual void Damaged(const Status& status) abstract;
+	virtual void Damaged(const Creature_Status& status) abstract;
 
 	virtual void SetOwner(shared_ptr<Creature> owner);
+	void SetHudTexture(const wstring& image);
 
+	shared_ptr<Quad> GetHudTexture() { return _hudTexture; }
 	const shared_ptr<Creature> GetOwner() { return _owner.lock(); }
 	const Item_Type& GetItemType() { return _itemType; }
 
 protected:
 	weak_ptr<Creature> _owner;
+	shared_ptr<Quad> _hudTexture;
 
-	Status _status;
+	Creature_Status _status;
 
 	Item_Type _itemType = ACCESSORY;
 };

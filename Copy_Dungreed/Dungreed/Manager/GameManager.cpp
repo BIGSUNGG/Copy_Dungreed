@@ -63,27 +63,27 @@ void GameManager::Render()
 		}
 	}
 
-
-	for (auto& collider : _debugCollider)
-	{
-		collider->Render();
-	}
 }
 
 void GameManager::PostRender()
 {
-	if (_renderCollider)
-	{
-		for (int i = Object::TILE; i < Object::UI; i++)
-		{
-			for (auto& object : _objectInScreen[i])
-			{
-				if (object == nullptr)
-					continue;
+	if (_renderCollider == false)
+		return;
 
-				object->PostRender();
-			}
+	for (int i = Object::TILE; i < Object::UI; i++)
+	{
+		for (auto& object : _objectInScreen[i])
+		{
+			if (object == nullptr)
+				continue;
+
+			object->PostRender();
 		}
+	}
+
+	for (auto& collider : _debugCollider)
+	{
+		collider->Render();
 	}
 }
 
@@ -192,10 +192,12 @@ void GameManager::Input()
 			_player->MoveLeft();
 		if (KEY_PRESS('D'))
 			_player->MoveRight();
-		if (KEY_DOWN(VK_LBUTTON))
+		if (KEY_PRESS(VK_LBUTTON))
 			_player->Attack();
 		if (KEY_DOWN(VK_RBUTTON))
 			_player->Dash();
+		if (KEY_DOWN('Q'))
+			_player->Skill();
 
 		_player->MouseEvent();
 	}

@@ -153,6 +153,13 @@ float Vector2::Angle(const Vector2& value)
     return acos(cos);
 }
 
+void Vector2::Reverse()
+{
+    float temp = x;
+    x = y;
+    y = temp;
+}
+
 Vector2 Vector2::TransformCoord(const Vector2& vector, const XMMATRIX& matrix)
 {
     XMVECTOR temp = XMLoadFloat2(&vector);

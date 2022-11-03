@@ -976,9 +976,36 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 			effect->SetAnimation();
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(4, 0.1f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
-			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/SwingFX00.png");
-			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/SwingFX01.png");
-			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/SwingFX02.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/BasicSword/SwingFX00.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/BasicSword/SwingFX01.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/BasicSword/SwingFX02.png");
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		case 1:
+			effect->SetAnimation();
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.1f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX01.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX02.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX03.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX04.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX05.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX06.png");
+			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		case 2:
+			effect->SetAnimation();
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(8, 0.1f);
+			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
+			effect->GetAnimation()->GetRefreshSize() = true;
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX00.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX01.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX02.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX03.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX04.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX05.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX06.png");
+			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX07.png");
 			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		default:
@@ -1052,7 +1079,7 @@ shared_ptr<Effect> ObjectManager::GetEnemyWeaponEffect(int type, int num)
 	return effect;
 }
 
-shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
+shared_ptr<Bullet> ObjectManager::GetBullet(int type, int num)
 {
 	shared_ptr<Bullet> bullet;
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
@@ -1061,6 +1088,29 @@ shared_ptr<Bullet> ObjectManager::GetPlayerBullet(int type, int num)
 	switch (type)
 	{
 	case Weapon::MELEE:
+		switch (num)
+		{
+		case 0:
+			break;
+		case 2:
+			bullet = make_shared<Bullet>(type, num);
+			bullet->SetDestroyTime(2.f);
+			bullet->SetHitCount(INT_MAX);
+
+			bullet->SetAnimation();
+			bullet->GetAnimation()->GetRefreshSize() = true;
+			bullet->GetAnimation()->_animSpeed[BASIC] = vector<float>(5, 0.05f);
+			bullet->GetAnimation()->_animState[BASIC] = Animation::Anim_State::LOOP;
+			bullet->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosAuror00.png");
+			bullet->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosAuror01.png");
+			bullet->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosAuror02.png");
+			bullet->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosAuror03.png");
+			bullet->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosAuror04.png");
+			texture = make_shared<Quad>(bullet->GetAnimation()->_animList[BASIC][BASIC]);
+			break;
+		default:
+			break;
+		}
 		break;
 	case Weapon::GUN:
 		switch (num)
@@ -1097,7 +1147,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 {
 	shared_ptr<Weapon> weapon;
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
-	function<shared_ptr<Effect>()> func;
+	function<shared_ptr<Effect>()> effect;
+	function<void()> skill;
 
 	switch (type)
 	{
@@ -1106,13 +1157,82 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		{
 		case 0:
 			weapon = make_shared<Melee>(type,num);
-			func = bind(&ObjectManager::GetPlayerWeaponEffect, this, 0, 0);
-			weapon->SetAttackRange({ 120,84 });
-			weapon->SetAttackEffect(func);
+			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
+			weapon->SetAttackRange({ 84,120 });
+			weapon->SetAttackEffect(effect);
 			weapon->SetAppendAngle({ -0.1f,1.2f });
-			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword_New.png");
+			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword/BasicShortSword_New.png");
 			SOUND->Add("swing2", "Resource/Sound/Weapon/Swing/swing2.wav");
 			weapon->SetAttackSound("swing2");
+			weapon->SetHudTexture(L"Resource/Weapon/Melee/BasicShortSword/BasicShortSword_New.png");
+			break;
+		case 1:
+			weapon = make_shared<Melee_FireDragonKiller>(type, num);
+			texture = make_shared<Quad>(L"Resource/Weapon/Melee/FireDragonKiller/FireDragonKiller.png");
+			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
+			weapon->SetHudTexture(L"Resource/Weapon/Melee/FireDragonKiller/FireDragonKiller.png");
+			weapon->SetAttackEffect(effect);
+			weapon->SetAttackRange({ 130,180 });
+			weapon->SetAppendAngle({ -0.1f,1.2f });
+			weapon->SetAttackDelay(0.75f);
+			break;
+		case 2:
+			weapon = make_shared<Melee>(type, num);
+			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
+			weapon->SetAttackRange({ 130,180 });
+			weapon->SetAttackDelay(0.25f);
+			weapon->SetAttackEffect(effect);
+			weapon->SetAppendAngle({ -0.1f,1.2f });
+			weapon->SetAnimation();
+			weapon->GetAnimation()->_animSpeed[Item::Item_State::IDLE] = vector<float>(12, 0.1f);
+			weapon->GetAnimation()->_animState[Item::Item_State::IDLE] = Animation::Anim_State::LOOP;
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword01.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword02.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword03.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword04.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword05.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword06.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword07.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword08.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword09.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword10.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword11.png");
+
+			weapon->GetAnimation()->_animSpeed[Item::Item_State::SKILL] = vector<float>(3, 0.1f);
+			weapon->GetAnimation()->_animState[Item::Item_State::SKILL] = Animation::Anim_State::END;
+			weapon->GetAnimation()->_animList[Item::Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill00.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill01.png");
+			weapon->GetAnimation()->_animList[Item::Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill02.png");
+
+			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[Item::Item_State::IDLE][BASIC]);
+			SOUND->Add("CosmicDash", "Resource/Sound/Weapon/Swing/CosmicDash.wav");
+			weapon->SetAttackSound("CosmicDash");
+			weapon->SetHudTexture(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
+
+			skill = [=]() {
+				SOUND->Play("CosmicDash");
+				weapon->AddOffsetIndex(1);
+
+				shared_ptr<Bullet> _bullet = MAKE_BULLET(type, num);
+				_bullet->GetObjectTexture()->GetTransform()->GetPos() = weapon->GetSpringArm()->GetWorldPos();
+				_bullet->GetObjectTexture()->GetTransform()->GetAngle() = weapon->GetShowDirection() - (0.5f * PI);
+
+				float angle = weapon->GetShowDirection() / PI;
+				Vector2 direction = { 1.0f,tan(weapon->GetShowDirection()) };
+
+				if (angle > 0.5f || angle < -0.5f)
+					direction *= -1;
+
+				direction.Normalize();
+
+				_bullet->SetDirection(direction);
+				_bullet->SetSpeed(2500.0f);
+				_bullet->SetOwner(weapon);
+
+				GAME->AddEctObject(_bullet);
+			};
+			weapon->SetSkill(skill, L"Resource/Skill/Skill_CosmosSwordAuror.png");
 			break;
 		default:
 			break;
@@ -1124,6 +1244,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		case 0:
 			weapon = make_shared<Gun>(type,num);
 			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
+			weapon->SetHudTexture(L"Resource/Weapon/Gun/MiniCrossbow2.png");
 			weapon->SetAttackDelay(0.5f);
 			SOUND->Add("crossbow", "Resource/Sound/Weapon/Fire/crossbow.wav");
 			weapon->SetAttackSound("crossbow");
@@ -1166,7 +1287,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->SetOffset({ 70,-55 });
 			weapon->SetAppendAngle({ 0.f });
 			weapon->SetGiveDamageDelay(0.8f);
-			weapon->SetAttackRange({ 100,100 });
+			weapon->SetAttackRange({ 70, 100});
 
 			weapon->SetAnimation();
 			weapon->GetAnimation()->GetRefreshSize() = true;
@@ -1191,6 +1312,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword10.png");
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword11.png");
 
+			weapon->SetHudTexture(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 1:
@@ -1199,7 +1321,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->SetOffset({ 45,-55 });
 			weapon->SetAppendAngle({ 0.f });
 			weapon->SetGiveDamageDelay(0.7f);
-			weapon->SetAttackRange({ 150,150 });
+			weapon->SetAttackRange({ 100,150 });
 
 			weapon->SetAnimation();
 			weapon->GetAnimation()->GetRefreshSize() = true;
@@ -1227,6 +1349,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword13.png");
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword14.png");
 
+			weapon->SetHudTexture(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		default:

@@ -203,6 +203,7 @@
     <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\LockDoor.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.h" />
+    <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Melee\FireDragonKiller\Melee_FireDragonKiller.h" />
     <ClInclude Include="Object\InstanceQuad.h" />
     <ClInclude Include="Object\Quad.h" />
     <ClInclude Include="Framework\State\BlendState.h" />
@@ -225,7 +226,7 @@
     <ClInclude Include="Framework\State\StateManager.h" />
     <ClInclude Include="Framework\Render\Shader.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
-    <ClInclude Include="Dungreed\Struct\Status\Status.h" />
+    <ClInclude Include="Dungreed\Struct\Status\Creature_Status.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
@@ -295,6 +296,7 @@
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\LockDoor.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\Ghost\Ghost.cpp" />
+    <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Melee\FireDragonKiller\Melee_FireDragonKiller.cpp" />
     <ClCompile Include="Object\InstanceQuad.cpp" />
     <ClCompile Include="Object\Quad.cpp" />
     <ClCompile Include="Framework\State\BlendState.cpp" />
@@ -331,7 +333,7 @@
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Weapon.cpp" />
-    <ClCompile Include="Dungreed\Struct\Status\Status.cpp" />
+    <ClCompile Include="Dungreed\Struct\Status\Creature_Status.cpp" />
     <ClCompile Include="Framework\Render\RenderTarget.cpp" />
     <ClCompile Include="Dungreed\Manager\UIManager.cpp" />
     <ClCompile Include="Dungreed\UI\UI.cpp" />

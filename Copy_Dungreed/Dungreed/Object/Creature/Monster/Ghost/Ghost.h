@@ -16,7 +16,7 @@ protected:
 
 protected:
 	float _targetDistance = 20.0f;
-	float _targetAttackDistance = 200.0f;
+	float _targetAttackDistance = 150.0f;
 
 	Vector2 _attackDirection = { 0,0 };
 	bool _attack = false;

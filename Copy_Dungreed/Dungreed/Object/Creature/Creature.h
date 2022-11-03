@@ -17,7 +17,7 @@ public:
 		RUN,
 		JUMP,
 		DIE,
-		CHARGE
+		SKILL,
 	};
 
 public:
@@ -27,19 +27,18 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-	virtual bool GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon);
-	virtual bool GiveDamage(shared_ptr<Creature> target , shared_ptr<Item> weapon = nullptr);
+	virtual float GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon);
+	virtual float GiveDamage(shared_ptr<Creature> target , shared_ptr<Item> weapon = nullptr);
 
 	const bool& GetIsFalling() { return _isFalling; }
 	const Vector2& GetVelocity() { return _velocity; }
-	const Status& GetStatus() { return _status; }
+	const Creature_Status& GetStatus() { return _status; }
 	const Vector2& GetBeforeMovePos() { return _beforeMove; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 
 	virtual void AddItem(shared_ptr<Item> weapon);
 	virtual void SetSpawnPos(Vector2 pos) override;
 	
-protected:
 	virtual void CollisionEvent();
 
 	virtual void TileCollison(shared_ptr<Tile> tile);
@@ -50,14 +49,17 @@ protected:
 
 	virtual void MovementEvent() {}
 	virtual void MoveCharacter();
+	virtual void FallingEnd();
 	virtual void Death();
+
+public:
 	virtual void Attack();
+	virtual void Skill();
 
 	virtual void MoveLeft();
 	virtual void MoveRight();
 	virtual void Jump();
 
-	virtual void FallingEnd();
 
 protected:
 	Creature_Type _creatureType = ENEMY;
@@ -71,7 +73,7 @@ protected:
 	Vector2 _beforeMove;
 	Vector2 _velocity = { 0,0 };
 
-	Status _status;
+	Creature_Status _status;
 
 	float _jumpPower = 0.0f;
 	float _jumpPowerMax = 1800.0f;

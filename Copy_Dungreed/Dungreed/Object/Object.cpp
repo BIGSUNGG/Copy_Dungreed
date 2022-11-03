@@ -10,7 +10,7 @@ Object::Object(int level, int num)
 
 void Object::Update()
 {
-	if (_anim != nullptr && _playingAnim)
+	if (_anim != nullptr)
 		_anim->Update();
 
 	_texture->Update();
@@ -64,7 +64,6 @@ void Object::SetCollider(shared_ptr<RectCollider> collider)
 void Object::SetAnimation()
 {
 	_anim = make_shared<Animation>();
-	_playingAnim = true;
 }
 
 void Object::SetTexture(shared_ptr<Quad> texture)
