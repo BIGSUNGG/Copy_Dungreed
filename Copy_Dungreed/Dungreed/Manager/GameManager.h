@@ -36,7 +36,7 @@ public:
 	void AddEffect(shared_ptr<Effect> effect);
 	void AddPlayer(shared_ptr<Player> player);
 	void AddEctObject(shared_ptr<Object> object);
-	void AddDebugCollider(shared_ptr<Collider> collider) { _debugCollider.push_back(collider); }
+	void AddDebugCollider(shared_ptr<Collider> collider);
 
 	bool& GetPause() { return _pause; }
 	bool& GetRenderTexture() { return _renderTexture; }
@@ -57,11 +57,14 @@ private:
 	static GameManager* _instance;	
 	
 	const float _maxDelay = 0.05f;
+	const float _debugColliderRunTime = 1.f;
 
 	shared_ptr<Map> _curMap;
+
 	vector<vector<shared_ptr<InstanceQuad>>> _instanceQuad;
 	vector<vector<shared_ptr<Object>>> _objectInScreen;
-	vector<shared_ptr<Collider>> _debugCollider;
+	vector<pair<shared_ptr<Collider>,float>> _debugCollider;
+
 	shared_ptr<Player> _player;
 
 	bool _renderTexture = true;

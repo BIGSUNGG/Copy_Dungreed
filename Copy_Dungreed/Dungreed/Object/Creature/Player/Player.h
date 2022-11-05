@@ -24,6 +24,8 @@ public:
 	virtual void MouseEvent();
 
 protected:
+	virtual float GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon = nullptr);
+
 	virtual void DashMovement();
 	virtual void MovementEvent();
 

@@ -196,6 +196,10 @@ void UI_Inventory::Update()
 	if (_selectedItem != nullptr)
 		_selectedItem->Update();
 
+	std::wstring coinText;
+	coinText += to_wstring(INVENTORY->GetGold());
+	_coinText->SetText(coinText);
+
 	MouseEvenet();
 }
 
@@ -229,9 +233,6 @@ void UI_Inventory::Render()
 	if (_selectedItem != nullptr)
 		_selectedItem->Render();
 
-	std::wstring coinText;
-	coinText += to_wstring(INVENTORY->GetGold());
-	_coinText->SetText(coinText);
 	_coinText->Render();
 }
 

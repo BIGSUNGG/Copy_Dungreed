@@ -132,6 +132,7 @@ using namespace std;
 #include "Dungreed/Object/Tile/LockDoor/Bottom/LockDoorBottom.h"
 #include "Dungreed/Object/Effect/Effect.h"
 #include "Dungreed/Object/Effect/Trail/Effect_Trail.h"
+#include "Dungreed/Object/Effect/Damage/Effect_Damage.h"
 
 // ECT
 #include "Dungreed/Object/Ect/Ect.h"

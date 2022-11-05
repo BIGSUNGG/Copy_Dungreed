@@ -196,35 +196,41 @@ void Creature::TileBlockCollision(shared_ptr<Tile> tile)
 	const float movedRight = _beforeMove.x + (_collider->GetHalfSize().x * _collider->GetTransform()->GetScale().x);
 	const float movedLeft = _beforeMove.x - (_collider->GetHalfSize().x * _collider->GetTransform()->GetScale().x);
 
-	if (_velocity.y <= 0 && movedBottom >= tile->GetCollider()->Top())
+	if (movedLeft != tile->GetCollider()->Right() && movedRight != tile->GetCollider()->Left())
+	{
+		if (_velocity.y <= 0 && movedBottom >= tile->GetCollider()->Top())
+		{
+			_texture->SetBottom(tile->GetCollider()->Top());
+			_jumpPower = 0.0f;
+			return;
+		}
+		if (movedTop <= tile->GetCollider()->Bottom())
+		{
+			_texture->SetTop(tile->GetCollider()->Bottom());
+			_jumpPower = 0.0f;
+			return;
+		}
+	}
+	if (_velocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
+	{
+		_texture->SetRight(tile->GetCollider()->Left() );
+		return;
+	}
+	if (_velocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
+	{
+		_texture->SetLeft(tile->GetCollider()->Right() );
+		return;
+	}
+	if (_onStair)
 	{
 		_texture->SetBottom(tile->GetCollider()->Top());
 		_jumpPower = 0.0f;
-	}
-	else if (movedTop <= tile->GetCollider()->Bottom())
-	{
-		_texture->SetTop(tile->GetCollider()->Bottom());
-		_jumpPower = 0.0f;
-	}
-	else if (_velocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
-	{
-		_texture->SetRight(tile->GetCollider()->Left());
-	}
-	else if (_velocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
-	{
-		_texture->SetLeft(tile->GetCollider()->Right());
-	}
-	else if (_onStair)
-	{
-		_texture->SetBottom(tile->GetCollider()->Top());
-		_jumpPower = 0.0f;
-	}
-	else
-	{
-		_texture->SetBottom(tile->GetCollider()->Top());
-		_jumpPower = 0.0f;
+		return;
 	}
 
+	_texture->SetBottom(tile->GetCollider()->Top());
+	_jumpPower = 0.0f;
+	return;
 }
 
 void Creature::TileFloorCollision(shared_ptr<Tile> tile)

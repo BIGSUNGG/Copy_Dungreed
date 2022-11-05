@@ -120,13 +120,6 @@ void UI_PlayerHpBar::Update()
 	_dashBarGaugeLeft->Update();
 	_dashBarGaugeMid->Update();
 	_dashBarGaugeRight->Update();
-}
-
-void UI_PlayerHpBar::Render()
-{
-	_hpBarBase->Render();
-	_hpBarGauge->Render();
-	_hpBarEmpty->Render();
 
 	int maxHp = GAME->GetPlayer()->GetStatus()._hpMax;
 	int hp = GAME->GetPlayer()->GetStatus()._hp;
@@ -137,7 +130,7 @@ void UI_PlayerHpBar::Render()
 	wstring curHpText = to_wstring(hp);
 	wstring maxHpText = to_wstring(maxHp);
 
-	for (int i = 0; i <maxHpText.length() - curHpText.length(); i++)
+	for (int i = 0; i < maxHpText.length() - curHpText.length(); i++)
 	{
 		hpText += L" ";
 	}
@@ -146,11 +139,20 @@ void UI_PlayerHpBar::Render()
 	hpText += L" / ";
 	hpText += maxHpText;
 	_hpText->SetText(hpText);
-	_hpText->Render();
 
 	std::wstring levelText;
 	levelText += to_wstring(INVENTORY->GetPlayerLevel());
 	_levelText->SetText(levelText);
+
+}
+
+void UI_PlayerHpBar::Render()
+{
+	_hpBarBase->Render();
+	_hpBarGauge->Render();
+	_hpBarEmpty->Render();
+
+	_hpText->Render();
 	_levelText->Render();
 
 	_dashBarGaugeBaseLeft->Render();

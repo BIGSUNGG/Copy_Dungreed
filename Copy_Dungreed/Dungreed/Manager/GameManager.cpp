@@ -32,9 +32,13 @@ void GameManager::Update()
 				object->GetCollider()->SetColorGreen();
 				continue;
 			}
-
 			object->Update();
 		}
+	}
+
+	for (auto& debug : _debugCollider)
+	{
+		debug.second -= DELTA_TIME;
 	}
 }
 
@@ -70,7 +74,7 @@ void GameManager::PostRender()
 	if (_renderCollider == false)
 		return;
 
-	for (int i = Object::TILE; i < Object::UI; i++)
+	for (int i = Object::TILE; i < Object::EFFECT; i++)
 	{
 		for (auto& object : _objectInScreen[i])
 		{
@@ -83,7 +87,8 @@ void GameManager::PostRender()
 
 	for (auto& collider : _debugCollider)
 	{
-		collider->Render();
+		if(collider.second > 0)
+			collider.first->Render();
 	}
 }
 
@@ -260,8 +265,11 @@ void GameManager::AddObject(shared_ptr<Object> object, int type)
 	if (_curMap == nullptr)
 		return;
 
-	object->GetObjectTexture()->Update();
-	object->GetCollider()->Update();
+	if (object->GetObjectTexture() != nullptr)
+	{
+		object->GetObjectTexture()->Update();
+		object->GetCollider()->Update();
+	}
 	_curMap->GetObjects()[type].emplace_back(object);
 }
 
@@ -295,6 +303,21 @@ void GameManager::AddEctObject(shared_ptr<Object> object)
 	AddObject(object, Object::Object_Type::ECT);
 }
 
+void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
+{
+	for (auto& debug : _debugCollider)
+	{
+		if (debug.second <= 0)
+		{
+			debug.first = collider;
+			debug.second = _debugColliderRunTime;
+			return;
+		}
+	}
+
+	_debugCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _debugColliderRunTime));
+}
+
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor,bool forceCollison)
 {
 	vector<shared_ptr<Object>> result;
@@ -308,13 +331,19 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 		if (object->GetCollision() == false && forceCollison == false)
 			continue;
 
-		if (collider->IsCollision(object->GetCollider(), Obb))
+		if (object->GetCollider() != nullptr)
 		{
-			if(setColor == true)
-				object->GetCollider()->SetColorRed();
+			if (collider->IsCollision(object->GetCollider(), Obb))
+			{
+				if (setColor == true)
+					object->GetCollider()->SetColorRed();
 
-			result.emplace_back(object);
+				result.emplace_back(object);
+			}
 		}
+		else if(forceCollison)
+			result.emplace_back(object);
+
 	}
 
 	return result;

@@ -12,7 +12,7 @@ protected:
 	shared_ptr<Quad> _hungryIcon;
 
 	shared_ptr<Quad> _hungryGauge;
-	shared_ptr<Quad> _hungryGaugeBase;
+	shared_ptr<Quad> _hungryBase;
 
 	shared_ptr<UI_Text> _coinText;
 	shared_ptr<UI_Text> _hungryText;

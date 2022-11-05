@@ -183,6 +183,22 @@ void Player::Dash()
 	}
 }
 
+float Player::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
+{
+	float damage = Creature::GiveDamage(target, weapon);
+	
+	if (damage > 0)
+	{
+		shared_ptr<Effect_Damage> effect = make_shared<Effect_Damage>();
+		effect->SetDamage(damage);
+		effect->SetPos(target->GetPos());
+
+		GAME->AddEffect(effect);
+	}
+
+	return damage;
+}
+
 void Player::DashMovement()
 {
 	if (_dash._dashCurSpeed > 0.0f)

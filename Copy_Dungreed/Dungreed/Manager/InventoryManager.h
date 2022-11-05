@@ -39,10 +39,10 @@ private:
 
 	static InventoryManager* _instance;
 
-	int _gold = 0;
-	int _hungry = 0;
+	int _gold = 123456789;
+	int _hungry = 12;
 	int _hungryMax = 100;
-	int _playerLevel = 1;
+	int _playerLevel = 12;
 
 	int* _curWeaponSlot;
 	vector<shared_ptr<Weapon>>* _weaponSlot;

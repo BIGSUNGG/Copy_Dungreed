@@ -69,7 +69,7 @@ void Dungreed::Init()
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->AddPlayer(_player);

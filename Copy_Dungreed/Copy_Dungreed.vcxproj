@@ -156,6 +156,7 @@
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.h" />
+    <ClInclude Include="Dungreed\Object\Effect\Damage\Effect_Damage.h" />
     <ClInclude Include="Framework\Utility\Audio.h" />
     <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.cpp" />
+    <ClCompile Include="Dungreed\Object\Effect\Damage\Effect_Damage.cpp" />
     <ClCompile Include="Framework\Utility\Audio.cpp" />
     <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />

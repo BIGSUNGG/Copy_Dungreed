@@ -44,9 +44,9 @@ void Melee_FireDragonKiller::FireEffect()
 	float length = direction.x * _texture->GetHalfSize().y;
 	float height = direction.y * _texture->GetHalfSize().x;
 	if (height > 0)
-		height += 20.f;
+		height += 15.f;
 	else
-		height -= 20.f;
+		height -= 15.f;
 
 	Vector2 pos = {
 		MathUtility::RandomFloat(-height,height),

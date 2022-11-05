@@ -983,7 +983,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 			break;
 		case 1:
 			effect->SetAnimation();
-			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.1f);
+			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.075f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX01.png");
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX02.png");

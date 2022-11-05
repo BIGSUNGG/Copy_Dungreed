@@ -21,7 +21,7 @@ UI_WeaponSlot::UI_WeaponSlot()
 	_curWeapon = make_shared<Quad>(L"EMPTY",Vector2(0,0));
 
 	_weaponSkillRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
-	float color[4] = { 0,0,0,0.3f };
+	float color[4] = { 0,0,0,0.4f };
 	_weaponSkillRtv->Color(color);
 
 
