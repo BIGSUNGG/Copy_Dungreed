@@ -47,10 +47,12 @@ void RenderTarget::Set()
 	DEVICE_CONTEXT->ClearRenderTargetView(_rtv.Get(), _color);
 }
 
-void RenderTarget::Color(float* color)
+void RenderTarget::SetColor(float* color)
 {
 	for (int i = 0; i < 4; i++)
 	{
 		_color[i] = color[i];
 	}
+
+	Set();
 }

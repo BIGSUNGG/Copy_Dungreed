@@ -1,17 +1,17 @@
 #include "framework.h"
-#include "GraphicManager.h"
-GraphicManager* GraphicManager::_instance = nullptr;
+#include "Graphic.h"
+Graphic* Graphic::_instance = nullptr;
 
-GraphicManager::GraphicManager()
+Graphic::Graphic()
 {
 	Load();
 }
 
-GraphicManager::~GraphicManager()
+Graphic::~Graphic()
 {
 }
 
-void GraphicManager::Save()
+void Graphic::Save()
 {
 	Timer::GetInstance()->SetLockFPS(_fpsLimit);
 
@@ -27,7 +27,7 @@ void GraphicManager::Save()
 	basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
 }
 
-void GraphicManager::Load()
+void Graphic::Load()
 {
 	{
 		BinaryReader Reader(L"Save/Graphic_Setting/Setting.bin");
@@ -46,7 +46,7 @@ void GraphicManager::Load()
 	Timer::GetInstance()->SetLockFPS(_fpsLimit);
 }
 
-void GraphicManager::ImGuiRender()
+void Graphic::ImGuiRender()
 {
 
 	if (ImGui::TreeNode("Window Mode"))
@@ -86,7 +86,7 @@ void GraphicManager::ImGuiRender()
 	}
 }
 
-void GraphicManager::SetWinMode(const int& mode)
+void Graphic::SetWinMode(const int& mode)
 {
 	if (mode > 1 || mode < 0)
 		return;
@@ -94,7 +94,7 @@ void GraphicManager::SetWinMode(const int& mode)
 	_winMode = mode;
 }
 
-void GraphicManager::SetFpsLimit(const int& mode)
+void Graphic::SetFpsLimit(const int& mode)
 {
 	_fpsLimit = mode;
 	Timer::GetInstance()->SetLockFPS(_fpsLimit);

@@ -1,10 +1,10 @@
 #pragma once
-class GraphicManager
+class Graphic
 {
 public:
 	static void Create() {
 		if (_instance == nullptr)
-			_instance = new GraphicManager;
+			_instance = new Graphic;
 	}
 
 	static void Delete() {
@@ -12,7 +12,7 @@ public:
 			delete _instance;
 	}
 
-	static GraphicManager* GetInstance() {
+	static Graphic* GetInstance() {
 		if (_instance != nullptr)
 			return _instance;
 	}
@@ -29,9 +29,9 @@ public:
 	void SetFpsLimit(const int& mode);
 
 private:
-	GraphicManager();
-	~GraphicManager();
-	static GraphicManager* _instance;
+	Graphic();
+	~Graphic();
+	static Graphic* _instance;
 
 	int _winMode = 1;
 	int _fpsLimit = 0;

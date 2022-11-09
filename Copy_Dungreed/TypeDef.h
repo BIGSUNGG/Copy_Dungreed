@@ -62,7 +62,7 @@
 #define GAME GameManager::GetInstance()
 #define GET_OBJECTS GameManager::GetInstance()->GetObjects()
 
-#define GRAPHIC GraphicManager::GetInstance()
+#define GRAPHIC Graphic::GetInstance()
 
 #define MAP_MANAGER MapManager::GetInstance()
 

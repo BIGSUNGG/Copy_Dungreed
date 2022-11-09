@@ -5,7 +5,7 @@ UI_Map::UI_Map()
 {
 	_filter = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 	float color[4] = { 0,0,0,0.5f };
-	_filter->Color(color);
+	_filter->SetColor(color);
 
 	_filterQuad = make_shared<Quad>(L"UI_Map_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
 	shared_ptr<Texture> texture = Texture::Add(L"UI_Map_Texture", _filter->GetSRV());

@@ -14,6 +14,9 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
+	if (_pause)
+		return;
+
 	if (DELTA_TIME >= _maxDelay)
 		return;
 
@@ -183,12 +186,17 @@ void GameManager::Input()
 		if (KEY_DOWN('W'))
 			_player->Jump();
 
-		if (KEY_PRESS('S'))
+		if (KEY_DOWN(VK_SPACE))
 		{
-			if (KEY_DOWN(VK_SPACE))
+			if (KEY_PRESS('S'))
 				_player->SetPassFloor(true);
 			else
-				_player->SetPassFloor(false);
+				_player->Jump();
+		}
+
+		if (KEY_PRESS('S'))
+		{
+
 		}
 		else if (KEY_UP('S'))
 			_player->SetPassFloor(false);
@@ -220,6 +228,9 @@ void GameManager::Input()
 		switch (UI_MANAGER->GetCurState())
 		{
 		case UIManager::UI_State::OPTION:
+			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+			break;
+		case UIManager::UI_State::SETTING:
 			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
 			break;
 		default:

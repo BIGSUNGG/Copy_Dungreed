@@ -174,7 +174,7 @@
     <ClInclude Include="Dungreed\Object\Object.h" />
     <ClInclude Include="Dungreed\Map\Map.h" />
     <ClInclude Include="Dungreed\Manager\GameManager.h" />
-    <ClInclude Include="Dungreed\Manager\GraphicManager.h" />
+    <ClInclude Include="Framework\Utility\Graphic.h" />
     <ClInclude Include="Dungreed\Object\Ect\Item\Item.h" />
     <ClInclude Include="Dungreed\Object\Creature\Monster\Monster.h" />
     <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Melee\Melee.h" />
@@ -277,7 +277,7 @@
     <ClCompile Include="Dungreed\Object\Object.cpp" />
     <ClCompile Include="Dungreed\Map\Map.cpp" />
     <ClCompile Include="Dungreed\Manager\GameManager.cpp" />
-    <ClCompile Include="Dungreed\Manager\GraphicManager.cpp" />
+    <ClCompile Include="Framework\Utility\Graphic.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Item\Item.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\Monster.cpp" />
     <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Melee\Melee.cpp" />

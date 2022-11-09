@@ -22,7 +22,7 @@ UI_WeaponSlot::UI_WeaponSlot()
 
 	_weaponSkillRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 	float color[4] = { 0,0,0,0.4f };
-	_weaponSkillRtv->Color(color);
+	_weaponSkillRtv->SetColor(color);
 
 
 	_weaponSkillBase = make_shared<Quad>(L"Resource/Ui/WeaponSlot/Weapon_Skill.png");

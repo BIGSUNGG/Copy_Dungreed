@@ -103,6 +103,7 @@ using namespace std;
 #include "Framework/Utility/tinyxml2.h"
 #include "Framework/Utility/Audio.h"
 #include "Framework/Utility/MouseCursur.h"
+#include "Framework/Utility/Graphic.h"
 
 //Collider
 #include "Framework/Collider/Collider.h"
@@ -178,7 +179,6 @@ using namespace std;
 #include "Dungreed/Manager/ObjectManager.h"
 #include "Dungreed/Manager/GameManager.h"
 #include "Dungreed/Manager/MapManager.h"
-#include "Dungreed/Manager/GraphicManager.h"
 #include "Dungreed/Manager/InventoryManager.h"
 #include "Dungreed/Manager/UIManager.h"
 

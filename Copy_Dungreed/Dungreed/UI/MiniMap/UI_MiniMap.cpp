@@ -9,7 +9,7 @@ UI_MiniMap::UI_MiniMap()
 
 	_miniMapRtv = make_shared<RenderTarget>(WIN_WIDTH,WIN_HEIGHT);
 	float color[4] = { 1,1,1,0 };
-	_miniMapRtv->Color(color);
+	_miniMapRtv->SetColor(color);
 
 	_miniTileRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 

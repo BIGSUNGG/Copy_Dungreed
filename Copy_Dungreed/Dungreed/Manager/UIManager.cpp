@@ -5,6 +5,36 @@ UIManager* UIManager::_instance = nullptr;
 
 void UIManager::Update()
 {
+	if (_blinkState != Blink_State::END)
+	{
+		switch (_blinkState)
+		{
+		case UIManager::DARK:
+			_blinkColor.w += DELTA_TIME * _blinkSpeed;
+			if (_blinkColor.w > 1)
+			{
+				_blinkColor.w = 1;
+				_blinkState = Blink_State::BRIGHT;
+				if(_blinkEvent != nullptr)
+					_blinkEvent();
+			}
+			break;
+		case UIManager::BRIGHT:
+			_blinkColor.w -= DELTA_TIME * _blinkSpeed;
+			if (_blinkColor.w < 0)
+			{
+				_blinkColor.w = 0;
+				_blinkState = Blink_State::END;
+			}
+			break;
+		default:
+			break;
+		}
+
+		float color[4] = { _blinkColor.x,_blinkColor.y,_blinkColor.z,_blinkColor.w };
+		_blinkRtv->SetColor(color);
+	}
+
 	switch (_state)
 	{
 	case UIManager::UI_State::NOMAL:
@@ -38,11 +68,13 @@ void UIManager::Update()
 	}
 
 	_filterQuad->Update();
+	_blinkQuad->Update();
 }
 
 void UIManager::PreRender()
 {
 	_filter->Set();
+	_blinkRtv->Set();
 	for (auto& ui : _ui)
 		ui->PreRender();
 }
@@ -81,6 +113,9 @@ void UIManager::PostRender()
 	default:
 		break;
 	}
+
+	if (_blinkState != Blink_State::END)
+		_blinkQuad->Render();
 }
 
 void UIManager::Refresh()
@@ -91,6 +126,24 @@ void UIManager::Refresh()
 
 void UIManager::SetState(const UI_State& state)
 {
+	switch (_state)
+	{
+	case UIManager::UI_State::NOMAL:
+		break;
+	case UIManager::UI_State::INVEN:
+		break;
+	case UI_State::MAP:
+		break;
+	case UI_State::OPTION:
+		GAME->GetPause() = false;
+		break;
+	case UI_State::SETTING:
+		GAME->GetPause() = false;
+		break;
+	default:
+		break;
+	}
+
 	_state = state;
 
 	switch (_state)
@@ -106,25 +159,46 @@ void UIManager::SetState(const UI_State& state)
 		break;
 	case UI_State::OPTION:
 		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		GAME->GetPause() = true;
 		break;
 	case UI_State::SETTING:
 		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		GAME->GetPause() = true;
 		break;
 	default:
 		break;
 	}
 }
 
+void UIManager::Blink(const float& speed, const XMFLOAT4& color, function<void()> func)
+{
+	if (_blinkState != Blink_State::END)
+		return;
+
+	_blinkSpeed = speed;
+	_blinkColor = color;
+	_blinkEvent = func;
+	_blinkState = Blink_State::DARK;
+}
+
+
 UIManager::UIManager()
 {
 	_filter = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 	float color[4] = { 0,0,0,0.15f };
-	_filter->Color(color);
+	_filter->SetColor(color);
 
 	_filterQuad = make_shared<Quad>(L"UI_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
 	shared_ptr<Texture> texture = Texture::Add(L"UI_Filter_Texture", _filter->GetSRV());
 	_filterQuad->SetTexture(texture);
 	_filterQuad->GetTransform()->GetPos() = CENTER;
+
+	_blinkRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
+
+	_blinkQuad = make_shared<Quad>(L"UI_Blink", Vector2(WIN_WIDTH, WIN_HEIGHT));
+	texture = Texture::Add(L"UI_Blink_Texture", _blinkRtv->GetSRV());
+	_blinkQuad->SetTexture(texture);
+	_blinkQuad->GetTransform()->GetPos() = CENTER;
 
 	_playerHpBar = make_shared<UI_PlayerHpBar>();
 	_enemyHpBar = make_shared<UI_EnemyHpBar>();

@@ -8,7 +8,7 @@ public:
 	~RenderTarget();
 
 	void Set();
-	void Color(float* color);
+	void SetColor(float* color);
 
 	ComPtr<ID3D11ShaderResourceView> GetSRV() { return _srv; }
 	ComPtr<ID3D11RenderTargetView> GetRTV() { return _rtv; }

@@ -70,13 +70,15 @@ void GraySkel::AI()
 void GraySkel::Attack()
 {
 	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=]() {
-		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos() = Vector2(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->Left(), _weaponSlot[_curWeaponSlot]->GetObjectTexture()->Top());
+		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos() = 
+			Vector2(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->Left(), _weaponSlot[_curWeaponSlot]->GetObjectTexture()->Bottom());
 		});
-
+	
 	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=]() {
 		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetLeft(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().x);
-		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetTop(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().y);
+		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetBottom(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().y);
 		});
+
 	Monster::Attack();
 }
 

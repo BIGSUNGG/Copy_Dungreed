@@ -53,6 +53,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	InputManager::Create();
 	StateManager::Create();
 	ShaderManager::Create();
+	Graphic::Create();
 	DirectWrite::Create();
 	Camera::Create();
 	Audio::Create();
@@ -61,7 +62,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	ObjectManager::Create();
 	GameManager::Create();
 	MapManager::Create();
-	GraphicManager::Create();
 	InventoryManager::Create();
 	UIManager::Create();
 
@@ -97,7 +97,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// 싱글톤 클래스 삭제
 	UIManager::Delete();
 	InventoryManager::Delete();
-	GraphicManager::Delete();
 	MapManager::Delete();
 	GameManager::Delete();
 	ObjectManager::Delete();
@@ -106,6 +105,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Audio::Delete();
 	Camera::Delete();
 	DirectWrite::Delete();
+	Graphic::Delete();
 	ShaderManager::Delete();
 	StateManager::Delete();
 	InputManager::Delete();

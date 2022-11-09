@@ -17,9 +17,6 @@ void Program::Update()
 
 	_runTime += DELTA_TIME;
 
-	if (GAME->GetPause())
-		return;
-
 	CAMERA->Update();
 	SOUND->Update();
 

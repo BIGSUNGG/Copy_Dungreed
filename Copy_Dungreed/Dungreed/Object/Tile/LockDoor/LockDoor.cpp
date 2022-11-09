@@ -23,7 +23,11 @@ void LockDoor::Update()
 			}
 
 			if (_collider->IsCollision(GAME->GetPlayer()->GetCollider()))
-				MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapIndex() + _moveDirection);
+			{
+				function<void()> func = [=]() {MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapIndex() + _moveDirection); };
+				XMFLOAT4 color = { 0,0,0,0 };
+				UI_MANAGER->Blink(4, color, func);
+			}
 		}
 		else if (_anim->GetCurAnim() == LOCK && _anim->GetIsPlaying() == false)
 			_anim->ChangeAnimation(IDLE);

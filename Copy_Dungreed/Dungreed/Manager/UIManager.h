@@ -11,6 +11,13 @@ public:
 		SETTING,
 	};
 
+	enum Blink_State
+	{
+		END = 0b00000000,
+		DARK = 0b00000010,
+		BRIGHT = 0b00000100,
+	};
+
 public:
 	static void Create() {
 		if (_instance == nullptr)
@@ -34,6 +41,9 @@ public:
 	void Refresh();
 	void SetState(const UI_State& state);
 	const UI_State& GetCurState() { return _state; }
+	char GetBlinkState() { return _blinkState; }
+
+	void Blink(const float& speed, const XMFLOAT4& color, function<void()> func = nullptr);
 
 private:
 	UIManager();
@@ -43,6 +53,14 @@ private:
 	UI_State _state = UI_State::NOMAL;
 	shared_ptr<RenderTarget> _filter;
 	shared_ptr<Quad> _filterQuad;
+
+	shared_ptr<Quad> _blinkQuad;
+	shared_ptr<RenderTarget> _blinkRtv;
+	XMFLOAT4 _blinkColor;
+	float _blinkSpeed;
+	char _blinkState;
+	function<void()> _blinkEvent;
+
 
 	vector<shared_ptr<UI>> _ui;
 
