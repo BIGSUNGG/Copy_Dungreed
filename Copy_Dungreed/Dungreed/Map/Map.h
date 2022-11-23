@@ -1,5 +1,5 @@
 #pragma once
-class Map
+class Map : public enable_shared_from_this<Map>
 {
 public:
 	enum Level
@@ -18,12 +18,17 @@ public:
 public:
 	Map(int level, int num);
 
-	void CheckCleared();
+	bool CheckCleared();
 
-	void AddObject(shared_ptr<Object> addObject, int type , bool toFront = false);
-	void DeleteObject(Vector2 Pos, int type, bool toFront = false);
+	void AddObject(shared_ptr<Object> addObject, int type);
+	bool DeleteObject(shared_ptr<Object> deleteObject, int type);
 	void Paste(shared_ptr<Map> copyMap);
 	void Reset();
+
+	void OpenEvent();
+	void LockEvent();
+	void AddOpenEvent(const function<void()>& func) { _openEvent.emplace_back(func); }
+	void AddLockEvent(const function<void()>& func) { _lockEvent.emplace_back(func); }
 
 	vector<vector<shared_ptr<Object>>>& GetObjects() { return _objects; }
 
@@ -49,6 +54,9 @@ public:
 private:
 	vector<vector<shared_ptr<Object>>> _objects;
 	int _objectCount = 0;
+
+	vector<function<void()>> _openEvent;
+	vector<function<void()>> _lockEvent;
 
 	Vector2 _startPos = { 5000,5000 };
 	Vector2 _leftBottom = { 0,0 };

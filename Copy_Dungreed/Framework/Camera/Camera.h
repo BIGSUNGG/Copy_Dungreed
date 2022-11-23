@@ -36,9 +36,11 @@ public:
 
 	shared_ptr<Transform> GetMoveTransform() { return _moveTransform; }
 	shared_ptr<Transform> GetTransform() { return _transform; }
-	Vector2 GetPos() { return _transform->GetPos() * -1; }
 	const const Vector2& GetVelocity() { return _velocity; }
 	const Vector2& GetBeforeMove() { return _beforeMove; }
+	Vector2 GetPos() { return _transform->GetPos() * -1; }
+	Vector2 GetLeftBottom() { return _leftBottom; }
+	Vector2 GetRightTop() { return _rightTop; }
 
 	Vector2 GetMouseWorldPos();
 

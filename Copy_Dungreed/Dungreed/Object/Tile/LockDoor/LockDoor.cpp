@@ -24,31 +24,57 @@ void LockDoor::Update()
 
 			if (_collider->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
-				function<void()> func = [=]() {MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapIndex() + _moveDirection); };
+				function<void()> func = [=]() {
+					MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapIndex() + _moveDirection);
+					GAME->SetInput(true);
+				};
 				XMFLOAT4 color = { 0,0,0,0 };
-				UI_MANAGER->Blink(4, color, func);
+				bool success = UI_MANAGER->Blink(6,0.15f, color, func);
+				if(success) 
+					GAME->SetInput(false);
 			}
 		}
 		else if (_anim->GetCurAnim() == LOCK && _anim->GetIsPlaying() == false)
 			_anim->ChangeAnimation(IDLE);
-		else if (_anim->GetCurAnim() == IDLE && MAP_MANAGER->GetCurMap()->GetCleared())
-			_anim->ChangeAnimation(OPEN);
 		else if (_anim->GetCurAnim() == OPEN && _anim->GetIsPlaying() == false)
-		{
-			Open();
-		}
+			Opened();
 	}
 
 	Tile::Update();
 }
 
-void LockDoor::Open()
+void LockDoor::SetOwnerMap(shared_ptr<Map> map)
+{
+	Tile::SetOwnerMap(map);
+	map->AddOpenEvent(bind(&LockDoor::Open, this));
+	map->AddLockEvent(bind(&LockDoor::Lock, this));
+}
+
+void LockDoor::Opened()
 {
 	_render = false;
 	_open = true;
 	_anim->ChangeAnimation(OPEN, true);
 	_anim->GetIsPlaying() = false;
 	_collison = false;
+}
+
+void LockDoor::Open()
+{
+	_render = true;
+	_open = false;
+	_anim->ChangeAnimation(OPEN);
+	_anim->GetIsPlaying() = true;
+	_collison = true;
+}
+
+void LockDoor::Lock()
+{
+	_render = true;
+	_open = false;
+	_anim->ChangeAnimation(LOCK);
+	_anim->GetIsPlaying() = true;
+	_collison = true;
 }
 
 

@@ -10,6 +10,8 @@ Melee_FireDragonKiller::Melee_FireDragonKiller(int level, int num)
 	_fireEffectAnim.emplace_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/BurnFX3.png");
 	_fireEffectAnim.emplace_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/BurnFX4.png");
 	_fireEffectAnim.emplace_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/BurnFX5.png");
+
+	_fireEffect.resize(10);
 }
 
 void Melee_FireDragonKiller::Update()
@@ -21,6 +23,27 @@ void Melee_FireDragonKiller::Update()
 	{
 		_effectRunTime = 0.0f;
 		FireEffect();
+	}
+
+	for (auto effect : _fireEffect)
+	{
+		if (effect == nullptr || !effect->GetIsActive())
+			continue;
+
+		effect->Update();
+	}
+}
+
+void Melee_FireDragonKiller::Render()
+{
+	Melee::Render();
+	
+	for (auto effect : _fireEffect)
+	{
+		if (effect == nullptr || !effect->GetIsActive())
+			continue;
+
+		effect->Render();
 	}
 }
 
@@ -54,5 +77,5 @@ void Melee_FireDragonKiller::FireEffect()
 	};
 
 	effect->SetPos(_texture->GetTransform()->GetWorldPos() + pos);
-	GAME->AddEffect(effect);
+	_fireEffect.emplace_back(effect);
 }

@@ -43,6 +43,7 @@ LockDoorRight::LockDoorRight()
 	SetTexture(texture);
 
 	GetAnimation()->SetTexture(texture);
+	Opened();
 }
 
 void LockDoorRight::DoorOpenEffect()

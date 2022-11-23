@@ -4,9 +4,6 @@
 UI_MiniMap::UI_MiniMap()
 	: UI()
 {
-	_uiType = UI::MINIMAP;
-
-
 	_miniMapRtv = make_shared<RenderTarget>(WIN_WIDTH,WIN_HEIGHT);
 	float color[4] = { 1,1,1,0 };
 	_miniMapRtv->SetColor(color);
@@ -86,7 +83,7 @@ void UI_MiniMap::Refresh()
 	{
 		_miniMapBase = make_shared<Quad>(L"MiniMap_Base", size);
 		shared_ptr<Texture> texture = Texture::Add(L"MiniMap_Base_Texture", _miniMapRtv->GetSRV());
-		_miniMapBase->SetTexture(texture);
+		_miniMapBase->SetImage(texture);
 		_miniMapBase->SetTop(WIN_HEIGHT - 40);
 		_miniMapBase->SetRight(WIN_WIDTH - 180);
 	}
@@ -96,7 +93,7 @@ void UI_MiniMap::Refresh()
 		auto quad = make_shared<Quad>(L"MiniMap_Tile", _miniTileSize);
 
 		shared_ptr<Texture> texture = Texture::Add(L"MiniMap_Tile_Texture", _miniTileRtv->GetSRV());
-		quad->SetTexture(texture);
+		quad->SetImage(texture);
 		_miniTile = make_shared<InstanceQuad>(quad, tiles.size());
 		for (int i = 0; i < tiles.size(); i++)
 		{

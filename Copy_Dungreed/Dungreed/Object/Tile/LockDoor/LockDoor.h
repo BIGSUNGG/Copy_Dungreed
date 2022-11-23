@@ -14,17 +14,19 @@ public:
 
 	virtual void Update() override;
 
-	virtual void Open();
+	virtual void SetOwnerMap(shared_ptr<Map> map) override;
 
 protected:
+	virtual void Opened();
+	virtual void Open();
+	virtual void Lock();
 	virtual void DoorOpenEffect();
 
-protected:
-	bool _open = false;
-	float _doorEffectDelayTime = 0.15f;
-	const float _doorEffectDelay = 0.15f;
-
 	Vector2 _moveDirection = { 0,0 };
+
+	const float _doorEffectDelay = 0.15f;
+	float _doorEffectDelayTime = 0.15f;
+	bool _open = false;
 
 };
 

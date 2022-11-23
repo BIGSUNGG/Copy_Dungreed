@@ -17,10 +17,9 @@ public:
 
 	void ChangeAnimation(int state, bool force = false);
 	void SetTexture(shared_ptr<Quad> texture) { _texture = texture; }
-	void SetBeforeChangeFunc(function<void()> func) { _beforeChange = func; }
-	void SetAfterChangeFunc(function<void()> func) { _afterChange = func; }
+	void SetBeforeChangeFunc(function<void(pair<int, int>)> func) { _beforeChange = func; }
+	void SetAfterChangeFunc(function<void(pair<int, int>)> func) { _afterChange = func; }
 
-	bool& GetRefreshSize() { return _refreshSize; }
 	bool& GetIsPlaying() { return _isPlaying; }
 	const int& GetCurAnim() { return _index.first; }
 
@@ -32,8 +31,8 @@ protected:
 	void ChangeImage();
 
 private:
-	function<void()> _beforeChange;
-	function<void()> _afterChange;
+	function<void(pair<int, int>)> _beforeChange;
+	function<void(pair<int, int>)> _afterChange;
 
 	shared_ptr<Quad> _texture;
 	pair<int, int> _index = { 0,0 };
@@ -42,5 +41,4 @@ private:
 	int _curState = _index.second;
 
 	bool _isPlaying = true;
-	bool _refreshSize = false;
 };

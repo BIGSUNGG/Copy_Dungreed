@@ -26,17 +26,18 @@ public:
 	void FindRightMap(int level, int x, int y);
 
 	shared_ptr<Map> Load(int level, int num);
+
 	void Save(shared_ptr<Map> map);
 	void SaveAll();
 
-	void SetTarget(shared_ptr<Creature> target);
 	void SetCurMap(shared_ptr<Map> map);
 	void SetCurMap(const Vector2& index);
+	void SetTarget(shared_ptr<Creature> target);
 
 	const Vector2& GetMapIndex() { return _curMapIndex; }
-	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.x][_curMapIndex.y].first; }
 	const vector<vector<int>>& GetCurMapSize() { return _mapSize; }
 	const map<int, map<int, pair<shared_ptr<Map>, bool>>>& GetMaps() { return _maps; }
+	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapIndex.x][_curMapIndex.y].first; }
 
 private:
 	void AddMap(shared_ptr<Map> map, Vector2 where);

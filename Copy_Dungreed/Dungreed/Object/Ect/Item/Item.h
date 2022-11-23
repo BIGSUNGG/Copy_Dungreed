@@ -2,12 +2,13 @@
 
 class Creature;
 
-class Item : public Ect , public enable_shared_from_this<Item>
+class Item : public Ect
 {
 public:
 	enum Item_Type
 	{
 		WEAPON,
+		SUB_WEAPON,
 		ACCESSORY,
 		NONE
 	};

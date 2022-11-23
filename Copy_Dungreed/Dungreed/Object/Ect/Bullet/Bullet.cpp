@@ -82,8 +82,8 @@ void Bullet::DestroyEvent()
 		effect->GetObjectTexture()->GetTransform()->GetAngle() = _texture->GetTransform()->GetAngle();
 
 		Vector2 direction = _direction;
-		effect->GetAnimation()->SetBeforeChangeFunc([=]() {effect->GetObjectTexture()->GetTransform()->GetPos() -= (direction * effect->GetObjectTexture()->GetHalfSize().y); });
-		effect->GetAnimation()->SetAfterChangeFunc([=]() {effect->GetObjectTexture()->GetTransform()->GetPos() += (direction * effect->GetObjectTexture()->GetHalfSize().y); });
+		effect->GetAnimation()->SetBeforeChangeFunc([=](pair<int, int> pair) {effect->GetObjectTexture()->GetTransform()->GetPos() -= (direction * effect->GetObjectTexture()->GetHalfSize().y); });
+		effect->GetAnimation()->SetAfterChangeFunc([=](pair<int, int> pair) {effect->GetObjectTexture()->GetTransform()->GetPos() += (direction * effect->GetObjectTexture()->GetHalfSize().y); });
 
 		GAME->AddEffect(effect); 
 	}

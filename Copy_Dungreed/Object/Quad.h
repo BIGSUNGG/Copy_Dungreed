@@ -15,8 +15,8 @@ public:
 	void Refresh();
 
 	void CreateVertices();
-	void SetTexture(shared_ptr<Texture> texture) { _texture = texture; }
-	void SetTexture(wstring file);
+	void SetImage(shared_ptr<Texture> texture) { _texture = texture; }
+	void SetImage(wstring file);
 	void SetVS(wstring vs);
 	void SetPS(wstring ps);
 

@@ -4,6 +4,7 @@
 BackGround::BackGround(int level, int num)
 	: Object(level, num)
 {
+	_renderOrder = 1.f;
 	_objectType = Object::Object_Type::BACKGROUND;
 	_static = false;
 }

@@ -19,18 +19,11 @@ void Monster::Update()
 		if (_spawn == false)
 			SearchTarget();
 
-		if (_spawn == true && _target.lock() != nullptr)
+		if (_ai == true && _target.lock() != nullptr)
 			AI();
-
-		if (_spawn == false && _target.lock() != nullptr)
-		{
-			_spawnDelay -= DELTA_TIME;
-			if (_spawnDelay <= 0)		
-				_spawn = true;
-		}
 	}
 
-	if (_spawn == true)
+	if (_render == true)
 		Creature::Update();
 	else
 		Object::Update();
@@ -38,7 +31,8 @@ void Monster::Update()
 
 void Monster::Render()
 {
-	if (_spawn || GAME->GetPlaying() == false || GAME->GetPlayer() == nullptr)
+	bool temp = GAME->GetPlaying();
+	if (_render || (GAME->GetPlaying() == false || GAME->GetPlayer() == nullptr))
 		Creature::Render();
 }
 
@@ -47,14 +41,13 @@ void Monster::SearchTarget()
 	if (_target.lock() != nullptr)
 		return;
 
-	auto collisions = GAME->GetCollisions(_collider, Object::Object_Type::CREATURE);
-
 	float length = (_texture->GetTransform()->GetPos() - GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos()).Length();
 
 	if (length <= _searchLength)
 	{
 		SetTarget(GAME->GetPlayer());
 		MAP_MANAGER->SetTarget(GAME->GetPlayer());
+		_ownerMap.lock()->LockEvent();
 	}
 }
 
@@ -65,7 +58,6 @@ void Monster::AI()
 void Monster::SetTarget(shared_ptr<Creature> target)
 {
 	_target = target;
-	_render = true;
 	SpawnEffect();
 }
 
@@ -97,6 +89,17 @@ void Monster::SpawnEffect()
 
 	if (_reversed)
 		spawn->GetObjectTexture()->ReverseToX();
+
+	function<void(pair<int, int> pair)> func = [&](pair<int, int> pair) {
+		if (pair.first == BASIC && pair.second == 10)
+		{
+			_render = true;
+			_spawn = true;
+		}
+		if (pair.first == BASIC && pair.second == 14)
+			_ai = true;
+	};
+	spawn->GetAnimation()->SetAfterChangeFunc(func);
 
 	GAME->AddEffect(spawn);
 }

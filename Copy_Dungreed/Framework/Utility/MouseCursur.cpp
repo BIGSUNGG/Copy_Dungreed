@@ -19,7 +19,7 @@ void MouseCursur::Render()
 
 void MouseCursur::SetCursurImage(wstring image)
 {
-	_mouseCursur->SetTexture(image);
+	_mouseCursur->SetImage(image);
 	_mouseCursur->Refresh();
 }
 

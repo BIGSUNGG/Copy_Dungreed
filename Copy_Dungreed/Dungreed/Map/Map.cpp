@@ -9,15 +9,16 @@ Map::Map(int level, int num)
 	Reset();
 }
 
-void Map::CheckCleared()
+bool Map::CheckCleared()
 {
 	if (_cleared == true)
-		return;
+		return true;
 
 	_cleared = true;
+
 	for (auto& object : _objects[Object::CREATURE])
 	{
-		if (object == nullptr)
+		if (object == nullptr || !object->GetIsActive())
 			continue;
 
 		auto creature = dynamic_pointer_cast<Creature>(object);
@@ -25,70 +26,38 @@ void Map::CheckCleared()
 		if (creature->GetCreatureType() == Creature::ENEMY)
 		{
 			_cleared = false;
-			return;
+			return false;
 		}
 	}
+
+	OpenEvent();
 }
 
-void Map::AddObject(shared_ptr<Object> addObject, int type,bool toFront)
+void Map::AddObject(shared_ptr<Object> addObject, int type)
 {
-	addObject->GetObjectTexture()->Update();
-	shared_ptr<Quad> addQuad = addObject->GetObjectTexture();
-
-	Vector2& pos = addObject->GetObjectTexture()->GetTransform()->GetPos();
-
-	for (auto& objects : _objects[type])
+	if (addObject->GetObjectTexture() != nullptr)
 	{
-		if (addObject->GetObjectTexture()->GetTransform()->GetPos() ==
-			objects->GetObjectTexture()->GetTransform()->GetPos())
-		{
-			return;
-		}
+		addObject->GetObjectTexture()->Update();
+		addObject->GetCollider()->Update();
 	}
-
+	addObject->SetOwnerMap(shared_from_this());
 	_objectCount++;
-
-	if (toFront)
-		_objects[type].emplace(_objects[type].begin(), addObject);
-	else
-		_objects[type].emplace_back(addObject);
-
-	GAME->Instancing();
+	_objects[type].emplace_back(addObject);
 }
 
-void Map::DeleteObject(Vector2 pos, int type, bool toFront)
+bool Map::DeleteObject(shared_ptr<Object> deleteObject, int type)
 {
-	if (toFront)
+	for (auto iter = _objects[type].begin(); iter != _objects[type].end(); iter++)
 	{
-		for (auto objects = _objects[type].begin(); objects != _objects[type].end(); objects++)
+		if (*iter == deleteObject)
 		{
-			shared_ptr<Quad> object = objects->get()->GetObjectTexture();
-			if (pos.x > object->Left() && pos.x < object->Right() &&
-				pos.y < object->Top() && pos.y > object->Bottom())
-			{
-				_objects[type].erase(objects);
-				_objectCount--;
-				break;
-			}
-		}
-	}
-	else
-	{
-		for (int i = _objects[type].size() - 1; i > 0; i--)
-		{
-			shared_ptr<Quad> object = _objects[type][i]->GetObjectTexture();
-			if (pos.x > object->Left() && pos.x < object->Right() &&
-				pos.y < object->Top() && pos.y > object->Bottom())
-			{
-				auto iter = _objects[type].begin() + i;
-				_objects[type].erase(iter);
-				_objectCount--;
-				break;
-			}
+			--_objectCount;
+			_objects[type].erase(iter);
+			return true;
 		}
 	}
 
-	GAME->Instancing();
+	return false;
 }
 
 void Map::Paste(shared_ptr<Map> copyMap)
@@ -128,4 +97,16 @@ void Map::Reset()
 	_bottomDoor = { 0,0 };
 	_leftDoor	= { 0,0 };
 	_rightDoor	= { 0,0 };
+}
+
+void Map::OpenEvent()
+{
+	for (auto& func : _openEvent)
+		func();
+}
+
+void Map::LockEvent()
+{
+	for (auto& func : _lockEvent)
+		func();
 }

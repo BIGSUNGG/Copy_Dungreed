@@ -4,8 +4,6 @@
 UI_PlayerHpBar::UI_PlayerHpBar()
 	: UI()
 {
-	_uiType = UI::HPBAR;
-
 	_hpBarEmpty = make_shared<Object>();
 	_hpBarEmpty->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Empty.png"));
 	_hpBarEmpty->GetObjectTexture()->SetLeft(18);

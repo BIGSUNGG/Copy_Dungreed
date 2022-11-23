@@ -4,8 +4,6 @@
 UI_WeaponSlot::UI_WeaponSlot()
 	: UI()
 {
-	_uiType = UI::WEAPON_SLOT;
-
 	_weaponSlot1 = make_shared<Object>();
 	_weaponSlot1->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_1.png"));
 	_weaponSlot1->GetObjectTexture()->SetRight(WIN_WIDTH - 25);
@@ -36,7 +34,7 @@ UI_WeaponSlot::UI_WeaponSlot()
 
 	_weaponSkillCoolTime = make_shared<Quad>(L"Skill_Cool_Time", Vector2(_weaponSkillBase->GetSize()));
 	shared_ptr<Texture> texture = Texture::Add(L"MiniMap_Base_Texture", _weaponSkillRtv->GetSRV());
-	_weaponSkillCoolTime->SetTexture(texture);
+	_weaponSkillCoolTime->SetImage(texture);
 	_weaponSkillCoolTime->GetTransform()->GetPos() = _weaponSkillBase->GetTransform()->GetPos();
 	_weaponSkillCoolTime->Update();
 }
@@ -70,8 +68,6 @@ void UI_WeaponSlot::Update()
 				break;
 			case Weapon::GUN:
 				break;
-			case Weapon::SUB:
-				break;
 			default:
 				break;
 			}
@@ -89,7 +85,7 @@ void UI_WeaponSlot::Update()
 	{
 		if (_weaponSkillIcon->GetImageFile() != INVENTORY->GetCurWeapon()->GetSkillHuiTexture()->GetImageFile())
 		{
-			_weaponSkillIcon->SetTexture(INVENTORY->GetCurWeapon()->GetSkillHuiTexture()->GetImageFile());
+			_weaponSkillIcon->SetImage(INVENTORY->GetCurWeapon()->GetSkillHuiTexture()->GetImageFile());
 			_weaponSkillIcon->Refresh();
 			_weaponSkillIcon->Update();
 		}

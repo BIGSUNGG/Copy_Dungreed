@@ -14,8 +14,9 @@ void Effect_Damage::Update()
 	_color.x -= _alphaSpeed * DELTA_TIME;
 	_color.y -= _alphaSpeed * DELTA_TIME;
 	_color.z -= _alphaSpeed * DELTA_TIME;
+	_color.w -= _alphaSpeed * DELTA_TIME;
 
-	if (_color.x <= 0.5f)
+	if (_color.w <= 0.5f)
 		_isActive = false;
 }
 

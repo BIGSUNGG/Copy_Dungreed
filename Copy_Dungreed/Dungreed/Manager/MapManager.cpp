@@ -226,12 +226,12 @@ shared_ptr<Map> MapManager::Load(int level, int num)
 
 			UINT size = mapReader.Uint();
 
-			vector<int> mapInfo;
+			vector<float> mapInfo;
 			int info = 6;
 			int infoCount = objectCount * info;
 			mapInfo.resize(infoCount);
 			void* ptr = mapInfo.data();
-			mapReader.Byte(&ptr, size * sizeof(int));
+			mapReader.Byte(&ptr, size * sizeof(float));
 
 			for (int i = 0; i < objectCount; i++)
 			{
@@ -322,23 +322,23 @@ void MapManager::Save(shared_ptr<Map> map)
 	{
 		BinaryWriter mapWriter(wLoadPath + L".bin");
 
-		vector<int> mapInfo;
+		vector<float> mapInfo;
 
 		for (auto& objects : map->GetObjects())
 		{
 			for (auto& object : objects)
 			{
-				mapInfo.push_back((int)object->GetType());
-				mapInfo.push_back(object->GetLevel());
-				mapInfo.push_back(object->GetNum());
-				mapInfo.push_back((int)object->GetObjectTexture()->GetTransform()->GetPos().x);
-				mapInfo.push_back((int)object->GetObjectTexture()->GetTransform()->GetPos().y);
-				mapInfo.push_back((int)object->GetReversed());
+				mapInfo.push_back((float)object->GetType());
+				mapInfo.push_back((float)object->GetLevel());
+				mapInfo.push_back((float)object->GetNum());
+				mapInfo.push_back((float)object->GetObjectTexture()->GetTransform()->GetPos().x);
+				mapInfo.push_back((float)object->GetObjectTexture()->GetTransform()->GetPos().y);
+				mapInfo.push_back((float)object->GetReversed());
 			}
 		}
 
 		mapWriter.Uint(mapInfo.size());
-		mapWriter.Byte(mapInfo.data(), mapInfo.size() * sizeof(int));
+		mapWriter.Byte(mapInfo.data(), mapInfo.size() * sizeof(float));
 	}
 }
 
@@ -457,8 +457,6 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 	{
 		auto door = make_shared<LockDoorLeft>();
 		door->SetSpawnPos(map->GetLeftDoor());
-		if (map->GetCleared() == true)
-			door->Open();
 
 		map->AddObject(door, Object::TILE);
 	}
@@ -466,8 +464,6 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 	{
 		auto door = make_shared<LockDoorRight>();
 		door->SetSpawnPos(map->GetRightDoor());
-		if (map->GetCleared() == true)
-			door->Open();
 
 		map->AddObject(door, Object::TILE);
 	}
@@ -475,8 +471,6 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 	{
 		auto door = make_shared<LockDoorTop>();
 		door->SetSpawnPos(map->GetRightDoor());
-		if (map->GetCleared() == true)
-			door->Open();
 
 		map->AddObject(door, Object::TILE);
 	}
@@ -484,8 +478,6 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 	{
 		auto door = make_shared<LockDoorBottom>();
 		door->SetSpawnPos(map->GetRightDoor());
-		if (map->GetCleared() == true)
-			door->Open();
 
 		map->AddObject(door, Object::TILE);
 	}

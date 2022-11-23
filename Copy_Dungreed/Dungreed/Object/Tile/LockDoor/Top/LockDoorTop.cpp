@@ -43,6 +43,7 @@ LockDoorTop::LockDoorTop()
 	SetTexture(texture);
 
 	GetAnimation()->SetTexture(texture);
+	Opened();
 }
 
 void LockDoorTop::DoorOpenEffect()

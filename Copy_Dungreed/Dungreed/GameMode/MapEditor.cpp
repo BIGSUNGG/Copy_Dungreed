@@ -6,12 +6,13 @@ MapEditor::MapEditor()
 	GAME->Reset();
 	_modeType = MAP_EDITOR;
 
-	_map = MAP_MANAGER->Load(_mapLevel,_mapNum);
+	_map = MAP_MANAGER->Load(0, 0);
 	GAME->SetCurMap(_map);
 	GAME->GetPlaying() = false;
 
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 	CAMERA->SetTarget(nullptr);
+	CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
 
 	_mouseOffset.x = (_curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x);
 	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
@@ -118,7 +119,7 @@ void MapEditor::ImGuiRender()
 			ImGui::Text("Object Count : %d", _map->GetObjectCount());
 			ImGui::SliderInt("Level", &_objectLevel, 0, 8);
 			ImGui::SliderInt("Num", &_objectNum, 0, 99);
-			ImGui::SliderInt("Type", &_objectType, 0, 3);
+			ImGui::SliderInt("Type", &_objectType, 0, Object::Object_Type::ECT);
 
 			if (ImGui::Button("Reverse"))
 				_curObject->ReverseTexture();
@@ -139,6 +140,9 @@ void MapEditor::ImGuiRender()
 				break;
 			case Object::Object_Type::CREATURE:
 				ImGui::Text("CREATURE");
+				break;
+			case Object::Object_Type::ECT:
+				ImGui::Text("ECT");
 				break;
 			default:
 				break;
@@ -246,21 +250,50 @@ void MapEditor::ImGuiRender()
 	GAME->ImguiRender();
 }
 
-void MapEditor::AddObject(const bool& toFront)
+void MapEditor::AddObject()
 {
-	_map->AddObject(_curObject, _objectType, toFront);
-	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
+	bool overlap = false;
+	for (auto& object : _map->GetObjects()[_objectType])
+	{
+		if (object->GetPos() == _curObject->GetObjectTexture()->GetTransform()->GetPos())
+		{
+			overlap = true;
+			break;
+		}
+	}
 
-	if(_autoSave)
-		MAP_MANAGER->Save(_map);
+	if (!overlap)
+	{
+		GAME->AddObject(_curObject, _objectType);
+		_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
+		if (_autoSave)
+			MAP_MANAGER->Save(_map);
+
+		GAME->Instancing();
+	}
 }
 
-void MapEditor::DeleteObject(const bool& toFront)
+void MapEditor::DeleteObject()
 {
-	_map->DeleteObject(_curMousePos, _objectType, toFront);
+	shared_ptr<Object> deleteObject;
+	for (int i = 0 ; i < _map->GetObjects()[_objectType].size(); i++)
+	{
+		if (_curObject->GetCollider()->IsCollision(_map->GetObjects()[_objectType][i]->GetCollider()->GetWorldPos()))
+		{
+			deleteObject = _map->GetObjects()[_objectType][i];
+			break;
+		}
+	}
 
-	if (_autoSave)
-		MAP_MANAGER->Save(_map);
+	bool success = _map->DeleteObject(deleteObject, _objectType);
+
+	if (success) 
+	{
+		if (_autoSave)
+			MAP_MANAGER->Save(_map);
+	
+		GAME->DeleteObject(deleteObject);
+	}
 }
 
 void MapEditor::MouseEvenet()
@@ -282,23 +315,17 @@ void MapEditor::InputEvent()
 {	
 	if (CAMERA->GetFreeMode() == false)
 	{
-		if (KEY_DOWN('Q'))
-			AddObject(true);
-
 		if (KEY_DOWN('W'))
-			AddObject(false);
+			AddObject();
 
 		if (KEY_PRESS('E'))
-			AddObject(false);
-
-		if (KEY_DOWN('A'))
-			DeleteObject(true);
+			AddObject();
 
 		if (KEY_DOWN('S'))
-			DeleteObject(false);
+			DeleteObject();
 
 		if (KEY_PRESS('D'))
-			DeleteObject(false);
+			DeleteObject();
 
 		if (KEY_DOWN('R'))
 		{

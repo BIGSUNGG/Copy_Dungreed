@@ -1,8 +1,8 @@
 #include "framework.h"
 #include "Accessory.h"
 
-Accessory::Accessory(int level, int num)
-	: Item(level, num)
+Accessory::Accessory(int num)
+	: Item(0, num)
 {
 	_itemType = Item::ACCESSORY;
 }

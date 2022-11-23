@@ -22,4 +22,3 @@ protected:
 	vector<shared_ptr<Transform>> _transforms;
 	shared_ptr<VertexBuffer> _instancingBuffer;
 };
-

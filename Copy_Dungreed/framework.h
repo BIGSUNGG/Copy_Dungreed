@@ -121,6 +121,11 @@ using namespace std;
 #include "Dungreed/Struct/Status/Creature_Status.h"
 #include "Dungreed/Struct/Dash/Dash_Info.h"
 
+// ObjComponent
+#include "Dungreed/ObjectComponent/ObjectComponent.h"
+#include "Dungreed/ObjectComponent/MovementComponent/MovementComponent.h"
+#include "Dungreed/ObjectComponent/MovementComponent/DashMovementComponent/DashMovementComponent.h"
+
 // Object
 #include "Dungreed/Object/Object.h"
 #include "Dungreed/Object/BackGround/BackGround.h"
@@ -138,6 +143,9 @@ using namespace std;
 // ECT
 #include "Dungreed/Object/Ect/Ect.h"
 #include "Dungreed/Object/Ect/Bullet/Bullet.h"
+#include "Dungreed/Object/Ect/DropItem/DropItem.h"
+#include "Dungreed/Object/Ect/DropGold/DropGold.h"
+#include "Dungreed/Object/Ect/Chest/Chest.h"
 
 // Item
 #include "Dungreed/Object/Ect/Item/Item.h"
@@ -146,6 +154,7 @@ using namespace std;
 #include "Dungreed/Object/Ect/Item/Weapon/Melee/FireDragonKiller/Melee_FireDragonKiller.h"
 #include "Dungreed/Object/Ect/Item/Weapon/Gun/Gun.h"
 #include "Dungreed/Object/Ect/Item/Accessory/Accessory.h"
+#include "Dungreed/Object/Ect/Item/SubWeapon/SubWeapon.h"
 
 // Creature
 #include "Dungreed/Object/Creature/Creature.h"

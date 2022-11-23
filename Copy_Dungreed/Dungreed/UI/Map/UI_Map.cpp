@@ -9,7 +9,7 @@ UI_Map::UI_Map()
 
 	_filterQuad = make_shared<Quad>(L"UI_Map_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
 	shared_ptr<Texture> texture = Texture::Add(L"UI_Map_Texture", _filter->GetSRV());
-	_filterQuad->SetTexture(texture);
+	_filterQuad->SetImage(texture);
 	_filterQuad->GetTransform()->GetPos() = CENTER;
 
 	_mapBase = make_shared<Quad>(L"Resource/Ui/Map/Map_Base.png");

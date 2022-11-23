@@ -8,7 +8,7 @@ public:
 
 	virtual float GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
 
-	const Dash_Info& GetDashInfo() { return _dash; }
+	const Dash_Info& GetDashInfo() { return _dashInfo; }
 
 	virtual void Dash();
 	virtual void Jump() override;
@@ -17,8 +17,9 @@ public:
 
 	virtual void MoveLeft();
 	virtual void MoveRight();
+	virtual void Interaction();
 
-	virtual void SetPassFloor(const bool& pass) { _passFloor = pass; }
+	virtual void SetPassFloor(const bool& pass) { _movement->SetPassFloor(pass); }
 	virtual void SetCurWeaponSlot(const int& slot) { _curWeaponSlot = slot; }
 
 	virtual void MouseEvent();
@@ -26,6 +27,7 @@ public:
 protected:
 	virtual float GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon = nullptr);
 
+	virtual void CheckEctEvent();
 	virtual void DashMovement();
 	virtual void MovementEvent();
 
@@ -35,7 +37,11 @@ protected:
 	virtual void DoubleJumpEffect();
 
 protected:
-	Dash_Info _dash;
+	shared_ptr<DashMovementComponent> _dash;
+	Dash_Info _dashInfo;
+
+	float _goldMagnetLength = 250.f;
+
 	float _weaponDirection = 0.0f;
 
 	string _curStepSound;

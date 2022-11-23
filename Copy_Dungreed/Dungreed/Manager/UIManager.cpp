@@ -14,10 +14,15 @@ void UIManager::Update()
 			if (_blinkColor.w > 1)
 			{
 				_blinkColor.w = 1;
-				_blinkState = Blink_State::BRIGHT;
+				_blinkState = Blink_State::STOP;
 				if(_blinkEvent != nullptr)
 					_blinkEvent();
 			}
+			break;
+		case UIManager::STOP:
+			_blinkStop -= DELTA_TIME;
+			if (_blinkStop <= 0)
+				_blinkState = BRIGHT;
 			break;
 		case UIManager::BRIGHT:
 			_blinkColor.w -= DELTA_TIME * _blinkSpeed;
@@ -170,34 +175,35 @@ void UIManager::SetState(const UI_State& state)
 	}
 }
 
-void UIManager::Blink(const float& speed, const XMFLOAT4& color, function<void()> func)
+bool UIManager::Blink(const float& speed, const float& stopTime, const XMFLOAT4& color, function<void()> func)
 {
 	if (_blinkState != Blink_State::END)
-		return;
+		return false;
 
 	_blinkSpeed = speed;
+	_blinkStop = stopTime;
 	_blinkColor = color;
 	_blinkEvent = func;
 	_blinkState = Blink_State::DARK;
+	return true;
 }
-
 
 UIManager::UIManager()
 {
 	_filter = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
-	float color[4] = { 0,0,0,0.15f };
+	float color[4] = { 0,0,0,0.3f };
 	_filter->SetColor(color);
 
 	_filterQuad = make_shared<Quad>(L"UI_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
 	shared_ptr<Texture> texture = Texture::Add(L"UI_Filter_Texture", _filter->GetSRV());
-	_filterQuad->SetTexture(texture);
+	_filterQuad->SetImage(texture);
 	_filterQuad->GetTransform()->GetPos() = CENTER;
 
 	_blinkRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 
 	_blinkQuad = make_shared<Quad>(L"UI_Blink", Vector2(WIN_WIDTH, WIN_HEIGHT));
 	texture = Texture::Add(L"UI_Blink_Texture", _blinkRtv->GetSRV());
-	_blinkQuad->SetTexture(texture);
+	_blinkQuad->SetImage(texture);
 	_blinkQuad->GetTransform()->GetPos() = CENTER;
 
 	_playerHpBar = make_shared<UI_PlayerHpBar>();

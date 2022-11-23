@@ -20,11 +20,11 @@ protected:
 
 protected:
 	weak_ptr<Creature> _target;
+	bool _ai = false;
 	bool search = false;
 	float _searchLength = 500.0f;
 
 	bool _spawn = false;
-	float _spawnDelay = 0.8f;
 
 };
 

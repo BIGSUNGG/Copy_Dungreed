@@ -4,6 +4,10 @@
 Player::Player(int level, int num)
 	: Creature(level, num)
 {
+	_dash = make_shared<DashMovementComponent>(this);
+	_dash->SetDashMovementEvent(bind(&Player::DashMovement, this));
+	_dash->SetDashEndEvent([&]() {_movement->SetGravityRatio(1.f); });
+
 	_damagedRunTimeMax = 0.2f;
 
 	_creatureType = PLAYER;
@@ -31,13 +35,15 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
-	_dash.Update();
+	_dashInfo.Update();
 	_dustRunTime += DELTA_TIME;
 
 	if (_weaponSlot[_curWeaponSlot] != nullptr)
 		_weaponSlot[_curWeaponSlot]->SetShowTo(_weaponDirection);
 
+	_dash->Update();
 	Creature::Update();
+	CheckEctEvent();
 }
 
 float Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
@@ -58,7 +64,7 @@ float Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 
 void Player::DustEffect()
 {
-	if (_dash._dashCurSpeed > 0)
+	if (_dash->GetCurSpeed() > 0)
 		return;
 
 	if (_dustRunTime >= _dustDelay)
@@ -107,7 +113,7 @@ void Player::MouseEvent()
 
 void Player::MovementEvent()
 {
-	if (_velocity.x != 0)
+	if (_movement->GetVelocity().x != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::RUN);
 		if (_isFalling == false)
@@ -121,7 +127,7 @@ void Player::MovementEvent()
 		_anim->ChangeAnimation(Creature_State::IDLE);
 	}
 
-	if ((_velocity.y != 0 || _dash._dashCurSpeed > 0.0f) && _onStair == false)
+	if ((_movement->GetVelocity().y != 0 || _dash->GetCurSpeed() > 0.0f) && _movement->IsOnStair() == false)
 	{
 
 		_anim->ChangeAnimation(Creature_State::JUMP);
@@ -172,14 +178,16 @@ void Player::StepSound()
 
 void Player::Dash()
 {
-	if (_dash._dashCount > 0)
+	if (_dashInfo._dashCount > 0)
 	{
 		SOUND->Play("ui-sound-13-dash");
-		_gravityRatio = 0.3f;
-		_jumpPower = 0.0f;
-		_dash.Reset();
-		_dash._dashDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
-		_dash._dashDirection.Normalize();
+		_movement->SetGravityRatio(0.3f);
+		_movement->SetJumpPower(0.f);
+		_dashInfo.Reset();
+		Vector2 direction = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
+		direction.Normalize();
+		_dash->SetDirection(direction);
+		_dash->Dash();
 	}
 }
 
@@ -199,66 +207,92 @@ float Player::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
 	return damage;
 }
 
-void Player::DashMovement()
+void Player::CheckEctEvent()
 {
-	if (_dash._dashCurSpeed > 0.0f)
+	for (auto& object : GAME->GetObjects()[Object::ECT])
 	{
-		_passFloor = true;
-		_movement += (_dash._dashDirection * _dash._dashCurSpeed);
-		if (_dash._trailCount < _dash._trailCountMax)
+		if(object == nullptr)
+			continue;
+
+		auto ect = dynamic_pointer_cast<Ect>(object);
+		switch (ect->GetEctType())
 		{
-			_dash._trailTime += DELTA_TIME;
-			if (_dash._trailTime > _dash._trailDelay)
+		case Ect::UNKNOWN:
+			break;
+		case Ect::ITEM:
+			break;
+		case Ect::BULLET:
+			break;
+		case Ect::CHEST:
+			break;
+		case Ect::DROP_ITEM:
+		{
+			if (_collider->IsCollision(object->GetCollider()))
 			{
-				++_dash._trailCount;
-				_dash._trailTime = 0.0f;
-				auto trail = make_shared<Effect_Trail>();
-				auto quad = make_shared<Quad>(_texture->GetImageFile());
-				trail->SetTexture(quad);
-				trail->GetPos() = this->GetPos();
-				trail->SetAlpha(0.5f);
-				trail->SetFadeRatio(1.5f);
-				if (_reversed)
-					trail->ReverseTexture();
-				GAME->AddEffect(trail);
+				auto dropItem = dynamic_pointer_cast<DropItem>(ect);
+				dropItem->AddItemToCreature(this);
 			}
 		}
-
-		_isFalling = true;
-
-		if (_dash._dashSlow)
+			break;
+		case Ect::DROP_COIN:
 		{
-			_dash._dashCurSpeed -= _dash._dashSlowSpeed * DELTA_TIME;
+			auto dropGold = dynamic_pointer_cast<DropGold>(ect);
+			if (_collider->IsCollision(object->GetCollider()))
+				dropGold->AddCoinToIventory();
+			else
+			{
+				Vector2 distance = this->GetPos() - ect->GetPos();
+				if (distance.Length() <= _goldMagnetLength)
+					dropGold->SetFollowCreature(this);
+			}
 		}
-		else
-		{
-			_dash._dashRunTime += DELTA_TIME;
-
-			if (_dash._dashRunTime >= _dash._dashRunTimeMax)
-				_dash._dashSlow = true;
+			break;
+		default:
+			break;
 		}
 	}
-	else
+}
+
+void Player::DashMovement()
+{
+	if (_dashInfo._trailCount < _dashInfo._trailCountMax)
 	{
-		_gravityRatio = 1.0f;
+		_dashInfo._trailTime += DELTA_TIME;
+		if (_dashInfo._trailTime > _dashInfo._trailDelay)
+		{
+			++_dashInfo._trailCount;
+			_dashInfo._trailTime = 0.0f;
+			auto trail = make_shared<Effect_Trail>();
+			auto quad = make_shared<Quad>(_texture->GetImageFile());
+			trail->SetTexture(quad);
+			trail->GetPos() = this->GetPos();
+			trail->SetAlpha(0.5f);
+			trail->SetFadeRatio(1.5f);
+			if (_reversed)
+				trail->ReverseTexture();
+			trail->SetRenderOrder(3.6f);
+			GAME->AddEffect(trail);
+		}
 	}
+
+	_isFalling = true;
 }
 
 void Player::Jump()
 {
-	if (_dash._dashCurSpeed > 0)
+	if (_dash->GetCurSpeed() > 0)
 		return;
 
 	if (_isFalling == false)
 	{
 		SOUND->Play("Jumping");
-		_jumpPower = _jumpPowerMax;
+		_movement->Jump();
 		DustEffect();
 	}
 	else if (_doubleJumped == false)
 	{
 		SOUND->Play("Jumping");
-		_jumpPower = _jumpPowerMax;
+		_movement->Jump();
 		_doubleJumped = true;
 		DoubleJumpEffect();
 	}
@@ -266,7 +300,7 @@ void Player::Jump()
 
 void Player::Attack()
 {
-	if (_dash._dashCurSpeed > 0)
+	if (_dash->GetCurSpeed() > 0)
 		return;
 	
 	Creature::Attack();
@@ -274,7 +308,7 @@ void Player::Attack()
 
 void Player::MoveLeft()
 {
-	if (_dash._dashCurSpeed > 0)
+	if (_dash->GetCurSpeed() > 0)
 		return;
 
 	Creature::MoveLeft();
@@ -282,8 +316,26 @@ void Player::MoveLeft()
 
 void Player::MoveRight()
 {
-	if (_dash._dashCurSpeed > 0)
+	if (_dash->GetCurSpeed() > 0)
 		return;
 
 	Creature::MoveRight();
+}
+
+void Player::Interaction()
+{
+	for (auto& object : GAME->GetObjects()[Object::ECT])
+	{
+		if (object == nullptr) continue;
+
+		auto ect = dynamic_pointer_cast<Ect>(object);
+		if(!ect->GetInteraction()) continue;
+
+		float length = (GetPos() - ect->GetPos()).Length();
+		if (length <= INVENTORY->GetInteractionDistance())
+		{
+			ect->Interaction();
+			return;
+		}
+	}
 }

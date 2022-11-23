@@ -13,6 +13,8 @@ public:
 	
 	virtual void Update()override;
 
+	void SetRenderOrder(float order) { _renderOrder = order; }
+
 	virtual Effect_Type& GetEffectType() { return _effectType; }
 
 protected:

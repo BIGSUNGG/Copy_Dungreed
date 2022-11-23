@@ -57,7 +57,7 @@ void Dungreed::ImGuiRender()
 			_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetObjectTexture()->GetTransform()->GetPos().x, _player->GetObjectTexture()->GetTransform()->GetPos().y);
-		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
+		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetMovementComponent()->GetVelocity().x, _player->GetMovementComponent()->GetVelocity().y);
 	}
 
 	GAME->ImguiRender();
@@ -75,6 +75,6 @@ void Dungreed::Init()
 	GAME->AddPlayer(_player);
 	GAME->GetPlaying() = true;
 
-	MAP_MANAGER->MakeRandomMap(1, 0);
+	MAP_MANAGER->MakeRandomMap(1, 1);
 	CAMERA->Update();
 }

@@ -22,7 +22,7 @@ void UI_EnemyHpBar::Update()
 				_hpBarBase[i]->GetRender() = true;
 				_hpBarGauge[i]->GetRender() = true;
 
-				_hpBarBase[i]->GetObjectTexture()->SetTop(creature->GetObjectTexture()->Bottom() - CAMERA->GetPos().y - 10.0f);
+				_hpBarBase[i]->GetObjectTexture()->SetTop(creature->GetCollider()->Bottom() - CAMERA->GetPos().y - 10.0f);
 				_hpBarBase[i]->GetPos().x = creature->GetPos().x - CAMERA->GetPos().x;
 
 				_hpBarGauge[i]->GetPos() = _hpBarBase[i]->GetPos();

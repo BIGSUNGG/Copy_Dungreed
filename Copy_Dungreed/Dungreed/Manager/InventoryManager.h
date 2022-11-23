@@ -17,6 +17,15 @@ public:
 			return _instance;
 	}
 
+	const float& GetInteractionDistance() { return _interactionDistance; }
+
+	virtual void AddGold(int gold);
+
+	void SetCurWeaponSlot(int* slot) { _curWeaponSlot = slot; }
+	void SetItemSlot(vector<shared_ptr<Item>>* slot) { _itemSlot = slot; }
+	void SetWeaponSlot(vector<shared_ptr<Weapon>>* slot) { _weaponSlot = slot; }
+	void SetAccessorySlot(vector<shared_ptr<Accessory>>* slot) { _accessory = slot; }
+
 	const int& GetGold() { return _gold; }
 	const int& GetCurHungry() { return _hungry; }
 	const int& GetHungryMax() { return _hungryMax; }
@@ -24,20 +33,17 @@ public:
 	const int& GetCurWeaponSlot() { return *_curWeaponSlot; }
 	shared_ptr<Weapon> GetCurWeapon() { return _weaponSlot->operator[](*_curWeaponSlot); }
 
+	vector<shared_ptr<Item>>& GetItemSlot() { return *_itemSlot; }
 	vector<shared_ptr<Weapon>>& GetWeaponSlot() { return *_weaponSlot; }
 	vector<shared_ptr<Accessory>>& GetAccessorySlot() { return *_accessory; }
-	vector<shared_ptr<Item>>& GetItemSlot() { return *_itemSlot; }
-
-	void SetCurWeaponSlot(int* slot) { _curWeaponSlot = slot; }
-	void SetAccessorySlot(vector<shared_ptr<Accessory>>* slot) { _accessory = slot; }
-	void SetWeaponSlot(vector<shared_ptr<Weapon>>* slot) { _weaponSlot = slot; }
-	void SetItemSlot(vector<shared_ptr<Item>>* slot) { _itemSlot = slot; }
 
 private:
 	InventoryManager();
 	~InventoryManager();
 
 	static InventoryManager* _instance;
+
+	float _interactionDistance = 300.f;
 
 	int _gold = 123456789;
 	int _hungry = 12;

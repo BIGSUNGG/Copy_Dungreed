@@ -42,7 +42,8 @@ void DebugMode::ImGuiRender()
 	if (ImGui::CollapsingHeader("Player"))
 	{
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetObjectTexture()->GetTransform()->GetPos().x, _player->GetObjectTexture()->GetTransform()->GetPos().y);
-		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetVelocity().x, _player->GetVelocity().y);
+		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetMovementComponent()->GetVelocity().x, 
+			_player->GetMovementComponent()->GetVelocity().y);
 	}
 	if (ImGui::CollapsingHeader("Map"))
 	{
@@ -66,8 +67,8 @@ void DebugMode::Init()
 	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
 	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
+	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
 
 	GAME->AddPlayer(_player);
 	GAME->GetPlaying() = true;

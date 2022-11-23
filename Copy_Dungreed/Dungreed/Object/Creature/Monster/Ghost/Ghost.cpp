@@ -7,16 +7,14 @@ Ghost::Ghost(int level, int num)
 	_status.SetMaxHp(15);
 	_status._atk = 20;
 	_status._speed = 300.0f;
-	_gravityRatio = 0.0f;
+	_movement->SetGravityRatio(0.0f);
+	_movement->SetCollision(false);
+	
 }
 
 void Ghost::Update()
 {
 	Monster::Update();
-}
-
-void Ghost::CollisionEvent()
-{
 }
 
 void Ghost::AI()
@@ -25,7 +23,7 @@ void Ghost::AI()
 	{
 		_anim->ChangeAnimation(Creature::ATTACK);
 
-		_movement += _attackDirection * _attackSpeed;
+		_movement->GetMovement() += _attackDirection * _attackSpeed;
 		Attack();
 
 		_attackRunTime += DELTA_TIME;
@@ -39,7 +37,7 @@ void Ghost::AI()
 	{
 		_anim->ChangeAnimation(Creature::IDLE);
 
-		float length = abs(_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);
+		float length = abs((_target.lock()->GetObjectTexture()->GetTransform()->GetPos() - _texture->GetTransform()->GetPos()).Length());
 		if (length >= _targetDistance)
 		{
 			if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x > _texture->GetTransform()->GetPos().x && _reversed == true)
@@ -50,7 +48,7 @@ void Ghost::AI()
 			MoveTo(_target.lock());
 		}
 
-		if (_targetAttackDistance <= length)
+		if (_targetAttackDistance >= length)
 		{
 			_attackWatitTime += DELTA_TIME;
 			if (_attackWatitTime >= _attackWaitDelay)
@@ -70,7 +68,7 @@ void Ghost::MoveTo(shared_ptr<Object> object)
 	_attackDirection = object->GetPos() - this->GetPos();
 	_attackDirection.Normalize();
 
-	_movement += _attackDirection * _status._speed;
+	_movement->GetMovement() += _attackDirection * _status._speed;
 }
 
 void Ghost::Attack()

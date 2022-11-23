@@ -4,8 +4,6 @@
 UI_Info::UI_Info()
 	: UI()
 {
-	_uiType = UI::INFO;
-
 	_coinIcon = make_shared<Quad>(L"Resource/Icon/CoinIcon.png");
 	_coinIcon->SetLeft(37);
 	_coinIcon->SetBottom(77);

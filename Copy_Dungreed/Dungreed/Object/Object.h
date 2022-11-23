@@ -1,5 +1,8 @@
 #pragma once
-class Object
+
+class Map;
+
+class Object : public enable_shared_from_this<Object>
 {
 public:
 	enum Object_Type
@@ -10,7 +13,7 @@ public:
 		CREATURE,
 		ECT,
 		EFFECT,
-		UI,
+		NONE,
 	};
 
 public:
@@ -27,10 +30,10 @@ public:
 
 	virtual void SetAnimation();
 	virtual void SetSpawnPos(Vector2 pos);
+	virtual void SetOwnerMap(shared_ptr<Map> map);
 	virtual void SetTexture(shared_ptr<Quad> texture);
 	virtual void SetCollider(shared_ptr<RectCollider> collider = nullptr);
 	virtual void SetPos(const Vector2& pos) { _texture->GetTransform()->GetPos() = pos; }
-
 
 	bool& GetRender() { return _render; }
 	const int& GetNum() { return _num; }
@@ -41,6 +44,7 @@ public:
 	const bool& GetIsActive() { return _isActive; }
 	const Vector2& GetSpawnPos() { return _spawnPos; }
 	const Object_Type& GetType() { return _objectType; }
+	const float& GetRenderOrder() { return _renderOrder; }
 	shared_ptr<Animation> GetAnimation() { return _anim; }
 	shared_ptr<Quad> GetObjectTexture() { return _texture; }
 	shared_ptr<RectCollider> GetCollider() { return _collider; }
@@ -48,21 +52,23 @@ public:
 
 	static const int _objectTypeCount = 7;
 protected:
-	Object_Type _objectType = Object_Type::TILE;
+	Object_Type _objectType = Object_Type::NONE;
 	Vector2 _spawnPos = { 0,0 };
+	float _renderOrder = 0.f;
 	bool _static = false;
 	bool _isActive = true;
 	bool _collison = true;
+	bool _reversed = false;
+	bool _render = true;
 
+	weak_ptr<Map> _ownerMap;
 	shared_ptr<Quad> _texture;
-	shared_ptr<RectCollider> _collider;
 	shared_ptr<Animation> _anim;
 	shared_ptr<ObjectBuffer> _buffer;
+	shared_ptr<RectCollider> _collider;
 
 	int _level = 0;
 	int _num = 0;
-	bool _render = true;
-	bool _reversed = false;
 
 };
 

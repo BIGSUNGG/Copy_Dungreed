@@ -46,8 +46,9 @@ void Weapon::CheckAttack()
 
 void Weapon::Skill()
 {
-	if (_skillRuntime < _skillDelay)
+	if (_skillRuntime < _skillDelay  || _skill == nullptr)
 		return;
+
 	_skillRuntime = 0.f;
 
 	_skill();

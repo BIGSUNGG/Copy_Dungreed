@@ -41,8 +41,6 @@ UI_Inventory::UI_Inventory()
 				break;
 			case Weapon::GUN:
 				break;
-			case Weapon::SUB:
-				break;
 			default:
 				break;
 			}
@@ -118,8 +116,6 @@ UI_Inventory::UI_Inventory()
 								_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
 								break;
 							case Weapon::GUN:
-								break;
-							case Weapon::SUB:
 								break;
 							default:
 								break;
@@ -254,8 +250,6 @@ void UI_Inventory::FindTexture()
 					break;
 				case Weapon::GUN:
 					break;
-				case Weapon::SUB:
-					break;
 				default:
 					break;
 				}
@@ -306,8 +300,6 @@ void UI_Inventory::FindTexture()
 						_items[i]->GetTransform()->GetAngle() = (1.5f * PI);
 						break;
 					case Weapon::GUN:
-						break;
-					case Weapon::SUB:
 						break;
 					default:
 						break;

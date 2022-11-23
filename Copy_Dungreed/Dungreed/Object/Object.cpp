@@ -51,6 +51,11 @@ void Object::SetSpawnPos(Vector2 pos)
 	_texture->GetTransform()->GetPos() = pos;
 }
 
+void Object::SetOwnerMap(shared_ptr<Map> map)
+{
+	_ownerMap = map;
+}
+
 void Object::SetCollider(shared_ptr<RectCollider> collider)
 {
 	if (collider == nullptr)

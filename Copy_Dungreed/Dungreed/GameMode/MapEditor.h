@@ -10,8 +10,9 @@ public:
 	void PostRender() override;
 	void ImGuiRender() override;
 
-	void AddObject(const bool& toFront);
-	void DeleteObject(const bool& toFront);
+protected:
+	void AddObject();
+	void DeleteObject();
 
 	void MouseEvenet();
 	void InputEvent();

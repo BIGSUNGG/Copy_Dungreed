@@ -22,18 +22,26 @@ public:
 	shared_ptr<BackGround> GetBackGround(int level,int num);
 	shared_ptr<Wall> GetWall(int level, int num);
 	shared_ptr<Tile> GetTile(int level, int num);
+	shared_ptr<Ect> GetEct(int type, int num);
 
 	shared_ptr<Player> GetPlayer(int num);
 	shared_ptr<Creature> GetCreature(int level, int num);
 
 	shared_ptr<Bullet> GetBullet(int type, int num);
+	// Player Item
 	shared_ptr<Weapon> GetPlayerWeapon(int type, int num);
+	shared_ptr<SubWeapon> GetPlayerSubWeapon(int num);
+	shared_ptr<Accessory> GetPlayerAccessory(int num);
+
+	// Enemy Item
 	shared_ptr<Weapon> GetEnemyWeapon(int type, int num);
 
 	shared_ptr<Effect> GetPlayerEffect(int num);
 	shared_ptr<Effect> GetCreatureEffect(int level, int num);
 	shared_ptr<Effect> GetPlayerWeaponEffect(int level, int num);
 	shared_ptr<Effect> GetEnemyWeaponEffect(int level, int num);
+
+	shared_ptr<DropGold> GetGold(int num);
 
 	wstring GetCursurImage(int num);
 

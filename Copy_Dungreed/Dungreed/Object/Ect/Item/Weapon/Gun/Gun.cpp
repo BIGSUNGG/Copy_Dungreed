@@ -38,7 +38,7 @@ void Gun::Attack()
 
 	_bullet->SetDirection(direction);
 	_bullet->SetSpeed(_bulletSpeed);
-	_bullet->SetOwner(shared_from_this());
+	_bullet->SetOwner(dynamic_pointer_cast<Gun>(shared_from_this()));
 
 	bool addBullet = false;
 

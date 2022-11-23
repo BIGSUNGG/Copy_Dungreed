@@ -7,7 +7,6 @@ public:
 	virtual void Update() override;
 
 protected:
-	virtual void CollisionEvent() override;
 
 	virtual void AI() override;
 	virtual void MoveTo(shared_ptr<Object> object);
@@ -16,7 +15,7 @@ protected:
 
 protected:
 	float _targetDistance = 20.0f;
-	float _targetAttackDistance = 150.0f;
+	float _targetAttackDistance = 650.0f;
 
 	Vector2 _attackDirection = { 0,0 };
 	bool _attack = false;

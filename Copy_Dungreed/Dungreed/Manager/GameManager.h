@@ -28,6 +28,7 @@ public:
 	void ImguiRender();
 
 	void Optimize();
+
 	void Instancing();
 
 	void Input();
@@ -38,9 +39,12 @@ public:
 	void AddEctObject(shared_ptr<Object> object);
 	void AddDebugCollider(shared_ptr<Collider> collider);
 
+	void DeleteObject(shared_ptr<Object> deleteObject);
+
 	bool& GetPause() { return _pause; }
 	bool& GetRenderTexture() { return _renderTexture; }
 	bool& GetRenderCollider() { return _renderCollider; }
+	const vector<vector<shared_ptr<Object>>>& GetObjects() { return _curMap->GetObjects(); }
 
 	bool& GetPlaying() { return _playing; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true , bool forceCollision = false);
@@ -48,6 +52,7 @@ public:
 	shared_ptr<Player> GetPlayer() { return _player; }
 
 	void SetCurMap(shared_ptr<Map> addedMap);
+	void SetInput(bool input) { _input = input; }
 
 	void Reset();
 
@@ -61,12 +66,13 @@ private:
 
 	shared_ptr<Map> _curMap;
 
-	vector<vector<shared_ptr<InstanceQuad>>> _instanceQuad;
+	map<float, pair<vector<shared_ptr<Object>>, vector<shared_ptr<InstanceQuad>>>> _renderOrder;
 	vector<vector<shared_ptr<Object>>> _objectInScreen;
 	vector<pair<shared_ptr<Collider>,float>> _debugCollider;
 
 	shared_ptr<Player> _player;
 
+	bool _input = true;
 	bool _renderTexture = true;
 	bool _renderCollider = false;
 	bool _pause = false;

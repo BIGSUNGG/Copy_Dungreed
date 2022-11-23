@@ -50,7 +50,10 @@ void Animation::Update()
 void Animation::ChangeAnimation(int state , bool force)
 {
 	if (force)
+	{
 		_index.first = state;
+		_index.second = 0;
+	}
 
 	if(_animList[state].size() > 0)
 		_curState = state;
@@ -60,10 +63,8 @@ void Animation::ChangeAnimation(int state , bool force)
 void Animation::ChangeImage()
 {
 	if (_beforeChange != nullptr)
-		_beforeChange();
-	_texture->SetTexture(_animList[_index.first][_index.second]);
-	if (_refreshSize)
-		_texture->Refresh();
+		_beforeChange(_index);
+	_texture->SetImage(_animList[_index.first][_index.second]);
 	if (_afterChange != nullptr)
-		_afterChange();
+		_afterChange(_index);
 }

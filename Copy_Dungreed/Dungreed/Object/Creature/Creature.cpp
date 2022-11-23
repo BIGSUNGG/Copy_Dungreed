@@ -4,6 +4,10 @@
 Creature::Creature(int level, int num)
 	: Object(level, num)
 {
+	_movement = make_shared<MovementComponent>(this);
+	_movement->SetMovementEvent(bind(&Creature::MovementEvent, this));
+
+	_renderOrder = 4.f;
 	_objectType = Object::Object_Type::CREATURE;
 	_weaponSlot.resize(1);
 }
@@ -15,27 +19,19 @@ void Creature::Update()
 	if (_damagedRunTime >= _damagedRunTimeMax)
 		_buffer->_data.selected = 0;
 
-	_onStair = false;
-
-	if (GAME->GetPlaying())
-	{
-		_jumpPower -= (_gravityPower * _gravityRatio) * DELTA_TIME;
-
-		_movement.y += _jumpPower;
-
-		MovementEvent();
-
-		if (GAME->GetPlaying())
-			MoveCharacter();
-
-		_passFloor = false;
-		_passTile = false;
-	}
-
+	_movement->Update();
 	Object::Update();
 
-	if (_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponSlot[_curWeaponSlot]->Update();
+	for (auto& wepaon : _weaponSlot)
+	{
+		if (wepaon == nullptr)
+			continue;
+
+		wepaon->Update();
+	}
+
+	if (_texture->Top() <= CAMERA->GetLeftBottom().y)
+		Death();
 }
 
 void Creature::Render()
@@ -78,23 +74,13 @@ float Creature::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 
 float Creature::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
 {
-	float attackDamage = target->GetDamage(shared_from_this(),weapon);
+	float attackDamage = target->GetDamage(dynamic_pointer_cast<Creature>(shared_from_this()),weapon);
 	return attackDamage;
 }
 
 void Creature::MoveCharacter()
 {
-	_texture->GetTransform()->GetPos() += (_movement * DELTA_TIME);
 
-	_texture->Update();
-	_collider->Update();
-
-	CollisionEvent();
-
-	_velocity = (_texture->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
-
-	_beforeMove = _texture->GetTransform()->GetPos();
-	_movement = { 0,0 };
 }
 
 void Creature::Death()
@@ -105,6 +91,31 @@ void Creature::Death()
 	deathEffect->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
 	GAME->AddEffect(deathEffect);
+
+	if (_dropGold)
+	{
+		int gold = rand() % 3;
+		if (gold == 0)
+		{
+			int goldCount = 3;	
+			for (int i = 0; i < goldCount; i++)
+			{
+				int goldType = rand() % 4;
+				if (goldType > 0)
+					goldType = 0;
+				else
+					goldType = 1;
+
+				auto dropGold = OBJ_MANAGER->GetGold(goldType);
+				dropGold->SetPos(GetPos());
+				float x = MathUtility::RandomFloat(-0.35f, 0.35f);
+				Vector2 direction = { x, 1.f };
+				dropGold->GetDashMovementComponent()->SetDirection(direction);
+				dropGold->GetDashMovementComponent()->Dash();
+				GAME->AddEctObject(dropGold);
+			}
+		}
+	}
 }
 
 void Creature::Attack()
@@ -125,18 +136,18 @@ void Creature::Skill()
 
 void Creature::MoveLeft()
 {
-	_movement.x -= _status._speed;
+	_movement->GetMovement().x -= _status._speed;
 }
 
 void Creature::MoveRight()
 {
-	_movement.x += _status._speed;
+	_movement->GetMovement().x += _status._speed;
 }
 
 void Creature::Jump()
 {
 	if (_isFalling == false)
-		_jumpPower = _jumpPowerMax;
+		_movement->Jump();
 }
 
 void Creature::FallingEnd()
@@ -146,151 +157,17 @@ void Creature::FallingEnd()
 
 void Creature::CollisionEvent()
 {
-	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_collider, Object::Object_Type::TILE);
-	sort(collisions.begin(), collisions.end(), [](const shared_ptr<Object>& value1, const shared_ptr<Object>& value2)
-		{
-			auto temp1 = dynamic_pointer_cast<Tile>(value1);
-			auto temp2 = dynamic_pointer_cast<Tile>(value2);
 
-			if (temp1->GetTileType() > temp2->GetTileType())
-				return true;
-
-			return false;
-		});
-
-	for (auto& object : collisions)
-	{
-		auto tile = dynamic_pointer_cast<Tile>(object);
-		TileCollison(tile);
-	}
-}
-
-void Creature::TileCollison(shared_ptr<Tile> tile)
-{
-	if (_passTile)
-		return;
-
-	switch (tile->GetTileType())
-	{
-	case Tile::BLOCK:
-		TileBlockCollision(tile);
-		break;
-	case Tile::FLOOR:
-		TileFloorCollision(tile);
-		break;
-	case Tile::LEFT_STAIR:
-		TileLeftStairCollision(tile);
-		break;
-	case Tile::RIGHT_STAIR:
-		TileRightStairCollision(tile);
-		break;
-	default:
-		break;
-	}
-}	
-
-void Creature::TileBlockCollision(shared_ptr<Tile> tile)
-{
-	const float movedTop = _beforeMove.y + (_collider->GetHalfSize().y * _collider->GetTransform()->GetScale().y);
-	const float movedBottom = _beforeMove.y - (_collider->GetHalfSize().y * _collider->GetTransform()->GetScale().y);
-	const float movedRight = _beforeMove.x + (_collider->GetHalfSize().x * _collider->GetTransform()->GetScale().x);
-	const float movedLeft = _beforeMove.x - (_collider->GetHalfSize().x * _collider->GetTransform()->GetScale().x);
-
-	if (movedLeft != tile->GetCollider()->Right() && movedRight != tile->GetCollider()->Left())
-	{
-		if (_velocity.y <= 0 && movedBottom >= tile->GetCollider()->Top())
-		{
-			_texture->SetBottom(tile->GetCollider()->Top());
-			_jumpPower = 0.0f;
-			return;
-		}
-		if (movedTop <= tile->GetCollider()->Bottom())
-		{
-			_texture->SetTop(tile->GetCollider()->Bottom());
-			_jumpPower = 0.0f;
-			return;
-		}
-	}
-	if (_velocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
-	{
-		_texture->SetRight(tile->GetCollider()->Left() );
-		return;
-	}
-	if (_velocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
-	{
-		_texture->SetLeft(tile->GetCollider()->Right() );
-		return;
-	}
-	if (_onStair)
-	{
-		_texture->SetBottom(tile->GetCollider()->Top());
-		_jumpPower = 0.0f;
-		return;
-	}
-
-	_texture->SetBottom(tile->GetCollider()->Top());
-	_jumpPower = 0.0f;
-	return;
-}
-
-void Creature::TileFloorCollision(shared_ptr<Tile> tile)
-{
-	if (_passFloor == false)
-	{
-		if (_beforeMove.y - (_texture->GetHalfSize().y * _texture->GetTransform()->GetScale().y) >= tile->GetCollider()->Top())
-		{
-			_texture->SetBottom(tile->GetCollider()->Top());
-			_jumpPower = 0.0f;
-			_passFloor = true;
-		}
-	}
-}
-
-void Creature::TileLeftStairCollision(shared_ptr<Tile> tile)
-{	
-	_onStair = true;
-
-	if (_texture->GetTransform()->GetPos().x >= tile->GetObjectTexture()->Left() &&
-		_texture->GetTransform()->GetPos().x <= tile->GetObjectTexture()->Right())
-	{
-		float x =  this->GetPos().x - tile->GetCollider()->Right();
-		float y = -x + tile->GetCollider()->Bottom();
-		if (_texture->Bottom() <= y)
-		{
-			_texture->SetBottom(y);
-			_passTile = true;
-			_jumpPower = 0.0f;
-		}
-	}
-}
-
-void Creature::TileRightStairCollision(shared_ptr<Tile> tile)
-{
-	_onStair = true;
-
-	if (_texture->GetTransform()->GetPos().x >= tile->GetObjectTexture()->Left() &&
-		_texture->GetTransform()->GetPos().x <= tile->GetObjectTexture()->Right())
-	{
-		float x = this->GetPos().x - tile->GetCollider()->Left();
-		float y = x + tile->GetCollider()->Bottom();
-		if (_texture->Bottom() <= y)
-		{
-			_texture->SetBottom(y);
-			_passTile = true;
-			_jumpPower = 0.0f;
-		}
-	}
 }
 
 void Creature::SetSpawnPos(Vector2 pos)
 {
 	Object::SetSpawnPos(pos);
-	_beforeMove = pos;
-	_velocity = { 0,0 };
+	_movement->SetBeforeMove(pos);
 }
 
 
-void Creature::AddItem(shared_ptr<Item> item)
+bool Creature::AddItem(shared_ptr<Item> item)
 {
 	bool add = false;
 
@@ -304,7 +181,7 @@ void Creature::AddItem(shared_ptr<Item> item)
 		{
 			if (slot == nullptr)
 			{
-				item->SetOwner(shared_from_this());
+				item->SetOwner(dynamic_pointer_cast<Creature>(shared_from_this()));
 				slot = weapon;
 				add = true;
 				break;
@@ -320,7 +197,7 @@ void Creature::AddItem(shared_ptr<Item> item)
 		{
 			if (slot == nullptr)
 			{
-				item->SetOwner(shared_from_this());
+				item->SetOwner(dynamic_pointer_cast<Creature>(shared_from_this()));
 				slot = accessory;
 				add = true;
 				break;
@@ -340,10 +217,13 @@ void Creature::AddItem(shared_ptr<Item> item)
 		{
 			if (slot == nullptr)
 			{
-				item->SetOwner(shared_from_this());
+				item->SetOwner(dynamic_pointer_cast<Creature>(shared_from_this()));
 				slot = item;
+				add = true;
 				break;
 			}
 		}
 	}
+
+	return add;
 }

@@ -9,7 +9,6 @@ public:
 	{
 		MELEE,
 		GUN,
-		SUB,
 	};
 
 public:
@@ -54,8 +53,8 @@ protected:
 	Weapon_Type _weaponType = MELEE;
 	shared_ptr<Quad> _skillHudTexture;
 	function<void()> _skill;
-	float _skillDelay = 3.f;
-	float _skillRuntime = 3.f;
+	float _skillDelay = 0.f;
+	float _skillRuntime = 0.f;
 
 	float _weaponLength = 0.0f;
 	bool _reversed = false;

@@ -7,6 +7,8 @@ GraySkel::GraySkel(int level, int num)
 	_status.SetMaxHp(80);
 	_status._atk = 25;
 	_status._speed = 300.0f;
+
+	_dropGold = true;
 }
 
 void GraySkel::Update()
@@ -53,7 +55,7 @@ void GraySkel::AI()
 	}
 	else if (_texture->Bottom() > _target.lock()->GetObjectTexture()->Top())
 	{
-		_passFloor = true;
+		_movement->SetPassFloor(true);
 	}
 	else
 	{
@@ -69,12 +71,12 @@ void GraySkel::AI()
 
 void GraySkel::Attack()
 {
-	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=]() {
+	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](pair<int,int> pair) {
 		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos() = 
 			Vector2(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->Left(), _weaponSlot[_curWeaponSlot]->GetObjectTexture()->Bottom());
 		});
 	
-	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=]() {
+	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](pair<int, int> pair) {
 		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetLeft(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().x);
 		_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetBottom(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().y);
 		});
@@ -84,13 +86,13 @@ void GraySkel::Attack()
 
 void GraySkel::MovementEvent()
 {
-	if (_velocity.x != 0)
+	if (_movement->GetVelocity().x != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::RUN);
 
-		if (_velocity.x > 0 && _reversed == true && _isFalling == false)
+		if (_movement->GetVelocity().x > 0 && _reversed == true && _isFalling == false)
 			ReverseTexture();
-		else if (_velocity.x < 0 && _reversed == false && _isFalling == false)
+		else if (_movement->GetVelocity().x < 0 && _reversed == false && _isFalling == false)
 			ReverseTexture();
 	}
 	else
@@ -98,7 +100,7 @@ void GraySkel::MovementEvent()
 		_anim->ChangeAnimation(Creature_State::IDLE);
 	}
 
-	if (_velocity.y != 0)
+	if (_movement->GetVelocity().y != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::JUMP);
 
@@ -107,6 +109,6 @@ void GraySkel::MovementEvent()
 	else
 	{
 		FallingEnd();
-		_jumpPower = 0.0f;
+		_movement->SetJumpPower(0.0f);
 	}
 }

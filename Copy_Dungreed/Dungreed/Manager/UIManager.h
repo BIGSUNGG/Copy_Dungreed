@@ -13,9 +13,10 @@ public:
 
 	enum Blink_State
 	{
-		END = 0b00000000,
-		DARK = 0b00000010,
-		BRIGHT = 0b00000100,
+		END =		0b00000000,
+		DARK =		0b00000001,
+		STOP =		0b00000010,
+		BRIGHT =	0b00000100,
 	};
 
 public:
@@ -40,10 +41,10 @@ public:
 
 	void Refresh();
 	void SetState(const UI_State& state);
-	const UI_State& GetCurState() { return _state; }
 	char GetBlinkState() { return _blinkState; }
+	const UI_State& GetCurState() { return _state; }
 
-	void Blink(const float& speed, const XMFLOAT4& color, function<void()> func = nullptr);
+	bool Blink(const float& speed, const float& stopTime = 0, const XMFLOAT4& color = {0,0,0,0}, function<void()> func = nullptr);
 
 private:
 	UIManager();
@@ -58,9 +59,9 @@ private:
 	shared_ptr<RenderTarget> _blinkRtv;
 	XMFLOAT4 _blinkColor;
 	float _blinkSpeed;
-	char _blinkState;
+	float _blinkStop;
+	char _blinkState = END;
 	function<void()> _blinkEvent;
-
 
 	vector<shared_ptr<UI>> _ui;
 

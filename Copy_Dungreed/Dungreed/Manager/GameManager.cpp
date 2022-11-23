@@ -14,34 +14,33 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
-	if (_pause)
-		return;
-
 	if (DELTA_TIME >= _maxDelay)
 		return;
 
 	Optimize();
 	Input();
 	
-	for (auto& objects : _curMap->GetObjects())
+	if (!_pause)
 	{
-		for (auto& object : objects)
+		for (auto& objects : _curMap->GetObjects())
 		{
-			if (object == nullptr)
-				continue;
-
-			if (object->GetStatic() == true)
+			for (auto& object : objects)
 			{
-				object->GetCollider()->SetColorGreen();
-				continue;
-			}
-			object->Update();
-		}
-	}
+				if (object == nullptr)
+					continue;
 
-	for (auto& debug : _debugCollider)
-	{
-		debug.second -= DELTA_TIME;
+				if (object->GetStatic() == true)
+				{
+					object->GetCollider()->SetColorGreen();
+					continue;
+				}
+				object->Update();
+			}
+		}
+		_curMap->CheckCleared();
+
+		for (auto& debug : _debugCollider)
+			debug.second -= DELTA_TIME;
 	}
 }
 
@@ -54,22 +53,19 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
-	for (int i = Object::BACKGROUND; i < Object::UI; i++)
+	for (auto& map : _renderOrder)
 	{
-		for (auto& instanceQuad : _instanceQuad[i])
-		{
-			instanceQuad->Render();
-		}
+		for (auto& instance : map.second.second)
+			instance->Render();
 
-		for (auto& object : _objectInScreen[i])
+		for (auto& object : map.second.first)
 		{
-			if (object == nullptr || object->GetStatic() == true)
+			if(object == nullptr || object->GetIsActive() == false)
 				continue;
 
 			object->Render();
 		}
 	}
-
 }
 
 void GameManager::PostRender()
@@ -138,9 +134,9 @@ void GameManager::Optimize()
 	_objectInScreen.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false, true));
 	_objectInScreen.emplace_back(GetCollisions(temp, Object::WALL, false, false, true));
 	_objectInScreen.emplace_back(GetCollisions(temp, Object::TILE, false, false, true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false,true));	
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false,true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false,true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false, true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false, true));
+	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false, true));
 }
 
 void GameManager::Instancing()
@@ -148,19 +144,21 @@ void GameManager::Instancing()
 	if (_curMap == nullptr)
 		return;
 
-	_instanceQuad.clear();
-	_instanceQuad.resize(Object::_objectTypeCount);
+	for (auto& map : _renderOrder)
+	{
+		map.second.second.clear();
+	}
 
 	for (int i = 0; i < Object::Object_Type::CREATURE; i++)
 	{
-		unordered_map<wstring, vector<shared_ptr<Transform>>> _objects;
+		unordered_map<wstring, vector<shared_ptr<Object>>> _objects;
 		for (auto& object : _curMap->GetObjects()[i])
 		{
 			if (object == nullptr || object->GetStatic() == false)
 				continue;
 
 			object->Update();
-			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object->GetObjectTexture()->GetTransform());
+			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object);
 		}
 
 		for (auto& iter : _objects)
@@ -168,17 +166,17 @@ void GameManager::Instancing()
 			auto instanceQuad = make_shared<InstanceQuad>(iter.first, iter.second.size());
 			for (int j = 0; j < iter.second.size(); j++)
 			{
-				instanceQuad->GetTransforms()[j] = iter.second[j];
+				instanceQuad->GetTransforms()[j] = iter.second[j]->GetObjectTexture()->GetTransform();
 			}
 			instanceQuad->ApplyChanges();
-			_instanceQuad[i].emplace_back(instanceQuad);
+			_renderOrder[iter.second.front()->GetRenderOrder()].second.emplace_back(instanceQuad);
 		}
 	}
 }
 
 void GameManager::Input()
 {
-	if (_player == nullptr)
+	if (_player == nullptr || !_input)
 		return;
 
 	if (UI_MANAGER->GetCurState() == UIManager::UI_State::NOMAL)
@@ -194,13 +192,6 @@ void GameManager::Input()
 				_player->Jump();
 		}
 
-		if (KEY_PRESS('S'))
-		{
-
-		}
-		else if (KEY_UP('S'))
-			_player->SetPassFloor(false);
-
 		if (KEY_PRESS('A'))
 			_player->MoveLeft();
 		if (KEY_PRESS('D'))
@@ -211,6 +202,8 @@ void GameManager::Input()
 			_player->Dash();
 		if (KEY_DOWN('Q'))
 			_player->Skill();
+		if (KEY_DOWN('F'))
+			_player->Interaction();
 
 		_player->MouseEvent();
 	}
@@ -276,12 +269,8 @@ void GameManager::AddObject(shared_ptr<Object> object, int type)
 	if (_curMap == nullptr)
 		return;
 
-	if (object->GetObjectTexture() != nullptr)
-	{
-		object->GetObjectTexture()->Update();
-		object->GetCollider()->Update();
-	}
-	_curMap->GetObjects()[type].emplace_back(object);
+	_renderOrder[object->GetRenderOrder()].first.emplace_back(object);
+	_curMap->AddObject(object, type);
 }
 
 void GameManager::AddEffect(shared_ptr<Effect> effect)
@@ -327,6 +316,39 @@ void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
 	}
 
 	_debugCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _debugColliderRunTime));
+}
+
+void GameManager::DeleteObject(shared_ptr<Object> deleteObject)
+{
+	if (deleteObject->GetStatic())
+	{
+		for (auto& instance : _renderOrder[deleteObject->GetRenderOrder()].second)
+		{
+			if (instance->GetTexture()->GetImageFile() == deleteObject->GetObjectTexture()->GetImageFile())
+			{
+				for (auto& transform : instance->GetTransforms())
+				{
+					if (transform->GetPos() == deleteObject->GetObjectTexture()->GetTransform()->GetPos())
+					{
+						transform->GetPos() = Vector2(-10000.f, -10000.f);
+						instance->ApplyChanges();
+						return;
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		for (auto& object : _renderOrder[deleteObject->GetRenderOrder()].first)
+		{
+			if (object == deleteObject)
+			{
+				object = nullptr;
+				return;
+			}
+		}
+	}
 }
 
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor,bool forceCollison)
@@ -425,7 +447,16 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 		}
 	}
 
+	_renderOrder.clear();
 	Instancing();
+	for(auto& objects : _curMap->GetObjects())
+		for (auto& object : objects)
+		{
+			if(object == nullptr || object->GetStatic())
+				continue;
+
+			_renderOrder[object->GetRenderOrder()].first.emplace_back(object);
+		}
 
 	CAMERA->SetLeftBottom(map->GetLeftBottom());
 	CAMERA->SetRightTop(map->GetRightTop());

@@ -143,9 +143,11 @@ void Quad::CreateVertices()
     _indices.push_back(3);
 }
 
-void Quad::SetTexture(wstring file)
-{
+void Quad::SetImage(wstring file)
+{  
     _texture = Texture::Add(file);
+	if (_size != _texture->GetSize())
+       Refresh();
 }
 
 void Quad::SetVS(wstring vs)
