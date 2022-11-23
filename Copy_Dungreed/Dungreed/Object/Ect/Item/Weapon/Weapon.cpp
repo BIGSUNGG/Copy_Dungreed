@@ -25,7 +25,7 @@ void Weapon::Update()
 
 	Item::Update();
 
-	if(_anim != nullptr && _anim->GetIsPlaying() == false)
+	if(_anim != nullptr && _anim->IsPlaying() == false)
 		_anim->ChangeAnimation(Creature::Creature_State::IDLE);
 }
 

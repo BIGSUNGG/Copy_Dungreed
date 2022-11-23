@@ -9,6 +9,7 @@ MovementComponent::MovementComponent(Object* object)
 void MovementComponent::Update()
 {
 	_onStair = false;
+	_isFalling = false;
 
 	if (GAME->GetPlaying())
 	{
@@ -30,6 +31,9 @@ void MovementComponent::Update()
 
 			_beforeMove = _object->GetObjectTexture()->GetTransform()->GetPos();
 			_movement = { 0,0 };
+
+			if (_velocity.y != 0.f)
+				_isFalling = true;
 		}
 
 		_passFloor = false;

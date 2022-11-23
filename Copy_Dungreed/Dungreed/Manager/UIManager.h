@@ -41,6 +41,7 @@ public:
 
 	void Refresh();
 	void SetState(const UI_State& state);
+	void SetPostProssesing(XMFLOAT4 color);
 	char GetBlinkState() { return _blinkState; }
 	const UI_State& GetCurState() { return _state; }
 
@@ -52,8 +53,8 @@ private:
 
 	static UIManager* _instance;
 	UI_State _state = UI_State::NOMAL;
-	shared_ptr<RenderTarget> _filter;
-	shared_ptr<Quad> _filterQuad;
+	shared_ptr<RenderTarget> _postProssessing;
+	shared_ptr<Quad> _postProssessingQuad;
 
 	shared_ptr<Quad> _blinkQuad;
 	shared_ptr<RenderTarget> _blinkRtv;

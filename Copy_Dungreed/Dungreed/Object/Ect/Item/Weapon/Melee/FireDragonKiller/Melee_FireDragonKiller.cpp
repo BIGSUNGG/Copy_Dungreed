@@ -27,7 +27,7 @@ void Melee_FireDragonKiller::Update()
 
 	for (auto effect : _fireEffect)
 	{
-		if (effect == nullptr || !effect->GetIsActive())
+		if (effect == nullptr || !effect->IsActive())
 			continue;
 
 		effect->Update();
@@ -40,7 +40,7 @@ void Melee_FireDragonKiller::Render()
 	
 	for (auto effect : _fireEffect)
 	{
-		if (effect == nullptr || !effect->GetIsActive())
+		if (effect == nullptr || !effect->IsActive())
 			continue;
 
 		effect->Render();

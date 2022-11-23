@@ -18,7 +18,7 @@ bool Map::CheckCleared()
 
 	for (auto& object : _objects[Object::CREATURE])
 	{
-		if (object == nullptr || !object->GetIsActive())
+		if (object == nullptr || !object->IsActive())
 			continue;
 
 		auto creature = dynamic_pointer_cast<Creature>(object);

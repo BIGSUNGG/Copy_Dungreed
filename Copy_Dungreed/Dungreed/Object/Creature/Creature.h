@@ -27,10 +27,11 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-	virtual float GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon);
+	virtual float TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon);
 	virtual float GiveDamage(shared_ptr<Creature> target , shared_ptr<Item> weapon = nullptr);
 
-	const bool& GetIsFalling() { return _isFalling; }
+	bool IsFalling() { return _movement->IsFalling(); }
+
 	const Creature_Status& GetStatus() { return _status; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
 	shared_ptr<MovementComponent> GetMovementComponent() { return _movement; }
@@ -41,7 +42,6 @@ public:
 	virtual void CollisionEvent();
 
 	virtual void MoveCharacter();
-	virtual void FallingEnd();
 	virtual void Death();
 
 public:
@@ -67,7 +67,6 @@ protected:
 	Creature_Status _status;
 
 	bool _dropGold = false;
-	bool _isFalling = false;
 
 	float _damagedRunTime = 0.1f;
 	float _damagedRunTimeMax = 0.1f;

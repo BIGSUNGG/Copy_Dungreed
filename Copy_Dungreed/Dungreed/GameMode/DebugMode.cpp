@@ -20,11 +20,13 @@ void DebugMode::Update()
 {
 	GAME->Update();
 	MAP_MANAGER->Update();
+	UI_MANAGER->Update();
 }
 
 void DebugMode::PreRender()
 {
 	GAME->PreRender();
+	UI_MANAGER->PreRender();
 }
 
 void DebugMode::Render()
@@ -35,6 +37,7 @@ void DebugMode::Render()
 void DebugMode::PostRender()
 {
 	GAME->PostRender();
+	UI_MANAGER->PostRender();
 }
 
 void DebugMode::ImGuiRender()

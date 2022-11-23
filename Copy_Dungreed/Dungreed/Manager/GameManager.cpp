@@ -60,7 +60,7 @@ void GameManager::Render()
 
 		for (auto& object : map.second.first)
 		{
-			if(object == nullptr || object->GetIsActive() == false)
+			if(object == nullptr || object->IsActive() == false)
 				continue;
 
 			object->Render();
@@ -121,7 +121,7 @@ void GameManager::Optimize()
 			if (object == nullptr)
 				continue;
 
-			if (object->GetIsActive() == false)
+			if (object->IsActive() == false)
 				object = nullptr;
 		}
 	}

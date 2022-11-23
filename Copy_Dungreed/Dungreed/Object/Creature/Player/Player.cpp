@@ -46,12 +46,12 @@ void Player::Update()
 	CheckEctEvent();
 }
 
-float Player::GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+float Player::TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 {
 	if (_buffer->_data.selected == 2)
 		return false;
 
-	const bool& damage = Creature::GetDamage(enemy, weapon);
+	const bool& damage = Creature::TakeDamage(enemy, weapon);
 
 	if (_status._hp > 0)
 	{
@@ -116,7 +116,7 @@ void Player::MovementEvent()
 	if (_movement->GetVelocity().x != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::RUN);
-		if (_isFalling == false)
+		if (_movement->IsFalling() == false)
 		{
 			StepSound();
 			DustEffect();
@@ -129,17 +129,14 @@ void Player::MovementEvent()
 
 	if ((_movement->GetVelocity().y != 0 || _dash->GetCurSpeed() > 0.0f) && _movement->IsOnStair() == false)
 	{
-
 		_anim->ChangeAnimation(Creature_State::JUMP);
-		_isFalling = true;
 	}
 	else
 	{
-		if (_isFalling == true)
+		if (_movement->IsFalling() == true)
 			DustEffect();
 
 		_doubleJumped = false;
-		FallingEnd();
 	}
 
 	DashMovement();
@@ -274,8 +271,6 @@ void Player::DashMovement()
 			GAME->AddEffect(trail);
 		}
 	}
-
-	_isFalling = true;
 }
 
 void Player::Jump()
@@ -283,7 +278,7 @@ void Player::Jump()
 	if (_dash->GetCurSpeed() > 0)
 		return;
 
-	if (_isFalling == false)
+	if (_movement->IsFalling() == false)
 	{
 		SOUND->Play("Jumping");
 		_movement->Jump();

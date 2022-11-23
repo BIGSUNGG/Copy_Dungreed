@@ -30,7 +30,7 @@ void GraySkel::Update()
 void GraySkel::AI()
 {
 	if (_weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::Creature_State::ATTACK && 
-		_weaponSlot[_curWeaponSlot]->GetAnimation()->GetIsPlaying() == true)
+		_weaponSlot[_curWeaponSlot]->GetAnimation()->IsPlaying() == true)
 		return;
 
 	float length = abs(_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x - _texture->GetTransform()->GetPos().x);
@@ -41,7 +41,7 @@ void GraySkel::AI()
 		else
 			MoveLeft();
 	}
-	else if (_texture->Top() < _target.lock()->GetObjectTexture()->GetTransform()->GetPos().y && _target.lock()->GetIsFalling() == false)
+	else if (_texture->Top() < _target.lock()->GetObjectTexture()->GetTransform()->GetPos().y && _target.lock()->IsFalling() == false)
 	{
 		if (length >= _targetDistanceJumping)
 		{
@@ -63,8 +63,8 @@ void GraySkel::AI()
 			ReverseTexture();
 		else if (_target.lock()->GetObjectTexture()->GetTransform()->GetPos().x < _texture->GetTransform()->GetPos().x && _reversed == false)
 			ReverseTexture();
-
-		if(_target.lock()->GetIsFalling() == false)
+		float t = _target.lock()->GetCollider()->Bottom();
+		if(_collider->Bottom() >= _target.lock()->GetCollider()->Bottom())
 			Attack();
 	}
 }
@@ -90,9 +90,9 @@ void GraySkel::MovementEvent()
 	{
 		_anim->ChangeAnimation(Creature_State::RUN);
 
-		if (_movement->GetVelocity().x > 0 && _reversed == true && _isFalling == false)
+		if (_movement->GetVelocity().x > 0 && _reversed == true && _movement->IsFalling() == false)
 			ReverseTexture();
-		else if (_movement->GetVelocity().x < 0 && _reversed == false && _isFalling == false)
+		else if (_movement->GetVelocity().x < 0 && _reversed == false && _movement->IsFalling() == false)
 			ReverseTexture();
 	}
 	else
@@ -103,12 +103,5 @@ void GraySkel::MovementEvent()
 	if (_movement->GetVelocity().y != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::JUMP);
-
-		_isFalling = true;
-	}
-	else
-	{
-		FallingEnd();
-		_movement->SetJumpPower(0.0f);
 	}
 }

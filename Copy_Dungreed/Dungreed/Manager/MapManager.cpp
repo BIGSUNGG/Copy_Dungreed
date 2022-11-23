@@ -426,8 +426,10 @@ void MapManager::SetCurMap(const Vector2& index)
 	{
 	case 0:
 		bgm = "0.Town";
+		UI_MANAGER->SetPostProssesing({ 0,0,0,0 });
 		break;
 	case 1:
+		UI_MANAGER->SetPostProssesing({ 0,0,0,0.3f });
 		bgm = "1.JailField";
 		break;
 	default:

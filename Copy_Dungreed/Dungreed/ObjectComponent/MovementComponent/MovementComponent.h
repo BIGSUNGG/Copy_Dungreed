@@ -11,6 +11,7 @@ public:
 
 	virtual void Jump();
 
+	bool IsFalling() { return _isFalling; }
 	bool IsOnStair() { return _onStair; }
 	Vector2& GetMovement() { return _movement; }
 	const Vector2& GetVelocity() { return _velocity; }
@@ -48,6 +49,7 @@ protected:
 	float _gravityRatio = 1.0f;
 
 	bool _collision = true;
+	bool _isFalling = false;
 	bool _passFloor = false;
 	bool _passTile = false;
 	bool _onStair = false;

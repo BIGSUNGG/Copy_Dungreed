@@ -72,13 +72,13 @@ void UIManager::Update()
 		break;
 	}
 
-	_filterQuad->Update();
+	_postProssessingQuad->Update();
 	_blinkQuad->Update();
 }
 
 void UIManager::PreRender()
 {
-	_filter->Set();
+	_postProssessing->Set();
 	_blinkRtv->Set();
 	for (auto& ui : _ui)
 		ui->PreRender();
@@ -88,7 +88,7 @@ void UIManager::PostRender()
 {
 	Camera::GetInstance()->SetUiCameraBuffer();
 
-	_filterQuad->Render();
+	_postProssessingQuad->Render();
 
 	switch (_state)
 	{
@@ -175,6 +175,12 @@ void UIManager::SetState(const UI_State& state)
 	}
 }
 
+void UIManager::SetPostProssesing(XMFLOAT4 color)
+{
+	float colors[4] = { color.x,color.y,color.z,color.w };
+	_postProssessing->SetColor(colors);
+}
+
 bool UIManager::Blink(const float& speed, const float& stopTime, const XMFLOAT4& color, function<void()> func)
 {
 	if (_blinkState != Blink_State::END)
@@ -190,14 +196,14 @@ bool UIManager::Blink(const float& speed, const float& stopTime, const XMFLOAT4&
 
 UIManager::UIManager()
 {
-	_filter = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
-	float color[4] = { 0,0,0,0.3f };
-	_filter->SetColor(color);
+	_postProssessing = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
+	float color[4] = { 0,0,0,0 };
+	_postProssessing->SetColor(color);
 
-	_filterQuad = make_shared<Quad>(L"UI_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
-	shared_ptr<Texture> texture = Texture::Add(L"UI_Filter_Texture", _filter->GetSRV());
-	_filterQuad->SetImage(texture);
-	_filterQuad->GetTransform()->GetPos() = CENTER;
+	_postProssessingQuad = make_shared<Quad>(L"UI_Filter", Vector2(WIN_WIDTH, WIN_HEIGHT));
+	shared_ptr<Texture> texture = Texture::Add(L"UI_Filter_Texture", _postProssessing->GetSRV());
+	_postProssessingQuad->SetImage(texture);
+	_postProssessingQuad->GetTransform()->GetPos() = CENTER;
 
 	_blinkRtv = make_shared<RenderTarget>(WIN_WIDTH, WIN_HEIGHT);
 

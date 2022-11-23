@@ -6,14 +6,14 @@ public:
 
 	virtual void Update() override;
 
-	virtual float GetDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
+	virtual float TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
 
 	const Dash_Info& GetDashInfo() { return _dashInfo; }
 
 	virtual void Dash();
 	virtual void Jump() override;
 
-	virtual void Attack();
+	virtual void Attack();	
 
 	virtual void MoveLeft();
 	virtual void MoveRight();
@@ -40,7 +40,7 @@ protected:
 	shared_ptr<DashMovementComponent> _dash;
 	Dash_Info _dashInfo;
 
-	float _goldMagnetLength = 250.f;
+	float _goldMagnetLength = 350.f;
 
 	float _weaponDirection = 0.0f;
 

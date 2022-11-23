@@ -34,9 +34,9 @@ void LockDoor::Update()
 					GAME->SetInput(false);
 			}
 		}
-		else if (_anim->GetCurAnim() == LOCK && _anim->GetIsPlaying() == false)
+		else if (_anim->GetCurAnim() == LOCK && _anim->IsPlaying() == false)
 			_anim->ChangeAnimation(IDLE);
-		else if (_anim->GetCurAnim() == OPEN && _anim->GetIsPlaying() == false)
+		else if (_anim->GetCurAnim() == OPEN && _anim->IsPlaying() == false)
 			Opened();
 	}
 
@@ -55,7 +55,7 @@ void LockDoor::Opened()
 	_render = false;
 	_open = true;
 	_anim->ChangeAnimation(OPEN, true);
-	_anim->GetIsPlaying() = false;
+	_anim->IsPlaying() = false;
 	_collison = false;
 }
 
@@ -64,7 +64,7 @@ void LockDoor::Open()
 	_render = true;
 	_open = false;
 	_anim->ChangeAnimation(OPEN);
-	_anim->GetIsPlaying() = true;
+	_anim->IsPlaying() = true;
 	_collison = true;
 }
 
@@ -73,7 +73,7 @@ void LockDoor::Lock()
 	_render = true;
 	_open = false;
 	_anim->ChangeAnimation(LOCK);
-	_anim->GetIsPlaying() = true;
+	_anim->IsPlaying() = true;
 	_collison = true;
 }
 

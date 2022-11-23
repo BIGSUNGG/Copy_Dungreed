@@ -45,14 +45,14 @@ private:
 
 	float _interactionDistance = 300.f;
 
-	int _gold = 123456789;
+	int _gold = 0;
 	int _hungry = 12;
 	int _hungryMax = 100;
 	int _playerLevel = 12;
 
 	int* _curWeaponSlot;
-	vector<shared_ptr<Weapon>>* _weaponSlot;
-	vector<shared_ptr<Accessory>>* _accessory;
-	vector<shared_ptr<Item>>* _itemSlot;
+	vector<shared_ptr<Weapon>>* _weaponSlot = nullptr;
+	vector<shared_ptr<Accessory>>* _accessory = nullptr;
+	vector<shared_ptr<Item>>* _itemSlot = nullptr;
 };
 

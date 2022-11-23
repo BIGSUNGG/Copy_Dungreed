@@ -35,13 +35,13 @@ public:
 	virtual void SetCollider(shared_ptr<RectCollider> collider = nullptr);
 	virtual void SetPos(const Vector2& pos) { _texture->GetTransform()->GetPos() = pos; }
 
+	bool IsActive() { return _isActive; }
 	bool& GetRender() { return _render; }
 	const int& GetNum() { return _num; }
 	const int& GetLevel() { return _level; }
 	bool& GetCollision() { return _collison; }
 	const bool& GetStatic() { return _static; }
 	const bool& GetReversed() { return _reversed; }
-	const bool& GetIsActive() { return _isActive; }
 	const Vector2& GetSpawnPos() { return _spawnPos; }
 	const Object_Type& GetType() { return _objectType; }
 	const float& GetRenderOrder() { return _renderOrder; }

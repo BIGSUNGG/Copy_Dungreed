@@ -20,7 +20,7 @@ public:
 	void SetBeforeChangeFunc(function<void(pair<int, int>)> func) { _beforeChange = func; }
 	void SetAfterChangeFunc(function<void(pair<int, int>)> func) { _afterChange = func; }
 
-	bool& GetIsPlaying() { return _isPlaying; }
+	bool& IsPlaying() { return _isPlaying; }
 	const int& GetCurAnim() { return _index.first; }
 
 	unordered_map<int, vector<wstring>> _animList;

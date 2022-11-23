@@ -12,6 +12,6 @@ void Effect::Update()
 {
 	Object::Update();
 
-	if (_anim->GetIsPlaying() == false)
+	if (_anim->IsPlaying() == false)
 		_isActive = false;
 }
