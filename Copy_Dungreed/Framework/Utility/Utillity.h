@@ -66,3 +66,26 @@ static void EndProgram()
 {
 	DestroyWindow(Device::GetInstance()->GetHWND());
 }
+
+static string GetCurPath()
+{
+	string strPath;
+
+	char path[1000];
+	_getcwd(path, 1000);
+
+	strPath = CharToStr(path, 1000);
+	strPath += "\\";
+
+	return strPath;
+}
+
+static bool CheckFileExist(const string& path)
+{
+	ifstream exist(path);
+
+	if (exist)
+		return true;
+
+	return false;
+}

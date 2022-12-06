@@ -41,7 +41,7 @@ public:
 	void Save();
 	void Load();
 
-	void Add(string key, string file, bool bgm = false);
+	void Add(string key, string file, bool loop = false, bool bgm = false);
 	void Play(string key);
 
 	void Stop(string key);

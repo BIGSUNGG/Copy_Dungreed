@@ -29,7 +29,7 @@ void GameManager::Update()
 				if (object == nullptr)
 					continue;
 
-				if (object->GetStatic() == true)
+				if (object->IsStatic() == true)
 				{
 					object->GetCollider()->SetColorGreen();
 					continue;
@@ -42,6 +42,8 @@ void GameManager::Update()
 		for (auto& debug : _debugCollider)
 			debug.second -= DELTA_TIME;
 	}
+
+	_curMap->CheckCleared();
 }
 
 void GameManager::PreRender()
@@ -154,7 +156,7 @@ void GameManager::Instancing()
 		unordered_map<wstring, vector<shared_ptr<Object>>> _objects;
 		for (auto& object : _curMap->GetObjects()[i])
 		{
-			if (object == nullptr || object->GetStatic() == false)
+			if (object == nullptr || object->IsStatic() == false)
 				continue;
 
 			object->Update();
@@ -320,7 +322,7 @@ void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
 
 void GameManager::DeleteObject(shared_ptr<Object> deleteObject)
 {
-	if (deleteObject->GetStatic())
+	if (deleteObject->IsStatic())
 	{
 		for (auto& instance : _renderOrder[deleteObject->GetRenderOrder()].second)
 		{
@@ -361,7 +363,7 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 		if (object == nullptr || collider == object->GetCollider())
 			continue;
 
-		if (object->GetCollision() == false && forceCollison == false)
+		if (object->IsCollision() == false && forceCollison == false)
 			continue;
 
 		if (object->GetCollider() != nullptr)
@@ -452,7 +454,7 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 	for(auto& objects : _curMap->GetObjects())
 		for (auto& object : objects)
 		{
-			if(object == nullptr || object->GetStatic())
+			if(object == nullptr || object->IsStatic())
 				continue;
 
 			_renderOrder[object->GetRenderOrder()].first.emplace_back(object);

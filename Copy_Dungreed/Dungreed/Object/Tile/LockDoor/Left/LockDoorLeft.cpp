@@ -45,18 +45,3 @@ LockDoorLeft::LockDoorLeft()
 	GetAnimation()->SetTexture(texture);
 	Opened();
 }
-
-void LockDoorLeft::DoorOpenEffect()
-{
-	auto trail = make_shared<Effect_Trail>();
-	auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
-	trail->SetTexture(quad);
-	trail->GetPos().x = MathUtility::RandomFloat(MAP_MANAGER->GetCurMap()->GetLeftDoor().x - _texture->GetHalfSize().x, MAP_MANAGER->GetCurMap()->GetLeftDoor().x + _texture->GetHalfSize().x);
-	trail->GetPos().y = MathUtility::RandomFloat(MAP_MANAGER->GetCurMap()->GetLeftDoor().y - (_texture->GetHalfSize().y * 0.7), MAP_MANAGER->GetCurMap()->GetLeftDoor().y + (_texture->GetHalfSize().y * 0.7));
-	trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
-	trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
-	trail->SetFadeRatio(0.7f);
-	trail->SetDirection({ 1,0 });
-	trail->SetSpeed(100.0f);
-	GAME->AddEffect(trail);
-}

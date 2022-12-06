@@ -17,11 +17,13 @@ public:
 	virtual void SetSlowDownSpeed(float speed) { _slowDownSpeed = speed; }
 	virtual void SetKeepMaxSpeedTime(float time) { _keepMaxSpeedTime = time; }
 	virtual void SetDashEndEvent(function<void()> func) { _dashEndEvent = func; }
+	virtual void SetDashSlowDownEvent(function<void()> func) { _slowDownEvent = func; }
 	virtual void SetDashMovementEvent(function<void()> func) { _dashMovementEvent = func; }
 
 protected:
 	Vector2 _direction = { 0,0 };
 	function<void()> _dashMovementEvent;
+	function<void()> _slowDownEvent;
 	function<void()> _dashEndEvent;
 
 	bool _dash = false;

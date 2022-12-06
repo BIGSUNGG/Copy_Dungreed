@@ -62,23 +62,22 @@ void Audio::Load()
 	}
 }
 
-void Audio::Add(string key, string file, bool bgm)
+void Audio::Add(string key, string file, bool loop, bool bgm)
 {
 	if (_soundMap.count(key) > 0)
 		return;
 
 	SoundInfo* info = new SoundInfo();
 
-	if (bgm)
-	{
+	if (loop)
 		_soundSystem->createStream(file.c_str(), FMOD_LOOP_NORMAL, nullptr, IN & info->_sound);
-		_type[key] = true;
-	}
 	else
-	{
 		_soundSystem->createSound(file.c_str(), FMOD_DEFAULT, nullptr, IN & info->_sound);
+
+	if (bgm)
+		_type[key] = true;
+	else
 		_type[key] = false;
-	}
 
 	assert(info->_sound != nullptr);
 

@@ -23,6 +23,7 @@ public:
 	virtual void SetCurWeaponSlot(const int& slot) { _curWeaponSlot = slot; }
 
 	virtual void MouseEvent();
+	virtual void SetStatic(bool sta);
 
 protected:
 	virtual float GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon = nullptr);

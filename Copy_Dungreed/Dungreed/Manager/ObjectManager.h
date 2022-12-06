@@ -44,6 +44,7 @@ public:
 	shared_ptr<DropGold> GetGold(int num);
 
 	wstring GetCursurImage(int num);
+	wstring GetNumberImage(int num);
 
 private:
 	ObjectManager();

@@ -11,8 +11,8 @@ public:
 
 	virtual void Jump();
 
-	bool IsFalling() { return _isFalling; }
 	bool IsOnStair() { return _onStair; }
+	bool& IsFalling() { return _isFalling; }
 	Vector2& GetMovement() { return _movement; }
 	const Vector2& GetVelocity() { return _velocity; }
 
@@ -25,6 +25,7 @@ public:
 	void SetCollision(bool collision) { _collision = collision; }
 	void SetPassFloor(bool pass) { _passFloor = pass; }
 	void SetPassTIle(bool pass) { _passTile = pass; }
+	void SetStatic(bool sta) { _static = sta; }
 
 protected:
 	virtual void CollisionEvent();
@@ -48,6 +49,7 @@ protected:
 	float _gravityPower = 5000.0f;
 	float _gravityRatio = 1.0f;
 
+	bool _static = false;
 	bool _collision = true;
 	bool _isFalling = false;
 	bool _passFloor = false;

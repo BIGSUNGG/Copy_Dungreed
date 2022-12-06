@@ -82,7 +82,7 @@ void Melee::SetWeapon()
 
 		float angle;
 
-		if (_owner.lock()->GetReversed())
+		if (_owner.lock()->IsReversed())
 		{
 			if (_reversed == false)
 			{

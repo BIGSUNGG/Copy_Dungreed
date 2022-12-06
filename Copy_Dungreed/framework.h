@@ -117,9 +117,10 @@ using namespace std;
 #include "Object/Quad.h"
 #include "Object/InstanceQuad.h"
 
-// Status
+// Struct
 #include "Dungreed/Struct/Status/Creature_Status.h"
 #include "Dungreed/Struct/Dash/Dash_Info.h"
+#include "Dungreed/Struct/Map/MapBasic.h"
 
 // ObjComponent
 #include "Dungreed/ObjectComponent/ObjectComponent.h"
@@ -138,7 +139,7 @@ using namespace std;
 #include "Dungreed/Object/Tile/LockDoor/Bottom/LockDoorBottom.h"
 #include "Dungreed/Object/Effect/Effect.h"
 #include "Dungreed/Object/Effect/Trail/Effect_Trail.h"
-#include "Dungreed/Object/Effect/Damage/Effect_Damage.h"
+#include "Dungreed/Object/Effect/Number/Effect_Number.h"
 
 // ECT
 #include "Dungreed/Object/Ect/Ect.h"

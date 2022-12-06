@@ -9,7 +9,7 @@ public:
 	void SetAlpha(const float& alpha) { _buffer->_data.value4 = alpha; }
 	void SetFadeRatio(const float& ratio) { _fadeRatio = ratio; }
 	void SetSpeed(const float& speed) { _speed = speed; }
-	void SetDirection(const Vector2& direction) { _direction = direction; }
+	void SetDirection(const Vector2& direction);
 
 protected:
 	float _fadeRatio = 1.0f;

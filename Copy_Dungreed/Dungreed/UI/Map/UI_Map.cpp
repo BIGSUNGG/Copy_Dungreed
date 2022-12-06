@@ -77,6 +77,8 @@ void UI_Map::Render()
 
 void UI_Map::Refresh()
 {
+	_visited[MAP_MANAGER->GetCurMap()] = true;
+
 	_mapBlock->GetTransforms().clear();
 	_verticalLine->GetTransforms().clear();
 	_horizonLine->GetTransforms().clear();
@@ -85,7 +87,10 @@ void UI_Map::Refresh()
 	{
 		for (auto& map : maps.second)
 		{
-			if (map.second.second)
+			if(map.second.first == nullptr)
+				continue;
+
+			if (map.second.second && _visited[map.second.first] == true)
 			{
 				Vector2 distance = MAP_MANAGER->GetMapIndex() - Vector2(maps.first, map.first);
 				Vector2 blockPos = Vector2(960.f - (distance.x * 156.f), 457.f - (distance.y * 156.f));

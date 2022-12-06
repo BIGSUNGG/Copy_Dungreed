@@ -18,6 +18,6 @@ public:
 	int _trailCount = 0;
 	float _trailTime = 0.0f;
 	const int _trailCountMax = 4;
-	const float _trailDelay = 0.05f;
+	const float _trailDelay = 0.025f;
 };
 

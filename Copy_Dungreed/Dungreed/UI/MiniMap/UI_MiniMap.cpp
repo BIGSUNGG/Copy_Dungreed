@@ -34,12 +34,12 @@ void UI_MiniMap::Update()
 		auto& creature = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
 		for (int i = 0; i < _miniEnemy.size(); i++)
 		{
-			if (creature[i] == GAME->GetPlayer() || creature[i] == nullptr || creature[i]->GetRender() == false)
+			if (creature[i] == GAME->GetPlayer() || creature[i] == nullptr || creature[i]->IsRender() == false)
 			{
-				_miniEnemy[i]->GetRender() = false;
+				_miniEnemy[i]->IsRender() = false;
 				continue;
 			}
-			_miniEnemy[i]->GetRender() = true;
+			_miniEnemy[i]->IsRender() = true;
 			Vector2 pos = (creature[i]->GetPos() - MAP_MANAGER->GetCurMap()->GetLeftBottom()) * _miniMapSizeRatio;
 			pos.x += _miniMapBase->Left();
 			pos.y += _miniMapBase->Bottom() + 5.0f;
@@ -97,7 +97,7 @@ void UI_MiniMap::Refresh()
 		_miniTile = make_shared<InstanceQuad>(quad, tiles.size());
 		for (int i = 0; i < tiles.size(); i++)
 		{
-			if (tiles[i] == nullptr || tiles[i]->GetStatic() == false)
+			if (tiles[i] == nullptr || tiles[i]->IsStatic() == false)
 			{
 				_miniTile->GetTransforms()[i] = nullptr;
 				continue;
@@ -120,7 +120,7 @@ void UI_MiniMap::Refresh()
 		for (auto& enemy : _miniEnemy)
 		{
 			enemy = make_shared<Object>();
-			enemy->GetRender() = false;
+			enemy->IsRender() = false;
 			auto quad = make_shared<Quad>(L"Resource/Ui/MiniMap/MiniEnemy.png");
 			enemy->SetTexture(quad);
 		}

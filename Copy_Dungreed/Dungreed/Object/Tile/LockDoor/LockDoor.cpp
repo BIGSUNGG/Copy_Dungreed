@@ -27,11 +27,15 @@ void LockDoor::Update()
 				function<void()> func = [=]() {
 					MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapIndex() + _moveDirection);
 					GAME->SetInput(true);
+					GAME->GetPlayer()->SetStatic(false);
 				};
 				XMFLOAT4 color = { 0,0,0,0 };
 				bool success = UI_MANAGER->Blink(6,0.15f, color, func);
-				if(success) 
+				if (success)
+				{
 					GAME->SetInput(false);
+					GAME->GetPlayer()->SetStatic(true);
+				}
 			}
 		}
 		else if (_anim->GetCurAnim() == LOCK && _anim->IsPlaying() == false)
@@ -80,4 +84,16 @@ void LockDoor::Lock()
 
 void LockDoor::DoorOpenEffect()
 {
+	auto trail = make_shared<Effect_Trail>();
+	auto quad = make_shared<Quad>(L"Resource/Effect/LockDoor/DoorEffect.png");
+	trail->SetTexture(quad);
+	trail->GetPos().x = MathUtility::RandomFloat(_texture->GetTransform()->GetPos().x - (_texture->GetHalfSize().x * 0.7), _texture->GetTransform()->GetPos().x + (_texture->GetHalfSize().x * 0.7));
+	trail->GetPos().y = MathUtility::RandomFloat(_texture->GetTransform()->GetPos().y - (_texture->GetHalfSize().y * 0.7), _texture->GetTransform()->GetPos().y + (_texture->GetHalfSize().y * 0.7));
+	trail->SetAlpha(MathUtility::RandomFloat(0.3f, 0.7f));
+	trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
+	trail->SetFadeRatio(0.7f);
+	Vector2 effectDirection = _moveDirection * -1;
+	trail->SetDirection(effectDirection);
+	trail->SetSpeed(100.0f);
+	GAME->AddEffect(trail);
 }

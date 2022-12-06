@@ -25,3 +25,9 @@ void Effect_Trail::Update()
 
 	Object::Update();
 }
+
+void Effect_Trail::SetDirection(const Vector2& direction)
+{
+	_direction = direction;
+	_direction.Normalize();
+}

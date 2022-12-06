@@ -35,19 +35,19 @@ public:
 	virtual void SetCollider(shared_ptr<RectCollider> collider = nullptr);
 	virtual void SetPos(const Vector2& pos) { _texture->GetTransform()->GetPos() = pos; }
 
-	bool IsActive() { return _isActive; }
-	bool& GetRender() { return _render; }
-	const int& GetNum() { return _num; }
-	const int& GetLevel() { return _level; }
-	bool& GetCollision() { return _collison; }
-	const bool& GetStatic() { return _static; }
-	const bool& GetReversed() { return _reversed; }
-	const Vector2& GetSpawnPos() { return _spawnPos; }
-	const Object_Type& GetType() { return _objectType; }
-	const float& GetRenderOrder() { return _renderOrder; }
-	shared_ptr<Animation> GetAnimation() { return _anim; }
-	shared_ptr<Quad> GetObjectTexture() { return _texture; }
-	shared_ptr<RectCollider> GetCollider() { return _collider; }
+	bool IsActive()							{ return _isActive; }
+	bool& IsRender()						{ return _render; }
+	bool& IsCollision()						{ return _collison; }
+	const int& GetNum()						{ return _num; }
+	const int& GetLevel()					{ return _level; }
+	const bool& IsStatic()					{ return _static; }
+	const bool& IsReversed()				{ return _reversed; }
+	const Vector2& GetSpawnPos()			{ return _spawnPos; }
+	const Object_Type& GetType()			{ return _objectType; }
+	const float& GetRenderOrder()			{ return _renderOrder; }
+	shared_ptr<Animation> GetAnimation()	{ return _anim; }
+	shared_ptr<Quad> GetObjectTexture()		{ return _texture; }
+	shared_ptr<RectCollider> GetCollider()	{ return _collider; }
 	Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
 
 	static const int _objectTypeCount = 7;

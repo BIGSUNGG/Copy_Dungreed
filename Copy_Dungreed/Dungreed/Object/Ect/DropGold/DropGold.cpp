@@ -36,6 +36,18 @@ void DropGold::AddCoinToIventory()
 {
 	_isActive = false;
 	INVENTORY->AddGold(_price);
+
+	auto effect = make_shared<Effect_Number>();
+	effect->SetNumber(_price);
+	effect->SetPos(GAME->GetPlayer()->GetPos());
+	effect->SetColor({
+		256.f / 256.f,
+		256.f / 256.f,
+		0.f,
+		1.f
+		});
+	GAME->AddEffect(effect);
+
 }
 
 void DropGold::SetFollowCreature(Creature* creature)

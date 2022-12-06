@@ -14,10 +14,10 @@ void DashMovementComponent::Update()
 	{
 		if (_curSpeed > 0.0f)
 		{
-			SetPassFloor(true);
 			GetMovement() += (_direction * _curSpeed);
 
-			if(_dashMovementEvent != nullptr) _dashMovementEvent();
+			if(_dashMovementEvent != nullptr) 
+				_dashMovementEvent();
 
 			if (_slowDown)
 				_curSpeed -= _slowDownSpeed * DELTA_TIME;
@@ -26,7 +26,11 @@ void DashMovementComponent::Update()
 				_runTIme += DELTA_TIME;
 
 				if (_runTIme >= _keepMaxSpeedTime)
+				{
 					_slowDown = true;
+					if (_slowDownEvent != nullptr)
+						_slowDownEvent();
+				}
 			}
 			MovementComponent::Update();
 		}

@@ -41,7 +41,7 @@ void Map::AddObject(shared_ptr<Object> addObject, int type)
 		addObject->GetCollider()->Update();
 	}
 	addObject->SetOwnerMap(shared_from_this());
-	_objectCount++;
+	_mapBasicInfo._objectCount++;
 	_objects[type].emplace_back(addObject);
 }
 
@@ -51,7 +51,7 @@ bool Map::DeleteObject(shared_ptr<Object> deleteObject, int type)
 	{
 		if (*iter == deleteObject)
 		{
-			--_objectCount;
+			--_mapBasicInfo._objectCount;
 			_objects[type].erase(iter);
 			return true;
 		}
@@ -68,16 +68,16 @@ void Map::Paste(shared_ptr<Map> copyMap)
 		object.reserve(100);
 
 	_objects		= copyMap->GetObjects();
-	_objectCount	= copyMap->GetObjectCount();
+	_mapBasicInfo._objectCount	= copyMap->GetObjectCount();
 
-	_startPos	= copyMap->GetStartPos();
-	_leftBottom = copyMap->GetLeftBottom();
-	_rightTop	= copyMap->GetRightTop();
+	_mapBasicInfo._startPos	= copyMap->GetStartPos();
+	_mapBasicInfo._leftBottom = copyMap->GetLeftBottom();
+	_mapBasicInfo._rightTop	= copyMap->GetRightTop();
 
-	_topDoor	= copyMap->GetTopDoor();
-	_bottomDoor = copyMap->GetBottomDoor();
-	_leftDoor	= copyMap->GetLeftDoor();
-	_rightDoor	= copyMap->GetRightDoor();
+	_mapBasicInfo._topDoor	= copyMap->GetTopDoor();
+	_mapBasicInfo._bottomDoor = copyMap->GetBottomDoor();
+	_mapBasicInfo._leftDoor	= copyMap->GetLeftDoor();
+	_mapBasicInfo._rightDoor	= copyMap->GetRightDoor();
 }
 
 void Map::Reset()
@@ -87,16 +87,16 @@ void Map::Reset()
 	for (auto& object : _objects)
 		object.reserve(100);
 
-	_objectCount = 0;
+	_mapBasicInfo._objectCount = 0;
 
-	_startPos	= { 5000,5000 };
-	_leftBottom = { 0,0 };
-	_rightTop	= { 10000,10000 };
+	_mapBasicInfo._startPos	= { 5000,5000 };
+	_mapBasicInfo._leftBottom = { 0,0 };
+	_mapBasicInfo._rightTop	= { 10000,10000 };
 
-	_topDoor	= { 0,0 };
-	_bottomDoor = { 0,0 };
-	_leftDoor	= { 0,0 };
-	_rightDoor	= { 0,0 };
+	_mapBasicInfo._topDoor	= { 0,0 };
+	_mapBasicInfo._bottomDoor = { 0,0 };
+	_mapBasicInfo._leftDoor	= { 0,0 };
+	_mapBasicInfo._rightDoor	= { 0,0 };
 }
 
 void Map::OpenEvent()

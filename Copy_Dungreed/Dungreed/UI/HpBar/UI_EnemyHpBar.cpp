@@ -11,7 +11,7 @@ void UI_EnemyHpBar::Update()
 	auto& creatures = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
 	for (int i = 0; i < _hpBarBase.size(); i++)
 	{
-		if (creatures[i] != nullptr && creatures[i]->GetRender())
+		if (creatures[i] != nullptr && creatures[i]->IsRender())
 		{
 			auto creature = dynamic_pointer_cast<Creature>(creatures[i]);
 			float hpRatio = 0.0f;
@@ -19,8 +19,8 @@ void UI_EnemyHpBar::Update()
 
 			if (creature->GetCreatureType() == Creature::ENEMY && hpRatio < 1.0f)
 			{
-				_hpBarBase[i]->GetRender() = true;
-				_hpBarGauge[i]->GetRender() = true;
+				_hpBarBase[i]->IsRender() = true;
+				_hpBarGauge[i]->IsRender() = true;
 
 				_hpBarBase[i]->GetObjectTexture()->SetTop(creature->GetCollider()->Bottom() - CAMERA->GetPos().y - 10.0f);
 				_hpBarBase[i]->GetPos().x = creature->GetPos().x - CAMERA->GetPos().x;
@@ -33,14 +33,14 @@ void UI_EnemyHpBar::Update()
 			}
 			else
 			{
-				_hpBarBase[i]->GetRender() = false;
-				_hpBarGauge[i]->GetRender() = false;
+				_hpBarBase[i]->IsRender() = false;
+				_hpBarGauge[i]->IsRender() = false;
 			}
 		}
 		else
 		{
-			_hpBarBase[i]->GetRender() = false;
-			_hpBarGauge[i]->GetRender() = false;
+			_hpBarBase[i]->IsRender() = false;
+			_hpBarGauge[i]->IsRender() = false;
 		}
 		
 		_hpBarBase[i]->Update();
@@ -76,8 +76,8 @@ void UI_EnemyHpBar::Refresh()
 		auto hpBarGaugeQuad = make_shared<Quad>(L"Resource/Ui/HpBar/Enemy_HpBar_Gauge.png");
 		_hpBarGauge[i]->SetTexture(hpBarGaugeQuad);
 
-		_hpBarBase[i]->GetRender() = false;
-		_hpBarGauge[i]->GetRender() = false;
+		_hpBarBase[i]->IsRender() = false;
+		_hpBarGauge[i]->IsRender() = false;
 	}
 
 }

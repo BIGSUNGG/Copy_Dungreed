@@ -176,6 +176,132 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 		case 15:
 			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_16.png");
 			break;
+		case 16:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_0.png");
+			break;
+		case 17:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_1.png");
+			break;
+		case 18:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_2.png");
+			break;
+		case 19:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_3.png");
+			break;
+		case 20:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_4.png");
+			break;
+		case 21:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_5.png");
+			break;
+		case 22:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Ceiling_6.png");
+			break;
+		case 23:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Statue_Bottom_0.png");
+			break;
+		case 24:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Statue_Middle_0.png");
+			break;
+		case 25:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Basic_Statue_Top_0.png");
+			break;
+		case 26:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Board_Left.png");
+			break;
+		case 27:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Board_Left_Cracked.png");
+			break;
+		case 28:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Board_Middle_1.png");
+			break;
+		case 29:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Board_Right.png");
+			break;
+		case 30:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Board_Right_Cracked.png");
+			break;
+		case 31:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Board_Statue.png");
+			break;
+		case 32:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Chain.png");
+			break;
+		case 33:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_0.png");
+			break;
+		case 34:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_1.png");
+			break;
+		case 35:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_2.png");
+			break;
+		case 36:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_3.png");
+			break;
+		case 37:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_4.png");
+			break;
+		case 38:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_5.png");
+			break;
+		case 39:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_Cracked_6.png");
+			break;
+		case 40:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H_Hole1.png");
+			break;
+		case 41:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H_Hole2.png");
+			break;
+		case 42:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H0.png");
+			break;
+		case 43:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H1.png");
+			break;
+		case 44:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H2.png");
+			break;
+		case 45:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H3.png");
+			break;
+		case 46:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H4_0.png");
+			break;
+		case 47:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H4_1.png");
+			break;
+		case 48:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H4_2.png");
+			break;
+		case 49:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H4_3.png");
+			break;
+		case 50:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H5.png");
+			break;
+		case 51:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H6.png");
+			break;
+		case 52:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H7.png");
+			break;
+		case 53:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H8.png");
+			break;
+		case 54:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H9.png");
+			break;
+		case 55:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H10.png");
+			break;
+		case 56:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H11.png");
+			break;
+		case 57:
+			texture = make_shared<Quad>(L"Resource/Map/Level_01/Wall/Wall_H12.png");
+			break;
 		default:
 			break;
 		}
@@ -342,7 +468,7 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		case 27:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_4.png");
-			object->GetCollision() = false;
+			object->IsCollision() = false;
 			break;
 		}
 		break;
@@ -1544,6 +1670,49 @@ wstring ObjectManager::GetCursurImage(int num)
 		break;
 	case 2:
 		string = L"Resource/Cursur/ShootingCursor2.png";
+		break;
+	default:
+		break;
+	}
+
+	return string;
+}
+
+wstring ObjectManager::GetNumberImage(int num)
+{
+	wstring string;
+
+	switch (num)
+	{
+	case 0:
+		string = L"Resource/Number/Zero.png";
+		break;
+	case 1:
+		string = L"Resource/Number/One.png";
+		break;
+	case 2:
+		string = L"Resource/Number/Two.png";
+		break;
+	case 3:
+		string = L"Resource/Number/Three.png";
+		break;
+	case 4:
+		string = L"Resource/Number/Four.png";
+		break;
+	case 5:
+		string = L"Resource/Number/Five.png";
+		break;
+	case 6:
+		string = L"Resource/Number/Six.png";
+		break;
+	case 7:
+		string = L"Resource/Number/Seven.png";
+		break;
+	case 8:
+		string = L"Resource/Number/Eight.png";
+		break;
+	case 9:
+		string = L"Resource/Number/Nine.png";
 		break;
 	default:
 		break;

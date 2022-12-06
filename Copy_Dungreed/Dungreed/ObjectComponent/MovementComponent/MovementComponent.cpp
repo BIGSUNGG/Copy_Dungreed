@@ -8,6 +8,9 @@ MovementComponent::MovementComponent(Object* object)
 
 void MovementComponent::Update()
 {
+	if (_static)
+		return;
+
 	_onStair = false;
 	_isFalling = false;
 
@@ -17,27 +20,24 @@ void MovementComponent::Update()
 
 		_movement.y += _jumpPower;
 
-		if (_movementEvent != nullptr)
-			_movementEvent();
+		_object->GetObjectTexture()->GetTransform()->GetPos() += (_movement * DELTA_TIME);
+		_object->GetObjectTexture()->Update();
 
-		if (GAME->GetPlaying())
-		{
-			_object->GetObjectTexture()->GetTransform()->GetPos() += (_movement * DELTA_TIME);
-			_object->GetObjectTexture()->Update();
+		CollisionEvent();
 
-			CollisionEvent();
+		_velocity = (_object->GetObjectTexture()->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
 
-			_velocity = (_object->GetObjectTexture()->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
+		_beforeMove = _object->GetObjectTexture()->GetTransform()->GetPos();
+		_movement = { 0,0 };
 
-			_beforeMove = _object->GetObjectTexture()->GetTransform()->GetPos();
-			_movement = { 0,0 };
-
-			if (_velocity.y != 0.f)
-				_isFalling = true;
-		}
+		if (_velocity.y != 0.f)
+			_isFalling = true;
 
 		_passFloor = false;
 		_passTile = false;
+
+		if (_movementEvent != nullptr)
+			_movementEvent();
 	}
 }
 

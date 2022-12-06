@@ -75,6 +75,6 @@ void Dungreed::Init()
 	GAME->AddPlayer(_player);
 	GAME->GetPlaying() = true;
 
-	MAP_MANAGER->MakeRandomMap(1, 1);
+	MAP_MANAGER->MakeRandomMap(1, 0);
 	CAMERA->Update();
 }

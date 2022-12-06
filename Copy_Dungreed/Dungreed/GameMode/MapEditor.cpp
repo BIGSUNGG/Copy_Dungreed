@@ -114,6 +114,34 @@ void MapEditor::ImGuiRender()
 		else
 			ImGui::Text("Apply Offset");
 
+		ImGui::Text("Left");
+		if (_map->CanGoLeft())
+		{
+			ImGui::SameLine();
+			ImGui::Text(" O ");
+		}
+
+		ImGui::Text("Right");
+		if (_map->CanGoRight())
+		{
+			ImGui::SameLine();
+			ImGui::Text(" O ");
+		}
+
+		ImGui::Text("Top");
+		if (_map->CanGoTop())
+		{
+			ImGui::SameLine();
+			ImGui::Text(" O ");
+		}
+
+		ImGui::Text("Bottom");
+		if (_map->CanGoBottom())
+		{
+			ImGui::SameLine();
+			ImGui::Text(" O ");
+		}
+
 		if (ImGui::TreeNode("Object"))
 		{
 			ImGui::Text("Object Count : %d", _map->GetObjectCount());
@@ -184,7 +212,7 @@ void MapEditor::ImGuiRender()
 
 		if (ImGui::TreeNode("Map"))
 		{
-			ImGui::SliderInt("Level", &_mapLevel, 0, 8);
+			ImGui::SliderInt("Level", &_mapLevel, 0, 17);
 			ImGui::SliderInt("Num", &_mapNum, 0, 30);
 
 			if (ImGui::Button("Save"))
@@ -215,6 +243,7 @@ void MapEditor::ImGuiRender()
 				{
 					_map->Paste(_copyMap);
 					CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
+					GAME->SetCurMap(_map);
 				}
 			}
 
@@ -315,6 +344,16 @@ void MapEditor::InputEvent()
 {	
 	if (CAMERA->GetFreeMode() == false)
 	{
+		if (KEY_DOWN('Q'))
+		{
+			GAME->AddObject(_curObject, _objectType);
+			_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
+			if (_autoSave)
+				MAP_MANAGER->Save(_map);
+
+			GAME->Instancing();
+		}
+
 		if (KEY_DOWN('W'))
 			AddObject();
 

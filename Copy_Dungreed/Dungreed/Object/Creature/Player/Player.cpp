@@ -6,7 +6,11 @@ Player::Player(int level, int num)
 {
 	_dash = make_shared<DashMovementComponent>(this);
 	_dash->SetDashMovementEvent(bind(&Player::DashMovement, this));
-	_dash->SetDashEndEvent([&]() {_movement->SetGravityRatio(1.f); });
+	_dash->SetDashEndEvent([&]() {
+		_movement->SetGravityRatio(1.f);
+		_movement->IsFalling() = true; 
+		});
+	_dash->SetDashSlowDownEvent([&]() {_movement->SetGravityRatio(0.4f); });
 
 	_damagedRunTimeMax = 0.2f;
 
@@ -111,6 +115,12 @@ void Player::MouseEvent()
 		_weaponDirection = (MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle();
 }
 
+void Player::SetStatic(bool sta)
+{
+	_movement->SetStatic(sta);
+	_dash->SetStatic(sta);
+}
+
 void Player::MovementEvent()
 {
 	if (_movement->GetVelocity().x != 0)
@@ -138,8 +148,6 @@ void Player::MovementEvent()
 
 		_doubleJumped = false;
 	}
-
-	DashMovement();
 }
 
 void Player::StepSound()
@@ -178,7 +186,7 @@ void Player::Dash()
 	if (_dashInfo._dashCount > 0)
 	{
 		SOUND->Play("ui-sound-13-dash");
-		_movement->SetGravityRatio(0.3f);
+		_movement->SetGravityRatio(0.2f);
 		_movement->SetJumpPower(0.f);
 		_dashInfo.Reset();
 		Vector2 direction = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
@@ -194,8 +202,9 @@ float Player::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
 	
 	if (damage > 0)
 	{
-		shared_ptr<Effect_Damage> effect = make_shared<Effect_Damage>();
-		effect->SetDamage(damage);
+		shared_ptr<Effect_Number> effect = make_shared<Effect_Number>();
+		int d = MathUtility::RandomInt(0, 99);
+		effect->SetNumber(d);
 		effect->SetPos(target->GetPos());
 
 		GAME->AddEffect(effect);
@@ -252,6 +261,8 @@ void Player::CheckEctEvent()
 
 void Player::DashMovement()
 {
+	_movement->SetPassFloor(true);
+
 	if (_dashInfo._trailCount < _dashInfo._trailCountMax)
 	{
 		_dashInfo._trailTime += DELTA_TIME;
@@ -263,8 +274,8 @@ void Player::DashMovement()
 			auto quad = make_shared<Quad>(_texture->GetImageFile());
 			trail->SetTexture(quad);
 			trail->GetPos() = this->GetPos();
-			trail->SetAlpha(0.5f);
-			trail->SetFadeRatio(1.5f);
+			trail->SetAlpha(0.75f);
+			trail->SetFadeRatio(3.f);
 			if (_reversed)
 				trail->ReverseTexture();
 			trail->SetRenderOrder(3.6f);

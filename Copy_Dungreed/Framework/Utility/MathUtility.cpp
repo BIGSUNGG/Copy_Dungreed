@@ -3,6 +3,7 @@
 
 int MathUtility::RandomInt(int min, int max)
 {
+    max += 1;
     int result = rand() % (max - min) + min;
     return result;
 }
