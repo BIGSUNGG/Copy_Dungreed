@@ -44,6 +44,7 @@ private:
 	~MapManager();
 	static MapManager* _instance;
 
+
 	map<int, map<int, pair<shared_ptr<Map>,bool>>> _maps;
 	Vector2 _mapSize = { 6,2 };
 	int _mapCount = 0;

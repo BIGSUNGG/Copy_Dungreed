@@ -22,6 +22,7 @@ public:
 	virtual void SetPassFloor(const bool& pass) { _movement->SetPassFloor(pass); }
 	virtual void SetCurWeaponSlot(const int& slot) { _curWeaponSlot = slot; }
 
+	virtual void StopMove();
 	virtual void MouseEvent();
 	virtual void SetStatic(bool sta);
 
@@ -38,7 +39,7 @@ protected:
 	virtual void DoubleJumpEffect();
 
 protected:
-	shared_ptr<DashMovementComponent> _dash;
+	shared_ptr<DashMovementComponent> _dashMovement;
 	Dash_Info _dashInfo;
 
 	float _goldMagnetLength = 350.f;

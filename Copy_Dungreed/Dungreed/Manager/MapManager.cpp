@@ -15,7 +15,7 @@ void MapManager::MakeRandomMap(int level, int num)
 
 	pair<shared_ptr<Map>, bool> pair = { nullptr,false };
 
-	// Maps ÃÊ±âÈ­
+	// Maps ï¿½Ê±ï¿½È­
 	for (int x = -_mapSize.x; x <= _mapSize.x; x++)
 	{
 		for (int y = -_mapSize.y; y <= _mapSize.y; y++)
@@ -24,7 +24,7 @@ void MapManager::MakeRandomMap(int level, int num)
 		}
 	}
 
-	// ±âº» ¸Ê Ãß°¡
+	// ï¿½âº» ï¿½ï¿½ ï¿½ß°ï¿½
 	shared_ptr<Map> map = Load(level, num);
 	AddMap(map, Vector2(0, 0));
 
@@ -50,7 +50,7 @@ void MapManager::MakeRandomMap(int level, int num)
 		tempMapCount++;
 	}
 
-	// ÀÌµ¿°¡´ÉÇÑ ¸Ê Ãß°¡
+	// ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½
 	while (tempMapCount <= _mapCountMax)
 	{
 		Vector2 index = { MathUtility::RandomInt(-_mapSize.x,_mapSize.x),MathUtility::RandomInt(-_mapSize.y,_mapSize.y) };
@@ -65,7 +65,7 @@ void MapManager::MakeRandomMap(int level, int num)
 		}
 	}
 
-	// ÀÌµ¿°¡´ÉÇÑ ¸Ê¿¡ ÀûÀýÇÑ ¸Ê »ðÀÔ
+	// ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	for (int x = -_mapSize.x; x <= _mapSize.x; x++)
 	{
 		for (int y = -_mapSize.y; y <= _mapSize.y; y++)
@@ -120,7 +120,7 @@ void MapManager::MakeRandomMap(int level, int num)
 
 			int mapNum;
 			MapBasic info;
-			// Àû´çÇÑ ¸Ê Ã£±â
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã£ï¿½ï¿½
 			while (true)
 			{
 
@@ -367,7 +367,7 @@ void MapManager::Save(shared_ptr<Map> map)
 
 void MapManager::SaveAll()
 {
-	// Save Load¹æ½ÄÀÇ º¯°æÁ¡ÀÌ ÀÖÀ»¶§ ÆíÇÏ°Ô ¾²±â À§ÇØ
+	// Save Loadï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	for (int level = 0; level < _mapList.size(); level++)
 	{
 		for (int num = 0; num < _mapList[level].size(); num++)
@@ -410,25 +410,27 @@ void MapManager::SetCurMap(const Vector2& index)
 	if (GAME->GetPlayer() != nullptr)
 	{
 		GAME->AddPlayer(GAME->GetPlayer());
+		GAME->GetPlayer()->GetObjectTexture()->Update();
+		GAME->GetPlayer()->GetCollider()->Update();
 		if (moveX > 0)
 		{
-			GAME->GetPlayer()->GetObjectTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorVerticalHalfSize.x + 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorVerticalHalfSize.x + 30);
 			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetLeftDoor().y - _doorVerticalHalfSize.y);
 		}
 		else if (moveX < 0)
 		{
-			GAME->GetPlayer()->GetObjectTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorVerticalHalfSize.x - 48);
+			GAME->GetPlayer()->GetObjectTexture()->SetRight(GetCurMap()->GetRightDoor().x - _doorVerticalHalfSize.x - 30);
 			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetRightDoor().y - _doorVerticalHalfSize.y);
 		}
 		else if (moveY > 0)
 		{
 			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetBottomDoor().x;
-			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorVerticalHalfSize.y + 96);
+			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetBottomDoor().y + _doorVerticalHalfSize.y + 30);
 		}
 		else if (moveY < 0)
 		{
 			GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos().x = GetCurMap()->GetTopDoor().x;
-			GAME->GetPlayer()->GetObjectTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorVerticalHalfSize.y + 96);
+			GAME->GetPlayer()->GetObjectTexture()->SetTop(GetCurMap()->GetTopDoor().y - _doorVerticalHalfSize.y - 30);
 		}
 		else
 		{
@@ -436,6 +438,9 @@ void MapManager::SetCurMap(const Vector2& index)
 			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetStartPos().y);
 		}
 		GAME->GetPlayer()->SetSpawnPos(GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos());
+		//GAME->GetPlayer()->StopMove();
+		GAME->GetPlayer()->GetObjectTexture()->Update();
+		GAME->GetPlayer()->GetCollider()->Update();
 	}
 
 	UI_MANAGER->Refresh();
@@ -518,7 +523,7 @@ MapManager::MapManager()
 	SOUND->Add("1.JailField", "Resource/Sound/Bgm/1.JailField.wav", true,true);
 	SOUND->Add("ambience_prison", "Resource/Sound/Bgm/ambience_prison.wav",true, false);
 
-	// ¸Ê °¹¼ö ±¸ÇÏ±â
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
 	for (int level = 0; level < 9; level++)
 	{
 		for (int num = 0; num < 30; num++)

@@ -4,13 +4,13 @@
 Player::Player(int level, int num)
 	: Creature(level, num)
 {
-	_dash = make_shared<DashMovementComponent>(this);
-	_dash->SetDashMovementEvent(bind(&Player::DashMovement, this));
-	_dash->SetDashEndEvent([&]() {
+	_dashMovement = make_shared<DashMovementComponent>(this);
+	_dashMovement->SetDashMovementEvent(bind(&Player::DashMovement, this));
+	_dashMovement->SetDashEndEvent([&]() {
 		_movement->SetGravityRatio(1.f);
 		_movement->IsFalling() = true; 
 		});
-	_dash->SetDashSlowDownEvent([&]() {_movement->SetGravityRatio(0.4f); });
+	_dashMovement->SetDashSlowDownEvent([&]() {_movement->SetGravityRatio(0.4f); });
 
 	_damagedRunTimeMax = 0.2f;
 
@@ -45,7 +45,7 @@ void Player::Update()
 	if (_weaponSlot[_curWeaponSlot] != nullptr)
 		_weaponSlot[_curWeaponSlot]->SetShowTo(_weaponDirection);
 
-	_dash->Update();
+	_dashMovement->Update();
 	Creature::Update();
 	CheckEctEvent();
 }
@@ -68,7 +68,7 @@ float Player::TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 
 void Player::DustEffect()
 {
-	if (_dash->GetCurSpeed() > 0)
+	if (_dashMovement->GetCurSpeed() > 0)
 		return;
 
 	if (_dustRunTime >= _dustDelay)
@@ -97,6 +97,12 @@ void Player::DoubleJumpEffect()
 	GAME->AddEffect(doubleJump);
 }
 
+void Player::StopMove()
+{
+	_dashMovement->GetCurSpeed() = 0.f;
+	_movement->GetMovement() = {0,0};
+}
+
 void Player::MouseEvent()
 {
 	if (_texture->GetTransform()->GetPos().x >= MOUSE_WORLD_POS.x)
@@ -118,7 +124,9 @@ void Player::MouseEvent()
 void Player::SetStatic(bool sta)
 {
 	_movement->SetStatic(sta);
-	_dash->SetStatic(sta);
+	_movement->GetMovement() = {0.f,0.f};
+	_dashMovement->SetStatic(sta);
+	_dashMovement->GetCurSpeed() = 0.f;
 }
 
 void Player::MovementEvent()
@@ -137,7 +145,7 @@ void Player::MovementEvent()
 		_anim->ChangeAnimation(Creature_State::IDLE);
 	}
 
-	if ((_movement->GetVelocity().y != 0 || _dash->GetCurSpeed() > 0.0f) && _movement->IsOnStair() == false)
+	if ((_movement->GetVelocity().y != 0 || _dashMovement->GetCurSpeed() > 0.0f) && _movement->IsOnStair() == false)
 	{
 		_anim->ChangeAnimation(Creature_State::JUMP);
 	}
@@ -191,8 +199,8 @@ void Player::Dash()
 		_dashInfo.Reset();
 		Vector2 direction = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos());
 		direction.Normalize();
-		_dash->SetDirection(direction);
-		_dash->Dash();
+		_dashMovement->SetDirection(direction);
+		_dashMovement->Dash();
 	}
 }
 
@@ -286,7 +294,7 @@ void Player::DashMovement()
 
 void Player::Jump()
 {
-	if (_dash->GetCurSpeed() > 0)
+	if (_dashMovement->GetCurSpeed() > 0)
 		return;
 
 	if (_movement->IsFalling() == false)
@@ -306,7 +314,7 @@ void Player::Jump()
 
 void Player::Attack()
 {
-	if (_dash->GetCurSpeed() > 0)
+	if (_dashMovement->GetCurSpeed() > 0)
 		return;
 	
 	Creature::Attack();
@@ -314,7 +322,7 @@ void Player::Attack()
 
 void Player::MoveLeft()
 {
-	if (_dash->GetCurSpeed() > 0)
+	if (_dashMovement->GetCurSpeed() > 0)
 		return;
 
 	Creature::MoveLeft();
@@ -322,7 +330,7 @@ void Player::MoveLeft()
 
 void Player::MoveRight()
 {
-	if (_dash->GetCurSpeed() > 0)
+	if (_dashMovement->GetCurSpeed() > 0)
 		return;
 
 	Creature::MoveRight();

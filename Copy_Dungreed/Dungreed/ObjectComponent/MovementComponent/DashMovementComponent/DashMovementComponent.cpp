@@ -34,8 +34,8 @@ void DashMovementComponent::Update()
 			}
 			MovementComponent::Update();
 		}
-		else if (_dashEndEvent != nullptr) 
-			_dashEndEvent();
+		else
+			DashEnd();
 	}
 }
 
