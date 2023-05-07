@@ -211,8 +211,7 @@ float Player::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
 	if (damage > 0)
 	{
 		shared_ptr<Effect_Number> effect = make_shared<Effect_Number>();
-		int d = MathUtility::RandomInt(0, 99);
-		effect->SetNumber(d);
+		effect->SetNumber(damage);
 		effect->SetPos(target->GetPos());
 
 		GAME->AddEffect(effect);

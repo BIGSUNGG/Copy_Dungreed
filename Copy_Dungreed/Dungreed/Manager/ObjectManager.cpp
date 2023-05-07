@@ -1398,6 +1398,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
 			weapon->SetAttackRange({ 130,180 });
 			weapon->SetAttackDelay(0.25f);
+			weapon->SetSkillDelay(2.f);
 			weapon->SetAttackEffect(effect);
 			weapon->SetAppendAngle({ -0.1f,1.2f });
 			weapon->SetAnimation();

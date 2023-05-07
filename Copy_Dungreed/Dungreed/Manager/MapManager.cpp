@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "MapManager.h"
+#include "Dungreed/Object/Object.h"
 
 MapManager* MapManager::_instance = nullptr;
 
@@ -347,9 +348,9 @@ void MapManager::Save(shared_ptr<Map> map)
 
 		vector<float> mapInfo;
 
-		for (auto& objects : map->GetObjects())
+		for (int i = Object::Object_Type::BACKGROUND; i <= Object::Object_Type::ECT; i++)
 		{
-			for (auto& object : objects)
+			for (auto& object : map->GetObjects()[i])
 			{
 				mapInfo.push_back((float)object->GetType());
 				mapInfo.push_back((float)object->GetLevel());
@@ -367,7 +368,6 @@ void MapManager::Save(shared_ptr<Map> map)
 
 void MapManager::SaveAll()
 {
-	// Save Load����� �������� ������ ���ϰ� ���� ����
 	for (int level = 0; level < _mapList.size(); level++)
 	{
 		for (int num = 0; num < _mapList[level].size(); num++)

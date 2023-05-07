@@ -31,7 +31,7 @@ UI_Setting::UI_Setting()
 		_applyText->SetPos(Vector2(CENTER.x, 70.f));
 		_applyText->SetTextSize(50);
 		_applyText->SetTextStatus(UI_Text::Text_Status::MID);
-		_applyText->SetText(L"Àû¿ë");
+		_applyText->SetText(L"ì ìš©");
 	}
 
 	{
@@ -52,7 +52,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,750 });
 		text->SetTextSize(50);
-		text->SetText(L"¸¶½ºÅÍ º¼·ı");
+		text->SetText(L"ë§ˆìŠ¤í„° ë³¼ë¥¨");
 		_texts.emplace_back(text);
 	}
 
@@ -60,7 +60,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,650 });
 		text->SetTextSize(50);
-		text->SetText(L"À½¾Ç º¼·ı");
+		text->SetText(L"ìŒì•… ë³¼ë¥¨");
 		_texts.emplace_back(text);
 	}
 
@@ -68,7 +68,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,550 });
 		text->SetTextSize(50);
-		text->SetText(L"È¿°úÀ½ º¼·ı");
+		text->SetText(L"íš¨ê³¼ìŒ ë³¼ë¥¨");
 		_texts.emplace_back(text);
 	}
 
@@ -76,7 +76,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,350 });
 		text->SetTextSize(50);
-		text->SetText(L"Ã¢¸ğµå");
+		text->SetText(L"ì°½ëª¨ë“œ");
 		_texts.emplace_back(text);
 	}
 
@@ -84,7 +84,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,250 });
 		text->SetTextSize(50);
-		text->SetText(L"ÃÖ´ë FPS");
+		text->SetText(L"ìµœëŒ€ FPS");
 		_texts.emplace_back(text);
 	}
 
@@ -203,11 +203,11 @@ UI_Setting::UI_Setting()
 	}
 
 	{
-		pair<wstring, int> pair = { L"      Ã¢È­¸é", 0 };
+		pair<wstring, int> pair = { L"      ì°½í™”ë©´", 0 };
 		_screen.push_back(pair);
-		pair = { L" Å×µÎ¸® ¾ø´Â Ã¢È­¸é", 1 };
+		pair = { L" í…Œë‘ë¦¬ ì—†ëŠ” ì°½í™”ë©´", 1 };
 		_screen.push_back(pair);
-		pair = { L"     ÀüÃ¼È­¸é", 2 };
+		pair = { L"     ì „ì²´í™”ë©´", 2 };
 		_screen.push_back(pair);
 	}
 
