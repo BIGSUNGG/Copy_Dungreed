@@ -17,7 +17,7 @@ public:
 	void SetSpeed(float speed) { _speed = speed; }
 	void SetHitCount(const float& count) { _hitCount = count; }
 	void SetDestroyTime(const float& time) { _runTimeMax = time; }
-	void SetOwner(shared_ptr<Item> weapon) { _weapon = weapon; }
+	void SetOwner(shared_ptr<class Weapon> weapon) { _weapon = weapon; }
 	void SetDestroyEffect(function<shared_ptr<Effect>()> effect) { _destroyEffect = effect; }
 protected:
 	virtual void DestroyEvent();
@@ -25,7 +25,7 @@ protected:
 protected:
 	map<shared_ptr<Object>, bool> _attacked;
 
-	weak_ptr<Item> _weapon;
+	weak_ptr<class Weapon> _weapon;
 
 	int _hitCount = 1;
 

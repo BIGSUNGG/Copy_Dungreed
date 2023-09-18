@@ -6,7 +6,8 @@ public:
 
 	virtual void Update() override;
 
-	virtual float TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
+	virtual float TakeDamage(float baseDamage, shared_ptr<Creature> attacker) override;
+	virtual float GiveDamage(float baseDamage, shared_ptr<Creature> target) override;
 
 	const Dash_Info& GetDashInfo() { return _dashInfo; }
 
@@ -27,7 +28,6 @@ public:
 	virtual void SetStatic(bool sta);
 
 protected:
-	virtual float GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon = nullptr);
 
 	virtual void CheckEctEvent();
 	virtual void DashMovement();

@@ -31,8 +31,15 @@ void Weapon::Update()
 
 void Weapon::Attack()
 {
-	_attacked = true;
-	_giveDamageDelayRunTime = 0.0f;
+	if (_giveDamageDelay == 0.f)
+	{
+		CheckAttack();
+	}
+	else
+	{
+		_attacked = true;
+		_giveDamageDelayRunTime = 0.0f;
+	}
 
 	if (_anim != nullptr)
 		_anim->ChangeAnimation(Creature::Creature_State::ATTACK);
@@ -59,6 +66,12 @@ void Weapon::Skill()
 
 void Weapon::Damaged(const Creature_Status& status)
 {
+}
+
+bool Weapon::GiveDamage(shared_ptr<Creature> target)
+{
+	bool attackSuccess = _owner.lock()->GiveDamage(MathUtility::RandomFloat(_attackMinDamage, _attackMaxDamage), target);
+	return attackSuccess;
 }
 
 float Weapon::GetSkillCoolTimeRatio()

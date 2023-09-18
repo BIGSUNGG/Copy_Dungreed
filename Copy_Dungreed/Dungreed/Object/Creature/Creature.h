@@ -27,8 +27,8 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 
-	virtual float TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon);
-	virtual float GiveDamage(shared_ptr<Creature> target , shared_ptr<Item> weapon = nullptr);
+	virtual float TakeDamage(float baseDamage, shared_ptr<Creature> attacker);
+	virtual float GiveDamage(float baseDamage, shared_ptr<Creature> target);
 
 	bool IsFalling() { return _movement->IsFalling(); }
 

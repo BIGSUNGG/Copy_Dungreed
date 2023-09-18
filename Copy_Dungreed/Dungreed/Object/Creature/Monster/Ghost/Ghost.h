@@ -19,6 +19,7 @@ protected:
 
 	Vector2 _attackDirection = { 0,0 };
 	bool _attack = false;
+	float _attackDamage = 10.f;
 	float _attackSpeed = 550.0f;
 	float _attackWatitTime = 0.0f;
 	float _attackRunTime = 0.0f;

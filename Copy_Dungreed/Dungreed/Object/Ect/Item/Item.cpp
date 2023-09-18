@@ -11,12 +11,6 @@ Item::~Item()
 {
 }
 
-bool Item::GiveDamage(shared_ptr<Creature> target)
-{
-	bool attackSuccess = _owner.lock()->GiveDamage(target, dynamic_pointer_cast<Item>(shared_from_this()));
-	return attackSuccess;
-}
-
 void Item::ReverseTexture()
 {
 	_texture->ReverseToX();

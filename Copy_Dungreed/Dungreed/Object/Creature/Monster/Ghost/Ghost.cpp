@@ -76,6 +76,6 @@ void Ghost::Attack()
 	if (_giveDamage == false && _collider->IsCollision(_target.lock()->GetCollider()))
 	{
 		_giveDamage = true;
-		GiveDamage(_target.lock());
+		GiveDamage(_attackDamage, _target.lock());
 	}
 }

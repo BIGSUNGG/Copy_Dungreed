@@ -59,9 +59,9 @@ void Creature::PostRender()
 		_weaponSlot[_curWeaponSlot]->PostRender();
 }
 
-float Creature::TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+float Creature::TakeDamage(float baseDamage, shared_ptr<Creature> attacker)
 {
-	float damage = enemy->GetStatus()._atk;
+	float damage = baseDamage + (attacker->GetStatus()._atk * 0.1f);
 	_status._hp -= damage;
 
 	if (_status._hp <= 0)
@@ -72,9 +72,9 @@ float Creature::TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
 	return damage;
 }
 
-float Creature::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
+float Creature::GiveDamage(float baseDamage, shared_ptr<Creature> target)
 {
-	float attackDamage = target->TakeDamage(dynamic_pointer_cast<Creature>(shared_from_this()),weapon);
+	float attackDamage = target->TakeDamage(baseDamage, dynamic_pointer_cast<Creature>(shared_from_this()));
 	return attackDamage;
 }
 

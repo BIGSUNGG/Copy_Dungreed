@@ -31,7 +31,7 @@ UI_Setting::UI_Setting()
 		_applyText->SetPos(Vector2(CENTER.x, 70.f));
 		_applyText->SetTextSize(50);
 		_applyText->SetTextStatus(UI_Text::Text_Status::MID);
-		_applyText->SetText(L"ì ìš©");
+		_applyText->SetText(L"Àû¿ë");
 	}
 
 	{
@@ -52,7 +52,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,750 });
 		text->SetTextSize(50);
-		text->SetText(L"ë§ˆìŠ¤í„° ë³¼ë¥¨");
+		text->SetText(L"¸¶½ºÅÍ º¼·ı");
 		_texts.emplace_back(text);
 	}
 
@@ -60,7 +60,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,650 });
 		text->SetTextSize(50);
-		text->SetText(L"ìŒì•… ë³¼ë¥¨");
+		text->SetText(L"À½¾Ç º¼·ı");
 		_texts.emplace_back(text);
 	}
 
@@ -68,7 +68,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,550 });
 		text->SetTextSize(50);
-		text->SetText(L"íš¨ê³¼ìŒ ë³¼ë¥¨");
+		text->SetText(L"È¿°úÀ½ º¼·ı");
 		_texts.emplace_back(text);
 	}
 
@@ -76,7 +76,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,350 });
 		text->SetTextSize(50);
-		text->SetText(L"ì°½ëª¨ë“œ");
+		text->SetText(L"Ã¢¸ğµå");
 		_texts.emplace_back(text);
 	}
 
@@ -84,7 +84,7 @@ UI_Setting::UI_Setting()
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,250 });
 		text->SetTextSize(50);
-		text->SetText(L"ìµœëŒ€ FPS");
+		text->SetText(L"ÃÖ´ë FPS");
 		_texts.emplace_back(text);
 	}
 
@@ -203,33 +203,33 @@ UI_Setting::UI_Setting()
 	}
 
 	{
-		pair<wstring, int> pair = { L"      ì°½í™”ë©´", 0 };
-		_screen.push_back(pair);
-		pair = { L" í…Œë‘ë¦¬ ì—†ëŠ” ì°½í™”ë©´", 1 };
-		_screen.push_back(pair);
-		pair = { L"     ì „ì²´í™”ë©´", 2 };
-		_screen.push_back(pair);
+		std::pair<wstring, int> _pair = { L"      Ã¢È­¸é", 0 };
+		_screen.push_back(_pair);
+		_pair = { L" Å×µÎ¸® ¾ø´Â Ã¢È­¸é", 1 };
+		_screen.push_back(_pair);
+		_pair = { L"     ÀüÃ¼È­¸é", 2 };
+		_screen.push_back(_pair);
 	}
 
 	{
-		pair<wstring, int> pair = { L"X", 0 };
-		_fps.push_back(pair);
-		pair = { L"30", 30 };
-		_fps.push_back(pair);
-		pair = { L"50", 50 };
-		_fps.push_back(pair);
-		pair = { L"60", 60 };
-		_fps.push_back(pair);
-		pair = { L"80", 80 };
-		_fps.push_back(pair);
-		pair = { L"120", 120 };
-		_fps.push_back(pair);
-		pair = { L"144", 144 };
-		_fps.push_back(pair);
-		pair = { L"160", 160 };
-		_fps.push_back(pair);
-		pair = { L"240", 240 };
-		_fps.push_back(pair);
+		std::pair<wstring, int> _pair = { L"X", 0 };
+		_fps.push_back(_pair);
+		_pair = { L"30", 30 };
+		_fps.push_back(_pair);
+		_pair = { L"50", 50 };
+		_fps.push_back(_pair);
+		_pair = { L"60", 60 };
+		_fps.push_back(_pair);
+		_pair = { L"80", 80 };
+		_fps.push_back(_pair);
+		_pair = { L"120", 120 };
+		_fps.push_back(_pair);
+		_pair = { L"144", 144 };
+		_fps.push_back(_pair);
+		_pair = { L"160", 160 };
+		_fps.push_back(_pair);
+		_pair = { L"240", 240 };
+		_fps.push_back(_pair);
 	}
 
 	_screenIndex = GRAPHIC->GetWinMode();

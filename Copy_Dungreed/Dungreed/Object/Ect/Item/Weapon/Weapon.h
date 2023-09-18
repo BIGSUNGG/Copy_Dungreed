@@ -19,6 +19,7 @@ public:
 	virtual void Attack() override;
 	virtual void Skill() override;
 	virtual void Damaged(const Creature_Status& status) override;
+	virtual bool GiveDamage(shared_ptr<Creature> target);
 
 	virtual void SetAttackEffect(function<shared_ptr<Effect>()> effect) { _attackEffect = effect; }
 
@@ -31,6 +32,8 @@ public:
 	void SetAttackDelay(float delay);
 	void SetAttackRange(Vector2 range) { _attackRange = range; }
 	void SetGiveDamageDelay(float delay) { _giveDamageDelay = delay; }
+	void SetAttackMinDamage(float Damage) { _attackMinDamage = Damage; }
+	void SetAttackMaxDamage(float Damage) { _attackMaxDamage = Damage; }
 	void SetAppendAngle(vector<float> angle) { _appendAngle = angle; }
 	virtual void SetAttackSound(const string& sound) { _attackSound = sound; }
 
@@ -75,6 +78,8 @@ protected:
 	float _showDirection = 0.f;
 
 	bool _attacked = false;
+	float _attackMinDamage = 10.f;
+	float _attackMaxDamage = 10.f;
 	float _giveDamageDelay = 0.0f;
 	float _giveDamageDelayRunTime = 0.0f;
 

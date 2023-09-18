@@ -8,7 +8,7 @@ public:
 	virtual void Render() override;
 
 	virtual void SetTarget(shared_ptr<Creature> target);
-	virtual float TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon) override;
+	virtual float TakeDamage(float baseDamage, shared_ptr<Creature> attacker) override;
 
 protected:
 	virtual void SearchTarget();

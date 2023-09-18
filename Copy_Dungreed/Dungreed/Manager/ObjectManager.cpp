@@ -1375,6 +1375,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		case 0:
 			weapon = make_shared<Melee>(type,num);
 			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
+			weapon->SetAttackMinDamage(10.f); 
+			weapon->SetAttackMaxDamage(20.f);
 			weapon->SetAttackRange({ 84,120 });
 			weapon->SetAttackEffect(effect);
 			weapon->SetAppendAngle({ -0.1f,1.2f });
@@ -1387,6 +1389,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			weapon = make_shared<Melee_FireDragonKiller>(type, num);
 			texture = make_shared<Quad>(L"Resource/Weapon/Melee/FireDragonKiller/FireDragonKiller.png");
 			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
+			weapon->SetAttackMinDamage(30.f);
+			weapon->SetAttackMaxDamage(50.f);
 			weapon->SetHudTexture(L"Resource/Weapon/Melee/FireDragonKiller/FireDragonKiller.png");
 			weapon->SetAttackEffect(effect);
 			weapon->SetAttackRange({ 130,180 });
@@ -1396,6 +1400,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		case 2:
 			weapon = make_shared<Melee>(type, num);
 			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
+			weapon->SetAttackMinDamage(15.f);
+			weapon->SetAttackMaxDamage(20.f);
 			weapon->SetAttackRange({ 130,180 });
 			weapon->SetAttackDelay(0.25f);
 			weapon->SetSkillDelay(2.f);
@@ -1462,6 +1468,8 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 		case 0:
 			weapon = make_shared<Gun>(type,num);
 			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
+			weapon->SetAttackMinDamage(15.f);
+			weapon->SetAttackMaxDamage(25.f);
 			weapon->SetHudTexture(L"Resource/Weapon/Gun/MiniCrossbow2.png");
 			weapon->SetAttackDelay(0.5f);
 			SOUND->Add("crossbow", "Resource/Sound/Weapon/Fire/crossbow.wav");

@@ -20,7 +20,6 @@ Player::Player(int level, int num)
 	_itemSlot.resize(15);
 
 	_status.SetMaxHp(80);
-	_status._atk = 25;
 	_status._speed = 450.0f;
 
 	INVENTORY->SetWeaponSlot(&_weaponSlot);
@@ -50,17 +49,33 @@ void Player::Update()
 	CheckEctEvent();
 }
 
-float Player::TakeDamage(shared_ptr<Creature> enemy, shared_ptr<Item> weapon)
+float Player::TakeDamage(float baseDamage, shared_ptr<Creature> attacker)
 {
 	if (_buffer->_data.selected == 2)
 		return false;
 
-	const bool& damage = Creature::TakeDamage(enemy, weapon);
+	float damage = Creature::TakeDamage(baseDamage, attacker);
 
 	if (_status._hp > 0)
 	{
 		_buffer->_data.selected = 2;
 		_buffer->_data.value4 = 0.5f;
+	}
+
+	return damage;
+}
+
+float Player::GiveDamage(float baseDamage, shared_ptr<Creature> target)
+{
+	float damage = Creature::GiveDamage(baseDamage, target);
+
+	if (damage > 0)
+	{
+		shared_ptr<Effect_Number> effect = make_shared<Effect_Number>();
+		effect->SetNumber(damage);
+		effect->SetPos(target->GetPos());
+
+		GAME->AddEffect(effect);
 	}
 
 	return damage;
@@ -202,22 +217,6 @@ void Player::Dash()
 		_dashMovement->SetDirection(direction);
 		_dashMovement->Dash();
 	}
-}
-
-float Player::GiveDamage(shared_ptr<Creature> target, shared_ptr<Item> weapon)
-{
-	float damage = Creature::GiveDamage(target, weapon);
-	
-	if (damage > 0)
-	{
-		shared_ptr<Effect_Number> effect = make_shared<Effect_Number>();
-		effect->SetNumber(damage);
-		effect->SetPos(target->GetPos());
-
-		GAME->AddEffect(effect);
-	}
-
-	return damage;
 }
 
 void Player::CheckEctEvent()
