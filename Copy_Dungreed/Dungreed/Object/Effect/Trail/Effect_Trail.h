@@ -6,6 +6,8 @@ public:
 
 	virtual void Update() override;
 
+public:
+	// Getter Setter
 	void SetAlpha(const float& alpha) { _buffer->_data.value4 = alpha; }
 	void SetFadeRatio(const float& ratio) { _fadeRatio = ratio; }
 	void SetSpeed(const float& speed) { _speed = speed; }

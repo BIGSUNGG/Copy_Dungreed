@@ -7,7 +7,6 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	virtual void SetTarget(shared_ptr<Creature> target);
 	virtual float TakeDamage(float baseDamage, shared_ptr<Creature> attacker) override;
 
 protected:
@@ -17,6 +16,10 @@ protected:
 	virtual void SpawnEffect();
 
 	virtual void MovementEvent() override {}
+
+public:
+	// Getter Setter
+	virtual void SetTarget(shared_ptr<Creature> target);
 
 protected:
 	weak_ptr<Creature> _target;

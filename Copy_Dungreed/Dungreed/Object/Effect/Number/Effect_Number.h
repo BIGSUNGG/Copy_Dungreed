@@ -7,6 +7,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
+public:
+	// Getter Setter
 	virtual void SetColor(const XMFLOAT4& color);
 	virtual void SetPos(const Vector2& pos) override;
 	virtual void SetNumber(const int& num);

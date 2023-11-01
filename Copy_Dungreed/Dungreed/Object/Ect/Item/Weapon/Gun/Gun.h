@@ -7,9 +7,12 @@ public:
 
 	virtual void Attack() override;
 
-	virtual void SetWeapon() override;
 protected:
 	virtual void AttackEffect();
+
+public:
+	// Getter Setter
+	virtual void SetWeapon() override;
 
 protected:
 	float _bulletSpeed = 2500.0f;

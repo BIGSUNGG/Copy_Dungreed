@@ -29,15 +29,6 @@ public:
 
 	virtual float TakeDamage(float baseDamage, shared_ptr<Creature> attacker);
 	virtual float GiveDamage(float baseDamage, shared_ptr<Creature> target);
-
-	bool IsFalling() { return _movement->IsFalling(); }
-
-	const Creature_Status& GetStatus() { return _status; }
-	Creature_Type& GetCreatureType() { return _creatureType; }
-	shared_ptr<MovementComponent> GetMovementComponent() { return _movement; }
-
-	virtual bool AddItem(shared_ptr<Item> weapon);
-	virtual void SetSpawnPos(Vector2 pos) override;
 	
 	virtual void CollisionEvent();
 
@@ -53,6 +44,16 @@ public:
 	virtual void MoveRight();
 	virtual void Jump();
 
+public:
+	// Getter Setter
+	bool IsFalling() { return _movement->IsFalling(); }
+
+	const Creature_Status& GetStatus() { return _status; }
+	Creature_Type& GetCreatureType() { return _creatureType; }
+	shared_ptr<MovementComponent> GetMovementComponent() { return _movement; }
+
+	virtual bool AddItem(shared_ptr<Item> weapon);
+	virtual void SetSpawnPos(Vector2 pos) override;
 
 protected:
 	Creature_Type _creatureType = ENEMY;

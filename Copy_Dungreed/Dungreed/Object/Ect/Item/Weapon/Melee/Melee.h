@@ -10,6 +10,8 @@ public:
 
 	virtual void AttackEffect() override;
 
+public:
+	// Getter Setter
 	virtual void SetWeapon() override;
 };
 

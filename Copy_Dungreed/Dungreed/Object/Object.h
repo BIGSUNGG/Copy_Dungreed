@@ -27,8 +27,10 @@ public:
 	virtual void ImGuiRender();
 
 	virtual void ReverseTexture();
+	virtual void CreateAnimation();
 
-	virtual void SetAnimation();
+public:
+	// Getter Setter
 	virtual void SetSpawnPos(Vector2 pos);
 	virtual void SetOwnerMap(shared_ptr<Map> map);
 	virtual void SetTexture(shared_ptr<Quad> texture);
@@ -51,6 +53,7 @@ public:
 	Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
 
 	static const int _objectTypeCount = 7;
+
 protected:
 	Object_Type _objectType = Object_Type::NONE;
 	Vector2 _spawnPos = { 0,0 };

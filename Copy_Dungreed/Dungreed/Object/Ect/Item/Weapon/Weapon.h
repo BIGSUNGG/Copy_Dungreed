@@ -25,6 +25,12 @@ public:
 
 	void AddOffsetIndex(const int& num);
 
+protected:
+	virtual void AttackEffect();
+	virtual void CheckAttack();
+
+public:
+	// Getter Setter
 	virtual void SetWeapon();
 	void SetOffset(Vector2 offset) { _offset = offset; }
 	void SetShowTo(const float& showDirection) { _showDirection = showDirection; }
@@ -48,9 +54,6 @@ public:
 	virtual const float& GetShowDirection() { return _showDirection; }
 	shared_ptr<Quad> GetSkillHuiTexture() { return _skillHudTexture; }
 	virtual const bool& GetFastRender() { return _fastRender[_offsetIndex]; }
-protected:
-	virtual void AttackEffect();
-	virtual void CheckAttack();
 
 protected:
 	Weapon_Type _weaponType = MELEE;

@@ -40,6 +40,7 @@ public:
 	void PostRender();
 
 	void Refresh();
+
 	void SetState(const UI_State& state);
 	void SetPostProssesing(XMFLOAT4 color);
 	char GetBlinkState() { return _blinkState; }

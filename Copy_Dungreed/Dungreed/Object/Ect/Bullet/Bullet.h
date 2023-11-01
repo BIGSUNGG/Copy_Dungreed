@@ -13,14 +13,17 @@ public:
 	void ReverseTexture();
 	virtual void Attack();
 
+protected:
+	virtual void DestroyEvent();
+
+public:
+	// Getter Setter
 	void SetDirection(const Vector2& direction);
 	void SetSpeed(float speed) { _speed = speed; }
 	void SetHitCount(const float& count) { _hitCount = count; }
 	void SetDestroyTime(const float& time) { _runTimeMax = time; }
 	void SetOwner(shared_ptr<class Weapon> weapon) { _weapon = weapon; }
 	void SetDestroyEffect(function<shared_ptr<Effect>()> effect) { _destroyEffect = effect; }
-protected:
-	virtual void DestroyEvent();
 
 protected:
 	map<shared_ptr<Object>, bool> _attacked;

@@ -31,6 +31,8 @@ public:
 	virtual void Skill() abstract;
 	virtual void Damaged(const Creature_Status& status) abstract;
 
+public:
+	// Getter Setter
 	virtual void SetOwner(shared_ptr<Creature> owner);
 	void SetHudTexture(const wstring& image);
 

@@ -13,6 +13,8 @@ public:
 public:
 	Tile(int level, int num);
 
+public:
+	// Getter Setter
 	virtual Tile_Type& GetTileType() { return _tileType; }
 
 protected:

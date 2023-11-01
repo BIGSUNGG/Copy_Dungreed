@@ -50,7 +50,7 @@ void Melee_FireDragonKiller::Render()
 void Melee_FireDragonKiller::FireEffect()
 {
 	shared_ptr<Effect> effect = make_shared<Effect>(0, 0);
-	effect->SetAnimation();
+	effect->CreateAnimation();
 	effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.1f);
 	effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 	effect->GetAnimation()->_animList[BASIC] = _fireEffectAnim;

@@ -7,7 +7,6 @@ public:
 	virtual void Update() override;
 
 protected:
-
 	virtual void AI() override;
 	virtual void MoveTo(shared_ptr<Object> object);
 

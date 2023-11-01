@@ -14,7 +14,6 @@ public:
 
 	virtual void Update() override;
 
-	virtual void SetOwnerMap(shared_ptr<Map> map) override;
 
 protected:
 	virtual void Opened();
@@ -22,6 +21,11 @@ protected:
 	virtual void Lock();
 	virtual void DoorOpenEffect();
 
+public:
+	// Getter Setter
+	virtual void SetOwnerMap(shared_ptr<Map> map) override;
+
+protected:
 	Vector2 _moveDirection = { 0,0 };
 
 	const float _doorEffectDelay = 0.15f;

@@ -9,7 +9,6 @@ public:
 	virtual float TakeDamage(float baseDamage, shared_ptr<Creature> attacker) override;
 	virtual float GiveDamage(float baseDamage, shared_ptr<Creature> target) override;
 
-	const Dash_Info& GetDashInfo() { return _dashInfo; }
 
 	virtual void Dash();
 	virtual void Jump() override;
@@ -25,7 +24,12 @@ public:
 
 	virtual void StopMove();
 	virtual void MouseEvent();
+
+public:
+	// Getter Setter
 	virtual void SetStatic(bool sta);
+
+	const Dash_Info& GetDashInfo() { return _dashInfo; }
 
 protected:
 

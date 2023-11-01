@@ -66,7 +66,7 @@ void Object::SetCollider(shared_ptr<RectCollider> collider)
 	_collider->SetParent(_texture->GetTransform());
 }
 
-void Object::SetAnimation()
+void Object::CreateAnimation()
 {
 	_anim = make_shared<Animation>();
 }

@@ -14,6 +14,8 @@ public:
 
 	virtual void Update() override;
 
+public:
+	// Getter Setter
 	virtual BackGround_Type& GetBackGroundType() { return _backGroundType; }
 	float& GetRatio() { return _perspectiveRatio; }
 

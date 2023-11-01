@@ -15,9 +15,11 @@ public:
 public:
 	Ect(int level, int num);
 
-	const Ect_Type& GetEctType() { return _ectType; }
-
 	virtual void Interaction() {}
+
+public:
+	// Getter Setter
+	const Ect_Type& GetEctType() { return _ectType; }
 	bool GetInteraction() { return _interaction; }
 
 protected:

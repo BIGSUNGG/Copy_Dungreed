@@ -7,6 +7,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
+protected:
 	virtual void FireEffect();
 
 protected:

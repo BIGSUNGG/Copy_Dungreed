@@ -794,7 +794,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 	switch (num)
 	{
 	case 0:
-		object->SetAnimation();
+		object->CreateAnimation();
 		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Adventurer/Idle/CharIdle0.png");
@@ -820,7 +820,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
 		break;
 	case 1:
-		object->SetAnimation();
+		object->CreateAnimation();
 		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Alice/Idle/CharIdle0.png");
@@ -844,7 +844,7 @@ shared_ptr<Player> ObjectManager::GetPlayer(int num)
 		texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
 		break;
 	case 2:
-		object->SetAnimation();
+		object->CreateAnimation();
 		object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(5, 0.1f);
 		object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 		object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Player/Sesilia/Idle/Sesilia_Idle00.png");
@@ -902,7 +902,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		case 0:
 			object = make_shared<GraySkel>(level, num);
 
-			object->SetAnimation();
+			object->CreateAnimation();
 			object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(1, 0.3f);
 			object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/GraySkel/Idle/GraySkelIdle.png");
@@ -924,7 +924,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		case 1:		
 			object = make_shared<GraySkel>(level, num);
 
-			object->SetAnimation();
+			object->CreateAnimation();
 			object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(1, 0.3f);
 			object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/GraySkel/Idle/GraySkelIdle.png");
@@ -946,7 +946,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 		case 2:
 			object = make_shared<Ghost>(level, num);
 
-			object->SetAnimation();
+			object->CreateAnimation();
 			object->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(6, 0.15f);
 			object->GetAnimation()->_animState[Creature::Creature_State::IDLE] = Animation::Anim_State::LOOP;
 			object->GetAnimation()->_animList[Creature::Creature_State::IDLE].push_back(L"Resource/Creature/Enemy/Ghost/Idle/LittleGhost0.png");
@@ -1009,7 +1009,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerEffect(int num)
 	switch (num)
 	{
 	case 0:
-		effect->SetAnimation();
+		effect->CreateAnimation();
 		effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
 		effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 		effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/Dust1.png");
@@ -1021,7 +1021,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerEffect(int num)
 		texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 		break;
 	case 1:
-		effect->SetAnimation();
+		effect->CreateAnimation();
 		effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.05f);
 		effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 		effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Player/Movement/DubleJumpFX0.png");
@@ -1075,7 +1075,7 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 		switch (num)
 		{
 		case 0:
-			effect->SetAnimation();
+			effect->CreateAnimation();
 
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(11, 0.05f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
@@ -1094,7 +1094,7 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 1:
-			effect->SetAnimation();
+			effect->CreateAnimation();
 
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(15, 0.05f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
@@ -1147,7 +1147,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 		switch (num)
 		{
 		case 0:
-			effect->SetAnimation();
+			effect->CreateAnimation();
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(4, 0.1f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/BasicSword/SwingFX00.png");
@@ -1156,7 +1156,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 1:
-			effect->SetAnimation();
+			effect->CreateAnimation();
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.075f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/FireDrangonKiller/FireGreatSwingFX01.png");
@@ -1168,7 +1168,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 			texture = make_shared<Quad>(effect->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 2:
-			effect->SetAnimation();
+			effect->CreateAnimation();
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(8, 0.1f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosSwingFX00.png");
@@ -1189,7 +1189,7 @@ shared_ptr<Effect> ObjectManager::GetPlayerWeaponEffect(int type, int num)
 		switch (num)
 		{
 		case 0:
-			effect->SetAnimation();
+			effect->CreateAnimation();
 			effect->GetAnimation()->_animSpeed[BASIC] = vector<float>(6, 0.05f);
 			effect->GetAnimation()->_animState[BASIC] = Animation::Anim_State::END;
 			effect->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Gun/Bullet/Destroy/ArrowFX0.png");
@@ -1256,7 +1256,7 @@ shared_ptr<DropGold> ObjectManager::GetGold(int num)
 	{
 	case 0:
 		gold->SetPirce(10);
-		gold->SetAnimation();
+		gold->CreateAnimation();
 		gold->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.1f);
 		gold->GetAnimation()->_animState[BASIC] = Animation::Anim_State::LOOP;
 		gold->GetAnimation()->_animList[BASIC].push_back(L"Resource/Map/Public/Gold/GoldCoin1.png");
@@ -1270,7 +1270,7 @@ shared_ptr<DropGold> ObjectManager::GetGold(int num)
 		break;
 	case 1:
 		gold->SetPirce(100);
-		gold->SetAnimation();
+		gold->CreateAnimation();
 		gold->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.1f);
 		gold->GetAnimation()->_animState[BASIC] = Animation::Anim_State::LOOP;
 		gold->GetAnimation()->_animList[BASIC].push_back(L"Resource/Map/Public/Gold/Bullion0.png");
@@ -1317,7 +1317,7 @@ shared_ptr<Bullet> ObjectManager::GetBullet(int type, int num)
 			bullet->SetDestroyTime(2.f);
 			bullet->SetHitCount(INT_MAX);
 
-			bullet->SetAnimation();
+			bullet->CreateAnimation();
 			bullet->GetAnimation()->_animSpeed[BASIC] = vector<float>(5, 0.05f);
 			bullet->GetAnimation()->_animState[BASIC] = Animation::Anim_State::LOOP;
 			bullet->GetAnimation()->_animList[BASIC].push_back(L"Resource/Effect/Weapon/Melee/Cosmos/CosmosAuror00.png");
@@ -1336,7 +1336,7 @@ shared_ptr<Bullet> ObjectManager::GetBullet(int type, int num)
 		{
 		case 0:
 			bullet = make_shared<Bullet>(type ,num);
-			func = bind(&ObjectManager::GetPlayerWeaponEffect,this, Weapon::GUN, 0);
+			func = bind(&ObjectManager::GetPlayerWeaponEffect, this, Weapon::GUN, 0);
 			bullet->SetDestroyEffect(func);
 			texture = make_shared<Quad>(L"Resource/Effect/Weapon/Gun/Bullet/CrossbowArrow.png");
 			break;
@@ -1407,7 +1407,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			weapon->SetSkillDelay(2.f);
 			weapon->SetAttackEffect(effect);
 			weapon->SetAppendAngle({ -0.1f,1.2f });
-			weapon->SetAnimation();
+			weapon->CreateAnimation();
 			weapon->GetAnimation()->_animSpeed[Item::Item_State::IDLE] = vector<float>(12, 0.1f);
 			weapon->GetAnimation()->_animState[Item::Item_State::IDLE] = Animation::Anim_State::LOOP;
 			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
@@ -1568,7 +1568,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->SetGiveDamageDelay(0.8f);
 			weapon->SetAttackRange({ 70, 100});
 
-			weapon->SetAnimation();
+			weapon->CreateAnimation();
 			weapon->SetAttackDelay(1.0f);
 
 			weapon->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(1, 0.1f);
@@ -1601,7 +1601,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->SetGiveDamageDelay(0.7f);
 			weapon->SetAttackRange({ 100,150 });
 
-			weapon->SetAnimation();
+			weapon->CreateAnimation();
 			weapon->SetAttackDelay(1.0f);
 
 			weapon->GetAnimation()->_animSpeed[Creature::Creature_State::IDLE] = vector<float>(1, 0.1f);

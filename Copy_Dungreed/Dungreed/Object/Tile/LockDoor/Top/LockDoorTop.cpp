@@ -6,7 +6,7 @@ LockDoorTop::LockDoorTop()
 {
 	_moveDirection = { 0,1 };
 
-	SetAnimation();
+	CreateAnimation();
 	GetAnimation()->_animSpeed[LockDoor::LOCK] = vector<float>(8, 0.1f);
 	GetAnimation()->_animState[LockDoor::LOCK] = Animation::Anim_State::END;
 	GetAnimation()->_animList[LockDoor::LOCK].push_back(L"Resource/Map/Public/Lock/LockDoorTop/Lock/Stele00.png");
