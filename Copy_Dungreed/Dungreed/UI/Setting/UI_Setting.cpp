@@ -230,6 +230,7 @@ UI_Setting::UI_Setting()
 		_fps.push_back(_pair);
 		_pair = { L"240", 240 };
 		_fps.push_back(_pair);
+
 	}
 
 	_screenIndex = GRAPHIC->GetWinMode();

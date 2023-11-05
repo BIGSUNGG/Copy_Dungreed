@@ -14,7 +14,7 @@ Item::~Item()
 void Item::ReverseTexture()
 {
 	_texture->ReverseToX();
-	SwitchBool(_reversed);
+	SWITCH_BOOL(_reversed);
 }
 
 void Item::SetOwner(shared_ptr<Creature> owner)

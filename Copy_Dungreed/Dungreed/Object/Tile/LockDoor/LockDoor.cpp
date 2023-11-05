@@ -59,7 +59,7 @@ void LockDoor::Opened()
 	_render = false;
 	_open = true;
 	_anim->ChangeAnimation(OPEN, true);
-	_anim->IsPlaying() = false;
+	_anim->SetIsPlaying(false);
 	_collison = false;
 }
 
@@ -68,7 +68,7 @@ void LockDoor::Open()
 	_render = true;
 	_open = false;
 	_anim->ChangeAnimation(OPEN);
-	_anim->IsPlaying() = true;
+	_anim->SetIsPlaying(true);
 	_collison = true;
 }
 
@@ -77,7 +77,7 @@ void LockDoor::Lock()
 	_render = true;
 	_open = false;
 	_anim->ChangeAnimation(LOCK);
-	_anim->IsPlaying() = true;
+	_anim->SetIsPlaying(true);
 	_collison = true;
 }
 

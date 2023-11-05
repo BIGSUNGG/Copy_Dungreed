@@ -49,7 +49,7 @@ void UI_Map::Update()
 	if (_blinkRunTime >= _blinkDelay)
 	{
 		_blinkRunTime = 0.0f;
-		SwitchBool(_blink);
+		SWITCH_BOOL(_blink);
 	}
 
 	_filterQuad->Update();

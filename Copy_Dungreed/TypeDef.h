@@ -77,5 +77,7 @@
 #define EXCEPT -1
 #define BASIC 0
 
+#define SWITCH_BOOL(boolVal) boolVal = !boolVal;
+
 using CallBack = function<void()>;
 using CallBackParam = function<void(int,int)>;

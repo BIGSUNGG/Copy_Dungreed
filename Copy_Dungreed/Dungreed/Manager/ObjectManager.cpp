@@ -468,7 +468,7 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		case 27:
 			texture = make_shared<Quad>(L"Resource/Map/Level_00/Tile/Grass_H_4.png");
-			object->IsCollision() = false;
+			object->SetIsCollision(false);
 			break;
 		}
 		break;

@@ -53,7 +53,7 @@ public:
 	shared_ptr<Transform> GetSpringArm() { return _springArm; }
 	virtual const float& GetShowDirection() { return _showDirection; }
 	shared_ptr<Quad> GetSkillHuiTexture() { return _skillHudTexture; }
-	virtual const bool& GetFastRender() { return _fastRender[_offsetIndex]; }
+	virtual const bool GetFastRender() { return _fastRender[_offsetIndex]; }
 
 protected:
 	Weapon_Type _weaponType = MELEE;

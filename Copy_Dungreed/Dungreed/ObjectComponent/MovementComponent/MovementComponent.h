@@ -11,11 +11,14 @@ public:
 
 	virtual void Jump();
 
+public:
+	// Getter Setter
 	bool IsOnStair() { return _onStair; }
-	bool& IsFalling() { return _isFalling; }
+	bool IsFalling() { return _isFalling; }
 	Vector2& GetMovement() { return _movement; }
 	const Vector2& GetVelocity() { return _velocity; }
 
+	void SetIsFalling(bool value) { _isFalling = value; }
 	void SetMovementEvent(function<void()> func) { _movementEvent = func; }
 	void SetCollisionEvent(function<void()> func) { _collisionEvent = func; }
 	void SetBeforeMove(const Vector2& vec);

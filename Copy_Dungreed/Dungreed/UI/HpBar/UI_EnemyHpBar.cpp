@@ -19,8 +19,8 @@ void UI_EnemyHpBar::Update()
 
 			if (creature->GetCreatureType() == Creature::ENEMY && hpRatio < 1.0f)
 			{
-				_hpBarBase[i]->IsRender() = true;
-				_hpBarGauge[i]->IsRender() = true;
+				_hpBarBase[i]->SetIsRender(true);
+				_hpBarGauge[i]->SetIsRender(true);
 
 				_hpBarBase[i]->GetObjectTexture()->SetTop(creature->GetCollider()->Bottom() - CAMERA->GetPos().y - 10.0f);
 				_hpBarBase[i]->GetPos().x = creature->GetPos().x - CAMERA->GetPos().x;
@@ -33,14 +33,14 @@ void UI_EnemyHpBar::Update()
 			}
 			else
 			{
-				_hpBarBase[i]->IsRender() = false;
-				_hpBarGauge[i]->IsRender() = false;
+				_hpBarBase[i]->SetIsRender(false);
+				_hpBarGauge[i]->SetIsRender(false);
 			}
 		}
 		else
 		{
-			_hpBarBase[i]->IsRender() = false;
-			_hpBarGauge[i]->IsRender() = false;
+			_hpBarBase[i]->SetIsRender(false);
+			_hpBarGauge[i]->SetIsRender(false);
 		}
 		
 		_hpBarBase[i]->Update();
@@ -76,8 +76,8 @@ void UI_EnemyHpBar::Refresh()
 		auto hpBarGaugeQuad = make_shared<Quad>(L"Resource/Ui/HpBar/Enemy_HpBar_Gauge.png");
 		_hpBarGauge[i]->SetTexture(hpBarGaugeQuad);
 
-		_hpBarBase[i]->IsRender() = false;
-		_hpBarGauge[i]->IsRender() = false;
+		_hpBarBase[i]->SetIsRender(false);
+		_hpBarGauge[i]->SetIsRender(false);
 	}
 
 }

@@ -14,14 +14,13 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
-	if (DELTA_TIME >= _maxDelay)
+	if (DELTA_TIME >= _maxDeltaTime)
 		return;
 
-	Optimize();
-	Input();
-	
 	if (!_pause)
 	{
+		Optimize();
+		Input();
 		for (auto& objects : _curMap->GetObjects())
 		{
 			for (auto& object : objects)
@@ -44,10 +43,17 @@ void GameManager::Update()
 	}
 
 	_curMap->CheckCleared();
+
+	MAP_MANAGER->Update();
+
+	if (_enableUI)
+		UI_MANAGER->Update();
 }
 
 void GameManager::PreRender()
 {
+	if (_enableUI && _renderUI)
+		UI_MANAGER->PreRender();
 }
 
 void GameManager::Render()
@@ -72,25 +78,28 @@ void GameManager::Render()
 
 void GameManager::PostRender()
 {
-	if (_renderCollider == false)
-		return;
-
-	for (int i = Object::TILE; i < Object::EFFECT; i++)
+	if (_renderCollider)
 	{
-		for (auto& object : _objectInScreen[i])
+		for (int i = Object::TILE; i < Object::EFFECT; i++)
 		{
-			if (object == nullptr)
-				continue;
-
-			object->PostRender();
+			for (auto& object : _objectInScreen[i])
+			{
+				if (object == nullptr)
+					continue;
+	
+				object->PostRender();
+			}
+		}
+	
+		for (auto& collider : _debugCollider)
+		{
+			if(collider.second > 0)
+				collider.first->Render();
 		}
 	}
 
-	for (auto& collider : _debugCollider)
-	{
-		if(collider.second > 0)
-			collider.first->Render();
-	}
+	if(_enableUI && _renderUI)
+		UI_MANAGER->PostRender();
 }
 
 void GameManager::ImguiRender()

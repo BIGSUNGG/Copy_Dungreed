@@ -12,9 +12,6 @@ Program::~Program()
 
 void Program::Update()
 {
-	if (KEY_DOWN(VK_F1))
-		SwitchBool(GAME->GetPause());
-
 	_runTime += DELTA_TIME;
 
 	CAMERA->Update();
@@ -24,10 +21,17 @@ void Program::Update()
 
 	MOUSE_CURSUR->Update();
 
+	// 게임 상태 변경
+	if (KEY_DOWN(VK_F1))
+		GAME->SetPause(!GAME->GetPause());
 	if (KEY_DOWN(VK_F2))
-		SwitchBool(GAME->GetRenderTexture());
+		GAME->SetRenderTexture(!GAME->GetRenderTexture());
 	if (KEY_DOWN(VK_F3))
-		SwitchBool(GAME->GetRenderCollider());
+		GAME->SetRenderCollider(!GAME->GetRenderCollider());
+	if (KEY_DOWN(VK_F4))
+		GAME->SetRenderUI(!GAME->GetRenderUI());
+
+	// 게임모드 변경
 	if (KEY_DOWN(VK_F6))
 		_gameMode = make_shared<MapEditor>();
 	if (KEY_DOWN(VK_F7))

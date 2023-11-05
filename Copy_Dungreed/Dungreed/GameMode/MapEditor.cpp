@@ -8,7 +8,8 @@ MapEditor::MapEditor()
 
 	_map = MAP_MANAGER->Load(0, 0);
 	GAME->SetCurMap(_map);
-	GAME->GetPlaying() = false;
+	GAME->SetPlaying(false);
+	GAME->SetEnableUI(false);
 
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 	CAMERA->SetTarget(nullptr);
@@ -175,7 +176,6 @@ void MapEditor::ImGuiRender()
 			default:
 				break;
 			}
-
 			ImGui::TreePop();
 		}
 
@@ -380,7 +380,7 @@ void MapEditor::InputEvent()
 		}
 
 		if (KEY_DOWN('F'))
-			SwitchBool(_freeMode);
+			SWITCH_BOOL(_freeMode);
 
 		if (KEY_DOWN('Z'))
 			_map->GetLeftBottom() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
@@ -440,7 +440,7 @@ void MapEditor::InputEvent()
 	}
 
 	if (KEY_DOWN('G'))
-		SwitchBool(CAMERA->GetFreeMode());
+		CAMERA->SetFreeMode(!CAMERA->GetFreeMode());
 	
 }
 

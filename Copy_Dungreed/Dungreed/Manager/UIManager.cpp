@@ -140,10 +140,10 @@ void UIManager::SetState(const UI_State& state)
 	case UI_State::MAP:
 		break;
 	case UI_State::OPTION:
-		GAME->GetPause() = false;
+		GAME->SetPause(false);
 		break;
 	case UI_State::SETTING:
-		GAME->GetPause() = false;
+		GAME->SetPause(false);
 		break;
 	default:
 		break;
@@ -164,11 +164,11 @@ void UIManager::SetState(const UI_State& state)
 		break;
 	case UI_State::OPTION:
 		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
-		GAME->GetPause() = true;
+		GAME->SetPause(true);
 		break;
 	case UI_State::SETTING:
 		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
-		GAME->GetPause() = true;
+		GAME->SetPause(true);
 		break;
 	default:
 		break;

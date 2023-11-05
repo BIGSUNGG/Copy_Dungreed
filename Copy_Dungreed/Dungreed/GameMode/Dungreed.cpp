@@ -6,7 +6,7 @@ Dungreed::Dungreed()
 	GAME->Reset();
 	_modeType = DUNGREED;
 
-	CAMERA->GetFreeMode() = false;
+	CAMERA->SetFreeMode(false);
 
 	Init();
 
@@ -18,14 +18,11 @@ void Dungreed::Update()
 	_gameRunTime += DELTA_TIME;
 
 	GAME->Update();
-	MAP_MANAGER->Update();
-	UI_MANAGER->Update();
 }
 
 void Dungreed::PreRender()
 {
 	GAME->PreRender();
-	UI_MANAGER->PreRender();
 }
 
 void Dungreed::Render()
@@ -36,7 +33,6 @@ void Dungreed::Render()
 void Dungreed::PostRender()
 {
 	GAME->PostRender();
-	UI_MANAGER->PostRender();
 }
 
 void Dungreed::ImGuiRender()
@@ -73,7 +69,8 @@ void Dungreed::Init()
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 	GAME->AddPlayer(_player);
-	GAME->GetPlaying() = true;
+	GAME->SetPlaying(true);
+	GAME->SetEnableUI(true);
 
 	MAP_MANAGER->MakeRandomMap(1, 0);
 	CAMERA->Update();

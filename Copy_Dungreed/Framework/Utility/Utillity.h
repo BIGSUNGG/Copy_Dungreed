@@ -54,14 +54,6 @@ static wstring CharToWstr(char* value, int size = 1000)
 	return result;
 }
 
-static void SwitchBool(bool& value)
-{
-	if (value == true)
-		value = false;
-	else
-		value = true;
-}
-
 static void EndProgram()
 {
 	DestroyWindow(Device::GetInstance()->GetHWND());

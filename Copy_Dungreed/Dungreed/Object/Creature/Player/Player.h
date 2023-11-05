@@ -19,7 +19,7 @@ public:
 	virtual void MoveRight();
 	virtual void Interaction();
 
-	virtual void SetPassFloor(const bool& pass) { _movement->SetPassFloor(pass); }
+	virtual void SetPassFloor(bool pass) { _movement->SetPassFloor(pass); }
 	virtual void SetCurWeaponSlot(const int& slot) { _curWeaponSlot = slot; }
 
 	virtual void StopMove();

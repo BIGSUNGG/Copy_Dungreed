@@ -41,16 +41,25 @@ public:
 
 	void DeleteObject(shared_ptr<Object> deleteObject);
 
-	bool& GetPause() { return _pause; }
-	bool& GetRenderTexture() { return _renderTexture; }
-	bool& GetRenderCollider() { return _renderCollider; }
+public:
+	// Getter Setter
+	bool GetPause() { return _pause; }
+	bool GetRenderTexture() { return _renderTexture; }
+	bool GetRenderCollider() { return _renderCollider; }
+	bool GetRenderUI() { return _renderUI; }
 	const vector<vector<shared_ptr<Object>>>& GetObjects() { return _curMap->GetObjects(); }
 
-	bool& GetPlaying() { return _playing; }
+	bool GetPlaying() { return _playing; }
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true , bool forceCollision = false);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	shared_ptr<Player> GetPlayer() { return _player; }
 
+	void SetRenderTexture(bool value) { _renderTexture = value; }
+	void SetRenderCollider(bool value) { _renderCollider = value; }
+	void SetRenderUI(bool value) { _renderUI = value; }
+	void SetEnableUI(bool value) { _enableUI = value; }
+	void SetPause(bool value) { _pause = value; }
+	void SetPlaying(bool value) { _playing = value; }
 	void SetCurMap(shared_ptr<Map> addedMap);
 	void SetInput(bool input) { _input = input; }
 
@@ -61,7 +70,7 @@ private:
 	~GameManager();
 	static GameManager* _instance;	
 	
-	const float _maxDelay = 0.05f;
+	const float _maxDeltaTime = 0.05f;
 	const float _debugColliderRunTime = 1.f;
 
 	shared_ptr<Map> _curMap;
@@ -75,6 +84,8 @@ private:
 	bool _input = true;
 	bool _renderTexture = true;
 	bool _renderCollider = false;
+	bool _renderUI = true;
+	bool _enableUI = false;
 	bool _pause = false;
 	bool _playing = false;
 };

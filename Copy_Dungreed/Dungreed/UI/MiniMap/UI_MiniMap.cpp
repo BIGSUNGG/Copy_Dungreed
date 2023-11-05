@@ -36,10 +36,10 @@ void UI_MiniMap::Update()
 		{
 			if (creature[i] == GAME->GetPlayer() || creature[i] == nullptr || creature[i]->IsRender() == false)
 			{
-				_miniEnemy[i]->IsRender() = false;
+				_miniEnemy[i]->SetIsRender(false);
 				continue;
 			}
-			_miniEnemy[i]->IsRender() = true;
+			_miniEnemy[i]->SetIsRender(true);
 			Vector2 pos = (creature[i]->GetPos() - MAP_MANAGER->GetCurMap()->GetLeftBottom()) * _miniMapSizeRatio;
 			pos.x += _miniMapBase->Left();
 			pos.y += _miniMapBase->Bottom() + 5.0f;
@@ -120,7 +120,7 @@ void UI_MiniMap::Refresh()
 		for (auto& enemy : _miniEnemy)
 		{
 			enemy = make_shared<Object>();
-			enemy->IsRender() = false;
+			enemy->SetIsRender(false);
 			auto quad = make_shared<Quad>(L"Resource/Ui/MiniMap/MiniEnemy.png");
 			enemy->SetTexture(quad);
 		}

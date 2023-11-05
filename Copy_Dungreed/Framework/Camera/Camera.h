@@ -25,6 +25,8 @@ public:
 
 	void ShakeStart(float magnitude, float duration, float reduceDamping = 1.0f);
 	
+public:
+	// Getter Setter
 	void SetViewPort(UINT width = WIN_WIDTH, UINT height = WIN_HEIGHT);
 	void SetProjectionBuffer(UINT width = WIN_WIDTH, UINT height = WIN_HEIGHT);
 	void SetCameraWorldBuffer() { _transform->SetBuffer(1); }
@@ -33,10 +35,11 @@ public:
 	void SetTarget(shared_ptr<Transform> target) { _target = target; }
 	void SetLeftBottom(Vector2 value) { _leftBottom = value; }
 	void SetRightTop(Vector2 value) { _rightTop = value; }
+	void SetFreeMode(bool value) { _freeMode = value; }
 
 	shared_ptr<Transform> GetMoveTransform() { return _moveTransform; }
 	shared_ptr<Transform> GetTransform() { return _transform; }
-	const const Vector2& GetVelocity() { return _velocity; }
+	const Vector2& GetVelocity() { return _velocity; }
 	const Vector2& GetBeforeMove() { return _beforeMove; }
 	Vector2 GetPos() { return _transform->GetPos() * -1; }
 	Vector2 GetLeftBottom() { return _leftBottom; }
@@ -44,7 +47,7 @@ public:
 
 	Vector2 GetMouseWorldPos();
 
-	bool& GetFreeMode() { return _freeMode; }
+	bool GetFreeMode() { return _freeMode; }
 
 private:
 	void Shake();

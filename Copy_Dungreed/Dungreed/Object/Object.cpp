@@ -42,7 +42,7 @@ void Object::ImGuiRender()
 void Object::ReverseTexture()
 {
 	_texture->ReverseToX();
-	SwitchBool(_reversed);
+	SWITCH_BOOL(_reversed);
 }
 
 void Object::SetSpawnPos(Vector2 pos)

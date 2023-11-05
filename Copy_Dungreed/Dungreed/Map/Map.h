@@ -55,7 +55,7 @@ public:
 	Vector2& GetLeftDoor()		{ return _mapBasicInfo._leftDoor; }
 	Vector2& GetRightDoor()		{ return _mapBasicInfo._rightDoor; }
 
-	const bool& GetCleared()	{ return _cleared; }
+	bool GetCleared()		{ return _cleared; }
 	const int& GetLevel()		{ return _level; }
 	const int& GetNum()			{ return _num; }
 	const int& GetObjectCount() { return _mapBasicInfo._objectCount; }

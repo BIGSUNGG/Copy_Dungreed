@@ -6,7 +6,7 @@ DebugMode::DebugMode()
 	GAME->Reset();
 	_modeType = DEBUG;
 
-	CAMERA->GetFreeMode() = false;
+	CAMERA->SetFreeMode(false);
 	auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
 
 	MAP_MANAGER->SetCurMap(_map);
@@ -19,14 +19,11 @@ DebugMode::DebugMode()
 void DebugMode::Update()
 {
 	GAME->Update();
-	MAP_MANAGER->Update();
-	UI_MANAGER->Update();
 }
 
 void DebugMode::PreRender()
 {
 	GAME->PreRender();
-	UI_MANAGER->PreRender();
 }
 
 void DebugMode::Render()
@@ -37,7 +34,6 @@ void DebugMode::Render()
 void DebugMode::PostRender()
 {
 	GAME->PostRender();
-	UI_MANAGER->PostRender();
 }
 
 void DebugMode::ImGuiRender()
@@ -55,9 +51,9 @@ void DebugMode::ImGuiRender()
 
 		if (ImGui::Button("Load"))
 		{
-			auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
-			MAP_MANAGER->SetCurMap(_map);
 			Init();
+			shared_ptr<Map> _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
+			MAP_MANAGER->SetCurMap(_map);
 		}
 	}
 
@@ -66,7 +62,9 @@ void DebugMode::ImGuiRender()
 
 void DebugMode::Init()
 {
-	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(0));
+	_player.reset();
+
+	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
 	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
 	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
@@ -74,7 +72,8 @@ void DebugMode::Init()
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
 
 	GAME->AddPlayer(_player);
-	GAME->GetPlaying() = true;
+	GAME->SetPlaying(true);
+	GAME->SetEnableUI(true);
 
 	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());

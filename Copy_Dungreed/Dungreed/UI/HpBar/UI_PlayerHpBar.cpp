@@ -92,27 +92,27 @@ void UI_PlayerHpBar::Update()
 
 	if (dashCount > 2)
 	{
-		_dashBarGaugeLeft->IsRender() = true;
-		_dashBarGaugeMid->IsRender() = true;
-		_dashBarGaugeRight->IsRender() = true;
+		_dashBarGaugeLeft->SetIsRender(true);
+		_dashBarGaugeMid->SetIsRender(true);
+		_dashBarGaugeRight->SetIsRender(true);
 	}
 	else if (dashCount > 1)
 	{
-		_dashBarGaugeLeft->IsRender() = true;
-		_dashBarGaugeMid->IsRender() = true;
-		_dashBarGaugeRight->IsRender() = false;
+		_dashBarGaugeLeft->SetIsRender(true);
+		_dashBarGaugeMid->SetIsRender(true);
+		_dashBarGaugeRight->SetIsRender(false);
 	}
 	else if (dashCount > 0)
 	{
-		_dashBarGaugeLeft->IsRender() = true;
-		_dashBarGaugeMid->IsRender() = false;
-		_dashBarGaugeRight->IsRender() = false;
+		_dashBarGaugeLeft->SetIsRender(true);
+		_dashBarGaugeMid->SetIsRender(false);
+		_dashBarGaugeRight->SetIsRender(false);
 	}
 	else
 	{
-		_dashBarGaugeLeft->IsRender() = false;
-		_dashBarGaugeMid->IsRender() = false;
-		_dashBarGaugeRight->IsRender() = false;
+		_dashBarGaugeLeft->SetIsRender(false);
+		_dashBarGaugeMid->SetIsRender(false);
+		_dashBarGaugeRight->SetIsRender(false);
 	}
 
 	_dashBarGaugeLeft->Update();

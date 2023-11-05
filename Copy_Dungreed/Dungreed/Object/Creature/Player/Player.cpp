@@ -8,7 +8,7 @@ Player::Player(int level, int num)
 	_dashMovement->SetDashMovementEvent(bind(&Player::DashMovement, this));
 	_dashMovement->SetDashEndEvent([&]() {
 		_movement->SetGravityRatio(1.f);
-		_movement->IsFalling() = true; 
+		_movement->SetIsFalling(true); 
 		});
 	_dashMovement->SetDashSlowDownEvent([&]() {_movement->SetGravityRatio(0.4f); });
 
