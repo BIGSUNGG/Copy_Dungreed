@@ -69,9 +69,9 @@ void UI_Map::Render()
 		_blinkBlock->Render();
 
 	_mapBlock->Render();
-	_mapBase->Render();
 	_verticalLine->Render();
 	_horizonLine->Render();
+	_mapBase->Render();
 	_exitButton->Render();
 }
 

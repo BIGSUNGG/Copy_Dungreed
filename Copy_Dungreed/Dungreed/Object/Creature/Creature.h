@@ -54,6 +54,7 @@ public:
 
 	virtual bool AddItem(shared_ptr<Item> weapon);
 	virtual void SetSpawnPos(Vector2 pos) override;
+	void AddOnDeathEvent(std::function<void()> Func) { _deathEvent.push_back(Func); }
 
 protected:
 	Creature_Type _creatureType = ENEMY;
@@ -71,6 +72,8 @@ protected:
 
 	float _damagedRunTime = 0.1f;
 	float _damagedRunTimeMax = 0.1f;
+
+	vector<std::function<void()>> _deathEvent;
 
 };
 

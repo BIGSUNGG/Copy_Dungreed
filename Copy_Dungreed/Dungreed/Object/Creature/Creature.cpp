@@ -116,6 +116,10 @@ void Creature::Death()
 			}
 		}
 	}
+
+	for (auto& func : _deathEvent)
+		func();
+
 }
 
 void Creature::Attack()

@@ -67,6 +67,7 @@ void Dungreed::Init()
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+	_player->AddOnDeathEvent(bind(&Dungreed::Init, this));
 
 	GAME->AddPlayer(_player);
 	GAME->SetPlaying(true);
