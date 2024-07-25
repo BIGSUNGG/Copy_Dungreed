@@ -142,7 +142,7 @@ void MapEditor::ImGuiRender()
 			ImGui::Text("Object Count : %d", _curMap->GetObjectCount());
 			ImGui::SliderInt("Level", &_objectLevel, 0, 8);
 			ImGui::SliderInt("Num", &_objectNum, 0, 99);
-			ImGui::SliderInt("Type", &_objectType, 0, Object::Object_Type::ECT);
+			ImGui::SliderInt("Type", &_objectType, 0, Object::Object_Type::ETC);
 
 			if (ImGui::Button("Reverse"))
 				_curObject->ReverseTexture();
@@ -164,7 +164,7 @@ void MapEditor::ImGuiRender()
 			case Object::Object_Type::CREATURE:
 				ImGui::Text("CREATURE");
 				break;
-			case Object::Object_Type::ECT:
+			case Object::Object_Type::ETC:
 				ImGui::Text("ECT");
 				break;
 			default:

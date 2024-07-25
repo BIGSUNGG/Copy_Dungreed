@@ -1,8 +1,8 @@
 #pragma once
-class Ect : public Object
+class Etc : public Object
 {
 public:
-	enum Ect_Type
+	enum Etc_Type
 	{
 		UNKNOWN,
 		ITEM,
@@ -13,17 +13,17 @@ public:
 	};
 
 public:
-	Ect(int level, int num);
+	Etc(int level, int num);
 
 	virtual void Interaction() {}
 
 public:
 	// Getter Setter
-	const Ect_Type& GetEctType() { return _ectType; }
+	const Etc_Type& GetEtcType() { return _etcType; }
 	bool GetInteraction() { return _interaction; }
 
 protected:
-	Ect_Type _ectType = UNKNOWN;
+	Etc_Type _etcType = UNKNOWN;
 	bool _interaction = false;
 };
 

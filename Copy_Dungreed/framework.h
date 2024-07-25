@@ -142,20 +142,20 @@ using namespace std;
 #include "Dungreed/Object/Effect/Number/Effect_Number.h"
 
 // ECT
-#include "Dungreed/Object/Ect/Ect.h"
-#include "Dungreed/Object/Ect/Bullet/Bullet.h"
-#include "Dungreed/Object/Ect/DropItem/DropItem.h"
-#include "Dungreed/Object/Ect/DropGold/DropGold.h"
-#include "Dungreed/Object/Ect/Chest/Chest.h"
+#include "Dungreed/Object/Etc/Etc.h"
+#include "Dungreed/Object/Etc/Bullet/Bullet.h"
+#include "Dungreed/Object/Etc/DropItem/DropItem.h"
+#include "Dungreed/Object/Etc/DropGold/DropGold.h"
+#include "Dungreed/Object/Etc/Chest/Chest.h"
 
 // Item
-#include "Dungreed/Object/Ect/Item/Item.h"
-#include "Dungreed/Object/Ect/Item/Weapon/Weapon.h"
-#include "Dungreed/Object/Ect/Item/Weapon/Melee/Melee.h"
-#include "Dungreed/Object/Ect/Item/Weapon/Melee/FireDragonKiller/Melee_FireDragonKiller.h"
-#include "Dungreed/Object/Ect/Item/Weapon/Gun/Gun.h"
-#include "Dungreed/Object/Ect/Item/Accessory/Accessory.h"
-#include "Dungreed/Object/Ect/Item/SubWeapon/SubWeapon.h"
+#include "Dungreed/Object/Etc/Item/Item.h"
+#include "Dungreed/Object/Etc/Item/Weapon/Weapon.h"
+#include "Dungreed/Object/Etc/Item/Weapon/Melee/Melee.h"
+#include "Dungreed/Object/Etc/Item/Weapon/Melee/FireDragonKiller/Melee_FireDragonKiller.h"
+#include "Dungreed/Object/Etc/Item/Weapon/Gun/Gun.h"
+#include "Dungreed/Object/Etc/Item/Accessory/Accessory.h"
+#include "Dungreed/Object/Etc/Item/SubWeapon/SubWeapon.h"
 
 // Creature
 #include "Dungreed/Object/Creature/Creature.h"

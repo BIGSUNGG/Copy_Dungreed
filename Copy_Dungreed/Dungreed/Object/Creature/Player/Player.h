@@ -33,7 +33,7 @@ public:
 
 protected:
 
-	virtual void CheckEctEvent();
+	virtual void CheckEtcEvent();
 	virtual void DashMovement();
 	virtual void MovementEvent();
 

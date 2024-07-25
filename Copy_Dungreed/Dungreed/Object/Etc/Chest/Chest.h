@@ -1,5 +1,5 @@
 #pragma once
-class Chest : public Ect
+class Chest : public Etc
 {
 public:
 	Chest(int type, int num);

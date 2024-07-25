@@ -2,9 +2,9 @@
 #include "Item.h"
 
 Item::Item(int level, int num)
-	: Ect(level, num)
+	: Etc(level, num)
 {
-	_ectType = Ect::ITEM;
+	_etcType = Etc::ITEM;
 }
 
 Item::~Item()

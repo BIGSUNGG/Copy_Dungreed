@@ -5,13 +5,14 @@ class Map;
 class Object : public enable_shared_from_this<Object>
 {
 public:
+	static const int _objectTypeCount = 7;
 	enum Object_Type
 	{
 		BACKGROUND,
 		WALL,
 		TILE,
 		CREATURE,
-		ECT,
+		ETC,
 		EFFECT,
 		NONE,
 	};
@@ -53,8 +54,6 @@ public:
 	shared_ptr<Quad> GetObjectTexture()		{ return _texture; }
 	shared_ptr<RectCollider> GetCollider()	{ return _collider; }
 	Vector2& GetPos() { return _texture->GetTransform()->GetPos(); }
-
-	static const int _objectTypeCount = 7;
 
 protected:
 	Object_Type _objectType = Object_Type::NONE;

@@ -37,7 +37,7 @@ public:
 	void AddEffect(shared_ptr<Effect> effect);
 	void SetPlayer(shared_ptr<Player> player);
 	void ResetPlayer();
-	void AddEctObject(shared_ptr<Object> object);
+	void AddEtcObject(shared_ptr<Object> object);
 	void AddDebugCollider(shared_ptr<Collider> collider);
 
 	void DeleteObject(shared_ptr<Object> deleteObject);
@@ -54,6 +54,7 @@ public:
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true , bool forceCollision = false);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	shared_ptr<Player> GetPlayer() { return _player; }
+	shared_ptr<Map> GetCurMap() { return _curMap; }
 
 	void SetRenderTexture(bool value) { _renderTexture = value; }
 	void SetRenderCollider(bool value) { _renderCollider = value; }

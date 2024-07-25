@@ -2,9 +2,9 @@
 #include "Bullet.h"
 
 Bullet::Bullet(int level, int num)
-	: Ect(level,num)
+	: Etc(level,num)
 {
-	_ectType = Ect::BULLET;
+	_etcType = Etc::BULLET;
 }
 
 Bullet::~Bullet()

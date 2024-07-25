@@ -42,7 +42,7 @@ void Gun::Attack()
 
 	bool addBullet = false;
 
-	GAME->AddEctObject(_bullet);
+	GAME->AddEtcObject(_bullet);
 
 	Weapon::Attack();
 }

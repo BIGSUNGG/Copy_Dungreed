@@ -153,9 +153,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Dungreed\ObjectComponent\MovementComponent\DashMovementComponent\DashMovementComponent.h" />
-    <ClInclude Include="Dungreed\Object\Ect\DropGold\DropGold.h" />
-    <ClInclude Include="Dungreed\Object\Ect\DropItem\DropItem.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Accessory\Accessory.h" />
+    <ClInclude Include="Dungreed\Object\Etc\DropGold\DropGold.h" />
+    <ClInclude Include="Dungreed\Object\Etc\DropItem\DropItem.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\Accessory\Accessory.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.h" />
@@ -164,8 +164,8 @@
     <ClInclude Include="Framework\Utility\Audio.h" />
     <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Bullet\Bullet.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Ect.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Bullet\Bullet.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Etc.h" />
     <ClInclude Include="Dungreed\Object\Effect\Trail\Effect_Trail.h" />
     <ClInclude Include="Framework\Animation\Animation.h" />
     <ClInclude Include="Dungreed\Object\Creature\Creature.h" />
@@ -179,10 +179,10 @@
     <ClInclude Include="Dungreed\Map\Map.h" />
     <ClInclude Include="Dungreed\Manager\GameManager.h" />
     <ClInclude Include="Framework\Utility\Graphic.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Item.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\Item.h" />
     <ClInclude Include="Dungreed\Object\Creature\Monster\Monster.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Melee\Melee.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Gun\Gun.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\Weapon\Melee\Melee.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\Weapon\Gun\Gun.h" />
     <ClInclude Include="Framework\Utility\DirectWrite.h" />
     <ClInclude Include="Framework\Utility\BinaryReader.h" />
     <ClInclude Include="Framework\Utility\BinaryWriter.h" />
@@ -198,7 +198,7 @@
     <ClInclude Include="Dungreed\UI\HpBar\UI_PlayerHpBar.h" />
     <ClInclude Include="Framework\Utility\MouseCursur.h" />
     <ClInclude Include="Dungreed\Object\Creature\Monster\Ghost\Ghost.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Chest\Chest.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Chest\Chest.h" />
     <ClInclude Include="Library\FMOD\inc\fmod.h" />
     <ClInclude Include="Library\FMOD\inc\fmod.hpp" />
     <ClInclude Include="Library\FMOD\inc\fmod_codec.h" />
@@ -209,7 +209,7 @@
     <ClInclude Include="Library\FMOD\inc\fmod_output.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\LockDoor.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Melee\FireDragonKiller\Melee_FireDragonKiller.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\Weapon\Melee\FireDragonKiller\Melee_FireDragonKiller.h" />
     <ClInclude Include="Dungreed\ObjectComponent\ObjectComponent.h" />
     <ClInclude Include="Dungreed\ObjectComponent\MovementComponent\MovementComponent.h" />
     <ClInclude Include="Object\InstanceQuad.h" />
@@ -235,7 +235,7 @@
     <ClInclude Include="Framework\Render\Shader.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
     <ClInclude Include="Dungreed\Struct\Status\Creature_Status.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\SubWeapon\SubWeapon.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\SubWeapon\SubWeapon.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
@@ -246,7 +246,7 @@
     <ClInclude Include="Framework\Render\VertexShader.h" />
     <ClInclude Include="Framework\Render\VertexBuffer.h" />
     <ClInclude Include="Dungreed\Object\Wall\Wall.h" />
-    <ClInclude Include="Dungreed\Object\Ect\Item\Weapon\Weapon.h" />
+    <ClInclude Include="Dungreed\Object\Etc\Item\Weapon\Weapon.h" />
     <ClInclude Include="Dungreed\Manager\UIManager.h" />
     <ClInclude Include="Dungreed\UI\UI.h" />
     <ClInclude Include="Dungreed\UI\WeaponSlot\UI_WeaponSlot.h" />
@@ -264,9 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungreed\ObjectComponent\MovementComponent\DashMovementComponent\DashMovementComponent.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\DropGold\DropGold.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\DropItem\DropItem.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Accessory\Accessory.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\DropGold\DropGold.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\DropItem\DropItem.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\Accessory\Accessory.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Bottom\LockDoorBottom.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.cpp" />
@@ -275,8 +275,8 @@
     <ClCompile Include="Framework\Utility\Audio.cpp" />
     <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Bullet\Bullet.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Ect.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Bullet\Bullet.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Etc.cpp" />
     <ClCompile Include="Dungreed\Object\Effect\Trail\Effect_Trail.cpp" />
     <ClCompile Include="Framework\Animation\Animation.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Creature.cpp" />
@@ -290,10 +290,10 @@
     <ClCompile Include="Dungreed\Map\Map.cpp" />
     <ClCompile Include="Dungreed\Manager\GameManager.cpp" />
     <ClCompile Include="Framework\Utility\Graphic.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Item.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\Item.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\Monster.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Melee\Melee.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Gun\Gun.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\Weapon\Melee\Melee.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\Weapon\Gun\Gun.cpp" />
     <ClCompile Include="Framework\Utility\DirectWrite.cpp" />
     <ClCompile Include="Framework\Utility\BinaryReader.cpp" />
     <ClCompile Include="Framework\Utility\BinaryWriter.cpp" />
@@ -310,8 +310,8 @@
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\LockDoor.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Left\LockDoorLeft.cpp" />
     <ClCompile Include="Dungreed\Object\Creature\Monster\Ghost\Ghost.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Melee\FireDragonKiller\Melee_FireDragonKiller.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Chest\Chest.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\Weapon\Melee\FireDragonKiller\Melee_FireDragonKiller.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Chest\Chest.cpp" />
     <ClCompile Include="Dungreed\ObjectComponent\ObjectComponent.cpp" />
     <ClCompile Include="Dungreed\ObjectComponent\MovementComponent\MovementComponent.cpp" />
     <ClCompile Include="Object\InstanceQuad.cpp" />
@@ -349,7 +349,7 @@
     <ClCompile Include="Dungreed\Object\Tile\Tile.cpp" />
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\Weapon\Weapon.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\Weapon\Weapon.cpp" />
     <ClCompile Include="Dungreed\Struct\Status\Creature_Status.cpp" />
     <ClCompile Include="Framework\Render\RenderTarget.cpp" />
     <ClCompile Include="Dungreed\Manager\UIManager.cpp" />
@@ -366,7 +366,7 @@
     <ClCompile Include="Dungreed\UI\Component\UI_Component.cpp" />
     <ClCompile Include="Dungreed\UI\Component\Slider\UI_Slider.cpp" />
     <ClCompile Include="Dungreed\UI\Component\Text\UI_Text.cpp" />
-    <ClCompile Include="Dungreed\Object\Ect\Item\SubWeapon\SubWeapon.cpp" />
+    <ClCompile Include="Dungreed\Object\Etc\Item\SubWeapon\SubWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Copy_Dungreed.rc" />

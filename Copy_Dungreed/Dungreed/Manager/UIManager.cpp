@@ -168,7 +168,7 @@ void UIManager::SetState(const UI_State& state)
 		GAME->SetPause(true);
 		break;
 	case UI_State::SETTING:
-		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0));
+		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(0)); 
 		GAME->SetPause(true);
 		break;
 	default:

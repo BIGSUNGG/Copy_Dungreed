@@ -2,7 +2,7 @@
 
 class Creature;
 
-class Item : public Ect
+class Item : public Etc
 {
 public:
 	enum Item_Type

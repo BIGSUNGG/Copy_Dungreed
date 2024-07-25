@@ -29,8 +29,8 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 	case Object::Object_Type::CREATURE:
 		object = GetCreature(level, num);
 		break;
-	case Object::Object_Type::ECT:
-		object = GetEct(level, num);
+	case Object::Object_Type::ETC:
+		object = GetEtc(level, num);
 		break;
 	case Object::Object_Type::EFFECT:
 		object = GetCreatureEffect(level, num);
@@ -748,20 +748,20 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 	return object;
 }
 
-shared_ptr<Ect> ObjectManager::GetEct(int type, int num)
+shared_ptr<Etc> ObjectManager::GetEtc(int type, int num)
 {
-	shared_ptr<Ect> object = make_shared<Ect>(type, num);
+	shared_ptr<Etc> object = make_shared<Etc>(type, num);
 	shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Cursur/ShootingCursor2.png");
 
 	switch (type)
 	{
-	case Ect::UNKNOWN:
+	case Etc::UNKNOWN:
 		break;
-	case Ect::ITEM:
+	case Etc::ITEM:
 		break;
-	case Ect::BULLET:
+	case Etc::BULLET:
 		break;
-	case Ect::CHEST:
+	case Etc::CHEST:
 	{
 		shared_ptr<Chest> chest = make_shared<Chest>(type, num);
 		switch (num)
@@ -1462,7 +1462,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 				_bullet->SetSpeed(2500.0f);
 				_bullet->SetOwner(weapon);
 
-				GAME->AddEctObject(_bullet);
+				GAME->AddEtcObject(_bullet);
 			};
 			weapon->SetSkill(skill, L"Resource/Skill/Skill_CosmosSwordAuror.png");
 			break;

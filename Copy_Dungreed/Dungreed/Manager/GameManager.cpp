@@ -73,6 +73,7 @@ void GameManager::Render()
 	frustumCollision->Update();
 
 	for (auto& map : _renderOrder)
+
 	{
 		for (auto& instance : map.second.second)
 		{
@@ -128,20 +129,36 @@ void GameManager::PostRender()
 {
 	if (_renderCollider)
 	{
+		shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER);
+		frustumCollision->GetPos() = CAMERA->GetPos() + CENTER;
+		frustumCollision->Update();
+
 		for (int i = Object::TILE; i < Object::EFFECT; i++)
 		{
-			for (auto& object : _objectInScreen[i])
+			vector<shared_ptr<Object>>& objects = _curMap->GetObjects()[i];
+			for (auto& object : objects)
 			{
 				if (object == nullptr)
 					continue;
-	
-				object->PostRender();
+
+				bool bShouldRender = true;
+
+				// 오브젝트의 프러스텀 컬링
+				shared_ptr<RectCollider> collider = object->GetCollider();
+				if (collider != nullptr)
+				{
+					// 텍스쳐가 화면안에 들어와 있는지
+					bShouldRender = frustumCollision->IsCollision(collider, false);
+				}
+
+				if (bShouldRender)
+					object->PostRender();
 			}
 		}
-	
+
 		for (auto& collider : _debugCollider)
 		{
-			if(collider.second > 0)
+			if (collider.second > 0)
 				collider.first->Render();
 		}
 	}
@@ -354,9 +371,9 @@ void GameManager::ResetPlayer()
 	_player = nullptr;
 }
 
-void GameManager::AddEctObject(shared_ptr<Object> object)
+void GameManager::AddEtcObject(shared_ptr<Object> object)
 {
-	AddObject(object, Object::Object_Type::ECT);
+	AddObject(object, Object::Object_Type::ETC);
 }
 
 void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
@@ -459,15 +476,15 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 void GameManager::SetCurMap(shared_ptr<Map> map)
 {
 	_curMap = map;
-	for (auto& object : _curMap->GetObjects()[Object::ECT])
+	for (auto& object : _curMap->GetObjects()[Object::ETC])
 	{
 		if(object == nullptr)
 			continue;
 
-		if (object->GetType() == Object::ECT)
+		if (object->GetType() == Object::ETC)
 		{
-			auto temp = dynamic_pointer_cast<Ect>(object);
-			if (temp->GetEctType() == Ect::BULLET)
+			auto temp = dynamic_pointer_cast<Etc>(object);
+			if (temp->GetEtcType() == Etc::BULLET)
 				object = nullptr;
 		}
 	}

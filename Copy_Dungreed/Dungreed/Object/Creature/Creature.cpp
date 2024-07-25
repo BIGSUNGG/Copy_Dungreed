@@ -113,7 +113,7 @@ void Creature::Death()
 				Vector2 direction = { x, 1.f };
 				dropGold->GetDashMovementComponent()->SetDirection(direction);
 				dropGold->GetDashMovementComponent()->Dash();
-				GAME->AddEctObject(dropGold);
+				GAME->AddEtcObject(dropGold);
 			}
 		}
 	}

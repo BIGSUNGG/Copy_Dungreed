@@ -32,6 +32,9 @@ void Object::Render()
 
 void Object::PostRender()
 {
+	if (_collider == nullptr)
+		return;
+
 	_collider->Render();
 }
 

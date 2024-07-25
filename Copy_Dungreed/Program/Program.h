@@ -13,8 +13,8 @@ public:
 	void RenderEnd();
 
 protected:
-	void DebugMapFromEditor();
-	void EditMapFromDebug();
+	void DebugCurrentMap();
+	void EditCurrentMap();
 
 private:
 	shared_ptr<GameMode> _gameMode;

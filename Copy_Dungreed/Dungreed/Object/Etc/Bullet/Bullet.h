@@ -2,7 +2,7 @@
 
 class Item;
 
-class Bullet : public Ect
+class Bullet : public Etc
 {
 public:
 	Bullet(int level, int num);

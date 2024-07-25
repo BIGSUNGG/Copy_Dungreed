@@ -2,9 +2,9 @@
 #include "Chest.h"
 
 Chest::Chest(int type, int num)
-	: Ect(type, num)
+	: Etc(type, num)
 {
-	_ectType = Ect::CHEST;
+	_etcType = Etc::CHEST;
 	_movement = make_shared<MovementComponent>(this);
 	_interaction = false;
 	_render = false;
@@ -18,7 +18,7 @@ void Chest::Update()
 	if(_spawn)
 		_movement->Update();
 
-	Ect::Update();
+	Etc::Update();
 }
 
 void Chest::Interaction()
@@ -32,13 +32,13 @@ void Chest::Interaction()
 	_dropItem->GetObjectTexture()->SetBottom(_texture->Bottom());
 	_dropItem->GetMovementComponent()->SetBeforeMove(_dropItem->GetPos());
 	_dropItem->GetMovementComponent()->Jump();
-	GAME->AddEctObject(_dropItem);
+	GAME->AddEtcObject(_dropItem);
 	_dropItem = nullptr;
 }
 
 void Chest::SetOwnerMap(shared_ptr<Map> map)
 {
-	Ect::SetOwnerMap(map);
+	Etc::SetOwnerMap(map);
 
 	map->AddOpenEvent([&]() 
 		{

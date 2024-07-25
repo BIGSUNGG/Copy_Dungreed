@@ -2,7 +2,7 @@
 
 class Creature;
 
-class DropItem : public Ect
+class DropItem : public Etc
 {
 public:
 	DropItem(int type, int num);

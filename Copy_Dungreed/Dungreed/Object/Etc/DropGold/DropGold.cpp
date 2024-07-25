@@ -2,9 +2,9 @@
 #include "DropGold.h"
 
 DropGold::DropGold(int type, int num)
-	: Ect(type,num)
+	: Etc(type,num)
 {
-	_ectType = DROP_COIN;
+	_etcType = DROP_COIN;
 	_movement = make_shared<MovementComponent>(this);
 	_movement->SetGravityRatio(1.f);
 	_movement->SetCollisionEvent([&]()
@@ -29,7 +29,7 @@ void DropGold::Update()
 
 	_dash->Update();
 	_movement->Update();
-	Ect::Update();
+	Etc::Update();
 }
 
 void DropGold::AddCoinToIventory()

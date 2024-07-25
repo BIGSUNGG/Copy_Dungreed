@@ -1,10 +1,10 @@
 #include "framework.h"
-#include "Ect.h"
+#include "Etc.h"
 
-Ect::Ect(int level, int num)
+Etc::Etc(int level, int num)
 	: Object(level,num)
 {
 	_renderOrder = 5.f;
-	_objectType = Object_Type::ECT;
+	_objectType = Object_Type::ETC;
 	_static = false;
 }

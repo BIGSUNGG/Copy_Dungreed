@@ -2,9 +2,9 @@
 #include "DropItem.h"
 
 DropItem::DropItem(int type, int num)
-	: Ect(type,num)
+	: Etc(type,num)
 {
-	_ectType = DROP_ITEM;
+	_etcType = DROP_ITEM;
 	_movement = make_shared<MovementComponent>(this);
 	_movement->SetJumpPowerMax(1200.f);
 	_renderOrder = 3.75f;
@@ -13,7 +13,7 @@ DropItem::DropItem(int type, int num)
 void DropItem::Update()
 {
 	_movement->Update();
-	Ect::Update();
+	Etc::Update();
 }
 
 void DropItem::SetItem(shared_ptr<Item> item)

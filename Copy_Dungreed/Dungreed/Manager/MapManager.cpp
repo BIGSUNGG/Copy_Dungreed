@@ -348,7 +348,7 @@ void MapManager::Save(shared_ptr<Map> map)
 
 		vector<float> mapInfo;
 
-		for (int i = Object::Object_Type::BACKGROUND; i <= Object::Object_Type::ECT; i++)
+		for (int i = Object::Object_Type::BACKGROUND; i <= Object::Object_Type::ETC; i++)
 		{
 			for (auto& object : map->GetObjects()[i])
 			{

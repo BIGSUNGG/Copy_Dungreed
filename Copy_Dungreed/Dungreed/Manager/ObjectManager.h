@@ -22,7 +22,7 @@ public:
 	shared_ptr<BackGround> GetBackGround(int level,int num);
 	shared_ptr<Wall> GetWall(int level, int num);
 	shared_ptr<Tile> GetTile(int level, int num);
-	shared_ptr<Ect> GetEct(int type, int num);
+	shared_ptr<Etc> GetEtc(int type, int num);
 
 	shared_ptr<Player> GetPlayer(int num);
 	shared_ptr<Creature> GetCreature(int level, int num);

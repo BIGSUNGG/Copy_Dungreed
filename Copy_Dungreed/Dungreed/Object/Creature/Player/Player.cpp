@@ -46,7 +46,7 @@ void Player::Update()
 
 	_dashMovement->Update();
 	Creature::Update();
-	CheckEctEvent();
+	CheckEtcEvent();
 }
 
 float Player::TakeDamage(float baseDamage, shared_ptr<Creature> attacker)
@@ -223,41 +223,41 @@ void Player::Dash()
 	}
 }
 
-void Player::CheckEctEvent()
+void Player::CheckEtcEvent()
 {
-	for (auto& object : GAME->GetObjects()[Object::ECT])
+	for (auto& object : GAME->GetObjects()[Object::ETC])
 	{
 		if(object == nullptr)
 			continue;
 
-		auto ect = dynamic_pointer_cast<Ect>(object);
-		switch (ect->GetEctType())
+		auto etc = dynamic_pointer_cast<Etc>(object);
+		switch (etc->GetEtcType())
 		{
-		case Ect::UNKNOWN:
+		case Etc::UNKNOWN:
 			break;
-		case Ect::ITEM:
+		case Etc::ITEM:
 			break;
-		case Ect::BULLET:
+		case Etc::BULLET:
 			break;
-		case Ect::CHEST:
+		case Etc::CHEST:
 			break;
-		case Ect::DROP_ITEM:
+		case Etc::DROP_ITEM:
 		{
 			if (_collider->IsCollision(object->GetCollider()))
 			{
-				auto dropItem = dynamic_pointer_cast<DropItem>(ect);
+				auto dropItem = dynamic_pointer_cast<DropItem>(etc);
 				dropItem->AddItemToCreature(this);
 			}
 		}
 			break;
-		case Ect::DROP_COIN:
+		case Etc::DROP_COIN:
 		{
-			auto dropGold = dynamic_pointer_cast<DropGold>(ect);
+			auto dropGold = dynamic_pointer_cast<DropGold>(etc);
 			if (_collider->IsCollision(object->GetCollider()))
 				dropGold->AddCoinToIventory();
 			else
 			{
-				Vector2 distance = this->GetPos() - ect->GetPos();
+				Vector2 distance = this->GetPos() - etc->GetPos();
 				if (distance.Length() <= _goldMagnetLength)
 					dropGold->SetFollowCreature(this);
 			}
@@ -340,11 +340,11 @@ void Player::MoveRight()
 
 void Player::Interaction()
 {
-	for (auto& object : GAME->GetObjects()[Object::ECT])
+	for (auto& object : GAME->GetObjects()[Object::ETC])
 	{
 		if (object == nullptr) continue;
 
-		auto ect = dynamic_pointer_cast<Ect>(object);
+		auto ect = dynamic_pointer_cast<Etc>(object);
 		if(!ect->GetInteraction()) continue;
 
 		float length = (GetPos() - ect->GetPos()).Length();
