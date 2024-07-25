@@ -2,25 +2,19 @@
 #include "MapEditor.h"
 
 MapEditor::MapEditor()
+	: MapEditor(0, 0)
 {
-	GAME->Reset();
+
+}
+
+MapEditor::MapEditor(int level, int num)
+{
 	_modeType = MAP_EDITOR;
+	_mapLevel = level;
+	_mapNum = num;
 
-	_map = MAP_MANAGER->Load(0, 0);
-	GAME->SetCurMap(_map);
-	GAME->SetPlaying(false);
-	GAME->SetEnableUI(false);
-
-	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
-	CAMERA->SetTarget(nullptr);
-	CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
-
-	_mouseOffset.x = (_curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x);
-	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
-
-	MOUSE_CURSUR->CursurOn();
-
-	SOUND->StopAll();
+	shared_ptr<Map> _map = MAP_MANAGER->Load(level, num);
+	Init(_map);
 }
 
 void MapEditor::Update()
@@ -55,43 +49,43 @@ void MapEditor::PostRender()
 
 	{
 		shared_ptr<Collider> temp = make_shared<RectCollider>(Vector2(40.0f, 40.0f));
-		temp->GetPos() = _map->GetLeftBottom();
+		temp->GetPos() = _curMap->GetLeftBottom();
 		temp->Update();
 		temp->SetColorRed();
 		temp->Render();
 
 		temp = make_shared<RectCollider>(Vector2(40.0f, 40.0f));
-		temp->GetPos() = _map->GetRightTop();
+		temp->GetPos() = _curMap->GetRightTop();
 		temp->Update();
 		temp->SetColorRed();
 		temp->Render();
 
 		temp = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
-		temp->GetPos() = _map->GetStartPos();
+		temp->GetPos() = _curMap->GetStartPos();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
 		temp = make_shared<RectCollider>(_verticalDoorHalfSize);
-		temp->GetPos() = _map->GetLeftDoor();
+		temp->GetPos() = _curMap->GetLeftDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
 		temp = make_shared<RectCollider>(_verticalDoorHalfSize);
-		temp->GetPos() = _map->GetRightDoor();
+		temp->GetPos() = _curMap->GetRightDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
 		temp = make_shared<RectCollider>(_horizonialDoorHalfSize);
-		temp->GetPos() = _map->GetTopDoor();
+		temp->GetPos() = _curMap->GetTopDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
 
 		temp = make_shared<RectCollider>(_horizonialDoorHalfSize);
-		temp->GetPos() = _map->GetBottomDoor();
+		temp->GetPos() = _curMap->GetBottomDoor();
 		temp->Update();
 		temp->SetColorGreen();
 		temp->Render();
@@ -116,28 +110,28 @@ void MapEditor::ImGuiRender()
 			ImGui::Text("Apply Offset");
 
 		ImGui::Text("Left");
-		if (_map->CanGoLeft())
+		if (_curMap->CanGoLeft())
 		{
 			ImGui::SameLine();
 			ImGui::Text(" O ");
 		}
 
 		ImGui::Text("Right");
-		if (_map->CanGoRight())
+		if (_curMap->CanGoRight())
 		{
 			ImGui::SameLine();
 			ImGui::Text(" O ");
 		}
 
 		ImGui::Text("Top");
-		if (_map->CanGoTop())
+		if (_curMap->CanGoTop())
 		{
 			ImGui::SameLine();
 			ImGui::Text(" O ");
 		}
 
 		ImGui::Text("Bottom");
-		if (_map->CanGoBottom())
+		if (_curMap->CanGoBottom())
 		{
 			ImGui::SameLine();
 			ImGui::Text(" O ");
@@ -145,7 +139,7 @@ void MapEditor::ImGuiRender()
 
 		if (ImGui::TreeNode("Object"))
 		{
-			ImGui::Text("Object Count : %d", _map->GetObjectCount());
+			ImGui::Text("Object Count : %d", _curMap->GetObjectCount());
 			ImGui::SliderInt("Level", &_objectLevel, 0, 8);
 			ImGui::SliderInt("Num", &_objectNum, 0, 99);
 			ImGui::SliderInt("Type", &_objectType, 0, Object::Object_Type::ECT);
@@ -216,34 +210,34 @@ void MapEditor::ImGuiRender()
 			ImGui::SliderInt("Num", &_mapNum, 0, 30);
 
 			if (ImGui::Button("Save"))
-				MAP_MANAGER->Save(_map);
+				MAP_MANAGER->Save(_curMap);
 
 			ImGui::SameLine();
 			if (ImGui::Button("Load"))
 			{
-				_map = MAP_MANAGER->Load(_mapLevel, _mapNum);
-				GAME->SetCurMap(_map);
-				CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
+				_curMap = MAP_MANAGER->Load(_mapLevel, _mapNum);
+				GAME->SetCurMap(_curMap);
+				CAMERA->GetTransform()->GetPos() = (_curMap->GetStartPos() - CENTER) * -1;
 			}
 
 			ImGui::SameLine();
 			if (ImGui::Button("Reset"))
 			{
-				_map->Reset();
+				_curMap->Reset();
 				GAME->Instancing();
 			}
 
 			if (ImGui::Button("Copy"))
-				_copyMap = _map;
+				_copyMap = _curMap;
 
 			ImGui::SameLine();
 			if (ImGui::Button("Paste"))
 			{
 				if (_copyMap != nullptr)
 				{
-					_map->Paste(_copyMap);
-					CAMERA->GetTransform()->GetPos() = (_map->GetStartPos() - CENTER) * -1;
-					GAME->SetCurMap(_map);
+					_curMap->Paste(_copyMap);
+					CAMERA->GetTransform()->GetPos() = (_curMap->GetStartPos() - CENTER) * -1;
+					GAME->SetCurMap(_curMap);
 				}
 			}
 
@@ -256,19 +250,19 @@ void MapEditor::ImGuiRender()
 			if (ImGui::TreeNode("Reset Door"))
 			{
 				if (ImGui::Button("Left"))
-					_map->GetLeftDoor() = Vector2(0, 0);
+					_curMap->GetLeftDoor() = Vector2(0, 0);
 				ImGui::SameLine();
 
 				if (ImGui::Button("Right"))
-					_map->GetRightDoor() = Vector2(0, 0);
+					_curMap->GetRightDoor() = Vector2(0, 0);
 				ImGui::SameLine();
 
 				if (ImGui::Button("Top"))
-					_map->GetTopDoor() = Vector2(0, 0);
+					_curMap->GetTopDoor() = Vector2(0, 0);
 				ImGui::SameLine();
 
 				if (ImGui::Button("Bottom"))
-					_map->GetBottomDoor() = Vector2(0, 0);
+					_curMap->GetBottomDoor() = Vector2(0, 0);
 
 				ImGui::TreePop();
 			}
@@ -279,10 +273,31 @@ void MapEditor::ImGuiRender()
 	GAME->ImguiRender();
 }
 
+void MapEditor::Init(shared_ptr<Map> debugMap)
+{
+	GAME->Reset();
+
+	_curMap = debugMap;
+	GAME->SetCurMap(_curMap);
+	GAME->SetPlaying(false);
+	GAME->SetEnableUI(false);
+
+	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
+	CAMERA->SetTarget(nullptr);
+	CAMERA->GetTransform()->GetPos() = (_curMap->GetStartPos() - CENTER) * -1;
+
+	_mouseOffset.x = (_curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x);
+	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
+
+	MOUSE_CURSUR->CursurOn();
+
+	SOUND->StopAll();
+}
+
 void MapEditor::AddObject()
 {
 	bool overlap = false;
-	for (auto& object : _map->GetObjects()[_objectType])
+	for (auto& object : _curMap->GetObjects()[_objectType])
 	{
 		if (object->GetPos() == _curObject->GetObjectTexture()->GetTransform()->GetPos())
 		{
@@ -296,7 +311,7 @@ void MapEditor::AddObject()
 		GAME->AddObject(_curObject, _objectType);
 		_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 		if (_autoSave)
-			MAP_MANAGER->Save(_map);
+			MAP_MANAGER->Save(_curMap);
 
 		GAME->Instancing();
 	}
@@ -305,21 +320,21 @@ void MapEditor::AddObject()
 void MapEditor::DeleteObject()
 {
 	shared_ptr<Object> deleteObject;
-	for (int i = 0 ; i < _map->GetObjects()[_objectType].size(); i++)
+	for (int i = 0 ; i < _curMap->GetObjects()[_objectType].size(); i++)
 	{
-		if (_curObject->GetCollider()->IsCollision(_map->GetObjects()[_objectType][i]->GetCollider()->GetWorldPos()))
+		if (_curObject->GetCollider()->IsCollision(_curMap->GetObjects()[_objectType][i]->GetCollider()->GetWorldPos()))
 		{
-			deleteObject = _map->GetObjects()[_objectType][i];
+			deleteObject = _curMap->GetObjects()[_objectType][i];
 			break;
 		}
 	}
 
-	bool success = _map->DeleteObject(deleteObject, _objectType);
+	bool success = _curMap->DeleteObject(deleteObject, _objectType);
 
 	if (success) 
 	{
 		if (_autoSave)
-			MAP_MANAGER->Save(_map);
+			MAP_MANAGER->Save(_curMap);
 	
 		GAME->DeleteObject(deleteObject);
 	}
@@ -349,7 +364,7 @@ void MapEditor::InputEvent()
 			GAME->AddObject(_curObject, _objectType);
 			_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 			if (_autoSave)
-				MAP_MANAGER->Save(_map);
+				MAP_MANAGER->Save(_curMap);
 
 			GAME->Instancing();
 		}
@@ -368,7 +383,7 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('R'))
 		{
-			for (auto& object : _map->GetObjects()[_objectType])
+			for (auto& object : _curMap->GetObjects()[_objectType])
 			{
 				if (object->GetPos() == _curObject->GetPos())
 				{
@@ -383,13 +398,13 @@ void MapEditor::InputEvent()
 			SWITCH_BOOL(_freeMode);
 
 		if (KEY_DOWN('Z'))
-			_map->GetLeftBottom() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
+			_curMap->GetLeftBottom() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
 
 		if (KEY_DOWN('X'))
-			_map->GetRightTop() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
+			_curMap->GetRightTop() = _curObject->GetObjectTexture()->GetTransform()->GetPos();
 
 		if (KEY_DOWN('C'))
-			_map->GetStartPos() = _curMousePos;
+			_curMap->GetStartPos() = _curMousePos;
 
 		if (KEY_DOWN(VK_UP))
 			++_objectLevel;
@@ -405,36 +420,36 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('J'))
 		{
-			_map->GetLeftDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
-			_map->GetLeftDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y + _verticalDoorHalfSize.y;
+			_curMap->GetLeftDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_curMap->GetLeftDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y + _verticalDoorHalfSize.y;
 			if (_autoSave)
-				MAP_MANAGER->Save(_map);
+				MAP_MANAGER->Save(_curMap);
 		}
 
 		if (KEY_DOWN('K'))
 		{
-			_map->GetBottomDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
-			_map->GetBottomDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y;
+			_curMap->GetBottomDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_curMap->GetBottomDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y;
 
 			if (_autoSave)
-				MAP_MANAGER->Save(_map);
+				MAP_MANAGER->Save(_curMap);
 		}
 
 
 		if (KEY_DOWN('L'))
 		{
-			_map->GetRightDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
-			_map->GetRightDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y + _verticalDoorHalfSize.y;
+			_curMap->GetRightDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_curMap->GetRightDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y + _verticalDoorHalfSize.y;
 			if (_autoSave)
-				MAP_MANAGER->Save(_map);
+				MAP_MANAGER->Save(_curMap);
 		}
 
 		if (KEY_DOWN('I'))
 		{
-			_map->GetTopDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
-			_map->GetTopDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y;			
+			_curMap->GetTopDoor().x = _curObject->GetObjectTexture()->GetTransform()->GetPos().x;
+			_curMap->GetTopDoor().y = _curObject->GetObjectTexture()->GetTransform()->GetPos().y;			
 			if (_autoSave)
-				MAP_MANAGER->Save(_map);
+				MAP_MANAGER->Save(_curMap);
 		}
 
 	}

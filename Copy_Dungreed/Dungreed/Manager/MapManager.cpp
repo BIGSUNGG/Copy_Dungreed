@@ -409,7 +409,7 @@ void MapManager::SetCurMap(const Vector2& index)
 	GAME->SetCurMap(_maps[_curMapIndex.x][_curMapIndex.y].first);
 	if (GAME->GetPlayer() != nullptr)
 	{
-		GAME->AddPlayer(GAME->GetPlayer());
+		GAME->SetPlayer(GAME->GetPlayer());
 		GAME->GetPlayer()->GetObjectTexture()->Update();
 		GAME->GetPlayer()->GetCollider()->Update();
 		if (moveX > 0)

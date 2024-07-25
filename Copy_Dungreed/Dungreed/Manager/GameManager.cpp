@@ -6,6 +6,7 @@ GameManager* GameManager::_instance = nullptr;
 GameManager::GameManager()
 {
 	_objectInScreen.resize(Object::_objectTypeCount);
+	_renderObjectType.resize(Object::_objectTypeCount, true);
 }
 
 GameManager::~GameManager()
@@ -17,10 +18,10 @@ void GameManager::Update()
 	if (DELTA_TIME >= _maxDeltaTime)
 		return;
 
+	Input();
+
 	if (!_pause)
 	{
-		Optimize();
-		Input();
 		for (auto& objects : _curMap->GetObjects())
 		{
 			for (auto& object : objects)
@@ -37,10 +38,12 @@ void GameManager::Update()
 			}
 		}
 		_curMap->CheckCleared();
+		Optimize();
 
 		for (auto& debug : _debugCollider)
 			debug.second -= DELTA_TIME;
 	}
+
 
 	_curMap->CheckCleared();
 
@@ -61,17 +64,62 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
+	if (_renderTexture == false)
+		return;
+
+	shared_ptr<RectCollider> textureCollider = make_shared<RectCollider>(CENTER);
+	shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER);
+	frustumCollision->GetPos() = CAMERA->GetPos() + CENTER;
+	frustumCollision->Update();
+
 	for (auto& map : _renderOrder)
 	{
 		for (auto& instance : map.second.second)
-			instance->Render();
+		{
+			// 인스턴스된 텍스쳐의 프러스텀 컬링
+			textureCollider->SetHalfSize(instance->GetTexture()->GetHalfSize());
+			for (shared_ptr<Transform> transform : instance->GetTransforms())
+			{
+				if(transform == nullptr)
+					continue;
+
+				// 텍스쳐가 화면안에 들어와 있는지
+				textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+				textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+				textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+				textureCollider->Update();
+
+				if (frustumCollision->IsCollision(textureCollider, false))
+				{
+					instance->Render();
+					break;
+				}
+			}
+		}
 
 		for (auto& object : map.second.first)
 		{
 			if(object == nullptr || object->IsActive() == false)
 				continue;
 
-			object->Render();
+			bool bShouldRender = true;
+
+			// 오브젝트의 프러스텀 컬링
+			shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
+			if (transform != nullptr)
+			{
+				// 텍스쳐가 화면안에 들어와 있는지
+				textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
+				textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+				textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+				textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+				textureCollider->Update();
+
+				bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+			}
+
+			if(bShouldRender)
+				object->Render();
 		}
 	}
 }
@@ -120,11 +168,13 @@ void GameManager::ImguiRender()
 		ImGui::Checkbox("Pause", &_pause);
 		ImGui::Checkbox("Render Texture", &_renderTexture);
 		ImGui::Checkbox("Render Collider", &_renderCollider);
+		ImGui::Checkbox("Render UI", &_renderUI);
 	}
 }
 
 void GameManager::Optimize()
 {
+	// 활성화되지 않은 오브젝트 제거
 	for (auto& objects : _curMap->GetObjects())
 	{
 		for (auto& object : objects)
@@ -136,18 +186,6 @@ void GameManager::Optimize()
 				object = nullptr;
 		}
 	}
-
-	shared_ptr<Collider> temp = make_shared<RectCollider>(CENTER);
-	temp->GetPos() = CAMERA->GetPos() + CENTER;
-	temp->Update();
-
-	_objectInScreen.clear();
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::BACKGROUND, false, false, true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::WALL, false, false, true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::TILE, false, false, true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::CREATURE, false, false, true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::ECT, false, false, true));
-	_objectInScreen.emplace_back(GetCollisions(temp, Object::EFFECT, false, false, true));
 }
 
 void GameManager::Instancing()
@@ -222,10 +260,12 @@ void GameManager::Input()
 	{
 		_player->MouseEvent();
 	}
+
 	if (KEY_DOWN('1'))
 		_player->SetCurWeaponSlot(0);
 	if (KEY_DOWN('2'))
 		_player->SetCurWeaponSlot(1);
+
 
 	if (KEY_DOWN(VK_ESCAPE))
 	{
@@ -235,7 +275,7 @@ void GameManager::Input()
 			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
 			break;
 		case UIManager::UI_State::SETTING:
-			UI_MANAGER->SetState(UIManager::UI_State::NOMAL);
+			UI_MANAGER->SetState(UIManager::UI_State::OPTION);
 			break;
 		default:
 			UI_MANAGER->SetState(UIManager::UI_State::OPTION);
@@ -289,7 +329,7 @@ void GameManager::AddEffect(shared_ptr<Effect> effect)
 	AddObject(effect, Object::Object_Type::EFFECT);
 }
 
-void GameManager::AddPlayer(shared_ptr<Player> player)
+void GameManager::SetPlayer(shared_ptr<Player> player)
 {
 	if (_player != nullptr && _curMap != nullptr)
 	{
@@ -307,6 +347,11 @@ void GameManager::AddPlayer(shared_ptr<Player> player)
 	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 
 	AddObject(_player, Object::Object_Type::CREATURE);
+}
+
+void GameManager::ResetPlayer()
+{
+	_player = nullptr;
 }
 
 void GameManager::AddEctObject(shared_ptr<Object> object)
@@ -372,22 +417,19 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> colli
 		if (object == nullptr || collider == object->GetCollider())
 			continue;
 
+		if (object->GetCollider() == nullptr)
+			continue;
+
 		if (object->IsCollision() == false && forceCollison == false)
 			continue;
 
-		if (object->GetCollider() != nullptr)
+		if (collider->IsCollision(object->GetCollider(), Obb))
 		{
-			if (collider->IsCollision(object->GetCollider(), Obb))
-			{
-				if (setColor == true)
-					object->GetCollider()->SetColorRed();
+			if (setColor == true)
+				object->GetCollider()->SetColorRed();
 
-				result.emplace_back(object);
-			}
-		}
-		else if(forceCollison)
 			result.emplace_back(object);
-
+		}
 	}
 
 	return result;
@@ -460,14 +502,16 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 
 	_renderOrder.clear();
 	Instancing();
-	for(auto& objects : _curMap->GetObjects())
+	for (auto& objects : _curMap->GetObjects())
+	{
 		for (auto& object : objects)
 		{
-			if(object == nullptr || object->IsStatic())
+			if (object == nullptr || object->IsStatic())
 				continue;
 
 			_renderOrder[object->GetRenderOrder()].first.emplace_back(object);
 		}
+	}
 
 	CAMERA->SetLeftBottom(map->GetLeftBottom());
 	CAMERA->SetRightTop(map->GetRightTop());

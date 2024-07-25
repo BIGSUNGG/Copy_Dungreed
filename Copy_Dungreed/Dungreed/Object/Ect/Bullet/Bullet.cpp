@@ -47,19 +47,20 @@ void Bullet::Attack()
 		if (_attacked[enemy] == true)
 			continue;
 
-		if (enemy != _weapon.lock()->GetOwner())
+		auto weapon = _weapon.lock();
+		if (enemy == weapon->GetOwner())
+			continue;
+
+		shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
+		bool attackSuccess = weapon->GiveDamage(weapon->GetRandomDamage(), creature);
+		if (attackSuccess)
 		{
-			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
-			bool attackSuccess = _weapon.lock()->GiveDamage(creature);
-			if(attackSuccess)
+			--_hitCount;
+			_attacked[enemy] = true;
+			if (_hitCount <= 0)
 			{
-				--_hitCount;
-				_attacked[enemy] = true;
-				if (_hitCount <= 0)
-				{
-					DestroyEvent();
-					return;
-				}
+				DestroyEvent();
+				return;
 			}
 		}
 	}
@@ -75,16 +76,17 @@ void Bullet::DestroyEvent()
 {
 	_isActive = false;
 
-	if (_destroyEffect)
-	{
-		shared_ptr<Effect> effect = _destroyEffect();
-		effect->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
-		effect->GetObjectTexture()->GetTransform()->GetAngle() = _texture->GetTransform()->GetAngle();
+	if (_destroyEffect == nullptr)
+		return;
 
-		Vector2 direction = _direction;
-		effect->GetAnimation()->SetBeforeChangeFunc([=](pair<int, int> pair) {effect->GetObjectTexture()->GetTransform()->GetPos() -= (direction * effect->GetObjectTexture()->GetHalfSize().y); });
-		effect->GetAnimation()->SetAfterChangeFunc([=](pair<int, int> pair) {effect->GetObjectTexture()->GetTransform()->GetPos() += (direction * effect->GetObjectTexture()->GetHalfSize().y); });
+	shared_ptr<Effect> effect = _destroyEffect();
+	effect->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetWorldPos();
+	effect->GetObjectTexture()->GetTransform()->GetAngle() = _texture->GetTransform()->GetAngle();
 
-		GAME->AddEffect(effect); 
-	}
+	Vector2 direction = _direction;
+	effect->GetAnimation()->SetBeforeChangeFunc([=](pair<int, int> pair) {effect->GetObjectTexture()->GetTransform()->GetPos() -= (direction * effect->GetObjectTexture()->GetHalfSize().y); });
+	effect->GetAnimation()->SetAfterChangeFunc([=](pair<int, int> pair) {effect->GetObjectTexture()->GetTransform()->GetPos() += (direction * effect->GetObjectTexture()->GetHalfSize().y); });
+
+	GAME->AddEffect(effect);
+
 }

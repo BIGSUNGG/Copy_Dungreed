@@ -68,9 +68,9 @@ void Weapon::Damaged(const Creature_Status& status)
 {
 }
 
-bool Weapon::GiveDamage(shared_ptr<Creature> target)
+bool Weapon::GiveDamage(int damage, shared_ptr<Creature> target)
 {
-	bool attackSuccess = _owner.lock()->GiveDamage(MathUtility::RandomFloat(_attackMinDamage, _attackMaxDamage), target);
+	bool attackSuccess = _owner.lock()->GiveDamage(damage, target);
 	return attackSuccess;
 }
 

@@ -51,7 +51,7 @@ void Player::Update()
 
 float Player::TakeDamage(float baseDamage, shared_ptr<Creature> attacker)
 {
-	if (_buffer->_data.selected == 2)
+	if (_damagedRunTime < _damagedRunTimeMax)
 		return false;
 
 	float damage = Creature::TakeDamage(baseDamage, attacker);
@@ -71,9 +71,13 @@ float Player::GiveDamage(float baseDamage, shared_ptr<Creature> target)
 
 	if (damage > 0)
 	{
+		Vector2 targetPos = target->GetPos();
+		targetPos.x += MathUtility::RandomFloat(-75, 75);
+		targetPos.y += MathUtility::RandomFloat(-50, 50);
+
 		shared_ptr<Effect_Number> effect = make_shared<Effect_Number>();
 		effect->SetNumber(damage);
-		effect->SetPos(target->GetPos());
+		effect->SetPos(targetPos);
 
 		GAME->AddEffect(effect);
 	}

@@ -41,6 +41,7 @@ InstanceQuad::InstanceQuad(shared_ptr<Quad> quad, int count)
 
 void InstanceQuad::Update()
 {
+	ApplyChanges();
 	_quad->Update();
 }
 

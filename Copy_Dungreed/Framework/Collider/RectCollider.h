@@ -19,6 +19,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
+	void SetHalfSize(const Vector2& halfSize) { _halfSize = halfSize; }
 	Vector2& GetHalfSize() { return _halfSize; }
 
 	float Top() { return GetWorldPos().y + (_halfSize.y * _transform->GetWorldScale().y); }
@@ -32,7 +33,7 @@ public:
 	void SetLeft(float pos) { _transform->GetPos().x = pos + (GetHalfSize().x * _transform->GetScale().x); }
 
 	virtual bool IsCollision(const Vector2& pos) override;
-	virtual bool IsCollision(shared_ptr< RectCollider> rect, bool isObb = false) override;
+	virtual bool IsCollision(shared_ptr<RectCollider> rect, bool isObb = false) override;
 	virtual bool IsCollision(shared_ptr<class CircleCollider> other, bool isObb = false) override;
 	
 	float SeparateAxis(Vector2 separate, Vector2 e1, Vector2 e2);

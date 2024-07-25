@@ -3,7 +3,8 @@ class MapEditor : public GameMode
 {
 public:
 	MapEditor();
-	// GameMode을(를) 통해 상속됨
+	MapEditor(int level, int num);
+
 	void Update() override;
 	void PreRender() override;
 	void Render() override;
@@ -11,6 +12,8 @@ public:
 	void ImGuiRender() override;
 
 protected:
+	void Init(shared_ptr<Map> debugMap);
+
 	void AddObject();
 	void DeleteObject();
 
@@ -20,8 +23,11 @@ protected:
 	void ApplyChange();
 	void ResetOffset();
 
+public:
+	shared_ptr<Map> GetCurMap() { return _curMap; }
+
 private:
-	shared_ptr<Map> _map;
+	shared_ptr<Map> _curMap;
 	shared_ptr<Map> _copyMap;
 
 	Vector2				_mouseOffset;
@@ -30,7 +36,7 @@ private:
 	shared_ptr<Object>	_curObject;
 
 	bool _freeMode	= false;
-	bool _autoSave	= false;
+	bool _autoSave	= true;
 
 	int _objectType		= 2;
 	int _objectLevel	= 0;

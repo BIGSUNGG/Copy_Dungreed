@@ -52,7 +52,7 @@ void Melee::CheckAttack()
 		{
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
 			if (creature->GetCreatureType() != _owner.lock()->GetCreatureType())
-				GiveDamage(creature); 
+				GiveDamage(GetRandomDamage(), creature);
 		}
 	}
 }

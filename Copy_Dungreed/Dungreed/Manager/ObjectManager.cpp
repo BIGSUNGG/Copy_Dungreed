@@ -70,6 +70,14 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 		}
 		break;
 	case Map::LEVEL_01:
+		switch (num)
+		{
+		case 0:
+			texture = make_shared<Quad>(L"Resource/BackGround/SubBG.png");
+			object->GetBackGroundType() = BackGround::BackGround_Type::FOLLOW_PLAYER;
+			object->GetRatio() = 1.5f;
+			break;
+		}
 		break;
 	case Map::LEVEL_02:
 		break;

@@ -3,14 +3,11 @@
 
 Dungreed::Dungreed()
 {
-	GAME->Reset();
 	_modeType = DUNGREED;
 
-	CAMERA->SetFreeMode(false);
 
 	Init();
 
-	MOUSE_CURSUR->CursurOff();
 }
 
 void Dungreed::Update()
@@ -61,6 +58,9 @@ void Dungreed::ImGuiRender()
 
 void Dungreed::Init()
 {
+	GAME->Reset();
+	CAMERA->SetFreeMode(false);
+
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
@@ -69,10 +69,12 @@ void Dungreed::Init()
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 	_player->AddOnDeathEvent(bind(&Dungreed::Init, this));
 
-	GAME->AddPlayer(_player);
+	GAME->SetPlayer(_player);
 	GAME->SetPlaying(true);
 	GAME->SetEnableUI(true);
 
 	MAP_MANAGER->MakeRandomMap(1, 0);
 	CAMERA->Update();
+
+	MOUSE_CURSUR->CursurOff();
 }

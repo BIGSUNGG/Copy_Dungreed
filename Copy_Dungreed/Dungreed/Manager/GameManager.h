@@ -27,15 +27,16 @@ public:
 	void PostRender();
 	void ImguiRender();
 
+	// 게임 최적화 코드
 	void Optimize();
-
 	void Instancing();
 
 	void Input();
 
 	void AddObject(shared_ptr<Object> object, int type);
 	void AddEffect(shared_ptr<Effect> effect);
-	void AddPlayer(shared_ptr<Player> player);
+	void SetPlayer(shared_ptr<Player> player);
+	void ResetPlayer();
 	void AddEctObject(shared_ptr<Object> object);
 	void AddDebugCollider(shared_ptr<Collider> collider);
 
@@ -88,5 +89,7 @@ private:
 	bool _enableUI = false;
 	bool _pause = false;
 	bool _playing = false;
+
+	vector<bool> _renderObjectType;
 };
 

@@ -20,6 +20,7 @@ void Creature::Update()
 		_buffer->_data.selected = 0;
 
 	_movement->Update();
+
 	Object::Update();
 
 	for (auto& wepaon : _weaponSlot)

@@ -19,7 +19,7 @@ public:
 	virtual void Attack() override;
 	virtual void Skill() override;
 	virtual void Damaged(const Creature_Status& status) override;
-	virtual bool GiveDamage(shared_ptr<Creature> target);
+	virtual bool GiveDamage(int damage, shared_ptr<Creature> target);
 
 	virtual void SetAttackEffect(function<shared_ptr<Effect>()> effect) { _attackEffect = effect; }
 
@@ -55,6 +55,7 @@ public:
 	shared_ptr<Quad> GetSkillHuiTexture() { return _skillHudTexture; }
 	virtual const bool GetFastRender() { return _fastRender[_offsetIndex]; }
 
+	float GetRandomDamage() { return MathUtility::RandomFloat(_attackMinDamage, _attackMaxDamage); }
 protected:
 	Weapon_Type _weaponType = MELEE;
 	shared_ptr<Quad> _skillHudTexture;

@@ -131,7 +131,10 @@ void UIManager::Refresh()
 
 void UIManager::SetState(const UI_State& state)
 {
-	switch (_state)
+	UI_State prevState = _state;
+	_state = state;
+
+	switch (prevState)
 	{
 	case UIManager::UI_State::NOMAL:
 		break;
@@ -149,9 +152,7 @@ void UIManager::SetState(const UI_State& state)
 		break;
 	}
 
-	_state = state;
-
-	switch (_state)
+	switch (state)
 	{
 	case UIManager::UI_State::NOMAL:
 		MOUSE_CURSUR->SetCursurImage(OBJ_MANAGER->GetCursurImage(2));

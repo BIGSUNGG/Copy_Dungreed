@@ -2,18 +2,18 @@
 #include "DebugMode.h"
 
 DebugMode::DebugMode()
+	: DebugMode(0, 0)
 {
-	GAME->Reset();
-	_modeType = DEBUG;
+}
 
-	CAMERA->SetFreeMode(false);
-	auto _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
+DebugMode::DebugMode(int level, int num)
+{
+	_modeType = GameModeType::DEBUG;
+	_mapLevel = level;
+	_mapNum = num;
 
-	MAP_MANAGER->SetCurMap(_map);
-
-	Init();
-
-	MOUSE_CURSUR->CursurOff();
+	shared_ptr<Map> _map = MAP_MANAGER->Load(level, num);
+	Init(_map);
 }
 
 void DebugMode::Update()
@@ -51,17 +51,23 @@ void DebugMode::ImGuiRender()
 
 		if (ImGui::Button("Load"))
 		{
-			Init();
 			shared_ptr<Map> _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
-			MAP_MANAGER->SetCurMap(_map);
+			Init(_map);
 		}
 	}
 
 	GAME->ImguiRender();
 }
 
-void DebugMode::Init()
+void DebugMode::Init(shared_ptr<Map> debugMap)
 {
+	_curMap = debugMap;
+
+	GAME->Reset();
+	CAMERA->SetFreeMode(false);
+
+	MAP_MANAGER->SetCurMap(_curMap);
+
 	_player.reset();
 
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
@@ -71,7 +77,7 @@ void DebugMode::Init()
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
 
-	GAME->AddPlayer(_player);
+	GAME->SetPlayer(_player);
 	GAME->SetPlaying(true);
 	GAME->SetEnableUI(true);
 
@@ -79,4 +85,6 @@ void DebugMode::Init()
 	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());
 	CAMERA->SetRightTop(MAP_MANAGER->GetCurMap()->GetRightTop());
 	CAMERA->Update();
+
+	MOUSE_CURSUR->CursurOff();
 }

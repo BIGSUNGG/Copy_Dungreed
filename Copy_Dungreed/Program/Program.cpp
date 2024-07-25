@@ -104,14 +104,23 @@ void Program::ImGuiRender()
 	case GameMode::MAP_EDITOR:
 		if (ImGui::Button("Dungreed"))
 			_gameMode = make_shared<Dungreed>();
+
 		if (ImGui::Button("Debug"))
 			_gameMode = make_shared<DebugMode>();
+
+		if (ImGui::Button("Debug Current Map"))
+			DebugMapFromEditor();
+
 		break;;
 	case GameMode::DEBUG:
 		if (ImGui::Button("Dungreed"))
 			_gameMode = make_shared<Dungreed>();
-		if (ImGui::Button("MapEditor"))
+		if (ImGui::Button("Map Editor"))
 			_gameMode = make_shared<MapEditor>();
+
+		if (ImGui::Button("Edit Current Map"))
+			EditMapFromDebug();
+
 		break;
 	default:
 		break;
@@ -132,4 +141,29 @@ void Program::RenderEnd()
 	MOUSE_CURSUR->Render();
 
 	Device::GetInstance()->Present();
+}
+
+void Program::DebugMapFromEditor()
+{
+	shared_ptr<MapEditor> editorMode = dynamic_pointer_cast<MapEditor>(_gameMode);
+	if (editorMode == nullptr)
+		return;
+
+	auto curMap = editorMode->GetCurMap();
+	int level = curMap->GetLevel();
+	int num = curMap->GetNum();
+	_gameMode = make_shared<DebugMode>(level, num);
+
+}
+
+void Program::EditMapFromDebug()
+{
+	shared_ptr<DebugMode> debugMode = dynamic_pointer_cast<DebugMode>(_gameMode);
+	if (debugMode == nullptr)
+		return;
+
+	auto curMap = debugMode->GetCurMap();
+	int level = curMap->GetLevel();
+	int num = curMap->GetNum();
+	_gameMode = make_shared<MapEditor>(level, num);
 }
