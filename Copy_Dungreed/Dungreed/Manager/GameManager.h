@@ -78,7 +78,6 @@ private:
 	shared_ptr<Map> _curMap;
 
 	map<float, pair<vector<shared_ptr<Object>>, vector<shared_ptr<InstanceQuad>>>> _renderOrder;
-	vector<vector<shared_ptr<Object>>> _objectInScreen;
 	vector<pair<shared_ptr<Collider>,float>> _debugCollider;
 
 	shared_ptr<Player> _player;
@@ -91,6 +90,7 @@ private:
 	bool _pause = false;
 	bool _playing = false;
 
-	vector<bool> _renderObjectType;
+	bool _instancing = true;
+	float _frustumSizeRatio = 1.f;
 };
 

@@ -6,7 +6,7 @@ BackGround::BackGround(int level, int num)
 {
 	_renderOrder = 1.f;
 	_objectType = Object::Object_Type::BACKGROUND;
-	_static = false;
+	_staticObject = false;
 }
 
 void BackGround::Update()

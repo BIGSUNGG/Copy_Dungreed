@@ -6,5 +6,5 @@ Tile::Tile(int level, int num)
 {
 	_renderOrder = 3.f;
 	_objectType = Object::Object_Type::TILE;
-	_static = true;
+	_staticObject = true;
 }

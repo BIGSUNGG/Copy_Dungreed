@@ -5,7 +5,7 @@ LockDoor::LockDoor(int level, int num)
 	: Tile(level,num)
 {
 	_tileType = BLOCK;
-	_static = false;
+	_staticObject = false;
 }
 
 void LockDoor::Update()

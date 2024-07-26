@@ -5,8 +5,6 @@ GameManager* GameManager::_instance = nullptr;
 
 GameManager::GameManager()
 {
-	_objectInScreen.resize(Object::_objectTypeCount);
-	_renderObjectType.resize(Object::_objectTypeCount, true);
 }
 
 GameManager::~GameManager()
@@ -67,60 +65,95 @@ void GameManager::Render()
 	if (_renderTexture == false)
 		return;
 
-	shared_ptr<RectCollider> textureCollider = make_shared<RectCollider>(CENTER);
-	shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER);
+	shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER * _frustumSizeRatio);
 	frustumCollision->GetPos() = CAMERA->GetPos() + CENTER;
 	frustumCollision->Update();
 
-	for (auto& map : _renderOrder)
+	shared_ptr<RectCollider> textureCollider = make_shared<RectCollider>(CENTER);
 
+	if (_instancing)
 	{
-		for (auto& instance : map.second.second)
+		for (auto& map : _renderOrder)
 		{
-			// 인스턴스된 텍스쳐의 프러스텀 컬링
-			textureCollider->SetHalfSize(instance->GetTexture()->GetHalfSize());
-			for (shared_ptr<Transform> transform : instance->GetTransforms())
+			for (auto& instance : map.second.second)
 			{
-				if(transform == nullptr)
-					continue;
-
-				// 텍스쳐가 화면안에 들어와 있는지
-				textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
-				textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
-				textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
-				textureCollider->Update();
-
-				if (frustumCollision->IsCollision(textureCollider, false))
+				// 인스턴스된 텍스쳐의 프러스텀 컬링
+				textureCollider->SetHalfSize(instance->GetTexture()->GetHalfSize());
+				for (shared_ptr<Transform> transform : instance->GetTransforms())
 				{
-					instance->Render();
-					break;
+					if (transform == nullptr)
+						continue;
+
+					// 텍스쳐가 화면안에 들어와 있는지
+					textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+					textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+					textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+					textureCollider->Update();
+
+					if (frustumCollision->IsCollision(textureCollider, false))
+					{
+						instance->Render();
+						break;
+					}
 				}
 			}
-		}
 
-		for (auto& object : map.second.first)
-		{
-			if(object == nullptr || object->IsActive() == false)
-				continue;
-
-			bool bShouldRender = true;
-
-			// 오브젝트의 프러스텀 컬링
-			shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
-			if (transform != nullptr)
+			for (auto& object : map.second.first)
 			{
-				// 텍스쳐가 화면안에 들어와 있는지
-				textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
-				textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
-				textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
-				textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
-				textureCollider->Update();
+				if (object == nullptr || object->IsActive() == false)
+					continue;
 
-				bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+				bool bShouldRender = true;
+				if (_instancing)
+				{
+					// 오브젝트의 프러스텀 컬링
+					shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
+					if (transform != nullptr)
+					{
+						// 텍스쳐가 화면안에 들어와 있는지
+						textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
+						textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+						textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+						textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+						textureCollider->Update();
+
+						bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+					}
+				}
+
+				if (bShouldRender)
+					object->Render();
 			}
+		}
+	}
+	else
+	{
+		for (auto& objects : _curMap->GetObjects())
+		{
+			for (auto& object : objects)
+			{
+				if (object == nullptr || object->IsActive() == false)
+					continue;
 
-			if(bShouldRender)
-				object->Render();
+				bool bShouldRender = true;
+
+				// 오브젝트의 프러스텀 컬링
+				shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
+				if (transform != nullptr)
+				{
+					// 텍스쳐가 화면안에 들어와 있는지
+					textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
+					textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+					textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+					textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+					textureCollider->Update();
+
+					bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+				}
+
+				if (bShouldRender)
+					object->Render();
+			}
 		}
 	}
 }
@@ -129,9 +162,11 @@ void GameManager::PostRender()
 {
 	if (_renderCollider)
 	{
-		shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER);
+		shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER * _frustumSizeRatio);
 		frustumCollision->GetPos() = CAMERA->GetPos() + CENTER;
 		frustumCollision->Update();
+
+		shared_ptr<RectCollider> textureCollider = make_shared<RectCollider>(CENTER);
 
 		for (int i = Object::TILE; i < Object::EFFECT; i++)
 		{
@@ -143,12 +178,17 @@ void GameManager::PostRender()
 
 				bool bShouldRender = true;
 
-				// 오브젝트의 프러스텀 컬링
-				shared_ptr<RectCollider> collider = object->GetCollider();
-				if (collider != nullptr)
+				shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
+				if (transform)
 				{
 					// 텍스쳐가 화면안에 들어와 있는지
-					bShouldRender = frustumCollision->IsCollision(collider, false);
+					textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
+					textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+					textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+					textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+					textureCollider->Update();
+
+					bShouldRender = frustumCollision->IsCollision(textureCollider, false);
 				}
 
 				if (bShouldRender)
@@ -186,6 +226,10 @@ void GameManager::ImguiRender()
 		ImGui::Checkbox("Render Texture", &_renderTexture);
 		ImGui::Checkbox("Render Collider", &_renderCollider);
 		ImGui::Checkbox("Render UI", &_renderUI);
+
+		ImGui::Checkbox("Use Instancing", &_instancing);
+		ImGui::SliderFloat("Frustum Size Ratio", &_frustumSizeRatio, 0.f, 1.f);
+
 	}
 }
 

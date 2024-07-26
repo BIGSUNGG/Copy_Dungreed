@@ -45,7 +45,7 @@ public:
 	bool IsCollision()						{ return _collison; }
 	const int& GetNum()						{ return _num; }
 	const int& GetLevel()					{ return _level; }
-	bool IsStatic()							{ return _static; }
+	bool IsStatic()							{ return _staticObject; }
 	bool IsReversed()						{ return _reversed; }
 	const Vector2& GetSpawnPos()			{ return _spawnPos; }
 	const Object_Type& GetType()			{ return _objectType; }
@@ -59,7 +59,7 @@ protected:
 	Object_Type _objectType = Object_Type::NONE;
 	Vector2 _spawnPos = { 0,0 };
 	float _renderOrder = 0.f;
-	bool _static = false;
+	bool _staticObject = false;
 	bool _isActive = true;
 	bool _collison = true;
 	bool _reversed = false;

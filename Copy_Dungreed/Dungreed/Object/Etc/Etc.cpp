@@ -6,5 +6,5 @@ Etc::Etc(int level, int num)
 {
 	_renderOrder = 5.f;
 	_objectType = Object_Type::ETC;
-	_static = false;
+	_staticObject = false;
 }
