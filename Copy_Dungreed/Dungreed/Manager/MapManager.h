@@ -21,12 +21,24 @@ public:
 
 	void MakeRandomMap(int level,int num);
 
+	// File
+	bool IsMapFileExist(int level, int num);
+	wstring GetMapBasicInfoFileWPath(int level, int num);
+	string GetMapBasicInfoFileSPath(int level, int num);
+
+	wstring GetMapObjectsFileWPath(int level, int num);
+	string GetMapObjectsFileSPath(int level, int num);
+
+	// Save Load
 	shared_ptr<Map> Load(int level, int num);
 	MapBasic LoadBasicInfo(int level, int num);
+	vector<shared_ptr<Object>> LoadObjects(int level, int num, int objectCount);
 
 	void Save(shared_ptr<Map> map);
 	void SaveAll();
 
+public:
+	// Getter Setter
 	void SetCurMap(shared_ptr<Map> map);
 	void SetCurMap(const Vector2& index);
 	void SetTarget(shared_ptr<Creature> target);

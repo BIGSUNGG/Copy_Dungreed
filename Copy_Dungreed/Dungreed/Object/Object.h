@@ -6,7 +6,7 @@ class Object : public enable_shared_from_this<Object>
 {
 public:
 	static const int _objectTypeCount = 7;
-	enum Object_Type
+	enum Object_Type : unsigned char
 	{
 		BACKGROUND,
 		WALL,

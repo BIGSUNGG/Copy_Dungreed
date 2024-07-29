@@ -27,6 +27,7 @@
 #include <fstream>
 #include <direct.h>
 #include <io.h>
+#include <cstring> 
 
 #include <wrl/client.h>
 #include <d3d11.h>

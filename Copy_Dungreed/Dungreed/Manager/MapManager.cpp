@@ -146,138 +146,215 @@ void MapManager::MakeRandomMap(int level, int num)
 	SetCurMap({ 0,0 });
 }
 
+bool MapManager::IsMapFileExist(int level, int num)
+{
+	ifstream checkPath1(GetMapBasicInfoFileSPath(level, num));
+	ifstream checkPath2(GetMapObjectsFileSPath(level, num));
+
+	if (!checkPath1)
+		return false;
+
+	if (!checkPath2)
+		return false;
+
+	return true;
+}
+
+std::wstring MapManager::GetMapBasicInfoFileWPath(int level, int num)
+{
+	wstring result = L"Save/Maps/Level_";
+	wstring levelStr;
+	{
+		if (level < 10)
+			levelStr += L"0";
+
+		levelStr += to_wstring(level);
+	}
+	wstring numStr;
+	{
+		if (num < 10)
+			numStr += L"0";
+
+		numStr += to_wstring(num);
+	}
+	result += levelStr + L"_" + numStr + L"_Basic" + L".bin";
+	return result;
+}
+
+std::string MapManager::GetMapBasicInfoFileSPath(int level, int num)
+{
+	string result = GetCurPath() + "Save\\Maps\\Level_";
+	string levelPath;
+	{
+		if (level < 10)
+			levelPath += "0";
+
+		levelPath += to_string(level);
+	}
+	string numPath;
+	{
+		if (num < 10)
+			numPath += "0";
+
+		numPath += to_string(num);
+	}
+	result += levelPath + "_" + numPath + "_Basic" + ".bin";
+	return result;
+}
+
+std::wstring MapManager::GetMapObjectsFileWPath(int level, int num)
+{
+	wstring result = L"Save/Maps/Level_";
+	wstring levelStr;
+	{
+		if (level < 10)
+			levelStr += L"0";
+
+		levelStr += to_wstring(level);
+	}
+	wstring numStr;
+	{
+		if (num < 10)
+			numStr += L"0";
+
+		numStr += to_wstring(num);
+	}
+	result += levelStr + L"_" + numStr + L".bin";
+	return result;
+}
+
+std::string MapManager::GetMapObjectsFileSPath(int level, int num)
+{
+	string result = GetCurPath() + "Save\\Maps\\Level_";
+	string levelPath;
+	{
+		if (level < 10)
+			levelPath += "0";
+
+		levelPath += to_string(level);
+	}
+	string numPath;
+	{
+		if (num < 10)
+			numPath += "0";
+
+		numPath += to_string(num);
+	}
+	result += levelPath + "_" + numPath + ".bin";
+	return result;
+}
+
 shared_ptr<Map> MapManager::Load(int level, int num)
 {
 	shared_ptr<Map> newMap = make_shared<Map>(level,num);
-	wstring wLoadPath = L"Save/Maps/Level_";
-	string sLoadPath = GetCurPath() + "Save\\Maps\\Level_";
 
-	wstring levelPath;
+	if (IsMapFileExist(level, num)) // 불러올 파일이 있는지
 	{
-		if (level < 10)
-			levelPath += L"0";
+		// 맵 정보 불러오기
+		MapBasic basicInfo = LoadBasicInfo(level, num);
+		newMap->GetLeftBottom() = basicInfo._leftBottom;
+		newMap->GetRightTop() = basicInfo._rightTop;
+		newMap->GetStartPos() = basicInfo._startPos;
 
-		levelPath += to_wstring(level);
+		newMap->GetTopDoor() = basicInfo._topDoor;
+		newMap->GetBottomDoor() = basicInfo._bottomDoor;
+		newMap->GetLeftDoor() = basicInfo._leftDoor;
+		newMap->GetRightDoor() = basicInfo._rightDoor;
+
+		// 오브젝트 정보 불러오기
+		vector<shared_ptr<Object>> objects = LoadObjects(level, num, basicInfo._objectCount);
+		for (shared_ptr<Object> object : objects)
+			newMap->AddObject(object, object->GetType());
 	}
-	wstring numPath;
-	{
-		if (num < 10)
-			numPath += L"0";
-
-		numPath += to_wstring(num);
-	}
-	wLoadPath += levelPath + L"_" + numPath;
-	sLoadPath += WstrToStr(levelPath) + "_" + WstrToStr(numPath);
-
-	ifstream checkPath1(sLoadPath + ".bin");
-	ifstream checkPath2(sLoadPath + "_Basic" + ".bin");
-
-	if (checkPath1 && checkPath2)
-	{
-		int objectCount;
-		{
-			BinaryReader basicReader(wLoadPath + L"_Basic" + L".bin");
-
-			UINT size = basicReader.Uint();
-
-			vector<int> basicInfo;
-			basicInfo.resize(15);
-			void* ptr = basicInfo.data();
-			basicReader.Byte(&ptr, size * sizeof(int));
-
-			objectCount = basicInfo[0];
-			newMap->GetLeftBottom() = Vector2(basicInfo[1], basicInfo[2]);
-			newMap->GetRightTop() = Vector2(basicInfo[3], basicInfo[4]);
-			newMap->GetStartPos() = Vector2(basicInfo[5], basicInfo[6]);
-
-			newMap->GetTopDoor() = Vector2(basicInfo[7], basicInfo[8]);
-			newMap->GetBottomDoor() = Vector2(basicInfo[9], basicInfo[10]);
-			newMap->GetLeftDoor() = Vector2(basicInfo[11], basicInfo[12]);
-			newMap->GetRightDoor() = Vector2(basicInfo[13], basicInfo[14]);
-		}
-
-		{
-			BinaryReader mapReader(wLoadPath + L".bin");
-
-			UINT size = mapReader.Uint();
-
-			vector<float> mapInfo;
-			int info = 6;
-			int infoCount = objectCount * info;
-			mapInfo.resize(infoCount);
-			void* ptr = mapInfo.data();
-			mapReader.Byte(&ptr, size * sizeof(float));
-
-			for (int i = 0; i < objectCount; i++)
-			{
-				int cur = i * info;
-
-				shared_ptr<Object> object = MAKE_OBJECT(mapInfo[cur], mapInfo[cur + 1], mapInfo[cur + 2]);
-
-				object->SetSpawnPos(Vector2(mapInfo[cur + 3], mapInfo[cur + 4]));
-
-				if (mapInfo[cur + 5] == 1)
-					object->ReverseTexture();
-
-				object->GetObjectTexture()->Update();
-				object->GetCollider()->Update();
-				newMap->AddObject(object, mapInfo[cur]);
-			}
-		}
-	}
-	else
-		newMap = make_shared<Map>(level, num);
 
 	return newMap;
 }
 
 MapBasic MapManager::LoadBasicInfo(int level, int num)
 {
-	MapBasic info;
-	wstring wLoadPath = L"Save/Maps/Level_";
-	string sLoadPath = GetCurPath() + "Save\\Maps\\Level_";
+	MapBasic result;
 
-	wstring levelPath;
+	// Load Basic
 	{
-		if (level < 10)
-			levelPath += L"0";
-
-		levelPath += to_wstring(level);
-	}
-	wstring numPath;
-	{
-		if (num < 10)
-			numPath += L"0";
-
-		numPath += to_wstring(num);
-	}
-	wLoadPath += levelPath + L"_" + numPath;
-	sLoadPath += WstrToStr(levelPath) + "_" + WstrToStr(numPath);
-
-	int objectCount;
-	{
-		BinaryReader basicReader(wLoadPath + L"_Basic" + L".bin");
-
+		BinaryReader basicReader(GetMapBasicInfoFileWPath(level, num));
 		UINT size = basicReader.Uint();
 
-		vector<int> basicInfo;
-		basicInfo.resize(15);
-		void* ptr = basicInfo.data();
-		basicReader.Byte(&ptr, size * sizeof(int));
+		const int basicInfoSize = 60;
+		unsigned char basicInfo[basicInfoSize];
+		void* ptr = &basicInfo;
+		basicReader.Byte(&ptr, size);
 
-		objectCount = basicInfo[0];
+		int offset = 0;
 
-		info._leftBottom	=  Vector2(basicInfo[1], basicInfo[2]);
-		info._rightDoor		= Vector2(basicInfo[3], basicInfo[4]);
-		info._startPos		= Vector2(basicInfo[5], basicInfo[6]);
-
-		info._topDoor		= Vector2(basicInfo[7], basicInfo[8]);
-		info._bottomDoor	= Vector2(basicInfo[9], basicInfo[10]);
-		info._leftDoor		= Vector2(basicInfo[11], basicInfo[12]);
-		info._rightDoor		= Vector2(basicInfo[13], basicInfo[14]);
+		memcpy(const_cast<int*>(&result._objectCount), basicInfo + offset, sizeof(int));
+		offset += sizeof(int);
+		memcpy(const_cast<Vector2*>(&result._leftBottom), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(const_cast<Vector2*>(&result._rightTop), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(const_cast<Vector2*>(&result._startPos), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(const_cast<Vector2*>(&result._topDoor), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(const_cast<Vector2*>(&result._bottomDoor), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(const_cast<Vector2*>(&result._leftDoor), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(const_cast<Vector2*>(&result._rightDoor), basicInfo + offset, sizeof(Vector2));
+		offset += sizeof(Vector2);
 	}
 
-	return info;
+	return result;
+}
+
+std::vector<std::shared_ptr<Object>> MapManager::LoadObjects(int level, int num, int objectCount)
+{
+	vector<shared_ptr<Object>> result;
+	result.reserve(objectCount);
+
+	// Load Objects
+	{
+		BinaryReader mapReader(GetMapObjectsFileWPath(level, num));
+		UINT size = mapReader.Uint();
+
+		vector<unsigned char> objectsInfo(size);
+		void* ptr = objectsInfo.data();
+		mapReader.Byte(&ptr, size);
+
+		int offset = 0;
+		for (int i = 0; i < objectCount; i++)
+		{
+			Object::Object_Type type;
+			int level;
+			int num;
+			Vector2 spawnPos;
+			bool isReversed;
+
+			memcpy(&type, objectsInfo.data() + offset, sizeof(Object::Object_Type));
+			offset += sizeof(Object::Object_Type);
+			memcpy(&level, objectsInfo.data() + offset, sizeof(int));
+			offset += sizeof(int);
+			memcpy(&num, objectsInfo.data() + offset, sizeof(int));
+			offset += sizeof(int);
+			memcpy(&spawnPos, objectsInfo.data() + offset, sizeof(Vector2));
+			offset += sizeof(Vector2);
+			memcpy(&isReversed, objectsInfo.data() + offset, sizeof(bool));
+			offset += sizeof(bool);
+
+			shared_ptr<Object> object = MAKE_OBJECT(type, level, num);
+			object->SetSpawnPos(spawnPos);
+
+			if (isReversed == true)
+				object->ReverseTexture();
+
+			object->GetObjectTexture()->Update();
+			object->GetCollider()->Update();
+
+			result.emplace_back(object);
+		}
+	}
+
+	return result;
 }
 
 void MapManager::Save(shared_ptr<Map> map)
@@ -285,84 +362,73 @@ void MapManager::Save(shared_ptr<Map> map)
 	const int& level = map->GetLevel();
 	const int& num = map->GetNum();
 
-	wstring wLoadPath = L"Save/Maps/Level_";
-	string sLoadPath = GetCurPath() + "Save\\Maps\\Level_";
-
-	wstring levelPath;
+	// 덮어쓸 파일이 없다면
+	if (IsMapFileExist(level, num) == false)
 	{
-		if (level < 10)
-			levelPath += L"0";
-
-		levelPath += to_wstring(level);
-	}
-	wstring numPath;
-	{
-		if (num < 10)
-			numPath += L"0";
-
-		numPath += to_wstring(num);
-	}
-	wLoadPath += levelPath + L"_" + numPath;
-	sLoadPath += WstrToStr(levelPath) + "_" + WstrToStr(numPath);
-
-	{
-		ifstream checkPath1(sLoadPath + ".bin");
-		ifstream checkPath2(sLoadPath + "_Basic" + ".bin");
-
-		if (!checkPath1 || !checkPath2)
-		{
-			ofstream makeFile1(sLoadPath + ".bin");
-			ofstream makeFile2(sLoadPath + "_Basic" + ".bin");
-			_mapList[level].emplace_back(num);
-		}
+		// 파일 생성
+		ofstream makeBasicFile(GetMapBasicInfoFileSPath(level, num));
+		ofstream makeObjectsFile(GetMapObjectsFileSPath(level, num));
+		_mapList[level].emplace_back(num);
 	}
 
+	// 맵 기본 정보 저장
 	{
-		BinaryWriter basicWriter(wLoadPath + L"_Basic" + L".bin");
+		BinaryWriter basicWriter(GetMapBasicInfoFileWPath(level, num));
 
-		vector<int> basicInfo;
+		const int basicInfoSize = 60;
+		unsigned char basicInfo[basicInfoSize];
+		int offset = 0;
 
-		basicInfo.push_back(map->GetObjectCount());
-		basicInfo.push_back(map->GetLeftBottom().x);
-		basicInfo.push_back(map->GetLeftBottom().y);
-		basicInfo.push_back(map->GetRightTop().x);
-		basicInfo.push_back(map->GetRightTop().y);
-		basicInfo.push_back(map->GetStartPos().x);
-		basicInfo.push_back(map->GetStartPos().y);
+		memcpy(basicInfo + offset, const_cast<int*>(&map->GetObjectCount()), sizeof(int));
+		offset += sizeof(int);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetLeftBottom()), sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetRightTop()), sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetStartPos()), sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetTopDoor()), sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetBottomDoor()), sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetLeftDoor()), sizeof(Vector2));
+		offset += sizeof(Vector2);
+		memcpy(basicInfo + offset, const_cast<Vector2*>(&map->GetRightDoor()), sizeof(Vector2));
+		offset += sizeof(Vector2);
 
-		basicInfo.push_back(map->GetTopDoor().x);
-		basicInfo.push_back(map->GetTopDoor().y);
-		basicInfo.push_back(map->GetBottomDoor().x);
-		basicInfo.push_back(map->GetBottomDoor().y);
-		basicInfo.push_back(map->GetLeftDoor().x);
-		basicInfo.push_back(map->GetLeftDoor().y);
-		basicInfo.push_back(map->GetRightDoor().x);
-		basicInfo.push_back(map->GetRightDoor().y);
-
-		basicWriter.Uint(basicInfo.size());
-		basicWriter.Byte(basicInfo.data(), basicInfo.size() * sizeof(int));
+		basicWriter.Uint(basicInfoSize);
+		basicWriter.Byte(basicInfo, basicInfoSize);
 	}
 
+	// 오브젝트 정보 저장
 	{
-		BinaryWriter mapWriter(wLoadPath + L".bin");
+		BinaryWriter mapWriter(GetMapObjectsFileWPath(level, num));
 
-		vector<float> mapInfo;
+		const int objectsInfoSize = map->GetObjectCount() * 18;
+		vector<unsigned char> objectsInfo(objectsInfoSize);
+		int offset = 0;
 
 		for (int i = Object::Object_Type::BACKGROUND; i <= Object::Object_Type::ETC; i++)
 		{
 			for (auto& object : map->GetObjects()[i])
 			{
-				mapInfo.push_back((float)object->GetType());
-				mapInfo.push_back((float)object->GetLevel());
-				mapInfo.push_back((float)object->GetNum());
-				mapInfo.push_back((float)object->GetObjectTexture()->GetTransform()->GetPos().x);
-				mapInfo.push_back((float)object->GetObjectTexture()->GetTransform()->GetPos().y);
-				mapInfo.push_back((float)object->IsReversed());
+				memcpy(objectsInfo.data() + offset, const_cast<Object::Object_Type*>(&object->GetType()), sizeof(Object::Object_Type));
+				offset += sizeof(Object::Object_Type);
+				memcpy(objectsInfo.data() + offset, const_cast<int*>(&object->GetLevel()), sizeof(int));
+				offset += sizeof(int);
+				memcpy(objectsInfo.data() + offset, const_cast<int*>(&object->GetNum()), sizeof(int));
+				offset += sizeof(int);
+				memcpy(objectsInfo.data() + offset, const_cast<Vector2*>(&object->GetObjectTexture()->GetTransform()->GetPos()), sizeof(Vector2));
+				offset += sizeof(Vector2);
+
+				bool isReversed = object->IsReversed();
+				memcpy(objectsInfo.data() + offset, const_cast<bool*>(&isReversed), sizeof(bool));
+				offset += sizeof(bool);
 			}
 		}
 
-		mapWriter.Uint(mapInfo.size());
-		mapWriter.Byte(mapInfo.data(), mapInfo.size() * sizeof(float));
+		mapWriter.Uint(objectsInfoSize);
+		mapWriter.Byte(objectsInfo.data(), objectsInfoSize);
 	}
 }
 
