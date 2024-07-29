@@ -30,6 +30,7 @@ public:
 	bool CheckCleared();
 
 	void AddObject(shared_ptr<Object> addObject, int type);
+	bool DeleteObject(shared_ptr<Object> deleteObject);
 	bool DeleteObject(shared_ptr<Object> deleteObject, int type);
 	void Paste(shared_ptr<Map> copyMap);
 	void Reset();

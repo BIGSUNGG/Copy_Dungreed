@@ -11,15 +11,19 @@ public:
 	virtual void Refresh() override;
 
 protected:
-	const Vector2 _miniTileSize = Vector2(5, 5);
-	const float _miniMapSizeRatio = 0.05f;
+	const Vector2 _tileSize = Vector2(5, 5);
+	const Vector2 _doorSize = Vector2(5, 5);
 
-	shared_ptr<RenderTarget> _miniMapRtv;
-	shared_ptr<RenderTarget> _miniTileRtv;
-	shared_ptr<Quad> _miniMapBase;
+	const float _mapSizeRatio = 0.05f;
 
-	shared_ptr<InstanceQuad> _miniTile;
-	vector<shared_ptr<Object>> _miniEnemy;
-	shared_ptr<Object> _miniPlayer;
+	shared_ptr<RenderTarget> _mapRtv;
+	shared_ptr<RenderTarget> _tileRtv;
+	shared_ptr<RenderTarget> _doorRtv;
+	shared_ptr<Quad> _mapBase;
+
+	shared_ptr<InstanceQuad> _tile;
+	shared_ptr<InstanceQuad> _door;
+	vector<shared_ptr<Object>> _enemy;
+	shared_ptr<Object> _player;
 };
 

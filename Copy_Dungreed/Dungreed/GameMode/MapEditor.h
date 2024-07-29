@@ -14,7 +14,7 @@ public:
 protected:
 	void Init(shared_ptr<Map> debugMap);
 
-	void AddObject();
+	void AddObject(bool force = false);
 	void DeleteObject();
 
 	void MouseEvenet();
@@ -38,9 +38,9 @@ private:
 	bool _freeMode	= false;
 	bool _autoSave	= true;
 
-	int _objectType		= 2;
+	int _objectType		= 1;
 	int _objectLevel	= 0;
-	int _objectNum		= 10;
+	int _objectNum		= 0;
 
 	int _mapLevel	= 0;
 	int _mapNum		= 0;

@@ -294,7 +294,7 @@ void MapEditor::Init(shared_ptr<Map> debugMap)
 	SOUND->StopAll();
 }
 
-void MapEditor::AddObject()
+void MapEditor::AddObject(bool force)
 {
 	bool overlap = false;
 	for (auto& object : _curMap->GetObjects()[_objectType])
@@ -306,15 +306,16 @@ void MapEditor::AddObject()
 		}
 	}
 
-	if (!overlap)
-	{
-		GAME->AddObject(_curObject, _objectType);
-		_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
-		if (_autoSave)
-			MAP_MANAGER->Save(_curMap);
+	if (overlap)
+		return;
 
-		GAME->Instancing();
-	}
+	GAME->AddObject(_curObject, _objectType);
+	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
+
+	GAME->Instancing();
+
+	if (_autoSave)
+		MAP_MANAGER->Save(_curMap);
 }
 
 void MapEditor::DeleteObject()
@@ -360,14 +361,7 @@ void MapEditor::InputEvent()
 	if (CAMERA->GetFreeMode() == false)
 	{
 		if (KEY_DOWN('Q'))
-		{
-			GAME->AddObject(_curObject, _objectType);
-			_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
-			if (_autoSave)
-				MAP_MANAGER->Save(_curMap);
-
-			GAME->Instancing();
-		}
+			AddObject(true);
 
 		if (KEY_DOWN('W'))
 			AddObject();

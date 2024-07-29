@@ -371,6 +371,15 @@ void MapManager::Save(shared_ptr<Map> map)
 		_mapList[level].emplace_back(num);
 	}
 
+	for (auto& objects : map->GetObjects())
+	{
+		for (auto& object : objects)
+		{
+			if (object == nullptr)
+				map->DeleteObject(object);
+		}
+	}	
+
 	// 맵 기본 정보 저장
 	{
 		BinaryWriter basicWriter(GetMapBasicInfoFileWPath(level, num));

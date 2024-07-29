@@ -170,7 +170,7 @@ void GameManager::PostRender()
 
 		for (int i = Object::TILE; i < Object::EFFECT; i++)
 		{
-			vector<shared_ptr<Object>>& objects = _curMap->GetObjects()[i];
+			const vector<shared_ptr<Object>>& objects = _curMap->GetObjects()[i];
 			for (auto& object : objects)
 			{
 				if (object == nullptr)

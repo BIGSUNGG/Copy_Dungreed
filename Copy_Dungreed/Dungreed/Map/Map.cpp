@@ -60,6 +60,14 @@ bool Map::DeleteObject(shared_ptr<Object> deleteObject, int type)
 	return false;
 }
 
+bool Map::DeleteObject(shared_ptr<Object> deleteObject)
+{
+	if (deleteObject == nullptr)
+		return false;
+
+	return DeleteObject(deleteObject, deleteObject->GetType());
+}
+
 void Map::Paste(shared_ptr<Map> copyMap)
 {
 	_objects.clear();
