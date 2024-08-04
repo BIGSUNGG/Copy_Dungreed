@@ -9,7 +9,7 @@ void MapManager::Update()
 }
 
 void MapManager::MakeRandomMap(int level, int num)
-{	
+{
 	_maps.clear();
 	_mapCount = 0;
 	_curMapIndex = { 0,0 };
@@ -71,10 +71,10 @@ void MapManager::MakeRandomMap(int level, int num)
 	{
 		for (int y = -_mapSize.y; y <= _mapSize.y; y++)
 		{
-			if(_maps[x][y].second == false)
+			if (_maps[x][y].second == false)
 				continue;
 
-			if(_maps[x][y].first != nullptr)
+			if (_maps[x][y].first != nullptr)
 				continue;
 
 			auto rightMap = _maps[x + 1][y];
@@ -82,10 +82,10 @@ void MapManager::MakeRandomMap(int level, int num)
 			auto topMap = _maps[x][y + 1];
 			auto bottomMap = _maps[x][y - 1];
 
-			bool goRight	= false;
-			bool goLeft		= false;
-			bool goTop		= false;
-			bool goBottom	= false;
+			bool goRight = false;
+			bool goLeft = false;
+			bool goTop = false;
+			bool goBottom = false;
 
 			if (rightMap.second)
 			{
@@ -128,13 +128,13 @@ void MapManager::MakeRandomMap(int level, int num)
 				mapNum = (rand() % (_mapList[level].size() - 1)) + 1;
 				info = LoadBasicInfo(level, mapNum);
 
-				if (info.CanGoLeft()	!= goLeft)
+				if (info.CanGoLeft() != goLeft)
 					continue;
-				if (info.CanGoRight()	!= goRight)
+				if (info.CanGoRight() != goRight)
 					continue;
-				if (info.CanGoTop()		!= goTop)
+				if (info.CanGoTop() != goTop)
 					continue;
-				if (info.CanGoBottom()	!= goBottom)
+				if (info.CanGoBottom() != goBottom)
 					continue;
 
 				auto map = Load(level, mapNum);
@@ -246,7 +246,7 @@ std::string MapManager::GetMapObjectsFileSPath(int level, int num)
 
 shared_ptr<Map> MapManager::Load(int level, int num)
 {
-	shared_ptr<Map> newMap = make_shared<Map>(level,num);
+	shared_ptr<Map> newMap = make_shared<Map>(level, num);
 
 	if (IsMapFileExist(level, num)) // 불러올 파일이 있는지
 	{
@@ -378,7 +378,7 @@ void MapManager::Save(shared_ptr<Map> map)
 			if (object == nullptr)
 				map->DeleteObject(object);
 		}
-	}	
+	}
 
 	// 맵 기본 정보 저장
 	{
@@ -417,7 +417,7 @@ void MapManager::Save(shared_ptr<Map> map)
 		vector<unsigned char> objectsInfo(objectsInfoSize);
 		int offset = 0;
 
-		for (int i = Object::Object_Type::BACKGROUND; i <= Object::Object_Type::ETC; i++)
+		for (int i = Object::Object_Type::BACKGROUND; i <= Object::Object_Type::CREATURE; i++)
 		{
 			for (auto& object : map->GetObjects()[i])
 			{
@@ -593,10 +593,10 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
 
 MapManager::MapManager()
 {
-	SOUND->Add("0.Town", "Resource/Sound/Bgm/0.Town.wav",true, true);
-	SOUND->Add("ambience_town", "Resource/Sound/Bgm/ambience_town.wav",true, false);
-	SOUND->Add("1.JailField", "Resource/Sound/Bgm/1.JailField.wav", true,true);
-	SOUND->Add("ambience_prison", "Resource/Sound/Bgm/ambience_prison.wav",true, false);
+	SOUND->Add("0.Town", "Resource/Sound/Bgm/0.Town.wav", true, true);
+	SOUND->Add("ambience_town", "Resource/Sound/Bgm/ambience_town.wav", true, false);
+	SOUND->Add("1.JailField", "Resource/Sound/Bgm/1.JailField.wav", true, true);
+	SOUND->Add("ambience_prison", "Resource/Sound/Bgm/ambience_prison.wav", true, false);
 
 	// �� ���� ���ϱ�
 	for (int level = 0; level < 9; level++)

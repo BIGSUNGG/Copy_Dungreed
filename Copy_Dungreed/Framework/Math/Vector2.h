@@ -2,6 +2,12 @@
 class Vector2 : public XMFLOAT2
 {
 public:
+	static Vector2 zero;
+	static Vector2 one;
+	static Vector2 right;
+	static Vector2 up;
+
+public:
 	Vector2();
 	Vector2(float x, float y);
 	Vector2(int x, int y);

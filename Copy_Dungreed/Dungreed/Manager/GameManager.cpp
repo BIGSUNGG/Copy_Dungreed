@@ -71,70 +71,55 @@ void GameManager::Render()
 
 	shared_ptr<RectCollider> textureCollider = make_shared<RectCollider>(CENTER);
 
-	if (_instancing)
+
+	for (int i = 0; i < Object::_objectTypeCount; i++)
 	{
-		for (auto& map : _renderOrder)
+		if (_instancing)
 		{
-			for (auto& instance : map.second.second)
+			for (auto instanceQuad : instanceQuads[i])
 			{
-				// 인스턴스된 텍스쳐의 프러스텀 컬링
-				textureCollider->SetHalfSize(instance->GetTexture()->GetHalfSize());
-				for (shared_ptr<Transform> transform : instance->GetTransforms())
-				{
-					if (transform == nullptr)
-						continue;
-
-					// 텍스쳐가 화면안에 들어와 있는지
-					textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
-					textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
-					textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
-					textureCollider->Update();
-
-					if (frustumCollision->IsCollision(textureCollider, false))
-					{
-						instance->Render();
-						break;
-					}
-				}
-			}
-
-			for (auto& object : map.second.first)
-			{
-				if (object == nullptr || object->IsActive() == false)
+				if (instanceQuad.second == nullptr)
 					continue;
 
-				bool bShouldRender = true;
-				if (_instancing)
+				if (_frustum)
 				{
 					// 오브젝트의 프러스텀 컬링
-					shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
-					if (transform != nullptr)
+					for (shared_ptr<Transform> transform : instanceQuad.second->GetTransforms())
 					{
+						if (transform == nullptr)
+							continue;
+
 						// 텍스쳐가 화면안에 들어와 있는지
-						textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
+						textureCollider->SetHalfSize(instanceQuad.second->GetTexture()->GetHalfSize());
 						textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
 						textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
 						textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
 						textureCollider->Update();
 
-						bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+						if (frustumCollision->IsCollision(textureCollider, false))
+						{
+							instanceQuad.second->Render();
+							break;
+						}
 					}
 				}
-
-				if (bShouldRender)
-					object->Render();
+				else
+				{
+					instanceQuad.second->Render();
+				}
 			}
 		}
-	}
-	else
-	{
-		for (auto& objects : _curMap->GetObjects())
-		{
-			for (auto& object : objects)
-			{
-				if (object == nullptr || object->IsActive() == false)
-					continue;
 
+		for (auto& object : _curMap->GetObjects()[i])
+		{
+			if (object == nullptr || object->IsActive() == false)
+				continue;
+
+			if (_instancing && object->IsStatic())
+				continue;			
+
+			if (_frustum)
+			{
 				bool bShouldRender = true;
 
 				// 오브젝트의 프러스텀 컬링
@@ -154,8 +139,13 @@ void GameManager::Render()
 				if (bShouldRender)
 					object->Render();
 			}
+			else
+			{
+				object->Render();
+			}
 		}
 	}
+
 }
 
 void GameManager::PostRender()
@@ -228,8 +218,8 @@ void GameManager::ImguiRender()
 		ImGui::Checkbox("Render UI", &_renderUI);
 
 		ImGui::Checkbox("Use Instancing", &_instancing);
+		ImGui::Checkbox("Use Frustum culling", &_frustum);
 		ImGui::SliderFloat("Frustum Size Ratio", &_frustumSizeRatio, 0.f, 1.f);
-
 	}
 }
 
@@ -249,37 +239,37 @@ void GameManager::Optimize()
 	}
 }
 
-void GameManager::Instancing()
+void GameManager::AddInstanceQuad(shared_ptr<Object> object)
 {
-	if (_curMap == nullptr)
+	if (object->IsStatic() == false || object->GetObjectTexture() == nullptr)
 		return;
 
-	for (auto& map : _renderOrder)
+	auto& instanceQuad = instanceQuads[object->GetType()];
+	auto iter = instanceQuad.find(object->GetObjectTexture()->GetImageFile());
+	if (iter == instanceQuad.end())
+		iter = instanceQuad.insert({ object->GetObjectTexture()->GetImageFile(), make_shared<InstanceQuad>(object->GetObjectTexture()->GetImageFile(), 0) }).first;
+
+	iter->second->GetTransforms().push_back(object->GetObjectTexture()->GetTransform());
+	iter->second->Update();
+}
+
+void GameManager::DeleteInstanceQuad(shared_ptr<Object> object)
+{
+	if (object->IsStatic() == false || object->GetObjectTexture() == nullptr)
+		return;
+
+	auto& instanceQuad = instanceQuads[object->GetType()];
+	auto iter = instanceQuad.find(object->GetObjectTexture()->GetImageFile());
+	if (iter == instanceQuad.end())
+		return;
+
+	for (int i = 0; i < iter->second->GetTransforms().size(); i++)
 	{
-		map.second.second.clear();
-	}
-
-	for (int i = 0; i < Object::Object_Type::CREATURE; i++)
-	{
-		unordered_map<wstring, vector<shared_ptr<Object>>> _objects;
-		for (auto& object : _curMap->GetObjects()[i])
+		if (iter->second->GetTransforms()[i] == object->GetObjectTexture()->GetTransform())
 		{
-			if (object == nullptr || object->IsStatic() == false)
-				continue;
-
-			object->Update();
-			_objects[object->GetObjectTexture()->GetImageFile()].emplace_back(object);
-		}
-
-		for (auto& iter : _objects)
-		{
-			auto instanceQuad = make_shared<InstanceQuad>(iter.first, iter.second.size());
-			for (int j = 0; j < iter.second.size(); j++)
-			{
-				instanceQuad->GetTransforms()[j] = iter.second[j]->GetObjectTexture()->GetTransform();
-			}
-			instanceQuad->ApplyChanges();
-			_renderOrder[iter.second.front()->GetRenderOrder()].second.emplace_back(instanceQuad);
+			iter->second->GetTransforms().erase(iter->second->GetTransforms().begin() + i);
+			iter->second->Update();
+			break;
 		}
 	}
 }
@@ -376,15 +366,6 @@ void GameManager::Input()
 	}
 }
 
-void GameManager::AddObject(shared_ptr<Object> object, int type)
-{
-	if (_curMap == nullptr)
-		return;
-
-	_renderOrder[object->GetRenderOrder()].first.emplace_back(object);
-	_curMap->AddObject(object, type);
-}
-
 void GameManager::AddEffect(shared_ptr<Effect> effect)
 {
 	AddObject(effect, Object::Object_Type::EFFECT);
@@ -435,37 +416,26 @@ void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
 	_debugCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _debugColliderRunTime));
 }
 
-void GameManager::DeleteObject(shared_ptr<Object> deleteObject)
+void GameManager::AddObject(shared_ptr<Object> object, int type)
 {
-	if (deleteObject->IsStatic())
-	{
-		for (auto& instance : _renderOrder[deleteObject->GetRenderOrder()].second)
-		{
-			if (instance->GetTexture()->GetImageFile() == deleteObject->GetObjectTexture()->GetImageFile())
-			{
-				for (auto& transform : instance->GetTransforms())
-				{
-					if (transform->GetPos() == deleteObject->GetObjectTexture()->GetTransform()->GetPos())
-					{
-						transform->GetPos() = Vector2(-10000.f, -10000.f);
-						instance->ApplyChanges();
-						return;
-					}
-				}
-			}
-		}
-	}
-	else
-	{
-		for (auto& object : _renderOrder[deleteObject->GetRenderOrder()].first)
-		{
-			if (object == deleteObject)
-			{
-				object = nullptr;
-				return;
-			}
-		}
-	}
+	if (_curMap == nullptr || object == nullptr)
+		return;
+
+	_curMap->AddObject(object, type);
+
+	if (object->IsStatic())
+		AddInstanceQuad(object);
+}
+
+void GameManager::DeleteObject(shared_ptr<Object> object)
+{
+	if (_curMap == nullptr)
+		return;
+
+	_curMap->DeleteObject(object);
+
+	if (object->IsStatic())
+		DeleteInstanceQuad(object);
 }
 
 vector<shared_ptr<Object>> GameManager::GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type,bool Obb,bool setColor,bool forceCollison)
@@ -519,6 +489,9 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 
 void GameManager::SetCurMap(shared_ptr<Map> map)
 {
+	instanceQuads.clear();
+	instanceQuads.resize(Object::_objectTypeCount);
+
 	_curMap = map;
 	for (auto& object : _curMap->GetObjects()[Object::ETC])
 	{
@@ -546,9 +519,9 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 		}
 	}
 
-	for (auto& objects : map->GetObjects())
+	for (int i = 0; i < Object::_objectTypeCount; i++)
 	{
-		for (auto& object : objects)
+		for (auto& object : _curMap->GetObjects()[i])
 		{
 			if (object == nullptr)
 				continue;
@@ -558,19 +531,9 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 
 			if (object->GetCollider() != nullptr)
 				object->GetCollider()->Update();
-		}
-	}
 
-	_renderOrder.clear();
-	Instancing();
-	for (auto& objects : _curMap->GetObjects())
-	{
-		for (auto& object : objects)
-		{
-			if (object == nullptr || object->IsStatic())
-				continue;
-
-			_renderOrder[object->GetRenderOrder()].first.emplace_back(object);
+			if (object->IsStatic())
+				AddInstanceQuad(object);
 		}
 	}
 

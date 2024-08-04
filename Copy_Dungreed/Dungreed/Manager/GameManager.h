@@ -29,17 +29,18 @@ public:
 
 	// 게임 최적화 코드
 	void Optimize();
-	void Instancing();
-
+	void AddInstanceQuad(shared_ptr<Object> object);
+	void DeleteInstanceQuad(shared_ptr<Object> object);
+	
 	void Input();
 
-	void AddObject(shared_ptr<Object> object, int type);
 	void AddEffect(shared_ptr<Effect> effect);
 	void SetPlayer(shared_ptr<Player> player);
 	void ResetPlayer();
 	void AddEtcObject(shared_ptr<Object> object);
 	void AddDebugCollider(shared_ptr<Collider> collider);
 
+	void AddObject(shared_ptr<Object> object, int type);
 	void DeleteObject(shared_ptr<Object> deleteObject);
 
 public:
@@ -76,8 +77,7 @@ private:
 	const float _debugColliderRunTime = 1.f;
 
 	shared_ptr<Map> _curMap;
-
-	map<float, pair<vector<shared_ptr<Object>>, vector<shared_ptr<InstanceQuad>>>> _renderOrder;
+	vector<unordered_map<wstring, shared_ptr<InstanceQuad>>> instanceQuads;	
 	vector<pair<shared_ptr<Collider>,float>> _debugCollider;
 
 	shared_ptr<Player> _player;
@@ -91,6 +91,7 @@ private:
 	bool _playing = false;
 
 	bool _instancing = true;
+	bool _frustum = true;
 	float _frustumSizeRatio = 1.f;
 };
 

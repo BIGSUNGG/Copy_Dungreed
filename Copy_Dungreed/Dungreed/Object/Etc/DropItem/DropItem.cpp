@@ -7,7 +7,6 @@ DropItem::DropItem(int type, int num)
 	_etcType = DROP_ITEM;
 	_movement = make_shared<MovementComponent>(this);
 	_movement->SetJumpPowerMax(1200.f);
-	_renderOrder = 3.75f;
 }
 
 void DropItem::Update()

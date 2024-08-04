@@ -15,7 +15,6 @@ DropGold::DropGold(int type, int num)
 	_dash = make_shared<DashMovementComponent>(this);
 	_dash->SetMaxSpeed(1500.f);
 	_dash->SetSlowDownSpeed(1500.f);
-	_renderOrder = 3.75f;
 }
 
 void DropGold::Update()
@@ -35,11 +34,15 @@ void DropGold::Update()
 void DropGold::AddCoinToIventory()
 {
 	_isActive = false;
-	INVENTORY->AddGold(_price);
+	INVENTORY->IncreaseGold(_price);
+
+	Vector2 targetPos = GAME->GetPlayer() ? GAME->GetPlayer()->GetPos() : Vector2::zero;
+	targetPos.x += MathUtility::RandomFloat(-50.f, 50.f);
+	targetPos.y += MathUtility::RandomFloat(-50.f, 50.f);
 
 	auto effect = make_shared<Effect_Number>();
 	effect->SetNumber(_price);
-	effect->SetPos(GAME->GetPlayer()->GetPos());
+	effect->SetPos(targetPos);
 	effect->SetColor({
 		256.f / 256.f,
 		256.f / 256.f,
@@ -47,7 +50,6 @@ void DropGold::AddCoinToIventory()
 		1.f
 		});
 	GAME->AddEffect(effect);
-
 }
 
 void DropGold::SetFollowCreature(Creature* creature)

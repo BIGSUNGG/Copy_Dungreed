@@ -254,7 +254,9 @@ void Player::CheckEtcEvent()
 		{
 			auto dropGold = dynamic_pointer_cast<DropGold>(etc);
 			if (_collider->IsCollision(object->GetCollider()))
+			{
 				dropGold->AddCoinToIventory();
+			}
 			else
 			{
 				Vector2 distance = this->GetPos() - etc->GetPos();
@@ -288,7 +290,6 @@ void Player::DashMovement()
 			trail->SetFadeRatio(3.f);
 			if (_reversed)
 				trail->ReverseTexture();
-			trail->SetRenderOrder(3.6f);
 			GAME->AddEffect(trail);
 		}
 	}

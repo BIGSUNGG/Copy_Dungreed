@@ -14,9 +14,6 @@ public:
 	virtual void Update()override;
 
 public:
-	// Getter Setter
-	void SetRenderOrder(float order) { _renderOrder = order; }
-
 	virtual Effect_Type& GetEffectType() { return _effectType; }
 
 protected:

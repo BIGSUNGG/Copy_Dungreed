@@ -19,7 +19,10 @@ public:
 
 	const float& GetInteractionDistance() { return _interactionDistance; }
 
-	virtual void AddGold(int gold);
+	virtual void IncreaseGold(int value);
+	virtual void DecreaseGold(int value);
+	virtual void IncreaseHungry(int value);
+	virtual void DecreaseHungry(int value);
 
 	void SetCurWeaponSlot(int* slot) { _curWeaponSlot = slot; }
 	void SetItemSlot(vector<shared_ptr<Item>>* slot) { _itemSlot = slot; }
@@ -46,7 +49,7 @@ private:
 	float _interactionDistance = 300.f;
 
 	int _gold = 0;
-	int _hungry = 12;
+	int _hungry = 100;
 	int _hungryMax = 100;
 	int _playerLevel = 12;
 

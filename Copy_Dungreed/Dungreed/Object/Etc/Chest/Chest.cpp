@@ -8,7 +8,6 @@ Chest::Chest(int type, int num)
 	_movement = make_shared<MovementComponent>(this);
 	_interaction = false;
 	_render = false;
-	_renderOrder = 3.5f;
 
 	MakeRandomItem();	
 }

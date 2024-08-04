@@ -109,6 +109,8 @@ void Map::Reset()
 
 void Map::OpenEvent()
 {
+	INVENTORY->DecreaseHungry(MathUtility::RandomInt(3, 10));
+
 	for (auto& func : _openEvent)
 		func();
 }

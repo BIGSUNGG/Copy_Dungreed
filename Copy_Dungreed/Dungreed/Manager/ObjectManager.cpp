@@ -26,11 +26,11 @@ shared_ptr<Object> ObjectManager::GetNewObject(int type, int level, int num)
 	case Object::Object_Type::TILE:
 		object = GetTile(level, num);
 		break;
-	case Object::Object_Type::CREATURE:
-		object = GetCreature(level, num);
-		break;
 	case Object::Object_Type::ETC:
 		object = GetEtc(level, num);
+		break;
+	case Object::Object_Type::CREATURE:
+		object = GetCreature(level, num);
 		break;
 	case Object::Object_Type::EFFECT:
 		object = GetCreatureEffect(level, num);

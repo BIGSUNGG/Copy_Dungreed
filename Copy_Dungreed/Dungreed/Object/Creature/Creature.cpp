@@ -7,7 +7,6 @@ Creature::Creature(int level, int num)
 	_movement = make_shared<MovementComponent>(this);
 	_movement->SetMovementEvent(bind(&Creature::MovementEvent, this));
 
-	_renderOrder = 4.f;
 	_objectType = Object::Object_Type::CREATURE;
 	_weaponSlot.resize(1);
 }

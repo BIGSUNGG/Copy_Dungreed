@@ -11,8 +11,8 @@ public:
 		BACKGROUND,
 		WALL,
 		TILE,
-		CREATURE,
 		ETC,
+		CREATURE,
 		EFFECT,
 		NONE,
 	};
@@ -49,7 +49,6 @@ public:
 	bool IsReversed()						{ return _reversed; }
 	const Vector2& GetSpawnPos()			{ return _spawnPos; }
 	const Object_Type& GetType()			{ return _objectType; }
-	const float& GetRenderOrder()			{ return _renderOrder; }
 	shared_ptr<Animation> GetAnimation()	{ return _anim; }
 	shared_ptr<Quad> GetObjectTexture()		{ return _texture; }
 	shared_ptr<RectCollider> GetCollider()	{ return _collider; }
@@ -58,7 +57,6 @@ public:
 protected:
 	Object_Type _objectType = Object_Type::NONE;
 	Vector2 _spawnPos = { 0,0 };
-	float _renderOrder = 0.f;
 	bool _staticObject = false;
 	bool _isActive = true;
 	bool _collison = true;

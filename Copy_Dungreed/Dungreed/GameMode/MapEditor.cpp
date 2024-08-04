@@ -142,7 +142,7 @@ void MapEditor::ImGuiRender()
 			ImGui::Text("Object Count : %d", _curMap->GetObjectCount());
 			ImGui::SliderInt("Level", &_objectLevel, 0, 8);
 			ImGui::SliderInt("Num", &_objectNum, 0, 99);
-			ImGui::SliderInt("Type", &_objectType, 0, Object::Object_Type::ETC);
+			ImGui::SliderInt("Type", &_objectType, 0, Object::Object_Type::CREATURE);
 
 			if (ImGui::Button("Reverse"))
 				_curObject->ReverseTexture();
@@ -224,7 +224,6 @@ void MapEditor::ImGuiRender()
 			if (ImGui::Button("Reset"))
 			{
 				_curMap->Reset();
-				GAME->Instancing();
 			}
 
 			if (ImGui::Button("Copy"))
@@ -311,8 +310,6 @@ void MapEditor::AddObject(bool force)
 
 	GAME->AddObject(_curObject, _objectType);
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
-
-	GAME->Instancing();
 
 	if (_autoSave)
 		MAP_MANAGER->Save(_curMap);
