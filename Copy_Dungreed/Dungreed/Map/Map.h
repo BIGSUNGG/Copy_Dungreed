@@ -57,8 +57,8 @@ public:
 	Vector2& GetRightDoor()		{ return _mapBasicInfo._rightDoor; }
 
 	bool GetCleared()		{ return _cleared; }
-	const int& GetLevel()		{ return _level; }
-	const int& GetNum()			{ return _num; }
+	const int& GetLevel()		{ return _mapBasicInfo._level; }
+	const int& GetNum()			{ return _mapBasicInfo._num; }
 	const int& GetObjectCount() { return _mapBasicInfo._objectCount; }
 
 private:
@@ -68,9 +68,6 @@ private:
 
 	vector<function<void()>> _openEvent;
 	vector<function<void()>> _lockEvent;
-
-	int _level;
-	int _num;
 
 	bool _cleared = false;
 };

@@ -3,8 +3,8 @@
 
 Map::Map(int level, int num)
 {
-	_level = level;
-	_num = num;
+	_mapBasicInfo._level = level;
+	_mapBasicInfo._num = num;
 
 	Reset();
 }

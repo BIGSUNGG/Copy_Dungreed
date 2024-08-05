@@ -1,7 +1,8 @@
 #include "framework.h"
 #include "MathUtility.h"
 
-int MathUtility::RandomInt(int min, int max)
+// min 이상 max 이하의 랜덤한 값을 구함
+int MathUtility::RandomInt(int min, int max) 
 {
     max += 1;
     int result = rand() % (max - min) + min;

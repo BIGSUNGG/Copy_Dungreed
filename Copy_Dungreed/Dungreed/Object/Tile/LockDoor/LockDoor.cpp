@@ -25,7 +25,7 @@ void LockDoor::Update()
 			if (_collider->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
 				function<void()> func = [=]() {
-					MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapIndex() + _moveDirection);
+					MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapPos() + _moveDirection);
 					GAME->SetInput(true);
 					GAME->GetPlayer()->SetStatic(false);
 				};

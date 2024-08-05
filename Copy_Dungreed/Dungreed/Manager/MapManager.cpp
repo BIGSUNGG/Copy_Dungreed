@@ -10,140 +10,186 @@ void MapManager::Update()
 
 void MapManager::MakeRandomMap(int level, int num)
 {
+	// 맵 초기화	
 	_maps.clear();
 	_mapCount = 0;
-	_curMapIndex = { 0,0 };
+	_curMapPos = { 0,0 };
 
-	pair<shared_ptr<Map>, bool> pair = { nullptr,false };
-
-	// Maps �ʱ�ȭ
-	for (int x = -_mapSize.x; x <= _mapSize.x; x++)
+	for (int x = -_mapHalfSize.x; x <= _mapHalfSize.x; x++)
 	{
-		for (int y = -_mapSize.y; y <= _mapSize.y; y++)
+		for (int y = -_mapHalfSize.y; y <= _mapHalfSize.y; y++)
 		{
-			_maps[x][y] = pair;
+			_maps[x][y] = nullptr;
 		}
 	}
 
-	// �⺻ �� �߰�
-	shared_ptr<Map> map = Load(level, num);
-	AddMap(map, Vector2(0, 0));
-
-	int tempMapCount = 0;
-	if (map->CanGoTop())
+	vector<MapBasic> curLevelMapList;
+	curLevelMapList.reserve(_mapList[level].size() - 1);
+	for (int i = 1; i < _mapList[level].size(); i++)
 	{
-		_maps[1][0].second = true;
-		tempMapCount++;
-	}
-	if (map->CanGoBottom())
-	{
-		_maps[0][-1].second = true;
-		tempMapCount++;
-	}
-	if (map->CanGoLeft())
-	{
-		_maps[-1][0].second = true;
-		tempMapCount++;
-	}
-	if (map->CanGoRight())
-	{
-		_maps[0][1].second = true;
-		tempMapCount++;
+		int num = _mapList[level][i];
+		MapBasic info = LoadBasicInfo(level, num);
+		curLevelMapList.push_back(info);
 	}
 
-	// �̵������� �� �߰�
-	while (tempMapCount <= _mapCountMax)
+	// 기본 맵 추가
+	shared_ptr<Map> curMap = Load(level, num);
+	const Vector2 startPos = { 0, 0 };
+	Vector2 curPos = startPos;
+	AddMap(curMap, curPos);
+	queue<Vector2> visitQueue;
+
+	while (true)
 	{
-		Vector2 index = { MathUtility::RandomInt(-_mapSize.x,_mapSize.x),MathUtility::RandomInt(-_mapSize.y,_mapSize.y) };
-		if (_maps[index.x][index.y].second == true)
+		// 최근 추가된 맵에서 갈 수 있는 위치 추가
+		if (curMap)
+		{
+			if (curMap->CanGoTop())
+				visitQueue.push(curPos + Vector2(0, 1));
+			if (curMap->CanGoBottom())
+				visitQueue.push(curPos + Vector2(0, -1));
+			if (curMap->CanGoLeft())
+				visitQueue.push(curPos + Vector2(-1, 0));
+			if (curMap->CanGoRight())
+				visitQueue.push(curPos + Vector2(1, 0));
+
+			curMap = nullptr;
+		}
+
+		if (visitQueue.size() <= 0) // 더 이상 맵을 놓을 수 없다면
+			break;
+
+		curPos = visitQueue.front();
+		visitQueue.pop();
+		if (_maps[curPos.x][curPos.y] != nullptr) // 현재 있는 위치에 맵이 이미 있다면
 			continue;
 
-		if (_maps[index.x + 1][index.y].second == true || _maps[index.x - 1][index.y].second == true ||
-			_maps[index.x][index.y + 1].second == true || _maps[index.x][index.y - 1].second == true)
+		// 맵을 충분히 추가했다면
+		if (_mapCount >= _mapCountMin) 
 		{
-			_maps[index.x][index.y].second = true;
-			tempMapCount++;
-		}
-	}
+			// 공백에 연결되어있는 맵 찾기
+			queue<Vector2> visitQueue;
+			unordered_map<int, unordered_map<int, bool>> visited;
+			Vector2 curPos = startPos;
+			shared_ptr<Map> curMap = _maps[startPos.x][startPos.y];
 
-	// �̵������� �ʿ� ������ �� ����
-	for (int x = -_mapSize.x; x <= _mapSize.x; x++)
-	{
-		for (int y = -_mapSize.y; y <= _mapSize.y; y++)
-		{
-			if (_maps[x][y].second == false)
-				continue;
-
-			if (_maps[x][y].first != nullptr)
-				continue;
-
-			auto rightMap = _maps[x + 1][y];
-			auto leftMap = _maps[x - 1][y];
-			auto topMap = _maps[x][y + 1];
-			auto bottomMap = _maps[x][y - 1];
-
-			bool goRight = false;
-			bool goLeft = false;
-			bool goTop = false;
-			bool goBottom = false;
-
-			if (rightMap.second)
-			{
-				if (rightMap.first != nullptr && rightMap.first->CanGoLeft())
-					goRight = true;
-				else if (rightMap.first == nullptr)
-					goRight = true;
-			}
-
-			if (leftMap.second)
-			{
-				if (leftMap.first != nullptr && leftMap.first->CanGoRight())
-					goLeft = true;
-				else if (leftMap.first == nullptr)
-					goLeft = true;
-			}
-
-			if (topMap.second)
-			{
-				if (topMap.first != nullptr && topMap.first->CanGoBottom())
-					goTop = true;
-				else if (topMap.first == nullptr)
-					goTop = true;
-			}
-
-			if (bottomMap.second)
-			{
-				if (bottomMap.first != nullptr && bottomMap.first->CanGoTop())
-					goBottom = true;
-				else if (bottomMap.first == nullptr)
-					goBottom = true;
-			}
-
-			int mapNum;
-			MapBasic info;
-			// ������ �� ã��
 			while (true)
 			{
+				if (curMap)
+				{
+					if (curMap->CanGoTop())
+						visitQueue.push(curPos + Vector2(0, 1));
+					if (curMap->CanGoBottom())
+						visitQueue.push(curPos + Vector2(0, -1));
+					if (curMap->CanGoLeft())
+						visitQueue.push(curPos + Vector2(-1, 0));
+					if (curMap->CanGoRight())
+						visitQueue.push(curPos + Vector2(1, 0));
 
-				mapNum = (rand() % (_mapList[level].size() - 1)) + 1;
-				info = LoadBasicInfo(level, mapNum);
+					curMap = nullptr;
+				}
 
-				if (info.CanGoLeft() != goLeft)
-					continue;
-				if (info.CanGoRight() != goRight)
-					continue;
-				if (info.CanGoTop() != goTop)
-					continue;
-				if (info.CanGoBottom() != goBottom)
+				if(visitQueue.size() <= 0) // 더 이상 확인할 맵이 없다면
+					break;
+
+				curPos = visitQueue.front();
+				visitQueue.pop();
+
+				if(visited[curPos.x][curPos.y] == true) // 이미 확인한 위치라면
 					continue;
 
-				auto map = Load(level, mapNum);
-				AddMap(map, { x,y });
-				break;
+				visited[curPos.x][curPos.y] = true;
+
+				curMap = _maps[curPos.x][curPos.y];
+				if (curMap == nullptr) // 현재 있는 위치에 맵이 없다면
+				{
+					// 연결되야하는 방향 구하기
+					bool shouldCanGoTop = _maps[curPos.x][curPos.y + 1] ? _maps[curPos.x][curPos.y + 1]->CanGoBottom() : false;
+					bool shouldCanGoBottom = _maps[curPos.x][curPos.y - 1] ? _maps[curPos.x][curPos.y - 1]->CanGoTop() : false;
+					bool shouldCanGoLeft = _maps[curPos.x - 1][curPos.y] ? _maps[curPos.x - 1][curPos.y]->CanGoRight() : false;
+					bool shouldCanGoRight = _maps[curPos.x + 1][curPos.y] ? _maps[curPos.x + 1][curPos.y]->CanGoLeft() : false;
+
+					// 적절한 맵 구하기
+					MapBasic* info = nullptr;
+					while (true)
+					{
+						// 랜덤한 맵 구하기
+						info = &curLevelMapList[MathUtility::RandomInt(0, curLevelMapList.size() - 1)];
+
+						// 맵이 필요한 조건에 맞는지
+						if (shouldCanGoTop != info->CanGoTop())
+							continue;
+						if (shouldCanGoBottom != info->CanGoBottom())
+							continue;
+						if (shouldCanGoLeft != info->CanGoLeft())
+							continue;
+						if (shouldCanGoRight != info->CanGoRight())
+							continue;
+
+						curMap = Load(info->_level, info->_num);
+						AddMap(curMap, curPos);
+						break;
+					}
+				}
 			}
+
+			break;
+		}
+
+		// 해당 방향으로 무조건 연결되어야하는지 확인
+		bool shouldCanGoTop = _maps[curPos.x][curPos.y + 1] ? _maps[curPos.x][curPos.y + 1]->CanGoBottom() : false;
+		bool shouldCanGoBottom = _maps[curPos.x][curPos.y - 1] ? _maps[curPos.x][curPos.y - 1]->CanGoTop() : false;
+		bool shouldCanGoLeft = _maps[curPos.x - 1][curPos.y] ? _maps[curPos.x - 1][curPos.y]->CanGoRight() : false;
+		bool shouldCanGoRight = _maps[curPos.x + 1][curPos.y] ? _maps[curPos.x + 1][curPos.y]->CanGoLeft() : false;
+
+		// 적절한 맵 구하기
+		MapBasic* info = nullptr;
+		while (true)
+		{
+			// 랜덤한 맵 구하기
+			info = &curLevelMapList[MathUtility::RandomInt(0, curLevelMapList.size() - 1)];
+
+			// 맵이 필요한 조건에 맞는지
+			if (shouldCanGoTop && info->CanGoTop() == false)
+				continue;
+			if (shouldCanGoBottom && info->CanGoBottom() == false)
+				continue;
+			if (shouldCanGoLeft && info->CanGoLeft() == false)
+				continue;
+			if (shouldCanGoRight && info->CanGoRight() == false)
+				continue;
+
+			// 맵에서 이동할 수 있는 위치가 맵의 크기를 넘는다면
+			if (info->CanGoTop() && curPos.y >= _mapHalfSize.y)
+				continue;
+			if (info->CanGoBottom() && curPos.y <= -_mapHalfSize.y)
+				continue;
+			if (info->CanGoRight() && curPos.x >= _mapHalfSize.x)
+				continue;
+			if (info->CanGoLeft() && curPos.x <= -_mapHalfSize.x)
+				continue;
+
+			// 맵에서 이동할 수 있는 맵이 있고 그 맵과 이어지지않다면
+			shared_ptr<Map> topMap    = _maps[curPos.x][curPos.y + 1];
+			shared_ptr<Map> bottomMap = _maps[curPos.x][curPos.y - 1];
+			shared_ptr<Map> rightMap  = _maps[curPos.x + 1][curPos.y];
+			shared_ptr<Map> leftMap   = _maps[curPos.x - 1][curPos.y];
+			if(info->CanGoTop() && topMap && topMap->CanGoBottom() == false)
+				continue;
+			if (info->CanGoBottom() && bottomMap && bottomMap->CanGoTop() == false)
+				continue;
+			if (info->CanGoRight() && rightMap && rightMap->CanGoLeft() == false)
+				continue;
+			if (info->CanGoLeft() && leftMap && leftMap->CanGoRight() == false)
+				continue;
+
+			curMap = Load(info->_level, info->_num);
+			AddMap(curMap, curPos);
+			break;
 		}
 	}
-	SetCurMap({ 0,0 });
+
+	SetCurMap(startPos);
 }
 
 bool MapManager::IsMapFileExist(int level, int num)
@@ -273,6 +319,8 @@ shared_ptr<Map> MapManager::Load(int level, int num)
 MapBasic MapManager::LoadBasicInfo(int level, int num)
 {
 	MapBasic result;
+	result._level = level;
+	result._num = num;
 
 	// Load Basic
 	{
@@ -455,7 +503,7 @@ void MapManager::SaveAll()
 
 void MapManager::SetTarget(shared_ptr<Creature> target)
 {
-	for (auto& monster : _maps[_curMapIndex.x][_curMapIndex.y].first->GetObjects()[Object::CREATURE])
+	for (auto& monster : _maps[_curMapPos.x][_curMapPos.y]->GetObjects()[Object::CREATURE])
 	{
 		auto creature = dynamic_pointer_cast<Creature>(monster);
 		if (creature != nullptr && creature->GetCreatureType() == Creature::ENEMY)
@@ -470,18 +518,18 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 
 void MapManager::SetCurMap(shared_ptr<Map> map)
 {
-	_maps[_curMapIndex.x][_curMapIndex.y].first = map;
-	SetCurMap(_curMapIndex);
+	_maps[_curMapPos.x][_curMapPos.y] = map;
+	SetCurMap(_curMapPos);
 
 	return;
 }
 
 void MapManager::SetCurMap(const Vector2& index)
 {
-	int moveX = index.x - _curMapIndex.x;
-	int moveY = index.y - _curMapIndex.y;
-	_curMapIndex = index;
-	GAME->SetCurMap(_maps[_curMapIndex.x][_curMapIndex.y].first);
+	int moveX = index.x - _curMapPos.x;
+	int moveY = index.y - _curMapPos.y;
+	_curMapPos = index;
+	GAME->SetCurMap(_maps[_curMapPos.x][_curMapPos.y]);
 	if (GAME->GetPlayer() != nullptr)
 	{
 		GAME->SetPlayer(GAME->GetPlayer());
@@ -513,7 +561,7 @@ void MapManager::SetCurMap(const Vector2& index)
 			GAME->GetPlayer()->GetObjectTexture()->SetBottom(GetCurMap()->GetStartPos().y);
 		}
 		GAME->GetPlayer()->SetSpawnPos(GAME->GetPlayer()->GetObjectTexture()->GetTransform()->GetPos());
-		//GAME->GetPlayer()->StopMove();
+		GAME->GetPlayer()->StopMove();
 		GAME->GetPlayer()->GetObjectTexture()->Update();
 		GAME->GetPlayer()->GetCollider()->Update();
 	}
@@ -524,7 +572,7 @@ void MapManager::SetCurMap(const Vector2& index)
 	string bgm;
 	string ambience;
 
-	switch (_maps[_curMapIndex.x][_curMapIndex.y].first->GetLevel())
+	switch (_maps[_curMapPos.x][_curMapPos.y]->GetLevel())
 	{
 	case 0:
 		bgm = "0.Town";
@@ -550,17 +598,17 @@ void MapManager::SetCurMap(const Vector2& index)
 	return;
 }
 
-void MapManager::AddMap(shared_ptr<Map> map, Vector2 where)
+void MapManager::AddMap(shared_ptr<Map> map, Vector2 pos)
 {
-	if (_maps[where.x][where.y].first != nullptr)
+	if (_maps[pos.x][pos.y] != nullptr)
 		return;
 
 	_mapCount++;
-	_maps[where.x][where.y].first = map;
-	_maps[where.x][where.y].second = true;
+	_maps[pos.x][pos.y] = map;
 
 	map->CheckCleared();
 
+	// 문 오브젝트 추가
 	if (map->CanGoLeft())
 	{
 		auto door = make_shared<LockDoorLeft>();

@@ -87,12 +87,12 @@ void UI_Map::Refresh()
 	{
 		for (auto& map : maps.second)
 		{
-			if(map.second.first == nullptr)
+			if(map.second == nullptr)
 				continue;
 
-			if (map.second.second && _visited[map.second.first] == true)
+			//if (_visited[map.second] == true)
 			{
-				Vector2 distance = MAP_MANAGER->GetMapIndex() - Vector2(maps.first, map.first);
+				Vector2 distance = MAP_MANAGER->GetMapPos() - Vector2(maps.first, map.first);
 				Vector2 blockPos = Vector2(960.f - (distance.x * 156.f), 457.f - (distance.y * 156.f));
 
 				{
@@ -101,25 +101,25 @@ void UI_Map::Refresh()
 					_mapBlock->GetTransforms().emplace_back(transform);
 				}
 
-				if (map.second.first->CanGoRight())
+				if (map.second->CanGoRight())
 				{
 					shared_ptr<Transform> transform = make_shared<Transform>();
 					transform->GetPos() = blockPos + Vector2(72, 0);
 					_horizonLine->GetTransforms().emplace_back(transform);
 				}
-				if (map.second.first->CanGoLeft())
+				if (map.second->CanGoLeft())
 				{
 					shared_ptr<Transform> transform = make_shared<Transform>();
 					transform->GetPos() = blockPos - Vector2(72, 0);
 					_horizonLine->GetTransforms().emplace_back(transform);
 				}
-				if (map.second.first->CanGoTop())
+				if (map.second->CanGoTop())
 				{
 					shared_ptr<Transform> transform = make_shared<Transform>();
 					transform->GetPos() = blockPos + Vector2(0, 72);
 					_verticalLine->GetTransforms().emplace_back(transform);
 				}
-				if (map.second.first->CanGoBottom())
+				if (map.second->CanGoBottom())
 				{
 					shared_ptr<Transform> transform = make_shared<Transform>();
 					transform->GetPos() = blockPos - Vector2(0, 72);

@@ -9,6 +9,8 @@ struct MapBasic
 	bool CanGoLeft()	{ return (_leftDoor != Vector2(0, 0)); }
 	bool CanGoRight()	{ return (_rightDoor != Vector2(0, 0)); }
 
+	int _level = 0;
+	int _num = 0;
 	int _objectCount = 0;
 
 	Vector2 _startPos	= { 5000,5000 };
