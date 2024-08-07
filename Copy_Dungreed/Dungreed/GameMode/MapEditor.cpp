@@ -13,7 +13,7 @@ MapEditor::MapEditor(int level, int num)
 	_mapLevel = level;
 	_mapNum = num;
 
-	shared_ptr<Map> _map = MAP_MANAGER->Load(level, num);
+	shared_ptr<Map> _map = MAP_MANAGER->LoadMap(level, num);
 	Init(_map);
 }
 
@@ -47,7 +47,9 @@ void MapEditor::PostRender()
 
 	_curObject->PostRender();
 
+	// 맵의 가장자리와 문 위치 표시
 	{
+		// 가장 자리
 		shared_ptr<Collider> temp = make_shared<RectCollider>(Vector2(40.0f, 40.0f));
 		temp->GetPos() = _curMap->GetLeftBottom();
 		temp->Update();
@@ -60,6 +62,7 @@ void MapEditor::PostRender()
 		temp->SetColorRed();
 		temp->Render();
 
+		// 문 위치
 		temp = make_shared<RectCollider>(Vector2(20.0f, 20.0f));
 		temp->GetPos() = _curMap->GetStartPos();
 		temp->Update();
@@ -215,7 +218,7 @@ void MapEditor::ImGuiRender()
 			ImGui::SameLine();
 			if (ImGui::Button("Load"))
 			{
-				_curMap = MAP_MANAGER->Load(_mapLevel, _mapNum);
+				_curMap = MAP_MANAGER->LoadMap(_mapLevel, _mapNum);
 				GAME->SetCurMap(_curMap);
 				CAMERA->GetTransform()->GetPos() = (_curMap->GetStartPos() - CENTER) * -1;
 			}
@@ -274,39 +277,48 @@ void MapEditor::ImGuiRender()
 
 void MapEditor::Init(shared_ptr<Map> debugMap)
 {
+	// 게임 초기화
 	GAME->Reset();
-
-	_curMap = debugMap;
-	GAME->SetCurMap(_curMap);
 	GAME->SetPlaying(false);
 	GAME->SetEnableUI(false);
 
-	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
+	// 맵 설정
+	_curMap = debugMap;
+	GAME->SetCurMap(_curMap);
+
+	// 오브젝트 설정
+	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);\
+
+	// 카메라 설정
 	CAMERA->SetTarget(nullptr);
 	CAMERA->GetTransform()->GetPos() = (_curMap->GetStartPos() - CENTER) * -1;
 
+	// 마우스 설정
 	_mouseOffset.x = (_curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x);
 	_mouseOffset.y = (_curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y);
-
 	MOUSE_CURSUR->CursurOn();
 
+	// 소리 설정
 	SOUND->StopAll();
 }
 
 void MapEditor::AddObject(bool force)
 {
-	bool overlap = false;
-	for (auto& object : _curMap->GetObjects()[_objectType])
+	if (force)
 	{
-		if (object->GetPos() == _curObject->GetObjectTexture()->GetTransform()->GetPos())
+		bool overlap = false;
+		for (auto& object : _curMap->GetObjects()[_objectType])
 		{
-			overlap = true;
-			break;
+			if (object->GetPos() == _curObject->GetObjectTexture()->GetTransform()->GetPos())
+			{
+				overlap = true;
+				break;
+			}
 		}
-	}
 
-	if (overlap)
-		return;
+		if (overlap)
+			return;
+	}
 
 	GAME->AddObject(_curObject, _objectType);
 	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
@@ -342,6 +354,7 @@ void MapEditor::MouseEvenet()
 {
 	if (_freeMode == false)
 	{
+		// 마우스 오프셋에 맞춰 오브젝트 위치 설정
 		_curMousePos.x = (int)MOUSE_WORLD_POS.x - ((int)MOUSE_WORLD_POS.x % (int)_mouseOffset.x) + (_mouseOffset.x / 2);
 		_curMousePos.x += _mouseAppend.x;
 		_curMousePos.y = (int)MOUSE_WORLD_POS.y - ((int)MOUSE_WORLD_POS.y % (int)_mouseOffset.y) + (_mouseOffset.y / 2);
@@ -374,6 +387,7 @@ void MapEditor::InputEvent()
 
 		if (KEY_DOWN('R'))
 		{
+			// 마우스 위치에 있는 오브젝트로 복사
 			for (auto& object : _curMap->GetObjects()[_objectType])
 			{
 				if (object->GetPos() == _curObject->GetPos())
@@ -452,7 +466,6 @@ void MapEditor::InputEvent()
 
 void MapEditor::ApplyOffset()
 {
-
 	_mouseOffset.x = _curObject->GetObjectTexture()->GetSize().x * _curObject->GetObjectTexture()->GetTransform()->GetScale().x;
 	_mouseOffset.y = _curObject->GetObjectTexture()->GetSize().y * _curObject->GetObjectTexture()->GetTransform()->GetScale().y;
 }

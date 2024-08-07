@@ -54,15 +54,15 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 		{
 		case 0:
 			texture = make_shared<Quad>(L"Resource/BackGround/Sky_Day.png");
-			object->GetBackGroundType() = BackGround::BackGround_Type::FOLLOW_CAMERA;
+			object->GetBackGroundType() = BackGround::BackGround_Type::WALLPAPER;
 			break;
 		case 1:
 			texture = make_shared<Quad>(L"Resource/BackGround/TownBG_Day.png");
-			object->GetBackGroundType() = BackGround::BackGround_Type::FOLLOW_PLAYER;
+			object->GetBackGroundType() = BackGround::BackGround_Type::PERSPECTIVE;
 			break;
 		case 2:
 			texture = make_shared<Quad>(L"Resource/BackGround/TownLayer_Day.png");
-			object->GetBackGroundType() = BackGround::BackGround_Type::FOLLOW_PLAYER;
+			object->GetBackGroundType() = BackGround::BackGround_Type::PERSPECTIVE;
 			object->GetRatio() = 3.0f;
 			break;
 		default:
@@ -74,7 +74,7 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 		{
 		case 0:
 			texture = make_shared<Quad>(L"Resource/BackGround/SubBG.png");
-			object->GetBackGroundType() = BackGround::BackGround_Type::FOLLOW_PLAYER;
+			object->GetBackGroundType() = BackGround::BackGround_Type::PERSPECTIVE;
 			object->GetRatio() = 1.5f;
 			break;
 		}

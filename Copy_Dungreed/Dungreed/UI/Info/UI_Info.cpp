@@ -35,7 +35,7 @@ void UI_Info::Update()
 {
 
 	std::wstring goldText;
-	goldText += to_wstring(INVENTORY->GetGold());
+	goldText += to_wstring(INVENTORY->GetCurGold());
 
 	_coinText->SetText(goldText);
 

@@ -18,8 +18,8 @@ public:
 	shared_ptr<Map> GetCurMap() { return _curMap; }
 
 private:
-	shared_ptr<Map> _curMap;
-	shared_ptr<Player> _player;
+	shared_ptr<Map> _curMap; // 현재 플레이 중인 맵
+	shared_ptr<Player> _player; // 플레이어 캐릭터
 
 	int _mapLevel = 0;
 	int _mapNum = 0;

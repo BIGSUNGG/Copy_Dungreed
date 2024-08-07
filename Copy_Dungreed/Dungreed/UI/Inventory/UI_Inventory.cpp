@@ -193,7 +193,7 @@ void UI_Inventory::Update()
 		_selectedItem->Update();
 
 	std::wstring coinText;
-	coinText += to_wstring(INVENTORY->GetGold());
+	coinText += to_wstring(INVENTORY->GetCurGold());
 	_coinText->SetText(coinText);
 
 	MouseEvenet();

@@ -12,7 +12,7 @@ DebugMode::DebugMode(int level, int num)
 	_mapLevel = level;
 	_mapNum = num;
 
-	shared_ptr<Map> _map = MAP_MANAGER->Load(level, num);
+	shared_ptr<Map> _map = MAP_MANAGER->LoadMap(level, num);
 	Init(_map);
 }
 
@@ -51,7 +51,7 @@ void DebugMode::ImGuiRender()
 
 		if (ImGui::Button("Load"))
 		{
-			shared_ptr<Map> _map = MAP_MANAGER->Load(_mapLevel, _mapNum);
+			shared_ptr<Map> _map = MAP_MANAGER->LoadMap(_mapLevel, _mapNum);
 			Init(_map);
 		}
 	}
@@ -63,13 +63,15 @@ void DebugMode::Init(shared_ptr<Map> debugMap)
 {
 	_curMap = debugMap;
 
+	// 게임 초기화
 	GAME->Reset();
 	CAMERA->SetFreeMode(false);
 
+	// 맵 설정
 	MAP_MANAGER->SetCurMap(_curMap);
 
+	// 플레이어 추가
 	_player.reset();
-
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
 	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
 	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
@@ -81,10 +83,12 @@ void DebugMode::Init(shared_ptr<Map> debugMap)
 	GAME->SetPlaying(true);
 	GAME->SetEnableUI(true);
 
+	// 카메라 설정
 	CAMERA->SetTarget(_player->GetObjectTexture()->GetTransform());
 	CAMERA->SetLeftBottom(MAP_MANAGER->GetCurMap()->GetLeftBottom());
 	CAMERA->SetRightTop(MAP_MANAGER->GetCurMap()->GetRightTop());
 	CAMERA->Update();
 
+	// 마우스 커서 설정
 	MOUSE_CURSUR->CursurOff();
 }

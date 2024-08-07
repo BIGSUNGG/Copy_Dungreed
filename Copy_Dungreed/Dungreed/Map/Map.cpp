@@ -9,12 +9,12 @@ Map::Map(int level, int num)
 	Reset();
 }
 
-bool Map::CheckCleared()
+bool Map::CheckClear()
 {
-	if (_cleared == true)
+	if (_clear == true)
 		return true;
 
-	_cleared = true;
+	_clear = true;
 
 	for (auto& object : _objects[Object::CREATURE])
 	{
@@ -25,7 +25,7 @@ bool Map::CheckCleared()
 
 		if (creature->GetCreatureType() == Creature::ENEMY)
 		{
-			_cleared = false;
+			_clear = false;
 			return false;
 		}
 	}
@@ -47,6 +47,12 @@ void Map::AddObject(shared_ptr<Object> addObject, int type)
 
 bool Map::DeleteObject(shared_ptr<Object> deleteObject, int type)
 {
+	if (deleteObject == nullptr)
+		return false;
+
+	if (_objects[type].size() <= 0)
+		return false;
+
 	for (auto iter = _objects[type].begin(); iter != _objects[type].end(); iter++)
 	{
 		if (*iter == deleteObject)

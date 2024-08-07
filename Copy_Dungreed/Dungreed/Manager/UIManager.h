@@ -13,10 +13,10 @@ public:
 
 	enum Blink_State
 	{
-		END =		0b00000000,
-		DARK =		0b00000001,
-		STOP =		0b00000010,
-		BRIGHT =	0b00000100,
+		END,
+		DARK,
+		STOP,
+		BRIGHT,
 	};
 
 public:
@@ -46,6 +46,11 @@ public:
 	char GetBlinkState() { return _blinkState; }
 	const UI_State& GetCurState() { return _state; }
 
+	// 화면 깜빡이기
+	// speed : 깜빡이는 속도
+	// stopTime : 완벽히 어두워지고 기다리는 시간
+	// color : 어두워지는 색
+	// func : 완벽히 어두워지면 호출할 함수
 	bool Blink(const float& speed, const float& stopTime = 0, const XMFLOAT4& color = {0,0,0,0}, function<void()> func = nullptr);
 
 private:
@@ -57,6 +62,7 @@ private:
 	shared_ptr<RenderTarget> _postProssessing;
 	shared_ptr<Quad> _postProssessingQuad;
 
+	// Blink
 	shared_ptr<Quad> _blinkQuad;
 	shared_ptr<RenderTarget> _blinkRtv;
 	XMFLOAT4 _blinkColor;
@@ -65,8 +71,8 @@ private:
 	char _blinkState = END;
 	function<void()> _blinkEvent;
 
-	vector<shared_ptr<UI>> _ui;
-
+	// UI
+	vector<shared_ptr<UI>> _uiList;
 	shared_ptr<UI_MiniMap> _miniMap;
 	shared_ptr<UI_PlayerHpBar> _playerHpBar;
 	shared_ptr<UI_EnemyHpBar> _enemyHpBar;

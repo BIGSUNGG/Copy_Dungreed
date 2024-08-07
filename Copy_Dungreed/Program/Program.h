@@ -5,7 +5,8 @@ public:
 	Program();
 	~Program();
 
-	void Update();
+	// 매 틱마다 호출
+	void Update(); 
 	void PreRender();
 	void Render();
 	void PostRender();
@@ -13,7 +14,9 @@ public:
 	void RenderEnd();
 
 protected:
+	// 현재 맵을 Debug Mode에서 실행
 	void DebugCurrentMap();
+	// 현재 맵을 Map Editor에서 실행
 	void EditCurrentMap();
 
 private:

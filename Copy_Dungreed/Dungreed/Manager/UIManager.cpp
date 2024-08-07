@@ -10,6 +10,7 @@ void UIManager::Update()
 		switch (_blinkState)
 		{
 		case UIManager::DARK:
+			// 화면 어두워지기
 			_blinkColor.w += DELTA_TIME * _blinkSpeed;
 			if (_blinkColor.w > 1)
 			{
@@ -20,11 +21,13 @@ void UIManager::Update()
 			}
 			break;
 		case UIManager::STOP:
+			// 기다리기
 			_blinkStop -= DELTA_TIME;
 			if (_blinkStop <= 0)
 				_blinkState = BRIGHT;
 			break;
 		case UIManager::BRIGHT:
+			// 화면 밝아지기
 			_blinkColor.w -= DELTA_TIME * _blinkSpeed;
 			if (_blinkColor.w < 0)
 			{
@@ -80,7 +83,7 @@ void UIManager::PreRender()
 {
 	_postProssessing->Set();
 	_blinkRtv->Set();
-	for (auto& ui : _ui)
+	for (auto& ui : _uiList)
 		ui->PreRender();
 }
 
@@ -125,7 +128,7 @@ void UIManager::PostRender()
 
 void UIManager::Refresh()
 {
-	for (auto& ui : _ui)
+	for (auto& ui : _uiList)
 		ui->Refresh();
 }
 
@@ -223,15 +226,15 @@ UIManager::UIManager()
 	_select = make_shared<UI_Option>();
 	_setting = make_shared<UI_Setting>();
 
-	_ui.emplace_back(_playerHpBar);
-	_ui.emplace_back(_enemyHpBar);
-	_ui.emplace_back(_weaponSlot);
-	_ui.emplace_back(_info);
-	_ui.emplace_back(_miniMap);
-	_ui.emplace_back(_inventory);
-	_ui.emplace_back(_map);
-	_ui.emplace_back(_select);
-	_ui.emplace_back(_setting);
+	_uiList.emplace_back(_playerHpBar);
+	_uiList.emplace_back(_enemyHpBar);
+	_uiList.emplace_back(_weaponSlot);
+	_uiList.emplace_back(_info);
+	_uiList.emplace_back(_miniMap);
+	_uiList.emplace_back(_inventory);
+	_uiList.emplace_back(_map);
+	_uiList.emplace_back(_select);
+	_uiList.emplace_back(_setting);
 
 }
 

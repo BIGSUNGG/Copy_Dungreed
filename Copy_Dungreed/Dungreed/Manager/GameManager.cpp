@@ -16,6 +16,10 @@ void GameManager::Update()
 	if (DELTA_TIME >= _maxDeltaTime)
 		return;
 
+	CAMERA->Update();
+	SOUND->Update();
+	MOUSE_CURSUR->Update();
+
 	Input();
 
 	if (!_pause)
@@ -35,15 +39,14 @@ void GameManager::Update()
 				object->Update();
 			}
 		}
-		_curMap->CheckCleared();
+		_curMap->CheckClear();
 		Optimize();
 
 		for (auto& debug : _debugCollider)
 			debug.second -= DELTA_TIME;
 	}
 
-
-	_curMap->CheckCleared();
+	_curMap->CheckClear();
 
 	MAP_MANAGER->Update();
 
@@ -53,16 +56,16 @@ void GameManager::Update()
 
 void GameManager::PreRender()
 {
-	if (_enableUI && _renderUI)
+	if (_enableUI && _enableRenderUI)
 		UI_MANAGER->PreRender();
 }
 
 void GameManager::Render()
 {
-	if (_renderTexture == false)
+	if (_enableRenderTexture == false)
 		return;
 
-	if (_renderTexture == false)
+	if (_enableRenderTexture == false)
 		return;
 
 	shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER * _frustumSizeRatio);
@@ -74,14 +77,14 @@ void GameManager::Render()
 
 	for (int i = 0; i < Object::_objectTypeCount; i++)
 	{
-		if (_instancing)
+		if (_enableInstancing)
 		{
 			for (auto instanceQuad : instanceQuads[i])
 			{
 				if (instanceQuad.second == nullptr)
 					continue;
 
-				if (_frustum)
+				if (_enableFrustum)
 				{
 					// 오브젝트의 프러스텀 컬링
 					for (shared_ptr<Transform> transform : instanceQuad.second->GetTransforms())
@@ -115,10 +118,10 @@ void GameManager::Render()
 			if (object == nullptr || object->IsActive() == false)
 				continue;
 
-			if (_instancing && object->IsStatic())
+			if (_enableInstancing && object->IsStatic())
 				continue;			
 
-			if (_frustum)
+			if (_enableFrustum)
 			{
 				bool bShouldRender = true;
 
@@ -150,7 +153,7 @@ void GameManager::Render()
 
 void GameManager::PostRender()
 {
-	if (_renderCollider)
+	if (_enableRenderCollider)
 	{
 		shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER * _frustumSizeRatio);
 		frustumCollision->GetPos() = CAMERA->GetPos() + CENTER;
@@ -193,7 +196,7 @@ void GameManager::PostRender()
 		}
 	}
 
-	if(_enableUI && _renderUI)
+	if(_enableUI && _enableRenderUI)
 		UI_MANAGER->PostRender();
 }
 
@@ -213,12 +216,12 @@ void GameManager::ImguiRender()
 	if (ImGui::CollapsingHeader("GameManager"))
 	{
 		ImGui::Checkbox("Pause", &_pause);
-		ImGui::Checkbox("Render Texture", &_renderTexture);
-		ImGui::Checkbox("Render Collider", &_renderCollider);
-		ImGui::Checkbox("Render UI", &_renderUI);
+		ImGui::Checkbox("Render Texture", &_enableRenderTexture);
+		ImGui::Checkbox("Render Collider", &_enableRenderCollider);
+		ImGui::Checkbox("Render UI", &_enableRenderUI);
 
-		ImGui::Checkbox("Use Instancing", &_instancing);
-		ImGui::Checkbox("Use Frustum culling", &_frustum);
+		ImGui::Checkbox("Use Instancing", &_enableInstancing);
+		ImGui::Checkbox("Use Frustum culling", &_enableFrustum);
 		ImGui::SliderFloat("Frustum Size Ratio", &_frustumSizeRatio, 0.f, 1.f);
 	}
 }
@@ -276,7 +279,7 @@ void GameManager::DeleteInstanceQuad(shared_ptr<Object> object)
 
 void GameManager::Input()
 {
-	if (_player == nullptr || !_input)
+	if (_player == nullptr || !_enableInput)
 		return;
 
 	if (UI_MANAGER->GetCurState() == UIManager::UI_State::NOMAL)
@@ -408,12 +411,12 @@ void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
 		if (debug.second <= 0)
 		{
 			debug.first = collider;
-			debug.second = _debugColliderRunTime;
+			debug.second = _drawColliderTime;
 			return;
 		}
 	}
 
-	_debugCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _debugColliderRunTime));
+	_debugCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _drawColliderTime));
 }
 
 void GameManager::AddObject(shared_ptr<Object> object, int type)
@@ -433,7 +436,7 @@ void GameManager::DeleteObject(shared_ptr<Object> object)
 		return;
 
 	_curMap->DeleteObject(object);
-
+	
 	if (object->IsStatic())
 		DeleteInstanceQuad(object);
 }
@@ -547,5 +550,6 @@ void GameManager::Reset()
 {
 	_curMap = nullptr;
 	_debugCollider.clear();
-	_player = nullptr;
+
+	ResetPlayer();
 }

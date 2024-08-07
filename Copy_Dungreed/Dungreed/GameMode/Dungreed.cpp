@@ -5,9 +5,7 @@ Dungreed::Dungreed()
 {
 	_modeType = DUNGREED;
 
-
 	Init();
-
 }
 
 void Dungreed::Update()
@@ -58,9 +56,11 @@ void Dungreed::ImGuiRender()
 
 void Dungreed::Init()
 {
+	// 게임 초기화
 	GAME->Reset();
 	CAMERA->SetFreeMode(false);
 
+	// 플레이어 추가
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
 	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
@@ -73,8 +73,12 @@ void Dungreed::Init()
 	GAME->SetPlaying(true);
 	GAME->SetEnableUI(true);
 
+	// 맵 생성
 	MAP_MANAGER->MakeRandomMap(1, 0);
+
+	// 카메라 설정
 	CAMERA->Update();
 
+	// 마우스 커서 설정
 	MOUSE_CURSUR->CursurOff();
 }

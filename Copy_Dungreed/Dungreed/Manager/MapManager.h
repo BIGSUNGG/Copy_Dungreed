@@ -19,8 +19,27 @@ public:
 
 	void Update();
 
+public:
+	// 랜덤 미로 맵 만들기
+	// level : 만들 맵의 레벨
+	// num : 시작 맵의 번호
 	void MakeRandomMap(int level,int num);
 
+private:
+	// 미로에 맵 추가
+	void AddMap(shared_ptr<Map> map, Vector2 pos);
+
+public:
+	// Save Load
+	shared_ptr<Map> LoadMap(int level, int num);
+	MapBasic LoadBasicInfo(int level, int num);
+	vector<shared_ptr<Object>> LoadObjects(int level, int num, int objectCount);
+
+	void Save(shared_ptr<Map> map);
+	// 모든 맵 저장
+	void SaveAll();
+
+public:
 	// File
 	bool IsMapFileExist(int level, int num);
 	wstring GetMapBasicInfoFileWPath(int level, int num);
@@ -29,15 +48,6 @@ public:
 	wstring GetMapObjectsFileWPath(int level, int num);
 	string GetMapObjectsFileSPath(int level, int num);
 
-	// Save Load
-	shared_ptr<Map> Load(int level, int num);
-	MapBasic LoadBasicInfo(int level, int num);
-	vector<shared_ptr<Object>> LoadObjects(int level, int num, int objectCount);
-
-	void Save(shared_ptr<Map> map);
-	void SaveAll();
-
-public:
 	// Getter Setter
 	void SetCurMap(shared_ptr<Map> map);
 	void SetCurMap(const Vector2& index);
@@ -47,9 +57,6 @@ public:
 	const unordered_map<int, vector<int>>& GetCurMapSize() { return _mapList; }
 	const unordered_map<int, unordered_map<int, shared_ptr<Map>>>& GetMaps() { return _maps; }
 	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapPos.x][_curMapPos.y]; }
-
-private:
-	void AddMap(shared_ptr<Map> map, Vector2 where);
 
 private:
 	MapManager();

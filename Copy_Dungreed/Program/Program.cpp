@@ -14,12 +14,7 @@ void Program::Update()
 {
 	_runTime += DELTA_TIME;
 
-	CAMERA->Update();
-	SOUND->Update();
-
 	_gameMode->Update();
-
-	MOUSE_CURSUR->Update();
 
 	// 게임 상태 변경
 	if (KEY_DOWN(VK_F1))

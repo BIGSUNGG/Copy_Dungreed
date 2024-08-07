@@ -16,10 +16,12 @@ void BackGround::Update()
 		{
 		case BackGround::STATIC:
 			break;
-		case BackGround::FOLLOW_CAMERA:
+		case BackGround::WALLPAPER:
+			// 카메라 위치와 같게
 			_texture->GetTransform()->GetPos() = CAMERA->GetPos() + CENTER;
 			break;
-		case BackGround::FOLLOW_PLAYER:
+		case BackGround::PERSPECTIVE:
+			// 카메라 이동에 따라 이동
 			_texture->GetTransform()->GetPos() += (CAMERA->GetVelocity() * DELTA_TIME) / _perspectiveRatio;
 			break;
 		default:

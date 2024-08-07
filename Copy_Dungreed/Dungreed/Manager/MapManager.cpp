@@ -10,7 +10,7 @@ void MapManager::Update()
 
 void MapManager::MakeRandomMap(int level, int num)
 {
-	// 맵 초기화	
+	// 미로 초기화	
 	_maps.clear();
 	_mapCount = 0;
 	_curMapPos = { 0,0 };
@@ -33,7 +33,7 @@ void MapManager::MakeRandomMap(int level, int num)
 	}
 
 	// 기본 맵 추가
-	shared_ptr<Map> curMap = Load(level, num);
+	shared_ptr<Map> curMap = LoadMap(level, num);
 	const Vector2 startPos = { 0, 0 };
 	Vector2 curPos = startPos;
 	AddMap(curMap, curPos);
@@ -75,6 +75,7 @@ void MapManager::MakeRandomMap(int level, int num)
 
 			while (true)
 			{
+				// 최근 추가된 맵에서 갈 수 있는 위치 추가
 				if (curMap)
 				{
 					if (curMap->CanGoTop())
@@ -126,13 +127,12 @@ void MapManager::MakeRandomMap(int level, int num)
 						if (shouldCanGoRight != info->CanGoRight())
 							continue;
 
-						curMap = Load(info->_level, info->_num);
+						curMap = LoadMap(info->_level, info->_num);
 						AddMap(curMap, curPos);
 						break;
 					}
 				}
 			}
-
 			break;
 		}
 
@@ -174,6 +174,7 @@ void MapManager::MakeRandomMap(int level, int num)
 			shared_ptr<Map> bottomMap = _maps[curPos.x][curPos.y - 1];
 			shared_ptr<Map> rightMap  = _maps[curPos.x + 1][curPos.y];
 			shared_ptr<Map> leftMap   = _maps[curPos.x - 1][curPos.y];
+
 			if(info->CanGoTop() && topMap && topMap->CanGoBottom() == false)
 				continue;
 			if (info->CanGoBottom() && bottomMap && bottomMap->CanGoTop() == false)
@@ -183,7 +184,7 @@ void MapManager::MakeRandomMap(int level, int num)
 			if (info->CanGoLeft() && leftMap && leftMap->CanGoRight() == false)
 				continue;
 
-			curMap = Load(info->_level, info->_num);
+			curMap = LoadMap(info->_level, info->_num);
 			AddMap(curMap, curPos);
 			break;
 		}
@@ -290,7 +291,7 @@ std::string MapManager::GetMapObjectsFileSPath(int level, int num)
 	return result;
 }
 
-shared_ptr<Map> MapManager::Load(int level, int num)
+shared_ptr<Map> MapManager::LoadMap(int level, int num)
 {
 	shared_ptr<Map> newMap = make_shared<Map>(level, num);
 
@@ -419,15 +420,6 @@ void MapManager::Save(shared_ptr<Map> map)
 		_mapList[level].emplace_back(num);
 	}
 
-	for (auto& objects : map->GetObjects())
-	{
-		for (auto& object : objects)
-		{
-			if (object == nullptr)
-				map->DeleteObject(object);
-		}
-	}
-
 	// 맵 기본 정보 저장
 	{
 		BinaryWriter basicWriter(GetMapBasicInfoFileWPath(level, num));
@@ -495,7 +487,7 @@ void MapManager::SaveAll()
 	{
 		for (int num = 0; num < _mapList[level].size(); num++)
 		{
-			shared_ptr<Map> temp = Load(level, _mapList[level][num]);
+			shared_ptr<Map> temp = LoadMap(level, _mapList[level][num]);
 			Save(temp);
 		}
 	}
@@ -503,17 +495,15 @@ void MapManager::SaveAll()
 
 void MapManager::SetTarget(shared_ptr<Creature> target)
 {
-	for (auto& monster : _maps[_curMapPos.x][_curMapPos.y]->GetObjects()[Object::CREATURE])
+	// 모든 몬스터에게 타켓 설정
+	for (auto& creature : _maps[_curMapPos.x][_curMapPos.y]->GetObjects()[Object::CREATURE])
 	{
-		auto creature = dynamic_pointer_cast<Creature>(monster);
-		if (creature != nullptr && creature->GetCreatureType() == Creature::ENEMY)
-		{
-			auto enemy = dynamic_pointer_cast<Monster>(creature);
-			enemy->SetTarget(target);
-		}
+		auto monster = dynamic_pointer_cast<Monster>(creature);
+		if(monster)
+			monster->SetTarget(target);
 	}
 
-	GetCurMap()->CheckCleared();
+	GetCurMap()->CheckClear();
 }
 
 void MapManager::SetCurMap(shared_ptr<Map> map)
@@ -526,15 +516,19 @@ void MapManager::SetCurMap(shared_ptr<Map> map)
 
 void MapManager::SetCurMap(const Vector2& index)
 {
+	// 미로에서 이동한 방향
 	int moveX = index.x - _curMapPos.x;
 	int moveY = index.y - _curMapPos.y;
 	_curMapPos = index;
+
 	GAME->SetCurMap(_maps[_curMapPos.x][_curMapPos.y]);
 	if (GAME->GetPlayer() != nullptr)
 	{
 		GAME->SetPlayer(GAME->GetPlayer());
 		GAME->GetPlayer()->GetObjectTexture()->Update();
 		GAME->GetPlayer()->GetCollider()->Update();
+
+		// 플레이어 위치 설정
 		if (moveX > 0)
 		{
 			GAME->GetPlayer()->GetObjectTexture()->SetLeft(GetCurMap()->GetLeftDoor().x + _doorVerticalHalfSize.x + 30);
@@ -569,6 +563,7 @@ void MapManager::SetCurMap(const Vector2& index)
 	UI_MANAGER->Refresh();
 	CAMERA->Update();
 
+	// BGM 실행
 	string bgm;
 	string ambience;
 
@@ -606,7 +601,7 @@ void MapManager::AddMap(shared_ptr<Map> map, Vector2 pos)
 	_mapCount++;
 	_maps[pos.x][pos.y] = map;
 
-	map->CheckCleared();
+	map->CheckClear();
 
 	// 문 오브젝트 추가
 	if (map->CanGoLeft())
@@ -646,36 +641,15 @@ MapManager::MapManager()
 	SOUND->Add("1.JailField", "Resource/Sound/Bgm/1.JailField.wav", true, true);
 	SOUND->Add("ambience_prison", "Resource/Sound/Bgm/ambience_prison.wav", true, false);
 
-	// �� ���� ���ϱ�
+	// 폴더에 있는 맵 리스트 구하기
 	for (int level = 0; level < 9; level++)
 	{
 		for (int num = 0; num < 30; num++)
 		{
-			string sLoadPath = GetCurPath() + "Save\\Maps\\Level_";
-
-			wstring levelPath;
-			{
-				if (level < 10)
-					levelPath += L"0";
-
-				levelPath += to_wstring(level);
-			}
-			wstring numPath;
-			{
-				if (num < 10)
-					numPath += L"0";
-
-				numPath += to_wstring(num);
-			}
-			sLoadPath += WstrToStr(levelPath) + "_" + WstrToStr(numPath);
-
-			bool checkPath1 = CheckFileExist(sLoadPath + ".bin");
-			bool checkPath2 = CheckFileExist(sLoadPath + "_Basic" + ".bin");
-
-			if (checkPath1 && checkPath2)
-			{
+			// 맵이 있다면 맵 리스트에 추가
+			if (IsMapFileExist(level, num))
 				_mapList[level].push_back(num);
-			}
+
 		}
 	}
 }

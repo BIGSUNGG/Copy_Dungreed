@@ -90,7 +90,7 @@ void UI_Map::Refresh()
 			if(map.second == nullptr)
 				continue;
 
-			//if (_visited[map.second] == true)
+			if (_visited[map.second] == true)
 			{
 				Vector2 distance = MAP_MANAGER->GetMapPos() - Vector2(maps.first, map.first);
 				Vector2 blockPos = Vector2(960.f - (distance.x * 156.f), 457.f - (distance.y * 156.f));
