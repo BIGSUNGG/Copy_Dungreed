@@ -57,9 +57,9 @@ void UI_WeaponSlot::Update()
 
 	if (INVENTORY->GetCurWeapon() != nullptr)
 	{
-		if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetHudTexture()->GetImageFile())
+		if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetIconTexture()->GetImageFile())
 		{
-			_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetHudTexture()->GetImageFile());
+			_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetIconTexture()->GetImageFile());
 			_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
 			switch (INVENTORY->GetCurWeapon()->GetWeaponType())
 			{

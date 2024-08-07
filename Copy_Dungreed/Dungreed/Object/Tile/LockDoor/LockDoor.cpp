@@ -22,14 +22,18 @@ void LockDoor::Update()
 					DoorOpenEffect();
 			}
 
+			// 플레이어가 문에 닿았다면
 			if (_collider->IsCollision(GAME->GetPlayer()->GetCollider()))
 			{
+				// 화면이 완전히 어두워지면 해당 함수 호출
 				function<void()> func = [=]() {
 					MAP_MANAGER->SetCurMap(MAP_MANAGER->GetMapPos() + _moveDirection);
 					GAME->SetInput(true);
 					GAME->GetPlayer()->SetStatic(false);
 				};
 				XMFLOAT4 color = { 0,0,0,0 };
+
+				// 화면 깜빡이기
 				bool success = UI_MANAGER->Blink(6,0.15f, color, func);
 				if (success)
 				{
@@ -60,7 +64,7 @@ void LockDoor::Opened()
 	_open = true;
 	_anim->ChangeAnimation(OPEN, true);
 	_anim->SetIsPlaying(false);
-	_collison = false;
+	_enableCollison = false;
 }
 
 void LockDoor::Open()
@@ -69,7 +73,7 @@ void LockDoor::Open()
 	_open = false;
 	_anim->ChangeAnimation(OPEN);
 	_anim->SetIsPlaying(true);
-	_collison = true;
+	_enableCollison = true;
 }
 
 void LockDoor::Lock()
@@ -78,7 +82,7 @@ void LockDoor::Lock()
 	_open = false;
 	_anim->ChangeAnimation(LOCK);
 	_anim->SetIsPlaying(true);
-	_collison = true;
+	_enableCollison = true;
 }
 
 
@@ -93,7 +97,7 @@ void LockDoor::DoorOpenEffect()
 	trail->GetObjectTexture()->GetTransform()->GetScale() *= MathUtility::RandomFloat(0.5f, 1.0f);
 	trail->SetFadeRatio(0.7f);
 	Vector2 effectDirection = _moveDirection * -1;
-	trail->SetDirection(effectDirection);
+	trail->SetMoveDirection(effectDirection);
 	trail->SetSpeed(100.0f);
 	GAME->AddEffect(trail);
 }

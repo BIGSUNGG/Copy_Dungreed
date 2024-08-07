@@ -44,7 +44,7 @@ void Chest::SetOwnerMap(shared_ptr<Map> map)
 			shared_ptr<Effect> spawn = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 1);
 			spawn->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
-			if (_reversed)
+			if (_reverseTexture)
 				spawn->GetObjectTexture()->ReverseToX();
 
 			function<void(pair<int, int> pair)> func = [&](pair<int, int> pair) {

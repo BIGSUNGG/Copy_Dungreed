@@ -12,18 +12,20 @@ Effect_Number::Effect_Number()
 }
 
 void Effect_Number::Update()
-{
+{	
 	_runTime += DELTA_TIME;
-	if (_runTime >= _alphaStartTime)
+	if (_runTime >= _alphaStartTime) 
 	{
+		// 문자 텍스쳐를 점점 사라지게함
 		_buffer->_data.value4 -= _alphaSpeed * DELTA_TIME;
 
+		// 완전히 사라질 경우 오브젝트 비활성화
 		if (_buffer->_data.value4 <= 0)
 			_isActive = false;
 	}
 
+	// 오브젝트에 중력 적용
 	_velocity.y -= _gravity * DELTA_TIME;
-
 	for (int i = 0; i < _text.size(); i++)
 	{
 		_text[i]->GetTransform()->GetPos() += _velocity * DELTA_TIME;

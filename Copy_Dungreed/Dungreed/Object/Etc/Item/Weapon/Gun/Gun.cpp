@@ -24,6 +24,7 @@ void Gun::Attack()
 	if (_offsetIndex >= _appendAngle.size())
 		_offsetIndex = 0;
 
+	// 투사체 발사
 	shared_ptr<Bullet> _bullet = MAKE_BULLET(_weaponType, 0);
 	_bullet->GetObjectTexture()->GetTransform()->GetPos() = _springArm->GetWorldPos();
 	_bullet->GetObjectTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
@@ -64,22 +65,22 @@ void Gun::SetWeapon()
 
 		if (_owner.lock()->IsReversed())
 		{
-			if (_reversed == false)
+			if (_reverseTexture == false)
 			{
 				_texture->ReverseToY();
 				_offset.x *= -1;
-				_reversed = true;
+				_reverseTexture = true;
 			}
 			angle = _showDirection + (_appendAngle[_offsetIndex] * PI);
 			_springArm->GetAngle() = angle;
 		}
 		else
 		{
-			if (_reversed == true)
+			if (_reverseTexture == true)
 			{
 				_texture->ReverseToY();
 				_offset.x *= -1;
-				_reversed = false;
+				_reverseTexture = false;
 			}
 			angle = _showDirection - (_appendAngle[_offsetIndex] * PI);
 			_springArm->GetAngle() = angle;

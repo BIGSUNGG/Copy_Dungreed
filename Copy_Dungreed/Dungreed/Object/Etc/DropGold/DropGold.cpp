@@ -23,7 +23,7 @@ void DropGold::Update()
 	{
 		Vector2 direction = _follow->GetPos() - this->GetPos();
 		direction.Normalize();
-		_movement->GetMovement() += direction * _followSpeed;
+		_movement->GetMoveDir() += direction * _followSpeed;
 	}
 
 	_dash->Update();

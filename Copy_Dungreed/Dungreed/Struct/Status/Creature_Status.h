@@ -11,7 +11,5 @@ public:
 public:
 	int _hp = 0;
 	int _hpMax = 0;
-	int _def = 0;
-	int _atk = 0;
 	float _speed = 0;
 };

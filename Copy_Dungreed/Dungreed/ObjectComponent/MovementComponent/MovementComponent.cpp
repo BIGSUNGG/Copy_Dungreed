@@ -16,21 +16,21 @@ void MovementComponent::Update()
 
 	if (GAME->GetPlaying())
 	{
-		_jumpPower -= (_gravityPower * _gravityRatio) * DELTA_TIME;
+		_curJumpPower -= (_gravityPower * _gravityRatio) * DELTA_TIME;
 
-		_movement.y += _jumpPower;
+		_moveDir.y += _curJumpPower;
 
-		_object->GetObjectTexture()->GetTransform()->GetPos() += (_movement * DELTA_TIME);
-		_object->GetObjectTexture()->Update();
+		_owner->GetObjectTexture()->GetTransform()->GetPos() += (_moveDir * DELTA_TIME);
+		_owner->GetObjectTexture()->Update();
 
 		CollisionEvent();
 
-		_velocity = (_object->GetObjectTexture()->GetTransform()->GetPos() - _beforeMove) / (float)DELTA_TIME;
+		_curVelocity = (_owner->GetObjectTexture()->GetTransform()->GetPos() - _beforeMovePos) / (float)DELTA_TIME;
 
-		_beforeMove = _object->GetObjectTexture()->GetTransform()->GetPos();
-		_movement = { 0,0 };
+		_beforeMovePos = _owner->GetObjectTexture()->GetTransform()->GetPos();
+		_moveDir = { 0,0 };
 
-		if (_velocity.y != 0.f)
+		if (_curVelocity.y != 0.f)
 			_isFalling = true;
 
 		_passFloor = false;
@@ -43,20 +43,20 @@ void MovementComponent::Update()
 
 void MovementComponent::Jump()
 {
-	_jumpPower = _jumpPowerMax;
+	_curJumpPower = _maxJumpPower;
 }
 
 void MovementComponent::SetBeforeMove(const Vector2& vec)
 {
-	_beforeMove = vec;
-	_velocity = { 0,0 };
+	_beforeMovePos = vec;
+	_curVelocity = { 0,0 };
 }
 
 void MovementComponent::CollisionEvent()
 {
 	if (!_collision) return;
 
-	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_object->GetCollider(), Object::Object_Type::TILE);
+	vector<shared_ptr<Object>> collisions = GAME->GetCollisions(_owner->GetCollider(), Object::Object_Type::TILE);
 	sort(collisions.begin(), collisions.end(), [](const shared_ptr<Object>& value1, const shared_ptr<Object>& value2)
 		{
 			auto temp1 = dynamic_pointer_cast<Tile>(value1);
@@ -109,57 +109,57 @@ bool MovementComponent::TileCollison(shared_ptr<Tile> tile)
 
 bool MovementComponent::TileBlockCollision(shared_ptr<Tile> tile)
 {
-	const float movedTop = _beforeMove.y + 
-		(_object->GetCollider()->GetHalfSize().y * _object->GetCollider()->GetTransform()->GetScale().y);
-	const float movedBottom = _beforeMove.y - 
-		(_object->GetCollider()->GetHalfSize().y * _object->GetCollider()->GetTransform()->GetScale().y);
-	const float movedRight = _beforeMove.x + 
-		(_object->GetCollider()->GetHalfSize().x * _object->GetCollider()->GetTransform()->GetScale().x);
-	const float movedLeft = _beforeMove.x - 
-		(_object->GetCollider()->GetHalfSize().x * _object->GetCollider()->GetTransform()->GetScale().x);
+	const float movedTop = _beforeMovePos.y + 
+		(_owner->GetCollider()->GetHalfSize().y * _owner->GetCollider()->GetTransform()->GetScale().y);
+	const float movedBottom = _beforeMovePos.y - 
+		(_owner->GetCollider()->GetHalfSize().y * _owner->GetCollider()->GetTransform()->GetScale().y);
+	const float movedRight = _beforeMovePos.x + 
+		(_owner->GetCollider()->GetHalfSize().x * _owner->GetCollider()->GetTransform()->GetScale().x);
+	const float movedLeft = _beforeMovePos.x - 
+		(_owner->GetCollider()->GetHalfSize().x * _owner->GetCollider()->GetTransform()->GetScale().x);
 
 	if (movedLeft != tile->GetCollider()->Right() && movedRight != tile->GetCollider()->Left())
 	{
-		if (_velocity.y <= 0 && movedBottom >= tile->GetCollider()->Top())
+		if (_curVelocity.y <= 0 && movedBottom >= tile->GetCollider()->Top())
 		{
-			_object->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
-				(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
+			_owner->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
+				(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
 
-			_jumpPower = 0.0f;
+			_curJumpPower = 0.0f;
 			return true;
 		}
 		if (movedTop <= tile->GetCollider()->Bottom())
 		{
-			_object->GetObjectTexture()->SetTop(tile->GetCollider()->Bottom() + 
-				(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
+			_owner->GetObjectTexture()->SetTop(tile->GetCollider()->Bottom() + 
+				(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
 
-			_jumpPower = 0.0f;
+			_curJumpPower = 0.0f;
 			return true;
 		}
 	}
-	if (_velocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
+	if (_curVelocity.x >= 0 && movedRight <= tile->GetCollider()->Left())
 	{
-		_object->GetObjectTexture()->SetRight(tile->GetCollider()->Left() + 
-			(_object->GetObjectTexture()->GetHalfSize().x - _object->GetCollider()->GetHalfSize().x));
+		_owner->GetObjectTexture()->SetRight(tile->GetCollider()->Left() + 
+			(_owner->GetObjectTexture()->GetHalfSize().x - _owner->GetCollider()->GetHalfSize().x));
 		return true;
 	}
-	if (_velocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
+	if (_curVelocity.x <= 0 && movedLeft >= tile->GetCollider()->Right())
 	{
-		_object->GetObjectTexture()->SetLeft(tile->GetCollider()->Right() - 
-			(_object->GetObjectTexture()->GetHalfSize().x - _object->GetCollider()->GetHalfSize().x));
+		_owner->GetObjectTexture()->SetLeft(tile->GetCollider()->Right() - 
+			(_owner->GetObjectTexture()->GetHalfSize().x - _owner->GetCollider()->GetHalfSize().x));
 		return true;
 	}
 	if (_onStair)
 	{
-		_object->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
-			(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
-		_jumpPower = 0.0f;
+		_owner->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
+			(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
+		_curJumpPower = 0.0f;
 		return true;
 	}
 
-	_object->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
-		(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
-	_jumpPower = 0.0f;
+	_owner->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
+		(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
+	_curJumpPower = 0.0f;
 	return true;
 }
 
@@ -168,14 +168,14 @@ bool MovementComponent::TileFloorCollision(shared_ptr<Tile> tile)
 	if (_passFloor)
 		return false;
 
-	const float movedBottom = _beforeMove.y - 
-		(_object->GetCollider()->GetHalfSize().y * _object->GetCollider()->GetTransform()->GetScale().y);
+	const float movedBottom = _beforeMovePos.y - 
+		(_owner->GetCollider()->GetHalfSize().y * _owner->GetCollider()->GetTransform()->GetScale().y);
 
 	if (movedBottom >= tile->GetCollider()->Top())
 	{
-		_object->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
-			(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
-		_jumpPower = 0.0f;
+		_owner->GetObjectTexture()->SetBottom(tile->GetCollider()->Top() - 
+			(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
+		_curJumpPower = 0.0f;
 		_passFloor = true;
 		return true;
 	}
@@ -187,17 +187,17 @@ bool MovementComponent::TileLeftStairCollision(shared_ptr<Tile> tile)
 {
 	_onStair = true;
 
-	if (_object->GetCollider()->GetTransform()->GetWorldPos().x >= tile->GetObjectTexture()->Left() &&
-		_object->GetCollider()->GetTransform()->GetWorldPos().x <= tile->GetObjectTexture()->Right())
+	if (_owner->GetCollider()->GetTransform()->GetWorldPos().x >= tile->GetObjectTexture()->Left() &&
+		_owner->GetCollider()->GetTransform()->GetWorldPos().x <= tile->GetObjectTexture()->Right())
 	{
-		float x = _object->GetPos().x - tile->GetCollider()->Right();
+		float x = _owner->GetPos().x - tile->GetCollider()->Right();
 		float y = -x + tile->GetCollider()->Bottom();
-		if (_object->GetCollider()->Bottom() <= y)
+		if (_owner->GetCollider()->Bottom() <= y)
 		{
-			_object->GetObjectTexture()->SetBottom(y - 
-				(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
+			_owner->GetObjectTexture()->SetBottom(y - 
+				(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
 			_passTile = true;
-			_jumpPower = 0.0f;
+			_curJumpPower = 0.0f;
 			return true;
 		}
 	}
@@ -209,17 +209,17 @@ bool MovementComponent::TileRightStairCollision(shared_ptr<Tile> tile)
 {
 	_onStair = true;
 
-	if (_object->GetCollider()->GetTransform()->GetWorldPos().x >= tile->GetObjectTexture()->Left() &&
-		_object->GetCollider()->GetTransform()->GetWorldPos().x <= tile->GetObjectTexture()->Right())
+	if (_owner->GetCollider()->GetTransform()->GetWorldPos().x >= tile->GetObjectTexture()->Left() &&
+		_owner->GetCollider()->GetTransform()->GetWorldPos().x <= tile->GetObjectTexture()->Right())
 	{
-		float x = _object->GetCollider()->GetWorldPos().x - tile->GetCollider()->Left();
+		float x = _owner->GetCollider()->GetWorldPos().x - tile->GetCollider()->Left();
 		float y = x + tile->GetCollider()->Bottom();
-		if (_object->GetCollider()->Bottom() <= y)
+		if (_owner->GetCollider()->Bottom() <= y)
 		{
-			_object->GetObjectTexture()->SetBottom(y - 
-				(_object->GetObjectTexture()->GetHalfSize().y - _object->GetCollider()->GetHalfSize().y));
+			_owner->GetObjectTexture()->SetBottom(y - 
+				(_owner->GetObjectTexture()->GetHalfSize().y - _owner->GetCollider()->GetHalfSize().y));
 			_passTile = true;
-			_jumpPower = 0.0f;
+			_curJumpPower = 0.0f;
 			return true;
 		}
 	}

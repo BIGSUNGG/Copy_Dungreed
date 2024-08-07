@@ -3,5 +3,5 @@
 
 ObjectComponent::ObjectComponent(Object* object)
 {
-	SetObject(object);
+	SetOwner(object);
 }

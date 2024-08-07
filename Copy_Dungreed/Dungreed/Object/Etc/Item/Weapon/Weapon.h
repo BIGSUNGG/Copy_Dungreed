@@ -18,7 +18,7 @@ public:
 
 	virtual void Attack() override;
 	virtual void Skill() override;
-	virtual void Damaged(const Creature_Status& status) override;
+	
 	virtual bool GiveDamage(int damage, shared_ptr<Creature> target);
 
 	virtual void SetAttackEffect(function<shared_ptr<Effect>()> effect) { _attackEffect = effect; }
@@ -64,12 +64,12 @@ protected:
 	float _skillRuntime = 0.f;
 
 	float _weaponLength = 0.0f;
-	bool _reversed = false;
+	bool _reverseTexture = false;
 	shared_ptr<Transform> _springArm;
 	shared_ptr<Transform> _attackOfsset;
 	shared_ptr<Transform> _ownerFollower;
 
-	vector<bool> _fastRender = { false,true };
+	vector<bool> _fastRender = { false,true }; // 소유하고 있는 캐릭터보다 빠르게 렌더링될지 
 
 	float _attackDelay = 0.3f;
 	float _attackDelayTime = 0.3f;

@@ -15,13 +15,16 @@ void GameManager::Update()
 {
 	if (DELTA_TIME >= _maxDeltaTime)
 		return;
-
+	
+	// 코어 객체 업데이트
 	CAMERA->Update();
 	SOUND->Update();
 	MOUSE_CURSUR->Update();
 
+	// 입력
 	Input();
 
+	// 오브젝트 업데이트
 	if (!_pause)
 	{
 		for (auto& objects : _curMap->GetObjects())
@@ -39,17 +42,16 @@ void GameManager::Update()
 				object->Update();
 			}
 		}
-		_curMap->CheckClear();
 		Optimize();
 
-		for (auto& debug : _debugCollider)
+		for (auto& debug : _drawCollider)
 			debug.second -= DELTA_TIME;
 	}
 
-	_curMap->CheckClear();
-
+	// 맵 정보 업데이트
 	MAP_MANAGER->Update();
 
+	// UI 업데이트
 	if (_enableUI)
 		UI_MANAGER->Update();
 }
@@ -68,23 +70,24 @@ void GameManager::Render()
 	if (_enableRenderTexture == false)
 		return;
 
+	// 프러스텀 컬링에 사용할 콜라이더
 	shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER * _frustumSizeRatio);
 	frustumCollision->GetPos() = CAMERA->GetPos() + CENTER;
 	frustumCollision->Update();
 
 	shared_ptr<RectCollider> textureCollider = make_shared<RectCollider>(CENTER);
 
-
 	for (int i = 0; i < Object::_objectTypeCount; i++)
 	{
 		if (_enableInstancing)
 		{
+			// 인스턴싱 텍스쳐 렌더링
 			for (auto instanceQuad : instanceQuads[i])
 			{
 				if (instanceQuad.second == nullptr)
 					continue;
 
-				if (_enableFrustum)
+				if (_enableFrustum) // 프러스텀 컬링이 활성화되어 있는 경우
 				{
 					// 오브젝트의 프러스텀 컬링
 					for (shared_ptr<Transform> transform : instanceQuad.second->GetTransforms())
@@ -106,25 +109,25 @@ void GameManager::Render()
 						}
 					}
 				}
-				else
+				else // 프러스텀 컬링이 비활성화되어 있는 경우
 				{
 					instanceQuad.second->Render();
 				}
 			}
 		}
 
+		// 오브젝트 렌더링
 		for (auto& object : _curMap->GetObjects()[i])
 		{
 			if (object == nullptr || object->IsActive() == false)
 				continue;
 
 			if (_enableInstancing && object->IsStatic())
-				continue;			
+				continue;
 
+			bool bShouldRender = true;
 			if (_enableFrustum)
 			{
-				bool bShouldRender = true;
-
 				// 오브젝트의 프러스텀 컬링
 				shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
 				if (transform != nullptr)
@@ -142,17 +145,13 @@ void GameManager::Render()
 				if (bShouldRender)
 					object->Render();
 			}
-			else
-			{
-				object->Render();
-			}
 		}
 	}
-
 }
 
 void GameManager::PostRender()
 {
+	// 콜라이더 렌더링
 	if (_enableRenderCollider)
 	{
 		shared_ptr<RectCollider> frustumCollision = make_shared<RectCollider>(CENTER * _frustumSizeRatio);
@@ -170,18 +169,21 @@ void GameManager::PostRender()
 					continue;
 
 				bool bShouldRender = true;
-
-				shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
-				if (transform)
+				if (_enableFrustum)
 				{
-					// 텍스쳐가 화면안에 들어와 있는지
-					textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
-					textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
-					textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
-					textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
-					textureCollider->Update();
+					// 오브젝트의 프러스텀 컬링
+					shared_ptr<Transform> transform = object->GetObjectTexture() == nullptr ? nullptr : object->GetObjectTexture()->GetTransform();
+					if (transform)
+					{
+						// 텍스쳐가 화면안에 들어와 있는지
+						textureCollider->SetHalfSize(object->GetObjectTexture()->GetHalfSize());
+						textureCollider->GetTransform()->GetPos() = transform->GetWorldPos();
+						textureCollider->GetTransform()->GetScale() = transform->GetWorldScale();
+						textureCollider->GetTransform()->GetAngle() = transform->GetAngle();
+						textureCollider->Update();
 
-					bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+						bShouldRender = frustumCollision->IsCollision(textureCollider, false);
+					}
 				}
 
 				if (bShouldRender)
@@ -189,13 +191,15 @@ void GameManager::PostRender()
 			}
 		}
 
-		for (auto& collider : _debugCollider)
+		// 추가 콜라이더 렌더링
+		for (auto& collider : _drawCollider)
 		{
 			if (collider.second > 0)
 				collider.first->Render();
 		}
 	}
 
+	// UI 렌더링
 	if(_enableUI && _enableRenderUI)
 		UI_MANAGER->PostRender();
 }
@@ -406,7 +410,7 @@ void GameManager::AddEtcObject(shared_ptr<Object> object)
 
 void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
 {
-	for (auto& debug : _debugCollider)
+	for (auto& debug : _drawCollider)
 	{
 		if (debug.second <= 0)
 		{
@@ -416,7 +420,7 @@ void GameManager::AddDebugCollider(shared_ptr<Collider> collider)
 		}
 	}
 
-	_debugCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _drawColliderTime));
+	_drawCollider.emplace_back(pair<shared_ptr<Collider>, float>(collider, _drawColliderTime));
 }
 
 void GameManager::AddObject(shared_ptr<Object> object, int type)
@@ -503,24 +507,14 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 
 		if (object->GetType() == Object::ETC)
 		{
-			auto temp = dynamic_pointer_cast<Etc>(object);
-			if (temp->GetEtcType() == Etc::BULLET)
+			// 투사체 오브젝트 삭제
+			auto etc = dynamic_pointer_cast<Etc>(object);
+			if (etc->GetEtcType() == Etc::BULLET)
 				object = nullptr;
 		}
 	}
 
-	for (auto& object : _curMap->GetObjects()[Object::EFFECT])
-	{
-		if (object == nullptr)
-			continue;
-
-		if (object->GetType() == Object::EFFECT)
-		{
-			auto temp = dynamic_pointer_cast<Effect>(object);
-			if (temp->GetEffectType() == Effect::DESTROY)
-				object = nullptr;
-		}
-	}
+	_curMap->GetObjects()[Object::EFFECT].clear();
 
 	for (int i = 0; i < Object::_objectTypeCount; i++)
 	{
@@ -549,7 +543,7 @@ void GameManager::SetCurMap(shared_ptr<Map> map)
 void GameManager::Reset()
 {
 	_curMap = nullptr;
-	_debugCollider.clear();
+	_drawCollider.clear();
 
 	ResetPlayer();
 }

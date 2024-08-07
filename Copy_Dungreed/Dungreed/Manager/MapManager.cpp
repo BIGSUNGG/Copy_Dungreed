@@ -6,6 +6,9 @@ MapManager* MapManager::_instance = nullptr;
 
 void MapManager::Update()
 {
+	shared_ptr<Map> map = GetCurMap();
+	if(map)
+		map->CheckClear();
 }
 
 void MapManager::MakeRandomMap(int level, int num)
@@ -190,7 +193,7 @@ void MapManager::MakeRandomMap(int level, int num)
 		}
 	}
 
-	SetCurMap(startPos);
+	SetCurMap(startPos);	
 }
 
 bool MapManager::IsMapFileExist(int level, int num)
@@ -503,6 +506,8 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 			monster->SetTarget(target);
 	}
 
+	// 문 닫기
+	GetCurMap()->LockEvent();
 	GetCurMap()->CheckClear();
 }
 

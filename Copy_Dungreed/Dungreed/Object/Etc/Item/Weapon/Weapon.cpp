@@ -44,6 +44,7 @@ void Weapon::Attack()
 	if (_anim != nullptr)
 		_anim->ChangeAnimation(Creature::Creature_State::ATTACK);
 
+	// 공격 소리 실행
 	SOUND->Play(_attackSound);
 }
 
@@ -62,10 +63,6 @@ void Weapon::Skill()
 
 	if (_anim != nullptr)
 		_anim->ChangeAnimation(Item::Item_State::SKILL);
-}
-
-void Weapon::Damaged(const Creature_Status& status)
-{
 }
 
 bool Weapon::GiveDamage(int damage, shared_ptr<Creature> target)

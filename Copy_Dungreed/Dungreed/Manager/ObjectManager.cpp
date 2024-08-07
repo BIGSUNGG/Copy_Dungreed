@@ -1391,7 +1391,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			texture = make_shared<Quad>(L"Resource/Weapon/Melee/BasicShortSword/BasicShortSword_New.png");
 			SOUND->Add("swing2", "Resource/Sound/Weapon/Swing/swing2.wav");
 			weapon->SetAttackSound("swing2");
-			weapon->SetHudTexture(L"Resource/Weapon/Melee/BasicShortSword/BasicShortSword_New.png");
+			weapon->SetIconTexture(L"Resource/Weapon/Melee/BasicShortSword/BasicShortSword_New.png");
 			break;
 		case 1:
 			weapon = make_shared<Melee_FireDragonKiller>(type, num);
@@ -1399,7 +1399,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			effect = bind(&ObjectManager::GetPlayerWeaponEffect, this, type, num);
 			weapon->SetAttackMinDamage(30.f);
 			weapon->SetAttackMaxDamage(50.f);
-			weapon->SetHudTexture(L"Resource/Weapon/Melee/FireDragonKiller/FireDragonKiller.png");
+			weapon->SetIconTexture(L"Resource/Weapon/Melee/FireDragonKiller/FireDragonKiller.png");
 			weapon->SetAttackEffect(effect);
 			weapon->SetAttackRange({ 130,180 });
 			weapon->SetAppendAngle({ -0.1f,1.2f });
@@ -1440,7 +1440,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[Item::Item_State::IDLE][BASIC]);
 			SOUND->Add("CosmicDash", "Resource/Sound/Weapon/Swing/CosmicDash.wav");
 			weapon->SetAttackSound("CosmicDash");
-			weapon->SetHudTexture(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
+			weapon->SetIconTexture(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
 
 			skill = [=]() {
 				SOUND->Play("CosmicDash");
@@ -1478,7 +1478,7 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			texture = make_shared<Quad>(L"Resource/Weapon/Gun/MiniCrossbow2.png");
 			weapon->SetAttackMinDamage(15.f);
 			weapon->SetAttackMaxDamage(25.f);
-			weapon->SetHudTexture(L"Resource/Weapon/Gun/MiniCrossbow2.png");
+			weapon->SetIconTexture(L"Resource/Weapon/Gun/MiniCrossbow2.png");
 			weapon->SetAttackDelay(0.5f);
 			SOUND->Add("crossbow", "Resource/Sound/Weapon/Fire/crossbow.wav");
 			weapon->SetAttackSound("crossbow");
@@ -1598,7 +1598,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword10.png");
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyShortSword11.png");
 
-			weapon->SetHudTexture(weapon->GetAnimation()->_animList[BASIC][BASIC]);
+			weapon->SetIconTexture(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		case 1:
@@ -1634,7 +1634,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword13.png");
 			weapon->GetAnimation()->_animList[Creature::Creature_State::ATTACK].push_back(L"Resource/Weapon/Enemy/GraySkel/RustyGreatSword14.png");
 
-			weapon->SetHudTexture(weapon->GetAnimation()->_animList[BASIC][BASIC]);
+			weapon->SetIconTexture(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[BASIC][BASIC]);
 			break;
 		default:

@@ -26,7 +26,7 @@ public:
 	virtual void SetOwnerMap(shared_ptr<Map> map) override;
 
 protected:
-	Vector2 _moveDirection = { 0,0 };
+	Vector2 _moveDirection = { 0,0 }; // 미로에서 이동할 위치
 
 	const float _doorEffectDelay = 0.15f;
 	float _doorEffectDelayTime = 0.15f;

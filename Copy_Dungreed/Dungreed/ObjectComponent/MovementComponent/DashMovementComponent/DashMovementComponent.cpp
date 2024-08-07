@@ -10,32 +10,40 @@ DashMovementComponent::DashMovementComponent(Object* object)
 
 void DashMovementComponent::Update()
 {
+	// 대시 중이라면
 	if (_dash)
 	{
-		if (_curSpeed > 0.0f)
+		// 현재 남은 대시 속도가 있다면
+		if (_curDashSpeed > 0.0f)
 		{
-			GetMovement() += (_direction * _curSpeed);
+			// 대시 속도로 돌진
+			GetMoveDir() += (_dashDirection * _curDashSpeed);
 
 			if(_dashMovementEvent != nullptr) 
 				_dashMovementEvent();
 
+			// 감속 중이라면 감속
 			if (_slowDown)
-				_curSpeed -= _slowDownSpeed * DELTA_TIME;
+				_curDashSpeed -= _slowDownSpeed * DELTA_TIME;
+			// 감속 중이 아니라면
 			else
-			{
-				_runTIme += DELTA_TIME;
-
-				if (_runTIme >= _keepMaxSpeedTime)
+			{			
+				_dashTime += DELTA_TIME;
+				if (_dashTime >= _keepMaxSpeedTime)
 				{
 					_slowDown = true;
 					if (_slowDownEvent != nullptr)
 						_slowDownEvent();
 				}
 			}
+
 			MovementComponent::Update();
 		}
+		// 대시 속도가 없다면
 		else
+		{
 			DashEnd();
+		}
 	}
 }
 
@@ -43,8 +51,8 @@ void DashMovementComponent::Dash()
 {
 	_dash = true;
 	_slowDown = false;
-	_runTIme = 0.0f;
-	_curSpeed = _speedMax;
+	_dashTime = 0.0f;
+	_curDashSpeed = _maxDashSpeed;
 }
 
 void DashMovementComponent::DashEnd()
@@ -59,6 +67,6 @@ void DashMovementComponent::DashEnd()
 
 void DashMovementComponent::SetDirection(const Vector2& vec)
 {
-	_direction = vec;
-	_direction.Normalize();
+	_dashDirection = vec;
+	_dashDirection.Normalize();
 }

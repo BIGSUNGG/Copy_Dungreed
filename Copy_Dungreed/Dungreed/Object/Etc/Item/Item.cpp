@@ -14,7 +14,7 @@ Item::~Item()
 void Item::ReverseTexture()
 {
 	_texture->ReverseToX();
-	SWITCH_BOOL(_reversed);
+	SWITCH_BOOL(_reverseTexture);
 }
 
 void Item::SetOwner(shared_ptr<Creature> owner)
@@ -22,8 +22,8 @@ void Item::SetOwner(shared_ptr<Creature> owner)
 	_owner = owner;
 }
 
-void Item::SetHudTexture(const wstring& image)
+void Item::SetIconTexture(const wstring& image)
 {
-	_hudTexture = make_shared<Quad>(image);
-	_hudTexture->Update();
+	_iconTexture = make_shared<Quad>(image);
+	_iconTexture->Update();
 }

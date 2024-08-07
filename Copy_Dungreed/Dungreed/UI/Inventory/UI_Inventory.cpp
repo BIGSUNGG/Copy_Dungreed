@@ -239,9 +239,9 @@ void UI_Inventory::FindTexture()
 	{
 		if (INVENTORY->GetWeaponSlot()[i] != nullptr)
 		{
-			if (_weapons[i]->GetImageFile() != INVENTORY->GetWeaponSlot()[i]->GetHudTexture()->GetImageFile())
+			if (_weapons[i]->GetImageFile() != INVENTORY->GetWeaponSlot()[i]->GetIconTexture()->GetImageFile())
 			{
-				_weapons[i] = make_shared<Quad>(INVENTORY->GetWeaponSlot()[i]->GetHudTexture()->GetImageFile());
+				_weapons[i] = make_shared<Quad>(INVENTORY->GetWeaponSlot()[i]->GetIconTexture()->GetImageFile());
 				_weapons[i]->GetTransform()->GetPos() = _weaponSlot[i]->GetPos();
 				switch (INVENTORY->GetWeaponSlot()[i]->GetWeaponType())
 				{
@@ -266,9 +266,9 @@ void UI_Inventory::FindTexture()
 	{
 		if (INVENTORY->GetAccessorySlot()[i] != nullptr)
 		{
-			if (_accessories[i]->GetImageFile() != INVENTORY->GetAccessorySlot()[i]->GetHudTexture()->GetImageFile())
+			if (_accessories[i]->GetImageFile() != INVENTORY->GetAccessorySlot()[i]->GetIconTexture()->GetImageFile())
 			{
-				_accessories[i] = make_shared<Quad>(INVENTORY->GetAccessorySlot()[i]->GetHudTexture()->GetImageFile());
+				_accessories[i] = make_shared<Quad>(INVENTORY->GetAccessorySlot()[i]->GetIconTexture()->GetImageFile());
 				_accessories[i]->GetTransform()->GetPos() = _accessorySlot[i]->GetPos();
 			}
 		}
@@ -284,9 +284,9 @@ void UI_Inventory::FindTexture()
 	{
 		if (INVENTORY->GetItemSlot()[i] != nullptr)
 		{
-			if (_items[i]->GetImageFile() != INVENTORY->GetItemSlot()[i]->GetHudTexture()->GetImageFile())
+			if (_items[i]->GetImageFile() != INVENTORY->GetItemSlot()[i]->GetIconTexture()->GetImageFile())
 			{
-				_items[i] = make_shared<Quad>(INVENTORY->GetItemSlot()[i]->GetHudTexture()->GetImageFile());
+				_items[i] = make_shared<Quad>(INVENTORY->GetItemSlot()[i]->GetIconTexture()->GetImageFile());
 				_items[i]->GetTransform()->GetPos() = _itemSlot[i]->GetPos();
 
 				switch (INVENTORY->GetItemSlot()[i]->GetItemType())

@@ -80,7 +80,7 @@ private:
 	
 	const float _maxDeltaTime = 0.05f; // DeltaTime이 해당 값을 넘으면 해당 틱 무시
 	const float _drawColliderTime = 1.f; // 공격 범위 그리기 시간
-	vector<pair<shared_ptr<Collider>/*그릴 콜라이더*/, float/*남은 그릴 시간*/>> _debugCollider; // 그릴 공격 콜라이더 배열
+	vector<pair<shared_ptr<Collider>/*그릴 콜라이더*/, float/*남은 그릴 시간*/>> _drawCollider; // 그릴 공격 콜라이더 배열
 
 	shared_ptr<Map> _curMap; // 현재 플레이 중인 맵
 	vector<unordered_map<wstring/*텍스쳐 이름*/, shared_ptr<InstanceQuad>>> instanceQuads; // 인스턴싱된 텍스쳐 모음

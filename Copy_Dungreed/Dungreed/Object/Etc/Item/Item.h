@@ -26,26 +26,25 @@ public:
 	virtual ~Item();
 
 	virtual void ReverseTexture();
-
+	
+	// 공격 시 호출
 	virtual void Attack() abstract;
+	// 스킬 사용 시 호출
 	virtual void Skill() abstract;
-	virtual void Damaged(const Creature_Status& status) abstract;
 
 public:
 	// Getter Setter
 	virtual void SetOwner(shared_ptr<Creature> owner);
-	void SetHudTexture(const wstring& image);
+	void SetIconTexture(const wstring& image);
 
-	shared_ptr<Quad> GetHudTexture() { return _hudTexture; }
+	shared_ptr<Quad> GetIconTexture() { return _iconTexture; }
 	const shared_ptr<Creature> GetOwner() { return _owner.lock(); }
 	const Item_Type& GetItemType() { return _itemType; }
 
 protected:
-	weak_ptr<Creature> _owner;
-	shared_ptr<Quad> _hudTexture;
+	Item_Type _itemType = ACCESSORY; 
 
-	Creature_Status _status;
-
-	Item_Type _itemType = ACCESSORY;
+	weak_ptr<Creature> _owner; // 오너 캐릭터
+	shared_ptr<Quad> _iconTexture; // 아이템 아이콘 이미지	 
 };
 

@@ -30,7 +30,8 @@ void Melee::Attack()
 void Melee::CheckAttack()
 {
 	AttackEffect();
-
+	
+	// 공격 범위 충돌 확인
 	shared_ptr<Collider> _attack = make_shared<RectCollider>(_attackRange);
 
 	float angle = _showDirection / PI;
@@ -45,11 +46,13 @@ void Melee::CheckAttack()
 	_attack->Update();
 	GAME->AddDebugCollider(_attack);
 
+	// 공격 범위에 있는 적들에게 데미지 주기
 	vector<shared_ptr<Object>> _collisions = GAME->GetCollisions(_attack, Object::Object_Type::CREATURE);
 	for (auto& enemy : _collisions)
 	{
 		if (enemy != _owner.lock())
 		{
+			// 다른 타입의 캐릭터일 경우 데미지 주기
 			shared_ptr<Creature> creature = dynamic_pointer_cast<Creature>(enemy);
 			if (creature->GetCreatureType() != _owner.lock()->GetCreatureType())
 				GiveDamage(GetRandomDamage(), creature);
@@ -66,7 +69,7 @@ void Melee::AttackEffect()
 	effect->GetObjectTexture()->GetTransform()->GetPos() = _attackOfsset->GetWorldPos();
 	effect->GetObjectTexture()->GetTransform()->GetAngle() = _showDirection - (0.5f * PI);
 
-	if (_reversed)
+	if (_reverseTexture)
 		effect->GetObjectTexture()->ReverseToX();
 
 	GAME->AddEffect(effect);
@@ -84,11 +87,11 @@ void Melee::SetWeapon()
 
 		if (_owner.lock()->IsReversed())
 		{
-			if (_reversed == false)
+			if (_reverseTexture == false)
 			{
 				_texture->ReverseToY();
 				_offset.x *= -1;
-				_reversed = true;
+				_reverseTexture = true;
 			}
 			_texture->GetTransform()->GetPos().y = -_weaponLength;
 			angle = _showDirection + (_appendAngle[_offsetIndex] * PI);
@@ -96,11 +99,11 @@ void Melee::SetWeapon()
 		}
 		else
 		{
-			if (_reversed == true)
+			if (_reverseTexture == true)
 			{
 				_texture->ReverseToY();
 				_offset.x *= -1;
-				_reversed = false;
+				_reverseTexture = false;
 			}
 			_texture->GetTransform()->GetPos().y = _weaponLength;
 			angle = _showDirection - (_appendAngle[_offsetIndex] * PI);

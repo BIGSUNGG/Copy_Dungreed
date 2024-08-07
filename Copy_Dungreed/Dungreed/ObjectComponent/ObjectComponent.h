@@ -9,10 +9,10 @@ public:
 
 	virtual void Update() abstract;
 
-	virtual void SetObject(Object* object) { _object = object; }
+	virtual void SetOwner(Object* owner) { _owner = owner; }
 
 protected:
-	Object* _object;
+	Object* _owner;
 
 };
 
