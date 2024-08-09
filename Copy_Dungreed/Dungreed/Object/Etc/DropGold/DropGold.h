@@ -9,9 +9,9 @@ public:
 
 	virtual void Update() override;
 
-	virtual void SetPirce(int price) { _price = price; }
+	virtual void SetGoldValue(int value) { _goldValue = value; }
 
-	virtual void AddCoinToIventory();
+	virtual void AddGoldToIventory();
 	virtual void SetFollowCreature(Creature* creature);
 
 	shared_ptr<MovementComponent> GetMovementComponent() { return _movement; }
@@ -23,6 +23,6 @@ protected:
 	Creature* _follow = nullptr;
 	float _followSpeed = 1500.f;
 	bool _canFollow = false;
-	int _price = 0.f;
+	int _goldValue = 0.f;
 };
 

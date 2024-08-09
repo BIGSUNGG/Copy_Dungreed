@@ -11,19 +11,20 @@ public:
 	virtual void Refresh() override;
 
 protected:
-	map<shared_ptr<Map>, bool> _visited;
+	map<shared_ptr<Map>, bool> _visited; // 방문한 맵 리스트
+	bool _showAllMap = false; // 방문한 맵인지 상관없이 보여질 것인지
 
 	shared_ptr<RenderTarget> _filter;
 	shared_ptr<Quad> _filterQuad;
 	shared_ptr<Quad> _mapBase;
 	shared_ptr<UI_Button> _exitButton;
-	shared_ptr<InstanceQuad> _mapBlock;
-	shared_ptr<InstanceQuad> _verticalLine;
-	shared_ptr<InstanceQuad> _horizonLine;
+	shared_ptr<InstanceQuad> _mapBlock; // 맵 표시하는 텍스쳐
+	shared_ptr<InstanceQuad> _verticalLine; // 맵에서 위 아래로 연결된 것을 표시하는 텍스쳐
+	shared_ptr<InstanceQuad> _horizonLine; // 맵에서 좌우로 연결된 것을 표시하는 텍스쳐
 
-	shared_ptr<Quad> _blinkBlock;
-	bool _blink = true;
-	const float _blinkDelay = 0.5f;
+	shared_ptr<Quad> _blinkBlock; // 현재 맵을 표시해주는 텍스쳐
+	bool _blink = true; //_blinkBlock이 나와있는지
+	const float _blinkDelay = 0.5f; // _blinkBlock이 꺼지고 켜지는 딜레이
 	float _blinkRunTime = 0.0f;
 
 };

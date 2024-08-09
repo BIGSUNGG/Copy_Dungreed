@@ -30,7 +30,7 @@ UI_MiniMap::UI_MiniMap()
 
 void UI_MiniMap::Update()
 {
-	// Player
+	// 플레이어 위치
 	{
 		Vector2 pos = (GAME->GetPlayer()->GetPos() - MAP_MANAGER->GetCurMap()->GetLeftBottom()) * _mapSizeRatio;
 		pos.x += _mapBase->Left();
@@ -38,7 +38,7 @@ void UI_MiniMap::Update()
 		_player->SetPos(pos);
 	}
 
-	// Enemy
+	// 몬스터 위치
 	{
 		auto& creature = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
 		for (int i = 0; i < _enemy.size(); i++)

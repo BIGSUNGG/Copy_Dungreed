@@ -31,17 +31,17 @@ void DropGold::Update()
 	Etc::Update();
 }
 
-void DropGold::AddCoinToIventory()
+void DropGold::AddGoldToIventory()
 {
 	_isActive = false;
-	INVENTORY->IncreaseGold(_price);
+	INVENTORY->IncreaseGold(_goldValue);
 
 	Vector2 targetPos = GAME->GetPlayer() ? GAME->GetPlayer()->GetPos() : Vector2::zero;
 	targetPos.x += MathUtility::RandomFloat(-50.f, 50.f);
 	targetPos.y += MathUtility::RandomFloat(-50.f, 50.f);
 
 	auto effect = make_shared<Effect_Number>();
-	effect->SetNumber(_price);
+	effect->SetNumber(_goldValue);
 	effect->SetPos(targetPos);
 	effect->SetColor({
 		256.f / 256.f,

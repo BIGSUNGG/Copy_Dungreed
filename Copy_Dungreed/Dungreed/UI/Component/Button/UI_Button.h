@@ -20,15 +20,16 @@ public:
 	void SetKeyUpEvent(function<void()> func) { _keyUpFunc = func; }
 
 protected:
-	shared_ptr<Quad> _texture;
-	shared_ptr<Quad> _hoverTexture;
-	shared_ptr<Collider> _collider;
+	shared_ptr<Quad> _texture; // 버튼 텍스쳐
+	shared_ptr<Quad> _hoverTexture; // 눌렸을 때 텍스쳐
+	shared_ptr<Collider> _collider; // 눌렸는지 확인하는 텍스쳐
 
-	bool _hover = false;
-	bool _click = false;
-	function<void()> _keyDownFunc;
-	function<void()> _keyPressFunc;
-	function<void()> _keyUpFunc;
+	bool _hover = false; // 마우스 커서가 위에 올려져 있는지
+	bool _click = false; // 마우스가 눌렸는지
+
+	function<void()> _keyDownFunc; // 마우스를 누르기 시작하면 호출
+	function<void()> _keyPressFunc; // 마우스를 누르고 있을 때 호출
+	function<void()> _keyUpFunc; // 마우스를 누르다 때면 호출
 
 };
 

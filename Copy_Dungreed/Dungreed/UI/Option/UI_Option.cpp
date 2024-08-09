@@ -8,6 +8,7 @@ UI_Option::UI_Option()
 	_base->GetTransform()->GetPos() = CENTER;
 	_base->Update();
 
+	// Exit Button
 	{
 		_exitButton = make_shared<UI_Button>();
 		auto quad = make_shared<Quad>(L"Resource/Ui/Button/Exit.png");
@@ -20,6 +21,7 @@ UI_Option::UI_Option()
 		_exitButton->SetKeyUpEvent(func);
 	}
 
+	// Book Button
 	{
 		_bookButton = make_shared<UI_Button>();
 		auto quad = make_shared<Quad>(L"Resource/Ui/Option/Book.png");
@@ -30,6 +32,7 @@ UI_Option::UI_Option()
 		_bookButton->SetHoverTexture(hoverQuad);
 	}
 
+	// Option Button
 	{
 		_optionButton = make_shared<UI_Button>();
 		auto quad = make_shared<Quad>(L"Resource/Ui/Option/Setting.png");
@@ -42,6 +45,7 @@ UI_Option::UI_Option()
 		_optionButton->SetKeyUpEvent(func);
 	}
 
+	// Exit Button
 	{
 		_gameExitButton = make_shared<UI_Button>();
 		auto quad = make_shared<Quad>(L"Resource/Ui/Option/Exit.png");

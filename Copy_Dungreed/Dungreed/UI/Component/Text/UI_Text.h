@@ -24,12 +24,12 @@ public:
 	virtual void SetTextStatus(const Text_Status& status) { _textStatus = status; }
 
 protected:
-	Vector2 _pos;
-	wstring _text;
-	wstring _font = L"DungGeunMo";
-	XMFLOAT4 _color{ 1,1,1,1 };
-	Text_Status _textStatus = Text_Status::LEFT;
-	float _size = 20.0f;
+	wstring _text; // 텍스트
+	wstring _font = L"DungGeunMo"; // 텍스트 폰트
+	Vector2 _pos; // 텍스트 위치
+	XMFLOAT4 _color{ 1,1,1,1 }; // 텍스츠 색
+	Text_Status _textStatus = Text_Status::LEFT; // 텍스트 위치
+	float _size = 20.0f; // 텍스트 사이즈
 
 };
 

@@ -8,11 +8,14 @@ UI_Button::UI_Button()
 
 void UI_Button::Update()
 {
+	// 마우스 커서가 버튼 위로 있다면
 	if (_collider->IsCollision(MOUSE_POS))
 	{
 		_hoverTexture->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 		_hoverTexture->Update();
 		_hover = true;
+
+		// 버튼을 눌렀다면
 		if (KEY_DOWN(VK_LBUTTON))
 		{
 			_click = true;
@@ -20,8 +23,10 @@ void UI_Button::Update()
 			if(_keyDownFunc != nullptr)
 				_keyDownFunc();
 		}
+		// 버튼을 누르고 있다면
 		else if (KEY_PRESS(VK_LBUTTON) && _keyPressFunc != nullptr)
 			_keyPressFunc();
+		// 버튼을 눌렀다 땟다면
 		else if (KEY_UP(VK_LBUTTON))
 		{
 			if(_click==true && _keyUpFunc != nullptr)

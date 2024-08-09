@@ -4,19 +4,19 @@
 UI_Info::UI_Info()
 	: UI()
 {
-	_coinIcon = make_shared<Quad>(L"Resource/Icon/CoinIcon.png");
-	_coinIcon->SetLeft(37);
-	_coinIcon->SetBottom(77);
-	_coinIcon->Update();
+	_goldIcon = make_shared<Quad>(L"Resource/Icon/CoinIcon.png");
+	_goldIcon->SetLeft(37);
+	_goldIcon->SetBottom(77);
+	_goldIcon->Update();
 
 	_hungryIcon = make_shared<Quad>(L"Resource/Icon/HungryIcon.png");
 	_hungryIcon->SetLeft(26);
 	_hungryIcon->SetBottom(33);
 	_hungryIcon->Update();
 
-	_coinText = make_shared<UI_Text>();
-	_coinText->SetPos(Vector2(_coinIcon->GetTransform()->GetPos().x + 40, _coinIcon->GetTransform()->GetPos().y));
-	_coinText->SetTextSize(40);
+	_goldText = make_shared<UI_Text>();
+	_goldText->SetPos(Vector2(_goldIcon->GetTransform()->GetPos().x + 40, _goldIcon->GetTransform()->GetPos().y));
+	_goldText->SetTextSize(40);
 
 	_hungryText = make_shared<UI_Text>();
 	_hungryText->SetPos(Vector2(_hungryIcon->GetTransform()->GetPos().x + 40, _hungryIcon->GetTransform()->GetPos().y));
@@ -37,7 +37,7 @@ void UI_Info::Update()
 	std::wstring goldText;
 	goldText += to_wstring(INVENTORY->GetCurGold());
 
-	_coinText->SetText(goldText);
+	_goldText->SetText(goldText);
 
 	std::wstring hungryText;
 	hungryText += to_wstring(INVENTORY->GetCurHungry());
@@ -46,6 +46,7 @@ void UI_Info::Update()
 
 	_hungryText->SetText(hungryText);
 
+	// 허기 게이지 설정
 	_hungryGauge->GetTransform()->GetScale().x = (float)INVENTORY->GetCurHungry() / (float)INVENTORY->GetHungryMax();
 	_hungryGauge->SetLeft(_hungryBase->Left() + 3);
 	_hungryGauge->Update();
@@ -53,10 +54,10 @@ void UI_Info::Update()
 
 void UI_Info::Render()
 {
-	_coinIcon->Render();
+	_goldIcon->Render();
 	_hungryIcon->Render();
 
-	_coinText->Render();
+	_goldText->Render();
 	_hungryText->Render();
 
 	_hungryBase->Render();

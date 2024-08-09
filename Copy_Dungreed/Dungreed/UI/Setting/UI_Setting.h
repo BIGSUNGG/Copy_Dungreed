@@ -22,12 +22,12 @@ protected:
 	vector<shared_ptr<UI_Slider>> _sliders;
 	vector<shared_ptr<UI_Button>> _buttons;
 	
-	shared_ptr<UI_Text> _screenText;
-	vector<pair<wstring, int>> _screen;
-	int _screenIndex = 0;
+	shared_ptr<UI_Text> _displayModeText; // 화면 모드 텍스트
+	vector<pair<wstring, int>> _displayMode; // 화면 모드 리스트
+	int _displayIndex = 0; // 선택한 화면 모드
 
-	shared_ptr<UI_Text> _fpsText;
-	vector<pair<wstring, int>> _fps;
-	int _fpsIndex = 0;
+	shared_ptr<UI_Text> _fpsText; // 최대 FPS 텍스트
+	vector<pair<wstring, int>> _fps; // 최대 FPS 리스트
+	int _fpsIndex = 0; // 선택한 최대 FPS
 };
 

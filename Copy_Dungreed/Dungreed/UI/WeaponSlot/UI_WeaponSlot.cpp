@@ -4,17 +4,17 @@
 UI_WeaponSlot::UI_WeaponSlot()
 	: UI()
 {
-	_weaponSlot1 = make_shared<Object>();
-	_weaponSlot1->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_1.png"));
-	_weaponSlot1->GetObjectTexture()->SetRight(WIN_WIDTH - 25);
-	_weaponSlot1->GetObjectTexture()->SetBottom(25);
-	_weaponSlot1->SetSpawnPos(_weaponSlot1->GetPos());
+	_weaponSlotBase1 = make_shared<Object>();
+	_weaponSlotBase1->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_1.png"));
+	_weaponSlotBase1->GetObjectTexture()->SetRight(WIN_WIDTH - 25);
+	_weaponSlotBase1->GetObjectTexture()->SetBottom(25);
+	_weaponSlotBase1->SetSpawnPos(_weaponSlotBase1->GetPos());
 
-	_weaponSlot2 = make_shared<Object>();
-	_weaponSlot2->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_2.png"));
-	_weaponSlot2->GetObjectTexture()->SetRight(WIN_WIDTH - 10);
-	_weaponSlot2->GetObjectTexture()->SetBottom(40);
-	_weaponSlot2->SetSpawnPos(_weaponSlot2->GetPos());
+	_weaponSlotBase2 = make_shared<Object>();
+	_weaponSlotBase2->SetTexture(make_shared<Quad>(L"Resource/Ui/WeaponSlot/WeaponSlot_2.png"));
+	_weaponSlotBase2->GetObjectTexture()->SetRight(WIN_WIDTH - 10);
+	_weaponSlotBase2->GetObjectTexture()->SetBottom(40);
+	_weaponSlotBase2->SetSpawnPos(_weaponSlotBase2->GetPos());
 
 	_curWeapon = make_shared<Quad>(L"EMPTY",Vector2(0,0));
 
@@ -24,8 +24,8 @@ UI_WeaponSlot::UI_WeaponSlot()
 
 
 	_weaponSkillBase = make_shared<Quad>(L"Resource/Ui/WeaponSlot/Weapon_Skill.png");
-	_weaponSkillBase->GetTransform()->GetPos().y = _weaponSlot1->GetSpawnPos().y;
-	_weaponSkillBase->GetTransform()->GetPos().x = _weaponSlot1->GetSpawnPos().x - 325.f;
+	_weaponSkillBase->GetTransform()->GetPos().y = _weaponSlotBase1->GetSpawnPos().y;
+	_weaponSkillBase->GetTransform()->GetPos().x = _weaponSlotBase1->GetSpawnPos().x - 325.f;
 	_weaponSkillBase->Update();
 
 	_weaponSkillIcon = make_shared<Quad>(L"EMPTY", Vector2(0, 0));
@@ -41,26 +41,16 @@ UI_WeaponSlot::UI_WeaponSlot()
 
 void UI_WeaponSlot::Update()
 {
-	if (INVENTORY->GetCurWeaponSlot() == 0)
-	{
-		_weaponSlot1->SetPos(_weaponSlot1->GetSpawnPos());
-		_weaponSlot2->SetPos(_weaponSlot2->GetSpawnPos());
-	}
-	else
-	{
-		_weaponSlot1->SetPos(_weaponSlot2->GetSpawnPos());
-		_weaponSlot2->SetPos(_weaponSlot1->GetSpawnPos());
-	}
-	_weaponSlot1->Update();
+	_weaponSlotBase1->Update();
+	_weaponSlotBase2->Update();
 
-	_weaponSlot2->Update();
-
+	// 현재 무기 이미지 설정
 	if (INVENTORY->GetCurWeapon() != nullptr)
 	{
 		if (_curWeapon->GetImageFile() != INVENTORY->GetCurWeapon()->GetIconTexture()->GetImageFile())
 		{
 			_curWeapon = make_shared<Quad>(INVENTORY->GetCurWeapon()->GetIconTexture()->GetImageFile());
-			_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
+			_curWeapon->GetTransform()->GetPos() = _weaponSlotBase1->GetSpawnPos();
 			switch (INVENTORY->GetCurWeapon()->GetWeaponType())
 			{
 			case Weapon::MELEE:
@@ -77,10 +67,11 @@ void UI_WeaponSlot::Update()
 	else
 	{
 		_curWeapon = make_shared<Quad>(L"EMPTY", (Vector2(0, 0)));
-		_curWeapon->GetTransform()->GetPos() = _weaponSlot1->GetSpawnPos();
+		_curWeapon->GetTransform()->GetPos() = _weaponSlotBase1->GetSpawnPos();
 		_curWeapon->Update();
 	}
 
+	// 현재 스킬 이미지 설정
 	if (INVENTORY->GetCurWeapon() != nullptr && INVENTORY->GetCurWeapon()->GetSkillHuiTexture() != nullptr)
 	{
 		if (_weaponSkillIcon->GetImageFile() != INVENTORY->GetCurWeapon()->GetSkillHuiTexture()->GetImageFile())
@@ -103,16 +94,8 @@ void UI_WeaponSlot::PreRender()
 
 void UI_WeaponSlot::Render()
 {
-	if (INVENTORY->GetCurWeaponSlot() == 0)
-	{
-		_weaponSlot2->Render();
-		_weaponSlot1->Render();
-	}
-	else
-	{
-		_weaponSlot1->Render();
-		_weaponSlot2->Render();
-	}
+	_weaponSlotBase2->Render();
+	_weaponSlotBase1->Render();
 
 	_curWeapon->Render();
 

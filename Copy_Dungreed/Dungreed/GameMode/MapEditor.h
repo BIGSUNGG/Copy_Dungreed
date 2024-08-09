@@ -43,10 +43,10 @@ private:
 
 	int _objectType		= 1; // 맵에 추가할 오브젝트 타입
 	int _objectLevel	= 0; // 맵에 추가할 오브젝트의 레벨
-	int _objectNum		= 0; // 맵에 추가할 오브젝트의 넘버
+	int _objectNum		= 0; // 맵에 추가할 오브젝트의 번호
 
 	int _mapLevel	= 0; // 수정할 맵의 레벨
-	int _mapNum		= 0; // 수정할 맵의 넘버
+	int _mapNum		= 0; // 수정할 맵의 번호
 
 	const Vector2 _verticalDoorHalfSize = { 60.0f, 198.0f }; // 좌 우 문의 크기
 	const Vector2 _horizonialDoorHalfSize = { 198.0f, 60.0f }; // 위 아래 문의 크기

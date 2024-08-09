@@ -45,8 +45,8 @@ UI_Inventory::UI_Inventory()
 				break;
 			}
 
-			_type = 0;
-			_num = i;
+			_selectedSlotType = Slot_Type::WEAPON_SLOT;
+			_selectedSlotNum = i;
 			return;
 		};
 		slot->SetKeyDownEvent(func);
@@ -79,8 +79,8 @@ UI_Inventory::UI_Inventory()
 		slot->SetHoverTexture(hoverQuad);
 		function<void()> func = [&, i]() {
 			_selectedItem = make_shared<Quad>(_accessories[i]->GetImageFile());
-			_type = 1;
-			_num = i;
+			_selectedSlotType = Slot_Type::ACCESSORY_SLOT;
+			_selectedSlotNum = i;
 			return;
 		};
 		slot->SetKeyDownEvent(func);
@@ -127,8 +127,8 @@ UI_Inventory::UI_Inventory()
 						}
 					}
 
-					_type = 2;
-					_num = index;
+					_selectedSlotType = Slot_Type::ITEM_SLOT;
+					_selectedSlotNum = index;
 					return;
 				};
 				slot->SetKeyDownEvent(func);
@@ -152,10 +152,10 @@ UI_Inventory::UI_Inventory()
 	_accessories.resize(4, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 	_items.resize(15, make_shared<Quad>(L"EMPTY", Vector2(0, 0)));
 
-	_coinText = make_shared<UI_Text>();
-	_coinText->SetTextSize(65.0f);
-	_coinText->SetTextStatus(UI_Text::Text_Status::RIGHT);
-	_coinText->SetPos(Vector2(WIN_WIDTH - 110, 70));
+	_goldText = make_shared<UI_Text>();
+	_goldText->SetTextSize(65.0f);
+	_goldText->SetTextStatus(UI_Text::Text_Status::RIGHT);
+	_goldText->SetPos(Vector2(WIN_WIDTH - 110, 70));
 }
 
 void UI_Inventory::Update()
@@ -194,7 +194,7 @@ void UI_Inventory::Update()
 
 	std::wstring coinText;
 	coinText += to_wstring(INVENTORY->GetCurGold());
-	_coinText->SetText(coinText);
+	_goldText->SetText(coinText);
 
 	MouseEvenet();
 }
@@ -229,7 +229,7 @@ void UI_Inventory::Render()
 	if (_selectedItem != nullptr)
 		_selectedItem->Render();
 
-	_coinText->Render();
+	_goldText->Render();
 }
 
 void UI_Inventory::FindTexture()
@@ -321,6 +321,7 @@ void UI_Inventory::FindTexture()
 
 void UI_Inventory::MouseEvenet()
 {
+	// 현재 선택한 아이템 위치를 마우스와 같게함
 	if (KEY_PRESS(VK_LBUTTON))
 	{
 		if (_selectedItem == nullptr)
@@ -328,84 +329,82 @@ void UI_Inventory::MouseEvenet()
 
 		_selectedItem->GetTransform()->GetPos() = MOUSE_POS;
 	}
+	// 현재 선택한 아이템을 마우스 위에 있는 
 	else if (KEY_UP(VK_LBUTTON))
 	{
 		if (_selectedItem == nullptr)
 			return;
 
-		bool swap = false;
+		// 현재 선택한 아이템 구하기
 		shared_ptr<Item> selected;
-		shared_ptr<Item> swapItem;
-		if (_type == 0)
+		if (_selectedSlotType == Slot_Type::WEAPON_SLOT)
 		{
-			_selectedItem->GetTransform()->GetPos() = _weaponSlot[_num]->GetPos();
-			selected = INVENTORY->GetWeaponSlot()[_num];
+			_selectedItem->GetTransform()->GetPos() = _weaponSlot[_selectedSlotNum]->GetPos();
+			selected = INVENTORY->GetWeaponSlot()[_selectedSlotNum];
 		}
-		else if (_type == 1)
+		else if (_selectedSlotType == Slot_Type::ACCESSORY_SLOT)
 		{
-			_selectedItem->GetTransform()->GetPos() = _accessorySlot[_num]->GetPos();
-			selected = INVENTORY->GetAccessorySlot()[_num];
+			_selectedItem->GetTransform()->GetPos() = _accessorySlot[_selectedSlotNum]->GetPos();
+			selected = INVENTORY->GetAccessorySlot()[_selectedSlotNum];
 		}
-		else if (_type == 2)
+		else if (_selectedSlotType == Slot_Type::ITEM_SLOT)
 		{
-			_selectedItem->GetTransform()->GetPos() = _itemSlot[_num]->GetPos();
-			selected = INVENTORY->GetItemSlot()[_num];
+			_selectedItem->GetTransform()->GetPos() = _itemSlot[_selectedSlotNum]->GetPos();
+			selected = INVENTORY->GetItemSlot()[_selectedSlotNum];
 		}
 
 		if (selected == nullptr)
 			return;
 
-		for (int i = 0; i < 2; i++)
+		// 아이템 교환
+		shared_ptr<Item> swapItem;
+		if (selected->GetItemType() == Item::WEAPON())
 		{
-			if (_weaponSlot[i]->GetHover())
+			for (int i = 0; i < 2; i++)
 			{
-				if (selected->GetItemType() == Item::WEAPON)
+				if (_weaponSlot[i]->GetHover())
 				{
 					swapItem = INVENTORY->GetWeaponSlot()[i];
 					INVENTORY->GetWeaponSlot()[i] = dynamic_pointer_cast<Weapon>(selected);
-					swap = true;
 				}
 			}
 		}
-
-		for (int i = 0; i < _accessorySlot.size(); i++)
+		else if (selected->GetItemType() == Item::ACCESSORY)
 		{
-			if (_accessorySlot[i]->GetHover())
+			for (int i = 0; i < _accessorySlot.size(); i++)
 			{
-				if (selected->GetItemType() == Item::ACCESSORY)
+				if (_accessorySlot[i]->GetHover())
 				{
 					swapItem = INVENTORY->GetAccessorySlot()[i];
 					INVENTORY->GetAccessorySlot()[i] = dynamic_pointer_cast<Accessory>(selected);
-					swap = true;
 				}
 			}
 		}
-
 		for (int i = 0; i < _itemSlot.size(); i++)
 		{
 			if (_itemSlot[i]->GetHover())
 			{
 				swapItem = INVENTORY->GetItemSlot()[i];
 				INVENTORY->GetItemSlot()[i] = dynamic_pointer_cast<Item>(selected);
-				swap = true;
+			}
+		}
+
+		if (swapItem)
+		{
+			if (_selectedSlotType == Slot_Type::WEAPON_SLOT)
+			{
+				INVENTORY->GetWeaponSlot()[_selectedSlotNum] = dynamic_pointer_cast<Weapon>(swapItem);
+			}
+			else if (_selectedSlotType == Slot_Type::ACCESSORY_SLOT)
+			{
+				INVENTORY->GetAccessorySlot()[_selectedSlotNum] = dynamic_pointer_cast<Accessory>(swapItem);
+			}
+			else if (_selectedSlotType == Slot_Type::ITEM_SLOT)
+			{
+				INVENTORY->GetItemSlot()[_selectedSlotNum] = swapItem;
 			}
 		}
 
 		_selectedItem = nullptr;
-		if (swap)
-		{
-			if (_type == 0)
-			{
-				INVENTORY->GetWeaponSlot()[_num] = dynamic_pointer_cast<Weapon>(swapItem);
-			}
-			else if (_type == 1)
-			{
-				INVENTORY->GetAccessorySlot()[_num] = dynamic_pointer_cast<Accessory>(swapItem);
-			}
-			else if (_type == 2)
-			{
-				INVENTORY->GetItemSlot()[_num] = swapItem;
-			}
-		}
 	}
 }

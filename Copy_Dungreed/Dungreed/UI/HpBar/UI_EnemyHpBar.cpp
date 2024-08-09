@@ -11,13 +11,15 @@ void UI_EnemyHpBar::Update()
 	auto& creatures = MAP_MANAGER->GetCurMap()->GetObjects()[Object::CREATURE];
 	for (int i = 0; i < _hpBarBase.size(); i++)
 	{
-		if (creatures[i] != nullptr && creatures[i]->IsRender())
+		if (creatures[i] != nullptr && creatures[i]->IsRender()) // 캐릭터가 렌더링되고 있다면
 		{
+			// 현재 HP 비율 구하기
 			auto creature = dynamic_pointer_cast<Creature>(creatures[i]);
 			float hpRatio = 0.0f;
 			hpRatio = creature->GetStatus().GetHpRatio();
-
-			if (creature->GetCreatureType() == Creature::ENEMY && hpRatio < 1.0f)
+			
+			// 적 캐릭터가 데미지를 받은 상태라면 Hp바 설정
+			if (creature->GetCreatureType() == Creature::ENEMY && hpRatio < 1.0f) 
 			{
 				_hpBarBase[i]->SetIsRender(true);
 				_hpBarGauge[i]->SetIsRender(true);
@@ -28,9 +30,9 @@ void UI_EnemyHpBar::Update()
 				_hpBarGauge[i]->GetPos() = _hpBarBase[i]->GetPos();
 
 				_hpBarGauge[i]->GetObjectTexture()->GetTransform()->GetScale().x = hpRatio;
-				_hpBarGauge[i]->GetObjectTexture()->SetLeft(_hpBarGauge[i]->GetPos().x - _hpBarGauge[i]->GetObjectTexture()->GetHalfSize().x);
-				
+				_hpBarGauge[i]->GetObjectTexture()->SetLeft(_hpBarGauge[i]->GetPos().x - _hpBarGauge[i]->GetObjectTexture()->GetHalfSize().x);				
 			}
+			// 적 캐릭터가 아니거나 데미지를 입지않은 상태라면 Hp바 비활성화
 			else
 			{
 				_hpBarBase[i]->SetIsRender(false);

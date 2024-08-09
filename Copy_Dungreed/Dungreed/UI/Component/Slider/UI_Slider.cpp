@@ -7,11 +7,14 @@ UI_Slider::UI_Slider()
 
 void UI_Slider::Update()
 {
-	if (KEY_UP(VK_LBUTTON))
+	// 마우스를 땟다면
+	if (KEY_UP(VK_LBUTTON)) 
 		_hold = false;
 
+	// 누르는 중이라면
 	if (_hold)
 	{
+		// 마우스 위치에 따라 슬라이더 바 위치 변경
 		float sizeX = _base->GetTexture()->GetSize().x;
 		float mouseX = MOUSE_POS.x - _base->GetTexture()->Left();
 		_ratio = mouseX / sizeX;
@@ -41,6 +44,7 @@ void UI_Slider::SetPos(const Vector2& pos)
 
 void UI_Slider::SetButton(shared_ptr<UI_Button> button)
 {
+	// 버튼이 눌리면 hold 활성화
 	_base = button;
 	function<void()> keyDownfunc = [&]() {
 		_hold = true;

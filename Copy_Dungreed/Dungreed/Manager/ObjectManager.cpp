@@ -1263,7 +1263,7 @@ shared_ptr<DropGold> ObjectManager::GetGold(int num)
 	switch (num)
 	{
 	case 0:
-		gold->SetPirce(MathUtility::RandomInt(5,10));
+		gold->SetGoldValue(MathUtility::RandomInt(5,10));
 		gold->CreateAnimation();
 		gold->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.1f);
 		gold->GetAnimation()->_animState[BASIC] = Animation::Anim_State::LOOP;
@@ -1277,7 +1277,7 @@ shared_ptr<DropGold> ObjectManager::GetGold(int num)
 		texture = make_shared<Quad>(gold->GetAnimation()->_animList[BASIC][BASIC]);
 		break;
 	case 1:
-		gold->SetPirce(MathUtility::RandomInt(80, 100));
+		gold->SetGoldValue(MathUtility::RandomInt(80, 100));
 		gold->CreateAnimation();
 		gold->GetAnimation()->_animSpeed[BASIC] = vector<float>(7, 0.1f);
 		gold->GetAnimation()->_animState[BASIC] = Animation::Anim_State::LOOP;

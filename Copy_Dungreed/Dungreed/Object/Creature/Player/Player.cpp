@@ -282,7 +282,7 @@ void Player::CheckEtcEvent()
 			if (_collider->IsCollision(object->GetCollider()))
 			{
 				// °ñµå Ãß°¡
-				dropGold->AddCoinToIventory();
+				dropGold->AddGoldToIventory();
 			}
 			else
 			{

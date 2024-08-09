@@ -58,7 +58,7 @@ protected:
 	float _weaponDirection = 0.0f; // 무기를 들고 있는 방향
 
 	string _curStepSound; // 현재 걷기 소리
-	int _stepSound = 0;  // 현재 걷기 소리 넘버
+	int _stepSound = 0;  // 현재 걷기 소리 번호
 
 	bool _doubleJumped = false; // 더블 점프 했는지 (착지 시 초기화)
 

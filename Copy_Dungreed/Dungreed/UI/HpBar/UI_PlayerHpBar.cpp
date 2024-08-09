@@ -4,22 +4,22 @@
 UI_PlayerHpBar::UI_PlayerHpBar()
 	: UI()
 {
-	_hpBarEmpty = make_shared<Object>();
-	_hpBarEmpty->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Empty.png"));
-	_hpBarEmpty->GetObjectTexture()->SetLeft(18);
-	_hpBarEmpty->GetObjectTexture()->SetTop(WIN_HEIGHT - 18);
-	_hpBarEmpty->SetSpawnPos(_hpBarEmpty->GetPos());
+	_hpBarBaseForward = make_shared<Object>();
+	_hpBarBaseForward->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Empty.png"));
+	_hpBarBaseForward->GetObjectTexture()->SetLeft(18);
+	_hpBarBaseForward->GetObjectTexture()->SetTop(WIN_HEIGHT - 18);
+	_hpBarBaseForward->SetSpawnPos(_hpBarBaseForward->GetPos());
 
-	_hpBarBase = make_shared<Object>();
-	_hpBarBase->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Base.png"));
-	_hpBarBase->GetObjectTexture()->SetLeft(18);
-	_hpBarBase->GetObjectTexture()->SetTop(WIN_HEIGHT - 18);
-	_hpBarBase->SetSpawnPos(_hpBarBase->GetPos());
+	_hpBarBaseBehind = make_shared<Object>();
+	_hpBarBaseBehind->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Base.png"));
+	_hpBarBaseBehind->GetObjectTexture()->SetLeft(18);
+	_hpBarBaseBehind->GetObjectTexture()->SetTop(WIN_HEIGHT - 18);
+	_hpBarBaseBehind->SetSpawnPos(_hpBarBaseBehind->GetPos());
 
 	_hpBarGauge = make_shared<Object>();
 	_hpBarGauge->SetTexture(make_shared<Quad>(L"Resource/Ui/HpBar/HpBar_Gauge.png"));
-	_hpBarGauge->GetObjectTexture()->SetLeft(_hpBarEmpty->GetObjectTexture()->Left() + 132);
-	_hpBarGauge->GetPos().y = _hpBarEmpty->GetPos().y;
+	_hpBarGauge->GetObjectTexture()->SetLeft(_hpBarBaseForward->GetObjectTexture()->Left() + 132);
+	_hpBarGauge->GetPos().y = _hpBarBaseForward->GetPos().y;
 	_hpBarGauge->SetSpawnPos(_hpBarGauge->GetPos());
 
 	_dashBarGaugeBaseLeft = make_shared<Object>();
@@ -71,18 +71,16 @@ UI_PlayerHpBar::UI_PlayerHpBar()
 
 void UI_PlayerHpBar::Update()
 {
-	_hpBarEmpty->Update();
+	_hpBarBaseForward->Update();
 
-	float hpRatio = 0.0f;
-	if (GAME->GetPlayer() != nullptr)
-		hpRatio = GAME->GetPlayer()->GetStatus().GetHpRatio();
-
+	// 체력바 크기와 위치 설정
+	float hpRatio = GAME->GetPlayer() != nullptr ? hpRatio = GAME->GetPlayer()->GetStatus().GetHpRatio() : 0.f;	
 	_hpBarGauge->SetPos(_hpBarGauge->GetSpawnPos());
 	_hpBarGauge->GetObjectTexture()->GetTransform()->GetScale().x = hpRatio;
 	_hpBarGauge->GetObjectTexture()->SetLeft(_hpBarGauge->GetPos().x - _hpBarGauge->GetObjectTexture()->GetHalfSize().x);
 	_hpBarGauge->Update();
 
-	_hpBarBase->Update();
+	_hpBarBaseBehind->Update();
 
 	_dashBarGaugeBaseLeft->Update();
 	_dashBarGaugeBaseMid->Update();
@@ -146,9 +144,9 @@ void UI_PlayerHpBar::Update()
 
 void UI_PlayerHpBar::Render()
 {
-	_hpBarBase->Render();
+	_hpBarBaseBehind->Render();
 	_hpBarGauge->Render();
-	_hpBarEmpty->Render();
+	_hpBarBaseForward->Render();
 
 	_hpText->Render();
 	_levelText->Render();

@@ -16,9 +16,9 @@ public:
 	virtual void SetRatio(const float& ratio);
 
 protected:
-	shared_ptr<UI_Button> _base;
-	shared_ptr<Quad> _thumb;	
-	float _ratio = 0.5f;
-	bool _hold = false;
-
+	shared_ptr<UI_Button> _base; // 슬라이더 베이스 
+	shared_ptr<Quad> _thumb; // 슬라이더 바 
+	float _ratio = 0.5f; // 슬라이더 왼쪽 끝이 0, 오른쪽 끝이 1라 했을 때 비율
+	bool _hold = false; // 슬라이더 바를 누르고 있는지
+	
 };

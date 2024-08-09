@@ -45,6 +45,7 @@ void UI_Map::PreRender()
 
 void UI_Map::Update()
 {
+	// _blinkBlock 깜박이기
 	_blinkRunTime += DELTA_TIME;
 	if (_blinkRunTime >= _blinkDelay)
 	{
@@ -77,8 +78,10 @@ void UI_Map::Render()
 
 void UI_Map::Refresh()
 {
+	// 방문한 맵 등록
 	_visited[MAP_MANAGER->GetCurMap()] = true;
 
+	// 맵 초기화
 	_mapBlock->GetTransforms().clear();
 	_verticalLine->GetTransforms().clear();
 	_horizonLine->GetTransforms().clear();
@@ -90,8 +93,10 @@ void UI_Map::Refresh()
 			if(map.second == nullptr)
 				continue;
 
-			if (_visited[map.second] == true)
+			// 방문한 맵이라면 지도맵에 표시
+			if (_showAllMap || _visited[map.second] == true)
 			{
+				// 맵 위치 설정
 				Vector2 distance = MAP_MANAGER->GetMapPos() - Vector2(maps.first, map.first);
 				Vector2 blockPos = Vector2(960.f - (distance.x * 156.f), 457.f - (distance.y * 156.f));
 
@@ -101,6 +106,7 @@ void UI_Map::Refresh()
 					_mapBlock->GetTransforms().emplace_back(transform);
 				}
 
+				// 다른 맵과 연결 여부 설정
 				if (map.second->CanGoRight())
 				{
 					shared_ptr<Transform> transform = make_shared<Transform>();

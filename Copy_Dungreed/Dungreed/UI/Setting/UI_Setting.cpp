@@ -4,6 +4,7 @@
 UI_Setting::UI_Setting()
 	: UI()
 {
+	// Exit Button
 	{
 		_exitButton = make_shared<UI_Button>();
 		auto quad = make_shared<Quad>(L"Resource/Ui/Button/Exit.png");
@@ -16,6 +17,7 @@ UI_Setting::UI_Setting()
 		_exitButton->SetKeyUpEvent(func);
 	}
 
+	// Apply Button
 	{
 		_applyButton = make_shared<UI_Button>();
 		auto quad = make_shared<Quad>(L"Resource/Ui/Setting/Apply.png");
@@ -26,6 +28,7 @@ UI_Setting::UI_Setting()
 		function<void()> func = bind(&UI_Setting::ApplySetting, this);
 		_applyButton->SetKeyDownEvent(func);
 	}
+	// Apply Text
 	{
 		_applyText = make_shared<UI_Text>();
 		_applyText->SetPos(Vector2(CENTER.x, 70.f));
@@ -34,13 +37,14 @@ UI_Setting::UI_Setting()
 		_applyText->SetText(L"적용");
 	}
 
+	// Base
 	{
 		_base = make_shared<Quad>(L"Resource/Ui/Setting/Setting_Base.png");
 		_base->SetBottom(0);
 		_base->GetTransform()->GetPos().x = CENTER.x;
 		_base->Update();
 	}
-
+	// Base Top
 	{
 		_baseTop = make_shared<Quad>(L"Resource/Ui/Setting/Setting_Top.png");
 		_baseTop->SetTop(WIN_HEIGHT);
@@ -48,6 +52,7 @@ UI_Setting::UI_Setting()
 		_baseTop->Update();
 	}
 
+	// Volume Slider
 	{
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,750 });
@@ -55,7 +60,6 @@ UI_Setting::UI_Setting()
 		text->SetText(L"마스터 볼륨");
 		_texts.emplace_back(text);
 	}
-
 	{
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,650 });
@@ -63,7 +67,6 @@ UI_Setting::UI_Setting()
 		text->SetText(L"음악 볼륨");
 		_texts.emplace_back(text);
 	}
-
 	{
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,550 });
@@ -72,6 +75,7 @@ UI_Setting::UI_Setting()
 		_texts.emplace_back(text);
 	}
 
+	// Display
 	{
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,350 });
@@ -79,7 +83,7 @@ UI_Setting::UI_Setting()
 		text->SetText(L"창모드");
 		_texts.emplace_back(text);
 	}
-
+	// Fps 
 	{
 		shared_ptr<UI_Text> text = make_shared<UI_Text>();
 		text->SetPos({ 275,250 });
@@ -88,6 +92,7 @@ UI_Setting::UI_Setting()
 		_texts.emplace_back(text);
 	}
 
+	// Sound Slider
 	{
 		shared_ptr<UI_Slider> slider = make_shared<UI_Slider>();
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
@@ -101,7 +106,6 @@ UI_Setting::UI_Setting()
 		slider->SetRatio(SOUND->GetAudioVolume() / 2);
 		_sliders.emplace_back(slider);
 	}
-
 	{
 		shared_ptr<UI_Slider> slider = make_shared<UI_Slider>();
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
@@ -115,7 +119,6 @@ UI_Setting::UI_Setting()
 		slider->SetRatio(SOUND->GetBGMVolume() / 2);
 		_sliders.emplace_back(slider);
 	}
-
 	{
 		shared_ptr<UI_Slider> slider = make_shared<UI_Slider>();
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
@@ -130,6 +133,7 @@ UI_Setting::UI_Setting()
 		_sliders.emplace_back(slider);
 	}
 
+	// Display Button
 	{
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
 		shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/Setting/NextButton_Left.png");
@@ -138,16 +142,15 @@ UI_Setting::UI_Setting()
 		button->SetHoverTexture(hoverTexture);
 		button->SetPos(Vector2(800, 350));
 		function<void()> func = [&]() {
-			--_screenIndex;
-			if (_screenIndex < 0)
-				_screenIndex = _screen.size() - 1;
+			--_displayIndex;
+			if (_displayIndex < 0)
+				_displayIndex = _displayMode.size() - 1;
 
-			_screenText->SetText(_screen[_screenIndex].first);
+			_displayModeText->SetText(_displayMode[_displayIndex].first);
 		};
 		button->SetKeyUpEvent(func);
 		_buttons.emplace_back(button);
 	}
-
 	{
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
 		shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/Setting/NextButton_Right.png");
@@ -156,16 +159,17 @@ UI_Setting::UI_Setting()
 		button->SetHoverTexture(hoverTexture);
 		button->SetPos(Vector2(1575, 350));
 		function<void()> func = [&]() {
-			++_screenIndex;
-			if (_screenIndex > _screen.size() - 1)
-				_screenIndex = 0;
+			++_displayIndex;
+			if (_displayIndex > _displayMode.size() - 1)
+				_displayIndex = 0;
 
-			_screenText->SetText(_screen[_screenIndex].first);
+			_displayModeText->SetText(_displayMode[_displayIndex].first);
 		};
 		button->SetKeyUpEvent(func);
 		_buttons.emplace_back(button);
 	}
 
+	// Fps Button
 	{
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
 		shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/Setting/NextButton_Left.png");
@@ -183,7 +187,6 @@ UI_Setting::UI_Setting()
 		button->SetKeyUpEvent(func);
 		_buttons.emplace_back(button);
 	}
-
 	{
 		shared_ptr<UI_Button> button = make_shared<UI_Button>();
 		shared_ptr<Quad> texture = make_shared<Quad>(L"Resource/Ui/Setting/NextButton_Right.png");
@@ -202,15 +205,17 @@ UI_Setting::UI_Setting()
 		_buttons.emplace_back(button);
 	}
 
+	// Display Text
 	{
 		std::pair<wstring, int> _pair = { L"      창화면", 0 };
-		_screen.push_back(_pair);
+		_displayMode.push_back(_pair);
 		_pair = { L" 테두리 없는 창화면", 1 };
-		_screen.push_back(_pair);
+		_displayMode.push_back(_pair);
 		_pair = { L"     전체화면", 2 };
-		_screen.push_back(_pair);
+		_displayMode.push_back(_pair);
 	}
 
+	// Fps Text
 	{
 		std::pair<wstring, int> _pair = { L"X", 0 };
 		_fps.push_back(_pair);
@@ -233,7 +238,8 @@ UI_Setting::UI_Setting()
 
 	}
 
-	_screenIndex = GRAPHIC->GetWinMode();
+	// Display
+	_displayIndex = GRAPHIC->GetWinMode();
 	for (int i = 0; i < _fps.size(); i++)
 	{
 		if (_fps[i].second == GRAPHIC->GetFpsLimit())
@@ -242,14 +248,14 @@ UI_Setting::UI_Setting()
 		}
 	}
 
+	// Text
 	{
-		_screenText = make_shared<UI_Text>();
-		_screenText->SetTextStatus(UI_Text::Text_Status::MID);
-		_screenText->SetTextSize(50);
-		_screenText->SetPos(Vector2(1070, 350));
-		_screenText->SetText(_screen[_screenIndex].first);
+		_displayModeText = make_shared<UI_Text>();
+		_displayModeText->SetTextStatus(UI_Text::Text_Status::MID);
+		_displayModeText->SetTextSize(50);
+		_displayModeText->SetPos(Vector2(1070, 350));
+		_displayModeText->SetText(_displayMode[_displayIndex].first);
 	}
-
 	{
 		_fpsText = make_shared<UI_Text>();
 		_fpsText->SetTextStatus(UI_Text::Text_Status::MID);
@@ -285,7 +291,7 @@ void UI_Setting::Render()
 
 	_applyButton->Render();
 	_applyText->Render();
-	_screenText->Render();
+	_displayModeText->Render();
 	_fpsText->Render();
 
 	_baseTop->Render();
@@ -294,13 +300,15 @@ void UI_Setting::Render()
 
 void UI_Setting::ApplySetting()
 {
+	// 소리 설정 저장
 	SOUND->SetAudioVolume(_sliders[0]->GetRatio() * 2);
 	SOUND->SetBGMVolume(_sliders[1]->GetRatio() * 2);
 	SOUND->SetSFXVolume(_sliders[2]->GetRatio() * 2);
 	SOUND->SetVolumeAll();
 	SOUND->Save();
 
-	GRAPHIC->SetWinMode(_screen[_screenIndex].second);
+	// 화면 설정 저장
+	GRAPHIC->SetWinMode(_displayMode[_displayIndex].second);
 	GRAPHIC->SetFpsLimit(_fps[_fpsIndex].second);
 	GRAPHIC->Save();
 }

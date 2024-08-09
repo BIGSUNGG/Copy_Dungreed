@@ -89,6 +89,7 @@ void UIManager::PreRender()
 
 void UIManager::PostRender()
 {
+	// 카메라 UI 버퍼로 변경
 	Camera::GetInstance()->SetUiCameraBuffer();
 
 	_postProssessingQuad->Render();

@@ -304,7 +304,7 @@ void MapEditor::Init(shared_ptr<Map> debugMap)
 
 void MapEditor::AddObject(bool force)
 {
-	if (force)
+	if (force == false)
 	{
 		bool overlap = false;
 		for (auto& object : _curMap->GetObjects()[_objectType])

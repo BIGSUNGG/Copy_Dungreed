@@ -10,8 +10,8 @@ public:
 	virtual void Refresh() override;
 
 protected:
-	vector<shared_ptr<Object>> _hpBarBase;
-	vector<shared_ptr<Object>> _hpBarGauge;
+	vector<shared_ptr<Object>> _hpBarBase; // HP바 베이스
+	vector<shared_ptr<Object>> _hpBarGauge; // 현재 HP를 보여주는 게이지
 
 };
 
