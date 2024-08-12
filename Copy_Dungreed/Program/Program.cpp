@@ -30,7 +30,7 @@ void Program::Update()
 	if (KEY_DOWN(VK_F6))
 		_gameMode = make_shared<MapEditor>();
 	if (KEY_DOWN(VK_F7))
-		_gameMode = make_shared<DebugMode>();
+		_gameMode = make_shared<MapTest>();
 	if (KEY_DOWN(VK_F8))
 		_gameMode = make_shared<Dungreed>();
 
@@ -93,24 +93,24 @@ void Program::ImGuiRender()
 	case GameMode::DUNGREED:
 		if (ImGui::Button("Map Editor"))
 			_gameMode = make_shared<MapEditor>();
-		if (ImGui::Button("Debug"))
-			_gameMode = make_shared<DebugMode>();
+		if (ImGui::Button("Test"))
+			_gameMode = make_shared<MapTest>();
 		if (ImGui::Button("Edit Current Map"))
 			EditCurrentMap();
-		if (ImGui::Button("Debug Current Map"))
-			DebugCurrentMap();
+		if (ImGui::Button("Test Current Map"))
+			TestCurrentMap();
 
 		break;
 	case GameMode::MAP_EDITOR:
 		if (ImGui::Button("Dungreed"))
 			_gameMode = make_shared<Dungreed>();
-		if (ImGui::Button("Debug"))
-			_gameMode = make_shared<DebugMode>();
-		if (ImGui::Button("Debug Current Map"))
-			DebugCurrentMap();
+		if (ImGui::Button("Test"))
+			_gameMode = make_shared<MapTest>();
+		if (ImGui::Button("Test Current Map"))
+			TestCurrentMap();
 
 		break;;
-	case GameMode::DEBUG:
+	case GameMode::MAP_TEST:
 		if (ImGui::Button("Dungreed"))
 			_gameMode = make_shared<Dungreed>();
 		if (ImGui::Button("Map Editor"))
@@ -140,12 +140,12 @@ void Program::RenderEnd()
 	Device::GetInstance()->Present();
 }
 
-void Program::DebugCurrentMap()
+void Program::TestCurrentMap()
 {
 	auto curMap = GAME->GetCurMap();
 	int level = curMap->GetLevel();
 	int num = curMap->GetNum();
-	_gameMode = make_shared<DebugMode>(level, num);
+	_gameMode = make_shared<MapTest>(level, num);
 }
 
 void Program::EditCurrentMap()

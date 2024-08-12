@@ -67,78 +67,6 @@ void MapManager::MakeRandomMap(int level, int num)
 		if (_maps[curPos.x][curPos.y] != nullptr) // 현재 있는 위치에 맵이 이미 있다면
 			continue;
 
-		// 맵을 충분히 추가했다면
-		if (_mapCount >= _mapCountMin) 
-		{
-			// 공백에 연결되어있는 맵 찾기
-			queue<Vector2> visitQueue;
-			unordered_map<int, unordered_map<int, bool>> visited;
-			Vector2 curPos = startPos;
-			shared_ptr<Map> curMap = _maps[startPos.x][startPos.y];
-
-			while (true)
-			{
-				// 최근 추가된 맵에서 갈 수 있는 위치 추가
-				if (curMap)
-				{
-					if (curMap->CanGoTop())
-						visitQueue.push(curPos + Vector2(0, 1));
-					if (curMap->CanGoBottom())
-						visitQueue.push(curPos + Vector2(0, -1));
-					if (curMap->CanGoLeft())
-						visitQueue.push(curPos + Vector2(-1, 0));
-					if (curMap->CanGoRight())
-						visitQueue.push(curPos + Vector2(1, 0));
-
-					curMap = nullptr;
-				}
-
-				if(visitQueue.size() <= 0) // 더 이상 확인할 맵이 없다면
-					break;
-
-				curPos = visitQueue.front();
-				visitQueue.pop();
-
-				if(visited[curPos.x][curPos.y] == true) // 이미 확인한 위치라면
-					continue;
-
-				visited[curPos.x][curPos.y] = true;
-
-				curMap = _maps[curPos.x][curPos.y];
-				if (curMap == nullptr) // 현재 있는 위치에 맵이 없다면
-				{
-					// 연결되야하는 방향 구하기
-					bool shouldCanGoTop = _maps[curPos.x][curPos.y + 1] ? _maps[curPos.x][curPos.y + 1]->CanGoBottom() : false;
-					bool shouldCanGoBottom = _maps[curPos.x][curPos.y - 1] ? _maps[curPos.x][curPos.y - 1]->CanGoTop() : false;
-					bool shouldCanGoLeft = _maps[curPos.x - 1][curPos.y] ? _maps[curPos.x - 1][curPos.y]->CanGoRight() : false;
-					bool shouldCanGoRight = _maps[curPos.x + 1][curPos.y] ? _maps[curPos.x + 1][curPos.y]->CanGoLeft() : false;
-
-					// 적절한 맵 구하기
-					MapBasic* info = nullptr;
-					while (true)
-					{
-						// 랜덤한 맵 구하기
-						info = &curLevelMapList[MathUtility::RandomInt(0, curLevelMapList.size() - 1)];
-
-						// 맵이 필요한 조건에 맞는지
-						if (shouldCanGoTop != info->CanGoTop())
-							continue;
-						if (shouldCanGoBottom != info->CanGoBottom())
-							continue;
-						if (shouldCanGoLeft != info->CanGoLeft())
-							continue;
-						if (shouldCanGoRight != info->CanGoRight())
-							continue;
-
-						curMap = LoadMap(info->_level, info->_num);
-						AddMap(curMap, curPos);
-						break;
-					}
-				}
-			}
-			break;
-		}
-
 		// 해당 방향으로 무조건 연결되어야하는지 확인
 		bool shouldCanGoTop = _maps[curPos.x][curPos.y + 1] ? _maps[curPos.x][curPos.y + 1]->CanGoBottom() : false;
 		bool shouldCanGoBottom = _maps[curPos.x][curPos.y - 1] ? _maps[curPos.x][curPos.y - 1]->CanGoTop() : false;
@@ -189,6 +117,78 @@ void MapManager::MakeRandomMap(int level, int num)
 
 			curMap = LoadMap(info->_level, info->_num);
 			AddMap(curMap, curPos);
+			break;
+		}
+
+		// 맵을 충분히 추가했다면
+		if (_mapCount >= _mapCountMin)
+		{
+			// 공백에 연결되어있는 맵 찾기
+			queue<Vector2> visitQueue;
+			unordered_map<int, unordered_map<int, bool>> visited;
+			Vector2 curPos = startPos;
+			shared_ptr<Map> curMap = _maps[startPos.x][startPos.y];
+
+			while (true)
+			{
+				// 최근 추가된 맵에서 갈 수 있는 위치 추가
+				if (curMap)
+				{
+					if (curMap->CanGoTop())
+						visitQueue.push(curPos + Vector2(0, 1));
+					if (curMap->CanGoBottom())
+						visitQueue.push(curPos + Vector2(0, -1));
+					if (curMap->CanGoLeft())
+						visitQueue.push(curPos + Vector2(-1, 0));
+					if (curMap->CanGoRight())
+						visitQueue.push(curPos + Vector2(1, 0));
+
+					curMap = nullptr;
+				}
+
+				if (visitQueue.size() <= 0) // 더 이상 확인할 맵이 없다면
+					break;
+
+				curPos = visitQueue.front();
+				visitQueue.pop();
+
+				if (visited[curPos.x][curPos.y] == true) // 이미 확인한 위치라면
+					continue;
+
+				visited[curPos.x][curPos.y] = true;
+
+				curMap = _maps[curPos.x][curPos.y];
+				if (curMap == nullptr) // 현재 있는 위치에 맵이 없다면
+				{
+					// 연결되야하는 방향 구하기
+					bool shouldCanGoTop = _maps[curPos.x][curPos.y + 1] ? _maps[curPos.x][curPos.y + 1]->CanGoBottom() : false;
+					bool shouldCanGoBottom = _maps[curPos.x][curPos.y - 1] ? _maps[curPos.x][curPos.y - 1]->CanGoTop() : false;
+					bool shouldCanGoLeft = _maps[curPos.x - 1][curPos.y] ? _maps[curPos.x - 1][curPos.y]->CanGoRight() : false;
+					bool shouldCanGoRight = _maps[curPos.x + 1][curPos.y] ? _maps[curPos.x + 1][curPos.y]->CanGoLeft() : false;
+
+					// 적절한 맵 구하기
+					MapBasic* info = nullptr;
+					while (true)
+					{
+						// 랜덤한 맵 구하기
+						info = &curLevelMapList[MathUtility::RandomInt(0, curLevelMapList.size() - 1)];
+
+						// 맵이 필요한 조건에 맞는지
+						if (shouldCanGoTop != info->CanGoTop())
+							continue;
+						if (shouldCanGoBottom != info->CanGoBottom())
+							continue;
+						if (shouldCanGoLeft != info->CanGoLeft())
+							continue;
+						if (shouldCanGoRight != info->CanGoRight())
+							continue;
+
+						curMap = LoadMap(info->_level, info->_num);
+						AddMap(curMap, curPos);
+						break;
+					}
+				}
+			}
 			break;
 		}
 	}

@@ -164,7 +164,7 @@
     <ClInclude Include="Dungreed\Struct\Map\MapBasic.h" />
     <ClInclude Include="Framework\Utility\Audio.h" />
     <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
-    <ClInclude Include="Dungreed\GameMode\DebugMode.h" />
+    <ClInclude Include="Dungreed\GameMode\MapTest.h" />
     <ClInclude Include="Dungreed\Object\Etc\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Object\Etc\Etc.h" />
     <ClInclude Include="Dungreed\Object\Effect\Trail\Effect_Trail.h" />
@@ -275,7 +275,7 @@
     <ClCompile Include="Dungreed\Struct\Map\MapBasic.cpp" />
     <ClCompile Include="Framework\Utility\Audio.cpp" />
     <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
-    <ClCompile Include="Dungreed\GameMode\DebugMode.cpp" />
+    <ClCompile Include="Dungreed\GameMode\MapTest.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\Bullet\Bullet.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\Etc.cpp" />
     <ClCompile Include="Dungreed\Object\Effect\Trail\Effect_Trail.cpp" />

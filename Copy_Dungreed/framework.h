@@ -197,7 +197,7 @@ using namespace std;
 // GameMode
 #include "Dungreed/GameMode/GameMode.h"
 #include "Dungreed/GameMode/Dungreed.h"
-#include "Dungreed/GameMode/DebugMode.h"
+#include "Dungreed/GameMode/MapTest.h"
 #include "Dungreed/GameMode/MapEditor.h"
 
 // Program

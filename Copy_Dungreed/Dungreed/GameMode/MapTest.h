@@ -1,9 +1,9 @@
 #pragma once
-class DebugMode : public GameMode
+class MapTest : public GameMode
 {
 public:
-	DebugMode();
-	DebugMode(int level, int num);
+	MapTest();
+	MapTest(int level, int num);
 
 	void Update() override;
 	void PreRender() override;
@@ -12,7 +12,7 @@ public:
 	void ImGuiRender() override;
 
 protected:
-	void Init(shared_ptr<Map> debugMap);
+	void Init(shared_ptr<Map> testMap);
 
 public:
 	shared_ptr<Map> GetCurMap() { return _curMap; }

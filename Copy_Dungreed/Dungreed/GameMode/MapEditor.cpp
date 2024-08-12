@@ -275,7 +275,7 @@ void MapEditor::ImGuiRender()
 	GAME->ImguiRender();
 }
 
-void MapEditor::Init(shared_ptr<Map> debugMap)
+void MapEditor::Init(shared_ptr<Map> editMap)
 {
 	// 게임 초기화
 	GAME->Reset();
@@ -283,7 +283,7 @@ void MapEditor::Init(shared_ptr<Map> debugMap)
 	GAME->SetEnableUI(false);
 
 	// 맵 설정
-	_curMap = debugMap;
+	_curMap = editMap;
 	GAME->SetCurMap(_curMap);
 
 	// 오브젝트 설정

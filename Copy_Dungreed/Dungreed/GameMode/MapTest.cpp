@@ -1,14 +1,14 @@
 #include "framework.h"
-#include "DebugMode.h"
+#include "MapTest.h"
 
-DebugMode::DebugMode()
-	: DebugMode(0, 0)
+MapTest::MapTest()
+	: MapTest(0, 0)
 {
 }
 
-DebugMode::DebugMode(int level, int num)
+MapTest::MapTest(int level, int num)
 {
-	_modeType = GameModeType::DEBUG;
+	_modeType = GameModeType::MAP_TEST;
 	_mapLevel = level;
 	_mapNum = num;
 
@@ -16,27 +16,27 @@ DebugMode::DebugMode(int level, int num)
 	Init(_map);
 }
 
-void DebugMode::Update()
+void MapTest::Update()
 {
 	GAME->Update();
 }
 
-void DebugMode::PreRender()
+void MapTest::PreRender()
 {
 	GAME->PreRender();
 }
 
-void DebugMode::Render()
+void MapTest::Render()
 {
 	GAME->Render();
 }
 
-void DebugMode::PostRender()
+void MapTest::PostRender()
 {
 	GAME->PostRender();
 }
 
-void DebugMode::ImGuiRender()
+void MapTest::ImGuiRender()
 {
 	if (ImGui::CollapsingHeader("Player"))
 	{
@@ -59,9 +59,9 @@ void DebugMode::ImGuiRender()
 	GAME->ImguiRender();
 }
 
-void DebugMode::Init(shared_ptr<Map> debugMap)
+void MapTest::Init(shared_ptr<Map> testMap)
 {
-	_curMap = debugMap;
+	_curMap = testMap;
 
 	// 게임 초기화
 	GAME->Reset();

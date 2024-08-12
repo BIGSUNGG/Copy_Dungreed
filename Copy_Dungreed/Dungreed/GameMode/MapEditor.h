@@ -12,7 +12,7 @@ public:
 	void ImGuiRender() override;
 
 protected:
-	void Init(shared_ptr<Map> debugMap);
+	void Init(shared_ptr<Map> editMap);
 
 	// _curObject를 맵에 추가하는 함수
 	// force : 추가할 위치에 오브젝트가 있어도 무시할지 여부

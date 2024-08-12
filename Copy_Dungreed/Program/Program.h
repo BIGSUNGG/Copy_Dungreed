@@ -14,8 +14,8 @@ public:
 	void RenderEnd();
 
 protected:
-	// 현재 맵을 Debug Mode에서 실행
-	void DebugCurrentMap();
+	// 현재 맵을 Map Test에서 실행
+	void TestCurrentMap();
 	// 현재 맵을 Map Editor에서 실행
 	void EditCurrentMap();
 
