@@ -189,7 +189,7 @@ void MapManager::MakeRandomMap(int level, int num)
 					}
 				}
 			}
-			break;
+			break;	
 		}
 	}
 

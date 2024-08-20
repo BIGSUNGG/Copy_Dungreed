@@ -41,6 +41,16 @@ UI_WeaponSlot::UI_WeaponSlot()
 
 void UI_WeaponSlot::Update()
 {
+	if (INVENTORY->GetCurWeaponSlot() == 0)
+	{
+		_weaponSlotBase1->SetPos(_weaponSlotBase1->GetSpawnPos());
+		_weaponSlotBase2->SetPos(_weaponSlotBase2->GetSpawnPos());
+	}
+	else
+	{
+		_weaponSlotBase1->SetPos(_weaponSlotBase2->GetSpawnPos());
+		_weaponSlotBase2->SetPos(_weaponSlotBase1->GetSpawnPos());
+	}
 	_weaponSlotBase1->Update();
 	_weaponSlotBase2->Update();
 
@@ -94,8 +104,17 @@ void UI_WeaponSlot::PreRender()
 
 void UI_WeaponSlot::Render()
 {
-	_weaponSlotBase2->Render();
-	_weaponSlotBase1->Render();
+	if (INVENTORY->GetCurWeaponSlot() == 0)
+	{
+		_weaponSlotBase2->Render();
+		_weaponSlotBase1->Render();
+	}
+	else
+	{
+		_weaponSlotBase1->Render(); 
+		_weaponSlotBase2->Render();
+	}
+	
 
 	_curWeapon->Render();
 
