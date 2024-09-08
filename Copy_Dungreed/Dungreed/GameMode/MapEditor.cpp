@@ -2,7 +2,7 @@
 #include "MapEditor.h"
 
 MapEditor::MapEditor()
-	: MapEditor(0, 0)
+	: MapEditor(1, 0)
 {
 
 }

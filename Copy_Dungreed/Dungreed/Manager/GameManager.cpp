@@ -15,18 +15,18 @@ void GameManager::Update()
 {
 	if (DELTA_TIME >= _maxDeltaTime)
 		return;
-	
+
 	// 코어 객체 업데이트
 	CAMERA->Update();
 	SOUND->Update();
 	MOUSE_CURSUR->Update();
 
-	// 입력
-	Input();
-
 	// 오브젝트 업데이트
 	if (!_pause)
 	{
+		// 입력
+		Input();
+
 		for (auto& objects : _curMap->GetObjects())
 		{
 			for (auto& object : objects)
@@ -145,6 +145,10 @@ void GameManager::Render()
 				if (bShouldRender)
 					object->Render();
 			}
+			else // 프러스텀 컬링이 비활성화되어 있는 경우
+			{
+				object->Render();
+			}
 		}
 	}
 }
@@ -228,6 +232,8 @@ void GameManager::ImguiRender()
 		ImGui::Checkbox("Use Frustum culling", &_enableFrustum);
 		ImGui::SliderFloat("Frustum Size Ratio", &_frustumSizeRatio, 0.f, 1.f);
 	}
+
+	UI_MANAGER->ImGuiRender();
 }
 
 void GameManager::Optimize()
@@ -546,4 +552,6 @@ void GameManager::Reset()
 	_drawCollider.clear();
 
 	ResetPlayer();
+
+	INVENTORY->Reset();
 }

@@ -38,13 +38,9 @@ public:
 	void Update();
 	void PreRender();
 	void PostRender();
+	void ImGuiRender();
 
 	void Refresh();
-
-	void SetState(const UI_State& state);
-	void SetPostProssesing(XMFLOAT4 color);
-	char GetBlinkState() { return _blinkState; }
-	const UI_State& GetCurState() { return _state; }
 
 	// 화면 깜빡이기
 	// speed : 깜빡이는 속도
@@ -52,6 +48,13 @@ public:
 	// color : 어두워지는 색
 	// func : 완벽히 어두워지면 호출할 함수
 	bool Blink(const float& speed, const float& stopTime = 0, const XMFLOAT4& color = {0,0,0,0}, function<void()> func = nullptr);
+
+public:
+	void SetState(const UI_State& state);
+	void SetPostProssesing(XMFLOAT4 color);
+	char GetBlinkState() { return _blinkState; }
+	const UI_State& GetCurState() { return _state; }
+	bool GetShowAllMaps() { return _showAllMaps; }
 
 private:
 	UIManager();
@@ -83,5 +86,6 @@ private:
 	shared_ptr<UI_Option> _select;
 	shared_ptr<UI_Setting> _setting;
 
+	bool _showAllMaps = false; // 지도에서 방문한 맵인지 상관없이 보여질 것인지
 };
 

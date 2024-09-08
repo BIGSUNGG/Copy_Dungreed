@@ -3,24 +3,135 @@
   "WorkspaceRootPath": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\UIManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Program\\Program.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Transform.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Math\\Transform.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Camera\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Camera\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Camera\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Camera\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\TextureVertexShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Shader\\TextureVertexShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\VertexShader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Render\\VertexShader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Object\\Quad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Object\\Quad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\TypeDef.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\TypeDef.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -55,14 +166,6 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\Melee.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapTest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\MapTest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -75,20 +178,8 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\MapTest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Program\\Program.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\GameMode.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\framework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -109,10 +200,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{371B9FA9-4C90-4AC6-A123-ACED756D6C77}|DirectXTex\\DirectXTex_Desktop_2019_Win10.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\DirectXTex\\DirectXTexP.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{371B9FA9-4C90-4AC6-A123-ACED756D6C77}|DirectXTex\\DirectXTex_Desktop_2019_Win10.vcxproj|solutionrelative:DirectXTex\\DirectXTexP.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\Audio.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -143,32 +230,12 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Option\\UI_Option.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Player\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Creature\\Player\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Map\\Map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -229,14 +296,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_EnemyHpBar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_EnemyHpBar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Slider\\UI_Slider.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -391,10 +450,6 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -419,10 +474,6 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Struct\\Status\\Creature_Status.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\InstancingShader\\InstancingPixelShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Shader\\InstancingShader\\InstancingPixelShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -435,10 +486,6 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Shader\\ColliderShader\\ColliderVertexShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -447,32 +494,12 @@
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\UIManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\ObjectManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\ObjectManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Vector2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Math\\Vector2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Transform.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|solutionrelative:Copy_Dungreed\\Framework\\Math\\Transform.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B202CC42-85B2-4A30-BA44-2B26BB6BDCEA}|Copy_Dungreed\\Copy_Dungreed.vcxproj|C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Copy_Dungreed.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -573,11 +600,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 30,
               "Title": "Object.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Object.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Object.h",
@@ -601,68 +628,324 @@
               "Name": "ST:0:0:{d3750d8a-574b-4fb3-b7e2-aa8af40e8231}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "BinaryReader.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
-              "RelativeToolTip": "Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-12T14:16:42.633Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MapManager.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAAAE4AAAACAAAA",
+              "DocumentIndex": 0,
+              "Title": "UI_Inventory.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
+              "ViewState": "AQIAAMMBAAAAAAAAAAAAANwBAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-27T11:35:19.107Z"
+              "WhenOpened": "2024-08-06T22:47:10.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UI_Button.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-08T02:26:42.704Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "MapManager.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-27T11:35:16.065Z"
+              "Title": "UI_WeaponSlot.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHIAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-07T07:11:25.062Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "BinaryWriter.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
-              "RelativeToolTip": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "DocumentIndex": 12,
+              "Title": "UIManager.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAtwIgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-29T19:55:07.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vector",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vector",
+              "RelativeToolTip": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vector",
+              "ViewState": "AQIAAFAHAAAAAAAAAAAuwGAHAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-08T07:38:10.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UI_Inventory.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-27T11:41:02.784Z"
+              "WhenOpened": "2024-08-08T14:09:01.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "InventoryManager.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
+              "ViewState": "AQIAABAAAAAAAAAAAAAtwC0AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-04T12:34:34.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MapEditor.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-29T22:16:16.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Item.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-07T00:37:46.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "framework.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\framework.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.h",
+              "RelativeToolTip": "Copy_Dungreed\\framework.h",
+              "ViewState": "AQIAAMIAAAAAAAAAAAAAAMgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-28T11:52:27.962Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "BinaryWriter.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-27T18:51:41.615Z"
+              "Title": "UI_Button.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAowBEAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-08T02:25:25.918Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "MapEditor.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-29T22:18:15.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "GameManager.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
+              "ViewState": "AQIAANkAAAAAAAAAAAAYwOsAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-27T18:55:52.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UIManager.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
+              "ViewState": "AQIAACAAAAAAAAAAAAAtwCgAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-29T19:55:35.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UI_Map.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-04T14:53:30.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UI_Map.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAowGAAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-04T14:19:10.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Program.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Program\\Program.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Program\\Program.cpp",
+              "ViewState": "AQIAABIAAAAAAAAAAAAtwCoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-03T18:48:48.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Dungreed.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
+              "ViewState": "AQIAABQAAAAAAAAAAAAtwDUAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-05T14:16:01.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "GameManager.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAABwAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-29T21:58:32.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UI_MiniMap.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAAAGUAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-29T19:56:34.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Dungreed.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-04T14:59:34.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "GameMode.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-05T14:16:31.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "InventoryManager.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-29T21:41:18.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Transform.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Transform.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Math\\Transform.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Transform.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Math\\Transform.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-04T07:38:49.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
               "Title": "Animation.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Animation\\Animation.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Animation\\Animation.h",
@@ -674,45 +957,151 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UI_Map.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.cpp",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAowGAAAAAPAAAA",
+              "DocumentIndex": 38,
+              "Title": "BinaryWriter.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-04T14:19:10.976Z"
+              "WhenOpened": "2024-07-27T18:51:41.615Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameManager.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.cpp",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAAAH0AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-27T18:55:52.979Z",
-              "EditorCaption": ""
+              "DocumentIndex": 31,
+              "Title": "TypeDef.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\TypeDef.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\TypeDef.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\TypeDef.h",
+              "RelativeToolTip": "Copy_Dungreed\\TypeDef.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-05T15:50:32.965Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UI_WeaponSlot.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.cpp",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAAAHIAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-07T07:11:25.062Z",
-              "EditorCaption": ""
+              "DocumentIndex": 24,
+              "Title": "Camera.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Camera\\Camera.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Camera\\Camera.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Camera\\Camera.h",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Camera\\Camera.h",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAB8AAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-05T15:50:45.403Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 25,
+              "Title": "Camera.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Camera\\Camera.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Camera\\Camera.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Camera\\Camera.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Camera\\Camera.cpp",
+              "ViewState": "AQIAADEAAAAAAAAAAAAAAEAAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-05T15:52:14.016Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "VertexShader.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\VertexShader.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Render\\VertexShader.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\VertexShader.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Render\\VertexShader.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-05T16:00:50.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "TextureVertexShader.hlsl",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\TextureVertexShader.hlsl",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Shader\\TextureVertexShader.hlsl",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\TextureVertexShader.hlsl",
+              "RelativeToolTip": "Copy_Dungreed\\Shader\\TextureVertexShader.hlsl",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2024-09-05T16:00:56.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Quad.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Object\\Quad.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Object\\Quad.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Object\\Quad.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Object\\Quad.cpp",
+              "ViewState": "AQIAACcAAAAAAAAAAAAtwEgAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-05T15:52:47.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "GlobalBuffer.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-07T00:22:07.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "BinaryWriter.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Utility\\BinaryWriter.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-27T11:41:02.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "MapManager.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-27T11:35:16.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "MapManager.cpp",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
+              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\MapManager.cpp",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAAAE4AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-27T11:35:19.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "BinaryReader.h",
+              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
+              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
+              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
+              "RelativeToolTip": "Copy_Dungreed\\Framework\\Utility\\BinaryReader.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-12T14:16:42.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
               "Title": "BinaryReader.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\BinaryReader.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\BinaryReader.cpp",
@@ -724,7 +1113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 35,
               "Title": "Animation.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Animation\\Animation.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Animation\\Animation.cpp",
@@ -735,24 +1124,8 @@
               "WhenOpened": "2024-08-12T14:49:20.858Z"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UI_Map.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Map\\UI_Map.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-04T14:53:30.428Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 40,
               "Title": "Melee.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\Melee.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\Melee.cpp",
@@ -764,31 +1137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "MapEditor.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.cpp",
-              "ViewState": "AQIAAAkBAAAAAAAAAAAAABMBAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-29T22:18:15.36Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "MapEditor.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\MapEditor.h",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAAA4AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-29T22:16:16.717Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 41,
               "Title": "MapTest.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapTest.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\MapTest.h",
@@ -800,7 +1149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 42,
               "Title": "Program.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Program\\Program.h",
@@ -812,7 +1161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 43,
               "Title": "MapTest.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\MapTest.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\MapTest.cpp",
@@ -824,19 +1173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Program.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Program\\Program.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Program\\Program.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Program\\Program.cpp",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAAAH8AAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-03T18:48:48.575Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 44,
               "Title": "GameMode.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\GameMode.h",
@@ -848,31 +1185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "framework.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\framework.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.h",
-              "RelativeToolTip": "Copy_Dungreed\\framework.h",
-              "ViewState": "AQIAAMEAAAAAAAAAAAAAAMgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-28T11:52:27.962Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Dungreed.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-04T14:59:34.779Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 48,
               "Title": "DirectXTex.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\DirectXTex\\DirectXTex.h",
               "RelativeDocumentMoniker": "DirectXTex\\DirectXTex.h",
@@ -884,7 +1197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 45,
               "Title": "framework.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\framework.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\framework.cpp",
@@ -896,7 +1209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 55,
               "Title": "UI_Option.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Option\\UI_Option.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Option\\UI_Option.cpp",
@@ -908,7 +1221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 53,
               "Title": "UI_Setting.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Setting\\UI_Setting.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Setting\\UI_Setting.h",
@@ -920,7 +1233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 54,
               "Title": "UI_Setting.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Setting\\UI_Setting.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Setting\\UI_Setting.cpp",
@@ -932,7 +1245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 49,
               "Title": "DirectXTexP.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\DirectXTex\\DirectXTexP.h",
               "RelativeDocumentMoniker": "DirectXTex\\DirectXTexP.h",
@@ -944,7 +1257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 47,
               "Title": "DirectXTexD3D11.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\DirectXTex\\DirectXTexD3D11.cpp",
               "RelativeDocumentMoniker": "DirectXTex\\DirectXTexD3D11.cpp",
@@ -956,7 +1269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 46,
               "Title": "DirectXTexD3D12.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\DirectXTex\\DirectXTexD3D12.cpp",
               "RelativeDocumentMoniker": "DirectXTex\\DirectXTexD3D12.cpp",
@@ -968,7 +1281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 52,
               "Title": "UI_WeaponSlot.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\WeaponSlot\\UI_WeaponSlot.h",
@@ -980,7 +1293,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 51,
               "Title": "Quad.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Object\\Quad.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Object\\Quad.h",
@@ -992,19 +1305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "UIManager.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.cpp",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAxwFwAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-29T19:55:07.171Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 56,
               "Title": "UI_Option.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Option\\UI_Option.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Option\\UI_Option.h",
@@ -1016,7 +1317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 50,
               "Title": "Audio.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\Audio.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\Audio.h",
@@ -1028,7 +1329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 58,
               "Title": "Player.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Player\\Player.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Player\\Player.h",
@@ -1040,19 +1341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Item.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.h",
-              "ViewState": "AQIAACIAAAAAAAAAAAAxwCkAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-07T00:37:46.12Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 60,
               "Title": "MapBasic.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Struct\\Map\\MapBasic.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Struct\\Map\\MapBasic.h",
@@ -1064,7 +1353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 59,
               "Title": "Map.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Map\\Map.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Map\\Map.h",
@@ -1076,7 +1365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 57,
               "Title": "UI_MiniMap.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.h",
@@ -1088,43 +1377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "UI_MiniMap.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\MiniMap\\UI_MiniMap.cpp",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAxwGUAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-29T19:56:34.926Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "UI_Inventory.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.h",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAxwCQAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-08T14:09:01.083Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "UI_Inventory.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Inventory\\UI_Inventory.cpp",
-              "ViewState": "AQIAAIMBAAAAAAAAAAAxwJoBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-06T22:47:10.042Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 63,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Player\\Player.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Player\\Player.cpp",
@@ -1136,7 +1389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 61,
               "Title": "DropGold.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\DropGold\\DropGold.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\DropGold\\DropGold.cpp",
@@ -1148,7 +1401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 62,
               "Title": "DropGold.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\DropGold\\DropGold.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\DropGold\\DropGold.h",
@@ -1160,7 +1413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 64,
               "Title": "ObjectManager.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\ObjectManager.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\ObjectManager.cpp",
@@ -1172,7 +1425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 65,
               "Title": "UI_PlayerHpBar.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_PlayerHpBar.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_PlayerHpBar.h",
@@ -1184,7 +1437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 66,
               "Title": "UI_EnemyHpBar.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_EnemyHpBar.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_EnemyHpBar.h",
@@ -1196,7 +1449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 67,
               "Title": "UI_Text.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Text\\UI_Text.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Text\\UI_Text.h",
@@ -1208,7 +1461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 68,
               "Title": "UI_Slider.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Slider\\UI_Slider.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Slider\\UI_Slider.h",
@@ -1220,7 +1473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 69,
               "Title": "UI_Component.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\UI_Component.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\UI_Component.h",
@@ -1232,7 +1485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 70,
               "Title": "UI_Info.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Info\\UI_Info.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Info\\UI_Info.h",
@@ -1244,7 +1497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 74,
               "Title": "UI_Slider.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Slider\\UI_Slider.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Slider\\UI_Slider.cpp",
@@ -1256,31 +1509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
-              "Title": "UI_Button.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-08T02:25:25.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
-              "Title": "UI_Button.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\UI\\Component\\Button\\UI_Button.cpp",
-              "ViewState": "AQIAABAAAAAAAAAAAABBwEAAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-08T02:26:42.704Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 72,
               "Title": "UI_PlayerHpBar.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_PlayerHpBar.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_PlayerHpBar.cpp",
@@ -1292,7 +1521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 71,
               "Title": "UI_Info.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Info\\UI_Info.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Info\\UI_Info.cpp",
@@ -1304,7 +1533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 73,
               "Title": "UI_EnemyHpBar.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_EnemyHpBar.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\HpBar\\UI_EnemyHpBar.cpp",
@@ -1316,7 +1545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 75,
               "Title": "UI_Component.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\Component\\UI_Component.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\Component\\UI_Component.cpp",
@@ -1328,7 +1557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 76,
               "Title": "Melee.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\Melee.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\Melee.h",
@@ -1340,7 +1569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 80,
               "Title": "GraySkel.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\GraySkel\\GraySkel.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\GraySkel\\GraySkel.cpp",
@@ -1352,7 +1581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 89,
               "Title": "Creature.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Creature.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Creature.h",
@@ -1364,7 +1593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 88,
               "Title": "Creature.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Creature.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Creature.cpp",
@@ -1376,7 +1605,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 79,
               "Title": "Object.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Object.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Object.cpp",
@@ -1388,7 +1617,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 84,
               "Title": "Item.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Item.cpp",
@@ -1400,7 +1629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 77,
               "Title": "Weapon.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Weapon.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Weapon.h",
@@ -1412,7 +1641,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 83,
               "Title": "Gun.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Gun\\Gun.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Gun\\Gun.cpp",
@@ -1424,7 +1653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 82,
               "Title": "Ghost.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Ghost\\Ghost.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Ghost\\Ghost.cpp",
@@ -1436,7 +1665,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 81,
               "Title": "Chest.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Chest\\Chest.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Chest\\Chest.cpp",
@@ -1448,7 +1677,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 78,
               "Title": "Etc.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Etc.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Etc.h",
@@ -1460,7 +1689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 85,
               "Title": "LockDoor.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\LockDoor.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\LockDoor.cpp",
@@ -1472,7 +1701,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 90,
               "Title": "Weapon.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Weapon.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Weapon.cpp",
@@ -1484,7 +1713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 91,
               "Title": "Melee_FireDragonKiller.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\FireDragonKiller\\Melee_FireDragonKiller.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Melee\\FireDragonKiller\\Melee_FireDragonKiller.cpp",
@@ -1496,7 +1725,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 86,
               "Title": "Wall.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Wall\\Wall.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Wall\\Wall.h",
@@ -1508,7 +1737,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 87,
               "Title": "Wall.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Wall\\Wall.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Wall\\Wall.cpp",
@@ -1520,7 +1749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 94,
               "Title": "Dash_Info.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Struct\\Dash\\Dash_Info.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Struct\\Dash\\Dash_Info.h",
@@ -1532,7 +1761,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 92,
               "Title": "Tile.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\Tile.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\Tile.h",
@@ -1544,7 +1773,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 95,
               "Title": "DashMovementComponent.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\DashMovementComponent\\DashMovementComponent.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\DashMovementComponent\\DashMovementComponent.h",
@@ -1556,7 +1785,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 97,
               "Title": "ObjectComponent.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\ObjectComponent\\ObjectComponent.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\ObjectComponent\\ObjectComponent.h",
@@ -1568,7 +1797,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 98,
               "Title": "MovementComponent.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\MovementComponent.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\MovementComponent.h",
@@ -1580,7 +1809,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 100,
               "Title": "ObjectComponent.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\ObjectComponent\\ObjectComponent.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\ObjectComponent\\ObjectComponent.cpp",
@@ -1592,7 +1821,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 101,
               "Title": "LockDoorRight.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\Right\\LockDoorRight.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\Right\\LockDoorRight.cpp",
@@ -1604,7 +1833,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 93,
               "Title": "Tile.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\Tile.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\Tile.cpp",
@@ -1616,7 +1845,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 96,
               "Title": "DashMovementComponent.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\DashMovementComponent\\DashMovementComponent.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\DashMovementComponent\\DashMovementComponent.cpp",
@@ -1628,7 +1857,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 99,
               "Title": "MovementComponent.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\MovementComponent.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\ObjectComponent\\MovementComponent\\MovementComponent.cpp",
@@ -1640,7 +1869,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 103,
               "Title": "Gun.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Gun\\Gun.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Item\\Weapon\\Gun\\Gun.h",
@@ -1652,7 +1881,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 104,
               "Title": "Map.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Map\\Map.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Map\\Map.cpp",
@@ -1664,7 +1893,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 102,
               "Title": "LockDoor.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\LockDoor.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\LockDoor.h",
@@ -1676,7 +1905,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 110,
               "Title": "Effect_Trail.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Trail\\Effect_Trail.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Effect\\Trail\\Effect_Trail.cpp",
@@ -1688,7 +1917,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 109,
               "Title": "Effect_Number.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Number\\Effect_Number.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Effect\\Number\\Effect_Number.h",
@@ -1700,7 +1929,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 105,
               "Title": "Effect_Trail.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Trail\\Effect_Trail.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Effect\\Trail\\Effect_Trail.h",
@@ -1712,7 +1941,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 111,
               "Title": "Effect.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.cpp",
@@ -1724,19 +1953,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
-              "Title": "GameManager.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\GameManager.h",
-              "ViewState": "AQIAADkAAAAAAAAAAAAxwFIAAABPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-29T21:58:32.516Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 106,
               "Title": "Etc.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Etc.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Etc.cpp",
@@ -1748,7 +1965,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 112,
               "Title": "Effect.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Effect\\Effect.h",
@@ -1760,7 +1977,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 107,
               "Title": "Creature_Status.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Struct\\Status\\Creature_Status.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Struct\\Status\\Creature_Status.h",
@@ -1772,7 +1989,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 108,
               "Title": "Effect_Number.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Effect\\Number\\Effect_Number.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Effect\\Number\\Effect_Number.cpp",
@@ -1784,7 +2001,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 113,
               "Title": "Ghost.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Ghost\\Ghost.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Ghost\\Ghost.h",
@@ -1796,7 +2013,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 114,
               "Title": "GraySkel.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\GraySkel\\GraySkel.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\GraySkel\\GraySkel.h",
@@ -1808,7 +2025,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 115,
               "Title": "Monster.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Monster.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Monster.cpp",
@@ -1820,7 +2037,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 116,
               "Title": "Monster.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Monster.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Creature\\Monster\\Monster.h",
@@ -1832,7 +2049,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 117,
               "Title": "Creature_Status.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Struct\\Status\\Creature_Status.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Struct\\Status\\Creature_Status.cpp",
@@ -1844,19 +2061,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
-              "Title": "GlobalBuffer.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
-              "RelativeToolTip": "Copy_Dungreed\\Framework\\Render\\GlobalBuffer.h",
-              "ViewState": "AQIAADEAAAAAAAAAAAAxwDgAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-07T00:22:07.363Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 118,
               "Title": "InstancingPixelShader.hlsl",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\InstancingShader\\InstancingPixelShader.hlsl",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Shader\\InstancingShader\\InstancingPixelShader.hlsl",
@@ -1868,7 +2073,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 119,
               "Title": "ObjectPixelShader.hlsl",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\ObjectShader\\ObjectPixelShader.hlsl",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Shader\\ObjectShader\\ObjectPixelShader.hlsl",
@@ -1880,7 +2085,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 120,
               "Title": "ColliderVertexShader.hlsl",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Shader\\ColliderShader\\ColliderVertexShader.hlsl",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Shader\\ColliderShader\\ColliderVertexShader.hlsl",
@@ -1892,7 +2097,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 122,
               "Title": "BackGround.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.h",
@@ -1904,19 +2109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
-              "Title": "UIManager.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\UIManager.h",
-              "ViewState": "AQIAABEAAAAAAAAAAAAxwCgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-07-29T19:55:35.97Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 121,
               "Title": "BackGround.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\BackGround\\BackGround.cpp",
@@ -1928,19 +2121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
-              "Title": "InventoryManager.h",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.h",
-              "ViewState": "AQIAABAAAAAAAAAAAAAwwCcAAABHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-04T12:34:34.945Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 123,
               "Title": "ObjectManager.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\ObjectManager.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\ObjectManager.h",
@@ -1952,43 +2133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 113,
-              "Title": "GameMode.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\GameMode.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-05T14:16:31.005Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 114,
-              "Title": "Dungreed.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\GameMode\\Dungreed.cpp",
-              "ViewState": "AQIAADUAAAAAAAAAAAAxwDsAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-05T14:16:01.73Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 115,
-              "Title": "InventoryManager.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Dungreed\\Manager\\InventoryManager.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-29T21:41:18.929Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 124,
               "Title": "Vector2.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Vector2.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Math\\Vector2.cpp",
@@ -2000,19 +2145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
-              "Title": "Transform.cpp",
-              "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Transform.cpp",
-              "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Math\\Transform.cpp",
-              "ToolTip": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Transform.cpp",
-              "RelativeToolTip": "Copy_Dungreed\\Framework\\Math\\Transform.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-04T07:38:49.942Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 120,
+              "DocumentIndex": 127,
               "Title": "vector",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\vector",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\vector",
@@ -2024,7 +2157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 118,
+              "DocumentIndex": 125,
               "Title": "Copy_Dungreed.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Copy_Dungreed.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Copy_Dungreed.cpp",
@@ -2036,7 +2169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 119,
+              "DocumentIndex": 126,
               "Title": "imstb_textedit.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\ImGui\\imstb_textedit.h",
               "RelativeDocumentMoniker": "ImGui\\imstb_textedit.h",
@@ -2048,7 +2181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 122,
+              "DocumentIndex": 129,
               "Title": "xhash",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\xhash",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\xhash",
@@ -2060,7 +2193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 121,
+              "DocumentIndex": 128,
               "Title": "MathUtility.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\MathUtility.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\MathUtility.cpp",
@@ -2072,7 +2205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 123,
+              "DocumentIndex": 130,
               "Title": "InstanceQuad.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Object\\InstanceQuad.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Object\\InstanceQuad.h",
@@ -2084,7 +2217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 124,
+              "DocumentIndex": 131,
               "Title": "InstanceQuad.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Object\\InstanceQuad.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Object\\InstanceQuad.cpp",
@@ -2096,7 +2229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 125,
+              "DocumentIndex": 132,
               "Title": "DropItem.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\DropItem\\DropItem.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\DropItem\\DropItem.cpp",
@@ -2108,7 +2241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 126,
+              "DocumentIndex": 133,
               "Title": "Vector2.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Math\\Vector2.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Math\\Vector2.h",
@@ -2120,7 +2253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 127,
+              "DocumentIndex": 134,
               "Title": "UI.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\UI\\UI.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\UI\\UI.cpp",
@@ -2132,7 +2265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 128,
+              "DocumentIndex": 135,
               "Title": "Timer.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\Timer.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\Timer.cpp",
@@ -2144,7 +2277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 131,
+              "DocumentIndex": 138,
               "Title": "Copy_Dungreed.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Copy_Dungreed.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Copy_Dungreed.h",
@@ -2156,7 +2289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 130,
+              "DocumentIndex": 137,
               "Title": "Utillity.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\Utillity.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\Utillity.h",
@@ -2168,7 +2301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 129,
+              "DocumentIndex": 136,
               "Title": "Timer.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Utility\\Timer.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Utility\\Timer.h",
@@ -2180,7 +2313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 132,
+              "DocumentIndex": 139,
               "Title": "Chest.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Etc\\Chest\\Chest.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Etc\\Chest\\Chest.h",
@@ -2192,7 +2325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 139,
+              "DocumentIndex": 146,
               "Title": "delete_scalar.cpp",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\crt\\src\\vcruntime\\delete_scalar.cpp",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\crt\\src\\vcruntime\\delete_scalar.cpp",
@@ -2204,7 +2337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 135,
+              "DocumentIndex": 142,
               "Title": "RenderTarget.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Framework\\Render\\RenderTarget.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Framework\\Render\\RenderTarget.h",
@@ -2216,7 +2349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 134,
+              "DocumentIndex": 141,
               "Title": "LockDoorTop.cpp",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\Top\\LockDoorTop.cpp",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\Top\\LockDoorTop.cpp",
@@ -2228,7 +2361,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 133,
+              "DocumentIndex": 140,
               "Title": "LockDoorTop.h",
               "DocumentMoniker": "C:\\Important\\Project\\DirectX\\Copy_Dungreed\\Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\Top\\LockDoorTop.h",
               "RelativeDocumentMoniker": "Copy_Dungreed\\Dungreed\\Object\\Tile\\LockDoor\\Top\\LockDoorTop.h",
@@ -2240,7 +2373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 138,
+              "DocumentIndex": 145,
               "Title": "delete_scalar_size.cpp",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\crt\\src\\vcruntime\\delete_scalar_size.cpp",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\crt\\src\\vcruntime\\delete_scalar_size.cpp",
@@ -2252,7 +2385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 142,
+              "DocumentIndex": 149,
               "Title": "memory",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\memory",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\memory",
@@ -2264,7 +2397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 136,
+              "DocumentIndex": 143,
               "Title": "winnt.h",
               "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\um\\winnt.h",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\um\\winnt.h",
@@ -2276,7 +2409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 137,
+              "DocumentIndex": 144,
               "Title": "xmemory",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\xmemory",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\xmemory",
@@ -2288,7 +2421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 140,
+              "DocumentIndex": 147,
               "Title": "DirectXMath.h",
               "DocumentMoniker": "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\um\\DirectXMath.h",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\um\\DirectXMath.h",
@@ -2300,7 +2433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 141,
+              "DocumentIndex": 148,
               "Title": "exception",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\exception",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\include\\exception",

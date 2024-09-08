@@ -17,6 +17,8 @@ public:
 			return _instance;
 	}
 
+	virtual void Reset();
+
 	// °ρµε Αυ°¨
 	virtual void IncreaseGold(int value);
 	virtual void DecreaseGold(int value);

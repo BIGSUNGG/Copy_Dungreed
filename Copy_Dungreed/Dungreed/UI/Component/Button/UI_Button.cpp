@@ -11,6 +11,12 @@ void UI_Button::Update()
 	// 마우스 커서가 버튼 위로 있다면
 	if (_collider->IsCollision(MOUSE_POS))
 	{
+		if (_hover == false && _hoverStartFunc != nullptr)
+			_hoverStartFunc();
+
+		if(_hoverUpdateFunc != nullptr)
+			_hoverUpdateFunc();
+
 		_hoverTexture->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 		_hoverTexture->Update();
 		_hover = true;
@@ -37,6 +43,9 @@ void UI_Button::Update()
 	}
 	else
 	{
+		if (_hover && _hoverEndFunc != nullptr)
+			_hoverEndFunc();
+
 		_texture->Update();
 		_collider->Update();
 		_hover = false;

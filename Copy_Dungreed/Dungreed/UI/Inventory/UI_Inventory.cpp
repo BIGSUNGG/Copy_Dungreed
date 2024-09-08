@@ -21,6 +21,7 @@ UI_Inventory::UI_Inventory()
 
 	}
 
+	// 무기 슬롯
 	for (int i = 0; i < 2; i++)
 	{
 		auto slot = make_shared<UI_Button>();
@@ -30,29 +31,62 @@ UI_Inventory::UI_Inventory()
 		quad->SetBottom(_curSlot[i]->Bottom() + 18);
 		slot->SetTexture(quad);
 		slot->SetHoverTexture(hoverQuad);
-		function<void()> func = [&, i]() {
-			_selectedItem = make_shared<Quad>(_weapons[i]->GetImageFile());
 
-			shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetWeaponSlot()[i]);
-			switch (weapon->GetWeaponType())
-			{
-			case Weapon::MELEE:
-				_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
-				break;
-			case Weapon::GUN:
-				break;
-			default:
-				break;
-			}
+		// 선택한 아이템 슬롯 설정
+		{
+			function<void()> func = [&, i]() {
+				_selected = true;
+				_selectedItem = INVENTORY->GetWeaponSlot()[i];
+				_selectedItemImage = make_shared<Quad>(_weapons[i]->GetImageFile());
+				_selectedSlotType = Slot_Type::WEAPON_SLOT;
+				_selectedSlotNum = i;
 
-			_selectedSlotType = Slot_Type::WEAPON_SLOT;
-			_selectedSlotNum = i;
-			return;
-		};
-		slot->SetKeyDownEvent(func);
+				if (_selectedItem == nullptr)
+					return;
+
+				shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(_selectedItem);
+				switch (weapon->GetWeaponType())
+				{
+				case Weapon::MELEE:
+					_selectedItemImage->GetTransform()->GetAngle() = (1.5f * PI);
+					break;
+				case Weapon::GUN:
+					break;
+				default:
+					break;
+				}
+				};
+			slot->SetKeyDownEvent(func);
+		}
+
+		// 마우스가 올라가 있는 슬롯 설정
+		{
+			function<void()> func = [&, i]() {
+				_hovered = true;
+				_hoveredItem = INVENTORY->GetWeaponSlot()[i];
+				_hoveredSlotType = Slot_Type::WEAPON_SLOT;
+				_hoveredSlotNum = i;
+
+				};
+			slot->SetHoverStartEvent(func);
+		}
+
+		// 마우스가 올라가 있는 슬롯 초기화
+		{
+			function<void()> func = [&, i]() {
+				_hovered = false;
+				_hoveredItem = nullptr;
+				_hoveredSlotType = Slot_Type::NONE;
+				_hoveredSlotNum = 0;
+
+				};
+			slot->SetHoverEndEvent(func);
+		}
+
 		_weaponSlot.emplace_back(slot);
 	}
-
+	
+	// 보조 무기 슬롯
 	for (int i = 0; i < 2; i++)
 	{
 		auto slot = make_shared<UI_Button>();
@@ -62,12 +96,47 @@ UI_Inventory::UI_Inventory()
 		quad->SetBottom(_curSlot[i]->Bottom() + 18);
 		slot->SetTexture(quad);
 		slot->SetHoverTexture(hoverQuad);
-		function<void()> func = [&, i]() {
-		};
-		slot->SetKeyDownEvent(func);
+
+		// 선택한 아이템 슬롯 설정
+		{
+			function<void()> func = [&, i]() {
+				_selected = true;
+				_selectedItem = nullptr;
+				_selectedItemImage = nullptr;
+				_selectedSlotType = Slot_Type::SUB_WEAPON_SLOT;
+				_selectedSlotNum = i;
+				};
+			slot->SetKeyDownEvent(func);
+		}
+
+		// 마우스가 올라가 있는 슬롯 설정
+		{
+			function<void()> func = [&, i]() {
+				_hovered = true;
+				_hoveredItem = nullptr;
+				_hoveredSlotType = Slot_Type::SUB_WEAPON_SLOT;
+				_hoveredSlotNum = i;
+
+				};
+			slot->SetHoverStartEvent(func);
+		}
+
+		// 마우스가 올라가 있는 슬롯 초기화
+		{
+			function<void()> func = [&, i]() {
+				_hovered = false;
+				_hoveredItem = nullptr;
+				_hoveredSlotType = Slot_Type::NONE;
+				_hoveredSlotNum = 0;
+
+				};
+			slot->SetHoverEndEvent(func);
+		}
+
 		_subWeaponSlot.emplace_back(slot);
 	}
 
+	// 악세사리 슬롯
 	for (int i = 0; i < 4; i++)
 	{
 		auto slot = make_shared<UI_Button>();
@@ -77,17 +146,49 @@ UI_Inventory::UI_Inventory()
 		quad->SetBottom(609);
 		slot->SetTexture(quad);
 		slot->SetHoverTexture(hoverQuad);
-		function<void()> func = [&, i]() {
-			_selectedItem = make_shared<Quad>(_accessories[i]->GetImageFile());
-			_selectedSlotType = Slot_Type::ACCESSORY_SLOT;
-			_selectedSlotNum = i;
-			return;
-		};
-		slot->SetKeyDownEvent(func);
+
+		// 선택한 아이템 슬롯 설정
+		{
+			function<void()> func = [&, i]() {
+				_selected = true;
+				_selectedItem = INVENTORY->GetAccessorySlot()[i];
+				_selectedItemImage = make_shared<Quad>(_accessories[i]->GetImageFile());
+				_selectedSlotType = Slot_Type::ACCESSORY_SLOT;
+				_selectedSlotNum = i;
+				};
+			slot->SetKeyDownEvent(func);
+		}
+
+		// 마우스가 올라가 있는 슬롯 설정
+		{
+			function<void()> func = [&, i]() {
+				_hovered = true;
+				_hoveredItem = INVENTORY->GetAccessorySlot()[i];
+				_hoveredSlotType = Slot_Type::ACCESSORY_SLOT;
+				_hoveredSlotNum = i;
+
+				};
+			slot->SetHoverStartEvent(func);
+		}
+
+		// 마우스가 올라가 있는 슬롯 초기화
+		{
+			function<void()> func = [&, i]() {
+				_hovered = false;
+				_hoveredItem = nullptr;
+				_hoveredSlotType = Slot_Type::NONE;
+				_hoveredSlotNum = 0;
+
+				};
+			slot->SetHoverEndEvent(func);
+		}
+
 		_accessorySlot.emplace_back(slot);
 	}
 
+	// 아이템 슬롯
 	for (int j = 0; j < 3; j++)
+	{
 		for (int i = 0; i < 5; i++)
 		{
 			{
@@ -98,43 +199,74 @@ UI_Inventory::UI_Inventory()
 				quad->SetBottom(432 - (132 * j));
 				slot->SetTexture(quad);
 				slot->SetHoverTexture(hoverQuad);
-				
-				int index = (j * 5) + i;
-				function<void()> func = [&, index]() {
-					_selectedItem = make_shared<Quad>(_items[index]->GetImageFile());
 
-					if (INVENTORY->GetItemSlot()[index] != nullptr)
-					{
-						switch (INVENTORY->GetItemSlot()[index]->GetItemType())
+				int index = (j * 5) + i;
+
+				// 선택한 아이템 슬롯 설정
+				{
+					function<void()> func = [&, index]() {
+						_selected = true;
+						_selectedItemImage = make_shared<Quad>(_items[index]->GetImageFile());
+						_selectedSlotType = Slot_Type::ITEM_SLOT;
+						_selectedSlotNum = index;
+						_selectedItem = INVENTORY->GetItemSlot()[index];
+
+						if (INVENTORY->GetItemSlot()[index] != nullptr)
 						{
-						case Item::WEAPON:
-						{
-							shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[index]);
-							switch (weapon->GetWeaponType())
+							switch (INVENTORY->GetItemSlot()[index]->GetItemType())
 							{
-							case Weapon::MELEE:
-								_selectedItem->GetTransform()->GetAngle() = (1.5f * PI);
-								break;
-							case Weapon::GUN:
-								break;
+							case Item::WEAPON:
+							{
+								shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[index]);
+								switch (weapon->GetWeaponType())
+								{
+								case Weapon::MELEE:
+									_selectedItemImage->GetTransform()->GetAngle() = (1.5f * PI);
+									break;
+								case Weapon::GUN:
+									break;
+								default:
+									break;
+								}
+							}
+							break;
 							default:
 								break;
 							}
 						}
-						break;
-						default:
-							break;
-						}
-					}
+						};
 
-					_selectedSlotType = Slot_Type::ITEM_SLOT;
-					_selectedSlotNum = index;
-					return;
-				};
-				slot->SetKeyDownEvent(func);
+					slot->SetKeyDownEvent(func);
+				}
+
+				// 마우스가 올라가 있는 슬롯 설정
+				{
+					function<void()> func = [&, index]() {
+						_hovered = true;
+						_hoveredItem = INVENTORY->GetItemSlot()[index];
+						_hoveredSlotType = Slot_Type::ITEM_SLOT;
+						_hoveredSlotNum = index;
+
+						};
+					slot->SetHoverStartEvent(func);
+				}
+
+				// 마우스가 올라가 있는 슬롯 초기화
+				{
+					function<void()> func = [&, index]() {
+						_hovered = false;
+						_hoveredItem = nullptr;
+						_hoveredSlotType = Slot_Type::NONE;
+						_hoveredSlotNum = 0;
+
+						};
+					slot->SetHoverEndEvent(func);
+				}
+
 				_itemSlot.emplace_back(slot);
 			}
 		}
+	}
 
 	{
 		_exitButton = make_shared<UI_Button>();
@@ -189,8 +321,8 @@ void UI_Inventory::Update()
 	for (auto& item : _items)
 		item->Update();
 
-	if (_selectedItem != nullptr)
-		_selectedItem->Update();
+	if (_selectedItemImage != nullptr)
+		_selectedItemImage->Update();
 
 	std::wstring coinText;
 	coinText += to_wstring(INVENTORY->GetCurGold());
@@ -226,8 +358,8 @@ void UI_Inventory::Render()
 	for (auto& item : _items)
 		item->Render();
 
-	if (_selectedItem != nullptr)
-		_selectedItem->Render();
+	if (_selected == true && _selectedItemImage != nullptr)
+		_selectedItemImage->Render();
 
 	_goldText->Render();
 }
@@ -324,87 +456,122 @@ void UI_Inventory::MouseEvenet()
 	// 현재 선택한 아이템 위치를 마우스와 같게함
 	if (KEY_PRESS(VK_LBUTTON))
 	{
-		if (_selectedItem == nullptr)
+		if (_selectedItemImage == nullptr)
 			return;
 
-		_selectedItem->GetTransform()->GetPos() = MOUSE_POS;
+		_selectedItemImage->GetTransform()->GetPos() = MOUSE_POS;
 	}
-	// 현재 선택한 아이템을 마우스 위에 있는 
+	// 현재 선택한 아이템을 마우스 위에 있는 인벤토리에 넣기
 	else if (KEY_UP(VK_LBUTTON))
 	{
-		if (_selectedItem == nullptr)
+		if (_selected == false || _selectedItem == nullptr)
 			return;
 
-		// 현재 선택한 아이템 구하기
-		shared_ptr<Item> selected;
-		if (_selectedSlotType == Slot_Type::WEAPON_SLOT)
-		{
-			_selectedItem->GetTransform()->GetPos() = _weaponSlot[_selectedSlotNum]->GetPos();
-			selected = INVENTORY->GetWeaponSlot()[_selectedSlotNum];
-		}
-		else if (_selectedSlotType == Slot_Type::ACCESSORY_SLOT)
-		{
-			_selectedItem->GetTransform()->GetPos() = _accessorySlot[_selectedSlotNum]->GetPos();
-			selected = INVENTORY->GetAccessorySlot()[_selectedSlotNum];
-		}
-		else if (_selectedSlotType == Slot_Type::ITEM_SLOT)
-		{
-			_selectedItem->GetTransform()->GetPos() = _itemSlot[_selectedSlotNum]->GetPos();
-			selected = INVENTORY->GetItemSlot()[_selectedSlotNum];
-		}
+		if (_hovered) // 교체할 슬롯이 있다면
+			bool unequipSuccess = SwapItem(_selectedItem, _selectedSlotType, _selectedSlotNum, _hoveredItem, _hoveredSlotType, _hoveredSlotNum);
 
-		if (selected == nullptr)
-			return;
-
-		// 아이템 교환
-		shared_ptr<Item> swapItem;
-		if (selected->GetItemType() == Item::WEAPON())
-		{
-			for (int i = 0; i < 2; i++)
-			{
-				if (_weaponSlot[i]->GetHover())
-				{
-					swapItem = INVENTORY->GetWeaponSlot()[i];
-					INVENTORY->GetWeaponSlot()[i] = dynamic_pointer_cast<Weapon>(selected);
-				}
-			}
-		}
-		else if (selected->GetItemType() == Item::ACCESSORY)
-		{
-			for (int i = 0; i < _accessorySlot.size(); i++)
-			{
-				if (_accessorySlot[i]->GetHover())
-				{
-					swapItem = INVENTORY->GetAccessorySlot()[i];
-					INVENTORY->GetAccessorySlot()[i] = dynamic_pointer_cast<Accessory>(selected);
-				}
-			}
-		}
-		for (int i = 0; i < _itemSlot.size(); i++)
-		{
-			if (_itemSlot[i]->GetHover())
-			{
-				swapItem = INVENTORY->GetItemSlot()[i];
-				INVENTORY->GetItemSlot()[i] = dynamic_pointer_cast<Item>(selected);
-			}
-		}
-
-		if (swapItem)
-		{
-			if (_selectedSlotType == Slot_Type::WEAPON_SLOT)
-			{
-				INVENTORY->GetWeaponSlot()[_selectedSlotNum] = dynamic_pointer_cast<Weapon>(swapItem);
-			}
-			else if (_selectedSlotType == Slot_Type::ACCESSORY_SLOT)
-			{
-				INVENTORY->GetAccessorySlot()[_selectedSlotNum] = dynamic_pointer_cast<Accessory>(swapItem);
-			}
-			else if (_selectedSlotType == Slot_Type::ITEM_SLOT)
-			{
-				INVENTORY->GetItemSlot()[_selectedSlotNum] = swapItem;
-			}
-		}
-
+		// 선택한 아이템 정보 초기화
+		_selected = false;
 		_selectedItem = nullptr;
+		_selectedItemImage = nullptr;
+		_selectedSlotType = Slot_Type::NONE;
+		_selectedSlotNum = 0;
 	}
 }
+
+bool UI_Inventory::SwapItem(shared_ptr<Item> aItem, Slot_Type aSlotType, int aSlotNum, shared_ptr<Item> bItem, Slot_Type bSlotType, int bSlotNum)
+{
+	// 아이템 교체가 가능한지
+	bool canSwap = CanSwap(aItem, aSlotType, bItem, bSlotType);
+	if (!canSwap)
+		return false;
+
+	// A아이템을 B슬롯에 장착
+	switch (bSlotType)
+	{
+	case Slot_Type::WEAPON_SLOT:
+		INVENTORY->GetWeaponSlot()[bSlotNum] = static_pointer_cast<Weapon>(aItem);
+		break;
+	case Slot_Type::ACCESSORY_SLOT:
+		INVENTORY->GetAccessorySlot()[bSlotNum] = static_pointer_cast<Accessory>(aItem);
+		break;
+	case Slot_Type::ITEM_SLOT:
+		INVENTORY->GetItemSlot()[bSlotNum] = aItem;
+		break;
+	default:
+		return false;
+		break;
+	}
+
+	// B아이템을 A슬롯에 장착
+	switch (aSlotType)
+	{
+	case Slot_Type::WEAPON_SLOT:
+		INVENTORY->GetWeaponSlot()[aSlotNum] = static_pointer_cast<Weapon>(bItem);
+		break;
+	case Slot_Type::ACCESSORY_SLOT:
+		INVENTORY->GetAccessorySlot()[aSlotNum] = static_pointer_cast<Accessory>(bItem);
+		break;
+	case Slot_Type::ITEM_SLOT:
+		INVENTORY->GetItemSlot()[aSlotNum] = bItem;
+		break;
+	default:
+		return false;
+		break;
+	}
+
+	return true;
+}
+
+bool UI_Inventory::CanSwap(shared_ptr<Item> aItem, Slot_Type aSlotType, shared_ptr<Item> bItem, Slot_Type bSlotType)
+{
+	return CanSwap(aItem ? aItem->GetItemType() : Item::NONE, aSlotType, bItem ? bItem->GetItemType() : Item::NONE, bSlotType);
+}
+
+bool UI_Inventory::CanSwap(Item::Item_Type aItemType, Slot_Type aSlotType, Item::Item_Type bItemType, Slot_Type bSlotType)
+{
+	// A아이템이 B아이템 슬롯에 장착이 가능한지
+	if (aItemType != Item::NONE)
+	{
+		switch (bSlotType)
+		{
+		case Slot_Type::WEAPON_SLOT:
+			if (aItemType != Item::Item_Type::WEAPON)
+				return false;
+			break;
+		case Slot_Type::ACCESSORY_SLOT:
+			if (aItemType != Item::Item_Type::ACCESSORY)
+				return false;
+			break;
+		case Slot_Type::ITEM_SLOT:
+			break;
+		default:
+			return false;
+			break;
+		}
+	}
+
+	// B아이템이 A아이템 슬롯에 장착이 가능한지
+	if (bItemType != Item::NONE)
+	{
+		switch (aSlotType)
+		{
+		case Slot_Type::WEAPON_SLOT:
+			if (bItemType != Item::Item_Type::WEAPON)
+				return false;
+			break;
+		case Slot_Type::ACCESSORY_SLOT:
+			if (bItemType != Item::Item_Type::ACCESSORY)
+				return false;
+			break;
+		case Slot_Type::ITEM_SLOT:
+			break;
+		default:
+			return false;
+			break;
+		}
+	}
+
+	return true;
+}
+

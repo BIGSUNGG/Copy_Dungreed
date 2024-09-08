@@ -94,7 +94,7 @@ void UI_Map::Refresh()
 				continue;
 
 			// 방문한 맵이라면 지도맵에 표시
-			if (_showAllMap || _visited[map.second] == true)
+			if (UI_MANAGER->GetShowAllMaps() || _visited[map.second] == true)
 			{
 				// 맵 위치 설정
 				Vector2 distance = MAP_MANAGER->GetMapPos() - Vector2(maps.first, map.first);

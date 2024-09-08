@@ -3,6 +3,12 @@
 
 InventoryManager* InventoryManager::_instance = nullptr;
 
+void InventoryManager::Reset()
+{
+	_curGold = 0;
+	_curHungry = 100;
+}
+
 void InventoryManager::IncreaseGold(int value)
 {
 	_curGold += value;

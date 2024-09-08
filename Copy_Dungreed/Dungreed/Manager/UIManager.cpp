@@ -127,6 +127,15 @@ void UIManager::PostRender()
 		_blinkQuad->Render();
 }
 
+void UIManager::ImGuiRender()
+{
+	if (ImGui::CollapsingHeader("UIManager"))
+	{
+		if (ImGui::Checkbox("Show All Maps", &_showAllMaps))
+			_map->Refresh();
+	}
+}
+
 void UIManager::Refresh()
 {
 	for (auto& ui : _uiList)

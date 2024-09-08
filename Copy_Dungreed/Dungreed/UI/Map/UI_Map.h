@@ -12,7 +12,6 @@ public:
 
 protected:
 	map<shared_ptr<Map>, bool> _visited; // 방문한 맵 리스트
-	bool _showAllMap = false; // 방문한 맵인지 상관없이 보여질 것인지
 
 	shared_ptr<RenderTarget> _filter;
 	shared_ptr<Quad> _filterQuad;
