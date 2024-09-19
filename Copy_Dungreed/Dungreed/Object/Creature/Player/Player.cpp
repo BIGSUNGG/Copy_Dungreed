@@ -152,7 +152,7 @@ void Player::MouseEvent()
 
 	// 플레이어가 커서를 바라보는 위치 구하기
 	if(_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponDirection = (MOUSE_WORLD_POS - (_texture->GetTransform()->GetPos() + _weaponSlot[_curWeaponSlot]->GetOffset())).Angle();
+		_weaponDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle();
 }
 
 void Player::SetStatic(bool sta)

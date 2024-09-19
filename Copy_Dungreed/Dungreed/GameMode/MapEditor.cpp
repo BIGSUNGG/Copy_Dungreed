@@ -287,7 +287,7 @@ void MapEditor::Init(shared_ptr<Map> editMap)
 	GAME->SetCurMap(_curMap);
 
 	// 오브젝트 설정
-	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);\
+	_curObject = MAKE_OBJECT(_objectType, _objectLevel, _objectNum);
 
 	// 카메라 설정
 	CAMERA->SetTarget(nullptr);

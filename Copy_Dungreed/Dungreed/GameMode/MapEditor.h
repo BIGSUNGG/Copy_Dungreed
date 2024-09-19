@@ -41,8 +41,8 @@ private:
 	bool _freeMode	= false; // true시 마우스 오프셋에 상관없이 오프젝트 위치 설정
 	bool _autoSave	= true; // 오브젝트 수정 시 자동으로 저장할지 여부
 
-	int _objectType		= 1; // 맵에 추가할 오브젝트 타입
-	int _objectLevel	= 0; // 맵에 추가할 오브젝트의 레벨
+	int _objectType		= Object::TILE; // 맵에 추가할 오브젝트 타입
+	int _objectLevel	= 1; // 맵에 추가할 오브젝트의 레벨
 	int _objectNum		= 0; // 맵에 추가할 오브젝트의 번호
 
 	int _mapLevel	= 0; // 수정할 맵의 레벨

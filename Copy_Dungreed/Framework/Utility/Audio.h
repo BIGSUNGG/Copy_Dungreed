@@ -78,7 +78,7 @@ private:
 
 	unordered_map<string, SoundInfo*> _soundMap;
 	map<string, bool> _type;
-	const int MAX_CHANNEL = 15;
+	const int MAX_CHANNEL = 45;
 
 	float _audioVolume = 0.5f;
 	float _bgmVolume = 1.0f;
