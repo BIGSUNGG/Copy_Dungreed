@@ -39,7 +39,8 @@ Copy Dungreed  project is replica of [Dungreed](https://store.steampowered.com/a
 
 MapEditor is a game mode for editing maps.   
 You can save changes by pressing "Save" button and load other saved maps  by pressing "Load" button  
-Also you can add objects by press "W" or "E" key and remove objects under your mouse cursur by press "S" or "D" key.
+Also you can add objects by press "W" or "E" key   
+and remove objects under your mouse cursur by press "S" or "D" key.
 
 ---
 
