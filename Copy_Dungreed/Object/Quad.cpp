@@ -85,8 +85,8 @@ void Quad::ReverseToX()
 {
     _vertices[0].uv.x = abs(_vertices[0].uv.x - 1);
     _vertices[1].uv.x = abs(_vertices[1].uv.x - 1);
-    _vertices[2].uv.x = abs(_vertices[2].uv.x - 1);
-    _vertices[3].uv.x = abs(_vertices[3].uv.x - 1);
+	_vertices[2].uv.x = abs(_vertices[2].uv.x - 1);
+	_vertices[3].uv.x = abs(_vertices[3].uv.x - 1);
 
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), sizeof(VertexUV), _vertices.size());
 }
