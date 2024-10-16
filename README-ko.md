@@ -1,3 +1,5 @@
+[English Document](https://github.com/BIGSUNGG/DirectX_2D/blob/main/README.md)
+
 <h2>Copy Dungreed 프로젝트</h2>
 
 Copy Dungreed  프로젝트는 [던그리드](https://store.steampowered.com/app/753420/Dungreed/)의 모작입니다.   

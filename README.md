@@ -1,3 +1,5 @@
+[한국어 문서](https://github.com/BIGSUNGG/DirectX_2D/blob/main/README-ko.md)
+
 <h2>Copy Dungreed Project</h2>
 
 Copy Dungreed  project is replica of [Dungreed](https://store.steampowered.com/app/753420/Dungreed/)  
