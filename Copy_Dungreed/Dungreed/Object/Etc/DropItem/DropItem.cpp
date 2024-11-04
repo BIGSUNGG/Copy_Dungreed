@@ -23,7 +23,7 @@ void DropItem::SetItem(shared_ptr<Item> item)
 
 void DropItem::AddItemToCreature(Creature* creature)
 {
-	bool success = creature->AddItem(_item);
+	bool success = creature->GainItem(_item);
 	if (success)
 		_isActive = false;
 }

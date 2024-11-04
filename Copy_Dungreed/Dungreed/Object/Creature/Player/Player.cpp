@@ -10,23 +10,19 @@ Player::Player(int level, int num)
 	_dashMovement = make_shared<DashMovementComponent>(this);
 	_dashMovement->SetDashMovementEvent(bind(&Player::DashMovement, this));
 	_dashMovement->SetDashEndEvent([&]() {
-		_movement->SetGravityRatio(1.f);
-		_movement->SetIsFalling(true); 
+		_movementComponent->SetGravityRatio(1.f);
+		_movementComponent->SetIsFalling(true); 
 		});
-	_dashMovement->SetDashSlowDownEvent([&]() {_movement->SetGravityRatio(0.4f); });
+	_dashMovement->SetDashSlowDownEvent([&]() {_movementComponent->SetGravityRatio(0.4f); });
+	_componentCollector->Add(_dashMovement);
 
 	// DamagedDuration 초기화
 	_damagedDuration = 0.2f;
 
 	// 슬롯 초기화
-	_weaponSlot.resize(2);
-	_accessorySlot.resize(4);
-	_itemSlot.resize(15);
-
-	INVENTORY->SetWeaponSlot(&_weaponSlot);
-	INVENTORY->SetCurWeaponSlot(&_curWeaponSlot);
-	INVENTORY->SetAccessorySlot(&_accessorySlot);
-	INVENTORY->SetItemSlot(&_itemSlot);
+	_inventory->SetWeaponSlotSize(2);
+	_inventory->SetAccessorySlotSize(4);
+	_inventory->SetItemSlotSize(15);
 
 	// 캐릭터 상태 초기화
 	_status.SetMaxHp(80);
@@ -44,15 +40,17 @@ Player::Player(int level, int num)
 
 void Player::Update()
 {
-	_dashInfo.Update();
+	Creature::Update();
+
 	_dustTime += DELTA_TIME;
-	_dashMovement->Update();
 
 	// 무기가 바라보는 방향 수정
-	if (_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponSlot[_curWeaponSlot]->SetShowTo(_weaponDirection);
+	auto curWeapon = GetCurWeapon();
+	if (curWeapon != nullptr)
+		curWeapon->SetShowTo(_weaponDirection);
 
-	Creature::Update();
+	_dashInfo.Update();
+
 	CheckEtcEvent();
 }
 
@@ -129,7 +127,7 @@ void Player::DoubleJumpEffect()
 void Player::StopMove()
 {
 	_dashMovement->GetCurSpeed() = 0.f;
-	_movement->GetMoveDir() = {0,0};
+	_movementComponent->GetMoveDir() = {0,0};
 }
 
 void Player::MouseEvent()
@@ -151,26 +149,27 @@ void Player::MouseEvent()
 
 
 	// 플레이어가 커서를 바라보는 위치 구하기
-	if(_weaponSlot[_curWeaponSlot] != nullptr)
+	auto curWeapon = GetCurWeapon();
+	if(curWeapon != nullptr)
 		_weaponDirection = (MOUSE_WORLD_POS - _texture->GetTransform()->GetPos()).Angle();
 }
 
 void Player::SetStatic(bool sta)
 {
-	_movement->SetStatic(sta);
-	_movement->GetMoveDir() = {0.f,0.f};
+	_movementComponent->SetStatic(sta);
+	_movementComponent->GetMoveDir() = {0.f,0.f};
 	_dashMovement->SetStatic(sta);
 	_dashMovement->GetCurSpeed() = 0.f;
 }
 
 void Player::MovementEvent()
 {
-	if (_movement->GetVelocity().x != 0) // 좌우로 이동하고 있다면
+	if (_movementComponent->GetVelocity().x != 0) // 좌우로 이동하고 있다면
 	{
 		_anim->ChangeAnimation(Creature_State::RUN);
 
 		// 땅에서 걸어다닌다면
-		if (_movement->IsFalling() == false)
+		if (_movementComponent->IsFalling() == false)
 		{
 			StepSound();
 			DustEffect();
@@ -182,13 +181,13 @@ void Player::MovementEvent()
 	}
 
 	// 계단에 있지않고 위 아래로 이동 중이라면
-	if (_movement->IsOnStair() == false && (_movement->GetVelocity().y != 0 || _dashMovement->GetCurSpeed() > 0.0f))
+	if (_movementComponent->IsOnStair() == false && (_movementComponent->GetVelocity().y != 0 || _dashMovement->GetCurSpeed() > 0.0f))
 	{
 		_anim->ChangeAnimation(Creature_State::JUMP);
 	}
 	else // 땅에 있다면
 	{
-		if (_movement->IsFalling() == true)
+		if (_movementComponent->IsFalling() == true)
 			DustEffect();
 
 		_doubleJumped = false;
@@ -234,8 +233,8 @@ void Player::Dash()
 		SOUND->Play("ui-sound-13-dash");
 
 		// Movement 설정 
-		_movement->SetGravityRatio(0.2f);
-		_movement->SetJumpPower(0.f);
+		_movementComponent->SetGravityRatio(0.2f);
+		_movementComponent->SetJumpPower(0.f);
 
 		// DashMovement 설정
 		_dashInfo.Reset();
@@ -301,7 +300,7 @@ void Player::CheckEtcEvent()
 
 void Player::DashMovement()
 {
-	_movement->SetPassFloor(true);
+	_movementComponent->SetPassFloor(true);
 
 	// 대시 이펙트를 더 만들 수 있다면
 	if (_dashInfo._trailCount < _dashInfo._trailCountMax)
@@ -332,13 +331,13 @@ void Player::Jump()
 		return;
 
 	
-	if (_movement->IsFalling() == false) // 땅에 있다면
+	if (_movementComponent->IsFalling() == false) // 땅에 있다면
 	{
 		// 점프 소리 실행
 		SOUND->Play("Jumping");
 
 		// 점프
-		_movement->Jump();
+		_movementComponent->Jump();
 
 		// 먼지 이펙트 실행
 		DustEffect();
@@ -349,7 +348,7 @@ void Player::Jump()
 		SOUND->Play("Jumping");
 
 		// 더블 점프 
-		_movement->Jump();
+		_movementComponent->Jump();
 		_doubleJumped = true;
 
 		// 더블 점프 이펙트

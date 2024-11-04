@@ -12,7 +12,8 @@ GraySkel::GraySkel(int level, int num)
 
 void GraySkel::Update()
 {
-	if (_weaponSlot[_curWeaponSlot] != nullptr)
+	auto curWeapon = GetCurWeapon();
+	if (curWeapon != nullptr)
 	{
 		float angle;
 
@@ -21,15 +22,16 @@ void GraySkel::Update()
 		else
 			angle = 0;
 
-		_weaponSlot[_curWeaponSlot]->SetShowTo(angle);
+		curWeapon->SetShowTo(angle);
 	}
 	Monster::Update();
 }
 
 void GraySkel::AI()
 {
-	if (_weaponSlot[_curWeaponSlot]->GetAnimation()->GetCurAnim() == Creature::Creature_State::ATTACK && 
-		_weaponSlot[_curWeaponSlot]->GetAnimation()->IsPlaying() == true)
+	auto curWeapon = GetCurWeapon();
+	if (curWeapon->GetAnimation()->GetCurAnim() == Creature::Creature_State::ATTACK &&
+		curWeapon->GetAnimation()->IsPlaying() == true)
 		return;
 
 	// 타겟이 공격할 수 있는 길이보다 멀리있다면
@@ -63,7 +65,7 @@ void GraySkel::AI()
 	// 타겟이 아래에 있다면
 	else if (_texture->Bottom() > _target.lock()->GetObjectTexture()->Top())
 	{
-		_movement->SetPassFloor(true);
+		_movementComponent->SetPassFloor(true);
 	}
 	// 타겟이 공격 범위안에 있다면
 	else
@@ -83,16 +85,19 @@ void GraySkel::AI()
 
 void GraySkel::Attack()
 {
-	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetBeforeChangeFunc([=](std::pair<int,int> value) 
+	auto curWeapon = GetCurWeapon();
+
+	// 애니메이션 변경 시 오브젝트 위치 재조정
+	curWeapon->GetAnimation()->SetBeforeChangeFunc([=](std::pair<int,int> value) 
 		{
-			_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos() = 
-			Vector2(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->Left(), _weaponSlot[_curWeaponSlot]->GetObjectTexture()->Bottom());
+			curWeapon->GetObjectTexture()->GetTransform()->GetPos() = 
+			Vector2(curWeapon->GetObjectTexture()->Left(), curWeapon->GetObjectTexture()->Bottom());
 		});
 	
-	_weaponSlot[_curWeaponSlot]->GetAnimation()->SetAfterChangeFunc([=](std::pair<int, int> value) 
+	curWeapon->GetAnimation()->SetAfterChangeFunc([=](std::pair<int, int> value) 
 		{
-			_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetLeft(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().x);
-			_weaponSlot[_curWeaponSlot]->GetObjectTexture()->SetBottom(_weaponSlot[_curWeaponSlot]->GetObjectTexture()->GetTransform()->GetPos().y);
+			curWeapon->GetObjectTexture()->SetLeft(curWeapon->GetObjectTexture()->GetTransform()->GetPos().x);
+			curWeapon->GetObjectTexture()->SetBottom(curWeapon->GetObjectTexture()->GetTransform()->GetPos().y);
 		});
 
 	Monster::Attack();
@@ -101,15 +106,15 @@ void GraySkel::Attack()
 void GraySkel::MovementEvent()
 {
 	// 좌우로 이동 중이라면
-	if (_movement->GetVelocity().x != 0)
+	if (_movementComponent->GetVelocity().x != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::RUN);
 
 		// 오른쪽으로 이동 중이라면
-		if (_movement->GetVelocity().x > 0 && _reverseTexture == true && _movement->IsFalling() == false)
+		if (_movementComponent->GetVelocity().x > 0 && _reverseTexture == true && _movementComponent->IsFalling() == false)
 			ReverseTexture();
 		// 왼쪽으로 이동 중이라면
-		else if (_movement->GetVelocity().x < 0 && _reverseTexture == false && _movement->IsFalling() == false)
+		else if (_movementComponent->GetVelocity().x < 0 && _reverseTexture == false && _movementComponent->IsFalling() == false)
 			ReverseTexture();
 	}
 	else // 가만히 있다면
@@ -118,7 +123,7 @@ void GraySkel::MovementEvent()
 	}
 
 	// 위 아래로 움직이는 중이라면
-	if (_movement->GetVelocity().y != 0)
+	if (_movementComponent->GetVelocity().y != 0)
 	{
 		_anim->ChangeAnimation(Creature_State::JUMP);
 	}

@@ -5,11 +5,13 @@ class Object;
 class ObjectComponent
 {
 public:
-	ObjectComponent(Object* object = nullptr);
+	ObjectComponent(Object* inOwner);
 
 	virtual void Update() abstract;
 
-	virtual void SetOwner(Object* owner) { _owner = owner; }
+public:
+	// 컴포넌트의 업데이트 우선순위
+	virtual float GetComponentPriority() = 0;
 
 protected:
 	Object* _owner;

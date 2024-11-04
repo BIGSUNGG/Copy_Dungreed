@@ -76,8 +76,8 @@ void MapTest::Init(shared_ptr<Map> testMap)
 	_player->GetObjectTexture()->GetTransform()->GetPos().x = MAP_MANAGER->GetCurMap()->GetStartPos().x;
 	_player->GetObjectTexture()->SetBottom(MAP_MANAGER->GetCurMap()->GetStartPos().y);
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
+	_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
+	_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
 
 	GAME->SetPlayer(_player);
 	GAME->SetPlaying(true);

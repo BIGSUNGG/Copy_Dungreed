@@ -215,7 +215,7 @@ UI_Inventory::UI_Inventory()
 						{
 							switch (INVENTORY->GetItemSlot()[index]->GetItemType())
 							{
-							case Item::WEAPON:
+							case Item_Type::WEAPON:
 							{
 								shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[index]);
 								switch (weapon->GetWeaponType())
@@ -423,7 +423,7 @@ void UI_Inventory::FindTexture()
 
 				switch (INVENTORY->GetItemSlot()[i]->GetItemType())
 				{
-				case Item::WEAPON:
+				case Item_Type::WEAPON:
 				{
 					shared_ptr<Weapon> weapon = dynamic_pointer_cast<Weapon>(INVENTORY->GetItemSlot()[i]);
 					switch (weapon->GetWeaponType())
@@ -468,7 +468,7 @@ void UI_Inventory::MouseEvenet()
 			return;
 
 		if (_hovered) // 교체할 슬롯이 있다면
-			bool unequipSuccess = SwapItem(_selectedItem, _selectedSlotType, _selectedSlotNum, _hoveredItem, _hoveredSlotType, _hoveredSlotNum);
+			bool swapSuccess = INVENTORY->GetInventory()->SwapItem(_selectedItem, _selectedSlotType, _selectedSlotNum, _hoveredItem, _hoveredSlotType, _hoveredSlotNum);
 
 		// 선택한 아이템 정보 초기화
 		_selected = false;
@@ -478,100 +478,3 @@ void UI_Inventory::MouseEvenet()
 		_selectedSlotNum = 0;
 	}
 }
-
-bool UI_Inventory::SwapItem(shared_ptr<Item> aItem, Slot_Type aSlotType, int aSlotNum, shared_ptr<Item> bItem, Slot_Type bSlotType, int bSlotNum)
-{
-	// 아이템 교체가 가능한지
-	bool canSwap = CanSwap(aItem, aSlotType, bItem, bSlotType);
-	if (!canSwap)
-		return false;
-
-	// A아이템을 B슬롯에 장착
-	switch (bSlotType)
-	{
-	case Slot_Type::WEAPON_SLOT:
-		INVENTORY->GetWeaponSlot()[bSlotNum] = static_pointer_cast<Weapon>(aItem);
-		break;
-	case Slot_Type::ACCESSORY_SLOT:
-		INVENTORY->GetAccessorySlot()[bSlotNum] = static_pointer_cast<Accessory>(aItem);
-		break;
-	case Slot_Type::ITEM_SLOT:
-		INVENTORY->GetItemSlot()[bSlotNum] = aItem;
-		break;
-	default:
-		return false;
-		break;
-	}
-
-	// B아이템을 A슬롯에 장착
-	switch (aSlotType)
-	{
-	case Slot_Type::WEAPON_SLOT:
-		INVENTORY->GetWeaponSlot()[aSlotNum] = static_pointer_cast<Weapon>(bItem);
-		break;
-	case Slot_Type::ACCESSORY_SLOT:
-		INVENTORY->GetAccessorySlot()[aSlotNum] = static_pointer_cast<Accessory>(bItem);
-		break;
-	case Slot_Type::ITEM_SLOT:
-		INVENTORY->GetItemSlot()[aSlotNum] = bItem;
-		break;
-	default:
-		return false;
-		break;
-	}
-
-	return true;
-}
-
-bool UI_Inventory::CanSwap(shared_ptr<Item> aItem, Slot_Type aSlotType, shared_ptr<Item> bItem, Slot_Type bSlotType)
-{
-	return CanSwap(aItem ? aItem->GetItemType() : Item::NONE, aSlotType, bItem ? bItem->GetItemType() : Item::NONE, bSlotType);
-}
-
-bool UI_Inventory::CanSwap(Item::Item_Type aItemType, Slot_Type aSlotType, Item::Item_Type bItemType, Slot_Type bSlotType)
-{
-	// A아이템이 B아이템 슬롯에 장착이 가능한지
-	if (aItemType != Item::NONE)
-	{
-		switch (bSlotType)
-		{
-		case Slot_Type::WEAPON_SLOT:
-			if (aItemType != Item::Item_Type::WEAPON)
-				return false;
-			break;
-		case Slot_Type::ACCESSORY_SLOT:
-			if (aItemType != Item::Item_Type::ACCESSORY)
-				return false;
-			break;
-		case Slot_Type::ITEM_SLOT:
-			break;
-		default:
-			return false;
-			break;
-		}
-	}
-
-	// B아이템이 A아이템 슬롯에 장착이 가능한지
-	if (bItemType != Item::NONE)
-	{
-		switch (aSlotType)
-		{
-		case Slot_Type::WEAPON_SLOT:
-			if (bItemType != Item::Item_Type::WEAPON)
-				return false;
-			break;
-		case Slot_Type::ACCESSORY_SLOT:
-			if (bItemType != Item::Item_Type::ACCESSORY)
-				return false;
-			break;
-		case Slot_Type::ITEM_SLOT:
-			break;
-		default:
-			return false;
-			break;
-		}
-	}
-
-	return true;
-}
-

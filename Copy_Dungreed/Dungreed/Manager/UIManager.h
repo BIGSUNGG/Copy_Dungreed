@@ -50,11 +50,13 @@ public:
 	bool Blink(const float& speed, const float& stopTime = 0, const XMFLOAT4& color = {0,0,0,0}, function<void()> func = nullptr);
 
 public:
-	void SetState(const UI_State& state);
-	void SetPostProssesing(XMFLOAT4 color);
+	// Getter Setter
 	char GetBlinkState() { return _blinkState; }
 	const UI_State& GetCurState() { return _state; }
 	bool GetShowAllMaps() { return _showAllMaps; }
+
+	void SetState(const UI_State& state);
+	void SetPostProssesing(XMFLOAT4 color);
 
 private:
 	UIManager();

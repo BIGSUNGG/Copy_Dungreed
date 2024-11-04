@@ -21,7 +21,7 @@ public:
 	virtual void Interaction();
 
 	// 바닥 타일을 통과할지
-	virtual void SetPassFloor(bool pass) { _movement->SetPassFloor(pass); }
+	virtual void SetPassFloor(bool pass) { _movementComponent->SetPassFloor(pass); }
 	virtual void SetCurWeaponSlot(const int& slot) { _curWeaponSlot = slot; }
 
 	virtual void StopMove();

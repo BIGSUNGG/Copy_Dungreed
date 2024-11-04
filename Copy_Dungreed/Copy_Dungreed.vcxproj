@@ -153,6 +153,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Dungreed\Instance\ComponentCollector\ComponentCollector.h" />
+    <ClInclude Include="Dungreed\Instance\Dash\Dash_Info.h" />
+    <ClInclude Include="Dungreed\Instance\Inventory\Inventory.h" />
+    <ClInclude Include="Dungreed\Instance\Map\MapBasic.h" />
+    <ClInclude Include="Dungreed\Instance\Status\Creature_Status.h" />
     <ClInclude Include="Dungreed\ObjectComponent\MovementComponent\DashMovementComponent\DashMovementComponent.h" />
     <ClInclude Include="Dungreed\Object\Etc\DropGold\DropGold.h" />
     <ClInclude Include="Dungreed\Object\Etc\DropItem\DropItem.h" />
@@ -264,6 +269,11 @@
     <ClInclude Include="Dungreed\UI\Component\Text\UI_Text.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dungreed\Instance\ComponentCollector\ComponentCollector.cpp" />
+    <ClCompile Include="Dungreed\Instance\Dash\Dash_Info.cpp" />
+    <ClCompile Include="Dungreed\Instance\Inventory\Inventory.cpp" />
+    <ClCompile Include="Dungreed\Instance\Map\MapBasic.cpp" />
+    <ClCompile Include="Dungreed\Instance\Status\Creature_Status.cpp" />
     <ClCompile Include="Dungreed\ObjectComponent\MovementComponent\DashMovementComponent\DashMovementComponent.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\DropGold\DropGold.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\DropItem\DropItem.cpp" />

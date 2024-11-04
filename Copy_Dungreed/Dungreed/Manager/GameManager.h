@@ -92,8 +92,8 @@ private:
 	bool _enableRenderCollider = false; // 콜라이더를 렌더링할지
 	bool _enableRenderUI = true; // UI를 렌더링할지
 	bool _enableUI = false; // UI를 사용할지
-	bool _pause = false; // 게임을 정지할지
-	bool _playing = false; // 플레이중인지 (false시 오브젝트들이 움직이지 않음)
+	bool _pause = false; // 게임이 정지 중인지
+	bool _playing = false; // 게임이 플레이 중인지 (false시 오브젝트들이 움직이지 않음)
 
 	bool _enableInstancing = true; // 인스턴싱된 텍스쳐를 사용할지
 	bool _enableFrustum = true; // 프러스텀 컬링을 사용할지

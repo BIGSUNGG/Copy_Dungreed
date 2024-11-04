@@ -4,5 +4,5 @@
 Accessory::Accessory(int num)
 	: Item(0, num)
 {
-	_itemType = Item::ACCESSORY;
+	_itemType = Item_Type::ACCESSORY;
 }

@@ -927,7 +927,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
 			object->SetTexture(texture);
 			weapon = GetEnemyWeapon(0, 0);
-			object->AddItem(weapon);
+			object->GainItem(weapon);
 			break;
 		case 1:		
 			object = make_shared<GraySkel>(level, num);
@@ -949,7 +949,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			texture = make_shared<Quad>(object->GetAnimation()->_animList[Creature::Creature_State::IDLE][0]);
 			object->SetTexture(texture);
 			weapon = GetEnemyWeapon(0, 1);
-			object->AddItem(weapon);
+			object->GainItem(weapon);
 			break;
 		case 2:
 			object = make_shared<Ghost>(level, num);
@@ -1416,28 +1416,28 @@ shared_ptr<Weapon> ObjectManager::GetPlayerWeapon(int type, int num)
 			weapon->SetAttackEffect(effect);
 			weapon->SetAppendAngle({ -0.1f,1.2f });
 			weapon->CreateAnimation();
-			weapon->GetAnimation()->_animSpeed[Item::Item_State::IDLE] = vector<float>(12, 0.1f);
-			weapon->GetAnimation()->_animState[Item::Item_State::IDLE] = Animation::Anim_State::LOOP;
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword01.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword02.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword03.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword04.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword05.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword06.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword07.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword08.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword09.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword10.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword11.png");
+			weapon->GetAnimation()->_animSpeed[Item_State::IDLE] = vector<float>(12, 0.1f);
+			weapon->GetAnimation()->_animState[Item_State::IDLE] = Animation::Anim_State::LOOP;
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword01.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword02.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword03.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword04.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword05.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword06.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword07.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword08.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword09.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword10.png");
+			weapon->GetAnimation()->_animList[Item_State::IDLE].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSword11.png");
 
-			weapon->GetAnimation()->_animSpeed[Item::Item_State::SKILL] = vector<float>(3, 0.1f);
-			weapon->GetAnimation()->_animState[Item::Item_State::SKILL] = Animation::Anim_State::END;
-			weapon->GetAnimation()->_animList[Item::Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill00.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill01.png");
-			weapon->GetAnimation()->_animList[Item::Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill02.png");
+			weapon->GetAnimation()->_animSpeed[Item_State::SKILL] = vector<float>(3, 0.1f);
+			weapon->GetAnimation()->_animState[Item_State::SKILL] = Animation::Anim_State::END;
+			weapon->GetAnimation()->_animList[Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill00.png");
+			weapon->GetAnimation()->_animList[Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill01.png");
+			weapon->GetAnimation()->_animList[Item_State::SKILL].push_back(L"Resource/Weapon/Melee/CosmosSword/CosmosSwordSkill02.png");
 
-			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[Item::Item_State::IDLE][BASIC]);
+			texture = make_shared<Quad>(weapon->GetAnimation()->_animList[Item_State::IDLE][BASIC]);
 			SOUND->Add("CosmicDash", "Resource/Sound/Weapon/Swing/CosmicDash.wav");
 			weapon->SetAttackSound("CosmicDash");
 			weapon->SetIconTexture(L"Resource/Weapon/Melee/CosmosSword/CosmosSword00.png");

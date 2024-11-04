@@ -4,7 +4,7 @@
 Weapon::Weapon(int level, int num)
 	: Item(level, num)
 {
-	_itemType = WEAPON;
+	_itemType = Item_Type::WEAPON;
 }
 
 void Weapon::Update()
@@ -62,7 +62,7 @@ void Weapon::Skill()
 	_skill();
 
 	if (_anim != nullptr)
-		_anim->ChangeAnimation(Item::Item_State::SKILL);
+		_anim->ChangeAnimation(Item_State::SKILL);
 }
 
 bool Weapon::GiveDamage(int damage, shared_ptr<Creature> target)

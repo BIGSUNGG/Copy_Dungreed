@@ -5,6 +5,7 @@ Object::Object(int level, int num)
 	: _level(level)
 	, _num(num)
 {
+	_componentCollector = make_shared<ComponentCollector>(this);
 	_buffer = make_shared<ObjectBuffer>();
 }
 
@@ -12,6 +13,8 @@ void Object::Update()
 {
 	if (_anim != nullptr)
 		_anim->Update();
+
+	_componentCollector->Update();
 
 	_texture->Update();
 	_collider->Update();

@@ -17,6 +17,8 @@ public:
 			return _instance;
 	}
 
+public:
+	// 정보 초기화
 	virtual void Reset();
 
 	// 골드 증감
@@ -29,22 +31,18 @@ public:
 
 public:
 	// Getter Setter
-	void SetCurWeaponSlot(int* slot) { _curWeaponSlot = slot; }
-	void SetItemSlot(vector<shared_ptr<Item>>* slot) { _itemSlot = slot; }
-	void SetWeaponSlot(vector<shared_ptr<Weapon>>* slot) { _weaponSlot = slot; }
-	void SetAccessorySlot(vector<shared_ptr<Accessory>>* slot) { _accessory = slot; }
+	FORCEINLINE const int& GetCurGold() { return _curGold; }
+	FORCEINLINE const int& GetCurHungry() { return _curHungry; }
+	FORCEINLINE const int& GetHungryMax() { return _maxHungry; }
+	FORCEINLINE const int& GetPlayerLevel() { return _curPlayerLevel; }
+	FORCEINLINE const float& GetInteractionDistance() { return _interactionDistance; }
 
-	const int& GetCurGold() { return _curGold; }
-	const int& GetCurHungry() { return _curHungry; }
-	const int& GetHungryMax() { return _maxHungry; }
-	const int& GetPlayerLevel() { return _curPlayerLevel; }
-	const int& GetCurWeaponSlot() { return *_curWeaponSlot; }
-	const float& GetInteractionDistance() { return _interactionDistance; }
-	shared_ptr<Weapon> GetCurWeapon() { return _weaponSlot->operator[](*_curWeaponSlot); }
-
-	vector<shared_ptr<Item>>& GetItemSlot() { return *_itemSlot; }
-	vector<shared_ptr<Weapon>>& GetWeaponSlot() { return *_weaponSlot; }
-	vector<shared_ptr<Accessory>>& GetAccessorySlot() { return *_accessory; }
+	FORCEINLINE const int& GetCurWeaponSlot() { return GAME->GetPlayer()->GetCurWeaponSlotIndex(); }
+	FORCEINLINE shared_ptr<Weapon> GetCurWeapon() { return GAME->GetPlayer()->GetCurWeapon(); }
+	FORCEINLINE const shared_ptr<Inventory>& GetInventory() { return GAME->GetPlayer()->GetInventory(); }
+	FORCEINLINE const vector<shared_ptr<Item>>& GetItemSlot() { return GAME->GetPlayer()->GetInventory()->GetItemSlot(); }
+	FORCEINLINE const vector<shared_ptr<Weapon>>& GetWeaponSlot() { return GAME->GetPlayer()->GetInventory()->GetWeaponSlot(); }
+	FORCEINLINE const vector<shared_ptr<Accessory>>& GetAccessorySlot() { return GAME->GetPlayer()->GetInventory()->GetAccessorySlot(); }
 
 private:
 	InventoryManager();
@@ -58,10 +56,5 @@ private:
 	int _curHungry = 100; // 현재 허기 값
 	int _maxHungry = 100; // 최대 허기 값
 	int _curPlayerLevel = 12; // 현재 플레이어 레벨
-
-	int* _curWeaponSlot; // 현재 들고있는 무기 슬롯
-	vector<shared_ptr<Weapon>>* _weaponSlot = nullptr; // 플레이어의 무기 슬롯 
-	vector<shared_ptr<Accessory>>* _accessory = nullptr; // 플레이어의 악세사리 슬롯
-	vector<shared_ptr<Item>>* _itemSlot = nullptr; // 아이템 슬롯
 };
 

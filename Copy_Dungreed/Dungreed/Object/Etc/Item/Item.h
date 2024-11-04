@@ -2,25 +2,24 @@
 
 class Creature;
 
+enum class Item_Type
+{
+	WEAPON,
+	SUB_WEAPON,
+	ACCESSORY,
+	NONE
+};
+
+enum Item_State : int
+{
+	IDLE,
+	ATTACK,
+	SKILL,
+	DAMAGED,
+};
+
 class Item : public Etc
 {
-public:
-	enum Item_Type
-	{
-		WEAPON,
-		SUB_WEAPON,
-		ACCESSORY,
-		NONE
-	};
-
-	enum Item_State
-	{
-		IDLE,
-		ATTACK,
-		SKILL,
-		DAMAGED,
-	};
-
 public:
 	Item(int level, int num);
 	virtual ~Item();
@@ -42,7 +41,7 @@ public:
 	const Item_Type& GetItemType() { return _itemType; }
 
 protected:
-	Item_Type _itemType = ACCESSORY; 
+	Item_Type _itemType = Item_Type::ACCESSORY;
 
 	weak_ptr<Creature> _owner; // 오너 캐릭터
 	shared_ptr<Quad> _iconTexture; // 아이템 아이콘 이미지	 

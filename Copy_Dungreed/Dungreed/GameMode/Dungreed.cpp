@@ -40,12 +40,12 @@ void Dungreed::ImGuiRender()
 	if (ImGui::CollapsingHeader("Player"))
 	{
 		if(ImGui::Button("MELEE"))
-			_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
+			_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
 
 		ImGui::SameLine();
 
 		if(ImGui::Button("GUN"))
-			_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+			_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 
 		ImGui::Text("Pos : %0.1f , %0.1f", _player->GetObjectTexture()->GetTransform()->GetPos().x, _player->GetObjectTexture()->GetTransform()->GetPos().y);
 		ImGui::Text("Velocity : %0.1f , %0.1f", _player->GetMovementComponent()->GetVelocity().x, _player->GetMovementComponent()->GetVelocity().y);
@@ -63,10 +63,10 @@ void Dungreed::Init()
 	// 플레이어 추가
 	_player = dynamic_pointer_cast<Player>(MAKE_PLAYER(2));
 	_player->SetSpawnPos(_player->GetObjectTexture()->GetTransform()->GetPos());
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
-	_player->AddItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
+	_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 2));
+	_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 1));
+	_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::MELEE, 0));
+	_player->GainItem(MAKE_PLAYER_WEAPON(Weapon::Weapon_Type::GUN, 0));
 	_player->AddOnDeathEvent(bind(&Dungreed::Init, this));
 
 	GAME->SetPlayer(_player);

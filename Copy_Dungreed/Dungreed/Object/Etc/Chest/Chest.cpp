@@ -71,21 +71,21 @@ void Chest::MakeRandomItem()
 		char itemType = rand() % 3;
 		char itemNum = rand() % 10;
 
-		switch (itemType)
+		switch (static_cast<Item_Type>(itemType))
 		{
-		case Item::WEAPON:
+		case Item_Type::WEAPON:
 		{
 			char weaponType = rand() % 2;
 			randomItem = OBJ_MANAGER->GetPlayerWeapon(weaponType, itemNum);
 		}
 		break;
-		case Item::SUB_WEAPON:
+		case Item_Type::SUB_WEAPON:
 			randomItem = OBJ_MANAGER->GetPlayerSubWeapon(itemNum);
 			break;
-		case Item::ACCESSORY:
+		case Item_Type::ACCESSORY:
 			randomItem = OBJ_MANAGER->GetPlayerAccessory(itemNum);
 			break;
-		case Item::NONE:
+		case Item_Type::NONE:
 			break;
 		default:
 			break;

@@ -10,6 +10,7 @@
 #include <windows.h>
 // C 런타임 헤더 파일입니다.
 #include <unordered_map>
+#include <unordered_set>
 #include <functional>
 #include <algorithm>
 #include <iostream>
@@ -120,9 +121,11 @@ using namespace std;
 #include "Object/InstanceQuad.h"
 
 // Struct
-#include "Dungreed/Struct/Status/Creature_Status.h"
-#include "Dungreed/Struct/Dash/Dash_Info.h"
-#include "Dungreed/Struct/Map/MapBasic.h"
+#include "Dungreed/Instance/Status/Creature_Status.h"
+#include "Dungreed/Instance/Dash/Dash_Info.h"
+#include "Dungreed/Instance/Map/MapBasic.h"
+#include "Dungreed/Instance/Inventory/Inventory.h"
+#include "Dungreed/Instance/ComponentCollector/ComponentCollector.h"
 
 // ObjComponent
 #include "Dungreed/ObjectComponent/ObjectComponent.h"

@@ -9,8 +9,11 @@ public:
 	virtual void Dash();
 	virtual void DashEnd();
 
-	bool IsSlowDown() { return _slowDown; }
+public:
+	// Getter Setter
+	virtual float GetComponentPriority() override { return 2.f; }
 	float& GetCurSpeed() { return _curDashSpeed; }
+	bool IsSlowDown() { return _slowDown; }
 
 	virtual void SetDirection(const Vector2& vec);
 	virtual void SetMaxSpeed(float speed) { _maxDashSpeed = speed; }

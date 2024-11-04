@@ -7,8 +7,8 @@ Ghost::Ghost(int level, int num)
 	_status.SetMaxHp(15);
 	_status._speed = 300.0f;
 
-	_movement->SetGravityRatio(0.0f);
-	_movement->SetCollision(false);
+	_movementComponent->SetGravityRatio(0.0f);
+	_movementComponent->SetCollision(false);
 	
 }
 
@@ -25,7 +25,7 @@ void Ghost::AI()
 		_anim->ChangeAnimation(Creature::ATTACK);
 
 		// 공격 방향으로 돌진
-		_movement->GetMoveDir() += _attackDirection * _attackSpeed;
+		_movementComponent->GetMoveDir() += _attackDirection * _attackSpeed;
 		Attack();
 
 		// 현재 공격 지속 시간 확인
@@ -79,7 +79,7 @@ void Ghost::MoveTo(shared_ptr<Object> object)
 	_attackDirection = object->GetPos() - this->GetPos();
 	_attackDirection.Normalize();
 
-	_movement->GetMoveDir() += _attackDirection * _status._speed;
+	_movementComponent->GetMoveDir() += _attackDirection * _status._speed;
 }
 
 void Ghost::Attack()

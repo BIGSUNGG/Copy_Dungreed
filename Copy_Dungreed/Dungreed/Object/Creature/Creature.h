@@ -35,6 +35,9 @@ public:
 	virtual void Death();
 
 public:
+	// 아이템 흭득 시 호출
+	virtual bool GainItem(shared_ptr<Item> item);
+
 	// 공격 시 호출
 	virtual void Attack();
 	// 스킬 사용 시 호출
@@ -51,14 +54,17 @@ public:
 
 public:
 	// Getter Setter
-	virtual bool AddItem(shared_ptr<Item> weapon);
 	void AddOnDeathEvent(std::function<void()> Func) { _deathEvent.push_back(Func); }
 
-	bool IsFalling() { return _movement->IsFalling(); }
+	bool IsFalling() { return _movementComponent->IsFalling(); }
 
 	const Creature_Status& GetStatus() { return _status; }
 	Creature_Type& GetCreatureType() { return _creatureType; }
-	shared_ptr<MovementComponent> GetMovementComponent() { return _movement; }
+	shared_ptr<MovementComponent> GetMovementComponent() { return _movementComponent; }
+	
+	const shared_ptr<Inventory> GetInventory() const { return _inventory; }
+	shared_ptr<Weapon> GetCurWeapon() { return _inventory->GetWeaponSlot()[_curWeaponSlot]; }
+	int GetCurWeaponSlotIndex() { return _curWeaponSlot; }
 
 	virtual void SetSpawnPos(Vector2 pos) override;
 
@@ -66,11 +72,9 @@ protected:
 	Creature_Type _creatureType = ENEMY;
 
 	int _curWeaponSlot = 0; // 현재 들고 있는 무기 슬롯 번호
-	vector<shared_ptr<Weapon>> _weaponSlot; // 무기 슬롯
-	vector<shared_ptr<Accessory>> _accessorySlot; // 악세사리 슬롯
-	vector<shared_ptr<Item>> _itemSlot; // 아이템 슬롯
-
-	shared_ptr<MovementComponent> _movement; // 이동 컴포넌트
+	
+	shared_ptr<Inventory> _inventory;
+	shared_ptr<MovementComponent> _movementComponent; // 이동 컴포넌트
 
 	Creature_Status _status; // 캐릭터 상태
 

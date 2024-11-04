@@ -22,14 +22,15 @@ protected:
 
 public:
 	// Getter Setter
-	bool IsOnStair() { return _onStair; }
-	bool IsFalling() { return _isFalling; }
+	virtual float GetComponentPriority() override { return 1.f; }
 	Vector2& GetMoveDir() { return _moveDir; }
 	const Vector2& GetVelocity() { return _curVelocity; }
+	bool IsOnStair() { return _onStair; }
+	bool IsFalling() { return _isFalling; }
 
-	void SetIsFalling(bool value) { _isFalling = value; }
 	void SetMovementEvent(function<void()> func) { _movementEvent = func; }
 	void SetCollisionEvent(function<void()> func) { _collisionEvent = func; }
+	void SetIsFalling(bool value) { _isFalling = value; }
 	void SetBeforeMove(const Vector2& vec);
 	void SetJumpPower(float power) { _curJumpPower = power; }
 	void SetJumpPowerMax(float power) { _maxJumpPower = power; }
@@ -43,17 +44,20 @@ protected:
 	function<void()> _movementEvent; // 이동 시 호출
 	function<void()> _collisionEvent; // 다른 타일에 충돌 시 호출
 
+	// Position
 	Vector2 _curVelocity; // 현재 속도
 	Vector2 _moveDir; // 이동할 방향
 	Vector2 _beforeMovePos; // 움직이기 전의 위치
 
+	// Movement
 	float _curJumpPower = 0.0f; // 현재 점프하는 힘
 	float _maxJumpPower = 1800.0f; // 점프하는 힘
 	float _gravityPower = 5000.0f; // 중력 힘
 	float _gravityRatio = 1.0f; // 중력 비율
 
+	// State
 	bool _static = false;
-	bool _collision = true; // 다른 타일과 충돌중인지
+	bool _collision = true; // 다른 타일과 충돌 체크를 할 것인지
 	bool _isFalling = false; // 공중에 있는지
 	bool _passFloor = false; // 바닥을 통과할지
 	bool _passTile = false; // 타일을 통과할지

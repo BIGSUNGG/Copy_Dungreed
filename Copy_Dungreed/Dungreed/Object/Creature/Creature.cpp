@@ -4,18 +4,18 @@
 Creature::Creature(int level, int num)
 	: Object(level, num)
 {
-	_movement = make_shared<MovementComponent>(this);
-	_movement->SetMovementEvent(bind(&Creature::MovementEvent, this));
-
 	_objectType = Object::Object_Type::CREATURE;
-	_weaponSlot.resize(1);
+
+	_inventory = make_shared<Inventory>(this);
+	_inventory->SetWeaponSlotSize(1);
+
+	_movementComponent = make_shared<MovementComponent>(this);
+	_movementComponent->SetMovementEvent(bind(&Creature::MovementEvent, this));
+	_componentCollector->Add(_movementComponent);
 }
 
 void Creature::Update()
 {
-	// 컴포넌트
-	_movement->Update();
-
 	Object::Update();
 
 	// 데미지 버퍼
@@ -24,7 +24,7 @@ void Creature::Update()
 		_buffer->_data.selected = 0;
 
 	// 무기 틱
-	for (auto& wepaon : _weaponSlot)
+	for (auto& wepaon : _inventory->GetWeaponSlot())
 	{
 		if (wepaon == nullptr)
 			continue;
@@ -40,17 +40,20 @@ void Creature::Update()
 void Creature::Render()
 {
 	// 현재 들고 있는 무기 렌더링
-	if (_weaponSlot[_curWeaponSlot] != nullptr)
+	auto curWeapon = GetCurWeapon();
+
+	if (curWeapon != nullptr)
 	{
 		// 무기를 플레이어보다 먼저 렌더링할지
-		bool weaponRender = _weaponSlot[_curWeaponSlot]->GetFastRender();
+		bool weaponRender = curWeapon->GetFastRender();
+
 		if (!weaponRender)
-			_weaponSlot[_curWeaponSlot]->Render();
+			curWeapon->Render();
 
 		Object::Render();
 
 		if (weaponRender)
-			_weaponSlot[_curWeaponSlot]->Render();
+			curWeapon->Render();
 	}
 	else
 		Object::Render();
@@ -61,8 +64,9 @@ void Creature::PostRender()
 	Object::PostRender();
 
 	// 무기 PostRender
-	if(_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponSlot[_curWeaponSlot]->PostRender();
+	auto curWeapon = GetCurWeapon();
+	if (curWeapon != nullptr)
+		curWeapon->PostRender();
 }
 
 float Creature::TakeDamage(float baseDamage, shared_ptr<Creature> attacker)
@@ -128,8 +132,9 @@ void Creature::Death()
 void Creature::Attack()
 {
 	// 현재 들고있는 무기로 공격
-	if (_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponSlot[_curWeaponSlot]->Attack();
+	auto curWeapon = GetCurWeapon();
+	if (curWeapon != nullptr)
+		curWeapon->Attack();
 
 	_anim->ChangeAnimation(Creature::Creature_State::ATTACK);
 }
@@ -137,8 +142,9 @@ void Creature::Attack()
 void Creature::Skill()
 {
 	// 현재 들고있는 무기의 스킬 사용
-	if (_weaponSlot[_curWeaponSlot] != nullptr)
-		_weaponSlot[_curWeaponSlot]->Skill();
+	auto curWeapon = GetCurWeapon();
+	if (curWeapon != nullptr)
+		curWeapon->Skill();
 
 	_anim->ChangeAnimation(Creature::Creature_State::SKILL);
 }
@@ -146,85 +152,29 @@ void Creature::Skill()
 void Creature::MoveLeft()
 {
 	// 왼쪽으로 이동
-	_movement->GetMoveDir().x -= _status._speed;
+	_movementComponent->GetMoveDir().x -= _status._speed;
 }
 
 void Creature::MoveRight()
 {
 	// 오른쪽으로 이동
-	_movement->GetMoveDir().x += _status._speed;
+	_movementComponent->GetMoveDir().x += _status._speed;
 }
 
 void Creature::Jump()
 {
 	// 공중에 있지 않다면 점프
-	if (_movement->IsFalling() == false)
-		_movement->Jump();
+	if (_movementComponent->IsFalling() == false)
+		_movementComponent->Jump();
 }
 
 void Creature::SetSpawnPos(Vector2 pos)
 {
 	Object::SetSpawnPos(pos);
-	_movement->SetBeforeMove(pos);
+	_movementComponent->SetBeforeMove(pos);
 }
 
-bool Creature::AddItem(shared_ptr<Item> item)
+bool Creature::GainItem(shared_ptr<Item> item)
 {
-	// 아이템 주인 설정
-	item->SetOwner(dynamic_pointer_cast<Creature>(shared_from_this()));
-
-
-	// 아이템 타입에 맞는 아이템 슬롯이 비어있다면 자동으로 장착
-	bool added = false;
-	switch (item->GetItemType())
-	{
-	case Item::WEAPON:
-	{
-		auto weapon = dynamic_pointer_cast<Weapon>(item);
-		for (auto& slot : _weaponSlot)
-		{
-			if (slot == nullptr)
-			{
-				slot = weapon;
-				added = true;
-				break;
-			}
-		}
-	}
-		break;
-	case Item::ACCESSORY:
-	{
-		auto accessory = dynamic_pointer_cast<Accessory>(item);
-		for (auto& slot : _accessorySlot)
-		{
-			if (slot == nullptr)
-			{
-				slot = accessory;
-				added = true;
-				break;
-			}
-		}
-	}
-		break;
-	case Item::NONE:
-		break;
-	default:
-		break;
-	}
-
-	// 비어있는 슬롯이 없었다면
-	if (added == false)
-	{
-		for (auto& slot : _itemSlot)
-		{
-			if (slot == nullptr)
-			{
-				slot = item;
-				added = true;
-				break;
-			}
-		}
-	}
-
-	return added;
+	return _inventory->AddOrEquipItem(item).first != Slot_Type::NONE;
 }

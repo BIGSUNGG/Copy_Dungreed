@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "ObjectComponent.h"
 
-ObjectComponent::ObjectComponent(Object* object)
+ObjectComponent::ObjectComponent(Object* inOwner)
 {
-	SetOwner(object);
+	_owner = inOwner;
 }
