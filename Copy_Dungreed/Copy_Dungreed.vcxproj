@@ -166,9 +166,7 @@
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.h" />
     <ClInclude Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.h" />
     <ClInclude Include="Dungreed\Object\Effect\Number\Effect_Number.h" />
-    <ClInclude Include="Dungreed\Struct\Map\MapBasic.h" />
     <ClInclude Include="Framework\Utility\Audio.h" />
-    <ClInclude Include="Dungreed\Struct\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\GameMode\MapTest.h" />
     <ClInclude Include="Dungreed\Object\Etc\Bullet\Bullet.h" />
     <ClInclude Include="Dungreed\Object\Etc\Etc.h" />
@@ -240,7 +238,6 @@
     <ClInclude Include="Framework\State\StateManager.h" />
     <ClInclude Include="Framework\Render\Shader.h" />
     <ClInclude Include="Framework\Render\ShaderManager.h" />
-    <ClInclude Include="Dungreed\Struct\Status\Creature_Status.h" />
     <ClInclude Include="Dungreed\Object\Etc\Item\SubWeapon\SubWeapon.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Utility\Timer.h" />
@@ -282,9 +279,7 @@
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Right\LockDoorRight.cpp" />
     <ClCompile Include="Dungreed\Object\Tile\LockDoor\Top\LockDoorTop.cpp" />
     <ClCompile Include="Dungreed\Object\Effect\Number\Effect_Number.cpp" />
-    <ClCompile Include="Dungreed\Struct\Map\MapBasic.cpp" />
     <ClCompile Include="Framework\Utility\Audio.cpp" />
-    <ClCompile Include="Dungreed\Struct\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\GameMode\MapTest.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\Bullet\Bullet.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\Etc.cpp" />
@@ -361,7 +356,6 @@
     <ClCompile Include="Dungreed\Manager\ObjectManager.cpp" />
     <ClCompile Include="Dungreed\Object\Wall\Wall.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\Item\Weapon\Weapon.cpp" />
-    <ClCompile Include="Dungreed\Struct\Status\Creature_Status.cpp" />
     <ClCompile Include="Framework\Render\RenderTarget.cpp" />
     <ClCompile Include="Dungreed\Manager\UIManager.cpp" />
     <ClCompile Include="Dungreed\UI\UI.cpp" />
