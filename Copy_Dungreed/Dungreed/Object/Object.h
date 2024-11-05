@@ -1,6 +1,6 @@
 #pragma once
 
-class Map;
+class StageMap;
 
 class Object : public enable_shared_from_this<Object>
 {
@@ -33,7 +33,7 @@ public:
 public:
 	// Getter Setter
 	virtual void SetSpawnPos(Vector2 pos);
-	virtual void SetOwnerMap(shared_ptr<Map> map);
+	virtual void SetOwnerMap(shared_ptr<StageMap> map);
 	virtual void SetTexture(shared_ptr<Quad> texture);
 	virtual void SetCollider(shared_ptr<RectCollider> collider = nullptr);
 
@@ -67,7 +67,7 @@ protected:
 	bool _reverseTexture = false; // 텍스쳐가 반전되었는지
 	bool _render = true; // 렌더링될 지 
 
-	weak_ptr<Map> _ownerMap; // 오브젝트를 포함하고 있는 맵
+	weak_ptr<StageMap> _ownerMap; // 오브젝트를 포함하고 있는 맵
 	shared_ptr<Quad> _texture; // 렌더링할 텍스쳐
 	shared_ptr<Animation> _anim; // 텍스쳐의 애니메이션
 	shared_ptr<ObjectBuffer> _buffer; // 텍스쳐의 버퍼

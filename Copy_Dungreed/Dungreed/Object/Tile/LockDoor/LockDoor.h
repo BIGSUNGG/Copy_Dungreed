@@ -23,7 +23,7 @@ protected:
 
 public:
 	// Getter Setter
-	virtual void SetOwnerMap(shared_ptr<Map> map) override;
+	virtual void SetOwnerMap(shared_ptr<StageMap> map) override;
 
 protected:
 	Vector2 _moveDirection = { 0,0 }; // 미로에서 이동할 위치

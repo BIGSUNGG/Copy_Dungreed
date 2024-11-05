@@ -49,7 +49,7 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 
 	switch (level)
 	{
-	case Map::LEVEL_00:
+	case StageMap::LEVEL_00:
 		switch (num)
 		{
 		case 0:
@@ -69,7 +69,7 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_01:
+	case StageMap::LEVEL_01:
 		switch (num)
 		{
 		case 0:
@@ -79,19 +79,19 @@ shared_ptr<BackGround> ObjectManager::GetBackGround(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_02:
+	case StageMap::LEVEL_02:
 		break;
-	case Map::LEVEL_03:
+	case StageMap::LEVEL_03:
 		break;
-	case Map::LEVEL_04:
+	case StageMap::LEVEL_04:
 		break;
-	case Map::LEVEL_05:
+	case StageMap::LEVEL_05:
 		break;
-	case Map::LEVEL_06:
+	case StageMap::LEVEL_06:
 		break;
-	case Map::LEVEL_07:
+	case StageMap::LEVEL_07:
 		break;
-	case Map::PUBLIC:
+	case StageMap::PUBLIC:
 		break;
 	default:
 		break;
@@ -116,7 +116,7 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 
 	switch (level)
 	{
-	case Map::LEVEL_00:
+	case StageMap::LEVEL_00:
 		switch (num)
 		{
 		case 0:
@@ -133,7 +133,7 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_01:
+	case StageMap::LEVEL_01:
 		switch (num)
 		{
 		case 0:
@@ -314,19 +314,19 @@ shared_ptr<Wall> ObjectManager::GetWall(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_02:
+	case StageMap::LEVEL_02:
 		break;
-	case Map::LEVEL_03:
+	case StageMap::LEVEL_03:
 		break;
-	case Map::LEVEL_04:
+	case StageMap::LEVEL_04:
 		break;
-	case Map::LEVEL_05:
+	case StageMap::LEVEL_05:
 		break;
-	case Map::LEVEL_06:
+	case StageMap::LEVEL_06:
 		break;
-	case Map::LEVEL_07:
+	case StageMap::LEVEL_07:
 		break;
-	case Map::PUBLIC:
+	case StageMap::PUBLIC:
 		switch (num)
 		{
 		case 0:
@@ -359,7 +359,7 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 
 	switch (level)
 	{
-	case Map::LEVEL_00:
+	case StageMap::LEVEL_00:
 		switch (num)
 		{
 		case 0:
@@ -480,7 +480,7 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_01:
+	case StageMap::LEVEL_01:
 		switch (num)
 		{
 		case 0:
@@ -718,19 +718,19 @@ shared_ptr<Tile> ObjectManager::GetTile(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_02:
+	case StageMap::LEVEL_02:
 		break;
-	case Map::LEVEL_03:
+	case StageMap::LEVEL_03:
 		break;
-	case Map::LEVEL_04:
+	case StageMap::LEVEL_04:
 		break;
-	case Map::LEVEL_05:
+	case StageMap::LEVEL_05:
 		break;
-	case Map::LEVEL_06:
+	case StageMap::LEVEL_06:
 		break;
-	case Map::LEVEL_07:
+	case StageMap::LEVEL_07:
 		break;
-	case Map::PUBLIC:
+	case StageMap::PUBLIC:
 		break;
 	default:
 		break;
@@ -904,7 +904,7 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 
 	switch (level)
 	{
-	case Map::LEVEL_00:
+	case StageMap::LEVEL_00:
 		switch (num)
 		{
 		case 0:
@@ -977,21 +977,21 @@ shared_ptr<Creature> ObjectManager::GetCreature(int level, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_01:
+	case StageMap::LEVEL_01:
 		break;
-	case Map::LEVEL_02:
+	case StageMap::LEVEL_02:
 		break;
-	case Map::LEVEL_03:
+	case StageMap::LEVEL_03:
 		break;
-	case Map::LEVEL_04:
+	case StageMap::LEVEL_04:
 		break;
-	case Map::LEVEL_05:
+	case StageMap::LEVEL_05:
 		break;
-	case Map::LEVEL_06:
+	case StageMap::LEVEL_06:
 		break;
-	case Map::LEVEL_07:
+	case StageMap::LEVEL_07:
 		break;
-	case Map::PUBLIC:
+	case StageMap::PUBLIC:
 		break;
 	default:
 		break;
@@ -1063,23 +1063,23 @@ shared_ptr<Effect> ObjectManager::GetCreatureEffect(int level, int num)
 
 	switch (level)
 	{
-	case Map::LEVEL_00:
+	case StageMap::LEVEL_00:
 		break;
-	case Map::LEVEL_01:
+	case StageMap::LEVEL_01:
 		break;
-	case Map::LEVEL_02:
+	case StageMap::LEVEL_02:
 		break;
-	case Map::LEVEL_03:
+	case StageMap::LEVEL_03:
 		break;
-	case Map::LEVEL_04:
+	case StageMap::LEVEL_04:
 		break;
-	case Map::LEVEL_05:
+	case StageMap::LEVEL_05:
 		break;
-	case Map::LEVEL_06:
+	case StageMap::LEVEL_06:
 		break;
-	case Map::LEVEL_07:
+	case StageMap::LEVEL_07:
 		break;
-	case Map::PUBLIC:
+	case StageMap::PUBLIC:
 		switch (num)
 		{
 		case 0:
@@ -1565,7 +1565,7 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 
 	switch (type)
 	{
-	case Map::LEVEL_00:
+	case StageMap::LEVEL_00:
 		switch (num)
 		{
 		case 0:
@@ -1641,21 +1641,21 @@ shared_ptr<Weapon> ObjectManager::GetEnemyWeapon(int type, int num)
 			break;
 		}
 		break;
-	case Map::LEVEL_01:
+	case StageMap::LEVEL_01:
 		break;
-	case Map::LEVEL_02:
+	case StageMap::LEVEL_02:
 		break;
-	case Map::LEVEL_03:
+	case StageMap::LEVEL_03:
 		break;
-	case Map::LEVEL_04:
+	case StageMap::LEVEL_04:
 		break;
-	case Map::LEVEL_05:
+	case StageMap::LEVEL_05:
 		break;
-	case Map::LEVEL_06:
+	case StageMap::LEVEL_06:
 		break;
-	case Map::LEVEL_07:
+	case StageMap::LEVEL_07:
 		break;
-	case Map::PUBLIC:
+	case StageMap::PUBLIC:
 		break;
 	default:
 		break;

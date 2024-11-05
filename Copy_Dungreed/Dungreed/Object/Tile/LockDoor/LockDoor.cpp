@@ -51,7 +51,7 @@ void LockDoor::Update()
 	Tile::Update();
 }
 
-void LockDoor::SetOwnerMap(shared_ptr<Map> map)
+void LockDoor::SetOwnerMap(shared_ptr<StageMap> map)
 {
 	Tile::SetOwnerMap(map);
 	map->AddOpenEvent(bind(&LockDoor::Open, this));

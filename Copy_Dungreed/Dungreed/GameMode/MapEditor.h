@@ -12,7 +12,7 @@ public:
 	void ImGuiRender() override;
 
 protected:
-	void Init(shared_ptr<Map> editMap);
+	void Init(shared_ptr<StageMap> editMap);
 
 	// _curObject를 맵에 추가하는 함수
 	// force : 추가할 위치에 오브젝트가 있어도 무시할지 여부
@@ -27,11 +27,11 @@ protected:
 	void ResetOffset();
 
 public:
-	shared_ptr<Map> GetCurMap() { return _curMap; }
+	shared_ptr<StageMap> GetCurMap() { return _curMap; }
 
 private:
-	shared_ptr<Map> _curMap; // 현재 수정중인 맵
-	shared_ptr<Map> _copyMap; // 복사한 맵
+	shared_ptr<StageMap> _curMap; // 현재 수정중인 맵
+	shared_ptr<StageMap> _copyMap; // 복사한 맵
 
 	Vector2				_mouseOffset; // 마우스 오프셋
 	Vector2				_mouseAppend; // 현재 마우스 오프셋에서 추가할 위치

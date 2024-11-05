@@ -62,7 +62,7 @@ public:
 	vector<shared_ptr<Object>> GetCollisions(shared_ptr<Collider> collider, Object::Object_Type type, bool OBB = false, bool setColor = true , bool forceCollision = false);
 	vector<shared_ptr<Object>> GetCollisions(Vector2 pos, Object::Object_Type type, bool setColor = true);
 	shared_ptr<Player> GetPlayer() { return _player; }
-	shared_ptr<Map> GetCurMap() { return _curMap; }
+	shared_ptr<StageMap> GetCurMap() { return _curMap; }
 
 	void SetRenderTexture(bool value) { _enableRenderTexture = value; }
 	void SetRenderCollider(bool value) { _enableRenderCollider = value; }
@@ -70,7 +70,7 @@ public:
 	void SetEnableUI(bool value) { _enableUI = value; }
 	void SetPause(bool value) { _pause = value; }
 	void SetPlaying(bool value) { _playing = value; }
-	void SetCurMap(shared_ptr<Map> addedMap);
+	void SetCurMap(shared_ptr<StageMap> addedMap);
 	void SetInput(bool input) { _enableInput = input; }
 
 private:
@@ -82,7 +82,7 @@ private:
 	const float _drawColliderTime = 1.f; // 공격 범위 그리기 시간
 	vector<pair<shared_ptr<Collider>/*그릴 콜라이더*/, float/*남은 그릴 시간*/>> _drawCollider; // 그릴 공격 콜라이더 배열
 
-	shared_ptr<Map> _curMap; // 현재 플레이 중인 맵
+	shared_ptr<StageMap> _curMap; // 현재 플레이 중인 맵
 	vector<unordered_map<wstring/*텍스쳐 이름*/, shared_ptr<InstanceQuad>>> instanceQuads; // 인스턴싱된 텍스쳐 모음
 
 	shared_ptr<Player> _player; // 플레이어 캐릭터

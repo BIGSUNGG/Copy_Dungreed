@@ -86,7 +86,7 @@ float Monster::TakeDamage(float baseDamage, shared_ptr<Creature> attacker)
 void Monster::SpawnEffect()
 {
 	// 스폰 이펙트 생성
-	shared_ptr<Effect> spawn = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 1);
+	shared_ptr<Effect> spawn = MAKE_CREATURE_EFFECT(StageMap::Level::PUBLIC, 1);
 	spawn->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
 	// 특정 애니메이션 부분에서 호출될 함수 설정

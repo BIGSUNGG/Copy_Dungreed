@@ -12,13 +12,13 @@ public:
 	void ImGuiRender() override;
 
 protected:
-	void Init(shared_ptr<Map> testMap);
+	void Init(shared_ptr<StageMap> testMap);
 
 public:
-	shared_ptr<Map> GetCurMap() { return _curMap; }
+	shared_ptr<StageMap> GetCurMap() { return _curMap; }
 
 private:
-	shared_ptr<Map> _curMap; // 현재 플레이 중인 맵
+	shared_ptr<StageMap> _curMap; // 현재 플레이 중인 맵
 	shared_ptr<Player> _player; // 플레이어 캐릭터
 
 	int _mapLevel = 0;

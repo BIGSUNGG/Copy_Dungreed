@@ -11,7 +11,7 @@ public:
 	virtual void Refresh() override;
 
 protected:
-	map<shared_ptr<Map>, bool> _visited; // 방문한 맵 리스트
+	map<shared_ptr<StageMap>, bool> _visited; // 방문한 맵 리스트
 
 	shared_ptr<RenderTarget> _filter;
 	shared_ptr<Quad> _filterQuad;

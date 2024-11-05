@@ -35,13 +35,13 @@ void Chest::Interaction()
 	_dropItem = nullptr;
 }
 
-void Chest::SetOwnerMap(shared_ptr<Map> map)
+void Chest::SetOwnerMap(shared_ptr<StageMap> map)
 {
 	Etc::SetOwnerMap(map);
 
 	map->AddOpenEvent([&]() 
 		{
-			shared_ptr<Effect> spawn = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 1);
+			shared_ptr<Effect> spawn = MAKE_CREATURE_EFFECT(StageMap::Level::PUBLIC, 1);
 			spawn->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 
 			if (_reverseTexture)

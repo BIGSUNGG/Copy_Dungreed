@@ -500,7 +500,7 @@ vector<shared_ptr<Object>> GameManager::GetCollisions(Vector2 pos, Object::Objec
 	return result;
 }
 
-void GameManager::SetCurMap(shared_ptr<Map> map)
+void GameManager::SetCurMap(shared_ptr<StageMap> map)
 {
 	instanceQuads.clear();
 	instanceQuads.resize(Object::_objectTypeCount);

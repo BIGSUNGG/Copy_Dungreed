@@ -12,7 +12,7 @@ MapTest::MapTest(int level, int num)
 	_mapLevel = level;
 	_mapNum = num;
 
-	shared_ptr<Map> _map = MAP_MANAGER->LoadMap(level, num);
+	shared_ptr<StageMap> _map = MAP_MANAGER->LoadMap(level, num);
 	Init(_map);
 }
 
@@ -51,7 +51,7 @@ void MapTest::ImGuiRender()
 
 		if (ImGui::Button("Load"))
 		{
-			shared_ptr<Map> _map = MAP_MANAGER->LoadMap(_mapLevel, _mapNum);
+			shared_ptr<StageMap> _map = MAP_MANAGER->LoadMap(_mapLevel, _mapNum);
 			Init(_map);
 		}
 	}
@@ -59,7 +59,7 @@ void MapTest::ImGuiRender()
 	GAME->ImguiRender();
 }
 
-void MapTest::Init(shared_ptr<Map> testMap)
+void MapTest::Init(shared_ptr<StageMap> testMap)
 {
 	_curMap = testMap;
 

@@ -57,7 +57,7 @@ void Object::SetSpawnPos(Vector2 pos)
 	_texture->GetTransform()->GetPos() = pos;
 }
 
-void Object::SetOwnerMap(shared_ptr<Map> map)
+void Object::SetOwnerMap(shared_ptr<StageMap> map)
 {
 	_ownerMap = map;
 }

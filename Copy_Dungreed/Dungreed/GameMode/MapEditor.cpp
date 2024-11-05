@@ -13,7 +13,7 @@ MapEditor::MapEditor(int level, int num)
 	_mapLevel = level;
 	_mapNum = num;
 
-	shared_ptr<Map> _map = MAP_MANAGER->LoadMap(level, num);
+	shared_ptr<StageMap> _map = MAP_MANAGER->LoadMap(level, num);
 	Init(_map);
 }
 
@@ -275,7 +275,7 @@ void MapEditor::ImGuiRender()
 	GAME->ImguiRender();
 }
 
-void MapEditor::Init(shared_ptr<Map> editMap)
+void MapEditor::Init(shared_ptr<StageMap> editMap)
 {
 	// 게임 초기화
 	GAME->Reset();

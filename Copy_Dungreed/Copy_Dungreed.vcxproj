@@ -156,7 +156,7 @@
     <ClInclude Include="Dungreed\Instance\ComponentCollector\ComponentCollector.h" />
     <ClInclude Include="Dungreed\Instance\Dash\Dash_Info.h" />
     <ClInclude Include="Dungreed\Instance\Inventory\Inventory.h" />
-    <ClInclude Include="Dungreed\Instance\Map\MapBasic.h" />
+    <ClInclude Include="Dungreed\Instance\Map\StageMapBasic.h" />
     <ClInclude Include="Dungreed\Instance\Status\Creature_Status.h" />
     <ClInclude Include="Dungreed\ObjectComponent\MovementComponent\DashMovementComponent\DashMovementComponent.h" />
     <ClInclude Include="Dungreed\Object\Etc\DropGold\DropGold.h" />
@@ -180,7 +180,7 @@
     <ClInclude Include="Framework\Utility\tinyxml2.h" />
     <ClInclude Include="Dungreed\GameMode\MapEditor.h" />
     <ClInclude Include="Dungreed\Object\Object.h" />
-    <ClInclude Include="Dungreed\Map\Map.h" />
+    <ClInclude Include="Dungreed\Map\StageMap.h" />
     <ClInclude Include="Dungreed\Manager\GameManager.h" />
     <ClInclude Include="Framework\Utility\Graphic.h" />
     <ClInclude Include="Dungreed\Object\Etc\Item\Item.h" />
@@ -269,7 +269,7 @@
     <ClCompile Include="Dungreed\Instance\ComponentCollector\ComponentCollector.cpp" />
     <ClCompile Include="Dungreed\Instance\Dash\Dash_Info.cpp" />
     <ClCompile Include="Dungreed\Instance\Inventory\Inventory.cpp" />
-    <ClCompile Include="Dungreed\Instance\Map\MapBasic.cpp" />
+    <ClCompile Include="Dungreed\Instance\Map\StageMapBasic.cpp" />
     <ClCompile Include="Dungreed\Instance\Status\Creature_Status.cpp" />
     <ClCompile Include="Dungreed\ObjectComponent\MovementComponent\DashMovementComponent\DashMovementComponent.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\DropGold\DropGold.cpp" />
@@ -293,7 +293,7 @@
     <ClCompile Include="Framework\Utility\tinyxml2.cpp" />
     <ClCompile Include="Dungreed\GameMode\MapEditor.cpp" />
     <ClCompile Include="Dungreed\Object\Object.cpp" />
-    <ClCompile Include="Dungreed\Map\Map.cpp" />
+    <ClCompile Include="Dungreed\Map\StageMap.cpp" />
     <ClCompile Include="Dungreed\Manager\GameManager.cpp" />
     <ClCompile Include="Framework\Utility\Graphic.cpp" />
     <ClCompile Include="Dungreed\Object\Etc\Item\Item.cpp" />

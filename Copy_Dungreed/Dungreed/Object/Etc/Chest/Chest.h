@@ -8,7 +8,7 @@ public:
 
 	virtual void Interaction() override;
 
-	virtual void SetOwnerMap(shared_ptr<Map> map);	
+	virtual void SetOwnerMap(shared_ptr<StageMap> map);	
 	virtual void SetOpenTexture(const wstring& image) { _openImage = image; }
 
 protected:

@@ -6,7 +6,7 @@ MapManager* MapManager::_instance = nullptr;
 
 void MapManager::Update()
 {
-	shared_ptr<Map> map = GetCurMap();
+	shared_ptr<StageMap> map = GetCurMap();
 	if(map)
 		map->CheckClear();
 }
@@ -26,17 +26,17 @@ void MapManager::MakeRandomMap(int level, int num)
 		}
 	}
 
-	vector<MapBasic> curLevelMapList;
+	vector<StageMapBasic> curLevelMapList;
 	curLevelMapList.reserve(_mapList[level].size() - 1);
 	for (int i = 1; i < _mapList[level].size(); i++)
 	{
 		int num = _mapList[level][i];
-		MapBasic info = LoadBasicInfo(level, num);
+		StageMapBasic info = LoadBasicInfo(level, num);
 		curLevelMapList.push_back(info);
 	}
 
 	// 기본 맵 추가
-	shared_ptr<Map> curMap = LoadMap(level, num);
+	shared_ptr<StageMap> curMap = LoadMap(level, num);
 	const Vector2 startPos = { 0, 0 };
 	Vector2 curPos = startPos;
 	AddMap(curMap, curPos);
@@ -74,7 +74,7 @@ void MapManager::MakeRandomMap(int level, int num)
 		bool shouldCanGoRight = _maps[curPos.x + 1][curPos.y] ? _maps[curPos.x + 1][curPos.y]->CanGoLeft() : false;
 
 		// 적절한 맵 구하기
-		MapBasic* info = nullptr;
+		StageMapBasic* info = nullptr;
 		while (true)
 		{
 			// 랜덤한 맵 구하기
@@ -101,10 +101,10 @@ void MapManager::MakeRandomMap(int level, int num)
 				continue;
 
 			// 맵에서 이동할 수 있는 맵이 있고 그 맵과 이어지지않다면
-			shared_ptr<Map> topMap    = _maps[curPos.x][curPos.y + 1];
-			shared_ptr<Map> bottomMap = _maps[curPos.x][curPos.y - 1];
-			shared_ptr<Map> rightMap  = _maps[curPos.x + 1][curPos.y];
-			shared_ptr<Map> leftMap   = _maps[curPos.x - 1][curPos.y];
+			shared_ptr<StageMap> topMap    = _maps[curPos.x][curPos.y + 1];
+			shared_ptr<StageMap> bottomMap = _maps[curPos.x][curPos.y - 1];
+			shared_ptr<StageMap> rightMap  = _maps[curPos.x + 1][curPos.y];
+			shared_ptr<StageMap> leftMap   = _maps[curPos.x - 1][curPos.y];
 
 			if(info->CanGoTop() && topMap && topMap->CanGoBottom() == false)
 				continue;
@@ -127,7 +127,7 @@ void MapManager::MakeRandomMap(int level, int num)
 			queue<Vector2> visitQueue;
 			unordered_map<int, unordered_map<int, bool>> visited;
 			Vector2 curPos = startPos;
-			shared_ptr<Map> curMap = _maps[startPos.x][startPos.y];
+			shared_ptr<StageMap> curMap = _maps[startPos.x][startPos.y];
 
 			while (true)
 			{
@@ -167,7 +167,7 @@ void MapManager::MakeRandomMap(int level, int num)
 					bool shouldCanGoRight = _maps[curPos.x + 1][curPos.y] ? _maps[curPos.x + 1][curPos.y]->CanGoLeft() : false;
 
 					// 적절한 맵 구하기
-					MapBasic* info = nullptr;
+					StageMapBasic* info = nullptr;
 					while (true)
 					{
 						// 랜덤한 맵 구하기
@@ -294,14 +294,14 @@ std::string MapManager::GetMapObjectsFileSPath(int level, int num)
 	return result;
 }
 
-shared_ptr<Map> MapManager::LoadMap(int level, int num)
+shared_ptr<StageMap> MapManager::LoadMap(int level, int num)
 {
-	shared_ptr<Map> newMap = make_shared<Map>(level, num);
+	shared_ptr<StageMap> newMap = make_shared<StageMap>(level, num);
 
 	if (IsMapFileExist(level, num)) // 불러올 파일이 있는지
 	{
 		// 맵 정보 불러오기
-		MapBasic basicInfo = LoadBasicInfo(level, num);
+		StageMapBasic basicInfo = LoadBasicInfo(level, num);
 		newMap->GetLeftBottom() = basicInfo._leftBottom;
 		newMap->GetRightTop() = basicInfo._rightTop;
 		newMap->GetStartPos() = basicInfo._startPos;
@@ -320,9 +320,9 @@ shared_ptr<Map> MapManager::LoadMap(int level, int num)
 	return newMap;
 }
 
-MapBasic MapManager::LoadBasicInfo(int level, int num)
+StageMapBasic MapManager::LoadBasicInfo(int level, int num)
 {
-	MapBasic result;
+	StageMapBasic result;
 	result._level = level;
 	result._num = num;
 
@@ -409,7 +409,7 @@ std::vector<std::shared_ptr<Object>> MapManager::LoadObjects(int level, int num,
 	return result;
 }
 
-void MapManager::Save(shared_ptr<Map> map)
+void MapManager::Save(shared_ptr<StageMap> map)
 {
 	const int& level = map->GetLevel();
 	const int& num = map->GetNum();
@@ -490,7 +490,7 @@ void MapManager::SaveAll()
 	{
 		for (int num = 0; num < _mapList[level].size(); num++)
 		{
-			shared_ptr<Map> temp = LoadMap(level, _mapList[level][num]);
+			shared_ptr<StageMap> temp = LoadMap(level, _mapList[level][num]);
 			Save(temp);
 		}
 	}
@@ -511,7 +511,7 @@ void MapManager::SetTarget(shared_ptr<Creature> target)
 	GetCurMap()->CheckClear();
 }
 
-void MapManager::SetCurMap(shared_ptr<Map> map)
+void MapManager::SetCurMap(shared_ptr<StageMap> map)
 {
 	_maps[_curMapPos.x][_curMapPos.y] = map;
 	SetCurMap(_curMapPos);
@@ -598,7 +598,7 @@ void MapManager::SetCurMap(const Vector2& index)
 	return;
 }
 
-void MapManager::AddMap(shared_ptr<Map> map, Vector2 pos)
+void MapManager::AddMap(shared_ptr<StageMap> map, Vector2 pos)
 {
 	if (_maps[pos.x][pos.y] != nullptr)
 		return;

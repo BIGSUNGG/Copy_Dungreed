@@ -94,7 +94,7 @@ void Creature::Death()
 	_isActive = false;
 
 	// ªÁ∏¡ ¿Ã∆Â∆Æ √ﬂ∞°
-	shared_ptr<Effect> deathEffect = MAKE_CREATURE_EFFECT(Map::Level::PUBLIC, 0);
+	shared_ptr<Effect> deathEffect = MAKE_CREATURE_EFFECT(StageMap::Level::PUBLIC, 0);
 	deathEffect->GetObjectTexture()->GetTransform()->GetPos() = _texture->GetTransform()->GetPos();
 	GAME->AddEffect(deathEffect);
 

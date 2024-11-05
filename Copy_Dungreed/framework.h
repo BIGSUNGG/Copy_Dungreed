@@ -123,7 +123,7 @@ using namespace std;
 // Struct
 #include "Dungreed/Instance/Status/Creature_Status.h"
 #include "Dungreed/Instance/Dash/Dash_Info.h"
-#include "Dungreed/Instance/Map/MapBasic.h"
+#include "Dungreed/Instance/Map/StageMapBasic.h"
 #include "Dungreed/Instance/Inventory/Inventory.h"
 #include "Dungreed/Instance/ComponentCollector/ComponentCollector.h"
 
@@ -188,7 +188,7 @@ using namespace std;
 #include "Dungreed/UI/Setting/UI_Setting.h"
 
 // Map
-#include "Dungreed/Map/Map.h"
+#include "Dungreed/Map/StageMap.h"
 
 // Manager
 #include "Dungreed/Manager/ObjectManager.h"

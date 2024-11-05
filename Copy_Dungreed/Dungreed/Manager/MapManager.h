@@ -27,15 +27,15 @@ public:
 
 private:
 	// 미로에 맵 추가
-	void AddMap(shared_ptr<Map> map, Vector2 pos);
+	void AddMap(shared_ptr<StageMap> map, Vector2 pos);
 
 public:
 	// Save Load
-	shared_ptr<Map> LoadMap(int level, int num);
-	MapBasic LoadBasicInfo(int level, int num);
+	shared_ptr<StageMap> LoadMap(int level, int num);
+	StageMapBasic LoadBasicInfo(int level, int num);
 	vector<shared_ptr<Object>> LoadObjects(int level, int num, int objectCount);
 
-	void Save(shared_ptr<Map> map);
+	void Save(shared_ptr<StageMap> map);
 	// 모든 맵 저장
 	void SaveAll();
 
@@ -49,21 +49,21 @@ public:
 	string GetMapObjectsFileSPath(int level, int num);
 
 	// Getter Setter
-	void SetCurMap(shared_ptr<Map> map);
+	void SetCurMap(shared_ptr<StageMap> map);
 	void SetCurMap(const Vector2& index);
 	void SetTarget(shared_ptr<Creature> target);
 
 	const Vector2& GetMapPos() { return _curMapPos; }
 	const unordered_map<int, vector<int>>& GetCurMapSize() { return _mapList; }
-	const unordered_map<int, unordered_map<int, shared_ptr<Map>>>& GetMaps() { return _maps; }
-	const shared_ptr<Map>& GetCurMap() { return _maps[_curMapPos.x][_curMapPos.y]; }
+	const unordered_map<int, unordered_map<int, shared_ptr<StageMap>>>& GetMaps() { return _maps; }
+	const shared_ptr<StageMap>& GetCurMap() { return _maps[_curMapPos.x][_curMapPos.y]; }
 
 private:
 	MapManager();
 	~MapManager();
 	static MapManager* _instance;
 
-	unordered_map<int, unordered_map<int, shared_ptr<Map>>> _maps;
+	unordered_map<int, unordered_map<int, shared_ptr<StageMap>>> _maps;
 	Vector2 _mapHalfSize = { 5,2 };
 	int _mapCount = 0;
 	const int _mapCountMin = 12;
