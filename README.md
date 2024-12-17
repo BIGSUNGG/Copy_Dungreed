@@ -1,21 +1,19 @@
-[한국어 문서](https://github.com/BIGSUNGG/DirectX_2D/blob/main/README-ko.md)
+<h2>Copy Dungreed 프로젝트</h2>
 
-<h2>Copy Dungreed Project</h2>
+Copy Dungreed  프로젝트는 DirectX 11와 Imgui, FMOD를 사용한 [던그리드](https://store.steampowered.com/app/753420/Dungreed/)의 모작입니다.   
 
-Copy Dungreed  project is replica of [Dungreed](https://store.steampowered.com/app/753420/Dungreed/)  
-
-[Execution Video](https://youtu.be/sR7eDG6EoLE)
+[실행 영상](https://www.youtube.com/watch?v=jI_yI_0sXpE)
 
 ---
 
-<h3>Languages and Tools</h3>
+<h3>기술 스택</h3>
 
 ---
 
 <table align="center">
     <tr align="center">
         <td style="font-weight: bold; padding-right: 10px; vertical-align: center;">
-            Language
+            언어
         </td>
         <td>
         <img height="40" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png?20170928190710"/>        
@@ -23,7 +21,7 @@ Copy Dungreed  project is replica of [Dungreed](https://store.steampowered.com/a
     </tr>
         <tr align="center">
         <td style="font-weight: bold; padding-right: 10px; vertical-align: center;">
-        Library
+        라이브러리
         </td>
         <td>
         <img height="40" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Microsoft-DirectX-11-Logo-wordmark.svg"/>
@@ -33,42 +31,42 @@ Copy Dungreed  project is replica of [Dungreed](https://store.steampowered.com/a
     </tr>
 </table>
 
-<h2>Game Mode</h2>
+<h2>게임 모드</h2>
 
-<h3>MapEditor</h3>
+<h3>맵 에디터</h3>
 
 ![intro-image](./README/MapEditor.png)
 
-MapEditor is a game mode for editing maps.   
-You can save changes by pressing "Save" button and load other saved maps  by pressing "Load" button  
-Also you can add objects by press "W" or "E" key   
-and remove objects under your mouse cursur by press "S" or "D" key.
+맵 에디터는 맵을 수정하기 위한 게임 모드입니다.  
+"Save"버튼을 눌러 변경 사항을 저장할 수 있고 "Load"버튼을 눌러 저장된 맵을 불러올 수 있습니다.  
+또한 W와 E키를 눌러 오브젝트를 추가할 수 있고   
+S와 D키를 눌러 마우스 커서 아래에 있는 오브젝트를 제거할 수도 있습니다.
 
 ---
 
-<h3>MapTest</h3>
+<h3>맵 테스트</h3>
 
 ![intro-image](./README/MapTest.png)
 
-MapTest is a game mode for testing maps.   
-You can play a saved map and load a saved map by pressing the 'Load' button.
+맵 테스트는 여러 맵들을 테스트할 수 있는 게임 모드입니다.  
+저장된 맵을 플레이해 볼 수도 있고 "Load"버튼을 눌러 저장된 맵을 불러올 수도 있습니다.
 
 ---
 
-<h3>Dungreed</h3>
+<h3>던그리드</h3>
 
 ![intro-image](./README/Dungreed.png)
 ![intro-image](./README/Dungeon.png)
 
-Dungreed is the main game mode.   
-When entering this game mode, Map Manager builds a procedurally generated dungeon.
+던그리드는 본 게임 모드입니다.
+던그리드 모드에 들어갈 때, 맵 매니저에서 랜덤한 던전을 만듭니다.
 
 ---
 
-<h2>Architecture</h2>
+<h2>함수의 실행 순서</h2>
 
 ![intro-image](./README/Architecture.png)
 
-In every frame, the `Program` class calls the   
-`Update`, `PreRender`, `Render`, `PostRender`, `ImGuiRender`, `RenderEnd` functions in sequence,   
-following the flow shown in the picture above.
+매 프레임마다 `Program` 클래스에서   
+`Update`, `PreRender`, `Render`, `PostRender`, `ImGuiRender`, `RenderEnd` 함수를 순서대로 호출 하고   
+위의 사진의 흐름처럼 코드가 실행됩니다.
